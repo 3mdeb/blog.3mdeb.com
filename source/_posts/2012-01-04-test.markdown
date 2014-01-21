@@ -1,0 +1,17 @@
+---
+layout: post
+title: "Test"
+date: 2012-01-04T21:46:00+01:00
+comments: true
+categories: test
+---
+
+01234567890123456789012345678901234567890123456789012345678901234567890123456789 This first test for blogger.vim plugin. THis will be used as sandbox, it looks like blogger vim works fine, need to check features that mostly use. Continue testing: [this is link](http://google.pl) - this is dash - 2nd dash
+this is bash code
+plain text
+1. 1st
+  1. under 1.st
+  2. 2nd under 2st
+
+3. 2.nd  
+
