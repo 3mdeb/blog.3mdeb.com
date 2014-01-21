@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Toolchain | My Octopress Blog]]></title>
+  <link href="http://pietrushnic.github.io/blog/categories/toolchain/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2014-01-21T22:32:11+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[0x2: Toolchain for Virtual Development Board]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/"/>
+    <updated>2013-06-07T08:42:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board</id>
+    <content type="html"><![CDATA[<h2>Table of contents</h2>
+
+<ul>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#intro">Introduction</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#what-is-toolchain">What is toolchain ?</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#why-we-need-cross-toolchain">Why we need cross-toolchain ?</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#how-to-create-toolchain">How to create toolchain ?</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#emdebian-path">Emdebian path</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#summary">Summary</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#kudos">Kudos</a></li>
+</ul>
+
+
+<p><a id="intro"></a></p>
+
+<h3>Introduction</h3>
+
+<p>This is probably the most complicated topic of all related to embedded
+development but we need to deal with it at the beginning. I read a lot about
+toolchains but still don&rsquo;t know enough to explain details. I think that best
+answers are in crosstool-ng <a href="http://crosstool-ng.org/hg/crosstool-ng/file/0fc56e62cecf/docs">documentation</a>.</p>
+
+<p><a id="what-is-toolchain"></a></p>
+
+<h3>What is toolchain ?</h3>
+
+<p><em>Toolchain</em> as the name said is a set of tools chained together, so output of
+one tool is the input for different tool. This is well known concept in
+Linux (eg. pipes). In embedded environment toolchain is called cross-toolchain or
+cross-compiler, because usually it compiles on one architecture and generate
+code for another (eg. it compiles on x86 and generate code for arm)<a href="http://elinux.org/Toolchains">[1]</a>.</p>
+
+<p><a id="why-we-need-cross-toolchain"></a></p>
+
+<h3>Why we need cross-toolchain ?</h3>
+
+<p>I suspect that your laptop/PC is not based on ARM processor, most probably it based on
+x86 architecture so you cannot simply compile code and run it in our
+virtual-arm-based environment. To prepare operating system and tools for it we
+need cross-toolchain.</p>
+
+<p><a id="how-to-create-toolchain"></a></p>
+
+<h3>How to create toolchain ?</h3>
+
+<p>Process of creating cross-toolchain from scratch is not easy and takes some
+time. There are few other ways to get toolchain, than creating it from scratch.
+First we can use prebuilt toolchain providers like: <code>CodeSourcery</code>, <code>Linaro</code>, <code>DENX
+EDLK</code> or <code>Emdebian</code>. Second we can create toolchain using special building system like: <code>Buildroot</code>, <code>Crosstool-NG</code>
+or <code>Bitbake</code>. I will not deal with preparing toolchain in this series
+because procedure for creating it takes pretty long. So we have two options:</p>
+
+<ul>
+<li>read my article about <a href="/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">Crosstool-NG arm-unknown-linux-gnueabi</a></li>
+<li>or install toolchain ready to use like <a href="http://www.emdebian.org/">Emdebian</a></li>
+</ul>
+
+
+<p><a id="emdebian-path"></a></p>
+
+<h4>Emdebian path</h4>
+
+<p>Add below lines to you <code>/etc/apt/sources.list</code>:
+<code>bash
+deb http://ftp.uk.debian.org/emdebian/toolchains unstable main
+</code>
+Install Emdebian keys, update and install cross-compiler with all related
+packages:
+<code>bash
+sudo apt-get install emdebian-archive-keyring
+sudo apt-get update
+sudo apt-get install gcc-4.7-arm-linux-gnueabi
+</code></p>
+
+<h5>Dependency problems during installation</h5>
+
+<p>If above attempt to install cross-compiler ends with:
+```
+pietrushnic@eglarest:~/src$ sudo apt-get install gcc-4.7-arm-linux-gnueabi
+Reading package lists&hellip; Done
+Building dependency tree
+Reading state information&hellip; Done
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:</p>
+
+<p>The following packages have unmet dependencies:
+ gcc-4.7-arm-linux-gnueabi : Depends: libgomp1-armel-cross (>= 4.7.2-5) but it
+ is not going to be installed
+ E: Unable to correct problems, you have held broken packages.
+<code>
+This means that Debian ustable cross-compiler is not available for you
+configuration. You can read more about that
+[here](http://lists.debian.org/debian-embedded/2011/05/msg00029.html).
+To fix that issue simply change emdebian toochain repository to testing in
+`/etc/apt/source.list`:
+</code>
+deb <a href="http://ftp.uk.debian.org/emdebian/toolchains">http://ftp.uk.debian.org/emdebian/toolchains</a> testing main
+```</p>
+
+<h5>Emdebian toolchain configuration</h5>
+
+<p>Check where <code>arm-linux-eabi-gcc-4.7</code> was installed:
+<code>bash
+whereis arm-linux-gnueabi-gcc-4.7
+arm-linux-gnueabi-gcc-4: /usr/bin/arm-linux-gnueabi-gcc-4.7 /usr/bin/X11/arm-linux-gnueabi-gcc-4.7
+</code>
+It is not linked to <code>arm-linux-gnueabi-gcc</code>, so we cannot give its prefix as <code>CROSS_COMPILE</code>
+variable value, which is needed for bootloader and kernel compilation. We have to link
+it to <code>arm-linux-gnueabi-gcc</code>:
+<code>bash
+sudo ln -s /usr/bin/arm-linux-gnueabi-gcc-4.7 /usr/bin/arm-linux-gnueabi-gcc
+</code></p>
+
+<p>Toolchain is ready to use.</p>
+
+<p><em>Note</em>: I tried <code>CodeSourcery</code> toolchain <code>arm-2012.09-64-arm-none-linux-gnueabi.bin</code>,
+but it contain <code>binutils</code> defect that not allow correctly build kernel. If you see
+something like this in log:
+<code>
+Error: selected processor does not support ARM mode `ldralt lr,[r1],#4'
+</code>
+That means you experience same thing, please use <code>Emdebian</code> or <code>Crosstool-NG</code> toolchain.</p>
+
+<p><em>Note 2</em>: If you&rsquo;re <code>Ubuntu</code> user I have to suggest experiments with toolchain
+build by your own, because I get really hard times trying to go through this
+tutorial with Ubuntu/Linaro cross compiler provided in repository. Finally I
+used <a href="/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">this</a>
+to push things forward. U-boot compiled with Ubuntu/Linaro toolchain had problem
+with <code>__udivsi3</code> instruction. This cause loop in initialization process.</p>
+
+<p><a id="summary"></a></p>
+
+<h3>Summary</h3>
+
+<p>If you take effort of creating toolchain using <code>Crosstool-NG</code> than
+congratulations.  But for simplifying whole <a href="/blog/2013/06/07/intro-to-virtual-development-board-building"><strong>Virtual Development Board</strong></a>
+series I will use <code>Emdebian</code> toolchain in further posts. Of course you can use
+your brand new <code>Crosstool-NG</code> toolchain by simply remember that tools prefixes are
+different. <code>Emdebian</code> uses <code>arm-linux-gnueabi-</code> and <code>Crosstool-NG</code> was created with
+<code>arm-unknown-linux-gnueabi-</code>. Replace one with another every time when needed.
+In <a href="/blog/2013/06/07/embedded-board-bootloader">next post</a> we will deal with
+bootloader.</p>
+
+<p><a id="kudos"></a></p>
+
+<h3>Kudos</h3>
+
+<p>[1] <a href="http://elinux.org/Toolchains">Toolchains</a></p>
+]]></content>
+  </entry>
+  
+</feed>

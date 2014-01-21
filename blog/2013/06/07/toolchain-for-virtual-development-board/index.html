@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>0x2: Toolchain for Virtual Development Board - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="How to create toolchain for embedded platform">
+  <meta name="keywords" content="toolchain, embedded, virtual development board">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">0x2: Toolchain for Virtual Development Board</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T08:42:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Table of contents</h2>
+
+<ul>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#intro">Introduction</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#what-is-toolchain">What is toolchain ?</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#why-we-need-cross-toolchain">Why we need cross-toolchain ?</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#how-to-create-toolchain">How to create toolchain ?</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#emdebian-path">Emdebian path</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#summary">Summary</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#kudos">Kudos</a></li>
+</ul>
+
+
+<p><a id="intro"></a></p>
+
+<h3>Introduction</h3>
+
+<p>This is probably the most complicated topic of all related to embedded
+development but we need to deal with it at the beginning. I read a lot about
+toolchains but still don&rsquo;t know enough to explain details. I think that best
+answers are in crosstool-ng <a href="http://crosstool-ng.org/hg/crosstool-ng/file/0fc56e62cecf/docs">documentation</a>.</p>
+
+<p><a id="what-is-toolchain"></a></p>
+
+<h3>What is toolchain ?</h3>
+
+<p><em>Toolchain</em> as the name said is a set of tools chained together, so output of
+one tool is the input for different tool. This is well known concept in
+Linux (eg. pipes). In embedded environment toolchain is called cross-toolchain or
+cross-compiler, because usually it compiles on one architecture and generate
+code for another (eg. it compiles on x86 and generate code for arm)<a href="http://elinux.org/Toolchains">[1]</a>.</p>
+
+<p><a id="why-we-need-cross-toolchain"></a></p>
+
+<h3>Why we need cross-toolchain ?</h3>
+
+<p>I suspect that your laptop/PC is not based on ARM processor, most probably it based on
+x86 architecture so you cannot simply compile code and run it in our
+virtual-arm-based environment. To prepare operating system and tools for it we
+need cross-toolchain.</p>
+
+<p><a id="how-to-create-toolchain"></a></p>
+
+<h3>How to create toolchain ?</h3>
+
+<p>Process of creating cross-toolchain from scratch is not easy and takes some
+time. There are few other ways to get toolchain, than creating it from scratch.
+First we can use prebuilt toolchain providers like: <code>CodeSourcery</code>, <code>Linaro</code>, <code>DENX
+EDLK</code> or <code>Emdebian</code>. Second we can create toolchain using special building system like: <code>Buildroot</code>, <code>Crosstool-NG</code>
+or <code>Bitbake</code>. I will not deal with preparing toolchain in this series
+because procedure for creating it takes pretty long. So we have two options:</p>
+
+<ul>
+<li>read my article about <a href="/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">Crosstool-NG arm-unknown-linux-gnueabi</a></li>
+<li>or install toolchain ready to use like <a href="http://www.emdebian.org/">Emdebian</a></li>
+</ul>
+
+
+<p><a id="emdebian-path"></a></p>
+
+<h4>Emdebian path</h4>
+
+<p>Add below lines to you <code>/etc/apt/sources.list</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>deb http://ftp.uk.debian.org/emdebian/toolchains unstable main
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install Emdebian keys, update and install cross-compiler with all related
+packages:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install emdebian-archive-keyring
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install gcc-4.7-arm-linux-gnueabi
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Dependency problems during installation</h5>
+
+<p>If above attempt to install cross-compiler ends with:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>pietrushnic@eglarest:~/src<span class="nv">$ </span>sudo apt-get install gcc-4.7-arm-linux-gnueabi
+</span><span class='line'>Reading package lists... Done
+</span><span class='line'>Building dependency tree
+</span><span class='line'>Reading state information... Done
+</span><span class='line'>Some packages could not be installed. This may mean that you have
+</span><span class='line'>requested an impossible situation or <span class="k">if </span>you are using the unstable
+</span><span class='line'>distribution that some required packages have not yet been created
+</span><span class='line'>or been moved out of Incoming.
+</span><span class='line'>The following information may <span class="nb">help </span>to resolve the situation:
+</span><span class='line'>
+</span><span class='line'>The following packages have unmet dependencies:
+</span><span class='line'> gcc-4.7-arm-linux-gnueabi : Depends: libgomp1-armel-cross <span class="o">(</span>&gt;<span class="o">=</span> 4.7.2-5<span class="o">)</span> but it
+</span><span class='line'> is not going to be installed
+</span><span class='line'> E: Unable to correct problems, you have held broken packages.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This means that Debian ustable cross-compiler is not available for you
+configuration. You can read more about that
+<a href="http://lists.debian.org/debian-embedded/2011/05/msg00029.html">here</a>.
+To fix that issue simply change emdebian toochain repository to testing in
+<code>/etc/apt/source.list</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>deb http://ftp.uk.debian.org/emdebian/toolchains testing main
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Emdebian toolchain configuration</h5>
+
+<p>Check where <code>arm-linux-eabi-gcc-4.7</code> was installed:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>whereis arm-linux-gnueabi-gcc-4.7
+</span><span class='line'>arm-linux-gnueabi-gcc-4: /usr/bin/arm-linux-gnueabi-gcc-4.7 /usr/bin/X11/arm-linux-gnueabi-gcc-4.7
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It is not linked to <code>arm-linux-gnueabi-gcc</code>, so we cannot give its prefix as <code>CROSS_COMPILE</code>
+variable value, which is needed for bootloader and kernel compilation. We have to link
+it to <code>arm-linux-gnueabi-gcc</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo ln -s /usr/bin/arm-linux-gnueabi-gcc-4.7 /usr/bin/arm-linux-gnueabi-gcc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Toolchain is ready to use.</p>
+
+<p><em>Note</em>: I tried <code>CodeSourcery</code> toolchain <code>arm-2012.09-64-arm-none-linux-gnueabi.bin</code>,
+but it contain <code>binutils</code> defect that not allow correctly build kernel. If you see
+something like this in log:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Error: selected processor does not support ARM mode <span class="sb">`</span>ldralt lr,<span class="o">[</span>r1<span class="o">]</span>,#4<span class="err">&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That means you experience same thing, please use <code>Emdebian</code> or <code>Crosstool-NG</code> toolchain.</p>
+
+<p><em>Note 2</em>: If you&rsquo;re <code>Ubuntu</code> user I have to suggest experiments with toolchain
+build by your own, because I get really hard times trying to go through this
+tutorial with Ubuntu/Linaro cross compiler provided in repository. Finally I
+used <a href="/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">this</a>
+to push things forward. U-boot compiled with Ubuntu/Linaro toolchain had problem
+with <code>__udivsi3</code> instruction. This cause loop in initialization process.</p>
+
+<p><a id="summary"></a></p>
+
+<h3>Summary</h3>
+
+<p>If you take effort of creating toolchain using <code>Crosstool-NG</code> than
+congratulations.  But for simplifying whole <a href="/blog/2013/06/07/intro-to-virtual-development-board-building"><strong>Virtual Development Board</strong></a>
+series I will use <code>Emdebian</code> toolchain in further posts. Of course you can use
+your brand new <code>Crosstool-NG</code> toolchain by simply remember that tools prefixes are
+different. <code>Emdebian</code> uses <code>arm-linux-gnueabi-</code> and <code>Crosstool-NG</code> was created with
+<code>arm-unknown-linux-gnueabi-</code>. Replace one with another every time when needed.
+In <a href="/blog/2013/06/07/embedded-board-bootloader">next post</a> we will deal with
+bootloader.</p>
+
+<p><a id="kudos"></a></p>
+
+<h3>Kudos</h3>
+
+<p>[1] <a href="http://elinux.org/Toolchains">Toolchains</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T08:42:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/embedded/'>embedded</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/toolchain/'>toolchain</a>, <a class='category' href='/blog/categories/vdb/'>vdb</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/" data-via="" data-counturl="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/" title="Previous Post: 0x1: Qemu as an environment for embedded board emulation">&laquo; 0x1: Qemu as an environment for embedded board emulation</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/06/07/embedded-board-bootloader/" title="Next Post: 0x3: Embedded board bootloader">0x3: Embedded board bootloader &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

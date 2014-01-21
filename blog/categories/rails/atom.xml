@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rails | My Octopress Blog]]></title>
+  <link href="http://pietrushnic.github.io/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2014-01-21T22:32:11+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Sqlite3 Gem Not Supported on Heroku]]></title>
+    <link href="http://pietrushnic.github.io/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/"/>
+    <updated>2012-11-18T21:16:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku</id>
+    <content type="html"><![CDATA[<p>When I tried to deploy second part of <a href="http://ruby.railstutorial.org/chapters/a-demo-app#top">RoR tutorial</a>
+to Heroku I get this error:
+<code>
+An error occurred while installing sqlite3 (1.3.5), and Bundler cannot continue.  
+Make sure that `gem install sqlite3 -v '1.3.5'` succeeds before bundling.
+!
+!  Failed to install gems via Bundler.
+!
+! Detected sqlite3 gem which is not supported on Heroku.
+!  http://devcenter.heroku.com/articles/how-do-i-use-sqlite3-for-development
+!
+!  Heroku push rejected, failed to compile Ruby/rails app
+To git@heroku.com:thawing-beyond-7283.git
+! [remote rejected] master -&gt; master (pre-receive hook declined)
+error: failed to push some refs to 'git@heroku.com:thawing-beyond-7283.git'
+</code>
+I searched a little bit about this error and find <a href="http://stackoverflow.com/questions/3747002/heroku-rails-3-and-sqlite3">this</a>
+stackoverflow post. But when I look more carefully on the Gemfile syntax I
+found a mistake. I used simply:
+<code>ruby
+gem 'sqlite3', '1.3.5'
+</code>
+But I should have:
+<code>ruby
+group :development do
+  gem 'sqlite3', '1.3.5'
+end
+group :production do
+  gem 'pg', '0.12.2'
+end
+</code>
+As RoR tutorial states.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Prepare for Ruby on Rails on Debian Wheezy]]></title>
+    <link href="http://pietrushnic.github.io/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian/"/>
+    <updated>2012-11-18T18:18:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian</id>
+    <content type="html"><![CDATA[<p>I start to learn Ruby on Rails. As always when you learn new programming
+language toolchain is required. In this tutorial I will try to go through
+toolchain preparation for my Debian wheezy. Of course I based on Vim as my
+editor of choice. Second requirement will be using some parts of toolchain in
+latest greatest version.</p>
+
+<p>As a beginner point for learning Ruby on Rails I choose <a href="http://ruby.railstutorial.org/ruby-on-rails-tutorial-book">this tutorial</a>.
+I will try to use their methods of setting environment adding my comments where
+it is needed. Also will resolve Debian and Vim specific issues. So let&rsquo;s begin.</p>
+
+<p>After quick look at RoR tutorial I have to switch to <a href="http://blog.sudobits.com/2012/05/02/how-to-install-ruby-on-rails-in-ubuntu-12-04-lts/">this site</a>
+for installation for Ubuntu 12.04 LTS. But instructions don&rsquo;t work as expected
+for my Debian. So after quick:</p>
+
+<p><code>bash
+sudo apt-get install git curl
+</code>
+I realized that I need proxy for curl and not only temporary but permanent. I
+added below line to my <code>$HOME/.curlrc:</code></p>
+
+<p><code>bash
+proxy=proxy.server.com:8080
+</code></p>
+
+<p>After that I was able to download and install stable version of rvm:</p>
+
+<p><code>bash
+curl -L get.rvm.io | bash -s stable
+</code></p>
+
+<p>Next I sourced configuration:</p>
+
+<p><code>bash
+source ~/.rvm/scripts/rvm
+</code></p>
+
+<p>Output which I get was:
+```
+pietrushnic@lothlann:~/src/node$ rvm requirements
+Requirements for Linux &ldquo;Debian GNU/Linux wheezy/sid&rdquo;
+NOTE: &lsquo;ruby&rsquo; represents Matz&rsquo;s Ruby Interpreter (MRI) (1.8.X, 1.9.X)</p>
+
+<pre><code>         This is the *original* / standard Ruby Language Interpreter
+  'ree'  represents Ruby Enterprise Edition
+  'rbx'  represents Rubinius
+</code></pre>
+
+<p>bash >= 4.1 required
+curl is required
+git is required (>= 1.7 for ruby-head)
+patch is required (for 1.8 rubies and some ruby-head&rsquo;s).</p>
+
+<p>To install rbx and/or Ruby 1.9 head (MRI) (eg. 1.9.2-head),
+then you must install and use rvm 1.8.7 first.</p>
+
+<p>Additional Dependencies:</p>
+
+<h1>For Ruby / Ruby HEAD (MRI, Rubinius, &amp; REE), install the following:</h1>
+
+<p>ruby: /usr/bin/apt-get install build-essential openssl libreadline6
+libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev
+libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev
+automake libtool bison subversion pkg-config</p>
+
+<h1>For JRuby, install the following: jruby: /usr/bin/apt-get install curl g++</h1>
+
+<p>openjdk-6-jre-headless jruby-head: /usr/bin/apt-get install ant openjdk-6-jdk #
+For IronRuby, install the following: ironruby: /usr/bin/apt-get install curl
+mono-2.0-devel
+```</p>
+
+<p>I need Ruby so copy&amp;paste line for it and:</p>
+
+<p><code>bash
+sudo apt-get install build-essential openssl libreadline6 libreadline6-dev curl
+git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3
+libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison
+subversion pkg-config
+</code></p>
+
+<p>Next thing we need is Node.js because this code of JavaScript runtime is under
+active development (latest version is 0.8.14 and Debian provided for sid 0.6.19)
+we use its latest greatest version from git repository.</p>
+
+<p><code>bash
+git clone https://github.com/joyent/node.git
+</code>
+Following by:
+<code>bash
+cd node;./configure;make;make test
+</code>
+In my configuration only one test failed test-tls-server-verify:
+```
+Running &lsquo;Allow both authed and unauthed connections with CA1&rsquo;
+  throw new assert.AssertionError({</p>
+
+<pre><code>      ^
+</code></pre>
+
+<p>  AssertionError: agent1 rejected, but should NOT have been</p>
+
+<pre><code> at ChildProcess.&lt;anonymous&gt; 
+  (/home/pietrushnic/src/node/test/simple/test-tls-server-verify.js:217:14)
+      at ChildProcess.EventEmitter.emit (events.js:96:17)
+  at Process.ChildProcess._handle.onexit 
+  (child_process.js:698:12)
+  at process._makeCallback (node.js:248:20)
+  &lt;/anonymous&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>This is known issue probably we have to wait for update of OpenSSL library in
+wheezy. Ignore this problem and install node.js:<br/>
+<code>bash
+sudo make install
+</code>
+Because of RoR tutorial requirements we install version 1.9.3:</p>
+
+<p><code>bash
+rvm get head &amp;&amp; rvm reload rvm install 1.9.3
+</code></p>
+
+<p>Next thing will be adding vim-ruby for our favorite editor Vim. I organize my
+dotfiles using git. I also use pathogen to control Vim plugins (as described
+<a href="http://pietrushnic.blogspot.com/2012/02/improve-productivity-by-tracking-work_20.html">here</a>),
+so :</p>
+
+<p><code>bash
+cd workspace
+git submodule add https://github.com/tpope/vim-rails.git
+dotfiles/vim/bundle/vim-rails
+git submodule init &amp;&amp; git submodule update
+git commit -m "vim-rails submodule added"
+</code></p>
+
+<p>Finally we have ready to use Ruby on Rails development environment based on Vim.
+I suggest to take a look at this
+<a href="https://www.youtube.com/watch?v=30P8DSNOZuU">movie</a> and after that dive into 
+<a href="http://ruby.railstutorial.org/">tutorial</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

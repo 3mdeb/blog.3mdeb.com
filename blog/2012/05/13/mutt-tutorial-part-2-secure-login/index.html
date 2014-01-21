@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Mutt Tutorial Part 2 - Secure Login - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Secure login with mutt">
+  <meta name="keywords" content="mutt,gpg,password">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-2-secure-login">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Mutt Tutorial Part 2 - Secure Login</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T14:13:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This is second post of mutt tutorial series. As in the <a href="/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account">previous post</a>
+for below information I need to thank Kousik for posts about <a href="http://nixtricks.wordpress.com/2009/10/04/introduction-to-encryption-of-files-using-gpg/">gpg</a>
+and <a href="http://nixtricks.wordpress.com/2010/05/05/mutt-configure-mutt-to-receive-email-via-imap-and-send-via-smtp/">using it with mutt</a>.
+But probably the most important to simplify this method was Fau comment <a href="http://nixtricks.wordpress.com/2010/05/20/mutt-multiple-email-accounts-using-hooks/#comment-162">here</a>.
+So going to the point of secure login for mutt we need gpg. First of all we need
+to install it by simply:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install gpg
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After that we generate our keys by:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gpg --gen-key
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I choose all default answers. So first is key type: <code>'RSA and RSA'</code>.
+Second &ndash; <code>keysize: 2048</code>. Third &ndash; time for key expiration: <code>'0 = key does not expire'</code>.
+After that you need to identify your key with some data. This data will be used
+to find your key so IMHO it should be short and simple but meaningful. At the end
+of this process you will be asked about pass phrase, which will be used to decrypt
+files encrypted with generated key. When you end with key generation you can
+encrypt file with passwords. Best way to do this is to write some script that will
+be sourced by mutt after decryption. For storing passwords I create directory in my <code>$HOME</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir <span class="nv">$HOME</span>/.passwd
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Inside this directory I create text file with the script, which look like below:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vim <span class="nv">$HOME</span>/.passwd/mutt.txt
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp1</span> <span class="o">=</span> <span class="s2">&quot;password1&quot;</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp2</span> <span class="o">=</span> <span class="s2">&quot;password2&quot;</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp3</span> <span class="o">=</span> <span class="s2">&quot;password3&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This script of course mean to set value of variable name <code>my_isp{1,2,3}</code> to some
+password string. Remember to use <code>my\_</code> prefix because this is the way that user
+variables should be defined in mutt scripts. After writing this file we need to
+encrypt it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gpg -e -o mutt.gpg mutt.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we should delete txt file. To use our newly created encrypted password script
+we need to add some lines to <code>$HOME/.muttrc</code>. So <code>vim $HOME/.muttrc</code>. Line that
+we need before sourcing encrypted scripts is declaration of variables in the script:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">set </span><span class="nv">my_isp1</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp2</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp3</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After this line we can source and decrypt out file with the passwords:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">source</span> <span class="s2">&quot;gpg --textmode -d ~/.passwd/mutt.gpg |&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the end wee need to replace all out plain text passwords (<code>smtp_pass</code> and
+<code>imap_pass</code> variables) with variables defined in out encrypted file. This
+settings will cause that mutt during start will run gpg to ask about password
+to decrypt password script file. In the <a href="/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/">next post</a>
+I will discuss mutt with sidebar and how to open html files from inside mutt.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T14:13:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-2-secure-login/" data-via="" data-counturl="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-2-secure-login/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account/" title="Previous Post: Mutt tutorial part 1 - setup IMAP account">&laquo; Mutt tutorial part 1 - setup IMAP account</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/" title="Next Post: Mutt tutorial part 3 - sidebar, URLs in e-mails">Mutt tutorial part 3 - sidebar, URLs in e-mails &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

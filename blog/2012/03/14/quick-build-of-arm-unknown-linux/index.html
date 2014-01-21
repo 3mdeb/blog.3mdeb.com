@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Quick Build of Arm-unknown-linux-gnueabi With Crosstool-ng - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="How to build arm-unknown-linux-gnueabi">
+  <meta name="keywords" content="crosstool-ng,embedded,linux,toolchain,arm-unknown-linux-gnueabi">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pietrushnic.github.io/blog/2012/03/14/quick-build-of-arm-unknown-linux">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Quick Build of Arm-unknown-linux-gnueabi With Crosstool-ng</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-14T23:42:00+01:00" pubdate data-updated="true">Mar 14<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>You might be surprised at how much you have to make to correctly build
+<code>arm-unknown-linux-gnueabi</code> config based toolchain with <a href="http://crosstool-ng.org/">crosstool-ng</a>. As you can
+see examples of many open source projects, the man&rsquo;s work is a rare resource.
+The result of this economic fact is that the attempt to build configuration
+<code>arm-unknown-linux-gnueabi</code> is not a simple task and during an operation you can
+come across many problems. Although I am not afraid of problems and effectively
+try to fight them and of course sharing the results of my work. My build system
+parameters:  <code>Debian GNU/Linux wheezy/sid 3.2.0-2-amd64</code></p>
+
+<ul>
+<li>Clone crosstools-ng (you need mercurial)</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>hg clone http://crosstool-ng.org/hg/crosstool-ng
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Create temporary directory and run</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ct-ng arm-unknown-linux-eabi <span class="c">#choose latest kernel (for me it was 3.2.9)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>We probably want to change directory to which all stuff will be build (default is <code>$HOME/x-tools</code>):</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ct-ng menuconfig
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And go to:
+<code>Paths and misc options ---&gt; (${HOME}/x-tools/${CT_TARGET}) Prefix directory</code>
+Change it according to your needs. Exit end save configuration.
+* Build (number after dot depend on how many command we want to run simultaneously):
+<code>ct-ng build.4</code>
+It can take a lot of time. On my machine with 5k BogoMips it takes over 1h.</p>
+
+<h3>Problems that you can encounter:</h3>
+
+<ul>
+<li><code>gcj</code> &ndash; latest changeset <code>2916:6f758ed4c0b9</code> have trouble finding <code>gcj</code> binary,
+which it show using following message:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>ERROR<span class="o">]</span> Missing: <span class="s1">&#39;x86_64-unknown-linux-gnu-gcj&#39;</span> or <span class="s1">&#39;x86_64-unknown-linux-gnu-gcj&#39;</span> or <span class="s1">&#39;gcj&#39;</span> : either needed!
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To workaround this install <code>gcj</code> and link binary like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo ln -s /usr/bin/gcj-4.6 /usr/bin/gcj
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>duma</code> &ndash; mentioned changeset also has problem with url to D.U.M.A library,
+apply below changes to workaround problems:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gd">--- a/scripts/build/debug/200-duma.sh Mon Mar 12 21:19:26 2012 +0100</span>
+</span><span class='line'><span class="gi">+++ b/scripts/build/debug/200-duma.sh Wed Mar 14 20:02:22 2012 +0100</span>
+</span><span class='line'><span class="gu">@@ -4,7 +4,7 @@ # Downloading an non-existing file from sourceforge will give you an</span>
+</span><span class='line'> # HTML file containing an error message, instead of returning a 404.
+</span><span class='line'> # Sigh...
+</span><span class='line'><span class="gd">- CT_GetFile &quot;duma_${CT_DUMA_VERSION}&quot; .tar.gz http://kent.dl.sourceforge.net/sourceforge/duma/ </span>
+</span><span class='line'><span class="gi">+ CT_GetFile &quot;duma_${CT_DUMA_VERSION}&quot; .tar.gz http://downloads.sourceforge.net/project/duma/duma/2.5.15</span>
+</span><span class='line'> # Downloading from sourceforge may leave garbage, cleanup
+</span><span class='line'> CT_DoExecLog ALL rm -f &quot;${CT_TARBALLS_DIR}/showfiles.php&quot;\* }
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>mawk</code> &ndash; if mawk return syntax error like this:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'>mawk: scripts/gen-sorted.awk: line 19: regular expression compile failed (bad
+</span><span class='line'>class -- [], [^] or [)
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It could be fixed in two ways. First is to change <code>line 19</code> in <code>/path/to/tmp/dir/.build/src/glibc-2.9/scripts/gen-sorted.awk</code>
+Is:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'>sub(/\/[^/]+$/, &quot;&quot;, subdir);
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Should be:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'>sub(/\/[^\/]+$/, &quot;&quot;, subdir);
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or simply by installing gawk, reconfigure and recompile <code>crosstools-ng</code>.</p>
+
+<p>This was my first post related to linux embedded enviroment. Hope it will be more. Enjoy!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-14T23:42:00+01:00" pubdate data-updated="true">Mar 14<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/crosstool-ng/'>crosstool-ng</a>, <a class='category' href='/blog/categories/embedded/'>embedded</a>, <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pietrushnic.github.io/blog/2012/03/14/quick-build-of-arm-unknown-linux/" data-via="" data-counturl="http://pietrushnic.github.io/blog/2012/03/14/quick-build-of-arm-unknown-linux/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/03/14/splitting-my-personal-repository/" title="Previous Post: Splitting my personal repository">&laquo; Splitting my personal repository</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/03/20/-democracy-the-god-that-failed-hans-hermann-hoppe/" title="Next Post: "Democracy: The God That Failed" Hans-Hermann Hoppe">"Democracy: The God That Failed" Hans-Hermann Hoppe &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

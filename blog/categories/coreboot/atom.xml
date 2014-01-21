@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Coreboot | My Octopress Blog]]></title>
+  <link href="http://pietrushnic.github.io/blog/categories/coreboot/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2014-01-21T22:32:11+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Debugging Coreboot in Qemu Environment - Part 2]]></title>
+    <link href="http://pietrushnic.github.io/blog/2012/04/18/qemu-as-debugging-environment-for/"/>
+    <updated>2012-04-18T22:41:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2012/04/18/qemu-as-debugging-environment-for</id>
+    <content type="html"><![CDATA[<p>In <a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment">previous post</a>
+<code>coreboot</code> was configured and installed. Here we try to establish good debugging
+environment for it. To create a good emulated environment to debug, research and
+learn <code>coreboot</code> few tricks are required. First of all we need to know how to run
+our emulated environment (qemu). What I mean by that ?</p>
+
+<ul>
+<li>load coreboot image (-bios option),
+
+<ul>
+<li>freeze CPU at startup (-S),</li>
+</ul>
+</li>
+<li>get appropriate feedback about virtual machine state (-d in_asm,cpu),</li>
+<li>set up remote gdb server to run qemu step by step (-s).</li>
+</ul>
+
+
+<p>So finally we get:<br/>
+<code>
+qemu -bios src/coreboot/build/coreboot.rom -s -S -d in_asm,cpu -nographic
+</code>
+We don&rsquo;t need graphics so it also could be disable (-nographic). Run above
+command and prepare debugging environment as described below.</p>
+
+<ul>
+<li>load bootblock file in gdb:
+<code>
+file path/to/coreboot/build/bootblock.elf
+</code></li>
+<li>use objdump to find out at what address .text, .bss and .data sections are:
+<code>
+objdump -h src/coreboot/build/coreboot\_ram|grep -E "text|bss|\.data"
+</code>
+my output looks like that:
+<code>
+0 .text 00010810 00100000 00100000 00001000 2**2 3 .data 000004d8 001174e8
+001174e8 000184e8 2**2 4 .bss  0000080c 001179c0 001179c0 000189c0 2**3
+</code></li>
+<li>use above addresses to load symbols from <code>coreboot_ram</code> file in gdb:
+<code>
+add-symbol-file src/coreboot/build/coreboot_ram 0x00100000 -s .data \
+0x001174e8 -s .bss 0x001179c0
+</code></li>
+<li>In another terminal or screen window
+<code>
+vim /tmp/qemu.log
+</code>
+(use :e to reload qemu.log file after every instruction), in this file we will
+get information about all registers of virtual machine</li>
+<li>target remote :1234</li>
+<li>Run next instruction (ni command in gdb) and refresh qemu.log, if you get
+ something like:
+<code>
+EAX=00000000 EBX=00000000 ECX=00000000 EDX=00000633
+ESI=00000000 EDI=00000000 EBP=00000000 ESP=00000000
+EIP=0000fff0 EFL=00000002 [-------] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0000 00000000 0000ffff 00009300
+CS =f000 ffff0000 0000ffff 00009b00
+SS =0000 00000000 0000ffff 00009300
+DS =0000 00000000 0000ffff 00009300
+FS =0000 00000000 0000ffff 00009300
+GS =0000 00000000 0000ffff 00009300
+LDT=0000 00000000 0000ffff 00008200
+TR =0000 00000000 0000ffff 00008b00
+GDT= 00000000 0000ffff
+IDT= 00000000 0000ffff
+CR0=60000010 CR2=00000000 CR3=00000000 CR4=00000000
+DR0=00000000 DR1=00000000 DR2=00000000 DR3=00000000
+DR6=ffff0ff0 DR7=00000400
+</code>
+it means that your debugging enviroment was set correctly.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Debugging Coreboot in Qemu Environment - Part 1]]></title>
+    <link href="http://pietrushnic.github.io/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/"/>
+    <updated>2012-03-12T21:30:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment</id>
+    <content type="html"><![CDATA[<p>First of all I use testing version of Debian &ndash; wheezy. Clone coreboot repository:<br/>
+<code>
+git clone http://review.coreboot.org/p/coreboot Conifigure:  
+cd coreboot; make menuconfig Set:  
+</code></p>
+
+<p>Configure FILO as apayload and use its latest version:
+<code>
+Payload -&gt; Add a payload -&gt; FILO Payload -&gt; FILO version -&gt; HEAD
+</code>
+Add verbose debugging messages:
+<code>
+Debugging -&gt; Check PIRQ table consistency Debugging -&gt; Output verbose malloc debug messages
+Debugging -&gt; Output verbose ACPI debug messages Debugging -&gt; Enable debug messages for option ROM execution
+Debugging -&gt; Built-in low-level shell Debugging -&gt; Trace function calls
+</code></p>
+
+<p>Try to build:
+<code>
+make
+</code></p>
+
+<p>If everything builds correctly you can process. Sometimes there is need to use
+cross compiler. To build one:<br/>
+<code>
+cd util/crossgcc
+./buildgcc
+</code></p>
+
+<p>To explore <code>coreboot</code> code effectively I suggest to create tags and cscope
+database for <code>coreboot</code>. In my personal workspace I&rsquo;ve got process that I go
+through before I start work (if you use my workspace configuration which
+is available <a href="https://github.com/pietrushnic/workspace">@github</a> you
+can follow below steps directly, if not adjust to your environment):</p>
+
+<ol>
+<li>run vim ;)</li>
+<li><code>:cd /path/to/code</code></li>
+<li><code>s&lt;Tab&gt;</code> (fuzzyfinder &ndash;> bookmark dir)</li>
+<li><code>si</code> (fuzzyfinder &ndash;> change dir)</li>
+<li><code>sr</code> (run ctags to generate tags and cscope to build symbol database &ndash; <code>ctags -R;cscope -R -q -b -v</code>)</li>
+</ol>
+
+
+<p>After steps above we can start work with code. Run vim in <code>coreboot</code> directory.
+Type:
+<code>:e src/cpu/x86/16bit/reset16.inc</code>
+Put cursor over <code>protected_start</code> and press <code>Ctrl-]</code>. If everything goes ok you
+should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 537.</p>
+
+<p>In second article we dive into first phase of <code>coreboot</code> execution in emulated environment.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Flashrom and Shuttle AV18E2]]></title>
+    <link href="http://pietrushnic.github.io/blog/2012/01/06/flashrom-and-shuttle-av18e2/"/>
+    <updated>2012-01-06T14:31:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2012/01/06/flashrom-and-shuttle-av18e2</id>
+    <content type="html"><![CDATA[<p>During Christmas break I found an old unused motherboard in my home, right away I thought that it maybe useful as learning environment for coreboot. First you need to do with this kind of board is to check if it is possible to flash its BIOS with user space tool called <a href="http://www.flashrom.org/">flashrom</a> list of supported hardware can be found <a href="http://www.flashrom.org/Supported_hardware">here</a>.</p>
+
+<p>All you need to do is go through <a href="http://www.flashrom.org/Board_Testing_HOWTO">this HOWTO</a>. Be aware that these operations can cause you will not be able to run your motherboard if something goes wrong. Therefore, I suggest protect yourself by supplying checked programmer or other memory chip for your board containing a working BIOS.</p>
+
+<p>For my <a href="http://www.shuttle.eu/_archive/older/de/av18.htm">Shuttle board</a> I checked if the Winbond W49F002U chip on it is supported by flashrom. Fortunately it was. After that I read my BIOS by:</p>
+
+<p>flashrom -Vr bios_bckp.bin
+And write it by:</p>
+
+<p>flashrom -Vw bios_bckp.bin At the end I&rsquo;ve got VERIFIED message but when I look carefully inside the log there was something like this:</p>
+
+<p>Erasing and writing flash chip&hellip; Trying erase function 0&hellip; 0x000000-0x01ffff:S, 0x020000-0x037fff:S, 0x038000-0x039fff:S, 0x03a000-0x03bfff:S, 0x03c000-0x03ffff:S Erase/write done. Verifying flash&hellip; VERIFIED. This means that these addresses have not been overwritten but skipped, becuse the fact that the data which were to be overridden were identical with what we wanted to write. So if we found such output to properly verify flashrom we need to clear our memory and write it again with BIOS backup. Correct output should look like this:</p>
+
+<p>Erasing and writing flash chip&hellip; Trying erase function 0&hellip; 0x000000-0x01ffff:W, 0x020000-0x037fff:W, 0x038000-0x039fff:W, 0x03a000-0x03bfff:W, 0x03c000-0x03ffff:W Erase/write done. Verifying flash&hellip; VERIFIED.</p>
+
+<p>Next post I will try to familiarize you with the process of debugging coreboot using <a href="http://wiki.qemu.org/Main_Page">QEMU</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Begin With Coreboot]]></title>
+    <link href="http://pietrushnic.github.io/blog/2012/01/06/how-to-begin-with-coreboot/"/>
+    <updated>2012-01-06T14:23:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2012/01/06/how-to-begin-with-coreboot</id>
+    <content type="html"><![CDATA[<p>About a month ago I started my adventure with coreboot. As <a href="http://www.coreboot.org/">coreboot home</a> page says &ldquo;coreboot is a Free Software project aimed at replacing the proprietary BIOS (firmware) found in most computers&rdquo;. Although I read the majority of materials from mentioned page I still suffered from a lack of basic information that would help me to arrange everything in my head. Therefore, I decided to write a series of posts described my actions associated with this interesting project.</p>
+
+<p>At the beginning I would recommend some interesting sources of information on coreboot:</p>
+
+<ul>
+<li><a href="http://www.coreboot.org/QEMU">http://www.coreboot.org/QEMU</a> - If you&rsquo;re impatient and want to start as soon as possible</li>
+<li><a href="http://www.coreboot.org/Screenshots#Videos">Coreboot videos</a> - One of the easiest ways to obtain general information about the project</li>
+<li><a href="http://lennartb.home.xs4all.nl/coreboot/coreboot.html">Start to understand</a> - I found this page by accident while googling materials, thanks to its author I understood basics and found out what&rsquo;s next</li>
+<li><a href="http://www.coreboot.org/Documentation">Documentation</a> - Many different types of documents, a large proportion of them are not applying to the latest version of coreboot v4, however, still has a educational value.</li>
+</ul>
+
+
+<p>After reviewing the above materials, you should understand the basics of coreboot. In the <a href="http://pietrushnic.blogspot.com/2012/01/flashrom-and-shuttle-av18e2.html">next post</a> I will describe <a href="http://flashrom.org/">flashrom</a> application and my experience with one of the old motherboard.</p>
+]]></content>
+  </entry>
+  
+</feed>

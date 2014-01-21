@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Mutt Tutorial Part 1 - Setup IMAP Account - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Mutt is one of those programs that make people call you a linux geek, nerd or a
+snob. This is because using TUI or command line tools in world of &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Mutt Tutorial Part 1 - Setup IMAP Account</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T11:43:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Mutt is one of those programs that make people call you a linux geek, nerd or a
+snob. This is because using TUI or command line tools in world of fancy GUI for
+most people is wierd. What&rsquo;s so great about mutt? I probably still have not
+found much of its advantages, but at first glance we can notice a few things.
+First, it keeps Unix convention of small programs for specific task <a href="http://www.faqs.org/docs/artu/ch01s06.html">&ldquo;Make each program to one thing well&rdquo;</a> or
+<a href="http://en.wikipedia.org/wiki/KISS_principle">KISS</a>. This means that mutt is
+only <a href="http://en.wikipedia.org/wiki/Mail_user_agent">MUA</a>, which is used to
+retrieve e-mails and for other tasks you need to use another application.
+However, due to the philosophy most applications are well suited to each other
+and usually everything works good. So you can easily combine it with Vim as the
+mail editor, abook as a address book, urlview as a browser launcher for html and
+graphics elements and so on. Third, it has support for IMAP which gives very
+nice usage model for most of e-mail account providers. Fourth, is used by such
+notables as Greg Kroah-Hartman and as <a href="http://www.mjmwired.net/kernel/Documentation/email-clients.txt">kernel documentation suggest</a> by
+other kernel developers. So lets start to discover mutt. Below I will discuss
+some basic features that until now (few days of using mutt) I found useful.</p>
+
+<ol>
+<li>Big kudos to Shinobu for <a href="http://zuttobenkyou.wordpress.com/2010/11/05/mutt-multiple-gmail-imap-setup/">this</a>
+post it helps me a lot. So first of all we need support for multiple
+accounts. In my case I have 4 accounts. Three of them got working IMAP
+access. 4th provider screw up something and access to IMAP server doesn&rsquo;t
+work so I need to workaround this with one of the Gmail features. At the
+beginning we create <code>$HOME/.muttrc</code> file:</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vim <span class="nv">$HOME</span>/.muttrc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>IMAP account configuration for looks like that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># unset important variables</span>
+</span><span class='line'>account-hook . <span class="s2">&quot;unset imap_user; unset imap_pass&quot;</span>
+</span><span class='line'>account-hook <span class="s2">&quot;imaps://&lt;account_name&gt;@&lt;imap_server_address&gt;/&quot;</span> <span class="s2">&quot;\</span>
+</span><span class='line'><span class="s2">    set imap_user = &lt;e-mail_address&gt;</span>
+</span><span class='line'><span class="s2">        imap_pass = &lt;e-mail_password&gt;&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Setup for &lt;e-mail_address&gt;:</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">folder</span> <span class="o">=</span> imaps://&lt;account_name&gt;@&lt;imap_server_address&gt;/
+</span><span class='line'><span class="c"># setup needed folders</span>
+</span><span class='line'><span class="nv">mailboxes</span> <span class="o">=</span> +INBOX <span class="o">=</span>&lt;folder_name&gt;
+</span><span class='line'><span class="nb">set </span><span class="nv">spoolfile</span> <span class="o">=</span> +INBOX
+</span><span class='line'>folder-hook imaps://&lt;account_name&gt;@&lt;imap_server_address&gt;/ <span class="err">&quot;</span><span class="se">\</span>
+</span><span class='line'>   <span class="nb">set </span><span class="nv">folder</span> <span class="o">=</span> imaps://&lt;account_name&gt;@&lt;imap_server_address&gt;/
+</span><span class='line'>   <span class="nv">spoolfile</span> <span class="o">=</span> +INBOX
+</span><span class='line'>   <span class="nv">postponed</span> <span class="o">=</span> +<span class="o">[</span>Gmail<span class="o">]</span>/Drafts
+</span><span class='line'>   <span class="nv">record</span> <span class="o">=</span> +<span class="o">[</span>Gmail<span class="o">]</span>/<span class="s1">&#39;Sent Mail&#39;</span>
+</span><span class='line'>   <span class="nv">from</span> <span class="o">=</span> <span class="s1">&#39;&lt;your_name&gt; &lt;e-mail_address&gt; &#39;</span>
+</span><span class='line'>   <span class="nv">realname</span> <span class="o">=</span> <span class="s1">&#39;&lt;real_name&gt;&#39;</span>
+</span><span class='line'>   <span class="nv">smtp_url</span> <span class="o">=</span> smtps://&lt;account_name&gt;@&lt;smpt_server_address&gt;
+</span><span class='line'>   <span class="nv">smtp_pass</span> <span class="o">=</span>  <span class="nb">unset </span>important variables
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>&lt;account_name&gt;</code> &ndash; for <a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#102;&#111;&#x6f;&#x2e;&#x62;&#97;&#114;&#64;&#103;&#x6d;&#x61;&#x69;&#108;&#46;&#99;&#x6f;&#109;">&#102;&#x6f;&#x6f;&#x2e;&#x62;&#97;&#x72;&#x40;&#103;&#x6d;&#97;&#105;&#108;&#46;&#x63;&#111;&#x6d;</a> it will be foo.bar
+<code>&lt;imap_server_address&gt;</code> &ndash; this information you can get from your e-mail provider
+help pages or from the settings of web e-mail client, for Gmail it is
+imap.gmail.com
+<code>&lt;e-mail_address&gt;</code> &ndash; your e-mail address
+<code>&lt;e-mail_password&gt;</code> &ndash; your e-mail password, later we will discuss how to store this more secure than
+plain text :)
+<code>&lt;folder_name&gt;</code> &ndash; any folder (for gmail account also filters) you
+have on you IMAP account, so for gmail account it could be Drafts, Starred,
+Important or others.
+<code>&lt;your_name&gt;</code> &ndash; your real name or nick anything you want
+to show in from field
+<code>&lt;real_name&gt;</code> &ndash; could be the same as <code>&lt;your_name&gt;</code>
+<code>&lt;smpt_server_address&gt;</code> &ndash; your SMTP server address, for gmail users it will be
+smtp.gmail.com</p>
+
+<ol>
+<li>If your e-mail provider have only pop3 access and you have gmail account you
+can use one of gmail account features to make your pop3 account visible as a
+IMAP folder. To do this got to Settings &ndash;> Accounts and Import and in the
+section &ldquo;Check mail from other accounts&rdquo; add your POP3 account. After that
+make sure to label your mails from POP3 account. Try to not use &lsquo;@&rsquo; in the
+label name because this cause problems during mutt configuration. If you set
+label for your POP3 account check if your label in Label tab have &ldquo;Show in
+IMAP&rdquo; marked, if yes everything was set correctly. To use this label in mutt
+simply add another <code>&lt;folder_name&gt;</code> to mailboxes line.</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T11:43:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account/" data-via="" data-counturl="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/21/vim-as-blogger-editor_21/" title="Previous Post: Vim as a Blogger editor">&laquo; Vim as a Blogger editor</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/05/13/mutt-tutorial-part-2-secure-login/" title="Next Post: Mutt tutorial part 2 - secure login">Mutt tutorial part 2 - secure login &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

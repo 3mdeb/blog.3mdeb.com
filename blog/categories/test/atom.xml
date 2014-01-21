@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Test | My Octopress Blog]]></title>
+  <link href="http://pietrushnic.github.io/blog/categories/test/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2014-01-21T22:32:11+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Test]]></title>
+    <link href="http://pietrushnic.github.io/blog/2012/01/04/test/"/>
+    <updated>2012-01-04T21:46:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2012/01/04/test</id>
+    <content type="html"><![CDATA[<p>01234567890123456789012345678901234567890123456789012345678901234567890123456789 This first test for blogger.vim plugin. THis will be used as sandbox, it looks like blogger vim works fine, need to check features that mostly use. Continue testing: <a href="http://google.pl">this is link</a> &ndash; this is dash &ndash; 2nd dash
+this is bash code
+plain text
+1. 1st
+  1. under 1.st
+  2. 2nd under 2st</p>
+
+<ol>
+<li>2.nd</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[First Post]]></title>
+    <link href="http://pietrushnic.github.io/blog/2012/01/03/first-post/"/>
+    <updated>2012-01-03T00:01:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2012/01/03/first-post</id>
+    <content type="html"><![CDATA[<p>This is first post to see how blog looks like.</p>
+
+<h2>Comments</h2>
+
+<p>pietrushnic</p>
+
+<p>1st test comment</p>
+]]></content>
+  </entry>
+  
+</feed>

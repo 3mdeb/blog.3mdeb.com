@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Mutt Tutorial Part 3 - Sidebar, URLs in E-mails - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="How to create sidebar in mutt and open URLs in e-mails">
+  <meta name="keywords" content="mutt,sidebar,linux">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Mutt Tutorial Part 3 - Sidebar, URLs in E-mails</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T15:43:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Information in this post came from <a href="http://www.lunar-linux.org/mutt-sidebar/">lunar linux page</a>. Kudos to its author. In this
+post I want to discuss two topics: sidebar and how to open urls form inside
+mutt. Sidebar is mutt feature delivered in mutt-patched package in Debian. It
+cause to split standard mutt window in two parts. In first we can find list of
+folders defined in the <code>$HOME/.muttrc</code> file, second window is a known old window
+with the list of posts. Mutt window with sidebar looks like on the picture
+below:</p>
+
+<p>  <img src="http://lunar-linux.org/~tchan/mutt/mutt-screenshot.png" alt="" /></p>
+
+<p>To use side bar we need to install mutt-patched packed in Debian:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install mutt-patched
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To make side bar more accessible I use default settings from lunar linux page.
+Add below lines to <code>$HOME/.muttrc</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">set </span><span class="nv">sidebar_width</span> <span class="o">=</span> 30
+</span><span class='line'><span class="nb">set </span><span class="nv">sidebar_visible</span> <span class="o">=</span> yes
+</span><span class='line'>color sidebar_new yellow default
+</span><span class='line'><span class="nb">bind </span>index CP sidebar-prev
+</span><span class='line'><span class="nb">bind </span>index CN sidebar-next
+</span><span class='line'><span class="nb">bind </span>index CO sidebar-open
+</span><span class='line'><span class="nb">bind </span>pager CP sidebar-prev
+</span><span class='line'><span class="nb">bind </span>pager CN sidebar-next
+</span><span class='line'><span class="nb">bind </span>pager CO sidebar-open
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>First line sets width of side bar it depends on how long are your folder names.
+Second line makes sidebar by default visible. Third makes folders with new
+messages yellow. Other lines create shortcuts for navigating sidebar. Note that
+C is not Ctrl but uppercase &lsquo;c&rsquo; key. Second topic I want to discuss is how to
+open urls from inside e-mails. To do this we can use tip from <a href="http://www.mutt.org/doc/manual/manual-4.html#ss4.13">mutt site</a>. As it said we need
+urlview application:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install urlview
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To correctly configure this tool you need to create <code>$HOME/.urlview</code> file. So:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vim <span class="nv">$HOME</span>/.urlview
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this file we define two things. First will be regular expression which match
+urls and second will be command line to run when regexp was matched. File looks like below:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>REGEXP <span class="o">(((</span>https?|ftp|gopher<span class="o">)</span>://|<span class="o">(</span>mailto|file|news<span class="o">)</span>:<span class="o">)[</span>^’ <span class="s2">&quot;]+|(www|web|w3).[-a-z0-9.]+)[^’ .,;&quot;</span>:<span class="o">]</span> COMMAND chromium %s
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Chromuim is my browser of choice but you can use firefox, lynx or anything you want.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T15:43:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/" data-via="" data-counturl="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/05/13/mutt-tutorial-part-2-secure-login/" title="Previous Post: Mutt tutorial part 2 - secure login">&laquo; Mutt tutorial part 2 - secure login</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/05/13/mutt-tutorial-part-4-html-mails-address/" title="Next Post: Mutt tutorial part 4 - html mails, address book and other useful features">Mutt tutorial part 4 - html mails, address book and other useful features &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

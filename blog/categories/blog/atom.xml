@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Blog | My Octopress Blog]]></title>
+  <link href="http://pietrushnic.github.io/blog/categories/blog/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2014-01-21T22:32:11+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[New Background and Not So Big "Coming Back"]]></title>
+    <link href="http://pietrushnic.github.io/blog/2012/11/13/new-background-and-not-so-big-coming/"/>
+    <updated>2012-11-13T00:04:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2012/11/13/new-background-and-not-so-big-coming</id>
+    <content type="html"><![CDATA[<p>It&rsquo;s been a long time since I last wrote anything on the blog. Because I hear complains about the background causing my blog hard to read I decide to change it.</p>
+
+<p>I have little break in my side project and noticed that most read posts are related to some technical workarounds and solutions for different problems I decide to write a series about gcc errors and some solutions for it. I know it may sound like some complete spam and trash for blog, but when I searched for some explanation and solution of this errors sometimes it was hard to find them, sometimes it was hard to match with my code and finally sometimes I was unable to understand what is going on. I want to share what I learned and even if it wouldn&rsquo;t help anyone I want to have this in one place.</p>
+
+<p>Recently I returned to my long-neglected hobby &ndash; chess. I will also try to write something constructive in this topic. Last time I also think a lot about embedded stuff (trying to reverse my printer), android (writing little project helping my colleague) and many other things. So maybe I will write about this. To not be boring I will simply get my hands dirty.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Nice Small Additions for My Blog]]></title>
+    <link href="http://pietrushnic.github.io/blog/2012/03/07/blog-has-changed-slightly/"/>
+    <updated>2012-03-07T23:15:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2012/03/07/blog-has-changed-slightly</id>
+    <content type="html"><![CDATA[<p>Blog has changed slightly. I&rsquo;ve added two new sections: social media and afk. In &ldquo;social media&rdquo; I will add links to my profiles on various social networking sites. You&rsquo;ll find my most recent development achievements ( <a href="https://github.com/pietrushnic">@github</a>) and twitts on topics of interest to me ( <a href="https://twitter.com/#!/pietrushnic">@twitter</a>). The second section, &ldquo;afk&rdquo; (away from keyboard) is intended for the information of life beyond the keyboard, which in my case is not too extensive. I will publish here information about the books we read, watched movies and many other interesting things, which can be passionate away from the keyboard.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ideas for Development]]></title>
+    <link href="http://pietrushnic.github.io/blog/2012/01/09/ideas-for-development/"/>
+    <updated>2012-01-09T22:24:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2012/01/09/ideas-for-development</id>
+    <content type="html"><![CDATA[<p>All the time come to my mind new ideas about what could be added to the blog and what information to post. I&rsquo;m interested in so many things that many of the ideas are killed before reaching the plane of the keyboard and has no chance to be introduced even as a draft to the blog. It seems that for myself I should store ideas for development in order to easily return to them when ripe.</p>
+
+<ol>
+<li>I want occasionally write something about the commodity markets, however, I&rsquo;m interested in it very briefly, because only about a year it seems to me that sometimes I have something to say.</li>
+<li>I begin learning about the <a href="http://www.uefi.org/home/">UEFI</a> environment and, therefore, that I am an advocate of freedom in the broad sense of the word, I would like to refer to this solution. I also want to understand the advantages and disadvantages of this solution in the context of freedom and relate them to other solutions such as <a href="http://www.coreboot.org/Welcome_to_coreboot">coreboot</a>.</li>
+<li>I would also like to implement a section that could be titled &ldquo;what I&rsquo;m interested now ?&rdquo;, &ldquo;what I read now?&rdquo; and &ldquo;what was last seen?&rdquo;</li>
+</ol>
+
+
+<p>I would like to set a specific time for blogging during the week, what with certainty contribute to faster realization of these ideas.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why I Decided to Write a Blog ?]]></title>
+    <link href="http://pietrushnic.github.io/blog/2012/01/03/why-i-decided-to-write-blog/"/>
+    <updated>2012-01-03T00:20:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2012/01/03/why-i-decided-to-write-blog</id>
+    <content type="html"><![CDATA[<p>Of course there are plenty of reasons. This idea haunted me for many months but finally insomnia pushed me to start.</p>
+]]></content>
+  </entry>
+  
+</feed>

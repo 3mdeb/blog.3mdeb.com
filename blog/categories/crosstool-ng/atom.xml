@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Crosstool-ng | My Octopress Blog]]></title>
+  <link href="http://pietrushnic.github.io/blog/categories/crosstool-ng/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2014-01-21T22:32:11+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Quick Build of Arm-unknown-linux-gnueabi With Crosstool-ng]]></title>
+    <link href="http://pietrushnic.github.io/blog/2012/03/14/quick-build-of-arm-unknown-linux/"/>
+    <updated>2012-03-14T23:42:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2012/03/14/quick-build-of-arm-unknown-linux</id>
+    <content type="html"><![CDATA[<p>You might be surprised at how much you have to make to correctly build
+<code>arm-unknown-linux-gnueabi</code> config based toolchain with <a href="http://crosstool-ng.org/">crosstool-ng</a>. As you can
+see examples of many open source projects, the man&rsquo;s work is a rare resource.
+The result of this economic fact is that the attempt to build configuration
+<code>arm-unknown-linux-gnueabi</code> is not a simple task and during an operation you can
+come across many problems. Although I am not afraid of problems and effectively
+try to fight them and of course sharing the results of my work. My build system
+parameters:  <code>Debian GNU/Linux wheezy/sid 3.2.0-2-amd64</code></p>
+
+<ul>
+<li>Clone crosstools-ng (you need mercurial)
+<code>bash
+hg clone http://crosstool-ng.org/hg/crosstool-ng
+</code></li>
+<li>Create temporary directory and run
+<code>bash
+ct-ng arm-unknown-linux-eabi #choose latest kernel (for me it was 3.2.9)
+</code></li>
+<li>We probably want to change directory to which all stuff will be build (default is <code>$HOME/x-tools</code>):
+<code>bash
+ct-ng menuconfig
+</code>
+And go to:
+<code>Paths and misc options ---&gt; (${HOME}/x-tools/${CT_TARGET}) Prefix directory</code>
+Change it according to your needs. Exit end save configuration.</li>
+<li>Build (number after dot depend on how many command we want to run simultaneously):
+<code>ct-ng build.4</code>
+It can take a lot of time. On my machine with 5k BogoMips it takes over 1h.</li>
+</ul>
+
+
+<h3>Problems that you can encounter:</h3>
+
+<ul>
+<li><code>gcj</code> &ndash; latest changeset <code>2916:6f758ed4c0b9</code> have trouble finding <code>gcj</code> binary,
+which it show using following message:
+<code>
+[ERROR] Missing: 'x86_64-unknown-linux-gnu-gcj' or 'x86_64-unknown-linux-gnu-gcj' or 'gcj' : either needed!
+</code>
+To workaround this install <code>gcj</code> and link binary like this:
+<code>
+sudo ln -s /usr/bin/gcj-4.6 /usr/bin/gcj
+</code></li>
+<li><code>duma</code> &ndash; mentioned changeset also has problem with url to D.U.M.A library,
+apply below changes to workaround problems:
+```diff
+&mdash;&ndash; a/scripts/build/debug/200-duma.sh Mon Mar 12 21:19:26 2012 +0100
++++ b/scripts/build/debug/200-duma.sh Wed Mar 14 20:02:22 2012 +0100
+@@ -4,7 +4,7 @@ # Downloading an non-existing file from sourceforge will give you an
+
+<h1>HTML file containing an error message, instead of returning a 404.</h1>
+
+<h1>Sigh&hellip;</h1></li>
+<li>CT_GetFile &ldquo;duma_${CT_DUMA_VERSION}&rdquo; .tar.gz <a href="http://kent.dl.sourceforge.net/sourceforge/duma/">http://kent.dl.sourceforge.net/sourceforge/duma/</a></li>
+<li>CT_GetFile &ldquo;duma_${CT_DUMA_VERSION}&rdquo; .tar.gz <a href="http://downloads.sourceforge.net/project/duma/duma/2.5.15">http://downloads.sourceforge.net/project/duma/duma/2.5.15</a>
+
+<h1>Downloading from sourceforge may leave garbage, cleanup</h1>
+
+<p>CT_DoExecLog ALL rm -f &ldquo;${CT_TARBALLS_DIR}/showfiles.php&rdquo;* }
+```</p></li>
+<li><code>mawk</code> &ndash; if mawk return syntax error like this:
+<code>
+mawk: scripts/gen-sorted.awk: line 19: regular expression compile failed (bad
+class -- [], [^] or [)
+</code>
+It could be fixed in two ways. First is to change <code>line 19</code> in <code>/path/to/tmp/dir/.build/src/glibc-2.9/scripts/gen-sorted.awk</code>
+Is:
+<code>
+sub(/\/[^/]+$/, "", subdir);
+</code>
+Should be:
+<code>
+sub(/\/[^\/]+$/, "", subdir);
+</code>
+Or simply by installing gawk, reconfigure and recompile <code>crosstools-ng</code>.</li>
+</ul>
+
+
+<p>This was my first post related to linux embedded enviroment. Hope it will be more. Enjoy!</p>
+]]></content>
+  </entry>
+  
+</feed>

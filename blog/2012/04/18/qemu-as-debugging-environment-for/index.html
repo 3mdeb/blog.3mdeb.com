@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Debugging Coreboot in Qemu Environment - Part 2 - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="How to debug coreboot under qemu">
+  <meta name="keywords" content="coreboot,qemu">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pietrushnic.github.io/blog/2012/04/18/qemu-as-debugging-environment-for">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Debugging Coreboot in Qemu Environment - Part 2</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-18T22:41:00+02:00" pubdate data-updated="true">Apr 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In <a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment">previous post</a>
+<code>coreboot</code> was configured and installed. Here we try to establish good debugging
+environment for it. To create a good emulated environment to debug, research and
+learn <code>coreboot</code> few tricks are required. First of all we need to know how to run
+our emulated environment (qemu). What I mean by that ?</p>
+
+<ul>
+<li>load coreboot image (-bios option),
+
+<ul>
+<li>freeze CPU at startup (-S),</li>
+</ul>
+</li>
+<li>get appropriate feedback about virtual machine state (-d in_asm,cpu),</li>
+<li>set up remote gdb server to run qemu step by step (-s).</li>
+</ul>
+
+
+<p>So finally we get:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu -bios src/coreboot/build/coreboot.rom -s -S -d in_asm,cpu -nographic</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We don&rsquo;t need graphics so it also could be disable (-nographic). Run above
+command and prepare debugging environment as described below.</p>
+
+<ul>
+<li>load bootblock file in gdb:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>file path/to/coreboot/build/bootblock.elf</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>use objdump to find out at what address .text, .bss and .data sections are:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>objdump -h src/coreboot/build/coreboot\_ram|grep -E "text|bss|\.data"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>my output looks like that:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>0 .text 00010810 00100000 00100000 00001000 2**2 3 .data 000004d8 001174e8 
+</span><span class='line'>001174e8 000184e8 2**2 4 .bss  0000080c 001179c0 001179c0 000189c0 2**3</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>use above addresses to load symbols from <code>coreboot_ram</code> file in gdb:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>add-symbol-file src/coreboot/build/coreboot_ram 0x00100000 -s .data \
+</span><span class='line'>0x001174e8 -s .bss 0x001179c0</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>In another terminal or screen window</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vim /tmp/qemu.log</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(use :e to reload qemu.log file after every instruction), in this file we will
+get information about all registers of virtual machine
+* target remote :1234
+* Run next instruction (ni command in gdb) and refresh qemu.log, if you get
+   something like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>EAX=00000000 EBX=00000000 ECX=00000000 EDX=00000633 
+</span><span class='line'>ESI=00000000 EDI=00000000 EBP=00000000 ESP=00000000 
+</span><span class='line'>EIP=0000fff0 EFL=00000002 [-------] CPL=0 II=0 A20=1 SMM=0 HLT=0
+</span><span class='line'>ES =0000 00000000 0000ffff 00009300
+</span><span class='line'>CS =f000 ffff0000 0000ffff 00009b00
+</span><span class='line'>SS =0000 00000000 0000ffff 00009300
+</span><span class='line'>DS =0000 00000000 0000ffff 00009300 
+</span><span class='line'>FS =0000 00000000 0000ffff 00009300
+</span><span class='line'>GS =0000 00000000 0000ffff 00009300
+</span><span class='line'>LDT=0000 00000000 0000ffff 00008200
+</span><span class='line'>TR =0000 00000000 0000ffff 00008b00
+</span><span class='line'>GDT= 00000000 0000ffff
+</span><span class='line'>IDT= 00000000 0000ffff
+</span><span class='line'>CR0=60000010 CR2=00000000 CR3=00000000 CR4=00000000
+</span><span class='line'>DR0=00000000 DR1=00000000 DR2=00000000 DR3=00000000
+</span><span class='line'>DR6=ffff0ff0 DR7=00000400</span></code></pre></td></tr></table></div></figure>
+
+
+<p>it means that your debugging enviroment was set correctly.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-18T22:41:00+02:00" pubdate data-updated="true">Apr 18<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/coreboot/'>coreboot</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pietrushnic.github.io/blog/2012/04/18/qemu-as-debugging-environment-for/" data-via="" data-counturl="http://pietrushnic.github.io/blog/2012/04/18/qemu-as-debugging-environment-for/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/12/building-arm-toolchain-part-2-gcc-and/" title="Previous Post: Building ARM toolchain - part 2: gcc and eglibc">&laquo; Building ARM toolchain - part 2: gcc and eglibc</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/04/21/vim-as-blogger-editor_21/" title="Next Post: Vim as a Blogger editor">Vim as a Blogger editor &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

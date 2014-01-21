@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Productivity | My Octopress Blog]]></title>
+  <link href="http://pietrushnic.github.io/blog/categories/productivity/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2014-01-21T22:32:11+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/"/>
+    <updated>2013-07-30T02:40:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity</id>
+    <content type="html"><![CDATA[<h2>Introduction</h2>
+
+<p>The idea of this post is very simple (as usually)  and I wonder why I didn&rsquo;t thought
+about it earlier. The point is to use history of your Google queries to improve
+productivity. Most of things that we google can be replaced for example by browser
+extensions, bookmarks or rss feeds. Thats how we can gain few additional free seconds on
+each google-type-click cycle.</p>
+
+<h2>Statistics</h2>
+
+<p>Depending on different factors we spend a lot of time in browser. I cannot find
+statistics for desktops but for mobile <a href="http://blog.flurry.com/bid/95723/Flurry-Five-Year-Report-It-s-an-App-World-The-Just-Web-Lives-in-It">Flurry</a>
+researches are probably relevant enough. Simplifying this statistics and assuming that desktop market
+is similar (it is probably to big simplification for some of you but IMHO it is
+good for reflections on this blog):</p>
+
+<ul>
+<li>access Facebook, social networks (+18%, +6%)</li>
+<li>play some games (<a href="http://allthingsd.com/20130325/a-look-ahead-at-gdc-its-mobile-vs-consoles-in-fight-for-game-developers-attention/">lets say 30%</a> of our 32% from Flurry report +13%)</li>
+<li>web browsing time (+20%)</li>
+<li>entertain</li>
+<li>read news</li>
+<li>use productivity tools</li>
+</ul>
+
+
+<p>We have at least 60 percent of our time in web browser. That&rsquo;s explain Google&rsquo;s
+ideas about ChromOS and competition on browser market. Of course if take look a
+this in short therm it look ridiculous but in long term it may be true. Even if this estimation
+not match your behavior than ask yourself what percentage of time spent in
+browser proves that improving productivity using google queries data does not
+make sense ? Especially when doing this will not consume lot of your time.</p>
+
+<h2>Productivity improvements based on my google history</h2>
+
+<p>Below I will show how I improve my productivity using top queries and top sites
+from <a href="https://history.google.com/history/">google history</a>. These are my results
+that I found after choosing <code>Show more trends</code>:</p>
+
+<h3>Top queries</h3>
+
+<ol>
+<li><code>ztm gdańsk</code>          &ndash; public transportation in my home town</li>
+<li><code>usdpln</code>              &ndash; Polish Zloty to US Dollar rate</li>
+<li><code>rozkład jazdy pkp</code>   &ndash; Polish state railways schedule</li>
+<li><code>intc</code>                &ndash; Intel Corporation stocks rate</li>
+<li><code>radio polska stacja</code> &ndash; Polish Internet radio station</li>
+</ol>
+
+
+<p>First of all I was surprised that I googled these things so many times. Especially
+for point 5 :). To improve my daily routine with these data I use following
+applications:</p>
+
+<h4>Public transporation</h4>
+
+<p>I used well known Polish application for public transpiration in biggest cities
+&ndash; <a href="http://jakdojade.pl/">jakdojade.pl</a>. If you register on their page they give
+you possibility to save travel directions, so I used it to save my common
+destinations. Of course I put it on my bookmark bar as it is one of the most
+used links.</p>
+
+<h4>Currency ratio</h4>
+
+<p>After thinking a while I realize that few requirements have to be met for me.
+I need below fields:</p>
+
+<ul>
+<li>USD/PLN rate</li>
+<li>EUR/PLN rate</li>
+<li>gold ounce in US Dollars or XAUUSD</li>
+<li>silver ounce in US Dollars or XAGUSD</li>
+</ul>
+
+
+<p>Unfortunately I was unhappy with choice presented on Chrome extension site
+because I find that it is not easy to met my expectations &ndash; this is probably
+market niche to explore. For today I choose <a href="https://chrome.google.com/webstore/detail/currency-converter/lncdobdbibdgoiohgnflmjajfphcnakg">Currency Converter</a>.
+It has pretty good rate 4.5 star/444 opinions. One thing I don&rsquo;t like is that I
+cannot set every field as I wish. Ratio always relate to recent changed position.
+I also cannot display stock rate. That&rsquo;s why I will have to use one another
+extension.</p>
+
+<h4>Railways schedule</h4>
+
+<p>Right now there is nothing I can do for this one than adding to bookmark bar as
+a recently visited site.</p>
+
+<h4>Stocks ticker</h4>
+
+<p>There are plenty of extensions for Chrome and not a lot of really good one. I
+found <a href="https://chrome.google.com/webstore/detail/stock-tracker/gphdmnilpmjaioploikmbpgkjfbagidf">Stock Tracker</a>
+useful because it shows price in the icon on toolbar. But it is not free from
+small bugs, for example INTC price is 4 digit with dot (00.00) and inadequate
+font size selection causing that last digit is visible only in half, which cause
+it hard to read. Good thing is that after pushing extension button on toolbar I
+get stock chart and can see the trend.</p>
+
+<h3>Top sites</h3>
+
+<ol>
+<li><code>stackoverflow.com</code></li>
+<li><code>en.wikipedia.org</code></li>
+<li><code>github.com</code></li>
+<li><code>www.chessgames.com</code></li>
+<li><code>pl.wikipedia.org</code></li>
+</ol>
+
+
+<p>Probably most of this pages are well known for you. What we can do with this
+information ?</p>
+
+<p>For
+<a href="https://chrome.google.com/webstore/detail/lookup-companion-for-wiki/dhgpkiiipkgmckicafkhcihkcldbdeej">wiki</a> and <a href="https://chrome.google.com/webstore/detail/search-stackoverflow/gmdolelhfhbldobljhbhdgljbajhfilj">stackoverflow</a> there are extensions that help get search engine of
+those sites. I found that usually google +stockoverflow works better than this
+extension but it is worth a try. Wiki works without any problem and only our
+habits can stop us by using it.</p>
+
+<p>I use a lot of <a href="http://www.chess.com">chess.com</a> what I found useful with this
+is <a href="https://chrome.google.com/webstore/detail/chesscom-notifier/khihkgdcfbjdnfgalkjnimbmofnhhpho">Chess.com Notifier</a>
+it change color when some pending move in my games. Unfortunately I get to
+<a href="http://www.chessgames.com">www.chessgames.com</a> though google looking for
+particular position in game &ndash; right now I can&rsquo;t find easy way to improve this
+other than paying for access to good database with defined interface or using my
+own database.</p>
+
+<p>I&rsquo;m sure that you have some clues how to improve your productivity using Google
+history or you will find application for suggested plugins. Anyway, I whish you
+good luck.</p>
+
+<h2>At the end &ndash; the hard thing</h2>
+
+<p>Switching our behaviors to something different is really hard thing. If we
+always go to google and type well know query and trying to switch to something
+new like replacing this behavior with clicking link or running extension could
+be hard. This new action at the begging can be even slower than old. That&rsquo;s why
+people resign after few tries. Most people also don&rsquo;t like changes as adage said
+&ldquo;better the devil you know&rdquo;. However only those who try to change something in
+their lives can reach success. And as story of Thomas Edison proves you have to
+try.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Workflow Imporovement With Open Source Tools - Part 1]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/05/16/workflow-imporovement-with-open-source-tools/"/>
+    <updated>2013-05-16T22:16:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/05/16/workflow-imporovement-with-open-source-tools</id>
+    <content type="html"><![CDATA[<h3>Introduction</h3>
+
+<p>I want to start a series of articles to describe how I improve my workflow with
+geeky Open Source applications. I will concentrate on terminal applications that
+I try to use in my GTD process.</p>
+
+<h3>Terminal</h3>
+
+<h4>Solarized gnome-terminal</h4>
+
+<p>If you already don&rsquo;t know what solarized color scheme is then please take a look
+at <a href="http://ethanschoonover.com/solarized">this page</a>. To install solarized
+colorscheme in gnome-terminal simply follow instruction from this <a href="https://github.com/sigurdga/gnome-terminal-colors-solarized">git repository</a>.</p>
+
+<h3>Mutt again</h3>
+
+<p>During last days I spent a lot of time to tweak my mutt configuration. Here I
+will give you few hints about things that I learned.</p>
+
+<h4>Solarized mutt</h4>
+
+<p>To enable solarized colorscheme in mutt simply download one of scheme files from <a href="https://github.com/altercation/mutt-colors-solarized">github</a>. If you installed
+dark scheme for your gnome-terminal then I suggest <code>mutt-colors-solarized-dark-16.muttrc</code>.
+Copy this file for example to <code>$HOME/.mutt</code> and source it in muttrc file:
+<code>
+source $HOME/.mutt/mutt-colors-solarized-dark-16.muttrc
+</code></p>
+
+<h4>Width of From column</h4>
+
+<p>Usually from field in today&rsquo;s emails is longer than 19 characters. If this
+happens mutt by default will not display whole string. To change this behavior
+you can manipulate <code>index_format</code> variable. I set mine to 30:
+
+<code>
+set index_format="%4C %Z %{%b %d} %-30.30L (%4l) %s"
+</code>
+</p>
+
+<h4>Sidebar</h4>
+
+<p>Finally I gave up sidebar for using latest code without annoying <code>tls_socket_read</code> error.
+Switching between IMAP folders is not so bad, you can quickly display all
+folders by <code>c&lt;Tab&gt;&lt;Tab&gt;</code> or simply <code>y</code></p>
+
+<h4>Offlineimap</h4>
+
+<p>This is probably best program to synchronize your emails with local storage. It
+also has feature that allow synchronization between different IMAP servers but
+I&rsquo;m not using it. Few things are crucial when using <code>offlineimap</code>:</p>
+
+<ul>
+<li>probably easiest way to keep passwords secret is using python hooks for gnome-keyring,
+detailed description how to integrate it with <code>offlineimap</code> is
+<a href="http://www.clasohm.com/blog/one-entry?entry_id=90957">here</a>. Debian name of
+<code>gnome-python2-gnomekeyring</code> is different: <code>python-gnomekeyring</code>.</li>
+<li>Use meaningful <code>localfolders</code> because you will use it in <code>mutt</code> configuration</li>
+</ul>
+
+
+<p>Typical configuration of <code>$HOME/.offlineimaprc</code>:
+```
+[mbnames]
+enabled = yes
+filename = ~/.mutt/muttrc.mailboxes
+header = &ldquo;mailboxes &rdquo;
+peritem = &ldquo;+%(accountname)s/%(foldername)s&rdquo;
+sep = &ldquo; &rdquo;
+footer = &ldquo;\n&rdquo;</p>
+
+<p>[general]
+metadata = ~/.offlineimap
+maxsyncaccounts = 5
+maxconnections = 2
+accounts = account1, account2
+status_backend = sqlite
+pythonfile = ~/.mutt/offlineimap.py</p>
+
+<p>[Account account1]
+autorefresh = 3
+localrepository = acc1_local
+remoterepository = acc1_remote</p>
+
+<p>[Repository acc1_local]
+type = Maildir
+localfolders = ~/.mail/account1</p>
+
+<p>[Repository acc2_remote]
+type = Gmail
+remoteusereval = get_username(&ldquo;account1&rdquo;)
+remotepasseval = get_password(&ldquo;account1&rdquo;)
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt</p>
+
+<p>[Account account2]
+autorefresh = 3
+localrepository = acc2_local
+remoterepository = acc2_remote</p>
+
+<p>[Repository acc2_local]
+type = Maildir
+localfolders = ~/.mail/account2</p>
+
+<p>[Repository acc2_remote]
+type = Gmail
+remoteusereval = get_username(&ldquo;account2&rdquo;)
+remotepasseval = get_password(&ldquo;account2&rdquo;)
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+```</p>
+
+<p>What this means by section:</p>
+
+<ul>
+<li><code>[mbnames]</code> &ndash; automatically create mailboxes folders according to your
+configuration on IMAP server</li>
+<li><code>[general]</code> &ndash; most important things here are self explanatory accounts
+variable and <code>max{syncaccounts,connections}</code>, first said how many accounts
+should be synchronized and second how many simultaneous connections should be
+used</li>
+<li><code>[Account *]</code> &ndash; contain sync refresh time in minutes (<code>autorefresh</code>) and link
+to local and remote repository definitions (<code>localrepository</code> and
+<code>remoterepository</code>)</li>
+<li><code>[Repository *]</code> &ndash; for local folder and its type and for remote gnome-keyring
+configuration</li>
+</ul>
+
+
+<h4>Multiple account configuration</h4>
+
+<p>To simplify multiple accounts configuration I added two things:</p>
+
+<ul>
+<li>separated account files configuration &ndash; in my case placed in <code>$HOME/.mutt/accounts</code>
+<code>
+set postponed   = +account1@server.com/Drafts
+set spoolfile   = +account1@server.com/INBOX
+set record      = +account1@server.com/Sent
+set from        = 'account1@server.com'
+set realname    = 'My Name'
+set smtp_url    = smtps://acc1@smtp.server.com:587
+set smtp_pass   = $my_pass
+set signature   = "~/.mutt/signature.example"
+</code></li>
+<li>folder hooks for particular account &ndash; it cause automatic loading of
+configurations when folder was changed (in <code>$HOME/muttrc</code>):
+<code>
+folder-hook 'account1@server.com' 'source $HOME/.mutt/accounts/account1'
+</code></li>
+</ul>
+
+
+<h4>Separate mailing list file</h4>
+
+<p>I keep my mailing list configuration file separated and source it in my
+<code>$HOME/.muttrc</code>. I&rsquo;m not mailing list advanced user, so right now I have manually
+created IMAP folders and Gmail filters to move mails from mailing list to this
+folders. On the mutt side I use <code>subscribe</code> command to indicate that particular
+mail id is a mailing list.</p>
+
+<h3>Personal informations</h3>
+
+<p>Some informations in my configuration files shouldn&rsquo;t be available for all. I
+mean my email account configuration, my todo list, passwords and things like
+that. To store this informations I use additional private git repository and use
+it as a submodule for my workspace configuration. I wrote post about keeping
+configuration using git
+<a href="/blog/2012/02/19/improve-productivity-by-tracking-work">here</a> and
+<a href="/blog/2012/02/20/improve-productivity-by-tracking-work_20">here</a>.</p>
+
+<h3>Taskwarrior and vit</h3>
+
+<p>I really like <code>taskwarrior</code> as a GTD tool but I was tired of writing everything
+every time I wanted to change sth. I found <code>vit</code>. Vit is a vi-like interface
+to task list generated by <code>taskwarrior</code> it works really great. Mostly it is
+written in perl and there is no official repository for its code base but latest
+version is from April 2013. I use lot of <code>project:</code> and <code>+flag</code> to update my
+TODO list. I prefer <code>long</code> filter.</p>
+
+<h4>My taskwarrior projects and flags</h4>
+
+<p>I have few ongoing projects like <code>blog</code>, <code>productivity</code> and <code>ideas</code>. In addition I use
+few flags like <code>ideas</code>, <code>finish</code>, <code>enhancement</code>, <code>fix</code> or <code>bug</code>. So when I
+connect project and flag I get few categories like:</p>
+
+<ul>
+<li><code>blog ideas</code> for new articles ideas</li>
+<li><code>blog finish</code> for articles that should be finished ASAP</li>
+<li><code>blog bug/fix</code> for articles that have to be changed for some reason</li>
+<li><code>productivity bug/fix</code> for productivity tools configuration improvements</li>
+<li><code>productivity ideas</code> for new improvements</li>
+</ul>
+
+
+<h3>Summary</h3>
+
+<p>I think this is enough for first post from this series. Hope it was helpful. If
+yes then please share, if no then comment what I should improve. Thanks for
+reading.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tmux as Screen Replacement and Productivity Accelerator]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/04/06/tmux/"/>
+    <updated>2013-04-06T05:29:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/04/06/tmux</id>
+    <content type="html"><![CDATA[<p>As I wrote in <a href="/blog/2013/03/19/debian-switching-to-unstable">previous post</a> I
+switched from GNU screen to <a href="http://tmux.sourceforge.net">tmux</a>. I use it for a
+few moths and have to said that I&rsquo;m really impressed by simplicity, performance
+and community support in this project. In this post I want to discuss my
+configuration and useful additions for it like tmuxinator, session logging,
+colors or status bar configuration.</p>
+
+<h3>Basics</h3>
+
+<p>Debian contain <code>tmux</code> package but for stable and testing release it is pretty
+old version. Personally I use <code>unstable</code> version where <code>tmux</code> was delivered in
+<code>1.7~svn2819-1</code> version.
+<code>
+sudo apt-get install tmux
+</code>
+To start session simply type <code>tmux</code>. Tmux uses <code>C-b</code>/ <code>Ctrl-b</code> as a prefix for
+commands. If you switch from GNU screen then at the beginning you can experience
+some annoying situations but after few days everything should back to normal.</p>
+
+<p>Most used keybiddings:</p>
+
+<ul>
+<li><code>C-b c</code> &ndash; create new window</li>
+<li><code>C-b ,</code> &ndash; rename current window</li>
+<li><code>C-b n</code> &ndash; next window</li>
+<li><code>C-b p</code> &ndash; previous window</li>
+<li><code>C-b l</code> &ndash; last window</li>
+<li><code>C-b d</code> &ndash; disconnect</li>
+<li><code>C-b k</code> &ndash; kill current window</li>
+<li><code>C-b K</code> &ndash; kill tmux server</li>
+<li><code>C-b [</code> &ndash; enter copy mode</li>
+<li><code>C-b ]</code> &ndash; paste last copied buffer</li>
+<li><code>C-b :</code> &ndash; tmux command line</li>
+<li><code>C-b w</code> &ndash; windows list</li>
+<li><code>C-b ?</code> &ndash; help</li>
+</ul>
+
+
+<p>Full list can be found <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tmux&amp;sektion=1#KEY+BINDINGS">here</a>.</p>
+
+<h3>Configuration</h3>
+
+<p>Tmux keeps its configuration in <code>$HOME/.tmux.conf</code>. My configuration mixes
+some tmux examples with code that I found in the net. This file can be found on
+my github repository <a href="https://github.com/pietrushnic/workspace/blob/master/dotfiles/tmux.conf">here</a>. First section contain some general configuration:
+```</p>
+
+<h1>confirm before killing a window or the server</h1>
+
+<p>bind-key k confirm kill-window
+bind-key K confirm kill-server</p>
+
+<h1>toggle statusbar</h1>
+
+<p>bind-key b set-option status</p>
+
+<h1>ctrl+left/right cycles thru windows</h1>
+
+<p>bind-key -n C-right next
+bind-key -n C-left prev</p>
+
+<h1>scrollback buffer n lines</h1>
+
+<p>set -g history-limit 10000</p>
+
+<h1>listen for activity on all windows</h1>
+
+<p>set -g bell-action any</p>
+
+<h1>on-screen time for display-panes in ms</h1>
+
+<p>set -g display-panes-time 2000</p>
+
+<h1>start window indexing at one instead of zero</h1>
+
+<p>set -g base-index 1</p>
+
+<h1>enable wm window titles</h1>
+
+<p>set -g set-titles on</p>
+
+<h1>wm window title string (uses statusbar variables)</h1>
+
+<p>set -g set-titles-string &ldquo;tmux.#I.#W&rdquo;</p>
+
+<h1>statusbar</h1>
+
+<p>set -g display-time 2000
+<code>
+After that I have implemented [solarized](http://ethanschoonover.com/solarized) colors (dark theme):
+</code></p>
+
+<h3>COLOUR (Solarized dark)</h3>
+
+<h1>default statusbar colors</h1>
+
+<p>set-option -g status-bg black #base02
+set-option -g status-fg yellow #yellow
+set-option -g status-attr default</p>
+
+<h1>default window title colors</h1>
+
+<p>set-window-option -g window-status-fg brightblue #base0
+set-window-option -g window-status-bg default</p>
+
+<h1>set-window-option -g window-status-attr dim</h1>
+
+<h1>active window title colors</h1>
+
+<p>set-window-option -g window-status-current-fg brightred #orange
+set-window-option -g window-status-current-bg default</p>
+
+<h1>set-window-option -g window-status-current-attr bright</h1>
+
+<h1>use vi-like keys</h1>
+
+<p>setw -g mode-keys vi</p>
+
+<h1>pane border</h1>
+
+<p>set-option -g pane-border-fg black #base02
+set-option -g pane-active-border-fg brightgreen #base01</p>
+
+<h1>message text</h1>
+
+<p>set-option -g message-bg black #base02
+set-option -g message-fg brightred #orange</p>
+
+<h1>pane number display</h1>
+
+<p>set-option -g display-panes-active-colour blue #blue
+set-option -g display-panes-colour brightred #orange
+```
+To make solarized colors work on my setup was quite challenging, because there
+are many things to set (vim, terminal, putty etc.). If you need any advice I can
+write something about this. Right now it is beyond the scope of this post.</p>
+
+<p>At the end of my tmux configuration I&rsquo;ve some fancy status bar:
+```</p>
+
+<h1>clock</h1>
+
+<p>set-window-option -g clock-mode-colour green #green</p>
+
+<h1>center align the window list</h1>
+
+<p>set -g status-justify centre</p>
+
+<h1>show some useful stats but only when tmux is started</h1>
+
+<h1>outside of Xorg, otherwise dwm statusbar shows these already</h1>
+
+<p>set -g status-right &ldquo;&rdquo;
+set -g status-left &ldquo;&rdquo;
+if &lsquo;[ -z &ldquo;$DISPLAY&rdquo; ]&rsquo; &lsquo;set -g status-left &ldquo;[#[fg=green] #H ][#[default]]&rdquo;&rsquo;
+if &lsquo;[ -z &ldquo;$DISPLAY&rdquo; ]&rsquo; &lsquo;set -g status-right &ldquo;[ #[fg=magenta]#(cat /proc/loadavg | cut -d \&rdquo; \&ldquo; -f 1,2,3)#[default] ][ #[fg=cyan,bright]%a %Y-%m-%d %H:%M #[default]]&rdquo;&rsquo;
+if &lsquo;[ -z &ldquo;$DISPLAY&rdquo; ]&rsquo; &lsquo;set -g status-right-length 50&rsquo;
+```
+I think that mostly this is self explanatory. This how it look in work:
+<a href="/assets/images/tmux-screen.png"><img class="center" src="/assets/images/tmux-screen.png" width="300" height="400"></a></p>
+
+<h3>tmuxinator</h3>
+
+<p>I spend some time to realize what is the best way of managing windows and panes
+in tmux. Especially I was interested in setting some windows at tmux startup.
+Finally I found <a href="https://github.com/aziz/tmuxinator">tmuxinator</a> small but useful
+project delivered through <code>gem</code> system. Follow tmuxinator page to set it up
+correctly. If you want to see my primitive configuration it is also available on
+my github in <a href="https://github.com/pietrushnic/workspace/blob/master/dotfiles/tmux.conf">werkspace project</a>.</p>
+
+<h3>Window logging</h3>
+
+<p>Last hint I found on this
+<a href="http://0xfeedface.org/blog/lattera/2012-03-19/using-tmux-screencasting-tool">blog</a>.
+How to log your work in console for example to write a blog post :) ? There is a
+universal method for piping all console output to our program of choice. For
+example run command like this (command mode available under <code>C-b :</code>):
+<code>
+pipe-pane -o 'cat &gt;&gt; ~/tmuxcast.#h.#T'
+</code>
+This will give you file with logged session output (all curses windows, editor
+windows and so on). Curses output can be unreadable because of control escape
+sequences. Use <code>cat</code> it will interpret escape sequences in terminal.</p>
+
+<p>As always I hope hints were useful. Please share this content if think its
+valuable. Comment if you think id needs improvements. Thank you for reading.</p>
+
+<p>P.S. I should probably create a footer with last paragraph :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Music for Programming]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/03/30/music-for-programming/"/>
+    <updated>2013-03-30T03:27:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/03/30/music-for-programming</id>
+    <content type="html"><![CDATA[<p>Of course this is strongly associated with personal taste but I will write my
+experience.</p>
+
+<ol>
+<li><a href="www.pandora.com">www.pandora.com</a> &ndash; really great radio station, choose your
+genre or artist and it will lead you through all variety of this type.
+unfortunately if you are fan of Iron Maiden, Blind Guardian, prog rock or
+irish folk you will be bored after 2 hours or less. Sadly not available in
+Poland <i class='emoji disappointed'></i> &ndash; maybe some proxy will work but I wasn&rsquo;t able to find one.</li>
+<li><a href="http://www.kohina.com/">kohina/demo scene</a> &ndash; very good radio for long night
+coding sessions. I&rsquo;m not big fan of demo scene but I appreciate what guys do
+and did. And somtimes you will hit Super Mario or Contra theme.</li>
+<li><a href="http://www.progarchives.com/subgenre.asp?style=32">post rock/math rock</a> &ndash; if you like any variety of prog rock you probably
+know <a href="http://www.progarchives.com/">ProgArchives</a>. It is really hard to find
+good prog rock radio where classics are well mixed with newcomers. I really
+like to listen guys like <a href="http://www.progarchives.com/subgenre.asp?style=32">God Is An Astronaut</a>,
+<a href="http://www.explosionsinthesky.com/">Explosions In The Sky</a>, <a href="http://twdy.tumblr.com/">This Will Destroy You</a>,
+<a href="http://www.65daysofstatic.com/">65daysofstatic</a>, <a href="http://www.redsparowes.com/News.aspx">Red Sparowes</a> or even
+<a href="http://mogwai.sandbag.uk.com/lesrevenants/">Mogwai</a> or <a href="http://www.sigur-ros.co.uk/">Sigur Ros</a>.
+Very good for programming if you drink cofee/tea <i class='emoji smile'></i></li>
+<li>movie soundtracks &ndash; This one I use when really need to concentrate
+especially when working daylight hours. What&rsquo;s best here most of people will
+agree that <a href="http://www.enniomorricone.it/uk/news.php">Ennio Moricone</a>, <a href="http://elsew.com/">Vangelis</a> and <a href="http://www.hans-zimmer.com/">Hans Zimmer</a>
+are famous one and most recognizable for my generation.</li>
+<li><a href="http://nsbradio.co.uk/content/">breakbeat</a> &ndash; this one reminds me some stories about mythical cyberpunk
+hackers, its usually noisy and help me isolate from environment and
+concentrate on my work. I will said that if you like freaked electronics than
+you can try this.</li>
+<li><a href="http://www.shoutcast.com/Internet-Radio/drum%20and%20base">dnb</a> &ndash; if
+breakbeat is to hard for you try this <i class='emoji smile'></i>. This music tune me in channel of
+rhythmical work.</li>
+<li>When googling this topic I found <a href="http://musicforprogramming.net/">this site</a>
+it was worth to check. Some links are broken. Most of those playlists have too
+low tempo for me.</li>
+</ol>
+
+
+<p>I can also suggest some Irish Folk influenced stuff if don&rsquo;t have &ldquo;The End is
+near&rdquo; wallpaper on your desktop <i class='emoji smile'></i> There was a time when I was listen a lot of
+psybient, but it is really hard to find good psychodelic ambient radio and this
+music is for me more like movie soundtracks I cannot listen it at night.
+Hope it will give some kind of direction. Let me know what you listen when coding.
+Maybe I will discover new universe.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Short Hint for All Those Who Use Vim and Pathogen]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/01/15/short-hint-for-all-those-who-use-vim/"/>
+    <updated>2013-01-15T11:51:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/01/15/short-hint-for-all-those-who-use-vim</id>
+    <content type="html"><![CDATA[<p>Today, after updating my wokspace to latest version I encounter below error during vim running:
+<code>
+Error detected while processing function pathogen#runtime_append_all_bundles:
+line 1:
+E121: Undefined variable: source_path
+E116: Invalid arguments for function string(source_path).') to pathogen#incubate('.string(source_path.'/{}').')')
+E116: Invalid arguments for function 4_warn
+Press ENTER or type command to continue
+</code>
+Quick look on pathogen runtime_append_all_bundles function and I found:
+<code>bash
+call s:warn('Change pathogen#runtime_append_all_bundles('.string(a:1).') to pathogen#incubate('.string(a:1.'/{}').')')
+</code>
+So simply replacing:
+<code>bash
+call pathogen#runtime_append_all_bundles()
+</code>
+with:
+<code>bash
+call pathogen#incubate() in $HOME/.vimrc fix the problem.
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>
