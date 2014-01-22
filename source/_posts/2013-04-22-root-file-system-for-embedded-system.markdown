@@ -127,9 +127,7 @@ What does it mean:
 * `root=/dev/nfs` - following 
 [kernel.org](https://www.kernel.org/doc/Documentation/filesystems/nfs/nfsroot.txt):
 {% blockquote %}
-This is necessary to enable the pseudo-NFS-device. Note that it's not a
-real device but just a synonym to tell the kernel to use NFS instead of
-a real device.
+This is necessary to enable the pseudo-NFS-device. Note that it's not a real device but just a synonym to tell the kernel to use NFS instead of a real device.
 {% endblockquote %}
 * `mem=128M ip=dhcp` - self-explaining 
 * `netdev=25,0,0xf1010000,0xf1010010,eth0` - network device configuration 
