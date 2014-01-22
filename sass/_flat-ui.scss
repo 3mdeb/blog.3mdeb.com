@@ -185,6 +185,10 @@ body {
 p {
   font-weight: 300; }
 
+p.intro {
+  font: 1.1em/1.25em "Sans-Serif", sans-serif;
+}
+
 a {
   color: $secondary-color;
   text-decoration: none;
