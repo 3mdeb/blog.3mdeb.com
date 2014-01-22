@@ -213,36 +213,43 @@ h1 {
   }
   .link {
     font-weight: 500;
-    font-size: 40px;
+    font-size: 1.8em;
+    line-height: 1.30;
+    font-family: "Sans-Serif";
+    margin-bottom: 1em;
   }
 
 h2 {
   color: $primary-color;
-  font-size: 26px;
+  font-size: 1.5em;
   font-weight: 500;
-  font-family: "Quicksand";
-  margin-bottom: 2px;
+  font-family: "Sans-Serif";
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
   border-bottom: 1px solid; }
 
 h3 {
   color: $accent-color2;
-  font-size: 24px;
+  font-size: 1.25em;
   font-weight: 500;
-  font-family: "Quicksand";
-  margin-bottom: 4px;
-  margin-top: 2px; }
+  font-family: "Sans-Serif";
+  margin-bottom: 0.5;
+  margin-top: 0.8; }
   .tagline
   {
     font-weight: 400;
+    font-size: 0.4em;
+    font-family: "Serif";
   }
 
 h4 {
   color: $accent-color2;
-  font-size: 18px;
+  font-size: 1.25em;
+  line-height: 1.5em;
   font-weight: 500;
-  font-family: "Quicksand";
-  line-height: 18px;
-  margin-top: 4px; }
+  font-family: "Sans-Serif";
+  margin-bottom: 0.5;
+  margin-top: 0.8em; }
 
 h5 {
   color: $accent-color2;
