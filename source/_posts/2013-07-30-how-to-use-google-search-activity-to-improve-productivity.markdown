@@ -55,14 +55,14 @@ First of all I was surprised that I googled these things so many times. Especial
 for point 5 :). To improve my daily routine with these data I use following 
 applications:
 
-####Public transporation####
+###Public transporation####
 I used well known Polish application for public transpiration in biggest cities 
 - [jakdojade.pl](http://jakdojade.pl/). If you register on their page they give 
 you possibility to save travel directions, so I used it to save my common 
 destinations. Of course I put it on my bookmark bar as it is one of the most 
 used links.
 
-####Currency ratio####
+###Currency ratio####
 After thinking a while I realize that few requirements have to be met for me.
 I need below fields:
 
@@ -79,11 +79,11 @@ cannot set every field as I wish. Ratio always relate to recent changed position
 I also cannot display stock rate. That's why I will have to use one another 
 extension.
 
-####Railways schedule####
+###Railways schedule####
 Right now there is nothing I can do for this one than adding to bookmark bar as 
 a recently visited site.
 
-####Stocks ticker####
+###Stocks ticker####
 There are plenty of extensions for Chrome and not a lot of really good one. I 
 found [Stock Tracker](https://chrome.google.com/webstore/detail/stock-tracker/gphdmnilpmjaioploikmbpgkjfbagidf) 
 useful because it shows price in the icon on toolbar. But it is not free from 
