@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Test | My Octopress Blog]]></title>
+  <title><![CDATA[Category: test | My Octopress Blog]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/test/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-01-21T22:32:11+01:00</updated>
+  <updated>2014-01-22T01:08:35+01:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -33,7 +33,7 @@ plain text
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[First Post]]></title>
+    <title type="html"><![CDATA[First post]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/01/03/first-post/"/>
     <updated>2012-01-03T00:01:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/01/03/first-post</id>

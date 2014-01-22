@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Books | My Octopress Blog]]></title>
+  <title><![CDATA[Category: books | My Octopress Blog]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/books/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-01-21T22:32:11+01:00</updated>
+  <updated>2014-01-22T01:08:35+01:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -75,7 +75,7 @@ a lot. Distributed systems are those in which life of one man is important.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA["Human Action" Ludwig Von Mises]]></title>
+    <title type="html"><![CDATA["Human Action" Ludwig von Mises]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/03/07/human-action-ludwig-von-misess-work-by/"/>
     <updated>2012-03-07T23:37:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/03/07/human-action-ludwig-von-misess-work-by</id>

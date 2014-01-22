@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Coreboot | My Octopress Blog]]></title>
+  <title><![CDATA[Category: coreboot | My Octopress Blog]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/coreboot/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-01-21T22:32:11+01:00</updated>
+  <updated>2014-01-22T01:08:35+01:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Debugging Coreboot in Qemu Environment - Part 2]]></title>
+    <title type="html"><![CDATA[Debugging coreboot in qemu environment - part 2]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/04/18/qemu-as-debugging-environment-for/"/>
     <updated>2012-04-18T22:41:00+02:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/04/18/qemu-as-debugging-environment-for</id>
@@ -96,7 +96,7 @@ it means that your debugging enviroment was set correctly.</li>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Debugging Coreboot in Qemu Environment - Part 1]]></title>
+    <title type="html"><![CDATA[Debugging coreboot in qemu environment - part 1]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/"/>
     <updated>2012-03-12T21:30:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment</id>
@@ -155,7 +155,7 @@ should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Flashrom and Shuttle AV18E2]]></title>
+    <title type="html"><![CDATA[flashrom and Shuttle AV18E2]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/01/06/flashrom-and-shuttle-av18e2/"/>
     <updated>2012-01-06T14:31:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/01/06/flashrom-and-shuttle-av18e2</id>
@@ -179,7 +179,7 @@ And write it by:</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[How to Begin With Coreboot]]></title>
+    <title type="html"><![CDATA[How to begin with coreboot]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/01/06/how-to-begin-with-coreboot/"/>
     <updated>2012-01-06T14:23:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/01/06/how-to-begin-with-coreboot</id>

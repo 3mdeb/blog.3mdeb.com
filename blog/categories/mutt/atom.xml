@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Mutt | My Octopress Blog]]></title>
+  <title><![CDATA[Category: mutt | My Octopress Blog]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/mutt/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-01-21T22:32:11+01:00</updated>
+  <updated>2014-01-22T01:08:35+01:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Workflow Imporovement With Open Source Tools - Part 1]]></title>
+    <title type="html"><![CDATA[Workflow imporovement with Open Source tools - part 1]]></title>
     <link href="http://pietrushnic.github.io/blog/2013/05/16/workflow-imporovement-with-open-source-tools/"/>
     <updated>2013-05-16T22:16:00+02:00</updated>
     <id>http://pietrushnic.github.io/blog/2013/05/16/workflow-imporovement-with-open-source-tools</id>
@@ -219,7 +219,7 @@ reading.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Thunderbird to Mutt Migration - Tips & Tricks]]></title>
+    <title type="html"><![CDATA[Thunderbird to Mutt migration - tips & tricks]]></title>
     <link href="http://pietrushnic.github.io/blog/2013/05/15/thunderbird-to-mutt-migration/"/>
     <updated>2013-05-15T18:40:00+02:00</updated>
     <id>http://pietrushnic.github.io/blog/2013/05/15/thunderbird-to-mutt-migration</id>

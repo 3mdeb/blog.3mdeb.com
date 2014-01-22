@@ -8,11 +8,10 @@
   <title>My Octopress Blog</title>
   <meta name="author" content="Your Name">
 
+   
+  <meta name="description" content="">
   
-  <meta name="description" content="Update: My repository is available
-here. Below is first post from series in which I want to describe my experience gained
-in attempt to enhance my &hellip;">
-  
+  <meta name="keywords" content="">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -22,12 +21,15 @@ in attempt to enhance my &hellip;">
   
   <link rel="canonical" href="http://pietrushnic.github.io/blog/page/5">
   <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -37,47 +39,60 @@ in attempt to enhance my &hellip;">
 </head>
 
 <body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
-  
-    <h2>A blogging framework for hackers.</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
 </ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
+<ul class="nav pull-right">
+    
+    
+    
+    
+    
+    
+    
+
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div class="jumbotron">
+  <div class="container">
+    
+      My Octopress Blog
+    
+    <h3 class="tagline">
+      
+        A blogging framework for hackers.
+      
+    </h3>
+  </div>
+</div>
+
+
+<div class="blog-index">
   
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/19/improve-productivity-by-tracking-work/">Improve Productivity by Tracking Work Environment With Git - Preparation</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -89,14 +104,23 @@ in attempt to enhance my &hellip;">
   
 
 
-<time datetime="2012-02-19T21:12:00+01:00" pubdate data-updated="true">Feb 19<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><em>Update</em>: My repository is available
+<i class="icon-calendar-empty"></i> <time datetime="2012-02-19T21:12:00+01:00" pubdate data-updated="true">Feb 19<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
+          
+          <a href="/blog/categories/productivity/"><span class="badge">productivity</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/02/19/improve-productivity-by-tracking-work/">Improve productivity by tracking work environment with git - preparation</a></h1>
+      <p><em>Update</em>: My repository is available
 <a href="https://github.com/pietrushnic/workspace.git">here</a>.</p>
 
 <p>Below is first post from series in which I want to describe my experience gained
@@ -131,23 +155,26 @@ repository and prepare first commit</p>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.gitignore
 </span><span class='line'>*.swp</span></code></pre></td></tr></table></div></figure>
 
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/15/set-irssi-under-debian-to-use-freenode/">Set Irssi Under Debian to Use Freenode Server</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -159,14 +186,21 @@ repository and prepare first commit</p>
   
 
 
-<time datetime="2012-02-15T20:25:00+01:00" pubdate data-updated="true">Feb 15<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Very short manual on how to set up irssi to work with freenode servers.<br/>
+<i class="icon-calendar-empty"></i> <time datetime="2012-02-15T20:25:00+01:00" pubdate data-updated="true">Feb 15<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/02/15/set-irssi-under-debian-to-use-freenode/">Set irssi under debian to use freenode server</a></h1>
+      <p>Very short manual on how to set up irssi to work with freenode servers.<br/>
 Fist, install irssi:</p>
 
 <p>sudo apt-get install irssi Run:</p>
@@ -186,23 +220,26 @@ Fist, install irssi:</p>
 <p>/channel ADD -auto #debian freenode After all we should save settings:</p>
 
 <p>/save That&rsquo;s all, enjoy!</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/06/arbtt-as-productivity-improver-for/">Arbtt as Productivity Improver For</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -214,14 +251,19 @@ Fist, install irssi:</p>
   
 
 
-<time datetime="2012-02-06T00:00:00+01:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>&mdash;&ndash; layout: post title: &ldquo;arbtt as productivity improver for Linux enviroment&rdquo; date: 2012-02-06T00:37:00+01:00 categories: &ndash; productivity &mdash;&ndash;</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-02-06T00:00:00+01:00" pubdate data-updated="true"></time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/02/06/arbtt-as-productivity-improver-for/">Arbtt As Productivity Improver For</a></h1>
+      <p>&mdash;&ndash; layout: post title: &ldquo;arbtt as productivity improver for Linux enviroment&rdquo; date: 2012-02-06T00:37:00+01:00 categories: &ndash; productivity &mdash;&ndash;</p>
 
 <p>As I mentioned in previous <a href="http://pietrushnic.blogspot.com/2012/02/first-steps-to-improve-work.html">post</a> I work a lot on improving my productivity. After FreeMind it is time for <a href="http://darcs.nomeata.de/arbtt/doc/users_guide/">arbtt</a>. This is small tool which tracks active windows during your work. It is delivered with distro that I&rsquo;m currently using (Debian wheezy). So all I had to do was:</p>
 
@@ -234,23 +276,26 @@ To effectively work with arbtt I had to run a daemon that collects information. 
 
 <p>termcapinfo xterm* &lsquo;hs:ts=\E]0;:fs=\007:ds=\E]0;\007&rsquo; defhstatus &ldquo;[screen] ^Et&rdquo; hardstatus off # Set the scrollback length: defscrollback 10000 # Select whether you want to see the copyright notice during startup: startup_message off # Display a caption string below, appearing like tabs and # displaying the window number and application name (by default). caption always caption string &ldquo;%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W}%c %{g}]&rdquo; #&ldquo;%{= kb}[ %=%{w}%?%-Lw%?%{b}(%{W}%n*%f %t%?(%u)%?%{b})%{w}%?%+Lw%?%?%= %{b}][%{B} %H %{W}%l %{b}][%{B} %d.%m.%Y %{W}%0c %{b}]&rdquo; #&ldquo;%{bw}[%H] [%?%-Lw%?%{wb}%n*%f%t%{bw}%?%+Lw%?]%=%{bw} [%1`] [%c:%s] [%l]&rdquo; # &ldquo;%{kw}%-w%{wr}%n %t%{&ndash;}%+w&rdquo; defhstatus set terminal title and caption keeps data about my open windows in screen. Every time I open new window or change current one terminal title is updated.<br/>
 For now that&rsquo;s all. In the future I wanted to write how to synchronize the title of the window in the screen with vim editor to include information about the currently edited file.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/05/first-steps-to-improve-work/">First Steps to Improve Work Productivity in Linux Environment</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -262,37 +307,47 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
   
 
 
-<time datetime="2012-02-05T03:08:00+01:00" pubdate data-updated="true">Feb 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The problem encountered on several occasions over several months. Now it is time to deal with it. How did this happen? As always, resources were not sufficient, and if we can not increase the amount of resources we must strive to optimize their use.In this case, it was about time.</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-02-05T03:08:00+01:00" pubdate data-updated="true">Feb 5<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/productivity/"><span class="badge">productivity</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/02/05/first-steps-to-improve-work/">First steps to improve work productivity in Linux environment</a></h1>
+      <p>The problem encountered on several occasions over several months. Now it is time to deal with it. How did this happen? As always, resources were not sufficient, and if we can not increase the amount of resources we must strive to optimize their use.In this case, it was about time.</p>
 
 <p>While reading my last acquisition, once again I faced the problem of re-configure Linux account. Every time when I need new account for some reasons I need to configure some things manually. Most things are simple enough, we copy configuration files from the already existing user directory, and voila. Of course Murphy&rsquo;s law works, and something goes wrong. Sometimes we need to create a new account with just a few of the tools configured as in other existing accounts. So we have a problem, however, reflecting on the solution, my mind was deepened in the increasing number of new issues, which caused the solution became more distant.</p>
 
 <p>How this process looks like? First we need new account, it should get automatically some configuration files that I create for other accounts. Second I realize that I don&rsquo;t have methods for storing configs that I use most. I heard about dotfiles tracking with git with cloud help (e.g. <a href="https://github.com/">github</a>). When I google this issue I found <a href="https://github.com/trym/dotty">dotty</a>. But after that I ask myself about productivity improvements in broad sense and the conclusion was that my work scheme should be changed. So I try to find some hints about improving productivity, there are thousand of web pages about that. Few things I found useful first of all the idea of &ldquo;automated time tracking&rdquo;. Second that chaos that I produced during solving simple problem meant that I thought about controlling of its flow, and this led me to <a href="http://en.wikipedia.org/wiki/Mind_map">mind mapping</a> technique. AFAIK <a href="http://freemind.sourceforge.net/wiki/index.php/Main_Page">FreeMind</a> is the best free software for playing with this way of data presentation. Below I attach my first mind map in FreeMind, this is of course beta version.</p>
 
 <p>  <img src="http://4.bp.blogspot.com/-JCXeznxAkyM/Ty3jqvKH1UI/AAAAAAAAAD8/6Rye6fkesjM/s640/improve_productivity.png" alt="" /></p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/15/another-interesting-topic-with-which-i/">UEFI From Linux Enthusiast Perspective</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -304,37 +359,47 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
   
 
 
-<time datetime="2012-01-15T23:04:00+01:00" pubdate data-updated="true">Jan 15<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Another interesting topic with which I am dealing with recently is the <a href="http://www.uefi.org/home/">UEFI</a>. As we read on wikipedia: &ldquo;The Unified Extensible Firmware Interface (UEFI) is a specification that defines a software interface between an operating system and platform firmware.&rdquo;. The purpose of this specification is to create something what in the future fully replace the BIOS.</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-01-15T23:04:00+01:00" pubdate data-updated="true">Jan 15<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/uefi/"><span class="badge">uefi</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/01/15/another-interesting-topic-with-which-i/">UEFI from Linux enthusiast perspective</a></h1>
+      <p>Another interesting topic with which I am dealing with recently is the <a href="http://www.uefi.org/home/">UEFI</a>. As we read on wikipedia: &ldquo;The Unified Extensible Firmware Interface (UEFI) is a specification that defines a software interface between an operating system and platform firmware.&rdquo;. The purpose of this specification is to create something what in the future fully replace the BIOS.</p>
 
 <p>Of course, as always in such a situation, I wonder what OpenSource and Linux gurus have to say. A brief googling and I found <a href="http://kerneltrap.org/node/6884">this</a>. On the one hand are noticeable advantages: better design, formalized structure of the code, the C programming language, but you can feel that community fears and feared that the &ldquo;standard&rdquo; will be used in an inappropriate manner. Therefore, I regularly read <a href="http://lwn.net/">LWN</a> RSS feeds, and it seems that on the horizon you can see already the first ideas on how to use UEFI to limit freedom. You can read about it in this article: <a href="http://lwn.net/Articles/475359/">&ldquo;SFLC: Microsoft confirms UEFI fears, locks down ARM devices&rdquo;</a>.</p>
 
 <p>Personally, I really do not like it, because I believe that everyone who buys the equipment has the right to exploit its capabilities in such a manner it deems appropriate.</p>
 
 <p>Of course, as usual, I change the subject. I wanted to write about the project <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=Welcome">TianoCore</a>, which is an open source implementation of UEFI implemented by Intel. When you do not have the strength nor the resources to fight the system, use the system to gather strength and resources, and then start fighting. So in the next post I will try to describe my first experience with <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=EDK2">EDKII</a> in emulated environment of QEMU.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/09/my-view-for-silver-perspective/">My View for Silver Perspective</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -346,37 +411,47 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
   
 
 
-<time datetime="2012-01-09T22:31:00+01:00" pubdate data-updated="true">Jan 9<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In the morning when reading RSS feeds (I should think about placing its list somewhere on the blog) from several sources the information came to me that silver is highly underrated recent times. I try to carefully analyze such information, despite the fact that I use more of niche sources of information and what is in them is served rather carefully selected. Although I looked at this subject a little closer.</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-01-09T22:31:00+01:00" pubdate data-updated="true">Jan 9<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/commodity/"><span class="badge">commodity</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/01/09/my-view-for-silver-perspective/">My view for silver perspective</a></h1>
+      <p>In the morning when reading RSS feeds (I should think about placing its list somewhere on the blog) from several sources the information came to me that silver is highly underrated recent times. I try to carefully analyze such information, despite the fact that I use more of niche sources of information and what is in them is served rather carefully selected. Although I looked at this subject a little closer.</p>
 
 <p>One of the factors that should be taken into account is the silver to gold ratio. It is said that historically it was 16, or 16 ounces of silver buys one ounce of gold. In view of the massive derivatives trading, selling certificates based on complex rules (that basically said &ldquo;do not try to take this physical&rdquo;), the silver market manipulation and the like rip accounting, the ratio is 3-4 times higher. After reading information about undervalued silver I looked at my favorite website provides charts <a href="http://stockcharts.com/h-sc/ui">stockcharts.com</a> and yesterday I checked, this ratio it was 56 and today fallen slightly due to movements in silver. Six months ago this ratio was below 40. What I learn until now silver reacts slower than gold and gold is taking action now. When I check stockcharts before New Year I found out that price per kilogram of gold was about 38 000 euro. Right now it is 41 100 and seems still rise. Silver seemed to wondering all the moves, and this morning took off. At the same time when I check gold silver became the shockingly low price of 663 euros per kilo. The new year saw a jump to level 730 and it looks like that this morning go after gold and now cost 760.</p>
 
 <p>We&rsquo;ll see how strong it will move. From a technical point of view, per half year MACD is narrow, and the RSI is equal to 54 and is far from the area to buy. Moving averages of 50 and 200 are to each other in nearly parallel position and technically in the next few months should not be anything happening. The three-year term MACD lines have not yet crossed, RSI is less than 50 recent declines lasted too short to harm long distance running averages of 50 and 200 on a 3-year chart.</p>
 
 <p>Precisely because there is little evidence for any event you may receive move. Of course, seriously people know that long-term perspective and fundamental considerations leave no doubt that the bull will have long reigned in the areas of commodity. While speculation is paper, and this can lead astray careless player.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/09/ideas-for-development/">Ideas for Development</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -388,14 +463,25 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
   
 
 
-<time datetime="2012-01-09T22:24:00+01:00" pubdate data-updated="true">Jan 9<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>All the time come to my mind new ideas about what could be added to the blog and what information to post. I&rsquo;m interested in so many things that many of the ideas are killed before reaching the plane of the keyboard and has no chance to be introduced even as a draft to the blog. It seems that for myself I should store ideas for development in order to easily return to them when ripe.</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-01-09T22:24:00+01:00" pubdate data-updated="true">Jan 9<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/about/"><span class="badge">about</span></a>
+          
+          <a href="/blog/categories/blog/"><span class="badge">blog</span></a>
+          
+          <a href="/blog/categories/this/"><span class="badge">this</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/01/09/ideas-for-development/">Ideas for development</a></h1>
+      <p>All the time come to my mind new ideas about what could be added to the blog and what information to post. I&rsquo;m interested in so many things that many of the ideas are killed before reaching the plane of the keyboard and has no chance to be introduced even as a draft to the blog. It seems that for myself I should store ideas for development in order to easily return to them when ripe.</p>
 
 <ol>
 <li>I want occasionally write something about the commodity markets, however, I&rsquo;m interested in it very briefly, because only about a year it seems to me that sometimes I have something to say.</li>
@@ -405,23 +491,26 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
 
 
 <p>I would like to set a specific time for blogging during the week, what with certainty contribute to faster realization of these ideas.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/06/syntax-highlighter-and-code-formatter/">Syntax Highlighter and Code Formatter for Blogger</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -433,14 +522,21 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
   
 
 
-<time datetime="2012-01-06T18:14:00+01:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Another time-waster was a decent code formatter and syntax highlighter. I google out <a href="http://www.commonitman.com/2010/09/how-to-use-syntax-highlighter-3-in.html">following solution</a>, it is based on <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter 3</a> It has interesting options:</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-01-06T18:14:00+01:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/blogger/"><span class="badge">blogger</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/01/06/syntax-highlighter-and-code-formatter/">Syntax highlighter and code formatter for Blogger</a></h1>
+      <p>Another time-waster was a decent code formatter and syntax highlighter. I google out <a href="http://www.commonitman.com/2010/09/how-to-use-syntax-highlighter-3-in.html">following solution</a>, it is based on <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter 3</a> It has interesting options:</p>
 
 <ol>
 <li>You can select the language for which a syntax-colored</li>
@@ -452,23 +548,26 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
 
 
 <p>My dream would be to create a theme that would look similar to vim syntax highlighing.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/06/flashrom-and-shuttle-av18e2/">Flashrom and Shuttle AV18E2</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -480,14 +579,21 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
   
 
 
-<time datetime="2012-01-06T14:31:00+01:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>During Christmas break I found an old unused motherboard in my home, right away I thought that it maybe useful as learning environment for coreboot. First you need to do with this kind of board is to check if it is possible to flash its BIOS with user space tool called <a href="http://www.flashrom.org/">flashrom</a> list of supported hardware can be found <a href="http://www.flashrom.org/Supported_hardware">here</a>.</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-01-06T14:31:00+01:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/coreboot/"><span class="badge">coreboot</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/01/06/flashrom-and-shuttle-av18e2/">flashrom and Shuttle AV18E2</a></h1>
+      <p>During Christmas break I found an old unused motherboard in my home, right away I thought that it maybe useful as learning environment for coreboot. First you need to do with this kind of board is to check if it is possible to flash its BIOS with user space tool called <a href="http://www.flashrom.org/">flashrom</a> list of supported hardware can be found <a href="http://www.flashrom.org/Supported_hardware">here</a>.</p>
 
 <p>All you need to do is go through <a href="http://www.flashrom.org/Board_Testing_HOWTO">this HOWTO</a>. Be aware that these operations can cause you will not be able to run your motherboard if something goes wrong. Therefore, I suggest protect yourself by supplying checked programmer or other memory chip for your board containing a working BIOS.</p>
 
@@ -503,23 +609,26 @@ And write it by:</p>
 <p>Erasing and writing flash chip&hellip; Trying erase function 0&hellip; 0x000000-0x01ffff:W, 0x020000-0x037fff:W, 0x038000-0x039fff:W, 0x03a000-0x03bfff:W, 0x03c000-0x03ffff:W Erase/write done. Verifying flash&hellip; VERIFIED.</p>
 
 <p>Next post I will try to familiarize you with the process of debugging coreboot using <a href="http://wiki.qemu.org/Main_Page">QEMU</a>.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/06/how-to-begin-with-coreboot/">How to Begin With Coreboot</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -531,14 +640,21 @@ And write it by:</p>
   
 
 
-<time datetime="2012-01-06T14:23:00+01:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>About a month ago I started my adventure with coreboot. As <a href="http://www.coreboot.org/">coreboot home</a> page says &ldquo;coreboot is a Free Software project aimed at replacing the proprietary BIOS (firmware) found in most computers&rdquo;. Although I read the majority of materials from mentioned page I still suffered from a lack of basic information that would help me to arrange everything in my head. Therefore, I decided to write a series of posts described my actions associated with this interesting project.</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-01-06T14:23:00+01:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/coreboot/"><span class="badge">coreboot</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/01/06/how-to-begin-with-coreboot/">How to begin with coreboot</a></h1>
+      <p>About a month ago I started my adventure with coreboot. As <a href="http://www.coreboot.org/">coreboot home</a> page says &ldquo;coreboot is a Free Software project aimed at replacing the proprietary BIOS (firmware) found in most computers&rdquo;. Although I read the majority of materials from mentioned page I still suffered from a lack of basic information that would help me to arrange everything in my head. Therefore, I decided to write a series of posts described my actions associated with this interesting project.</p>
 
 <p>At the beginning I would recommend some interesting sources of information on coreboot:</p>
 
@@ -551,67 +667,42 @@ And write it by:</p>
 
 
 <p>After reviewing the above materials, you should understand the basics of coreboot. In the <a href="http://pietrushnic.blogspot.com/2012/01/flashrom-and-shuttle-av18e2.html">next post</a> I will describe <a href="http://flashrom.org/">flashrom</a> application and my experience with one of the old motherboard.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
   
   <div class="pagination">
     
-      <a class="prev" href="/blog/page/6/">&larr; Older</a>
+    <a class="prev" href="/blog/page/6/">&larr; Older</a>
     
-    <a href="/blog/archives">Blog Archives</a>
+
     
     <a class="next" href="/blog/page/4/">Newer &rarr;</a>
     
   </div>
 </div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a>
-      </li>
-    
-  </ul>
-</section>
 
 
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
   Copyright &copy; 2014 - Your Name -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
 </p>
 
-</footer>
+
+        </footer>
+      </div>
+  </div>
   
 
 
@@ -625,7 +716,7 @@ And write it by:</p>
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

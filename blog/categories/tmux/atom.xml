@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Tmux | My Octopress Blog]]></title>
+  <title><![CDATA[Category: tmux | My Octopress Blog]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/tmux/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-01-21T22:32:11+01:00</updated>
+  <updated>2014-01-22T01:08:35+01:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Tmux as Screen Replacement and Productivity Accelerator]]></title>
+    <title type="html"><![CDATA[Tmux as screen replacement and productivity accelerator]]></title>
     <link href="http://pietrushnic.github.io/blog/2013/04/06/tmux/"/>
     <updated>2013-04-06T05:29:00+02:00</updated>
     <id>http://pietrushnic.github.io/blog/2013/04/06/tmux</id>
@@ -210,7 +210,7 @@ valuable. Comment if you think id needs improvements. Thank you for reading.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Tmux Multiplexer and Vi-like Keys in Copy-mode]]></title>
+    <title type="html"><![CDATA[tmux multiplexer and vi-like keys in copy-mode]]></title>
     <link href="http://pietrushnic.github.io/blog/2013/03/19/debian-switching-to-unstable/"/>
     <updated>2013-03-19T16:30:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2013/03/19/debian-switching-to-unstable</id>

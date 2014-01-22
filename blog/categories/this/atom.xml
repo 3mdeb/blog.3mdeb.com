@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: This | My Octopress Blog]]></title>
+  <title><![CDATA[Category: this | My Octopress Blog]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/this/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-01-21T22:32:11+01:00</updated>
+  <updated>2014-01-22T01:08:35+01:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[New Background and Not So Big "Coming Back"]]></title>
+    <title type="html"><![CDATA[New background and not so big "coming back"]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/11/13/new-background-and-not-so-big-coming/"/>
     <updated>2012-11-13T00:04:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/11/13/new-background-and-not-so-big-coming</id>
@@ -27,7 +27,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Nice Small Additions for My Blog]]></title>
+    <title type="html"><![CDATA[Nice small additions for my blog]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/03/07/blog-has-changed-slightly/"/>
     <updated>2012-03-07T23:15:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/03/07/blog-has-changed-slightly</id>
@@ -36,7 +36,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Ideas for Development]]></title>
+    <title type="html"><![CDATA[Ideas for development]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/01/09/ideas-for-development/"/>
     <updated>2012-01-09T22:24:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/01/09/ideas-for-development</id>
@@ -54,7 +54,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Why I Decided to Write a Blog ?]]></title>
+    <title type="html"><![CDATA[Why I decided to write a blog ?]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/01/03/why-i-decided-to-write-blog/"/>
     <updated>2012-01-03T00:20:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/01/03/why-i-decided-to-write-blog</id>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Crosstool-ng | My Octopress Blog]]></title>
+  <title><![CDATA[Category: crosstool-ng | My Octopress Blog]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/crosstool-ng/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-01-21T22:32:11+01:00</updated>
+  <updated>2014-01-22T01:08:35+01:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Quick Build of Arm-unknown-linux-gnueabi With Crosstool-ng]]></title>
+    <title type="html"><![CDATA[Quick build of arm-unknown-linux-gnueabi with crosstool-ng]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/03/14/quick-build-of-arm-unknown-linux/"/>
     <updated>2012-03-14T23:42:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/03/14/quick-build-of-arm-unknown-linux</id>

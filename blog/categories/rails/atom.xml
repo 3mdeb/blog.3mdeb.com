@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Rails | My Octopress Blog]]></title>
+  <title><![CDATA[Category: rails | My Octopress Blog]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-01-21T22:32:11+01:00</updated>
+  <updated>2014-01-22T01:08:35+01:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Sqlite3 Gem Not Supported on Heroku]]></title>
+    <title type="html"><![CDATA[Sqlite3 gem not supported on Heroku]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/"/>
     <updated>2012-11-18T21:16:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku</id>
@@ -54,7 +54,7 @@ As RoR tutorial states.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Prepare for Ruby on Rails on Debian Wheezy]]></title>
+    <title type="html"><![CDATA[Prepare for Ruby on Rails on Debian wheezy]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian/"/>
     <updated>2012-11-18T18:18:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian</id>

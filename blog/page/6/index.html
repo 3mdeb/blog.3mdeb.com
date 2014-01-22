@@ -8,10 +8,10 @@
   <title>My Octopress Blog</title>
   <meta name="author" content="Your Name">
 
+   
+  <meta name="description" content="">
   
-  <meta name="description" content="I didn&rsquo;t imagine that placing the code for favicon can be so time consuming. Here are some tpis and tricks that can be useful to others.
-1. &hellip;">
-  
+  <meta name="keywords" content="">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -21,12 +21,15 @@
   
   <link rel="canonical" href="http://pietrushnic.github.io/blog/page/6">
   <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -36,47 +39,60 @@
 </head>
 
 <body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
-  
-    <h2>A blogging framework for hackers.</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
 </ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
+<ul class="nav pull-right">
+    
+    
+    
+    
+    
+    
+    
+
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div class="jumbotron">
+  <div class="container">
+    
+      My Octopress Blog
+    
+    <h3 class="tagline">
+      
+        A blogging framework for hackers.
+      
+    </h3>
+  </div>
+</div>
+
+
+<div class="blog-index">
   
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/05/blogger-favicon-in-chrome-and-ff/">Blogger Favicon in Chrome and FF</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -88,14 +104,21 @@
   
 
 
-<time datetime="2012-01-05T00:22:00+01:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I didn&rsquo;t imagine that placing the code for favicon can be so time consuming. Here are some tpis and tricks that can be useful to others.<br/>
+<i class="icon-calendar-empty"></i> <time datetime="2012-01-05T00:22:00+01:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/blogger/"><span class="badge">blogger</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/01/05/blogger-favicon-in-chrome-and-ff/">Blogger favicon in Chrome and FF</a></h1>
+      <p>I didn&rsquo;t imagine that placing the code for favicon can be so time consuming. Here are some tpis and tricks that can be useful to others.<br/>
 1. First find or create favicon ( <a href="http://www.google.pl/search?q=favicon&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;tbm=isch&amp;source=og&amp;sa=N&amp;tab=wi&amp;ei=udsET4OiG8vO-Qbd27j5Cw&amp;biw=1600&amp;bih=732&amp;sei=u9sET_miJsztOf-2uLYO#um=1&amp;hl=en&amp;tbs=isz:ex%2Ciszw%3A32%2Ciszh%3A32&amp;tbm=isch&amp;sa=1&amp;q=favicon&amp;pbx=1&amp;oq=favicon&amp;aq=f&amp;aqi=g10&amp;aql=&amp;gs_sm=s&amp;gs_upl=1959l2847l0l4598l6l5l0l0l0l3l407l1119l0.3.1.0.1l5l0&amp;bav=on.2,or.r_gc.r_pw.,cf.osb&amp;fp=7c76d7186cf3fdc4&amp;biw=1600&amp;bih=732">google</a> or <a href="http://favicon.cc/">favicon.cc</a>)<br/>
 2. Make sure that you have not set any favicon (Design-> Page Elelments-> Favicon)<br/>
 3. Add this code below </head> tag</p>
@@ -103,23 +126,26 @@
 <p><link href='http://bsaves.com/HowHero/Blogger%20Templates/moonspot/images/favicon.ico' rel='shortcut icon' type='image/vnd.microsoft.icon' /> <link href='http://bsaves.com/HowHero/Blogger%20Templates/moonspot/images/favicon.ico' rel='icon'/> This tip comes from <a href="http://widgetsforfree.blogspot.com/2009/08/how-to-change-favicon-in-blogger.html">here</a>. It doesn&rsquo;t work on IE but this did not bother me.</p>
 
 <p>If you want put the favicon in the network to imageshack.us to receive a direct link from them you must register. For those who do not want to do that I propose to use available in Chrome the &ldquo;inspect element&rdquo; feature with its help you can easily read the entire value of the field &ldquo;Direct Link&rdquo; on imageshack.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/05/blogspot-beginning/">Blogspot Beginning</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -131,35 +157,45 @@
   
 
 
-<time datetime="2012-01-05T00:02:00+01:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ol>
+<i class="icon-calendar-empty"></i> <time datetime="2012-01-05T00:02:00+01:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/blogger/"><span class="badge">blogger</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/01/05/blogspot-beginning/">Blogspot beginning</a></h1>
+      <ol>
 <li>Blog should be correctly displayed under lynx<br/>
 2. I&rsquo;m not a sophisticated graphic designer, so I can not afford a sensational appearance (so far).</li>
 </ol>
 
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/04/test/">Test</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -171,14 +207,21 @@
   
 
 
-<time datetime="2012-01-04T21:46:00+01:00" pubdate data-updated="true">Jan 4<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>01234567890123456789012345678901234567890123456789012345678901234567890123456789 This first test for blogger.vim plugin. THis will be used as sandbox, it looks like blogger vim works fine, need to check features that mostly use. Continue testing: <a href="http://google.pl">this is link</a> &ndash; this is dash &ndash; 2nd dash
+<i class="icon-calendar-empty"></i> <time datetime="2012-01-04T21:46:00+01:00" pubdate data-updated="true">Jan 4<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/test/"><span class="badge">test</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/01/04/test/">Test</a></h1>
+      <p>01234567890123456789012345678901234567890123456789012345678901234567890123456789 This first test for blogger.vim plugin. THis will be used as sandbox, it looks like blogger vim works fine, need to check features that mostly use. Continue testing: <a href="http://google.pl">this is link</a> &ndash; this is dash &ndash; 2nd dash
 this is bash code
 plain text
 1. 1st
@@ -189,23 +232,26 @@ plain text
 <li>2.nd</li>
 </ol>
 
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/04/blog-look-and-feel-idea/">Blog Look and Feel Idea</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -217,31 +263,41 @@ plain text
   
 
 
-<time datetime="2012-01-04T19:30:00+01:00" pubdate data-updated="true">Jan 4<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
+<i class="icon-calendar-empty"></i> <time datetime="2012-01-04T19:30:00+01:00" pubdate data-updated="true">Jan 4<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/blogger/"><span class="badge">blogger</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/01/04/blog-look-and-feel-idea/">Blog look and feel idea</a></h1>
+      <p>Because I&rsquo;m a fan of Linux climate of terminals and this kind of stuff. I will try to tweak blogspot tamplete (fonts, background etc.) to terminal (right know I don&rsquo;t know which one) style. </p>
 
+      
+      
+    </div>
+  </div>
 
-  <div class="entry-content"><p>Because I&rsquo;m a fan of Linux climate of terminals and this kind of stuff. I will try to tweak blogspot tamplete (fonts, background etc.) to terminal (right know I don&rsquo;t know which one) style. </p>
-</div>
-  
-  
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/03/blogspot-begin-todo-list/">Blogspot Begin: Todo List</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -253,14 +309,21 @@ plain text
   
 
 
-<time datetime="2012-01-03T00:38:00+01:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ol>
+<i class="icon-calendar-empty"></i> <time datetime="2012-01-03T00:38:00+01:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/blogger/"><span class="badge">blogger</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/01/03/blogspot-begin-todo-list/">Blogspot begin: todo list</a></h1>
+      <ol>
 <li>Learn Blogspot</li>
 <li>Consider Google Analytics</li>
 <li>Find nice backgrounds (probably should be similar to my favourite graphics)</li>
@@ -268,23 +331,26 @@ plain text
 <li>Continue <a href="/blog/2012/01/03/why-i-decided-to-write-blog/">here</a></li>
 </ol>
 
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/03/why-i-decided-to-write-blog/">Why I Decided to Write a Blog ?</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -296,31 +362,45 @@ plain text
   
 
 
-<time datetime="2012-01-03T00:20:00+01:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
+<i class="icon-calendar-empty"></i> <time datetime="2012-01-03T00:20:00+01:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/about/"><span class="badge">about</span></a>
+          
+          <a href="/blog/categories/blog/"><span class="badge">blog</span></a>
+          
+          <a href="/blog/categories/this/"><span class="badge">this</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/01/03/why-i-decided-to-write-blog/">Why I decided to write a blog ?</a></h1>
+      <p>Of course there are plenty of reasons. This idea haunted me for many months but finally insomnia pushed me to start.</p>
 
+      
+      
+    </div>
+  </div>
 
-  <div class="entry-content"><p>Of course there are plenty of reasons. This idea haunted me for many months but finally insomnia pushed me to start.</p>
-</div>
-  
-  
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/03/first-post/">First Post</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -332,79 +412,61 @@ plain text
   
 
 
-<time datetime="2012-01-03T00:01:00+01:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is first post to see how blog looks like.</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-01-03T00:01:00+01:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/test/"><span class="badge">test</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/01/03/first-post/">First post</a></h1>
+      <p>This is first post to see how blog looks like.</p>
 
 <h2>Comments</h2>
 
 <p>pietrushnic</p>
 
 <p>1st test comment</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
   
   <div class="pagination">
     
-    <a href="/blog/archives">Blog Archives</a>
+
     
     <a class="next" href="/blog/page/5/">Newer &rarr;</a>
     
   </div>
 </div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a>
-      </li>
-    
-  </ul>
-</section>
 
 
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
   Copyright &copy; 2014 - Your Name -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
 </p>
 
-</footer>
+
+        </footer>
+      </div>
+  </div>
   
 
 
@@ -418,7 +480,7 @@ plain text
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

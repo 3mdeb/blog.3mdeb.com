@@ -8,9 +8,10 @@
   <title>My Octopress Blog</title>
   <meta name="author" content="Your Name">
 
+   
+  <meta name="description" content="">
   
-  <meta name="description" content="Therefore, I&rsquo;m leaving for the Easter holidays I wanted to download some lecture on embedded systems, which was presented at the 2012 Embedded &hellip;">
-  
+  <meta name="keywords" content="">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -20,12 +21,15 @@
   
   <link rel="canonical" href="http://pietrushnic.github.io/blog/page/4">
   <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -35,47 +39,60 @@
 </head>
 
 <body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
-  
-    <h2>A blogging framework for hackers.</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
 </ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
+<ul class="nav pull-right">
+    
+    
+    
+    
+    
+    
+    
+
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div class="jumbotron">
+  <div class="container">
+    
+      My Octopress Blog
+    
+    <h3 class="tagline">
+      
+        A blogging framework for hackers.
+      
+    </h3>
+  </div>
+</div>
+
+
+<div class="blog-index">
   
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/06/therefore-im-leaving-for-easter/">How to Download Videos From videos.linux.com</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -87,14 +104,21 @@
   
 
 
-<time datetime="2012-04-06T22:48:00+02:00" pubdate data-updated="true">Apr 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Therefore, I&rsquo;m leaving for the Easter holidays I wanted to download some lecture on embedded systems, which was presented at the 2012 Embedded Linux Conference. Although I regret I found that I could not find as good quality copy in the network as on the Linux Foundation page. It is unfortunate that linux.com site does not have the possibility of direct downloading video files. But there is a workaround. Follow below tutorial:</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-04-06T22:48:00+02:00" pubdate data-updated="true">Apr 6<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/04/06/therefore-im-leaving-for-easter/">How to download videos from videos.linux.com</a></h1>
+      <p>Therefore, I&rsquo;m leaving for the Easter holidays I wanted to download some lecture on embedded systems, which was presented at the 2012 Embedded Linux Conference. Although I regret I found that I could not find as good quality copy in the network as on the Linux Foundation page. It is unfortunate that linux.com site does not have the possibility of direct downloading video files. But there is a workaround. Follow below tutorial:</p>
 
 <ol>
 <li>Go to page with video. For example:  <a href="http://video.linux.com/videos/to-provide-a-long-term-stable-linux-for-industry">http://video.linux.com/videos/to-provide-a-long-term-stable-linux-for-industry</a></li>
@@ -106,23 +130,26 @@
 
 
 <p>These links are only temporary, so if you want to use them do it as soon as possible. The sad part of all is that the organization intended to promote one of the most libertarian solutions in software history does not provide materials for download.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/20/building-arm-toolchain-part-1-libs-and/">Building ARM Toolchain - Part 1: Libs and Binutils</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -134,14 +161,21 @@
   
 
 
-<time datetime="2012-03-20T23:25:00+01:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Searching the Internet for information on how to build arm toolchain from
+<i class="icon-calendar-empty"></i> <time datetime="2012-03-20T23:25:00+01:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/embedded/"><span class="badge">embedded</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/03/20/building-arm-toolchain-part-1-libs-and/">Building ARM toolchain - part 1: libs and binutils</a></h1>
+      <p>Searching the Internet for information on how to build arm toolchain from
 scratch I realize that it is very hard to find  information about this matter
 (and recent one even harder). I will try to fill this lack of information and
 try to build toolchain. My main goal is to use a component based on the GNU
@@ -367,23 +401,26 @@ I will use <code>arm-unknown-linux-gnueabi</code> as entry point compiler.</li>
 
 
 <p>This set gives us a solid base to build the compiler. However, it will be in the <a href="/blog/2012/04/12/building-arm-toolchain-part-2-gcc-and">next section</a>.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/20/-democracy-the-god-that-failed-hans-hermann-hoppe/">&#8220;Democracy: The God That Failed&#8221; Hans-Hermann Hoppe</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -395,14 +432,21 @@ I will use <code>arm-unknown-linux-gnueabi</code> as entry point compiler.</li>
   
 
 
-<time datetime="2012-03-20T21:16:00+01:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I began this article last year. Until now I wonder if anyone could be interested
+<i class="icon-calendar-empty"></i> <time datetime="2012-03-20T21:16:00+01:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/books/"><span class="badge">books</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/03/20/-democracy-the-god-that-failed-hans-hermann-hoppe/">&#8220;Democracy: The God That Failed&#8221; Hans-Hermann Hoppe</a></h1>
+      <p>I began this article last year. Until now I wonder if anyone could be interested
 in reading about book that I read. I saw great interesting in linux/embedded
 stuff but what about different things that we met every day. What about
 politics/economics and religion ? Don&rsquo;t know if you should start this but I will
@@ -455,23 +499,26 @@ power distributed to locally living people. Let them decide if they want
 conflict with town or village near them. Or maybe better live in peace, trade
 freely and make world better. Centralized systems are slow, inefficient and cost
 a lot. Distributed systems are those in which life of one man is important.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/14/quick-build-of-arm-unknown-linux/">Quick Build of Arm-unknown-linux-gnueabi With Crosstool-ng</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -483,14 +530,25 @@ a lot. Distributed systems are those in which life of one man is important.</p>
   
 
 
-<time datetime="2012-03-14T23:42:00+01:00" pubdate data-updated="true">Mar 14<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>You might be surprised at how much you have to make to correctly build
+<i class="icon-calendar-empty"></i> <time datetime="2012-03-14T23:42:00+01:00" pubdate data-updated="true">Mar 14<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/crosstool-ng/"><span class="badge">crosstool-ng</span></a>
+          
+          <a href="/blog/categories/embedded/"><span class="badge">embedded</span></a>
+          
+          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/03/14/quick-build-of-arm-unknown-linux/">Quick build of arm-unknown-linux-gnueabi with crosstool-ng</a></h1>
+      <p>You might be surprised at how much you have to make to correctly build
 <code>arm-unknown-linux-gnueabi</code> config based toolchain with <a href="http://crosstool-ng.org/">crosstool-ng</a>. As you can
 see examples of many open source projects, the man&rsquo;s work is a rare resource.
 The result of this economic fact is that the attempt to build configuration
@@ -613,23 +671,26 @@ Is:</p>
 <p>Or simply by installing gawk, reconfigure and recompile <code>crosstools-ng</code>.</p>
 
 <p>This was my first post related to linux embedded enviroment. Hope it will be more. Enjoy!</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/14/splitting-my-personal-repository/">Splitting My Personal Repository</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -641,14 +702,21 @@ Is:</p>
   
 
 
-<time datetime="2012-03-14T23:26:00+01:00" pubdate data-updated="true">Mar 14<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>After writing a few posts in which my workspace scripts could be useful, I
+<i class="icon-calendar-empty"></i> <time datetime="2012-03-14T23:26:00+01:00" pubdate data-updated="true">Mar 14<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/productivity/"><span class="badge">productivity</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/03/14/splitting-my-personal-repository/">Splitting my personal repository</a></h1>
+      <p>After writing a few posts in which my workspace scripts could be useful, I
 realized that I should split blog works from the scripts that can be useful to
 others. From now materials related to the blog I will track in a separate
 repository and I&rsquo;ll add them as submodule into my environment. This implies that
@@ -658,23 +726,26 @@ Any additional items should be removed. We get a lot of unwanted stuff today, at
 every opportunity. From an economic point of view, it is known that very often
 margin value law is used here i.e. by hypermarkets, I will touch on this subject
 on another occasion, related to economics.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/">Debugging Coreboot in Qemu Environment - Part 1</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -686,14 +757,21 @@ on another occasion, related to economics.</p>
   
 
 
-<time datetime="2012-03-12T21:30:00+01:00" pubdate data-updated="true">Mar 12<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>First of all I use testing version of Debian &ndash; wheezy. Clone coreboot repository:</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-03-12T21:30:00+01:00" pubdate data-updated="true">Mar 12<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/coreboot/"><span class="badge">coreboot</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/">Debugging coreboot in qemu environment - part 1</a></h1>
+      <p>First of all I use testing version of Debian &ndash; wheezy. Clone coreboot repository:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -754,23 +832,26 @@ Put cursor over <code>protected_start</code> and press <code>Ctrl-]</code>. If e
 should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 537.</p>
 
 <p>In second article we dive into first phase of <code>coreboot</code> execution in emulated environment.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/07/human-action-ludwig-von-misess-work-by/">&#8220;Human Action&#8221; Ludwig Von Mises</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -782,33 +863,43 @@ should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 
   
 
 
-<time datetime="2012-03-07T23:37:00+01:00" pubdate data-updated="true">Mar 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>  <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Ludzkie_dzialanie_okladka.jpg/166px-Ludzkie_dzialanie_okladka.jpg" alt="" /></p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-03-07T23:37:00+01:00" pubdate data-updated="true">Mar 7<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/books/"><span class="badge">books</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/03/07/human-action-ludwig-von-misess-work-by/">&#8220;Human Action&#8221; Ludwig von Mises</a></h1>
+      <p>  <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Ludzkie_dzialanie_okladka.jpg/166px-Ludzkie_dzialanie_okladka.jpg" alt="" /></p>
 
 <p>&ldquo;Human Action&rdquo; Ludwig von Mises&rsquo;s work by some of called the pope of free market. IMHO is one of the best books on economics I read in my life. It is not easy, however, giving it time with certainly pays off. Allows to understand the basic laws which ruled the modern world of finance. Mises in a sensational way talk about the myths explaining what is inflation, why it has impact on our lives, what is and how works the supply of credit, and who depend most on the production of money without coverage (<em>fiat</em> money). I can say that until I read this book, I was lost in the dark. Thanks to it I received a weapon to overthrow ridiculous  world order concepts, absurd messages communicated in the media. I recommend:  <a href="http://mises.org/store/Human-Action-The-Scholars-Edition-P119.aspx">mises.org store &ndash; Human Action </a></p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/07/blog-has-changed-slightly/">Nice Small Additions for My Blog</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -820,31 +911,45 @@ should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 
   
 
 
-<time datetime="2012-03-07T23:15:00+01:00" pubdate data-updated="true">Mar 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
+<i class="icon-calendar-empty"></i> <time datetime="2012-03-07T23:15:00+01:00" pubdate data-updated="true">Mar 7<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/about/"><span class="badge">about</span></a>
+          
+          <a href="/blog/categories/blog/"><span class="badge">blog</span></a>
+          
+          <a href="/blog/categories/this/"><span class="badge">this</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/03/07/blog-has-changed-slightly/">Nice small additions for my blog</a></h1>
+      <p>Blog has changed slightly. I&rsquo;ve added two new sections: social media and afk. In &ldquo;social media&rdquo; I will add links to my profiles on various social networking sites. You&rsquo;ll find my most recent development achievements ( <a href="https://github.com/pietrushnic">@github</a>) and twitts on topics of interest to me ( <a href="https://twitter.com/#!/pietrushnic">@twitter</a>). The second section, &ldquo;afk&rdquo; (away from keyboard) is intended for the information of life beyond the keyboard, which in my case is not too extensive. I will publish here information about the books we read, watched movies and many other interesting things, which can be passionate away from the keyboard.</p>
 
+      
+      
+    </div>
+  </div>
 
-  <div class="entry-content"><p>Blog has changed slightly. I&rsquo;ve added two new sections: social media and afk. In &ldquo;social media&rdquo; I will add links to my profiles on various social networking sites. You&rsquo;ll find my most recent development achievements ( <a href="https://github.com/pietrushnic">@github</a>) and twitts on topics of interest to me ( <a href="https://twitter.com/#!/pietrushnic">@twitter</a>). The second section, &ldquo;afk&rdquo; (away from keyboard) is intended for the information of life beyond the keyboard, which in my case is not too extensive. I will publish here information about the books we read, watched movies and many other interesting things, which can be passionate away from the keyboard.</p>
-</div>
-  
-  
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/20/improve-productivity-by-tracking-work_20/">Improve Productivity by Tracking Work Environment With Git - Vim</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -856,14 +961,23 @@ should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 
   
 
 
-<time datetime="2012-02-20T21:43:00+01:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In this post I try to describe my vim configuration procedure and how it is
+<i class="icon-calendar-empty"></i> <time datetime="2012-02-20T21:43:00+01:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
+          
+          <a href="/blog/categories/productivity/"><span class="badge">productivity</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/02/20/improve-productivity-by-tracking-work_20/">Improve productivity by tracking work environment with git - vim</a></h1>
+      <p>In this post I try to describe my vim configuration procedure and how it is
 connected with git. The whole concept is based on keeping all the configuration
 files in a separate directory. These files are connected using symbolic links in
 places where system or application requires it (eg <code>$HOME/.vimrc -&gt;
@@ -1014,23 +1128,26 @@ lines to .vimrc (9 = black)</li>
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>" fuzzy-finder - fix colors highlight PmenuSel ctermbg=9</span></code></pre></td></tr></table></div></figure>
 
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/20/hostname-generator/">Hostname Generator</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -1042,77 +1159,61 @@ lines to .vimrc (9 = black)</li>
   
 
 
-<time datetime="2012-02-20T20:58:00+01:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Many times happened that I spend time, during the installation of the new system, whether it be a virtual physical machine, wondering about it&rsquo;s hostname. One day I asked myself the trouble searching for host name generator. Best I could find (currently second in the results of google) is rospo.net. It gives you the choice of category for the host name. My favorite, as a fan of fantasy is &ldquo;Characters from Tolkien&rdquo;. Although the category name does not reflect the truth, because in addition also includes a set of known sites in middlearth and more. So I recommend:</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-02-20T20:58:00+01:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
+          
+          <a href="/blog/categories/productivity/"><span class="badge">productivity</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/02/20/hostname-generator/">Hostname generator</a></h1>
+      <p>Many times happened that I spend time, during the installation of the new system, whether it be a virtual physical machine, wondering about it&rsquo;s hostname. One day I asked myself the trouble searching for host name generator. Best I could find (currently second in the results of google) is rospo.net. It gives you the choice of category for the host name. My favorite, as a fan of fantasy is &ldquo;Characters from Tolkien&rdquo;. Although the category name does not reflect the truth, because in addition also includes a set of known sites in middlearth and more. So I recommend:</p>
 
 <p>  <a href="http://rospo.net/webproducts/name/index.php">http://rospo.net/webproducts/name/index.php</a></p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
   
   <div class="pagination">
     
-      <a class="prev" href="/blog/page/5/">&larr; Older</a>
+    <a class="prev" href="/blog/page/5/">&larr; Older</a>
     
-    <a href="/blog/archives">Blog Archives</a>
+
     
     <a class="next" href="/blog/page/3/">Newer &rarr;</a>
     
   </div>
 </div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a>
-      </li>
-    
-  </ul>
-</section>
 
 
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
   Copyright &copy; 2014 - Your Name -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
 </p>
 
-</footer>
+
+        </footer>
+      </div>
+  </div>
   
 
 
@@ -1126,7 +1227,7 @@ lines to .vimrc (9 = black)</li>
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

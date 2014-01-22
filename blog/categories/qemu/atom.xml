@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Qemu | My Octopress Blog]]></title>
+  <title><![CDATA[Category: qemu | My Octopress Blog]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/qemu/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-01-21T22:32:11+01:00</updated>
+  <updated>2014-01-22T01:08:35+01:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[0x5: Qemu Network Configuration and Tftp for Virtual Development Board]]></title>
+    <title type="html"><![CDATA[0x5: Qemu network configuration and tftp for Virtual Development Board]]></title>
     <link href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/"/>
     <updated>2013-06-07T10:36:00+02:00</updated>
     <id>http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board</id>
@@ -304,7 +304,7 @@ This is expected result.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[0x1: Qemu as an Environment for Embedded Board Emulation]]></title>
+    <title type="html"><![CDATA[0x1: Qemu as an environment for embedded board emulation]]></title>
     <link href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/"/>
     <updated>2013-06-07T08:27:00+02:00</updated>
     <id>http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation</id>

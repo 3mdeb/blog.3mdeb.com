@@ -8,22 +8,10 @@
   <title>My Octopress Blog</title>
   <meta name="author" content="Your Name">
 
+   
+  <meta name="description" content="">
   
-  <meta name="description" content="When I tried to deploy second part of RoR tutorial
-to Heroku I get this error: 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-An error occurred while installing sqlite3 &hellip;">
-  
+  <meta name="keywords" content="">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -33,12 +21,15 @@ An error occurred while installing sqlite3 &hellip;">
   
   <link rel="canonical" href="http://pietrushnic.github.io/blog/page/3">
   <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -48,47 +39,60 @@ An error occurred while installing sqlite3 &hellip;">
 </head>
 
 <body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
-  
-    <h2>A blogging framework for hackers.</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
 </ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
+<ul class="nav pull-right">
+    
+    
+    
+    
+    
+    
+    
+
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div class="jumbotron">
+  <div class="container">
+    
+      My Octopress Blog
+    
+    <h3 class="tagline">
+      
+        A blogging framework for hackers.
+      
+    </h3>
+  </div>
+</div>
+
+
+<div class="blog-index">
   
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/">Sqlite3 Gem Not Supported on Heroku</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -100,14 +104,21 @@ An error occurred while installing sqlite3 &hellip;">
   
 
 
-<time datetime="2012-11-18T21:16:00+01:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When I tried to deploy second part of <a href="http://ruby.railstutorial.org/chapters/a-demo-app#top">RoR tutorial</a>
+<i class="icon-calendar-empty"></i> <time datetime="2012-11-18T21:16:00+01:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/rails/"><span class="badge">rails</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/">Sqlite3 gem not supported on Heroku</a></h1>
+      <p>When I tried to deploy second part of <a href="http://ruby.railstutorial.org/chapters/a-demo-app#top">RoR tutorial</a>
 to Heroku I get this error:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -163,23 +174,26 @@ found a mistake. I used simply:</p>
 
 
 <p>As RoR tutorial states.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian/">Prepare for Ruby on Rails on Debian Wheezy</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -191,14 +205,21 @@ found a mistake. I used simply:</p>
   
 
 
-<time datetime="2012-11-18T18:18:00+01:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I start to learn Ruby on Rails. As always when you learn new programming
+<i class="icon-calendar-empty"></i> <time datetime="2012-11-18T18:18:00+01:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/rails/"><span class="badge">rails</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian/">Prepare for Ruby on Rails on Debian wheezy</a></h1>
+      <p>I start to learn Ruby on Rails. As always when you learn new programming
 language toolchain is required. In this tutorial I will try to go through
 toolchain preparation for my Debian wheezy. Of course I based on Vim as my
 editor of choice. Second requirement will be using some parts of toolchain in
@@ -389,23 +410,26 @@ so :</p>
 I suggest to take a look at this
 <a href="https://www.youtube.com/watch?v=30P8DSNOZuU">movie</a> and after that dive into 
 <a href="http://ruby.railstutorial.org/">tutorial</a>.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/13/new-background-and-not-so-big-coming/">New Background and Not So Big &#8220;Coming Back&#8221;</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -417,35 +441,49 @@ I suggest to take a look at this
   
 
 
-<time datetime="2012-11-13T00:04:00+01:00" pubdate data-updated="true">Nov 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>It&rsquo;s been a long time since I last wrote anything on the blog. Because I hear complains about the background causing my blog hard to read I decide to change it.</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-11-13T00:04:00+01:00" pubdate data-updated="true">Nov 13<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/about/"><span class="badge">about</span></a>
+          
+          <a href="/blog/categories/blog/"><span class="badge">blog</span></a>
+          
+          <a href="/blog/categories/this/"><span class="badge">this</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/11/13/new-background-and-not-so-big-coming/">New background and not so big &#8220;coming back&#8221;</a></h1>
+      <p>It&rsquo;s been a long time since I last wrote anything on the blog. Because I hear complains about the background causing my blog hard to read I decide to change it.</p>
 
 <p>I have little break in my side project and noticed that most read posts are related to some technical workarounds and solutions for different problems I decide to write a series about gcc errors and some solutions for it. I know it may sound like some complete spam and trash for blog, but when I searched for some explanation and solution of this errors sometimes it was hard to find them, sometimes it was hard to match with my code and finally sometimes I was unable to understand what is going on. I want to share what I learned and even if it wouldn&rsquo;t help anyone I want to have this in one place.</p>
 
 <p>Recently I returned to my long-neglected hobby &ndash; chess. I will also try to write something constructive in this topic. Last time I also think a lot about embedded stuff (trying to reverse my printer), android (writing little project helping my colleague) and many other things. So maybe I will write about this. To not be boring I will simply get my hands dirty.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/13/mutt-tutorial-part-4-html-mails-address/">Mutt Tutorial Part 4 - Html Mails, Address Book and Other Useful Features</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -457,14 +495,21 @@ I suggest to take a look at this
   
 
 
-<time datetime="2012-05-13T17:21:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>How mutt can handle mails in html format ? Takling about html mail handling is
+<i class="icon-calendar-empty"></i> <time datetime="2012-05-13T17:21:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/05/13/mutt-tutorial-part-4-html-mails-address/">Mutt tutorial part 4 - html mails, address book and other useful features</a></h1>
+      <p>How mutt can handle mails in html format ? Takling about html mail handling is
 talking about handling any type of <a href="http://en.wikipedia.org/wiki/MIME">Multipurpose Internet Mail Extensions</a>.
 Mutt supports handling for all MIME types in one place for all programs. This
 place is <code>.mailcap</code> file. Googling a little bit I found below mailcap file
@@ -521,23 +566,26 @@ cc, to or bcc filed.  There is few more options that I found useful. To find it
 please go to my <a href="https://github.com/pietrushnic/workspace">workspace</a> scripts at
 github. Also if you have any issues with the configuration or comments please
 let me know by commenting below the post.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/">Mutt Tutorial Part 3 - Sidebar, URLs in E-mails</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -549,14 +597,21 @@ let me know by commenting below the post.</p>
   
 
 
-<time datetime="2012-05-13T15:43:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Information in this post came from <a href="http://www.lunar-linux.org/mutt-sidebar/">lunar linux page</a>. Kudos to its author. In this
+<i class="icon-calendar-empty"></i> <time datetime="2012-05-13T15:43:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/">Mutt tutorial part 3 - sidebar, URLs in e-mails</a></h1>
+      <p>Information in this post came from <a href="http://www.lunar-linux.org/mutt-sidebar/">lunar linux page</a>. Kudos to its author. In this
 post I want to discuss two topics: sidebar and how to open urls form inside
 mutt. Sidebar is mutt feature delivered in mutt-patched package in Debian. It
 cause to split standard mutt window in two parts. In first we can find list of
@@ -625,23 +680,26 @@ urls and second will be command line to run when regexp was matched. File looks 
 
 
 <p>Chromuim is my browser of choice but you can use firefox, lynx or anything you want.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/13/mutt-tutorial-part-2-secure-login/">Mutt Tutorial Part 2 - Secure Login</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -653,14 +711,21 @@ urls and second will be command line to run when regexp was matched. File looks 
   
 
 
-<time datetime="2012-05-13T14:13:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is second post of mutt tutorial series. As in the <a href="/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account">previous post</a>
+<i class="icon-calendar-empty"></i> <time datetime="2012-05-13T14:13:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/05/13/mutt-tutorial-part-2-secure-login/">Mutt tutorial part 2 - secure login</a></h1>
+      <p>This is second post of mutt tutorial series. As in the <a href="/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account">previous post</a>
 for below information I need to thank Kousik for posts about <a href="http://nixtricks.wordpress.com/2009/10/04/introduction-to-encryption-of-files-using-gpg/">gpg</a>
 and <a href="http://nixtricks.wordpress.com/2010/05/05/mutt-configure-mutt-to-receive-email-via-imap-and-send-via-smtp/">using it with mutt</a>.
 But probably the most important to simplify this method was Fau comment <a href="http://nixtricks.wordpress.com/2010/05/20/mutt-multiple-email-accounts-using-hooks/#comment-162">here</a>.
@@ -741,23 +806,26 @@ we need before sourcing encrypted scripts is declaration of variables in the scr
 settings will cause that mutt during start will run gpg to ask about password
 to decrypt password script file. In the <a href="/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/">next post</a>
 I will discuss mutt with sidebar and how to open html files from inside mutt.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account/">Mutt Tutorial Part 1 - Setup IMAP Account</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -769,14 +837,21 @@ I will discuss mutt with sidebar and how to open html files from inside mutt.</p
   
 
 
-<time datetime="2012-05-13T11:43:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Mutt is one of those programs that make people call you a linux geek, nerd or a
+<i class="icon-calendar-empty"></i> <time datetime="2012-05-13T11:43:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account/">Mutt tutorial part 1 - setup IMAP account</a></h1>
+      <p>Mutt is one of those programs that make people call you a linux geek, nerd or a
 snob. This is because using TUI or command line tools in world of fancy GUI for
 most people is wierd. What&rsquo;s so great about mutt? I probably still have not
 found much of its advantages, but at first glance we can notice a few things.
@@ -853,7 +928,7 @@ beginning we create <code>$HOME/.muttrc</code> file:</li>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>&lt;account_name&gt;</code> &ndash; for <a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#102;&#111;&#x6f;&#x2e;&#x62;&#97;&#114;&#64;&#103;&#x6d;&#x61;&#x69;&#108;&#46;&#99;&#x6f;&#109;">&#102;&#x6f;&#x6f;&#x2e;&#x62;&#97;&#x72;&#x40;&#103;&#x6d;&#97;&#105;&#108;&#46;&#x63;&#111;&#x6d;</a> it will be foo.bar
+<p><code>&lt;account_name&gt;</code> &ndash; for <a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#102;&#x6f;&#111;&#46;&#98;&#x61;&#x72;&#64;&#x67;&#x6d;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;">&#x66;&#111;&#x6f;&#x2e;&#x62;&#97;&#114;&#64;&#x67;&#109;&#97;&#105;&#x6c;&#x2e;&#99;&#111;&#109;</a> it will be foo.bar
 <code>&lt;imap_server_address&gt;</code> &ndash; this information you can get from your e-mail provider
 help pages or from the settings of web e-mail client, for Gmail it is
 imap.gmail.com
@@ -881,23 +956,26 @@ IMAP&rdquo; marked, if yes everything was set correctly. To use this label in mu
 simply add another <code>&lt;folder_name&gt;</code> to mailboxes line.</li>
 </ol>
 
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/21/vim-as-blogger-editor_21/">Vim as a Blogger Editor</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -909,14 +987,21 @@ simply add another <code>&lt;folder_name&gt;</code> to mailboxes line.</li>
   
 
 
-<time datetime="2012-04-21T12:55:00+02:00" pubdate data-updated="true">Apr 21<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>  <a href="https://github.com/ujihisa/blogger.vim">Blogger.vim</a> is a vim plugin for interfacing with Google&rsquo;s Blogger. Below I will use my workspace git <a href="https://github.com/pietrushnic/workspace">repository</a>. To use this plugin we need pretty new ruby >= 1.9.2 and gems nokogiri and net-https-wrapper. Let&rsquo;s install latest possible ruby for Debian, before that make sure you have latest updates:</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-04-21T12:55:00+02:00" pubdate data-updated="true">Apr 21<span>st</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/productivity/"><span class="badge">productivity</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/04/21/vim-as-blogger-editor_21/">Vim as a Blogger editor</a></h1>
+      <p>  <a href="https://github.com/ujihisa/blogger.vim">Blogger.vim</a> is a vim plugin for interfacing with Google&rsquo;s Blogger. Below I will use my workspace git <a href="https://github.com/pietrushnic/workspace">repository</a>. To use this plugin we need pretty new ruby >= 1.9.2 and gems nokogiri and net-https-wrapper. Let&rsquo;s install latest possible ruby for Debian, before that make sure you have latest updates:</p>
 
 <p>sudo apt-get update sudo apt-get upgrade sudo apt-get dist-upgrade And ruby:</p>
 
@@ -935,23 +1020,26 @@ simply add another <code>&lt;folder_name&gt;</code> to mailboxes line.</li>
 <p>:e blogger:list If list of you see all your posts than it seems that plugin works good. Finally check writing feature. Create file with some text and type:</p>
 
 <p>:w blogger:create Few things doesn&rsquo;t work as it should. Meybe I will find enough time to fix it. This article was created by using blogger.vim script.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/18/qemu-as-debugging-environment-for/">Debugging Coreboot in Qemu Environment - Part 2</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -963,14 +1051,21 @@ simply add another <code>&lt;folder_name&gt;</code> to mailboxes line.</li>
   
 
 
-<time datetime="2012-04-18T22:41:00+02:00" pubdate data-updated="true">Apr 18<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In <a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment">previous post</a>
+<i class="icon-calendar-empty"></i> <time datetime="2012-04-18T22:41:00+02:00" pubdate data-updated="true">Apr 18<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/coreboot/"><span class="badge">coreboot</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/04/18/qemu-as-debugging-environment-for/">Debugging coreboot in qemu environment - part 2</a></h1>
+      <p>In <a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment">previous post</a>
 <code>coreboot</code> was configured and installed. Here we try to establish good debugging
 environment for it. To create a good emulated environment to debug, research and
 learn <code>coreboot</code> few tricks are required. First of all we need to know how to run
@@ -1084,23 +1179,26 @@ get information about all registers of virtual machine
 
 
 <p>it means that your debugging enviroment was set correctly.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/12/building-arm-toolchain-part-2-gcc-and/">Building ARM Toolchain - Part 2: Gcc and Eglibc</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
 
 
 
@@ -1112,14 +1210,21 @@ get information about all registers of virtual machine
   
 
 
-<time datetime="2012-04-12T23:54:00+02:00" pubdate data-updated="true">Apr 12<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Unfortunately after few tries of cross compiling eglibc using different source
+<i class="icon-calendar-empty"></i> <time datetime="2012-04-12T23:54:00+02:00" pubdate data-updated="true">Apr 12<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/embedded/"><span class="badge">embedded</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/blog/2012/04/12/building-arm-toolchain-part-2-gcc-and/">Building ARM toolchain - part 2: gcc and eglibc</a></h1>
+      <p>Unfortunately after few tries of cross compiling eglibc using different source
 for instructions I alway end with hard to solve issues. Luckily, in the sources
 of eglibc I noticed instructions for cross-compiling written long time ago by
 Jim Blandy(I know i should start <a href="http://www.eglibc.org/cgi-bin/viewvc.cgi/trunk/libc/EGLIBC.cross-building?revision=2037&amp;view=markup">here</a>).
@@ -1487,67 +1592,42 @@ $TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-readelf -hl c++-hello</p>
 <p>I hope you find above manual useful. If you need more detailed descriptions it
 can be found <a href="http://www.eglibc.org/cgi-bin/viewvc.cgi/trunk/libc/EGLIBC.cross-building?view=markup">here</a>.
 Also don&rsquo;t bother to ask me by comment below.</p>
-</div>
-  
-  
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
   
   <div class="pagination">
     
-      <a class="prev" href="/blog/page/4/">&larr; Older</a>
+    <a class="prev" href="/blog/page/4/">&larr; Older</a>
     
-    <a href="/blog/archives">Blog Archives</a>
+
     
     <a class="next" href="/blog/page/2/">Newer &rarr;</a>
     
   </div>
 </div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a>
-      </li>
-    
-  </ul>
-</section>
 
 
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
   Copyright &copy; 2014 - Your Name -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
 </p>
 
-</footer>
+
+        </footer>
+      </div>
+  </div>
   
 
 
@@ -1561,7 +1641,7 @@ Also don&rsquo;t bother to ask me by comment below.</p>
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

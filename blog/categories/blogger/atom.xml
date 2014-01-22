@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Blogger | My Octopress Blog]]></title>
+  <title><![CDATA[Category: blogger | My Octopress Blog]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/blogger/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-01-21T22:32:11+01:00</updated>
+  <updated>2014-01-22T01:08:35+01:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Syntax Highlighter and Code Formatter for Blogger]]></title>
+    <title type="html"><![CDATA[Syntax highlighter and code formatter for Blogger]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/01/06/syntax-highlighter-and-code-formatter/"/>
     <updated>2012-01-06T18:14:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/01/06/syntax-highlighter-and-code-formatter</id>
@@ -34,7 +34,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Blogger Favicon in Chrome and FF]]></title>
+    <title type="html"><![CDATA[Blogger favicon in Chrome and FF]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/01/05/blogger-favicon-in-chrome-and-ff/"/>
     <updated>2012-01-05T00:22:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/01/05/blogger-favicon-in-chrome-and-ff</id>
@@ -50,7 +50,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Blogspot Beginning]]></title>
+    <title type="html"><![CDATA[Blogspot beginning]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/01/05/blogspot-beginning/"/>
     <updated>2012-01-05T00:02:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/01/05/blogspot-beginning</id>
@@ -63,7 +63,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Blog Look and Feel Idea]]></title>
+    <title type="html"><![CDATA[Blog look and feel idea]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/01/04/blog-look-and-feel-idea/"/>
     <updated>2012-01-04T19:30:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/01/04/blog-look-and-feel-idea</id>
@@ -72,7 +72,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Blogspot Begin: Todo List]]></title>
+    <title type="html"><![CDATA[Blogspot begin: todo list]]></title>
     <link href="http://pietrushnic.github.io/blog/2012/01/03/blogspot-begin-todo-list/"/>
     <updated>2012-01-03T00:38:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/01/03/blogspot-begin-todo-list</id>

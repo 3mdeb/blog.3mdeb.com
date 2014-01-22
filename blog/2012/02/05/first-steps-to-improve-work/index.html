@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>First Steps to Improve Work Productivity in Linux Environment - My Octopress Blog</title>
+  <title>First steps to improve work productivity in Linux environment - My Octopress Blog</title>
   <meta name="author" content="Your Name">
 
+   
+  <meta name="description" content="">
   
-  <meta name="description" content="The problem encountered on several occasions over several months. Now it is time to deal with it. How did this happen? As always, resources were not &hellip;">
-  
+  <meta name="keywords" content="">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -20,12 +21,15 @@
   
   <link rel="canonical" href="http://pietrushnic.github.io/blog/2012/02/05/first-steps-to-improve-work">
   <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -35,44 +39,44 @@
 </head>
 
 <body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
-  
-    <h2>A blogging framework for hackers.</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
 </ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
+<ul class="nav pull-right">
+    
+    
+    
+    
+    
+    
+    
+
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
 <article class="hentry" role="article">
   
+
   <header>
-    
-      <h1 class="entry-title">First Steps to Improve Work Productivity in Linux Environment</h1>
-    
-    
-      <p class="meta">
-        
+  <div class="jumbotron">
+    First Steps to Improve Work Productivity in Linux Environment
+	<h5>
 
 
 
@@ -84,121 +88,94 @@
   
 
 
-<time datetime="2012-02-05T03:08:00+01:00" pubdate data-updated="true">Feb 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>The problem encountered on several occasions over several months. Now it is time to deal with it. How did this happen? As always, resources were not sufficient, and if we can not increase the amount of resources we must strive to optimize their use.In this case, it was about time.</p>
+<i class="icon-calendar-empty"></i> <time datetime="2012-02-05T03:08:00+01:00" pubdate data-updated="true">Feb 5<span>th</span>, 2012</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>The problem encountered on several occasions over several months. Now it is time to deal with it. How did this happen? As always, resources were not sufficient, and if we can not increase the amount of resources we must strive to optimize their use.In this case, it was about time.</p>
 
 <p>While reading my last acquisition, once again I faced the problem of re-configure Linux account. Every time when I need new account for some reasons I need to configure some things manually. Most things are simple enough, we copy configuration files from the already existing user directory, and voila. Of course Murphy&rsquo;s law works, and something goes wrong. Sometimes we need to create a new account with just a few of the tools configured as in other existing accounts. So we have a problem, however, reflecting on the solution, my mind was deepened in the increasing number of new issues, which caused the solution became more distant.</p>
 
 <p>How this process looks like? First we need new account, it should get automatically some configuration files that I create for other accounts. Second I realize that I don&rsquo;t have methods for storing configs that I use most. I heard about dotfiles tracking with git with cloud help (e.g. <a href="https://github.com/">github</a>). When I google this issue I found <a href="https://github.com/trym/dotty">dotty</a>. But after that I ask myself about productivity improvements in broad sense and the conclusion was that my work scheme should be changed. So I try to find some hints about improving productivity, there are thousand of web pages about that. Few things I found useful first of all the idea of &ldquo;automated time tracking&rdquo;. Second that chaos that I produced during solving simple problem meant that I thought about controlling of its flow, and this led me to <a href="http://en.wikipedia.org/wiki/Mind_map">mind mapping</a> technique. AFAIK <a href="http://freemind.sourceforge.net/wiki/index.php/Main_Page">FreeMind</a> is the best free software for playing with this way of data presentation. Below I attach my first mind map in FreeMind, this is of course beta version.</p>
 
 <p>  <img src="http://4.bp.blogspot.com/-JCXeznxAkyM/Ty3jqvKH1UI/AAAAAAAAAD8/6Rye6fkesjM/s640/improve_productivity.png" alt="" /></p>
-</div>
+
+    </div>
+  </div>
+
 
 
   <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-05T03:08:00+01:00" pubdate data-updated="true">Feb 5<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/productivity/'>productivity</a>
-  
-</span>
-
-
-    </p>
+    <hr>
     
-      <div class="sharing">
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
+
+
+
+  <a href="/blog/categories/productivity/"><span class="badge">productivity</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <div class="addthis_toolbox addthis_default_style ">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pietrushnic.github.io/blog/2012/02/05/first-steps-to-improve-work/" data-via="" data-counturl="http://pietrushnic.github.io/blog/2012/02/05/first-steps-to-improve-work/" >Tweet</a>
+  
+  <a class="addthis_button_tweet"></a>
   
   
-  
+  <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
 </div>
 
+      </div>
+      
+      
+    </div>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/01/15/another-interesting-topic-with-which-i/" title="Previous Post: UEFI from Linux enthusiast perspective">&laquo; UEFI from Linux enthusiast perspective</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/02/06/arbtt-as-productivity-improver-for/" title="Next Post: Arbtt As Productivity Improver For">Arbtt As Productivity Improver For &raquo;</a>
-      
-    </p>
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/blog/2012/01/15/another-interesting-topic-with-which-i/" title="Previous Post: UEFI from Linux enthusiast perspective">&laquo; UEFI from Linux enthusiast perspective</a>
+          
+          
+            <a class="basic-alignment right" href="/blog/2012/02/06/arbtt-as-productivity-improver-for/" title="Next Post: Arbtt As Productivity Improver For">Arbtt As Productivity Improver For &raquo;</a>
+          
+        </p>
+      </div>
+    </div>
   </footer>
 </article>
 
 </div>
 
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a>
-      </li>
-    
-  </ul>
-</section>
 
 
-
-
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
   Copyright &copy; 2014 - Your Name -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
 </p>
 
-</footer>
+
+        </footer>
+      </div>
+  </div>
   
 
 
@@ -212,7 +189,7 @@
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
