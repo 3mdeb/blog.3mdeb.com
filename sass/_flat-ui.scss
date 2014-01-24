@@ -179,7 +179,7 @@
 body {
   color: $text-color;
   background: $bg-color;
-  font: 1.5em/1.25em "Serif", serif;
+  font: 1.35em/1.25em "Serif", serif;
 }
 
 p {
@@ -203,9 +203,9 @@ a {
 
 h1 {
   color: $primary-color;
-  font-size: 32px;
+  font-size: 1.6em;
   font-weight: 900; 
-  font-family: "Quicksand"; }
+  font-family: "Sans-Serif"; }
   .date-time{
     font-size: 15px;
     color: $accent-color2;
@@ -213,15 +213,15 @@ h1 {
   }
   .link {
     font-weight: 500;
-    font-size: 1.8em;
-    line-height: 1.30;
+    font-size: 1.6em;
+    line-height: 1.30em;
     font-family: "Sans-Serif";
     margin-bottom: 1em;
   }
 
 h2 {
   color: $primary-color;
-  font-size: 1.5em;
+  font-size: 1.25em;
   font-weight: 500;
   font-family: "Sans-Serif";
   margin-top: 1.5em;
@@ -233,10 +233,11 @@ h3 {
   font-size: 1.25em;
   font-weight: 500;
   font-family: "Sans-Serif";
-  margin-bottom: 0.5;
-  margin-top: 0.8; }
+  margin-bottom: 0.5em;
+  margin-top: 0.8em; }
   .tagline
   {
+    margin-top: 0.5em;
     font-weight: 400;
     font-size: 0.4em;
     font-family: "Serif";
