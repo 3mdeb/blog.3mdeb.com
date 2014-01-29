@@ -97,4 +97,11 @@ disqus_show_comment_count: true
 google_analytics_tracking_id: UA-39420295-1
 
 # Facebook Like
-facebook_like: false
+facebook_like: true
+
+# octoflat navigation
+navigation:
+  - text: Home
+    url: /index.html
+  - text: Archives
+    url: /blog/archives/index.html
