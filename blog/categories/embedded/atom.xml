@@ -4,7 +4,7 @@
   <title><![CDATA[Category: embedded | Linux geek scratchpad]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/embedded/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-01-24T01:10:51+01:00</updated>
+  <updated>2014-01-29T23:05:48+01:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -375,7 +375,7 @@ RPC: Registered udp transport module.
 RPC: Registered tcp transport module.
 RPC: Registered tcp NFSv4.1 backchannel transport module.
 NetWinder Floating Point Emulator V0.97 (double precision)
-Installing knfsd (copyright &copy; 1996 <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#x3a;&#x6f;&#x6b;&#x69;&#114;&#64;&#109;&#111;&#x6e;&#x61;&#x64;&#46;&#x73;&#119;&#98;&#46;&#100;&#x65;">&#111;&#107;&#x69;&#114;&#x40;&#x6d;&#111;&#110;&#x61;&#x64;&#x2e;&#x73;&#x77;&#98;&#x2e;&#100;&#x65;</a>).
+Installing knfsd (copyright &copy; 1996 <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#x3a;&#111;&#107;&#x69;&#x72;&#64;&#109;&#111;&#110;&#97;&#x64;&#46;&#115;&#x77;&#98;&#x2e;&#x64;&#x65;">&#x6f;&#107;&#x69;&#114;&#x40;&#109;&#x6f;&#x6e;&#x61;&#100;&#x2e;&#115;&#119;&#x62;&#x2e;&#100;&#101;</a>).
 jffs2: version 2.2. (NAND) © 2001-2006 Red Hat, Inc.
 ROMFS MTD &copy; 2007 Red Hat, Inc.
 msgmni has been set to 246
@@ -391,7 +391,7 @@ physmap platform flash device: 04000000 at 34000000
 physmap-flash.0: Found 1 x32 devices at 0x0 in 32-bit bank. Manufacturer ID 0x000000 Chip ID 0x000000
 Intel/Sharp Extended Query Table at 0x0031
 Using buffer write method
-smc91x.c: v1.1, sep 22 2004 by Nicolas Pitre <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#x6f;&#x3a;&#110;&#105;&#x63;&#111;&#64;&#102;&#108;&#117;&#120;&#x6e;&#105;&#x63;&#x2e;&#110;&#x65;&#116;">&#x6e;&#x69;&#x63;&#x6f;&#x40;&#102;&#x6c;&#x75;&#x78;&#110;&#x69;&#x63;&#46;&#110;&#101;&#116;</a>
+smc91x.c: v1.1, sep 22 2004 by Nicolas Pitre <a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#x6e;&#105;&#99;&#111;&#64;&#x66;&#x6c;&#x75;&#x78;&#110;&#x69;&#x63;&#46;&#x6e;&#101;&#x74;">&#x6e;&#x69;&#99;&#x6f;&#64;&#x66;&#x6c;&#117;&#x78;&#110;&#x69;&#x63;&#x2e;&#x6e;&#101;&#116;</a>
 eth0: SMC91C11xFD (rev 1) at c89c8000 IRQ 57 [nowait]
 eth0: Ethernet addr: 52:54:00:12:34:56
 mousedev: PS/2 mouse device common for all mice

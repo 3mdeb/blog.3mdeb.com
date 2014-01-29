@@ -35,6 +35,18 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39420295-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
 
 </head>
 
@@ -48,13 +60,23 @@
   	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
   	      <ul class="nav">
     
+        <li ><a href="/index.html">Home</a></li>
+    
+        <li ><a href="/blog/archives/index.html">Archives</a></li>
+    
 </ul>
 
 <ul class="nav pull-right">
     
+    <li><a href="http://github.com/pietrushnic" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
     
     
     
+    
+    <li><a href="http://twitter.com/pietrushnic" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    <li><a href="http://plus.google.com/115979497998056410813" title="Google+ Profile"><i class="icon-google-plus-sign social-navbar"></i></a></li>
     
     
     
@@ -192,6 +214,8 @@ urls and second will be command line to run when regexp was matched. File looks 
         <div class="sharing">
   <div class="addthis_toolbox addthis_default_style ">
   
+  <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+  
   
   <a class="addthis_button_tweet"></a>
   
@@ -221,6 +245,12 @@ urls and second will be command line to run when regexp was matched. File looks 
   </footer>
 </article>
 
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
 </div>
 
 
@@ -240,7 +270,32 @@ urls and second will be command line to run when regexp was matched. File looks 
   </div>
   
 
+<script type="text/javascript">
+      var disqus_shortname = 'pietrushnics-world';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/';
+        var disqus_url = 'http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 
 
