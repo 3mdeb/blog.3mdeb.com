@@ -662,17 +662,23 @@ h6 {
   background: $navbar-color;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false); }
 .navbar-inverse .nav > li > a {
+  font-family: "Sans-Serif";
+  font-size: 1.25em;
   color: $accent-color3; 
   font-weight: 300; }
 .navbar-inverse .nav .active > a, .navbar-inverse .nav .active > a:hover, .navbar-inverse .nav .active > a:focus {
   background-color: transparent;
-  color: $tertiary-color;
+  font-family: "Sans-Serif";
+  font-size: 1.25em;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none; }
 
 .navbar-inverse .nav .active > a:hover {
-    background-color: $accent-color1; }
+    font-family: "Sans-Serif";
+    font-size: 1.25em;
+    background-color: $accent-color1;
+    color: $tertiary-color; }
 
 .navbar-unread {
   background-color: #e74c3c;
