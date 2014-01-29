@@ -67,4 +67,4 @@ whom creating this article would not be possible. Thanks for sharing your
 knowledge. Every time when I use knowledge that found by googling I'm trying
 to stick link for further reading.
 
-####[_Ejoy!_](/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation)####
+####[_Enjoy!_](/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation)####
