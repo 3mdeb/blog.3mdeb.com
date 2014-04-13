@@ -12,7 +12,7 @@ footer: true
 Hi,
 my name is Piotr Król I'm a firmware and embedded system developer
 currently working for Intel Technology Poland. I'm freedom and liberty
-enthusiast.
+enthusiast interested in Linux and low level hacking.
 
 More about me you can find on social coding and social media sites.
 
