@@ -9,9 +9,7 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="Update: My repository is available
-here. Below is first post from series in which I want to describe my experience gained
-in attempt to enhance my &hellip;">
+  <meta name="description" content="The problem encountered on several occasions over several months. Now it is time to deal with it. How did this happen? As always, resources were not &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,185 +78,6 @@ in attempt to enhance my &hellip;">
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/19/improve-productivity-by-tracking-work/">Improve Productivity by Tracking Work Environment With Git - Preparation</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-19T21:12:00+01:00" pubdate data-updated="true">Feb 19<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/02/19/improve-productivity-by-tracking-work/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><em>Update</em>: My repository is available
-<a href="https://github.com/pietrushnic/workspace.git">here</a>.</p>
-
-<p>Below is first post from series in which I want to describe my experience gained
-in attempt to enhance my productivity by using git to control the contents of
-some files in my home directory. The first step to improve the productivity
-is good organization of working environment. It happens very often that I work
-on multiple machines both physical and virtual. Therefore I need a
-good mechanism to share knowledge, experience, code, configuration and many
-other things. Configuration described below is only an example that actually
-fits my way of working.  First of all simple concept of directory structure is
-needed. Let&rsquo;s start with:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir -p $HOME/workspace/blog;mkdir -p $HOME/workspace/dotfiles
-</span><span class='line'>cd workspace </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Write some files (i.e. for your blog) with your favourite editor, initialize
-repository and prepare first commit</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git init
-</span><span class='line'>git add .;git commit -m "Initial commit for environment tracking" </span></code></pre></td></tr></table></div></figure>
-
-
-<p>To avoid information about untracked vim swp files add $HOME/workspace/.gitignore with following content:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.gitignore
-</span><span class='line'>*.swp</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/15/set-irssi-under-debian-to-use-freenode/">Set Irssi Under Debian to Use Freenode Server</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-15T20:25:00+01:00" pubdate data-updated="true">Feb 15<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/02/15/set-irssi-under-debian-to-use-freenode/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Very short manual on how to set up irssi to work with freenode servers.<br/>
-Fist, install irssi:</p>
-
-<p>sudo apt-get install irssi Run:</p>
-
-<p>irssi For freenode write:</p>
-
-<p>/connect holmes.freenode.net Send register command for youe {nickname} and add information about your {e-mail}:</p>
-
-<p>/msg nickserv register {nickname} {e-mail} Copy and paste line, which you get from freenode registration server to your mailbox, to irssi. After that add freenode network:</p>
-
-<p>/network add freenode Add what should be automaticali send to server after connecting, remeber to correctly write your {nickname} and {password}, password will be stored in plain text:</p>
-
-<p>/network add -autosendcmd &lsquo;^nick {nickname};/msg nickserv identify {password}&rsquo; freenode Auto-connect everytime when irssi will be run:</p>
-
-<p>/server ADD -auto -network freenode holmes.freenode.net 6667 Channel autologin:</p>
-
-<p>/channel ADD -auto #debian freenode After all we should save settings:</p>
-
-<p>/save That&rsquo;s all, enjoy!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/06/arbtt-as-productivity-improver-for/">Arbtt as Productivity Improver For</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-06T00:00:00+01:00" pubdate data-updated="true"></time>
-        
-         | <a href="/blog/2012/02/06/arbtt-as-productivity-improver-for/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>&mdash;&ndash; layout: post title: &ldquo;arbtt as productivity improver for Linux enviroment&rdquo; date: 2012-02-06T00:37:00+01:00 categories: &ndash; productivity &mdash;&ndash;</p>
-
-<p>As I mentioned in previous <a href="http://pietrushnic.blogspot.com/2012/02/first-steps-to-improve-work.html">post</a> I work a lot on improving my productivity. After FreeMind it is time for <a href="http://darcs.nomeata.de/arbtt/doc/users_guide/">arbtt</a>. This is small tool which tracks active windows during your work. It is delivered with distro that I&rsquo;m currently using (Debian wheezy). So all I had to do was:</p>
-
-<p>sudo apt-get install arbtt Below I try describe how I configure arbtt to work with some apps that I use (Google Chrome, FreeMind, gnome-terminal and screen).<br/>
-To effectively work with arbtt I had to run a daemon that collects information. In this way, I found the first problem, namely, it is hard to find a website, which correctly explains how to execute command during startup on Debian with GNOME environment. After few tries I realize that I should focus on GNOME autostart mechanism. This led me to create little file in $HOME/.config/autostart which looks like that:</p>
-
-<p>[Desktop Entry] Type=Application Encoding=UTF-8 Name=The Automatic Rule-Base Time Tracker Exec=arbtt-capture Terminal=false So I had configured arbtt and it starts to capture data about my work. To display this data in friendly manner arbtt-stat should be used. Application complains if $HOME/.arbtt/categorize.cfg wasn&rsquo;t configured for it appropriate. Detailed documentation about this file can be found on arbtt <a href="http://darcs.nomeata.de/arbtt/doc/users_guide/configuration.html">configuration page</a>. The process of writing this file should be iterative, starting point for me was:</p>
-
-<p>&mdash; This defines some aliases, to make the reports look nicer: aliases ( &ldquo;sun-awt-X11-XFramePeer&rdquo; &ndash;> &ldquo;java&rdquo; ) &mdash; A rule that probably everybody wants. Being inactive for over a minute &mdash; causes this sample to be ignored by default. $idle > 60 ==> tag inactive, current window $program == &ldquo;sun-awt-X11-XFramePeer&rdquo; &amp;&amp; current window ($title =~ /(.+)\s-\sFreeMind/) ==> tag program:FreeMind-$1, current window $program == &ldquo;gnome-terminal&rdquo; &amp;&amp; current window ($title =~ /(.+)/) ==> tag term:$1, &mdash; Simple rule that just tags the current program tag program:$current.program, &mdash; I&rsquo;d like to know what web pages in google-chrome I&rsquo;m working in. So I do &mdash; not tag necessarily by the active window title, but the title that contains &mdash; the specific string. current window $program == &ldquo;google-chrome&rdquo; &amp;&amp; any window ($program == &ldquo;google-chrome&rdquo; &amp;&amp; $title =~ /(.+)\s-\sGoogle\sChrome/) ==> tag www:$1, However, after creating a configuration file such statistics were displayed correctly it was still a big problem to solve &ndash; how to combine arbtt with gnome-terminal and screen. The first one requires only a correctly set the window&rsquo;s name. Although the synchronization of the terminal window&rsquo;s name with a window inside the screen was not a trivial task (primarily on the mass of broken tutorials that can be found on the web). Finally my .screenrc looks like that:</p>
-
-<p>termcapinfo xterm* &lsquo;hs:ts=\E]0;:fs=\007:ds=\E]0;\007&rsquo; defhstatus &ldquo;[screen] ^Et&rdquo; hardstatus off # Set the scrollback length: defscrollback 10000 # Select whether you want to see the copyright notice during startup: startup_message off # Display a caption string below, appearing like tabs and # displaying the window number and application name (by default). caption always caption string &ldquo;%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W}%c %{g}]&rdquo; #&ldquo;%{= kb}[ %=%{w}%?%-Lw%?%{b}(%{W}%n*%f %t%?(%u)%?%{b})%{w}%?%+Lw%?%?%= %{b}][%{B} %H %{W}%l %{b}][%{B} %d.%m.%Y %{W}%0c %{b}]&rdquo; #&ldquo;%{bw}[%H] [%?%-Lw%?%{wb}%n*%f%t%{bw}%?%+Lw%?]%=%{bw} [%1`] [%c:%s] [%l]&rdquo; # &ldquo;%{kw}%-w%{wr}%n %t%{&ndash;}%+w&rdquo; defhstatus set terminal title and caption keeps data about my open windows in screen. Every time I open new window or change current one terminal title is updated.<br/>
-For now that&rsquo;s all. In the future I wanted to write how to synchronize the title of the window in the screen with vim editor to include information about the currently edited file.</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -591,6 +410,141 @@ And write it by:</p>
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/05/blogger-favicon-in-chrome-and-ff/">Blogger Favicon in Chrome and FF</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-05T00:22:00+01:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/01/05/blogger-favicon-in-chrome-and-ff/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I didn&rsquo;t imagine that placing the code for favicon can be so time consuming. Here are some tpis and tricks that can be useful to others.<br/>
+1. First find or create favicon ( <a href="http://www.google.pl/search?q=favicon&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;tbm=isch&amp;source=og&amp;sa=N&amp;tab=wi&amp;ei=udsET4OiG8vO-Qbd27j5Cw&amp;biw=1600&amp;bih=732&amp;sei=u9sET_miJsztOf-2uLYO#um=1&amp;hl=en&amp;tbs=isz:ex%2Ciszw%3A32%2Ciszh%3A32&amp;tbm=isch&amp;sa=1&amp;q=favicon&amp;pbx=1&amp;oq=favicon&amp;aq=f&amp;aqi=g10&amp;aql=&amp;gs_sm=s&amp;gs_upl=1959l2847l0l4598l6l5l0l0l0l3l407l1119l0.3.1.0.1l5l0&amp;bav=on.2,or.r_gc.r_pw.,cf.osb&amp;fp=7c76d7186cf3fdc4&amp;biw=1600&amp;bih=732">google</a> or <a href="http://favicon.cc/">favicon.cc</a>)<br/>
+2. Make sure that you have not set any favicon (Design-> Page Elelments-> Favicon)<br/>
+3. Add this code below </head> tag</p>
+
+<p><link href='http://bsaves.com/HowHero/Blogger%20Templates/moonspot/images/favicon.ico' rel='shortcut icon' type='image/vnd.microsoft.icon' /> <link href='http://bsaves.com/HowHero/Blogger%20Templates/moonspot/images/favicon.ico' rel='icon'/> This tip comes from <a href="http://widgetsforfree.blogspot.com/2009/08/how-to-change-favicon-in-blogger.html">here</a>. It doesn&rsquo;t work on IE but this did not bother me.</p>
+
+<p>If you want put the favicon in the network to imageshack.us to receive a direct link from them you must register. For those who do not want to do that I propose to use available in Chrome the &ldquo;inspect element&rdquo; feature with its help you can easily read the entire value of the field &ldquo;Direct Link&rdquo; on imageshack.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/05/blogspot-beginning/">Blogspot Beginning</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-05T00:02:00+01:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/01/05/blogspot-beginning/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ol>
+<li>Blog should be correctly displayed under lynx<br/>
+2. I&rsquo;m not a sophisticated graphic designer, so I can not afford a sensational appearance (so far).</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/04/test/">Test</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-04T21:46:00+01:00" pubdate data-updated="true">Jan 4<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/01/04/test/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>01234567890123456789012345678901234567890123456789012345678901234567890123456789 This first test for blogger.vim plugin. THis will be used as sandbox, it looks like blogger vim works fine, need to check features that mostly use. Continue testing: <a href="http://google.pl">this is link</a> &ndash; this is dash &ndash; 2nd dash
+this is bash code
+plain text
+1. 1st
+  1. under 1.st
+  2. 2nd under 2st</p>
+
+<ol>
+<li>2.nd</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -603,75 +557,7 @@ And write it by:</p>
 </div>
 <aside class="sidebar">
   
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
     
-      <li class="post">
-        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve productivity with Goolge history using bookmarks and Chrome extensions</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and run OVMF under Qemu</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root file system for embedded system</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu network configuration and tftp for Virtual Development Board</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux kernel for embedded system</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/pietrushnic">@pietrushnic</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'pietrushnic',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/115979497998056410813?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
   
 </aside>
 
