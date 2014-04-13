@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Linux geek scratchpad</title>
+  <title>Linux geek's scratchpad</title>
   <meta name="author" content="">
 
-   
-  <meta name="description" content="">
   
-  <meta name="keywords" content="">
+  <meta name="description" content="The idea of this post is very simple (as usually) and I wonder why I didn&#8217;t thought
+about it earlier. The point is to use history of your &hellip;">
+  
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -21,19 +21,16 @@
   
   <link rel="canonical" href="http://pietrushnic.github.io">
   <link href="/favicon.png" rel="icon">
-  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Linux geek scratchpad" type="application/atom+xml">
-  <script src="/js/jquery.js"></script>
-  <script src="/js/bootstrap-collapse.js"></script>
-  <script src="/js/modernizr-2.0.js"></script>
-  <script src="/js/octopress.js" type="text/javascript"></script>
-  <script src="/js/application.js"></script>
+  <link href="/atom.xml" rel="alternate" title="Linux geek's scratchpad" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -42,7 +39,7 @@
 
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
@@ -50,71 +47,48 @@
 
 </head>
 
-<body   >
-  <div class="navbar navbar-inverse navbar-static-top">
-  	<div class="navbar-inner">
-  	  <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="fui-menu-24"></span>
-        </a>
-  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
-  	      <ul class="nav">
-    
-        <li class="active"><a href="/index.html">Home</a></li>
-    
-        <li ><a href="/blog/archives/index.html">Archives</a></li>
-    
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Linux geek's scratchpad</a></h1>
+  
+    <h2>or embedded dreams about productivity, freedom and liberty</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
-<ul class="nav pull-right">
-    
-    <li><a href="http://github.com/pietrushnic" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
-    
-    
-    
-    
-    <li><a href="http://twitter.com/pietrushnic" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
-    
-    
-    <li><a href="http://plus.google.com/115979497998056410813" title="Google+ Profile"><i class="icon-google-plus-sign social-navbar"></i></a></li>
-    
-    
-    
-
-    
-</ul>
-
-  	    </div>
-  	  </div>
-  	</div>
-  </div>
-  <div class="container" id="main">
-      <div class="row-fluid">
-        <div id="content">
-          <div class="jumbotron">
-  <div class="container">
-    
-      Linux geek scratchpad
-    
-    <h3 class="tagline">
-      
-        or embedded dreams about productivity, freedom and liberty
-      
-    </h3>
-  </div>
-</div>
-
-
-<div class="blog-index">
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
   
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -126,23 +100,16 @@
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-07-30T02:40:00+02:00" pubdate data-updated="true">Jul 30<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/productivity/"><span class="badge">productivity</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve productivity with Goolge history using bookmarks and Chrome extensions</a></h1>
-      <p class=intro>
+<time datetime="2013-07-30T02:40:00+02:00" pubdate data-updated="true">Jul 30<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p class=intro>
 The idea of this post is very simple (as usually)  and I wonder why I didn&#8217;t thought
 about it earlier. The point is to use history of your Google queries to improve
 productivity. Most of things that we google can be replaced for example by browser
@@ -283,26 +250,23 @@ people resign after few tries. Most people also don&rsquo;t like changes as adag
 &ldquo;better the devil you know&rdquo;. However only those who try to change something in
 their lives can reach success. And as story of Thomas Edison proves you have to
 try.</p>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -314,27 +278,89 @@ try.</p>
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-06-07T10:40:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/embedded/"><span class="badge">embedded</span></a>
-          
-          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
-          
-          <a href="/blog/categories/vdb/"><span class="badge">vdb</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root file system for embedded system</a></h1>
-      <h2>Table of contents</h2>
+<time datetime="2013-06-14T23:22:00+02:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>What the OVMF is ?</h3>
+
+<p><strong>OVMF</strong> (<em>Open Virtual Machine Firmware</em>) is a firmware actively developed as a
+<strong>EDK2</strong>(<em>EFI Developer Kit</em>) package. It is a packed that aims to support
+firmware for virtual machines like Qemu.</p>
+
+<h3>Simplified build process</h3>
+
+<p>First of all lets get latest version of the code. For some time <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=Welcome">EFI and
+Framework Open Source
+Community</a> share edk2 code also on <a href="https://github.com/tianocore/edk2">github</a> mirror.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/tianocore/edk2.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Building process was simplified by OvmfPkg contributors. But I found that
+toolchain for latest gcc compilers is not ready in main repository. So I suggest
+to remove <code>BaseTools</code> directory and clone up to date git repository in this
+place:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd edk2
+</span><span class='line'>rm -rf BaseTools
+</span><span class='line'>git clone https://github.com/tianocore/buildtools-BaseTools.git BaseTools
+</span><span class='line'>. edksetup.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So to build firmware we need only one command:
+&#8220;`</p>
+
+<p><code>``
+You may need some additional packages like</code>uuid-dev<code>,</code>iasl<code>or</code>g++`.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T10:40:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/root-file-system-for-embedded-system/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Table of contents</h2>
 
 <ul>
 <li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#intro">Introduction</a></li>
@@ -994,26 +1020,23 @@ hope that I will back to this issues in near future. If you like this series
 please share it, if somethings wrong please comment I will try to help if can.</p>
 
 <p><a href="http://bec-systems.com/site/418/how-to-set-up-a-nfs-rootfs">How to set up a NFS root filesystem for embedded Linux development</a></p>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -1025,29 +1048,16 @@ please share it, if somethings wrong please comment I will try to help if can.</
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-06-07T10:36:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/embedded/"><span class="badge">embedded</span></a>
-          
-          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
-          
-          <a href="/blog/categories/qemu/"><span class="badge">qemu</span></a>
-          
-          <a href="/blog/categories/vdb/"><span class="badge">vdb</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu network configuration and tftp for Virtual Development Board</a></h1>
-      <h2>Table of contents</h2>
+<time datetime="2013-06-07T10:36:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Table of contents</h2>
 
 <ul>
 <li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#intro">Introduction</a></li>
@@ -1454,26 +1464,23 @@ be used as a console. Before <code>bootm</code> set:</p>
 
 <p>We happily built basic virtual development, what we need right now is some
 <a href="/blog/2013/06/07/root-file-system-for-embedded-system">initial filesystem</a>.</p>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -1485,27 +1492,16 @@ be used as a console. Before <code>bootm</code> set:</p>
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-06-07T10:33:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/embedded/"><span class="badge">embedded</span></a>
-          
-          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
-          
-          <a href="/blog/categories/vdb/"><span class="badge">vdb</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux kernel for embedded system</a></h1>
-      <h2>Table of contents</h2>
+<time datetime="2013-06-07T10:33:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Table of contents</h2>
 
 <ul>
 <li><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/#a-little-history">A little history</a></li>
@@ -1642,26 +1638,23 @@ manually modified. So using uImage is easiest</p>
 
 <p>[1] <a href="http://digital-domain.net/lug/unix-linux-history.html">UNIX/Linux History</a></br>
 [2] <a href="http://www.arm.linux.org.uk/docs/history.php">The History of ARM Linux</a></p>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/embedded-board-bootloader/">0x3: Embedded Board Bootloader</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -1673,29 +1666,16 @@ manually modified. So using uImage is easiest</p>
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-06-07T10:32:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/embedded/"><span class="badge">embedded</span></a>
-          
-          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
-          
-          <a href="/blog/categories/u-boot/"><span class="badge">u-boot</span></a>
-          
-          <a href="/blog/categories/vdb/"><span class="badge">vdb</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/06/07/embedded-board-bootloader/">0x3: Embedded board bootloader</a></h1>
-      <h2>Table of contents</h2>
+<time datetime="2013-06-07T10:32:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/embedded-board-bootloader/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Table of contents</h2>
 
 <ul>
 <li><a href="/blog/2013/06/07/embedded-board-bootloader/#what-is-bootloader">What is bootloader ?</a></li>
@@ -1812,26 +1792,23 @@ CPU. But this is only corporate babble :)</p>
 [3] <a href="http://forum.xda-developers.com/showthread.php?t=2201146">U-boot for the multi-boot support</a></br>
 [4] <a href="http://balau82.wordpress.com/2010/04/12/booting-linux-with-u-boot-on-qemu-arm/">Booting Linux with U-Boot on QEMU ARM</a></br>
 [5] <a href="http://wiki.osdev.org/Bootloader">Bootloader</a></br></p>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/">0x2: Toolchain for Virtual Development Board</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -1843,29 +1820,16 @@ CPU. But this is only corporate babble :)</p>
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-06-07T08:42:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/embedded/"><span class="badge">embedded</span></a>
-          
-          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
-          
-          <a href="/blog/categories/toolchain/"><span class="badge">toolchain</span></a>
-          
-          <a href="/blog/categories/vdb/"><span class="badge">vdb</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/">0x2: Toolchain for Virtual Development Board</a></h1>
-      <h2>Table of contents</h2>
+<time datetime="2013-06-07T08:42:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Table of contents</h2>
 
 <ul>
 <li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#intro">Introduction</a></li>
@@ -2050,26 +2014,23 @@ bootloader.</p>
 <h3>Kudos</h3>
 
 <p>[1] <a href="http://elinux.org/Toolchains">Toolchains</a></p>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/">0x1: Qemu as an Environment for Embedded Board Emulation</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -2081,29 +2042,16 @@ bootloader.</p>
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-06-07T08:27:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/embedded/"><span class="badge">embedded</span></a>
-          
-          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
-          
-          <a href="/blog/categories/qemu/"><span class="badge">qemu</span></a>
-          
-          <a href="/blog/categories/vdb/"><span class="badge">vdb</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/">0x1: Qemu as an environment for embedded board emulation</a></h1>
-      <h2>Table of contents</h2>
+<time datetime="2013-06-07T08:27:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Table of contents</h2>
 
 <ul>
 <li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#intro">Introduction</a></li>
@@ -2176,26 +2124,23 @@ of emulated machines by <code>-M ?</code>. Now, let&rsquo;s talk about <a href="
 <h3>Kudos</h3>
 
 <p>[1] <a href="http://infoscience.epfl.ch/record/149975/files/x86-llvm-translator-chipounov_2.pdf">Dynamically Translating x86 to LLVM using QEMU</a></p>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/">0x0: Intro to Virtual Development Board Building</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -2207,27 +2152,16 @@ of emulated machines by <code>-M ?</code>. Now, let&rsquo;s talk about <a href="
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-06-07T01:27:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/embedded/"><span class="badge">embedded</span></a>
-          
-          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
-          
-          <a href="/blog/categories/vdb/"><span class="badge">vdb</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/">0x0: Intro to Virtual Development Board building</a></h1>
-      <ul>
+<time datetime="2013-06-07T01:27:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
 <li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#preface">Preface</a></li>
 <li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#first-question">First question: How to start ?</a></li>
 <li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#virtual-development-board">Virtual Development Board &ndash; table of contents</a></li>
@@ -2299,26 +2233,23 @@ knowledge. Every time when I use knowledge that found by googling I&rsquo;m tryi
 to stick link for further reading.</p>
 
 <h4><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation"><em>Enjoy!</em></a></h4>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/16/octopress-depoying-problem-after-migrating-to-star-dot-github-dot-io/">Octopress Depoying Problem After Migrating to *.github.io</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -2330,21 +2261,16 @@ to stick link for further reading.</p>
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-05-16T22:20:00+02:00" pubdate data-updated="true">May 16<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/05/16/octopress-depoying-problem-after-migrating-to-star-dot-github-dot-io/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/05/16/octopress-depoying-problem-after-migrating-to-star-dot-github-dot-io/">Octopress depoying problem after migrating to *.github.io</a></h1>
-      <p>My story was that I migrate to new environment and want to recover my octopress
+<time datetime="2013-05-16T22:20:00+02:00" pubdate data-updated="true">May 16<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/16/octopress-depoying-problem-after-migrating-to-star-dot-github-dot-io/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>My story was that I migrate to new environment and want to recover my octopress
 setup. I thought that it will be as simple as cloning my blog github repository
 and start to work.</p>
 
@@ -2373,348 +2299,103 @@ few weeks ago github decide to migrate domain from <code>*.github.com</code> to
 this is incorrect. If you have github repository for your pages with <code>com</code> in
 name you should use your orginal repository address. Repository was not changed.
 This is obvious but I lost few minutes to figure out whats going on.</p>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
-  
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
-
-
-
-
-
-
-  
-
-
-<i class="icon-calendar-empty"></i> <time datetime="2013-05-16T22:16:00+02:00" pubdate data-updated="true">May 16<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/05/16/workflow-imporovement-with-open-source-tools/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
-          
-          <a href="/blog/categories/mutt/"><span class="badge">mutt</span></a>
-          
-          <a href="/blog/categories/productivity/"><span class="badge">productivity</span></a>
-          
-          <a href="/blog/categories/taskwarrior/"><span class="badge">taskwarrior</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/05/16/workflow-imporovement-with-open-source-tools/">Workflow imporovement with Open Source tools - part 1</a></h1>
-      <h3>Introduction</h3>
-
-<p>I want to start a series of articles to describe how I improve my workflow with
-geeky Open Source applications. I will concentrate on terminal applications that
-I try to use in my GTD process.</p>
-
-<h3>Terminal</h3>
-
-<h4>Solarized gnome-terminal</h4>
-
-<p>If you already don&rsquo;t know what solarized color scheme is then please take a look
-at <a href="http://ethanschoonover.com/solarized">this page</a>. To install solarized
-colorscheme in gnome-terminal simply follow instruction from this <a href="https://github.com/sigurdga/gnome-terminal-colors-solarized">git repository</a>.</p>
-
-<h3>Mutt again</h3>
-
-<p>During last days I spent a lot of time to tweak my mutt configuration. Here I
-will give you few hints about things that I learned.</p>
-
-<h4>Solarized mutt</h4>
-
-<p>To enable solarized colorscheme in mutt simply download one of scheme files from <a href="https://github.com/altercation/mutt-colors-solarized">github</a>. If you installed
-dark scheme for your gnome-terminal then I suggest <code>mutt-colors-solarized-dark-16.muttrc</code>.
-Copy this file for example to <code>$HOME/.mutt</code> and source it in muttrc file:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>source $HOME/.mutt/mutt-colors-solarized-dark-16.muttrc</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Width of From column</h4>
-
-<p>Usually from field in today&rsquo;s emails is longer than 19 characters. If this
-happens mutt by default will not display whole string. To change this behavior
-you can manipulate <code>index_format</code> variable. I set mine to 30:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>set index_format="%4C %Z %{%b %d} %-30.30L (%4l) %s"</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Sidebar</h4>
-
-<p>Finally I gave up sidebar for using latest code without annoying <code>tls_socket_read</code> error.
-Switching between IMAP folders is not so bad, you can quickly display all
-folders by <code>c&lt;Tab&gt;&lt;Tab&gt;</code> or simply <code>y</code></p>
-
-<h4>Offlineimap</h4>
-
-<p>This is probably best program to synchronize your emails with local storage. It
-also has feature that allow synchronization between different IMAP servers but
-I&rsquo;m not using it. Few things are crucial when using <code>offlineimap</code>:</p>
-
-<ul>
-<li>probably easiest way to keep passwords secret is using python hooks for gnome-keyring,
-detailed description how to integrate it with <code>offlineimap</code> is
-<a href="http://www.clasohm.com/blog/one-entry?entry_id=90957">here</a>. Debian name of
-<code>gnome-python2-gnomekeyring</code> is different: <code>python-gnomekeyring</code>.</li>
-<li>Use meaningful <code>localfolders</code> because you will use it in <code>mutt</code> configuration</li>
-</ul>
-
-
-<p>Typical configuration of <code>$HOME/.offlineimaprc</code>:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[mbnames]
-</span><span class='line'>enabled = yes
-</span><span class='line'>filename = ~/.mutt/muttrc.mailboxes
-</span><span class='line'>header = "mailboxes "
-</span><span class='line'>peritem = "+%(accountname)s/%(foldername)s"
-</span><span class='line'>sep = " "
-</span><span class='line'>footer = "\n"
-</span><span class='line'>
-</span><span class='line'>[general]
-</span><span class='line'>metadata = ~/.offlineimap
-</span><span class='line'>maxsyncaccounts = 5
-</span><span class='line'>maxconnections = 2
-</span><span class='line'>accounts = account1, account2
-</span><span class='line'>status_backend = sqlite
-</span><span class='line'>pythonfile = ~/.mutt/offlineimap.py
-</span><span class='line'>
-</span><span class='line'>[Account account1]
-</span><span class='line'>autorefresh = 3
-</span><span class='line'>localrepository = acc1_local
-</span><span class='line'>remoterepository = acc1_remote
-</span><span class='line'>
-</span><span class='line'>[Repository acc1_local]
-</span><span class='line'>type = Maildir
-</span><span class='line'>localfolders = ~/.mail/account1
-</span><span class='line'>
-</span><span class='line'>[Repository acc2_remote]
-</span><span class='line'>type = Gmail
-</span><span class='line'>remoteusereval = get_username("account1")
-</span><span class='line'>remotepasseval = get_password("account1")
-</span><span class='line'>sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-</span><span class='line'>
-</span><span class='line'>[Account account2]
-</span><span class='line'>autorefresh = 3
-</span><span class='line'>localrepository = acc2_local
-</span><span class='line'>remoterepository = acc2_remote
-</span><span class='line'>
-</span><span class='line'>[Repository acc2_local]
-</span><span class='line'>type = Maildir
-</span><span class='line'>localfolders = ~/.mail/account2
-</span><span class='line'>
-</span><span class='line'>[Repository acc2_remote]
-</span><span class='line'>type = Gmail
-</span><span class='line'>remoteusereval = get_username("account2")
-</span><span class='line'>remotepasseval = get_password("account2")
-</span><span class='line'>sslcacertfile = /etc/ssl/certs/ca-certificates.crt</span></code></pre></td></tr></table></div></figure>
-
-
-<p>What this means by section:</p>
-
-<ul>
-<li><code>[mbnames]</code> &ndash; automatically create mailboxes folders according to your
-configuration on IMAP server</li>
-<li><code>[general]</code> &ndash; most important things here are self explanatory accounts
-variable and <code>max{syncaccounts,connections}</code>, first said how many accounts
-should be synchronized and second how many simultaneous connections should be
-used</li>
-<li><code>[Account *]</code> &ndash; contain sync refresh time in minutes (<code>autorefresh</code>) and link
-to local and remote repository definitions (<code>localrepository</code> and
-<code>remoterepository</code>)</li>
-<li><code>[Repository *]</code> &ndash; for local folder and its type and for remote gnome-keyring
-configuration</li>
-</ul>
-
-
-<h4>Multiple account configuration</h4>
-
-<p>To simplify multiple accounts configuration I added two things:</p>
-
-<ul>
-<li>separated account files configuration &ndash; in my case placed in <code>$HOME/.mutt/accounts</code></li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>set postponed   = +account1@server.com/Drafts
-</span><span class='line'>set spoolfile   = +account1@server.com/INBOX
-</span><span class='line'>set record      = +account1@server.com/Sent
-</span><span class='line'>set from        = 'account1@server.com'
-</span><span class='line'>set realname    = 'My Name'
-</span><span class='line'>set smtp_url    = smtps://acc1@smtp.server.com:587
-</span><span class='line'>set smtp_pass   = $my_pass
-</span><span class='line'>set signature   = "~/.mutt/signature.example"</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>folder hooks for particular account &ndash; it cause automatic loading of
-configurations when folder was changed (in <code>$HOME/muttrc</code>):</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>folder-hook 'account1@server.com' 'source $HOME/.mutt/accounts/account1'</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Separate mailing list file</h4>
-
-<p>I keep my mailing list configuration file separated and source it in my
-<code>$HOME/.muttrc</code>. I&rsquo;m not mailing list advanced user, so right now I have manually
-created IMAP folders and Gmail filters to move mails from mailing list to this
-folders. On the mutt side I use <code>subscribe</code> command to indicate that particular
-mail id is a mailing list.</p>
-
-<h3>Personal informations</h3>
-
-<p>Some informations in my configuration files shouldn&rsquo;t be available for all. I
-mean my email account configuration, my todo list, passwords and things like
-that. To store this informations I use additional private git repository and use
-it as a submodule for my workspace configuration. I wrote post about keeping
-configuration using git
-<a href="/blog/2012/02/19/improve-productivity-by-tracking-work">here</a> and
-<a href="/blog/2012/02/20/improve-productivity-by-tracking-work_20">here</a>.</p>
-
-<h3>Taskwarrior and vit</h3>
-
-<p>I really like <code>taskwarrior</code> as a GTD tool but I was tired of writing everything
-every time I wanted to change sth. I found <code>vit</code>. Vit is a vi-like interface
-to task list generated by <code>taskwarrior</code> it works really great. Mostly it is
-written in perl and there is no official repository for its code base but latest
-version is from April 2013. I use lot of <code>project:</code> and <code>+flag</code> to update my
-TODO list. I prefer <code>long</code> filter.</p>
-
-<h4>My taskwarrior projects and flags</h4>
-
-<p>I have few ongoing projects like <code>blog</code>, <code>productivity</code> and <code>ideas</code>. In addition I use
-few flags like <code>ideas</code>, <code>finish</code>, <code>enhancement</code>, <code>fix</code> or <code>bug</code>. So when I
-connect project and flag I get few categories like:</p>
-
-<ul>
-<li><code>blog ideas</code> for new articles ideas</li>
-<li><code>blog finish</code> for articles that should be finished ASAP</li>
-<li><code>blog bug/fix</code> for articles that have to be changed for some reason</li>
-<li><code>productivity bug/fix</code> for productivity tools configuration improvements</li>
-<li><code>productivity ideas</code> for new improvements</li>
-</ul>
-
-
-<h3>Summary</h3>
-
-<p>I think this is enough for first post from this series. Hope it was helpful. If
-yes then please share, if no then comment what I should improve. Thanks for
-reading.</p>
-
-      
-      
-    </div>
-  </div>
-
-
-
-    </article>
-    
   
   <div class="pagination">
     
-    <a class="prev" href="/blog/page/2/">&larr; Older</a>
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
-
+    <a href="/blog/archives">Blog Archives</a>
     
   </div>
 </div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve productivity with Goolge history using bookmarks and Chrome extensions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and run OVMF under Qemu</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root file system for embedded system</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu network configuration and tftp for Virtual Development Board</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux kernel for embedded system</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/pietrushnic">@pietrushnic</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'pietrushnic',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
 
 
-        </div>
-      </div>
-      <div class="row-fluid">
-        <footer class="footer-page" role="contentinfo">
-          <p>
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/115979497998056410813?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
   Copyright &copy; 2014 -  -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
 </p>
 
-
-        </footer>
-      </div>
-  </div>
+</footer>
   
 
 <script type="text/javascript">
@@ -2729,6 +2410,9 @@ reading.</p>
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
+
+
+
 
 
 

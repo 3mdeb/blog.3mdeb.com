@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Linux geek scratchpad</title>
+  <title>Linux geek's scratchpad</title>
   <meta name="author" content="">
 
-   
-  <meta name="description" content="">
   
-  <meta name="keywords" content="">
+  <meta name="description" content="Introduction I want to start a series of articles to describe how I improve my workflow with
+geeky Open Source applications. I will concentrate on &hellip;">
+  
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -21,19 +21,16 @@
   
   <link rel="canonical" href="http://pietrushnic.github.io/blog/page/2">
   <link href="/favicon.png" rel="icon">
-  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Linux geek scratchpad" type="application/atom+xml">
-  <script src="/js/jquery.js"></script>
-  <script src="/js/bootstrap-collapse.js"></script>
-  <script src="/js/modernizr-2.0.js"></script>
-  <script src="/js/octopress.js" type="text/javascript"></script>
-  <script src="/js/application.js"></script>
+  <link href="/atom.xml" rel="alternate" title="Linux geek's scratchpad" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -42,7 +39,7 @@
 
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
@@ -50,71 +47,48 @@
 
 </head>
 
-<body   >
-  <div class="navbar navbar-inverse navbar-static-top">
-  	<div class="navbar-inner">
-  	  <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="fui-menu-24"></span>
-        </a>
-  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
-  	      <ul class="nav">
-    
-        <li ><a href="/index.html">Home</a></li>
-    
-        <li ><a href="/blog/archives/index.html">Archives</a></li>
-    
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Linux geek's scratchpad</a></h1>
+  
+    <h2>or embedded dreams about productivity, freedom and liberty</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
-<ul class="nav pull-right">
-    
-    <li><a href="http://github.com/pietrushnic" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
-    
-    
-    
-    
-    <li><a href="http://twitter.com/pietrushnic" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
-    
-    
-    <li><a href="http://plus.google.com/115979497998056410813" title="Google+ Profile"><i class="icon-google-plus-sign social-navbar"></i></a></li>
-    
-    
-    
-
-    
-</ul>
-
-  	    </div>
-  	  </div>
-  	</div>
-  </div>
-  <div class="container" id="main">
-      <div class="row-fluid">
-        <div id="content">
-          <div class="jumbotron">
-  <div class="container">
-    
-      Linux geek scratchpad
-    
-    <h3 class="tagline">
-      
-        or embedded dreams about productivity, freedom and liberty
-      
-    </h3>
-  </div>
-</div>
-
-
-<div class="blog-index">
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
   
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/16/workflow-imporovement-with-open-source-tools/">Workflow Imporovement With Open Source Tools - Part 1</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -126,25 +100,308 @@
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-05-15T18:40:00+02:00" pubdate data-updated="true">May 15<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/05/15/thunderbird-to-mutt-migration/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/mutt/"><span class="badge">mutt</span></a>
-          
-          <a href="/blog/categories/productivty/"><span class="badge">productivty</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/05/15/thunderbird-to-mutt-migration/">Thunderbird to Mutt migration - tips & tricks</a></h1>
-      <h3>Preface</h3>
+<time datetime="2013-05-16T22:16:00+02:00" pubdate data-updated="true">May 16<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/16/workflow-imporovement-with-open-source-tools/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>Introduction</h3>
+
+<p>I want to start a series of articles to describe how I improve my workflow with
+geeky Open Source applications. I will concentrate on terminal applications that
+I try to use in my GTD process.</p>
+
+<h3>Terminal</h3>
+
+<h4>Solarized gnome-terminal</h4>
+
+<p>If you already don&rsquo;t know what solarized color scheme is then please take a look
+at <a href="http://ethanschoonover.com/solarized">this page</a>. To install solarized
+colorscheme in gnome-terminal simply follow instruction from this <a href="https://github.com/sigurdga/gnome-terminal-colors-solarized">git repository</a>.</p>
+
+<h3>Mutt again</h3>
+
+<p>During last days I spent a lot of time to tweak my mutt configuration. Here I
+will give you few hints about things that I learned.</p>
+
+<h4>Solarized mutt</h4>
+
+<p>To enable solarized colorscheme in mutt simply download one of scheme files from <a href="https://github.com/altercation/mutt-colors-solarized">github</a>. If you installed
+dark scheme for your gnome-terminal then I suggest <code>mutt-colors-solarized-dark-16.muttrc</code>.
+Copy this file for example to <code>$HOME/.mutt</code> and source it in muttrc file:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>source $HOME/.mutt/mutt-colors-solarized-dark-16.muttrc</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Width of From column</h4>
+
+<p>Usually from field in today&rsquo;s emails is longer than 19 characters. If this
+happens mutt by default will not display whole string. To change this behavior
+you can manipulate <code>index_format</code> variable. I set mine to 30:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set index_format="%4C %Z %{%b %d} %-30.30L (%4l) %s"</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Sidebar</h4>
+
+<p>Finally I gave up sidebar for using latest code without annoying <code>tls_socket_read</code> error.
+Switching between IMAP folders is not so bad, you can quickly display all
+folders by <code>c&lt;Tab&gt;&lt;Tab&gt;</code> or simply <code>y</code></p>
+
+<h4>Offlineimap</h4>
+
+<p>This is probably best program to synchronize your emails with local storage. It
+also has feature that allow synchronization between different IMAP servers but
+I&rsquo;m not using it. Few things are crucial when using <code>offlineimap</code>:</p>
+
+<ul>
+<li>probably easiest way to keep passwords secret is using python hooks for gnome-keyring,
+detailed description how to integrate it with <code>offlineimap</code> is
+<a href="http://www.clasohm.com/blog/one-entry?entry_id=90957">here</a>. Debian name of
+<code>gnome-python2-gnomekeyring</code> is different: <code>python-gnomekeyring</code>.</li>
+<li>Use meaningful <code>localfolders</code> because you will use it in <code>mutt</code> configuration</li>
+</ul>
+
+
+<p>Typical configuration of <code>$HOME/.offlineimaprc</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[mbnames]
+</span><span class='line'>enabled = yes
+</span><span class='line'>filename = ~/.mutt/muttrc.mailboxes
+</span><span class='line'>header = "mailboxes "
+</span><span class='line'>peritem = "+%(accountname)s/%(foldername)s"
+</span><span class='line'>sep = " "
+</span><span class='line'>footer = "\n"
+</span><span class='line'>
+</span><span class='line'>[general]
+</span><span class='line'>metadata = ~/.offlineimap
+</span><span class='line'>maxsyncaccounts = 5
+</span><span class='line'>maxconnections = 2
+</span><span class='line'>accounts = account1, account2
+</span><span class='line'>status_backend = sqlite
+</span><span class='line'>pythonfile = ~/.mutt/offlineimap.py
+</span><span class='line'>
+</span><span class='line'>[Account account1]
+</span><span class='line'>autorefresh = 3
+</span><span class='line'>localrepository = acc1_local
+</span><span class='line'>remoterepository = acc1_remote
+</span><span class='line'>
+</span><span class='line'>[Repository acc1_local]
+</span><span class='line'>type = Maildir
+</span><span class='line'>localfolders = ~/.mail/account1
+</span><span class='line'>
+</span><span class='line'>[Repository acc2_remote]
+</span><span class='line'>type = Gmail
+</span><span class='line'>remoteusereval = get_username("account1")
+</span><span class='line'>remotepasseval = get_password("account1")
+</span><span class='line'>sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+</span><span class='line'>
+</span><span class='line'>[Account account2]
+</span><span class='line'>autorefresh = 3
+</span><span class='line'>localrepository = acc2_local
+</span><span class='line'>remoterepository = acc2_remote
+</span><span class='line'>
+</span><span class='line'>[Repository acc2_local]
+</span><span class='line'>type = Maildir
+</span><span class='line'>localfolders = ~/.mail/account2
+</span><span class='line'>
+</span><span class='line'>[Repository acc2_remote]
+</span><span class='line'>type = Gmail
+</span><span class='line'>remoteusereval = get_username("account2")
+</span><span class='line'>remotepasseval = get_password("account2")
+</span><span class='line'>sslcacertfile = /etc/ssl/certs/ca-certificates.crt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What this means by section:</p>
+
+<ul>
+<li><code>[mbnames]</code> &ndash; automatically create mailboxes folders according to your
+configuration on IMAP server</li>
+<li><code>[general]</code> &ndash; most important things here are self explanatory accounts
+variable and <code>max{syncaccounts,connections}</code>, first said how many accounts
+should be synchronized and second how many simultaneous connections should be
+used</li>
+<li><code>[Account *]</code> &ndash; contain sync refresh time in minutes (<code>autorefresh</code>) and link
+to local and remote repository definitions (<code>localrepository</code> and
+<code>remoterepository</code>)</li>
+<li><code>[Repository *]</code> &ndash; for local folder and its type and for remote gnome-keyring
+configuration</li>
+</ul>
+
+
+<h4>Multiple account configuration</h4>
+
+<p>To simplify multiple accounts configuration I added two things:</p>
+
+<ul>
+<li>separated account files configuration &ndash; in my case placed in <code>$HOME/.mutt/accounts</code></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set postponed   = +account1@server.com/Drafts
+</span><span class='line'>set spoolfile   = +account1@server.com/INBOX
+</span><span class='line'>set record      = +account1@server.com/Sent
+</span><span class='line'>set from        = 'account1@server.com'
+</span><span class='line'>set realname    = 'My Name'
+</span><span class='line'>set smtp_url    = smtps://acc1@smtp.server.com:587
+</span><span class='line'>set smtp_pass   = $my_pass
+</span><span class='line'>set signature   = "~/.mutt/signature.example"</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>folder hooks for particular account &ndash; it cause automatic loading of
+configurations when folder was changed (in <code>$HOME/muttrc</code>):</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>folder-hook 'account1@server.com' 'source $HOME/.mutt/accounts/account1'</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Separate mailing list file</h4>
+
+<p>I keep my mailing list configuration file separated and source it in my
+<code>$HOME/.muttrc</code>. I&rsquo;m not mailing list advanced user, so right now I have manually
+created IMAP folders and Gmail filters to move mails from mailing list to this
+folders. On the mutt side I use <code>subscribe</code> command to indicate that particular
+mail id is a mailing list.</p>
+
+<h3>Personal informations</h3>
+
+<p>Some informations in my configuration files shouldn&rsquo;t be available for all. I
+mean my email account configuration, my todo list, passwords and things like
+that. To store this informations I use additional private git repository and use
+it as a submodule for my workspace configuration. I wrote post about keeping
+configuration using git
+<a href="/blog/2012/02/19/improve-productivity-by-tracking-work">here</a> and
+<a href="/blog/2012/02/20/improve-productivity-by-tracking-work_20">here</a>.</p>
+
+<h3>Taskwarrior and vit</h3>
+
+<p>I really like <code>taskwarrior</code> as a GTD tool but I was tired of writing everything
+every time I wanted to change sth. I found <code>vit</code>. Vit is a vi-like interface
+to task list generated by <code>taskwarrior</code> it works really great. Mostly it is
+written in perl and there is no official repository for its code base but latest
+version is from April 2013. I use lot of <code>project:</code> and <code>+flag</code> to update my
+TODO list. I prefer <code>long</code> filter.</p>
+
+<h4>My taskwarrior projects and flags</h4>
+
+<p>I have few ongoing projects like <code>blog</code>, <code>productivity</code> and <code>ideas</code>. In addition I use
+few flags like <code>ideas</code>, <code>finish</code>, <code>enhancement</code>, <code>fix</code> or <code>bug</code>. So when I
+connect project and flag I get few categories like:</p>
+
+<ul>
+<li><code>blog ideas</code> for new articles ideas</li>
+<li><code>blog finish</code> for articles that should be finished ASAP</li>
+<li><code>blog bug/fix</code> for articles that have to be changed for some reason</li>
+<li><code>productivity bug/fix</code> for productivity tools configuration improvements</li>
+<li><code>productivity ideas</code> for new improvements</li>
+</ul>
+
+
+<h3>Summary</h3>
+
+<p>I think this is enough for first post from this series. Hope it was helpful. If
+yes then please share, if no then comment what I should improve. Thanks for
+reading.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/15/thunderbird-to-mutt-migration/">Thunderbird to Mutt Migration - Tips & Tricks</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-15T18:40:00+02:00" pubdate data-updated="true">May 15<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/15/thunderbird-to-mutt-migration/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>Preface</h3>
 
 <p>I migrate with my working environment to laptop. My workstation going older and
 I don&rsquo;t have time to maintain few systems to keep it clean and in sync. I
@@ -253,26 +510,23 @@ you need to install <code>libkrb5-dev</code>:</p>
 <p>That&rsquo;s all in this post but I&rsquo;m sure that there will be next in this topic. I
 hope to improve my whole workflow and write few posts about improving
 productivity using open source tools.</p>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/12/kernel-developers-tools/">Kernel Developers Tools - Based on &#8216;30 Linux Kernel Developers in 30 Weeks&#8217;</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -284,27 +538,77 @@ productivity using open source tools.</p>
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-04-06T05:29:00+02:00" pubdate data-updated="true">Apr 6<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/04/06/tmux/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
-          
-          <a href="/blog/categories/productivity/"><span class="badge">productivity</span></a>
-          
-          <a href="/blog/categories/tmux/"><span class="badge">tmux</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/04/06/tmux/">Tmux as screen replacement and productivity accelerator</a></h1>
-      <p>As I wrote in <a href="/blog/2013/03/19/debian-switching-to-unstable">previous post</a> I
+<time datetime="2013-05-12T02:41:00+02:00" pubdate data-updated="true">May 12<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/12/kernel-developers-tools/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>git, cscope, vi, bash, awk, and the rare bout with python.
+Ubuntu with Unity2D
+terminal, make, gcc, make me happy. Quilt for patch management, Git or
+Subversion for source code management. I&rsquo;m using Nedit
+SLED for work and openSUSE
+email client (mutt), and my editor (vim),
+git and quilt for kernel development, Chrome and Firefox for web browsing, and
+irssi for irc communication
+NOME 3 on my desktop, but sometimes get frustrated with it and revert back to
+OpenBox or i3m
+Xfce
+fbcon, vim, and mutt
+fvwm2
+bash shell, joe editor, gcc, make, git
+ Fedora
+ Xfce
+ git, sparse, smatch and spatch
+ joe
+  xterm, emacs, perl, mc and git.
+  i3
+  Emacs, ocaml, xfce
+  Emacs, Evolution, GNOME 3, Iceweasel (aka Firefox)
+  git, gcc, gmake, bash, perl
+  Thunderbird</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/06/tmux/">Tmux as Screen Replacement and Productivity Accelerator</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-06T05:29:00+02:00" pubdate data-updated="true">Apr 6<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/06/tmux/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As I wrote in <a href="/blog/2013/03/19/debian-switching-to-unstable">previous post</a> I
 switched from GNU screen to <a href="http://tmux.sourceforge.net">tmux</a>. I use it for a
 few moths and have to said that I&rsquo;m really impressed by simplicity, performance
 and community support in this project. In this post I want to discuss my
@@ -548,26 +852,23 @@ sequences. Use <code>cat</code> it will interpret escape sequences in terminal.<
 valuable. Comment if you think id needs improvements. Thank you for reading.</p>
 
 <p>P.S. I should probably create a footer with last paragraph :)</p>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi/">Yet Another Quick Build of Arm-unknown-linux-gnueabi</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -579,25 +880,16 @@ valuable. Comment if you think id needs improvements. Thank you for reading.</p>
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-04-03T19:00:00+02:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/embedded/"><span class="badge">embedded</span></a>
-          
-          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi/">Yet another quick build of arm-unknown-linux-gnueabi</a></h1>
-      <p>So I decide to check what is going on with
+<time datetime="2013-04-03T19:00:00+02:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So I decide to check what is going on with
 <a href="http://crosstool-ng.org">crosstool-ng</a> and refresh my <a href="/blog/2012/03/14/quick-build-of-arm-unknown-linux">old post</a>
 about building <code>arm-unknown-linux-gnueabi</code> toolchain. Last post was pretty
 popular, so definitely this is direction I should follow :). I will not repeat
@@ -748,26 +1040,23 @@ embedded development environment based on <a href="http://wiki.qemu.org/Main_Pag
 I was inspired by <a href="http://www.elinux.org/Virtual_Development_Board">this article</a>.
 Hope this article was useful. If you have any comments or difficulties please
 comment below. If think this post was useful &ndash; share.</p>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/30/useful-hints-for-blogging-using-octopress-with-vim/">Useful Hints for Blogging Using Octopress With Vim</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -779,23 +1068,64 @@ comment below. If think this post was useful &ndash; share.</p>
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-03-30T03:27:00+01:00" pubdate data-updated="true">Mar 30<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/03/30/music-for-programming/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/productivity/"><span class="badge">productivity</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/03/30/music-for-programming/">Music for programming</a></h1>
-      <p>Of course this is strongly associated with personal taste but I will write my
+<time datetime="2013-03-30T05:49:00+01:00" pubdate data-updated="true">Mar 30<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/30/useful-hints-for-blogging-using-octopress-with-vim/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>1. Dictionary</h3>
+
+<p>Use dictionary. I wrote about how to start it automatically for <code>markdown</code> files
+<a href="/blog/2013/03/19/another-blogger-switched-to-octopress">here</a>.</p>
+
+<ul>
+<li><code>z=</code> &ndash; probably most useful function for me right now, as you probably noticed
+I&rsquo;m not great in English, so if you see some glaring errors &ndash; let me know I
+will fix it</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/30/music-for-programming/">Music for Programming</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-30T03:27:00+01:00" pubdate data-updated="true">Mar 30<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/30/music-for-programming/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Of course this is strongly associated with personal taste but I will write my
 experience.</p>
 
 <ol>
@@ -838,26 +1168,23 @@ psybient, but it is really hard to find good psychodelic ambient radio and this
 music is for me more like movie soundtracks I cannot listen it at night.
 Hope it will give some kind of direction. Let me know what you listen when coding.
 Maybe I will discover new universe.</p>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/19/debian-switching-to-unstable/">Tmux Multiplexer and Vi-like Keys in Copy-mode</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -869,25 +1196,16 @@ Maybe I will discover new universe.</p>
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-03-19T16:30:00+01:00" pubdate data-updated="true">Mar 19<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/03/19/debian-switching-to-unstable/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
-          
-          <a href="/blog/categories/tmux/"><span class="badge">tmux</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/03/19/debian-switching-to-unstable/">tmux multiplexer and vi-like keys in copy-mode</a></h1>
-      <p>So I tried to write second post for my new blog but to effectively work using
+<time datetime="2013-03-19T16:30:00+01:00" pubdate data-updated="true">Mar 19<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/19/debian-switching-to-unstable/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So I tried to write second post for my new blog but to effectively work using
 terminal I need terminal multiplexer. I switched to tmux from screen
 because I reach point that I can&rsquo;t do some things in it in easy way and
 performance was poor. Also activity of tmux developers is better than for gnu
@@ -912,26 +1230,23 @@ excerpts.</p>
 </span><span class='line'>setw -g mode-keys vi
 </span></code></pre></td></tr></table></div></figure>
 
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/19/another-blogger-switched-to-octopress/">Yet Another Blogger Switched to Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -943,23 +1258,16 @@ excerpts.</p>
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-03-19T03:01:00+01:00" pubdate data-updated="true">Mar 19<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/03/19/another-blogger-switched-to-octopress/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/about-this-blog/"><span class="badge">about this blog</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/03/19/another-blogger-switched-to-octopress/">Yet another blogger switched to Octopress</a></h1>
-      <h3>1. Introduction</h3>
+<time datetime="2013-03-19T03:01:00+01:00" pubdate data-updated="true">Mar 19<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/19/another-blogger-switched-to-octopress/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>1. Introduction</h3>
 
 <p>It&rsquo;s been over 3 months when I published my last post. In chaos of daily jobs I
 realize that there is so much things that I don&rsquo;t like in Google Blogger that I
@@ -1208,26 +1516,23 @@ fix this behavior:</li>
 
 
 <p>Hope this tips are useful for you.</p>
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
   
   
     <article>
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/15/short-hint-for-all-those-who-use-vim/">Short Hint for All Those Who Use Vim and Pathogen</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -1239,27 +1544,16 @@ fix this behavior:</li>
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-01-15T11:51:00+01:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2013/01/15/short-hint-for-all-those-who-use-vim/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/linux/"><span class="badge">linux</span></a>
-          
-          <a href="/blog/categories/productivity/"><span class="badge">productivity</span></a>
-          
-          <a href="/blog/categories/vim/"><span class="badge">vim</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2013/01/15/short-hint-for-all-those-who-use-vim/">Short hint for all those who use vim and pathogen</a></h1>
-      <p>Today, after updating my wokspace to latest version I encounter below error during vim running:</p>
+<time datetime="2013-01-15T11:51:00+01:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/01/15/short-hint-for-all-those-who-use-vim/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today, after updating my wokspace to latest version I encounter below error during vim running:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1295,439 +1589,105 @@ fix this behavior:</li>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>call pathogen#incubate<span class="o">()</span> in <span class="nv">$HOME</span>/.vimrc fix the problem.
 </span></code></pre></td></tr></table></div></figure>
 
-
-      
-      
-    </div>
-  </div>
-
+</div>
+  
+  
 
 
     </article>
-    
-    <hr>
-    
-  
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
-
-
-
-
-
-
-  
-
-
-<i class="icon-calendar-empty"></i> <time datetime="2012-11-18T21:16:00+01:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/rails/"><span class="badge">rails</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/">Sqlite3 gem not supported on Heroku</a></h1>
-      <p>When I tried to deploy second part of <a href="http://ruby.railstutorial.org/chapters/a-demo-app#top">RoR tutorial</a>
-to Heroku I get this error:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>An error occurred while installing sqlite3 (1.3.5), and Bundler cannot continue.  
-</span><span class='line'>Make sure that `gem install sqlite3 -v '1.3.5'` succeeds before bundling.
-</span><span class='line'>!
-</span><span class='line'>!  Failed to install gems via Bundler.
-</span><span class='line'>!
-</span><span class='line'>! Detected sqlite3 gem which is not supported on Heroku.
-</span><span class='line'>!  http://devcenter.heroku.com/articles/how-do-i-use-sqlite3-for-development
-</span><span class='line'>!
-</span><span class='line'>!  Heroku push rejected, failed to compile Ruby/rails app
-</span><span class='line'>To git@heroku.com:thawing-beyond-7283.git 
-</span><span class='line'>! [remote rejected] master -&gt; master (pre-receive hook declined)
-</span><span class='line'>error: failed to push some refs to 'git@heroku.com:thawing-beyond-7283.git'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I searched a little bit about this error and find <a href="http://stackoverflow.com/questions/3747002/heroku-rails-3-and-sqlite3">this</a>
-stackoverflow post. But when I look more carefully on the Gemfile syntax I
-found a mistake. I used simply:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.5&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>But I should have:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">group</span> <span class="ss">:development</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.5&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">group</span> <span class="ss">:production</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;pg&#39;</span><span class="p">,</span> <span class="s1">&#39;0.12.2&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As RoR tutorial states.</p>
-
-      
-      
-    </div>
-  </div>
-
-
-
-    </article>
-    
-    <hr>
-    
-  
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
-
-
-
-
-
-
-  
-
-
-<i class="icon-calendar-empty"></i> <time datetime="2012-11-18T18:18:00+01:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/rails/"><span class="badge">rails</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian/">Prepare for Ruby on Rails on Debian wheezy</a></h1>
-      <p>I start to learn Ruby on Rails. As always when you learn new programming
-language toolchain is required. In this tutorial I will try to go through
-toolchain preparation for my Debian wheezy. Of course I based on Vim as my
-editor of choice. Second requirement will be using some parts of toolchain in
-latest greatest version.</p>
-
-<p>As a beginner point for learning Ruby on Rails I choose <a href="http://ruby.railstutorial.org/ruby-on-rails-tutorial-book">this tutorial</a>.
-I will try to use their methods of setting environment adding my comments where
-it is needed. Also will resolve Debian and Vim specific issues. So let&rsquo;s begin.</p>
-
-<p>After quick look at RoR tutorial I have to switch to <a href="http://blog.sudobits.com/2012/05/02/how-to-install-ruby-on-rails-in-ubuntu-12-04-lts/">this site</a>
-for installation for Ubuntu 12.04 LTS. But instructions don&rsquo;t work as expected
-for my Debian. So after quick:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install git curl
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I realized that I need proxy for curl and not only temporary but permanent. I
-added below line to my <code>$HOME/.curlrc:</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">proxy</span><span class="o">=</span>proxy.server.com:8080
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>After that I was able to download and install stable version of rvm:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl -L get.rvm.io | bash -s stable
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next I sourced configuration:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">source</span> ~/.rvm/scripts/rvm
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Output which I get was:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>pietrushnic@lothlann:~/src/node<span class="nv">$ </span>rvm requirements
-</span><span class='line'>Requirements <span class="k">for </span>Linux <span class="s2">&quot;Debian GNU/Linux wheezy/sid&quot;</span>
-</span><span class='line'>NOTE: <span class="s1">&#39;ruby&#39;</span> represents Matz<span class="s1">&#39;s Ruby Interpreter (MRI) (1.8.X, 1.9.X)</span>
-</span><span class='line'><span class="s1">             This is the *original* / standard Ruby Language Interpreter</span>
-</span><span class='line'><span class="s1">      &#39;</span>ree<span class="s1">&#39;  represents Ruby Enterprise Edition</span>
-</span><span class='line'><span class="s1">      &#39;</span>rbx<span class="s1">&#39;  represents Rubinius</span>
-</span><span class='line'>
-</span><span class='line'><span class="s1">bash &gt;= 4.1 required</span>
-</span><span class='line'><span class="s1">curl is required</span>
-</span><span class='line'><span class="s1">git is required (&gt;= 1.7 for ruby-head)</span>
-</span><span class='line'><span class="s1">patch is required (for 1.8 rubies and some ruby-head&#39;</span>s<span class="o">)</span>.
-</span><span class='line'>
-</span><span class='line'>To install rbx and/or Ruby 1.9 head <span class="o">(</span>MRI<span class="o">)</span> <span class="o">(</span>eg. 1.9.2-head<span class="o">)</span>,
-</span><span class='line'><span class="k">then </span>you must install and use rvm 1.8.7 first.
-</span><span class='line'>
-</span><span class='line'>Additional Dependencies:
-</span><span class='line'><span class="c"># For Ruby / Ruby HEAD (MRI, Rubinius, &amp; REE), install the following:</span>
-</span><span class='line'>ruby: /usr/bin/apt-get install build-essential openssl libreadline6
-</span><span class='line'>libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev
-</span><span class='line'>libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev
-</span><span class='line'>automake libtool bison subversion pkg-config
-</span><span class='line'>
-</span><span class='line'><span class="c"># For JRuby, install the following: jruby: /usr/bin/apt-get install curl g++ </span>
-</span><span class='line'>openjdk-6-jre-headless jruby-head: /usr/bin/apt-get install ant openjdk-6-jdk <span class="c"># </span>
-</span><span class='line'>For IronRuby, install the following: ironruby: /usr/bin/apt-get install curl
-</span><span class='line'>mono-2.0-devel
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I need Ruby so copy&amp;paste line for it and:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install build-essential openssl libreadline6 libreadline6-dev curl
-</span><span class='line'>git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3
-</span><span class='line'>libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison
-</span><span class='line'>subversion pkg-config
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next thing we need is Node.js because this code of JavaScript runtime is under
-active development (latest version is 0.8.14 and Debian provided for sid 0.6.19)
-we use its latest greatest version from git repository.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/joyent/node.git
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Following by:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>node;./configure;make;make <span class="nb">test</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In my configuration only one test failed test-tls-server-verify:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>Running <span class="s1">&#39;Allow both authed and unauthed connections with CA1&#39;</span>
-</span><span class='line'>  throw new assert.AssertionError<span class="o">({</span>
-</span><span class='line'>          ^
-</span><span class='line'>  AssertionError: agent1 rejected, but should NOT have been
-</span><span class='line'>     at ChildProcess.&lt;anonymous&gt;
-</span><span class='line'>      <span class="o">(</span>/home/pietrushnic/src/node/test/simple/test-tls-server-verify.js:217:14<span class="o">)</span>
-</span><span class='line'>          at ChildProcess.EventEmitter.emit <span class="o">(</span>events.js:96:17<span class="o">)</span>
-</span><span class='line'>      at Process.ChildProcess._handle.onexit
-</span><span class='line'>      <span class="o">(</span>child_process.js:698:12<span class="o">)</span>
-</span><span class='line'>      at process._makeCallback <span class="o">(</span>node.js:248:20<span class="o">)</span>
-</span><span class='line'>      &lt;/anonymous&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is known issue probably we have to wait for update of OpenSSL library in
-wheezy. Ignore this problem and install node.js:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Because of RoR tutorial requirements we install version 1.9.3:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm get head <span class="o">&amp;&amp;</span> rvm reload rvm install 1.9.3
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next thing will be adding vim-ruby for our favorite editor Vim. I organize my
-dotfiles using git. I also use pathogen to control Vim plugins (as described
-<a href="http://pietrushnic.blogspot.com/2012/02/improve-productivity-by-tracking-work_20.html">here</a>),
-so :</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>workspace
-</span><span class='line'>git submodule add https://github.com/tpope/vim-rails.git
-</span><span class='line'>dotfiles/vim/bundle/vim-rails
-</span><span class='line'>git submodule init <span class="o">&amp;&amp;</span> git submodule update
-</span><span class='line'>git commit -m <span class="s2">&quot;vim-rails submodule added&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Finally we have ready to use Ruby on Rails development environment based on Vim.
-I suggest to take a look at this
-<a href="https://www.youtube.com/watch?v=30P8DSNOZuU">movie</a> and after that dive into 
-<a href="http://ruby.railstutorial.org/">tutorial</a>.</p>
-
-      
-      
-    </div>
-  </div>
-
-
-
-    </article>
-    
-    <hr>
-    
-  
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
-
-
-
-
-
-
-  
-
-
-<i class="icon-calendar-empty"></i> <time datetime="2012-11-13T00:04:00+01:00" pubdate data-updated="true">Nov 13<span>th</span>, 2012</time></h5>
-          <div class="row-fluid">
-          
-          <a href="http://pietrushnic.github.io/blog/2012/11/13/new-background-and-not-so-big-coming/#disqus_thread">Comments </a> <span class="fui-bubble-16"></span>
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/about/"><span class="badge">about</span></a>
-          
-          <a href="/blog/categories/blog/"><span class="badge">blog</span></a>
-          
-          <a href="/blog/categories/this/"><span class="badge">this</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/blog/2012/11/13/new-background-and-not-so-big-coming/">New background and not so big &#8220;coming back&#8221;</a></h1>
-      <p>It&rsquo;s been a long time since I last wrote anything on the blog. Because I hear complains about the background causing my blog hard to read I decide to change it.</p>
-
-<p>I have little break in my side project and noticed that most read posts are related to some technical workarounds and solutions for different problems I decide to write a series about gcc errors and some solutions for it. I know it may sound like some complete spam and trash for blog, but when I searched for some explanation and solution of this errors sometimes it was hard to find them, sometimes it was hard to match with my code and finally sometimes I was unable to understand what is going on. I want to share what I learned and even if it wouldn&rsquo;t help anyone I want to have this in one place.</p>
-
-<p>Recently I returned to my long-neglected hobby &ndash; chess. I will also try to write something constructive in this topic. Last time I also think a lot about embedded stuff (trying to reverse my printer), android (writing little project helping my colleague) and many other things. So maybe I will write about this. To not be boring I will simply get my hands dirty.</p>
-
-      
-      
-    </div>
-  </div>
-
-
-
-    </article>
-    
   
   <div class="pagination">
     
-    <a class="prev" href="/blog/page/3/">&larr; Older</a>
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
     
-
+    <a href="/blog/archives">Blog Archives</a>
     
     <a class="next" href="/">Newer &rarr;</a>
     
   </div>
 </div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve productivity with Goolge history using bookmarks and Chrome extensions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and run OVMF under Qemu</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root file system for embedded system</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu network configuration and tftp for Virtual Development Board</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux kernel for embedded system</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/pietrushnic">@pietrushnic</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'pietrushnic',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
 
 
-        </div>
-      </div>
-      <div class="row-fluid">
-        <footer class="footer-page" role="contentinfo">
-          <p>
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/115979497998056410813?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
   Copyright &copy; 2014 -  -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
 </p>
 
-
-        </footer>
-      </div>
-  </div>
+</footer>
   
 
 <script type="text/javascript">
@@ -1742,6 +1702,9 @@ I suggest to take a look at this
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
+
+
+
 
 
 
