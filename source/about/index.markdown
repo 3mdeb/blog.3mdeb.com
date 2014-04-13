@@ -14,7 +14,7 @@ my name is Piotr Król I'm a firmware and embedded system developer
 currently working for Intel Technology Poland. I'm freedom and liberty
 enthusiast interested in Linux and low level hacking.
 
-More about me you can find on social coding and social media sites.
+More about me you can find on social media sites.
 
 [{% img social-icon /assets/icons/linkedin-logo-square2.png 64 64 linkedin %}](http://pl.linkedin.com/in/krolpiotr/)
 [{% img social-icon /assets/icons/facebook-logo-square.png 64 64 facebook %}](https://www.facebook.com/piotr.krol.756859)
