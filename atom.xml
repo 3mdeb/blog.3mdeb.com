@@ -4,7 +4,7 @@
   <title><![CDATA[Linux geek's scratchpad]]></title>
   <link href="http://pietrushnic.github.io/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-04-13T19:20:26+02:00</updated>
+  <updated>2014-04-13T19:24:18+02:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -159,6 +159,50 @@ people resign after few tries. Most people also don&rsquo;t like changes as adag
 &ldquo;better the devil you know&rdquo;. However only those who try to change something in
 their lives can reach success. And as story of Thomas Edison proves you have to
 try.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Build and run OVMF under Qemu]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/06/14/build-and-run-ovmf-under-qemu/"/>
+    <updated>2013-06-14T23:22:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/06/14/build-and-run-ovmf-under-qemu</id>
+    <content type="html"><![CDATA[<h3>What the OVMF is ?</h3>
+
+<p><strong>OVMF</strong> (<em>Open Virtual Machine Firmware</em>) is a firmware actively developed as a
+<strong>EDK2</strong>(<em>EFI Developer Kit</em>) package. It is a packed that aims to support
+firmware for virtual machines like Qemu.</p>
+
+<h3>Simplified build process</h3>
+
+<p>First of all lets get latest version of the code. For some time <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=Welcome">EFI and
+Framework Open Source
+Community</a> share edk2 code also on <a href="https://github.com/tianocore/edk2">github</a> mirror.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/tianocore/edk2.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Building process was simplified by OvmfPkg contributors. But I found that
+toolchain for latest gcc compilers is not ready in main repository. So I suggest
+to remove <code>BaseTools</code> directory and clone up to date git repository in this
+place:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd edk2
+</span><span class='line'>rm -rf BaseTools
+</span><span class='line'>git clone https://github.com/tianocore/buildtools-BaseTools.git BaseTools
+</span><span class='line'>. edksetup.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So to build firmware we need only one command:
+&#8220;`</p>
+
+<p><code>``
+You may need some additional packages like</code>uuid-dev<code>,</code>iasl<code>or</code>g++`.</p>
 ]]></content>
   </entry>
   
@@ -2287,6 +2331,38 @@ productivity using open source tools.</p>
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Kernel developers tools - based on '30 Linux Kernel Developers in 30 Weeks']]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/05/12/kernel-developers-tools/"/>
+    <updated>2013-05-12T02:41:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/05/12/kernel-developers-tools</id>
+    <content type="html"><![CDATA[<p>git, cscope, vi, bash, awk, and the rare bout with python.
+Ubuntu with Unity2D
+terminal, make, gcc, make me happy. Quilt for patch management, Git or
+Subversion for source code management. I&rsquo;m using Nedit
+SLED for work and openSUSE
+email client (mutt), and my editor (vim),
+git and quilt for kernel development, Chrome and Firefox for web browsing, and
+irssi for irc communication
+NOME 3 on my desktop, but sometimes get frustrated with it and revert back to
+OpenBox or i3m
+Xfce
+fbcon, vim, and mutt
+fvwm2
+bash shell, joe editor, gcc, make, git
+ Fedora
+ Xfce
+ git, sparse, smatch and spatch
+ joe
+  xterm, emacs, perl, mc and git.
+  i3
+  Emacs, ocaml, xfce
+  Emacs, Evolution, GNOME 3, Iceweasel (aka Firefox)
+  git, gcc, gmake, bash, perl
+  Thunderbird</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Tmux as screen replacement and productivity accelerator]]></title>
     <link href="http://pietrushnic.github.io/blog/2013/04/06/tmux/"/>
     <updated>2013-04-06T05:29:00+02:00</updated>
@@ -2698,6 +2774,25 @@ comment below. If think this post was useful &ndash; share.</p>
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Useful hints for blogging using Octopress with Vim]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/03/30/useful-hints-for-blogging-using-octopress-with-vim/"/>
+    <updated>2013-03-30T05:49:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/03/30/useful-hints-for-blogging-using-octopress-with-vim</id>
+    <content type="html"><![CDATA[<h3>1. Dictionary</h3>
+
+<p>Use dictionary. I wrote about how to start it automatically for <code>markdown</code> files
+<a href="http://pietrushnic.github.io/blog/2013/03/19/another-blogger-switched-to-octopress">here</a>.</p>
+
+<ul>
+<li><code>z=</code> &ndash; probably most useful function for me right now, as you probably noticed
+I&rsquo;m not great in English, so if you see some glaring errors &ndash; let me know I
+will fix it</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Music for programming]]></title>
     <link href="http://pietrushnic.github.io/blog/2013/03/30/music-for-programming/"/>
     <updated>2013-03-30T03:27:00+01:00</updated>
@@ -3079,282 +3174,6 @@ fix this behavior:</li>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>call pathogen#incubate<span class="o">()</span> in <span class="nv">$HOME</span>/.vimrc fix the problem.
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Sqlite3 gem not supported on Heroku]]></title>
-    <link href="http://pietrushnic.github.io/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/"/>
-    <updated>2012-11-18T21:16:00+01:00</updated>
-    <id>http://pietrushnic.github.io/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku</id>
-    <content type="html"><![CDATA[<p>When I tried to deploy second part of <a href="http://ruby.railstutorial.org/chapters/a-demo-app#top">RoR tutorial</a>
-to Heroku I get this error:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>An error occurred while installing sqlite3 (1.3.5), and Bundler cannot continue.  
-</span><span class='line'>Make sure that `gem install sqlite3 -v '1.3.5'` succeeds before bundling.
-</span><span class='line'>!
-</span><span class='line'>!  Failed to install gems via Bundler.
-</span><span class='line'>!
-</span><span class='line'>! Detected sqlite3 gem which is not supported on Heroku.
-</span><span class='line'>!  http://devcenter.heroku.com/articles/how-do-i-use-sqlite3-for-development
-</span><span class='line'>!
-</span><span class='line'>!  Heroku push rejected, failed to compile Ruby/rails app
-</span><span class='line'>To git@heroku.com:thawing-beyond-7283.git 
-</span><span class='line'>! [remote rejected] master -&gt; master (pre-receive hook declined)
-</span><span class='line'>error: failed to push some refs to 'git@heroku.com:thawing-beyond-7283.git'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I searched a little bit about this error and find <a href="http://stackoverflow.com/questions/3747002/heroku-rails-3-and-sqlite3">this</a>
-stackoverflow post. But when I look more carefully on the Gemfile syntax I
-found a mistake. I used simply:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.5&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>But I should have:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">group</span> <span class="ss">:development</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.5&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">group</span> <span class="ss">:production</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;pg&#39;</span><span class="p">,</span> <span class="s1">&#39;0.12.2&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As RoR tutorial states.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Prepare for Ruby on Rails on Debian wheezy]]></title>
-    <link href="http://pietrushnic.github.io/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian/"/>
-    <updated>2012-11-18T18:18:00+01:00</updated>
-    <id>http://pietrushnic.github.io/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian</id>
-    <content type="html"><![CDATA[<p>I start to learn Ruby on Rails. As always when you learn new programming
-language toolchain is required. In this tutorial I will try to go through
-toolchain preparation for my Debian wheezy. Of course I based on Vim as my
-editor of choice. Second requirement will be using some parts of toolchain in
-latest greatest version.</p>
-
-<p>As a beginner point for learning Ruby on Rails I choose <a href="http://ruby.railstutorial.org/ruby-on-rails-tutorial-book">this tutorial</a>.
-I will try to use their methods of setting environment adding my comments where
-it is needed. Also will resolve Debian and Vim specific issues. So let&rsquo;s begin.</p>
-
-<p>After quick look at RoR tutorial I have to switch to <a href="http://blog.sudobits.com/2012/05/02/how-to-install-ruby-on-rails-in-ubuntu-12-04-lts/">this site</a>
-for installation for Ubuntu 12.04 LTS. But instructions don&rsquo;t work as expected
-for my Debian. So after quick:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install git curl
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I realized that I need proxy for curl and not only temporary but permanent. I
-added below line to my <code>$HOME/.curlrc:</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">proxy</span><span class="o">=</span>proxy.server.com:8080
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>After that I was able to download and install stable version of rvm:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl -L get.rvm.io | bash -s stable
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next I sourced configuration:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">source</span> ~/.rvm/scripts/rvm
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Output which I get was:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>pietrushnic@lothlann:~/src/node<span class="nv">$ </span>rvm requirements
-</span><span class='line'>Requirements <span class="k">for </span>Linux <span class="s2">&quot;Debian GNU/Linux wheezy/sid&quot;</span>
-</span><span class='line'>NOTE: <span class="s1">&#39;ruby&#39;</span> represents Matz<span class="s1">&#39;s Ruby Interpreter (MRI) (1.8.X, 1.9.X)</span>
-</span><span class='line'><span class="s1">             This is the *original* / standard Ruby Language Interpreter</span>
-</span><span class='line'><span class="s1">      &#39;</span>ree<span class="s1">&#39;  represents Ruby Enterprise Edition</span>
-</span><span class='line'><span class="s1">      &#39;</span>rbx<span class="s1">&#39;  represents Rubinius</span>
-</span><span class='line'>
-</span><span class='line'><span class="s1">bash &gt;= 4.1 required</span>
-</span><span class='line'><span class="s1">curl is required</span>
-</span><span class='line'><span class="s1">git is required (&gt;= 1.7 for ruby-head)</span>
-</span><span class='line'><span class="s1">patch is required (for 1.8 rubies and some ruby-head&#39;</span>s<span class="o">)</span>.
-</span><span class='line'>
-</span><span class='line'>To install rbx and/or Ruby 1.9 head <span class="o">(</span>MRI<span class="o">)</span> <span class="o">(</span>eg. 1.9.2-head<span class="o">)</span>,
-</span><span class='line'><span class="k">then </span>you must install and use rvm 1.8.7 first.
-</span><span class='line'>
-</span><span class='line'>Additional Dependencies:
-</span><span class='line'><span class="c"># For Ruby / Ruby HEAD (MRI, Rubinius, &amp; REE), install the following:</span>
-</span><span class='line'>ruby: /usr/bin/apt-get install build-essential openssl libreadline6
-</span><span class='line'>libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev
-</span><span class='line'>libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev
-</span><span class='line'>automake libtool bison subversion pkg-config
-</span><span class='line'>
-</span><span class='line'><span class="c"># For JRuby, install the following: jruby: /usr/bin/apt-get install curl g++ </span>
-</span><span class='line'>openjdk-6-jre-headless jruby-head: /usr/bin/apt-get install ant openjdk-6-jdk <span class="c"># </span>
-</span><span class='line'>For IronRuby, install the following: ironruby: /usr/bin/apt-get install curl
-</span><span class='line'>mono-2.0-devel
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I need Ruby so copy&amp;paste line for it and:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install build-essential openssl libreadline6 libreadline6-dev curl
-</span><span class='line'>git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3
-</span><span class='line'>libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison
-</span><span class='line'>subversion pkg-config
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next thing we need is Node.js because this code of JavaScript runtime is under
-active development (latest version is 0.8.14 and Debian provided for sid 0.6.19)
-we use its latest greatest version from git repository.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/joyent/node.git
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Following by:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>node;./configure;make;make <span class="nb">test</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In my configuration only one test failed test-tls-server-verify:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>Running <span class="s1">&#39;Allow both authed and unauthed connections with CA1&#39;</span>
-</span><span class='line'>  throw new assert.AssertionError<span class="o">({</span>
-</span><span class='line'>          ^
-</span><span class='line'>  AssertionError: agent1 rejected, but should NOT have been
-</span><span class='line'>     at ChildProcess.&lt;anonymous&gt;
-</span><span class='line'>      <span class="o">(</span>/home/pietrushnic/src/node/test/simple/test-tls-server-verify.js:217:14<span class="o">)</span>
-</span><span class='line'>          at ChildProcess.EventEmitter.emit <span class="o">(</span>events.js:96:17<span class="o">)</span>
-</span><span class='line'>      at Process.ChildProcess._handle.onexit
-</span><span class='line'>      <span class="o">(</span>child_process.js:698:12<span class="o">)</span>
-</span><span class='line'>      at process._makeCallback <span class="o">(</span>node.js:248:20<span class="o">)</span>
-</span><span class='line'>      &lt;/anonymous&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is known issue probably we have to wait for update of OpenSSL library in
-wheezy. Ignore this problem and install node.js:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Because of RoR tutorial requirements we install version 1.9.3:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm get head <span class="o">&amp;&amp;</span> rvm reload rvm install 1.9.3
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next thing will be adding vim-ruby for our favorite editor Vim. I organize my
-dotfiles using git. I also use pathogen to control Vim plugins (as described
-<a href="http://pietrushnic.blogspot.com/2012/02/improve-productivity-by-tracking-work_20.html">here</a>),
-so :</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>workspace
-</span><span class='line'>git submodule add https://github.com/tpope/vim-rails.git
-</span><span class='line'>dotfiles/vim/bundle/vim-rails
-</span><span class='line'>git submodule init <span class="o">&amp;&amp;</span> git submodule update
-</span><span class='line'>git commit -m <span class="s2">&quot;vim-rails submodule added&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Finally we have ready to use Ruby on Rails development environment based on Vim.
-I suggest to take a look at this
-<a href="https://www.youtube.com/watch?v=30P8DSNOZuU">movie</a> and after that dive into 
-<a href="http://ruby.railstutorial.org/">tutorial</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[New background and not so big "coming back"]]></title>
-    <link href="http://pietrushnic.github.io/blog/2012/11/13/new-background-and-not-so-big-coming/"/>
-    <updated>2012-11-13T00:04:00+01:00</updated>
-    <id>http://pietrushnic.github.io/blog/2012/11/13/new-background-and-not-so-big-coming</id>
-    <content type="html"><![CDATA[<p>It&rsquo;s been a long time since I last wrote anything on the blog. Because I hear complains about the background causing my blog hard to read I decide to change it.</p>
-
-<p>I have little break in my side project and noticed that most read posts are related to some technical workarounds and solutions for different problems I decide to write a series about gcc errors and some solutions for it. I know it may sound like some complete spam and trash for blog, but when I searched for some explanation and solution of this errors sometimes it was hard to find them, sometimes it was hard to match with my code and finally sometimes I was unable to understand what is going on. I want to share what I learned and even if it wouldn&rsquo;t help anyone I want to have this in one place.</p>
-
-<p>Recently I returned to my long-neglected hobby &ndash; chess. I will also try to write something constructive in this topic. Last time I also think a lot about embedded stuff (trying to reverse my printer), android (writing little project helping my colleague) and many other things. So maybe I will write about this. To not be boring I will simply get my hands dirty.</p>
 ]]></content>
   </entry>
   

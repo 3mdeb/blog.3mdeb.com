@@ -9,8 +9,20 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="How mutt can handle mails in html format ? Takling about html mail handling is
-talking about handling any type of Multipurpose Internet Mail &hellip;">
+  <meta name="description" content="When I tried to deploy second part of RoR tutorial
+to Heroku I get this error: 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+An error occurred while installing sqlite3 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +91,369 @@ talking about handling any type of Multipurpose Internet Mail &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/">Sqlite3 Gem Not Supported on Heroku</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-18T21:16:00+01:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When I tried to deploy second part of <a href="http://ruby.railstutorial.org/chapters/a-demo-app#top">RoR tutorial</a>
+to Heroku I get this error:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>An error occurred while installing sqlite3 (1.3.5), and Bundler cannot continue.  
+</span><span class='line'>Make sure that `gem install sqlite3 -v '1.3.5'` succeeds before bundling.
+</span><span class='line'>!
+</span><span class='line'>!  Failed to install gems via Bundler.
+</span><span class='line'>!
+</span><span class='line'>! Detected sqlite3 gem which is not supported on Heroku.
+</span><span class='line'>!  http://devcenter.heroku.com/articles/how-do-i-use-sqlite3-for-development
+</span><span class='line'>!
+</span><span class='line'>!  Heroku push rejected, failed to compile Ruby/rails app
+</span><span class='line'>To git@heroku.com:thawing-beyond-7283.git 
+</span><span class='line'>! [remote rejected] master -&gt; master (pre-receive hook declined)
+</span><span class='line'>error: failed to push some refs to 'git@heroku.com:thawing-beyond-7283.git'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I searched a little bit about this error and find <a href="http://stackoverflow.com/questions/3747002/heroku-rails-3-and-sqlite3">this</a>
+stackoverflow post. But when I look more carefully on the Gemfile syntax I
+found a mistake. I used simply:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.5&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But I should have:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">group</span> <span class="ss">:development</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.5&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">group</span> <span class="ss">:production</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;pg&#39;</span><span class="p">,</span> <span class="s1">&#39;0.12.2&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As RoR tutorial states.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian/">Prepare for Ruby on Rails on Debian Wheezy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-18T18:18:00+01:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I start to learn Ruby on Rails. As always when you learn new programming
+language toolchain is required. In this tutorial I will try to go through
+toolchain preparation for my Debian wheezy. Of course I based on Vim as my
+editor of choice. Second requirement will be using some parts of toolchain in
+latest greatest version.</p>
+
+<p>As a beginner point for learning Ruby on Rails I choose <a href="http://ruby.railstutorial.org/ruby-on-rails-tutorial-book">this tutorial</a>.
+I will try to use their methods of setting environment adding my comments where
+it is needed. Also will resolve Debian and Vim specific issues. So let&rsquo;s begin.</p>
+
+<p>After quick look at RoR tutorial I have to switch to <a href="http://blog.sudobits.com/2012/05/02/how-to-install-ruby-on-rails-in-ubuntu-12-04-lts/">this site</a>
+for installation for Ubuntu 12.04 LTS. But instructions don&rsquo;t work as expected
+for my Debian. So after quick:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install git curl
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I realized that I need proxy for curl and not only temporary but permanent. I
+added below line to my <code>$HOME/.curlrc:</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">proxy</span><span class="o">=</span>proxy.server.com:8080
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After that I was able to download and install stable version of rvm:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl -L get.rvm.io | bash -s stable
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next I sourced configuration:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">source</span> ~/.rvm/scripts/rvm
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Output which I get was:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>pietrushnic@lothlann:~/src/node<span class="nv">$ </span>rvm requirements
+</span><span class='line'>Requirements <span class="k">for </span>Linux <span class="s2">&quot;Debian GNU/Linux wheezy/sid&quot;</span>
+</span><span class='line'>NOTE: <span class="s1">&#39;ruby&#39;</span> represents Matz<span class="s1">&#39;s Ruby Interpreter (MRI) (1.8.X, 1.9.X)</span>
+</span><span class='line'><span class="s1">             This is the *original* / standard Ruby Language Interpreter</span>
+</span><span class='line'><span class="s1">      &#39;</span>ree<span class="s1">&#39;  represents Ruby Enterprise Edition</span>
+</span><span class='line'><span class="s1">      &#39;</span>rbx<span class="s1">&#39;  represents Rubinius</span>
+</span><span class='line'>
+</span><span class='line'><span class="s1">bash &gt;= 4.1 required</span>
+</span><span class='line'><span class="s1">curl is required</span>
+</span><span class='line'><span class="s1">git is required (&gt;= 1.7 for ruby-head)</span>
+</span><span class='line'><span class="s1">patch is required (for 1.8 rubies and some ruby-head&#39;</span>s<span class="o">)</span>.
+</span><span class='line'>
+</span><span class='line'>To install rbx and/or Ruby 1.9 head <span class="o">(</span>MRI<span class="o">)</span> <span class="o">(</span>eg. 1.9.2-head<span class="o">)</span>,
+</span><span class='line'><span class="k">then </span>you must install and use rvm 1.8.7 first.
+</span><span class='line'>
+</span><span class='line'>Additional Dependencies:
+</span><span class='line'><span class="c"># For Ruby / Ruby HEAD (MRI, Rubinius, &amp; REE), install the following:</span>
+</span><span class='line'>ruby: /usr/bin/apt-get install build-essential openssl libreadline6
+</span><span class='line'>libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev
+</span><span class='line'>libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev
+</span><span class='line'>automake libtool bison subversion pkg-config
+</span><span class='line'>
+</span><span class='line'><span class="c"># For JRuby, install the following: jruby: /usr/bin/apt-get install curl g++ </span>
+</span><span class='line'>openjdk-6-jre-headless jruby-head: /usr/bin/apt-get install ant openjdk-6-jdk <span class="c"># </span>
+</span><span class='line'>For IronRuby, install the following: ironruby: /usr/bin/apt-get install curl
+</span><span class='line'>mono-2.0-devel
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I need Ruby so copy&amp;paste line for it and:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install build-essential openssl libreadline6 libreadline6-dev curl
+</span><span class='line'>git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3
+</span><span class='line'>libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison
+</span><span class='line'>subversion pkg-config
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next thing we need is Node.js because this code of JavaScript runtime is under
+active development (latest version is 0.8.14 and Debian provided for sid 0.6.19)
+we use its latest greatest version from git repository.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/joyent/node.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Following by:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>node;./configure;make;make <span class="nb">test</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In my configuration only one test failed test-tls-server-verify:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Running <span class="s1">&#39;Allow both authed and unauthed connections with CA1&#39;</span>
+</span><span class='line'>  throw new assert.AssertionError<span class="o">({</span>
+</span><span class='line'>          ^
+</span><span class='line'>  AssertionError: agent1 rejected, but should NOT have been
+</span><span class='line'>     at ChildProcess.&lt;anonymous&gt;
+</span><span class='line'>      <span class="o">(</span>/home/pietrushnic/src/node/test/simple/test-tls-server-verify.js:217:14<span class="o">)</span>
+</span><span class='line'>          at ChildProcess.EventEmitter.emit <span class="o">(</span>events.js:96:17<span class="o">)</span>
+</span><span class='line'>      at Process.ChildProcess._handle.onexit
+</span><span class='line'>      <span class="o">(</span>child_process.js:698:12<span class="o">)</span>
+</span><span class='line'>      at process._makeCallback <span class="o">(</span>node.js:248:20<span class="o">)</span>
+</span><span class='line'>      &lt;/anonymous&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is known issue probably we have to wait for update of OpenSSL library in
+wheezy. Ignore this problem and install node.js:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Because of RoR tutorial requirements we install version 1.9.3:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm get head <span class="o">&amp;&amp;</span> rvm reload rvm install 1.9.3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next thing will be adding vim-ruby for our favorite editor Vim. I organize my
+dotfiles using git. I also use pathogen to control Vim plugins (as described
+<a href="http://pietrushnic.blogspot.com/2012/02/improve-productivity-by-tracking-work_20.html">here</a>),
+so :</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>workspace
+</span><span class='line'>git submodule add https://github.com/tpope/vim-rails.git
+</span><span class='line'>dotfiles/vim/bundle/vim-rails
+</span><span class='line'>git submodule init <span class="o">&amp;&amp;</span> git submodule update
+</span><span class='line'>git commit -m <span class="s2">&quot;vim-rails submodule added&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Finally we have ready to use Ruby on Rails development environment based on Vim.
+I suggest to take a look at this
+<a href="https://www.youtube.com/watch?v=30P8DSNOZuU">movie</a> and after that dive into 
+<a href="http://ruby.railstutorial.org/">tutorial</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/13/new-background-and-not-so-big-coming/">New Background and Not So Big &#8220;Coming Back&#8221;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-13T00:04:00+01:00" pubdate data-updated="true">Nov 13<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/13/new-background-and-not-so-big-coming/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It&rsquo;s been a long time since I last wrote anything on the blog. Because I hear complains about the background causing my blog hard to read I decide to change it.</p>
+
+<p>I have little break in my side project and noticed that most read posts are related to some technical workarounds and solutions for different problems I decide to write a series about gcc errors and some solutions for it. I know it may sound like some complete spam and trash for blog, but when I searched for some explanation and solution of this errors sometimes it was hard to find them, sometimes it was hard to match with my code and finally sometimes I was unable to understand what is going on. I want to share what I learned and even if it wouldn&rsquo;t help anyone I want to have this in one place.</p>
+
+<p>Recently I returned to my long-neglected hobby &ndash; chess. I will also try to write something constructive in this topic. Last time I also think a lot about embedded stuff (trying to reverse my printer), android (writing little project helping my colleague) and many other things. So maybe I will write about this. To not be boring I will simply get my hands dirty.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -505,7 +880,7 @@ beginning we create <code>$HOME/.muttrc</code> file:</li>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>&lt;account_name&gt;</code> &ndash; for <a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#58;&#102;&#x6f;&#x6f;&#x2e;&#x62;&#97;&#114;&#64;&#103;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#109;">&#102;&#x6f;&#111;&#x2e;&#98;&#x61;&#x72;&#64;&#x67;&#109;&#97;&#105;&#x6c;&#46;&#x63;&#111;&#109;</a> it will be foo.bar
+<p><code>&lt;account_name&gt;</code> &ndash; for <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#102;&#111;&#x6f;&#46;&#98;&#97;&#114;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#109;">&#102;&#111;&#111;&#46;&#x62;&#97;&#x72;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#111;&#109;</a> it will be foo.bar
 <code>&lt;imap_server_address&gt;</code> &ndash; this information you can get from your e-mail provider
 help pages or from the settings of web e-mail client, for Gmail it is
 imap.gmail.com
@@ -1152,408 +1527,6 @@ Also don&rsquo;t bother to ask me by comment below.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/06/therefore-im-leaving-for-easter/">How to Download Videos From videos.linux.com</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-06T22:48:00+02:00" pubdate data-updated="true">Apr 6<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/04/06/therefore-im-leaving-for-easter/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Therefore, I&rsquo;m leaving for the Easter holidays I wanted to download some lecture on embedded systems, which was presented at the 2012 Embedded Linux Conference. Although I regret I found that I could not find as good quality copy in the network as on the Linux Foundation page. It is unfortunate that linux.com site does not have the possibility of direct downloading video files. But there is a workaround. Follow below tutorial:</p>
-
-<ol>
-<li>Go to page with video. For example:  <a href="http://video.linux.com/videos/to-provide-a-long-term-stable-linux-for-industry">http://video.linux.com/videos/to-provide-a-long-term-stable-linux-for-industry</a></li>
-<li><p>Click play on the video and if you using Chrome browser right click on player window and inspect this element. Result should look like that: 
-<img src="http://1.bp.blogspot.com/-ivNLyF3IFwc/T39S_IwbntI/AAAAAAAAAEg/mVgiu6CXqhs/s400/Untitled.png" alt="" /></p></li>
-<li><p>Expand div tag marked in red on screenshot above. If video was start you should see video tag which contain two links to video files mp4 and webm. Screen shot below shows hot it should look like:
-<img src="http://3.bp.blogspot.com/-waLmSIB4LAI/T39VlAF5P7I/AAAAAAAAAEo/7T9bUg5p-sw/s400/Untitled1.png" alt="" /></p></li>
-</ol>
-
-
-<p>These links are only temporary, so if you want to use them do it as soon as possible. The sad part of all is that the organization intended to promote one of the most libertarian solutions in software history does not provide materials for download.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/20/building-arm-toolchain-part-1-libs-and/">Building ARM Toolchain - Part 1: Libs and Binutils</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-20T23:25:00+01:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/03/20/building-arm-toolchain-part-1-libs-and/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Searching the Internet for information on how to build arm toolchain from
-scratch I realize that it is very hard to find  information about this matter
-(and recent one even harder). I will try to fill this lack of information and
-try to build toolchain. My main goal is to use a component based on the GNU
-public license, and using them in as the newest version as it is possible.</p>
-
-<p>What is toolchain ? (according to wikipedia):</p>
-
-<blockquote><p>In software, a toolchain is the set of programming tools that are used to create a product (typically another computer program or system of programs). The tools may be used in a chain, so that the output of each tool becomes the input for the next, but the term is used widely to refer to any set of linked development tools.</p></blockquote>
-
-<h3>Requirements</h3>
-
-<ul>
-<li>Cross compiler, I create one using corsstool-ng and describe this process in 
-<a href="/blog/2012/03/14/quick-build-of-arm-unknown-linux">previous post</a>.
-I will use <code>arm-unknown-linux-gnueabi</code> as entry point compiler.</li>
-<li>$TARGET is defined as my destination directory:</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>export TARGET=/home/pietrushnic/sandbox/toolchain  </span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Procedure</h3>
-
-<h4>Kernel header files</h4>
-
-<ol>
-<li>clone linux git repository</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>install headers $TARGET is home of our toolchain</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make ARCH=arm INSTALL_HDR_PATH=$TARGET/usr headers_install</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Libraries (gmp, mpfr, mpc)</h4>
-
-<ol>
-<li>GMP (<em>GNU Multiple Precision Arithmetic Library</em>) &ndash; changeset used: 14765:0acae62fa162</li>
-<li>As I said before. I use &ldquo;latest greatest&rdquo; ;P version, and for gmp we can reach it using:</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>hg clone http://gmplib.org:8000/gmp</span></code></pre></td></tr></table></div></figure>
-
-
-<pre><code> - create configuration files 
-</code></pre>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./.bootstrap</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>configure</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./configure --prefix=$TARGET/arm-x-tools --enable-shared=n --enable-static</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>compile</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make && make check && make install</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li> MPFR (<em>GNU Multiple Precision Floating-Point Reliably</em>) &ndash; version: r8103</li>
-<li>get latest version</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>svn checkout svn://scm.gforge.inria.fr/svn/mpfr/trunk mpfr</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>create configuration file</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>autoreconf -i</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>configure</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./configure --prefix=$TARGET/arm-x-tools --enable-thread-safe \ --with-gmp=$TARGET/arm-x-tools --disable-shared --enable-static</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>compile</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make && make install</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li> MPC (<em>Multiple Precision Complex</em>)&ndash; version: r1146</li>
-<li>checkout svn</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>svn checkout svn://scm.gforge.inria.fr/svnroot/mpc/trunk mpc</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>create configuration file</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>autoreconf -i</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>configure</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./configure --prefix=$TARGET/arm-x-tools \ --with-gmp=$TARGET/arm-x-tools --with-mpfr=$TARGET/arm-x-tools \ --disable-shared --enable-static</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>compile</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make && make install</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Binutils &ndash; collection of a GNU binary tools:</li>
-<li>checkout version from anonymous cvs</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cvs -z 9 -d :pserver:anoncvs@sourceware.org:/cvs/src</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>login create directory for checkout</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir binutils</span></code></pre></td></tr></table></div></figure>
-
-
-<p>checkout sources</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cvs -z 9 -d :pserver:anoncvs@sourceware.org:/cvs/src co binutils</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>configure</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>LDFLAGS="-Wl,-rpath -Wl,$TARGET/arm-x-tools/lib" ./configure \
-</span><span class='line'>--build=x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu \
-</span><span class='line'>--target=arm-unknown-linux-gnueabi --prefix=$TARGET/arm-x-tools \
-</span><span class='line'>--disable-nls --disable-multilib --disable-werror --with-float=soft \
-</span><span class='line'>--with-gmp=$TARGET/arm-x-tools --with-mpfr=$TARGET/arm-x-tools \
-</span><span class='line'>--with-mpc=$TARGET/arm-x-tools --with-sysroot=$TARGET</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>compile</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make configure-host make make install</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>to check if everything was made correctly</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ldd $TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-ldd</span></code></pre></td></tr></table></div></figure>
-
-
-<p>it should show that it use library compiled previously by us:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>libz.so.1 =&gt; /home/pietrushnic/sandbox/toolchain/arm-x-tools/lib/libz.so.1 \ (0x00007f0086cc5000)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This set gives us a solid base to build the compiler. However, it will be in the <a href="/blog/2012/04/12/building-arm-toolchain-part-2-gcc-and">next section</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/20/-democracy-the-god-that-failed-hans-hermann-hoppe/">&#8220;Democracy: The God That Failed&#8221; Hans-Hermann Hoppe</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-20T21:16:00+01:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/03/20/-democracy-the-god-that-failed-hans-hermann-hoppe/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I began this article last year. Until now I wonder if anyone could be interested
-in reading about book that I read. I saw great interesting in linux/embedded
-stuff but what about different things that we met every day. What about
-politics/economics and religion ? Don&rsquo;t know if you should start this but I will
-give it a try.</p>
-
-<p>I&rsquo;m argue a lot about politics/economics and religion. I don&rsquo;t have education in
-this matter but study by myself a little bit. So maybe this is good place for
-sharing ideas.</p>
-
-<p>So about a year ago I read a book <a href="http://www.amazon.com/Democracy-Economics-Politics-Monarchy-Natural/dp/0765808684">&ldquo;Democracy: The God That Failed&rdquo;</a>.
-I talk a lot about this book with mu colleagues and have to said that some ideas in it
-are very controversial. One thing is that Hoppe assume some economic facts that
-are not clear for most people &ndash; I agree with most of them, because it is
-libertarian point of view and right now I&rsquo;m trying to follow this ideas of
-freedom.</p>
-
-<p>Hoppe shows that people democracy have to fail because leads to socialism.
-Increasing number of privileges and promoting average citizen to politics cause
-system inefficient. So most of this things in my environment are well known and
-discussion goes to details.</p>
-
-<p>Probably the most shocking for me was concept of totally private security system.
-Everyone can have guns, missiles, tanks or any other fight equipment he want.
-Hoppe is an anarcho-capitalist so he doesn&rsquo;t like state and it&rsquo;s monopoly on
-high end weapon. After rethinking twice this concept could be good but IMO
-through natural evolution we will get companies that would take care about
-security. Also today we can find some trends in this, many Polish citizen with
-high wages go to closed residential housing with security, protecting themselves
-against poor, beggars and drunk junkies.</p>
-
-<p>Second thing that heated debate was that state kills more than anarchy or not
-organized society. Discussion goes to question: When more people were killed
-during the Middle Ages, which took quite a long time, or in a few wars started
-by democratically ruled countries ?</p>
-
-<p>So if we look at wiki <a href="http://en.wikipedia.org/wiki/List_of_wars_and_disasters_by_death_toll">article</a>
-what we can see ? Biggest killers in history are Chinese and they did this in
-medieval. So not Europe with it Christian crusade and small contention between
-the principalities ? I will not count Mongolian and Tatar invasion because it took 200
-years, so this was not a simple war it was series of wars simply concatenated in
-one. Surprising data from China, they were able to kill 5-15% of world population
-three times during medieval. They didn&rsquo;t have atomic bomb, Ebola, chemical poisons
-and they did this. If you ever read something about China history you that it is
-one of the best organized society in the world (take a look at great wall).
-First administration exams, wheel base (width of road), language was standardized
-over 2k years ago. Very good organization of the state. So biggest wars and most
-killed battles came from well organized strong state. If you want peace you
-don&rsquo;t need &ldquo;New World Order&rdquo; or &ldquo;World Government&rdquo; you need weak state with
-power distributed to locally living people. Let them decide if they want
-conflict with town or village near them. Or maybe better live in peace, trade
-freely and make world better. Centralized systems are slow, inefficient and cost
-a lot. Distributed systems are those in which life of one man is important.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1566,7 +1539,75 @@ a lot. Distributed systems are those in which life of one man is important.</p>
 </div>
 <aside class="sidebar">
   
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
     
+      <li class="post">
+        <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve productivity with Goolge history using bookmarks and Chrome extensions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and run OVMF under Qemu</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root file system for embedded system</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu network configuration and tftp for Virtual Development Board</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux kernel for embedded system</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/pietrushnic">@pietrushnic</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'pietrushnic',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/115979497998056410813?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
   
 </aside>
 
