@@ -4,7 +4,7 @@
   <title><![CDATA[Linux geek's scratchpad]]></title>
   <link href="http://pietrushnic.github.io/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-04-13T19:50:08+02:00</updated>
+  <updated>2014-04-13T20:10:09+02:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A little bit of fresh air]]></title>
+    <link href="http://pietrushnic.github.io/blog/2014/04/13/a-little-bit-of-fresh-air/"/>
+    <updated>2014-04-13T19:55:18+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2014/04/13/a-little-bit-of-fresh-air</id>
+    <content type="html"><![CDATA[<p>It is over 9 months since my last post. As you see since then I refreshed look
+and feel of my blog a little bit. Theme was changed to
+<a href="https://github.com/lucaslew/whitespace">whitespace</a>, because of my
+minimalistic inspiration induced by <a href="http://www.kaikkonendesign.fi/">Tommi Kaikkonen</a>. Meanwhile AddThis improved their
+products offer by <a href="https://www.addthis.com/get/smart-layers">Smart Layers</a> and
+you can see how they works on left and upper right. I hope that thanks to this
+improvement sharing valuable content would be easier.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Improve productivity with Goolge history using bookmarks and Chrome extensions]]></title>
@@ -3130,50 +3145,6 @@ fix this behavior:</li>
 
 
 <p>Hope this tips are useful for you.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Short hint for all those who use vim and pathogen]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/01/15/short-hint-for-all-those-who-use-vim/"/>
-    <updated>2013-01-15T11:51:00+01:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/01/15/short-hint-for-all-those-who-use-vim</id>
-    <content type="html"><![CDATA[<p>Today, after updating my wokspace to latest version I encounter below error during vim running:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Error detected while processing function pathogen#runtime_append_all_bundles:
-</span><span class='line'>line 1:
-</span><span class='line'>E121: Undefined variable: source_path
-</span><span class='line'>E116: Invalid arguments for function string(source_path).') to pathogen#incubate('.string(source_path.'/{}').')') 
-</span><span class='line'>E116: Invalid arguments for function 4_warn
-</span><span class='line'>Press ENTER or type command to continue</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Quick look on pathogen runtime_append_all_bundles function and I found:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>call s:warn<span class="o">(</span><span class="s1">&#39;Change pathogen#runtime_append_all_bundles(&#39;</span>.string<span class="o">(</span>a:1<span class="o">)</span>.<span class="s1">&#39;) to pathogen#incubate(&#39;</span>.string<span class="o">(</span>a:1.<span class="s1">&#39;/{}&#39;</span><span class="o">)</span>.<span class="s1">&#39;)&#39;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So simply replacing:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>call pathogen#runtime_append_all_bundles<span class="o">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>with:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>call pathogen#incubate<span class="o">()</span> in <span class="nv">$HOME</span>/.vimrc fix the problem.
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
