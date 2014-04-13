@@ -81,25 +81,92 @@ qemu-linaro/bin/qemu-system-arm: error while loading shared libraries: libblueto
 to fix that you have to install i386 packages with the library i.e. `sudo
 apt-get install libbluetooth3:i386`
 
-## Ivestigation ##
+## U-boot for IGEPv2 ##
 
-So, I'm stuck for a while. My concerns in this point are:
+Without kernel sources for image provided in IGEP Qemu package debugging is not
+very easy task. Especially because `qemu-nano.img` contain only `vmlinuz,`
+which is the compressed kernel executable not suitable for debugging purposes.
 
-* Kernel was configured for displaying messages on attached display, serial
-  logging was disabled and Qemu VNC session doesn't show anything. I could
-  split qemu-nano image into components and try to add some options to bootloader but it
-  seems to be a hacky workaround.
-* I will attach to Qemu session with crossdebugger and see whats going on I
-  hope that kernel wan't stripped from debugging symbols.
-* Maybe I should concentrate on building completely new kernel for this board
-  with enabled debugging ?
+To create U-Boot image for IGEPv2 we need file that will represent SD card when
+attached to Qemu.
 
-### Debugging sessions ###
+### Image ###
 
-After building `arm-unknown-linux-uclibcgnueabi` toolchain using crosstool-ng I
-tried to debug whats going on inside emulated environment:
+Create image:
+
+```
+dd if=/dev/zero of=igepv2.img bs=1M count=256
+```
+
+Prepare partition in it:
+
+```
+[21:24:54] pkrol:igepv2-dm3730 git:(master*) $ sudo fdisk igepv2.img
+Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel
+Building a new DOS disklabel with disk identifier 0xfc985d8c.
+Changes will remain in memory only, until you decide to write them.
+After that, of course, the previous content won't be recoverable.
+
+Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)
+
+Command (m for help): n
+Partition type:
+ p   primary (0 primary, 0 extended, 4 free)
+ e   extended
+Select (default p): p
+Partition number (1-4, default 1):
+Using default value 1
+First sector (2048-524287, default 2048):
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-524287, default 524287): +64M
+
+Command (m for help): t
+Selected partition 1
+Hex code (type L to list codes): c
+Changed system type of partition 1 to c (W95 FAT32 (LBA))
+
+Command (m for help): a
+Partition number (1-4): 1
+
+Command (m for help): w
+The partition table has been altered!
 
 
+WARNING: If you have created or modified any DOS 6.x
+partitions, please see the fdisk manual page for additional
+information.
+Syncing disks.
+```
+
+To format our new FAT32 partition we will map piece of `igepv2.img` file to
+loop device. Note that first sector of FAT32 partition is on `2048\*512` byte.
+
+```
+sudo losetup -o$[2048*512] /dev/loop1 ./igepv2.img
+sudo mkfs.vfat -n boot -F 32 /dev/loop1
+sudo losetup -d /dev/loop1
+```
+
+### Compile U-Boot ###
+
+This step is very simple. Key is in choosing config file. For our Qemu powered IGEPv2 it will be `igep0020_nand_config`.
+So, correct steps are:
+
+```
+git clone git://git.denx.de/u-boot.git
+cd u-boot
+make igep0020_nand_config
+make
+```
+
+After all we can copy `MLO` and `u-boot.img` to `igepv2.img`:
+
+```
+sudo mkdir /mnt/tmp
+sudo mount -o offset=$[2048*512] /path/to/igepv2.img /mnt/tmp
+sudo cp MLO /mnt/tmp
+sudo cp u-boot.img /mnt/tmp
+```
 
 ## Qemu from Linaro ##
 

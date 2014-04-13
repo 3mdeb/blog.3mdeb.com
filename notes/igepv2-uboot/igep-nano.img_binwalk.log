@@ -1,0 +1,388 @@
+
+DECIMAL   	HEX       	DESCRIPTION
+-------------------------------------------------------------------------------------------------------------------
+1073440   	0x106120  	U-Boot boot loader reference
+1170815   	0x11DD7F  	U-Boot boot loader reference
+1172480   	0x11E400  	uImage header, header size: 64 bytes, header CRC: 0xB1773589, created: Thu Oct 27 17:38:10 2011, image size: 3988720 bytes, Data Address: 0x80008000, Entry Point: 0x80008000, data CRC: 0x7238D9DB, OS: Linux, CPU: ARM, image type: OS Kernel Image, compression type: none, image name: "Linux"
+1185355   	0x12164B  	gzip compressed data, maximum compression, from Unix, NULL date: Thu Jan  1 01:00:00 1970
+5161472   	0x4EC200  	uImage header, header size: 64 bytes, header CRC: 0x1F812D57, created: Thu Oct 27 17:38:10 2011, image size: 1471679 bytes, Data Address: 0x0, Entry Point: 0x0, data CRC: 0x7566D37F, OS: Linux, CPU: ARM, image type: RAMDisk Image, compression type: none, image name: "initramfs"
+5161536   	0x4EC240  	gzip compressed data, from Unix, last modified: Thu Oct 27 17:37:22 2011
+6634496   	0x653C00  	uImage header, header size: 64 bytes, header CRC: 0x2D797BEE, created: Thu Oct 27 17:38:10 2011, image size: 444 bytes, Data Address: 0x0, Entry Point: 0x0, data CRC: 0x88B3B7E, OS: Linux, CPU: ARM, image type: Script file, compression type: none, image name: "boot script"
+6635008   	0x653E00  	uImage header, header size: 64 bytes, header CRC: 0x2D797BEE, created: Thu Oct 27 17:38:10 2011, image size: 444 bytes, Data Address: 0x0, Entry Point: 0x0, data CRC: 0x88B3B7E, OS: Linux, CPU: ARM, image type: Script file, compression type: none, image name: "boot script"
+6692678   	0x661F46  	U-Boot boot loader reference
+6714151   	0x667327  	gzip compressed data, maximum compression, from Unix, last modified: Tue Jan 10 13:00:05 2012
+9762087   	0x94F527  	gzip compressed data, maximum compression, from Unix, last modified: Wed Jan 11 11:47:00 2012
+54525952  	0x3400000 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+59163909  	0x386C505 	Linux kernel version "2.6.37+ (mcaro@manel-VirtualBox2) (gcc version 4.6.1 (Ubuntu/Li2) (gcc version 4.6.1 (Ubuntu/Linaro 4.6.1-7ubuntu2~ppa3) ) #1 "
+59199839  	0x387515F 	Linux kernel version "2.6.37+ (mcaro@manel-VirtualBox2) (gcc version 4.6.1 (Ubuntu/Li2) (gcc version 4.6.1 (Ubuntu/Linaro 4.6.1-7ubuntu2~ppa3) ) #1 "
+59275417  	0x3887899 	Linux kernel version "2.6.37+ (mcaro@manel-VirtualBox2) (gcc version 4.6.1 (Ubuntu/Li2) (gcc version 4.6.1 (Ubuntu/Linaro 4.6.1-7ubuntu2~ppa3) ) #1 "
+59301593  	0x388DED9 	Linux kernel version "2.6.37+ (mcaro@manel-VirtualBox2) (gcc version 4.6.1 (Ubuntu/Li2) (gcc version 4.6.1 (Ubuntu/Linaro 4.6.1-7ubuntu2~ppa3) ) #1 "
+59321719  	0x3892D77 	Linux kernel version "2.6.37+ (mcaro@manel-VirtualBox2) (gcc version 4.6.1 (Ubuntu/Li2) (gcc version 4.6.1 (Ubuntu/Linaro 4.6.1-7ubuntu2~ppa3) ) #1 "
+59348274  	0x3899532 	Linux kernel version "2.6.37+ (mcaro@manel-VirtualBox2) (gcc version 4.6.1 (Ubuntu/Li2) (gcc version 4.6.1 (Ubuntu/Linaro 4.6.1-7ubuntu2~ppa3) ) #2 "
+59492540  	0x38BC8BC 	Linux kernel version "2.6.37+ (mcaro@manel-VirtualBox2) (gcc version 4.6.1 (Ubuntu/Li2) (gcc version 4.6.1 (Ubuntu/Linaro 4.6.1-7ubuntu2~ppa3) ) #2 "
+62914560  	0x3C00000 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+63191040  	0x3C43800 	Executable script, shebang: "/bin/sh"
+63206433  	0x3C47421 	Copyright string: " (C) 1996-2001,2003,2007 Free Software Foundation, Inc.oftware Foundation, Inc."
+63235072  	0x3C4E400 	Executable script, shebang: "/bin/sh -e"
+63270940  	0x3C5701C 	Copyright string: " (c) 2009 Kel Modderman <kel@otaku42.de>aku42.de>"
+63278080  	0x3C58C00 	Executable script, shebang: "/bin/sh"
+63279104  	0x3C59000 	Executable script, shebang: "/bin/sh"
+63292416  	0x3C5C400 	Executable script, shebang: "/bin/sh"
+63408128  	0x3C78800 	Executable script, shebang: "/bin/sh -p"
+63439872  	0x3C80400 	XML document, version: "1.0"
+63441920  	0x3C80C00 	XML document, version: "1.0"
+63448064  	0x3C82400 	Executable script, shebang: "/bin/sh"
+63452160  	0x3C83400 	Executable script, shebang: "/bin/sh"
+63454208  	0x3C83C00 	Executable script, shebang: "/bin/sh"
+63456256  	0x3C84400 	Executable script, shebang: "/bin/sh"
+63458304  	0x3C84C00 	Executable script, shebang: "/bin/sh"
+63460352  	0x3C85400 	Executable script, shebang: "/bin/sh"
+63462400  	0x3C85C00 	Executable script, shebang: "/bin/sh"
+63465472  	0x3C86800 	Executable script, shebang: "/bin/sh"
+63466496  	0x3C86C00 	Executable script, shebang: "/bin/sh"
+63468544  	0x3C87400 	Executable script, shebang: "/bin/sh"
+63474688  	0x3C88C00 	Executable script, shebang: "/bin/sh"
+63477760  	0x3C89800 	Executable script, shebang: "/bin/sh"
+63478784  	0x3C89C00 	Executable script, shebang: "/bin/sh"
+63479808  	0x3C8A000 	Executable script, shebang: "/bin/sh"
+63482000  	0x3C8A890 	Executable script, shebang: "/bin/sh" at the top."
+63483904  	0x3C8B000 	Executable script, shebang: "/bin/sh"
+63484928  	0x3C8B400 	Executable script, shebang: "/bin/sh"
+63485952  	0x3C8B800 	Executable script, shebang: "/bin/sh -e"
+63489024  	0x3C8C400 	Executable script, shebang: "/bin/sh"
+63492096  	0x3C8D000 	Executable script, shebang: "/bin/sh"
+63493120  	0x3C8D400 	Executable script, shebang: "/bin/sh"
+63495168  	0x3C8DC00 	Executable script, shebang: "/bin/sh"
+63504384  	0x3C90000 	Executable script, shebang: "/bin/sh"
+63509504  	0x3C91400 	Executable script, shebang: "/bin/sh"
+63512576  	0x3C92000 	Executable script, shebang: "/bin/sh"
+63513090  	0x3C92202 	MPFS (Microchip) filesystem, version 95.77, 20564 file entries
+63513530  	0x3C923BA 	MPFS (Microchip) filesystem, version 95.77, 20564 file entries
+63513550  	0x3C923CE 	MPFS (Microchip) filesystem, version 95.77, 20564 file entries
+63513919  	0x3C9253F 	MPFS (Microchip) filesystem, version 95.77, 20564 file entries
+63514055  	0x3C925C7 	MPFS (Microchip) filesystem, version 95.77, 20564 file entries
+63514185  	0x3C92649 	MPFS (Microchip) filesystem, version 95.77, 20564 file entries
+63517696  	0x3C93400 	GPG key trust database version 3
+63552512  	0x3C9BC00 	Executable script, shebang: "/bin/sh"
+63568896  	0x3C9FC00 	Executable script, shebang: "/bin/sh"
+63570944  	0x3CA0400 	Executable script, shebang: "/bin/sh -e"
+63571968  	0x3CA0800 	Executable script, shebang: "/bin/sh -e"
+63603712  	0x3CA8400 	Executable script, shebang: "/bin/sh"
+63604233  	0x3CA8609 	Copyright string: " (C) 2006 - 2009 Debian/Ubuntu wpasupplicant Maintainers wpasupplicant Maintainers "
+63608832  	0x3CA9800 	Executable script, shebang: "/bin/sh"
+63608934  	0x3CA9866 	Copyright string: ": Copyright (c) 2008-2010, Kel Modderman <kel@otaku42.de>Modderman <kel@otaku42.de>"
+63608945  	0x3CA9871 	Copyright string: " (c) 2008-2010, Kel Modderman <kel@otaku42.de>kel@otaku42.de>"
+63609856  	0x3CA9C00 	Executable script, shebang: "/bin/sh"
+63610333  	0x3CA9DDD 	Copyright string: " (C) 2006 - 2009 Debian/Ubuntu wpasupplicant Maintainers wpasupplicant Maintainers "
+63656960  	0x3CB5400 	gzip compressed data, maximum compression, from Unix, last modified: Mon Oct 24 19:37:02 2011
+63726592  	0x3CC6400 	Executable script, shebang: "/bin/sh"
+63726656  	0x3CC6440 	Copyright string: " (C) 2009-2010 Canonical Ltd."
+63728640  	0x3CC6C00 	Executable script, shebang: "/bin/sh"
+63728724  	0x3CC6C54 	Copyright string: " (C) 2009-2010 Canonical Ltd."
+63730688  	0x3CC7400 	Executable script, shebang: "/bin/sh"
+63730759  	0x3CC7447 	Copyright string: " (C) 2009-2010 Canonical Ltd."
+63833088  	0x3CE0400 	ELF 32-bit LSB executable, ARM, version 1 (SYSV)
+63898734  	0x3CF046E 	Copyright string: " CNRI, All Rights Reserved. NO WARRANTY.WARRANTY."
+65033811  	0x3E05653 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65059039  	0x3E0B8DF 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65064947  	0x3E0CFF3 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65148427  	0x3E2160B 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65175883  	0x3E2814B 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65177171  	0x3E28653 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65227307  	0x3E34A2B 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65277743  	0x3E40F2F 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65311859  	0x3E49473 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65335431  	0x3E4F087 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65336959  	0x3E4F67F 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65377987  	0x3E596C3 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65418427  	0x3E634BB 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65420739  	0x3E63DC3 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65422531  	0x3E644C3 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65425603  	0x3E650C3 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65428675  	0x3E65CC3 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65432003  	0x3E669C3 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65438403  	0x3E682C3 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65472187  	0x3E706BB 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65473475  	0x3E70BC3 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65475523  	0x3E713C3 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65481667  	0x3E72BC3 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65515419  	0x3E7AF9B 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65532359  	0x3E7F1C7 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+65953792  	0x3EE6000 	PGP armored data,
+65968128  	0x3EE9800 	PGP armored data,
+65980416  	0x3EEC800 	PGP armored data,
+66061876  	0x3F00634 	Copyright string: " (C) 2000 Texas Instruments Incorporated.All Rights Reserved.orporated.All Rights Reserved."
+66215936  	0x3F26000 	LZMA compressed data, properties: 0xC8, dictionary size: 8388608 bytes, uncompressed size: 16781312 bytes
+66699264  	0x3F9C000 	PGP armored data,
+66827264  	0x3FBB400 	PGP armored data,
+66828288  	0x3FBB800 	PGP armored data,
+66956288  	0x3FDAC00 	PGP armored data,
+67634176  	0x4080400 	Zip encrypted archive data, at least v2.0 to extract, compressed size: 33,  uncompressed size: 19, name: "T1:X3_101025_1_8_1_expROM_FW_uni_template_rmt_cmd_line.txt"  
+67634297  	0x4080479 	Zip encrypted archive data, at least v2.0 to extract, compressed size: 178764,  uncompressed size: 2097152, name: "T1:X3_101025_1_8_1_expROM_FW_uni_template_flash0.bin"  
+67813143  	0x40ABF17 	Zip encrypted archive data, at least v2.0 to extract, compressed size: 158,  uncompressed size: 1024, name: "T1:X3_101025_1_8_1_expROM_FW_uni_template_eeprom0.bin"  
+67813384  	0x40AC008 	Zip encrypted archive data, at least v2.0 to extract, compressed size: 33,  uncompressed size: 19, name: "T1A:X3_101025_1_8_1_expROM_FW_uni_template_rmt_cmd_line.txt"  
+67813506  	0x40AC082 	Zip encrypted archive data, at least v2.0 to extract, compressed size: 178763,  uncompressed size: 2097152, name: "T1A:X3_101025_1_8_1_expROM_FW_uni_template_flash0.bin"  
+67992352  	0x40D7B20 	Zip encrypted archive data, at least v2.0 to extract, compressed size: 159,  uncompressed size: 1024, name: "T1A:X3_101025_1_8_1_expROM_FW_uni_template_eeprom0.bin"  
+67993200  	0x40D7E70 	End of Zip archive
+67993600  	0x40D8000 	PGP armored data,
+68153344  	0x40FF000 	PGP armored data,
+68158464  	0x4100400 	ELF 32-bit LSB relocatable, ARM, version 1 (SYSV)
+68233524  	0x4112934 	LZMA compressed data, properties: 0x48, dictionary size: 33554432 bytes, uncompressed size: 536871168 bytes
+68419437  	0x413FF6D 	U-Boot boot loader reference
+68420608  	0x4140400 	ELF 32-bit LSB shared object, ARM, version 1 (SYSV)
+68660112  	0x417AB90 	LZMA compressed data, properties: 0xBD, dictionary size: 16777216 bytes, uncompressed size: 50331648 bytes
+68661248  	0x417B000 	PGP armored data,
+68682752  	0x4180400 	ELF 32-bit LSB shared object, ARM, version 1 (SYSV)
+68903394  	0x41B61E2 	LZMA compressed data, properties: 0x66, dictionary size: 16777216 bytes, uncompressed size: 21328 bytes
+68908185  	0x41B7499 	LZMA compressed data, properties: 0x63, dictionary size: 16777216 bytes, uncompressed size: 10058 bytes
+68908935  	0x41B7787 	LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, missing uncompressed size
+68951001  	0x41C1BD9 	LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, missing uncompressed size
+68952021  	0x41C1FD5 	LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, missing uncompressed size
+69146780  	0x41F189C 	LZMA compressed data, properties: 0xBE, dictionary size: 16777216 bytes, uncompressed size: 50331648 bytes
+69207040  	0x4200400 	ELF 32-bit LSB shared object, ARM, version 1 (SYSV)
+69623820  	0x426600C 	XML document, version: "1.0"
+69942844  	0x42B3E3C 	LZMA compressed data, properties: 0xC8, dictionary size: 16777216 bytes, uncompressed size: 50331648 bytes
+69961239  	0x42B8617 	Linux kernel version "2.6.37+ (mcaro@manel-VirtualBox2) (gcc version 4.6.1 (Ubuntu/Li2) (gcc version 4.6.1 (Ubuntu/Linaro 4.6.1-7ubuntu2~ppa3) ) #1 "
+69988193  	0x42BEF61 	Linux kernel version "2.6.37+ (mcaro@manel-VirtualBox2) (gcc version 4.6.1 (Ubuntu/Li2) (gcc version 4.6.1 (Ubuntu/Linaro 4.6.1-7ubuntu2~ppa3) ) #1 "
+70255616  	0x4300400 	ELF 32-bit LSB shared object, ARM, version 1 (SYSV)
+70944048  	0x43A8530 	PEM RSA private key
+70944188  	0x43A85BC 	PEM certificate
+70968396  	0x43AE44C 	XML document, version: "1.0"
+71055428  	0x43C3844 	LZMA compressed data, properties: 0xC8, dictionary size: 16777216 bytes, uncompressed size: 50331648 bytes
+71074950  	0x43C8486 	Linux kernel version "2.6.37+ (mcaro@manel-VirtualBox2) (gcc version 4.6.1 (Ubuntu/Li2) (gcc version 4.6.1 (Ubuntu/Linaro 4.6.1-7ubuntu2~ppa3) ) #1 "
+71129028  	0x43D57C4 	Linux kernel version "2.6.37+ (mcaro@manel-VirtualBox2) (gcc versionOrigin: Ubuntu2) (gcc versionOrigin: Ubuntu"
+71308288  	0x4401400 	ELF 32-bit LSB executable, ARM, version 1 (SYSV)
+71442432  	0x4422000 	Executable script, shebang: "/bin/sh -e"
+71444480  	0x4422800 	ELF 32-bit LSB executable, ARM, version 1 (SYSV)
+71454720  	0x4425000 	Executable script, shebang: "/bin/sh"
+71488512  	0x442D400 	Executable script, shebang: "/bin/sh -e"
+71491584  	0x442E000 	Executable script, shebang: "/bin/sh"
+71506944  	0x4431C00 	Executable script, shebang: "/bin/sh"
+71514112  	0x4433800 	Executable script, shebang: "/bin/sh"
+71521280  	0x4435400 	Executable script, shebang: "/bin/sh"
+71539712  	0x4439C00 	Executable script, shebang: "/bin/sh -e"
+71541760  	0x443A400 	Executable script, shebang: "/bin/sh"
+71542784  	0x443A800 	Executable script, shebang: "/bin/sh"
+71595008  	0x4447400 	Executable script, shebang: "/bin/sh -e"
+71597056  	0x4447C00 	Executable script, shebang: "/bin/sh"
+71640064  	0x4452400 	Executable script, shebang: "/bin/sh"
+71641088  	0x4452800 	Executable script, shebang: "/bin/sh"
+71642112  	0x4452C00 	Executable script, shebang: "/bin/sh"
+71663616  	0x4458000 	Executable script, shebang: "/bin/sh"
+71682048  	0x445C800 	Executable script, shebang: "/usr/bin/perl"
+71690240  	0x445E800 	Executable script, shebang: "/bin/sh"
+71691264  	0x445EC00 	Executable script, shebang: "/bin/sh"
+71694336  	0x445F800 	Executable script, shebang: "/bin/sh -e"
+71696384  	0x4460000 	Executable script, shebang: "/bin/sh"
+71697408  	0x4460400 	Executable script, shebang: "/bin/sh"
+71717888  	0x4465400 	Executable script, shebang: "/bin/sh"
+71718912  	0x4465800 	Executable script, shebang: "/bin/sh"
+71720960  	0x4466000 	Executable script, shebang: "/bin/sh"
+71721984  	0x4466400 	Executable script, shebang: "/bin/sh"
+71729152  	0x4468000 	Executable script, shebang: "/usr/bin/perl"
+71738368  	0x446A400 	Executable script, shebang: "/bin/sh"
+71739392  	0x446A800 	Executable script, shebang: "/bin/sh -e"
+71741440  	0x446B000 	Executable script, shebang: "/bin/sh"
+71745536  	0x446C000 	Executable script, shebang: "/bin/sh"
+71750656  	0x446D400 	Executable script, shebang: "/bin/sh -e"
+71751680  	0x446D800 	Executable script, shebang: "/bin/sh"
+71794688  	0x4478000 	Executable script, shebang: "/bin/sh"
+71797760  	0x4478C00 	Executable script, shebang: "/usr/bin/perl"
+71810048  	0x447BC00 	Executable script, shebang: "/bin/sh"
+71828480  	0x4480400 	ELF 32-bit LSB executable, ARM, version 1 (SYSV)
+71853744  	0x44866B0 	Copyright string: " (C) 2000, 2001 Wichert Akkerman.n."
+71853787  	0x44866DB 	Copyright string: " (C) 2006-2009 Guillem Jover."
+71879804  	0x448CC7C 	Copyright string: " %s %d Free Software Foundation, Inc., Inc."
+71883228  	0x448D9DC 	LZMA compressed data, properties: 0xC7, dictionary size: 16777216 bytes, uncompressed size: 50331648 bytes
+73401344  	0x4600400 	ELF 32-bit LSB executable, ARM, version 1 (SYSV)
+74279641  	0x46D6AD9 	PARity archive data - file number 19781
+74279649  	0x46D6AE1 	PARity archive data - file number 21836
+74813067  	0x4758E8B 	mcrypt 2.2 encrypted data, algorithm: blowfish-448, mode: CBC, keymode: 8bit
+74893179  	0x476C77B 	mcrypt 2.2 encrypted data, algorithm: blowfish-448, mode: CBC, keymode: MD5 hash
+74913605  	0x4771745 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+74914709  	0x4771B95 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+74915045  	0x4771CE5 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+74925188  	0x4774484 	LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, missing uncompressed size
+74938761  	0x4777989 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+74938777  	0x4777999 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+74938785  	0x47779A1 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+74938793  	0x47779A9 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+74938801  	0x47779B1 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+74938809  	0x47779B9 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+74938825  	0x47779C9 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+74941769  	0x4778549 	LZMA compressed data, properties: 0x5D, dictionary size: 16777216 bytes, missing uncompressed size
+75017369  	0x478AC99 	mcrypt 2.2 encrypted data, algorithm: blowfish-448, mode: CBC, keymode: 8bit
+75159352  	0x47AD738 	Copyright string: " (c) 2001-2011 Python Software Foundation.Foundation."
+75159426  	0x47AD782 	Copyright string: " (c) 2000 BeOpen.com.s Reserved."
+75159479  	0x47AD7B7 	Copyright string: " (c) 1995-2001 Corporation for National Research Initiatives.National Research Initiatives."
+75159572  	0x47AD814 	Copyright string: " (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.atisch Centrum, Amsterdam."
+75374135  	0x47E1E37 	Copyright string: " (c) 1997-2002 by Secret Labs AB B "
+76090149  	0x4890B25 	Executable script, shebang: "/usr/bin/bosh) so that the"
+76257017  	0x48B96F9 	Copyright string: " does not exist, book about hacker cultureker culture"
+76257070  	0x48B972E 	Copyright string: " does not exist: Book about hacker culture, folklore andker culture, folklore and"
+76257317  	0x48B9825 	Copyright string: " finns inte, book about hacker cultureculture"
+76257366  	0x48B9856 	Copyright string: " finns inte: Book about hacker culture, folklore and historyculture, folklore and history"
+76788447  	0x493B2DF 	U-Boot boot loader reference
+76881361  	0x4951DD1 	Linux kernel version "of the VMS "Phone" utility and a VMSMaila VMSMail"
+77885231  	0x4A46F2F 	GIF image data, version "89a", 8202 x 27713
+78414981  	0x4AC8485 	Executable script, shebang: "/usr/bin/guile, or as an extension language for"
+78415488  	0x4AC8680 	Executable script, shebang: "/usr/bin/guile, or as an extension language for"
+78415913  	0x4AC8829 	Executable script, shebang: "/usr/bin/guile, or as an extension language for"
+78417182  	0x4AC8D1E 	Executable script, shebang: "/usr/bin/guile, or as an extension language for"
+79691776  	0x4C00000 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+82754165  	0x4EEBA75 	Ubiquiti firmware header, ~CRC32: 0x6F64656C, version: " provides a spatial object model and fundamental geometric"
+82754867  	0x4EEBD33 	Ubiquiti firmware header, ~CRC32: 0x6F64656C, version: " provides a spatial object model and fundamental geometric"
+82755530  	0x4EEBFCA 	Ubiquiti firmware header, ~CRC32: 0x69627261, version: " library"
+82755544  	0x4EEBFD8 	Ubiquiti firmware header, ~CRC32: 0x67653A20, version: " provides a spatial object model and fundamental geometric"
+82755784  	0x4EEC0C8 	Ubiquiti firmware header, ~CRC32: 0x65642069, version: " library."
+82755931  	0x4EEC15B 	Ubiquiti firmware header, ~CRC32: 0x73207573, version: " provides a spatial object model and fundamental geometric"
+82756199  	0x4EEC267 	Ubiquiti firmware header, ~CRC32: 0x66696E65, version: "."
+82756315  	0x4EEC2DB 	Ubiquiti firmware header, ~CRC32: 0x666F7220, version: " GIS geometry engine library"
+82756349  	0x4EEC2FD 	Ubiquiti firmware header, ~CRC32: 0x732D7275, version: " provides a spatial object model and fundamental geometric"
+82756583  	0x4EEC3E7 	Ubiquiti firmware header, ~CRC32: 0x6E736F72, version: " API."
+82756685  	0x4EEC44D 	Ubiquiti firmware header, ~CRC32: 0xA506163, version: " bindings for Ruby"
+82756709  	0x4EEC465 	Ubiquiti firmware header, ~CRC32: 0xA446573, version: " provides a spatial object model and fundamental geometric"
+82756939  	0x4EEC54B 	Ubiquiti firmware header, ~CRC32: 0x6E206465, version: "."
+83675083  	0x4FCC7CB 	Executable script, shebang: "/usr/bin/guile, or as an extension language for"
+85443277  	0x517C2CD 	Executable script, shebang: "/usr/bin/guile, or as an extension language for"
+86825885  	0x52CDB9D 	Copyright string: " info for songs Page advance"
+87485998  	0x536EE2E 	Linux kernel version "& processors) andro-partition information."
+87683903  	0x539F33F 	Linux kernel version "of the hub software for the Directect"
+89767993  	0x559C039 	Executable script, shebang: "/bin/sh"
+90438511  	0x563FB6F 	Executable script, shebang: "/bin/sh"
+90581531  	0x5662A1B 	U-Boot boot loader reference
+91272710  	0x570B606 	VMware4 disk image
+91439104  	0x5734000 	GIF image data, version "87a", 8236 x 18759
+91439112  	0x5734008 	GIF image data, version "89a", 8236 x 20554
+91518641  	0x57476B1 	U-Boot boot loader reference
+92343077  	0x5810B25 	Executable script, shebang: "/usr/bin/bosh) so that the"
+92509945  	0x58396F9 	Copyright string: " does not exist, book about hacker cultureker culture"
+92509998  	0x583972E 	Copyright string: " does not exist: Book about hacker culture, folklore andker culture, folklore and"
+92510245  	0x5839825 	Copyright string: " finns inte, book about hacker cultureculture"
+92510294  	0x5839856 	Copyright string: " finns inte: Book about hacker culture, folklore and historyculture, folklore and history"
+93041375  	0x58BB2DF 	U-Boot boot loader reference
+93134289  	0x58D1DD1 	Linux kernel version "of the VMS "Phone" utility and a VMSMaila VMSMail"
+94138159  	0x59C6F2F 	GIF image data, version "89a", 8202 x 27713
+94667909  	0x5A48485 	Executable script, shebang: "/usr/bin/guile, or as an extension language for"
+94668416  	0x5A48680 	Executable script, shebang: "/usr/bin/guile, or as an extension language for"
+94668841  	0x5A48829 	Executable script, shebang: "/usr/bin/guile, or as an extension language for"
+94670110  	0x5A48D1E 	Executable script, shebang: "/usr/bin/guile, or as an extension language for"
+96468992  	0x5C00000 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+99531381  	0x5EEBA75 	Ubiquiti firmware header, ~CRC32: 0x6F64656C, version: " provides a spatial object model and fundamental geometric"
+99532083  	0x5EEBD33 	Ubiquiti firmware header, ~CRC32: 0x6F64656C, version: " provides a spatial object model and fundamental geometric"
+99532746  	0x5EEBFCA 	Ubiquiti firmware header, ~CRC32: 0x69627261, version: " library"
+99532760  	0x5EEBFD8 	Ubiquiti firmware header, ~CRC32: 0x67653A20, version: " provides a spatial object model and fundamental geometric"
+99533000  	0x5EEC0C8 	Ubiquiti firmware header, ~CRC32: 0x65642069, version: " library."
+99533147  	0x5EEC15B 	Ubiquiti firmware header, ~CRC32: 0x73207573, version: " provides a spatial object model and fundamental geometric"
+99533415  	0x5EEC267 	Ubiquiti firmware header, ~CRC32: 0x66696E65, version: "."
+99533531  	0x5EEC2DB 	Ubiquiti firmware header, ~CRC32: 0x666F7220, version: " GIS geometry engine library"
+99533565  	0x5EEC2FD 	Ubiquiti firmware header, ~CRC32: 0x732D7275, version: " provides a spatial object model and fundamental geometric"
+99533799  	0x5EEC3E7 	Ubiquiti firmware header, ~CRC32: 0x6E736F72, version: " API."
+99533901  	0x5EEC44D 	Ubiquiti firmware header, ~CRC32: 0xA506163, version: " bindings for Ruby"
+99533925  	0x5EEC465 	Ubiquiti firmware header, ~CRC32: 0xA446573, version: " provides a spatial object model and fundamental geometric"
+99534155  	0x5EEC54B 	Ubiquiti firmware header, ~CRC32: 0x6E206465, version: "."
+100452299 	0x5FCC7CB 	Executable script, shebang: "/usr/bin/guile, or as an extension language for"
+102220493 	0x617C2CD 	Executable script, shebang: "/usr/bin/guile, or as an extension language for"
+103603101 	0x62CDB9D 	Copyright string: " info for songs Page advance"
+104263214 	0x636EE2E 	Linux kernel version "& processors) andro-partition information."
+104461119 	0x639F33F 	Linux kernel version "of the hub software for the Directect"
+106545209 	0x659C039 	Executable script, shebang: "/bin/sh"
+107215727 	0x663FB6F 	Executable script, shebang: "/bin/sh"
+107358747 	0x6662A1B 	U-Boot boot loader reference
+108049926 	0x670B606 	VMware4 disk image
+108216320 	0x6734000 	GIF image data, version "87a", 8236 x 18759
+108216328 	0x6734008 	GIF image data, version "89a", 8236 x 20554
+108295857 	0x67476B1 	U-Boot boot loader reference
+113246208 	0x6C00000 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+124485029 	0x76B7DA5 	U-Boot boot loader reference
+130023424 	0x7C00000 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+134878151 	0x80A13C7 	U-Boot boot loader reference
+145919052 	0x8B28C4C 	Copyright string: " does not exist, book about hacker cultureker culture"
+145919749 	0x8B28F05 	Copyright string: " finns inte, book about hacker cultureculture"
+Progress: 27.54% (147849216 / 536870912)
+
+148485222 	0x8D9B466 	GIF image data, version "89a", 17418 x 29541
+Progress: 27.93% (149946368 / 536870912)
+
+Progress: 27.93% (149946368 / 536870912)
+
+153076510 	0x91FC31E 	Ubiquiti firmware header, ~CRC32: 0x696E6572, version: " library"
+153078080 	0x91FC940 	Ubiquiti firmware header, ~CRC32: 0x696E7465, version: " GIS geometry engine library"
+153078973 	0x91FCCBD 	Ubiquiti firmware header, ~CRC32: 0x32340A4D, version: " bindings for Ruby"
+159822660 	0x986B344 	U-Boot boot loader reference
+164793420 	0x9D28C4C 	Copyright string: " does not exist, book about hacker cultureker culture"
+164794117 	0x9D28F05 	Copyright string: " finns inte, book about hacker cultureculture"
+168359138 	0xA08F4E2 	U-Boot boot loader reference
+171553894 	0xA39B466 	GIF image data, version "89a", 17418 x 29541
+176145182 	0xA7FC31E 	Ubiquiti firmware header, ~CRC32: 0x696E6572, version: " library"
+176146752 	0xA7FC940 	Ubiquiti firmware header, ~CRC32: 0x696E7465, version: " GIS geometry engine library"
+176147645 	0xA7FCCBD 	Ubiquiti firmware header, ~CRC32: 0x32340A4D, version: " bindings for Ruby"
+182891332 	0xAE6B344 	U-Boot boot loader reference
+189214212 	0xB472E04 	Linux EXT filesystem, rev 0.0 ext2 filesystem data (mounted or unclean), UUID=00000000-0000-0000-0000-000000000000
+192968735 	0xB80781F 	GPG key trust database version 107
+192968755 	0xB807833 	GPG key trust database version 107
+192968775 	0xB807847 	GPG key trust database version 107
+192968799 	0xB80785F 	GPG key trust database version 107
+192968823 	0xB807877 	GPG key trust database version 107
+193001587 	0xB80F873 	GPG key trust database version 118
+193229136 	0xB847150 	U-Boot boot loader reference
+193295675 	0xB85753B 	GPG key trust database version 45
+193296963 	0xB857A43 	GPG key trust database version 1
+193297659 	0xB857CFB 	GPG key trust database version 118
+193299563 	0xB85846B 	GPG key trust database version 45
+193301871 	0xB858D6F 	GPG key trust database version 115
+193318712 	0xB85CF38 	U-Boot boot loader reference
+193326235 	0xB85EC9B 	GPG key trust database version 118
+193330676 	0xB85FDF4 	U-Boot boot loader reference
+193335411 	0xB861073 	GPG key trust database version 118
+197134336 	0xBC00800 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+197155840 	0xBC05C00 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+197170176 	0xBC09400 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+197187584 	0xBC0D800 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+197255168 	0xBC1E000 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+197290168 	0xBC268B8 	LZMA compressed data, properties: 0x5C, dictionary size: 16777216 bytes, uncompressed size: 1232 bytes
+197292600 	0xBC27238 	LZMA compressed data, properties: 0x99, dictionary size: 16777216 bytes, uncompressed size: 1224 bytes
+197296128 	0xBC28000 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+197315584 	0xBC2CC00 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+197354496 	0xBC36400 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+197474304 	0xBC53800 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+197493760 	0xBC58400 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+197638328 	0xBC7B8B8 	LZMA compressed data, properties: 0x5C, dictionary size: 16777216 bytes, uncompressed size: 1232 bytes
+197649976 	0xBC7E638 	LZMA compressed data, properties: 0x99, dictionary size: 16777216 bytes, uncompressed size: 1224 bytes
+197726239 	0xBC9101F 	GPG key trust database version 107
+197726259 	0xBC91033 	GPG key trust database version 107
+197726279 	0xBC91047 	GPG key trust database version 107
+197726303 	0xBC9105F 	GPG key trust database version 107
+197726327 	0xBC91077 	GPG key trust database version 107
+197743847 	0xBC954E7 	LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, missing uncompressed size
+197812339 	0xBCA6073 	GPG key trust database version 118
+197831151 	0xBCAA9EF 	LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, missing uncompressed size
+198179159 	0xBCFF957 	LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, missing uncompressed size
+198323536 	0xBD22D50 	U-Boot boot loader reference
+198701271 	0xBD7F0D7 	LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, missing uncompressed size
+198788727 	0xBD94677 	LZMA compressed data, properties: 0x5D, dictionary size: 33554432 bytes, missing uncompressed size
+198866235 	0xBDA753B 	GPG key trust database version 45
+198876739 	0xBDA9E43 	GPG key trust database version 1
+198877435 	0xBDAA0FB 	GPG key trust database version 118
+198888555 	0xBDACC6B 	GPG key trust database version 45
+198905199 	0xBDB0D6F 	GPG key trust database version 115
+198978052 	0xBDC2A04 	Linux EXT filesystem, rev 0.0 ext2 filesystem data (mounted or unclean), UUID=00000000-0000-0000-0000-000000000000
+199002936 	0xBDC8B38 	U-Boot boot loader reference
+199035035 	0xBDD089B 	GPG key trust database version 118
+199047668 	0xBDD39F4 	U-Boot boot loader reference
+199069811 	0xBDD9073 	GPG key trust database version 118
+199130112 	0xBDE7C00 	Linux EXT filesystem, rev 1.0 ext4 filesystem data, UUID=0008119d-9b57-4eb8-9a77-d16828b728b7, volume name "rootfs"
+205521920 	0xC400400 	ELF 32-bit LSB executable, ARM, version 1 (SYSV)
+205580288 	0xC40E800 	Executable script, shebang: "/bin/bash"
+205580455 	0xC40E8A7 	Copyright string: " (C) 1998, 2001, 2002, 2006, 2007 Free Software Foundation07 Free Software Foundation"
+205580525 	0xC40E8ED 	Copyright string: " (C) 1993 Jean-loup Gaillyhis program is free software; you can redistribute it and/or mo"
+205581349 	0xC40EC25 	Copyright string: " (C) 2007 Free Software Foundation, Inc.ion, Inc."
+205586432 	0xC410000 	ELF 32-bit LSB executable, ARM, version 1 (SYSV)
+205649920 	0xC41F800 	ELF 32-bit LSB executable, ARM, version 1 (SYSV)
+205660220 	0xC42203C 	Copyright string: " %s %d Free Software Foundation, Inc., Inc."
+205663548 	0xC422D3C 	LZMA compressed data, properties: 0xC7, dictionary size: 16777216 bytes, uncompressed size: 50331648 bytes
+205664256 	0xC423000 	ELF 32-bit LSB executable, ARM, version 1 (SYSV)
+205693353 	0xC42A1A9 	Copyright string: " (c) 1989 The Regents of the University of California.iversity of California."
+205694976 	0xC42A800 	ELF 32-bit LSB executable, ARM, version 1 (SYSV)
+205732840 	0xC433BE8 	Zip archive data, v0.0 compressed size: 621412352,  uncompressed size: 622869107, name: "ot in gzip formatdecompression OK, trailing zero bytes ignored bytes ignoredression OK, trailing garbage ignorednored"  
+
