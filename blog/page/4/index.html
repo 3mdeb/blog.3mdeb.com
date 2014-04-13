@@ -9,8 +9,7 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="You might be surprised at how much you have to make to correctly build
-arm-unknown-linux-gnueabi config based toolchain with crosstool-ng. As you can &hellip;">
+  <meta name="description" content="Therefore, I&rsquo;m leaving for the Easter holidays I wanted to download some lecture on embedded systems, which was presented at the 2012 Embedded &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +77,408 @@ arm-unknown-linux-gnueabi config based toolchain with crosstool-ng. As you can &
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/06/therefore-im-leaving-for-easter/">How to Download Videos From videos.linux.com</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-06T22:48:00+02:00" pubdate data-updated="true">Apr 6<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/04/06/therefore-im-leaving-for-easter/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Therefore, I&rsquo;m leaving for the Easter holidays I wanted to download some lecture on embedded systems, which was presented at the 2012 Embedded Linux Conference. Although I regret I found that I could not find as good quality copy in the network as on the Linux Foundation page. It is unfortunate that linux.com site does not have the possibility of direct downloading video files. But there is a workaround. Follow below tutorial:</p>
+
+<ol>
+<li>Go to page with video. For example:  <a href="http://video.linux.com/videos/to-provide-a-long-term-stable-linux-for-industry">http://video.linux.com/videos/to-provide-a-long-term-stable-linux-for-industry</a></li>
+<li><p>Click play on the video and if you using Chrome browser right click on player window and inspect this element. Result should look like that: 
+<img src="http://1.bp.blogspot.com/-ivNLyF3IFwc/T39S_IwbntI/AAAAAAAAAEg/mVgiu6CXqhs/s400/Untitled.png" alt="" /></p></li>
+<li><p>Expand div tag marked in red on screenshot above. If video was start you should see video tag which contain two links to video files mp4 and webm. Screen shot below shows hot it should look like:
+<img src="http://3.bp.blogspot.com/-waLmSIB4LAI/T39VlAF5P7I/AAAAAAAAAEo/7T9bUg5p-sw/s400/Untitled1.png" alt="" /></p></li>
+</ol>
+
+
+<p>These links are only temporary, so if you want to use them do it as soon as possible. The sad part of all is that the organization intended to promote one of the most libertarian solutions in software history does not provide materials for download.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/20/building-arm-toolchain-part-1-libs-and/">Building ARM Toolchain - Part 1: Libs and Binutils</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-20T23:25:00+01:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/03/20/building-arm-toolchain-part-1-libs-and/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Searching the Internet for information on how to build arm toolchain from
+scratch I realize that it is very hard to find  information about this matter
+(and recent one even harder). I will try to fill this lack of information and
+try to build toolchain. My main goal is to use a component based on the GNU
+public license, and using them in as the newest version as it is possible.</p>
+
+<p>What is toolchain ? (according to wikipedia):</p>
+
+<blockquote><p>In software, a toolchain is the set of programming tools that are used to create a product (typically another computer program or system of programs). The tools may be used in a chain, so that the output of each tool becomes the input for the next, but the term is used widely to refer to any set of linked development tools.</p></blockquote>
+
+<h3>Requirements</h3>
+
+<ul>
+<li>Cross compiler, I create one using corsstool-ng and describe this process in 
+<a href="/blog/2012/03/14/quick-build-of-arm-unknown-linux">previous post</a>.
+I will use <code>arm-unknown-linux-gnueabi</code> as entry point compiler.</li>
+<li>$TARGET is defined as my destination directory:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export TARGET=/home/pietrushnic/sandbox/toolchain  </span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Procedure</h3>
+
+<h4>Kernel header files</h4>
+
+<ol>
+<li>clone linux git repository</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>install headers $TARGET is home of our toolchain</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make ARCH=arm INSTALL_HDR_PATH=$TARGET/usr headers_install</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Libraries (gmp, mpfr, mpc)</h4>
+
+<ol>
+<li>GMP (<em>GNU Multiple Precision Arithmetic Library</em>) &ndash; changeset used: 14765:0acae62fa162</li>
+<li>As I said before. I use &ldquo;latest greatest&rdquo; ;P version, and for gmp we can reach it using:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hg clone http://gmplib.org:8000/gmp</span></code></pre></td></tr></table></div></figure>
+
+
+<pre><code> - create configuration files 
+</code></pre>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./.bootstrap</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>configure</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./configure --prefix=$TARGET/arm-x-tools --enable-shared=n --enable-static</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>compile</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make && make check && make install</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li> MPFR (<em>GNU Multiple Precision Floating-Point Reliably</em>) &ndash; version: r8103</li>
+<li>get latest version</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>svn checkout svn://scm.gforge.inria.fr/svn/mpfr/trunk mpfr</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>create configuration file</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>autoreconf -i</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>configure</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./configure --prefix=$TARGET/arm-x-tools --enable-thread-safe \ --with-gmp=$TARGET/arm-x-tools --disable-shared --enable-static</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>compile</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make && make install</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li> MPC (<em>Multiple Precision Complex</em>)&ndash; version: r1146</li>
+<li>checkout svn</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>svn checkout svn://scm.gforge.inria.fr/svnroot/mpc/trunk mpc</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>create configuration file</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>autoreconf -i</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>configure</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./configure --prefix=$TARGET/arm-x-tools \ --with-gmp=$TARGET/arm-x-tools --with-mpfr=$TARGET/arm-x-tools \ --disable-shared --enable-static</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>compile</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make && make install</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Binutils &ndash; collection of a GNU binary tools:</li>
+<li>checkout version from anonymous cvs</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cvs -z 9 -d :pserver:anoncvs@sourceware.org:/cvs/src</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>login create directory for checkout</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir binutils</span></code></pre></td></tr></table></div></figure>
+
+
+<p>checkout sources</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cvs -z 9 -d :pserver:anoncvs@sourceware.org:/cvs/src co binutils</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>configure</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>LDFLAGS="-Wl,-rpath -Wl,$TARGET/arm-x-tools/lib" ./configure \
+</span><span class='line'>--build=x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu \
+</span><span class='line'>--target=arm-unknown-linux-gnueabi --prefix=$TARGET/arm-x-tools \
+</span><span class='line'>--disable-nls --disable-multilib --disable-werror --with-float=soft \
+</span><span class='line'>--with-gmp=$TARGET/arm-x-tools --with-mpfr=$TARGET/arm-x-tools \
+</span><span class='line'>--with-mpc=$TARGET/arm-x-tools --with-sysroot=$TARGET</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>compile</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make configure-host make make install</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>to check if everything was made correctly</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ldd $TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-ldd</span></code></pre></td></tr></table></div></figure>
+
+
+<p>it should show that it use library compiled previously by us:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>libz.so.1 =&gt; /home/pietrushnic/sandbox/toolchain/arm-x-tools/lib/libz.so.1 \ (0x00007f0086cc5000)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This set gives us a solid base to build the compiler. However, it will be in the <a href="/blog/2012/04/12/building-arm-toolchain-part-2-gcc-and">next section</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/20/-democracy-the-god-that-failed-hans-hermann-hoppe/">&#8220;Democracy: The God That Failed&#8221; Hans-Hermann Hoppe</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-20T21:16:00+01:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/03/20/-democracy-the-god-that-failed-hans-hermann-hoppe/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I began this article last year. Until now I wonder if anyone could be interested
+in reading about book that I read. I saw great interesting in linux/embedded
+stuff but what about different things that we met every day. What about
+politics/economics and religion ? Don&rsquo;t know if you should start this but I will
+give it a try.</p>
+
+<p>I&rsquo;m argue a lot about politics/economics and religion. I don&rsquo;t have education in
+this matter but study by myself a little bit. So maybe this is good place for
+sharing ideas.</p>
+
+<p>So about a year ago I read a book <a href="http://www.amazon.com/Democracy-Economics-Politics-Monarchy-Natural/dp/0765808684">&ldquo;Democracy: The God That Failed&rdquo;</a>.
+I talk a lot about this book with mu colleagues and have to said that some ideas in it
+are very controversial. One thing is that Hoppe assume some economic facts that
+are not clear for most people &ndash; I agree with most of them, because it is
+libertarian point of view and right now I&rsquo;m trying to follow this ideas of
+freedom.</p>
+
+<p>Hoppe shows that people democracy have to fail because leads to socialism.
+Increasing number of privileges and promoting average citizen to politics cause
+system inefficient. So most of this things in my environment are well known and
+discussion goes to details.</p>
+
+<p>Probably the most shocking for me was concept of totally private security system.
+Everyone can have guns, missiles, tanks or any other fight equipment he want.
+Hoppe is an anarcho-capitalist so he doesn&rsquo;t like state and it&rsquo;s monopoly on
+high end weapon. After rethinking twice this concept could be good but IMO
+through natural evolution we will get companies that would take care about
+security. Also today we can find some trends in this, many Polish citizen with
+high wages go to closed residential housing with security, protecting themselves
+against poor, beggars and drunk junkies.</p>
+
+<p>Second thing that heated debate was that state kills more than anarchy or not
+organized society. Discussion goes to question: When more people were killed
+during the Middle Ages, which took quite a long time, or in a few wars started
+by democratically ruled countries ?</p>
+
+<p>So if we look at wiki <a href="http://en.wikipedia.org/wiki/List_of_wars_and_disasters_by_death_toll">article</a>
+what we can see ? Biggest killers in history are Chinese and they did this in
+medieval. So not Europe with it Christian crusade and small contention between
+the principalities ? I will not count Mongolian and Tatar invasion because it took 200
+years, so this was not a simple war it was series of wars simply concatenated in
+one. Surprising data from China, they were able to kill 5-15% of world population
+three times during medieval. They didn&rsquo;t have atomic bomb, Ebola, chemical poisons
+and they did this. If you ever read something about China history you that it is
+one of the best organized society in the world (take a look at great wall).
+First administration exams, wheel base (width of road), language was standardized
+over 2k years ago. Very good organization of the state. So biggest wars and most
+killed battles came from well organized strong state. If you want peace you
+don&rsquo;t need &ldquo;New World Order&rdquo; or &ldquo;World Government&rdquo; you need weak state with
+power distributed to locally living people. Let them decide if they want
+conflict with town or village near them. Or maybe better live in peace, trade
+freely and make world better. Centralized systems are slow, inefficient and cost
+a lot. Distributed systems are those in which life of one man is important.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -690,185 +1091,6 @@ lines to .vimrc (9 = black)</li>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/19/improve-productivity-by-tracking-work/">Improve Productivity by Tracking Work Environment With Git - Preparation</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-19T21:12:00+01:00" pubdate data-updated="true">Feb 19<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/02/19/improve-productivity-by-tracking-work/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><em>Update</em>: My repository is available
-<a href="https://github.com/pietrushnic/workspace.git">here</a>.</p>
-
-<p>Below is first post from series in which I want to describe my experience gained
-in attempt to enhance my productivity by using git to control the contents of
-some files in my home directory. The first step to improve the productivity
-is good organization of working environment. It happens very often that I work
-on multiple machines both physical and virtual. Therefore I need a
-good mechanism to share knowledge, experience, code, configuration and many
-other things. Configuration described below is only an example that actually
-fits my way of working.  First of all simple concept of directory structure is
-needed. Let&rsquo;s start with:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir -p $HOME/workspace/blog;mkdir -p $HOME/workspace/dotfiles
-</span><span class='line'>cd workspace </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Write some files (i.e. for your blog) with your favourite editor, initialize
-repository and prepare first commit</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git init
-</span><span class='line'>git add .;git commit -m "Initial commit for environment tracking" </span></code></pre></td></tr></table></div></figure>
-
-
-<p>To avoid information about untracked vim swp files add $HOME/workspace/.gitignore with following content:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.gitignore
-</span><span class='line'>*.swp</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/15/set-irssi-under-debian-to-use-freenode/">Set Irssi Under Debian to Use Freenode Server</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-15T20:25:00+01:00" pubdate data-updated="true">Feb 15<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/02/15/set-irssi-under-debian-to-use-freenode/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Very short manual on how to set up irssi to work with freenode servers.<br/>
-Fist, install irssi:</p>
-
-<p>sudo apt-get install irssi Run:</p>
-
-<p>irssi For freenode write:</p>
-
-<p>/connect holmes.freenode.net Send register command for youe {nickname} and add information about your {e-mail}:</p>
-
-<p>/msg nickserv register {nickname} {e-mail} Copy and paste line, which you get from freenode registration server to your mailbox, to irssi. After that add freenode network:</p>
-
-<p>/network add freenode Add what should be automaticali send to server after connecting, remeber to correctly write your {nickname} and {password}, password will be stored in plain text:</p>
-
-<p>/network add -autosendcmd &lsquo;^nick {nickname};/msg nickserv identify {password}&rsquo; freenode Auto-connect everytime when irssi will be run:</p>
-
-<p>/server ADD -auto -network freenode holmes.freenode.net 6667 Channel autologin:</p>
-
-<p>/channel ADD -auto #debian freenode After all we should save settings:</p>
-
-<p>/save That&rsquo;s all, enjoy!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/06/arbtt-as-productivity-improver-for/">Arbtt as Productivity Improver For</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-06T00:00:00+01:00" pubdate data-updated="true"></time>
-        
-         | <a href="/blog/2012/02/06/arbtt-as-productivity-improver-for/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>&mdash;&ndash; layout: post title: &ldquo;arbtt as productivity improver for Linux enviroment&rdquo; date: 2012-02-06T00:37:00+01:00 categories: &ndash; productivity &mdash;&ndash;</p>
-
-<p>As I mentioned in previous <a href="http://pietrushnic.blogspot.com/2012/02/first-steps-to-improve-work.html">post</a> I work a lot on improving my productivity. After FreeMind it is time for <a href="http://darcs.nomeata.de/arbtt/doc/users_guide/">arbtt</a>. This is small tool which tracks active windows during your work. It is delivered with distro that I&rsquo;m currently using (Debian wheezy). So all I had to do was:</p>
-
-<p>sudo apt-get install arbtt Below I try describe how I configure arbtt to work with some apps that I use (Google Chrome, FreeMind, gnome-terminal and screen).<br/>
-To effectively work with arbtt I had to run a daemon that collects information. In this way, I found the first problem, namely, it is hard to find a website, which correctly explains how to execute command during startup on Debian with GNOME environment. After few tries I realize that I should focus on GNOME autostart mechanism. This led me to create little file in $HOME/.config/autostart which looks like that:</p>
-
-<p>[Desktop Entry] Type=Application Encoding=UTF-8 Name=The Automatic Rule-Base Time Tracker Exec=arbtt-capture Terminal=false So I had configured arbtt and it starts to capture data about my work. To display this data in friendly manner arbtt-stat should be used. Application complains if $HOME/.arbtt/categorize.cfg wasn&rsquo;t configured for it appropriate. Detailed documentation about this file can be found on arbtt <a href="http://darcs.nomeata.de/arbtt/doc/users_guide/configuration.html">configuration page</a>. The process of writing this file should be iterative, starting point for me was:</p>
-
-<p>&mdash; This defines some aliases, to make the reports look nicer: aliases ( &ldquo;sun-awt-X11-XFramePeer&rdquo; &ndash;> &ldquo;java&rdquo; ) &mdash; A rule that probably everybody wants. Being inactive for over a minute &mdash; causes this sample to be ignored by default. $idle > 60 ==> tag inactive, current window $program == &ldquo;sun-awt-X11-XFramePeer&rdquo; &amp;&amp; current window ($title =~ /(.+)\s-\sFreeMind/) ==> tag program:FreeMind-$1, current window $program == &ldquo;gnome-terminal&rdquo; &amp;&amp; current window ($title =~ /(.+)/) ==> tag term:$1, &mdash; Simple rule that just tags the current program tag program:$current.program, &mdash; I&rsquo;d like to know what web pages in google-chrome I&rsquo;m working in. So I do &mdash; not tag necessarily by the active window title, but the title that contains &mdash; the specific string. current window $program == &ldquo;google-chrome&rdquo; &amp;&amp; any window ($program == &ldquo;google-chrome&rdquo; &amp;&amp; $title =~ /(.+)\s-\sGoogle\sChrome/) ==> tag www:$1, However, after creating a configuration file such statistics were displayed correctly it was still a big problem to solve &ndash; how to combine arbtt with gnome-terminal and screen. The first one requires only a correctly set the window&rsquo;s name. Although the synchronization of the terminal window&rsquo;s name with a window inside the screen was not a trivial task (primarily on the mass of broken tutorials that can be found on the web). Finally my .screenrc looks like that:</p>
-
-<p>termcapinfo xterm* &lsquo;hs:ts=\E]0;:fs=\007:ds=\E]0;\007&rsquo; defhstatus &ldquo;[screen] ^Et&rdquo; hardstatus off # Set the scrollback length: defscrollback 10000 # Select whether you want to see the copyright notice during startup: startup_message off # Display a caption string below, appearing like tabs and # displaying the window number and application name (by default). caption always caption string &ldquo;%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W}%c %{g}]&rdquo; #&ldquo;%{= kb}[ %=%{w}%?%-Lw%?%{b}(%{W}%n*%f %t%?(%u)%?%{b})%{w}%?%+Lw%?%?%= %{b}][%{B} %H %{W}%l %{b}][%{B} %d.%m.%Y %{W}%0c %{b}]&rdquo; #&ldquo;%{bw}[%H] [%?%-Lw%?%{wb}%n*%f%t%{bw}%?%+Lw%?]%=%{bw} [%1`] [%c:%s] [%l]&rdquo; # &ldquo;%{kw}%-w%{wr}%n %t%{&ndash;}%+w&rdquo; defhstatus set terminal title and caption keeps data about my open windows in screen. Every time I open new window or change current one terminal title is updated.<br/>
-For now that&rsquo;s all. In the future I wanted to write how to synchronize the title of the window in the screen with vim editor to include information about the currently edited file.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -890,6 +1112,10 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
       </li>
     
       <li class="post">
+        <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and run OVMF under Qemu</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root file system for embedded system</a>
       </li>
     
@@ -899,10 +1125,6 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
     
       <li class="post">
         <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux kernel for embedded system</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/07/embedded-board-bootloader/">0x3: Embedded board bootloader</a>
       </li>
     
   </ul>
