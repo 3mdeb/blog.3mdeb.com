@@ -7,12 +7,10 @@ categories: arduino, c
 published: false
 ---
 
-This tutorial is addressed to Linux users that want to learn a little bit of C
-and how really things works from the embedded developer perspective. I assume
-that you own Arduino board and have some basic understanding of how it works. I
-prepared my examples on Anduino Duemilanove (this is not a typo), which is 100%
-compatible Arduino board with the same name . I'm using Debian unstable but all
-Debian-based distros should work pretty fine.
+This tutorial is addressed to Linux users that want to learn how to program
+Arduino using plain C. I assume that you own Arduino board and have some basic
+understanding of how it works. I prepared my examples with Anduino Duemilanove.
+I'm using Debian unstable but all Debian-based distros should work pretty fine.
 
 My inspiration for this series was article by Javier Valcarce [Program Arduino
 with AVR-GCC](http://www.javiervalcarce.eu/wiki/Program_Arduino_with_AVR-GCC),
@@ -20,7 +18,7 @@ because it was written over 5 years ago I would like to refresh some content
 presented there.
 
 _Disclaimer_: I'm not considering myself expert in programming Arduino. I tried
-my best to provide high quality materials but nobody's perfect, so if you find
+my best to provide high quality materials but nobody's perfect, so if you found
 any confusing informations please let me know.
 
 ###Beginner notes###
