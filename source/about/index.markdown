@@ -23,5 +23,5 @@ More about me you can find on social media sites.
 [{% img social-icon /assets/icons/twitter-logo-square.png 64 64 twitter %}](https://twitter.com/pietrushnic)
 [{% img social-icon /assets/icons/you-tube2-s.png 64 64 youtube %}](https://www.youtube.com/user/pietrushnic)
 
-_Disclaimer_: Of course, all opinions on this blog are my own not my employee.
+_Disclaimer_: Of course, all opinions on this blog are my own not my employer.
 
