@@ -475,6 +475,79 @@ try.</p>
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-14T23:22:00+02:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>What the OVMF is ?</h3>
+
+<p><strong>OVMF</strong> (<em>Open Virtual Machine Firmware</em>) is a firmware actively developed as a
+<strong>EDK2</strong>(<em>EFI Developer Kit</em>) package. It is a packed that aims to support
+firmware for virtual machines like Qemu.</p>
+
+<h3>Simplified build process</h3>
+
+<p>First of all lets get latest version of the code. For some time <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=Welcome">EFI and
+Framework Open Source
+Community</a> share edk2 code also on <a href="https://github.com/tianocore/edk2">github</a> mirror.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/tianocore/edk2.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Building process was simplified by OvmfPkg contributors. But I found that
+toolchain for latest gcc compilers is not ready in main repository. So I suggest
+to remove <code>BaseTools</code> directory and clone up to date git repository in this
+place:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd edk2
+</span><span class='line'>rm -rf BaseTools
+</span><span class='line'>git clone https://github.com/tianocore/buildtools-BaseTools.git BaseTools
+</span><span class='line'>. edksetup.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So to build firmware we need only one command:
+&#8220;`</p>
+
+<p><code>``
+You may need some additional packages like</code>uuid-dev<code>,</code>iasl<code>or</code>g++`.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a></h1>
     
     
@@ -2264,115 +2337,6 @@ of emulated machines by <code>-M ?</code>. Now, let&rsquo;s talk about <a href="
 <h3>Kudos</h3>
 
 <p>[1] <a href="http://infoscience.epfl.ch/record/149975/files/x86-llvm-translator-chipounov_2.pdf">Dynamically Translating x86 to LLVM using QEMU</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/">0x0: Intro to Virtual Development Board Building</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-07T01:27:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#preface">Preface</a></li>
-<li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#first-question">First question: How to start ?</a></li>
-<li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#virtual-development-board">Virtual Development Board &ndash; table of contents</a></li>
-<li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#kudos">Kudos</a></li>
-</ul>
-
-
-<p><a id="preface"></a></p>
-
-<h3>Preface</h3>
-
-<p>There are many reasons why ambitious programmers should care about huge rush in
-embedded market. IMO there is great potential in it. I don&rsquo;t want to go deep into
-this but take a look at all tablets, phones, smart TVs and other cool stuff
-like wireless in you washing machine or refrigerator (ok this two are right now only a gadgets :) ).
-This is all embedded. Another thing is that wages of experienced embedded
-developers are really high.</p>
-
-<p>This environment is very interesting. A lot to learn, a lot to do, so why not get
-your hands dirty ?</p>
-
-<p><a id="first-question"></a></p>
-
-<h3>First question: How to start ?</h3>
-
-<p>To do real embedded development, to learn the most, you simply buy hardware like
-all this <code>${animal}board (animal={panda,beagle,hawk})</code>. This is the best way but
-if you&rsquo;re beginner (like me) you probably don&rsquo;t want to spend $50 for stuff that
-you throw away after month because you don&rsquo;t like to deal with it or problems
-are not on your level, than maybe you should take a look around and wonder if it
-is possible to build virtual environment to check what kind of problem you may
-encounter learning embedded ? BTW this is cheap and fun, so potential ROI is big
-enough to try.</p>
-
-<p>IMHO this is where world going: proof of concept embedded platforms affordable
-for common man (not only for US/West Europe), testing environment based on
-virtualized/emulated solution, to check basic features, speed up testing, development
-and deployment. That&rsquo;s why we see so active development of software like Qemu/KVM.</p>
-
-<p><a id="virtual-development-board"></a></p>
-
-<h3>Virtual Development Board &ndash; table of contents</h3>
-
-<p>I realize that it is achievable and I will learn a lot trying to implement this
-idea. Finally I was convinced reading <a href="http://www.elinux.org/Virtual_Development_Board">this</a>
-two years old article on <a href="http://www.elinux.org">eLinux.org</a>.</p>
-
-<p>I decide to divide this article on few parts because IMHO it was to big to read
-it at once. Also people interesting in particular topic won&rsquo;t have to scrolling <code>&gt;2k</code>
-words post. List of all articles in this series:</p>
-
-<ol>
-<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/">Qemu as an environment for embedded board emulation</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/">Toolchain for Virtual Development Board</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/">Embedded board bootloader</a></li>
-<li><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">Linux kernel for embedded system</a></li>
-<li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">Qemu network configuration and tftp for Virtual Development Board</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/">Root file system for embedded system</a></li>
-</ol>
-
-
-<p><a id="kudos"></a></p>
-
-<h3>Kudos</h3>
-
-<p>At the and of this intro I want to give big kudos to all those hackers without
-whom creating this article would not be possible. Thanks for sharing your
-knowledge. Every time when I use knowledge that found by googling I&rsquo;m trying
-to stick link for further reading.</p>
-
-<h4><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation"><em>Enjoy!</em></a></h4>
 </div>
   
   

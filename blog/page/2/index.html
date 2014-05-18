@@ -9,8 +9,10 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="My story was that I migrate to new environment and want to recover my octopress
-setup. I thought that it will be as simple as cloning my blog github &hellip;">
+  <meta name="description" content="Preface
+First question: How to start ?
+Virtual Development Board &ndash; table of contents
+Kudos Preface There are many reasons why ambitious &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -102,6 +104,115 @@ setup. I thought that it will be as simple as cloning my blog github &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/">0x0: Intro to Virtual Development Board Building</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T01:27:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#preface">Preface</a></li>
+<li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#first-question">First question: How to start ?</a></li>
+<li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#virtual-development-board">Virtual Development Board &ndash; table of contents</a></li>
+<li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#kudos">Kudos</a></li>
+</ul>
+
+
+<p><a id="preface"></a></p>
+
+<h3>Preface</h3>
+
+<p>There are many reasons why ambitious programmers should care about huge rush in
+embedded market. IMO there is great potential in it. I don&rsquo;t want to go deep into
+this but take a look at all tablets, phones, smart TVs and other cool stuff
+like wireless in you washing machine or refrigerator (ok this two are right now only a gadgets :) ).
+This is all embedded. Another thing is that wages of experienced embedded
+developers are really high.</p>
+
+<p>This environment is very interesting. A lot to learn, a lot to do, so why not get
+your hands dirty ?</p>
+
+<p><a id="first-question"></a></p>
+
+<h3>First question: How to start ?</h3>
+
+<p>To do real embedded development, to learn the most, you simply buy hardware like
+all this <code>${animal}board (animal={panda,beagle,hawk})</code>. This is the best way but
+if you&rsquo;re beginner (like me) you probably don&rsquo;t want to spend $50 for stuff that
+you throw away after month because you don&rsquo;t like to deal with it or problems
+are not on your level, than maybe you should take a look around and wonder if it
+is possible to build virtual environment to check what kind of problem you may
+encounter learning embedded ? BTW this is cheap and fun, so potential ROI is big
+enough to try.</p>
+
+<p>IMHO this is where world going: proof of concept embedded platforms affordable
+for common man (not only for US/West Europe), testing environment based on
+virtualized/emulated solution, to check basic features, speed up testing, development
+and deployment. That&rsquo;s why we see so active development of software like Qemu/KVM.</p>
+
+<p><a id="virtual-development-board"></a></p>
+
+<h3>Virtual Development Board &ndash; table of contents</h3>
+
+<p>I realize that it is achievable and I will learn a lot trying to implement this
+idea. Finally I was convinced reading <a href="http://www.elinux.org/Virtual_Development_Board">this</a>
+two years old article on <a href="http://www.elinux.org">eLinux.org</a>.</p>
+
+<p>I decide to divide this article on few parts because IMHO it was to big to read
+it at once. Also people interesting in particular topic won&rsquo;t have to scrolling <code>&gt;2k</code>
+words post. List of all articles in this series:</p>
+
+<ol>
+<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/">Qemu as an environment for embedded board emulation</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/">Toolchain for Virtual Development Board</a></li>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/">Embedded board bootloader</a></li>
+<li><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">Linux kernel for embedded system</a></li>
+<li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">Qemu network configuration and tftp for Virtual Development Board</a></li>
+<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/">Root file system for embedded system</a></li>
+</ol>
+
+
+<p><a id="kudos"></a></p>
+
+<h3>Kudos</h3>
+
+<p>At the and of this intro I want to give big kudos to all those hackers without
+whom creating this article would not be possible. Thanks for sharing your
+knowledge. Every time when I use knowledge that found by googling I&rsquo;m trying
+to stick link for further reading.</p>
+
+<h4><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation"><em>Enjoy!</em></a></h4>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -612,6 +723,67 @@ productivity using open source tools.</p>
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/05/12/kernel-developers-tools/">Kernel Developers Tools - Based on &#8216;30 Linux Kernel Developers in 30 Weeks&#8217;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-12T02:41:00+02:00" pubdate data-updated="true">May 12<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/12/kernel-developers-tools/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>git, cscope, vi, bash, awk, and the rare bout with python.
+Ubuntu with Unity2D
+terminal, make, gcc, make me happy. Quilt for patch management, Git or
+Subversion for source code management. I&rsquo;m using Nedit
+SLED for work and openSUSE
+email client (mutt), and my editor (vim),
+git and quilt for kernel development, Chrome and Firefox for web browsing, and
+irssi for irc communication
+NOME 3 on my desktop, but sometimes get frustrated with it and revert back to
+OpenBox or i3m
+Xfce
+fbcon, vim, and mutt
+fvwm2
+bash shell, joe editor, gcc, make, git
+ Fedora
+ Xfce
+ git, sparse, smatch and spatch
+ joe
+  xterm, emacs, perl, mc and git.
+  i3
+  Emacs, ocaml, xfce
+  Emacs, Evolution, GNOME 3, Iceweasel (aka Firefox)
+  git, gcc, gmake, bash, perl
+  Thunderbird</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/04/06/tmux/">Tmux as Screen Replacement and Productivity Accelerator</a></h1>
     
     
@@ -1081,6 +1253,54 @@ comment below. If think this post was useful &ndash; share.</p>
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/03/30/useful-hints-for-blogging-using-octopress-with-vim/">Useful Hints for Blogging Using Octopress With Vim</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-30T05:49:00+01:00" pubdate data-updated="true">Mar 30<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/03/30/useful-hints-for-blogging-using-octopress-with-vim/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>1. Dictionary</h3>
+
+<p>Use dictionary. I wrote about how to start it automatically for <code>markdown</code> files
+<a href="/blog/2013/03/19/another-blogger-switched-to-octopress">here</a>.</p>
+
+<ul>
+<li><code>z=</code> &ndash; probably most useful function for me right now, as you probably noticed
+I&rsquo;m not great in English, so if you see some glaring errors &ndash; let me know I
+will fix it</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/03/30/music-for-programming/">Music for Programming</a></h1>
     
     
@@ -1211,458 +1431,6 @@ excerpts.</p>
 </span><span class='line'>setw -g mode-keys vi
 </span></code></pre></td></tr></table></div></figure>
 
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/19/another-blogger-switched-to-octopress/">Yet Another Blogger Switched to Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-19T03:01:00+01:00" pubdate data-updated="true">Mar 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/19/another-blogger-switched-to-octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>1. Introduction</h3>
-
-<p>It&rsquo;s been over 3 months when I published my last post. In chaos of daily jobs I
-realize that there is so much things that I don&rsquo;t like in Google Blogger that I
-have to find different solution for my blogging aspirations. So first of all
-requirements, what do I hate most in Blogger:</p>
-
-<ul>
-<li> <strong>editor</strong> &ndash; I used to vim and cannot stand that there is no bracket matching,
-vertical/block modification, and other cool stuff that I use</li>
-<li> <strong>the way that page was stored</strong> &ndash; I want to have control on my blog and if I can
-use for example git to track its content that would be great</li>
-<li>  <strong>lamish</strong> &ndash; with Blogger I learned nothing, I look for something related with new
-trends in web development, it looks that ruby on rails is the most interesting
-framework</li>
-</ul>
-
-
-<p>And I found <a href="http://octopress.org">Octopress</a> it has all I need. The page states
-&ldquo;A blogging framework for hackers&rdquo;. I don&rsquo;t know if I can or should call myself
-hacker but the idea is great for me.</p>
-
-<p>So I start to move my blog to Octopress. Of course there is a plenty of things
-to do but also many to learn.</p>
-
-<p>Lets start with first part of hints that I found useful:</p>
-
-<h3>2. Blogger post conversion to markdown and import to Octopress</h3>
-
-<p><strong>Update</strong>: <em>after I wrote this post I found interesting article on <a href="https://github.com/mojombo/jekyll/wiki/blog-migrations">this page</a></em></p>
-
-<ul>
-<li>Export Blogger posts.
-To do this go to your blog <code>Design-&gt;Settings-&gt;Other-&gt;Export blog-&gt;Donwload blog</code></li>
-<li>Convert xml to html files.
-I used latest modification of <a href="https://gist.github.com/dnagir/1765496/forks">import.rb</a>
-but you probably can find better solution.</li>
-<li>Convert html files to markdown for example by using <a href="https://github.com/xijo/reverse_markdown">reverse_markdown</a>:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo gem install reverse_markdown
-</span><span class='line'>d path/with/your/html/files
-</span><span class='line'>find -name <span class="s2">&quot;*.html&quot;</span> | sed -e <span class="s1">&#39;s/\.html//&#39;</span> | xargs -n 1 -I @ sh -c <span class="s1">&#39;reverse_markdown @.html &gt; @.markdown&#39;</span>
-</span><span class='line'>mv *.markdown path/to/your/octopress/source/_posts/
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>At the end of this process you should take a look at generated code, so setup
-your octopress and run <code>rake preview</code></li>
-<li>Fix syntax and enjoy your posts in markdown.
-
-<ul>
-<li>useful thing here for me was markdown syntax highlighting in vim by tpope
-<a href="https://github.com/tpope/vim-markdown">vim-markdown</a></li>
-<li>liquid syntax <a href="https://github.com/tpope/vim-liquid">vim-liquid</a></li>
-<li>also setting spellchecker could be useful, add below line to your <code>$HOME/.vimrc</code>
-and you will get spell cheking with en_us dictionary and word wraping on 80
-character:</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="err">&quot;</span> blogging with markdown
-</span><span class='line'>au BufRead,BufEnter *.markdown setlocal <span class="nv">textwidth</span><span class="o">=</span>80 formatoptions+<span class="o">=</span>w spell <span class="nv">spelllang</span><span class="o">=</span>en_us
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>3. Octopress configuration &ndash; tricks that I used for this blog</h3>
-
-<ul>
-<li>Configure your social networks as it was explained in <a href="http://octopress.org/docs/configuring">Octopress documentation</a></li>
-<li>It is good to register on <a href="http://disqus.com/">Disqus</a> the idea of keeping
-comments separated from blog is very good. I realized it when was trying
-migrate my comments from Blogger and didn&rsquo;t have installed Disqus.</li>
-<li><a href="http://www.google.com/analytics/">Google Analytics</a> and <a href="http://www.addthis.com/">AddThis</a>
-also are very helpful in tracking how your content was shared and what of this
-stuff has greatest interest. I will write article how to integrate <a href="http://www.addthis.com/">AddThis</a>
-because there is lack of information about it in google.</li>
-<li>Header background image can be changed by dealing with sass files. I did this
-in <code>sass/custom/_layout.scss</code> using below lines:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">header</span><span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s2">&quot;banner&quot;</span><span class="o">]</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(/images/header_bg2_1200x168.png)</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background-repeat</span><span class="o">:</span> <span class="k">no-repeat</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>If you add some background you probably want to set position of your title and
-subtitle. You can do this in the same file as background image using something
-like this:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">header</span> <span class="nt">h2</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span><span class="k">relative</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding-left</span><span class="o">:</span><span class="m">6.6em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">header</span> <span class="nt">h1</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">font-weight</span><span class="o">:</span><span class="k">bold</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span><span class="k">relative</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding-left</span><span class="o">:</span><span class="m">3em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Do not forget about updating your Octopress frequently. Instructions how to do
-that can be found in <a href="http://octopress.org/docs/updating/">documentation</a></li>
-</ul>
-
-
-<h3>4. SEO</h3>
-
-<p>Most interesting article about SEO is surprisingly on top of google search <a href="http://www.yatishmehta.in/seo-for-octopress">&lsquo;octopress seo&rsquo;</a>.
-Main thing that I take from the article is that Octopress already have built in
-support for SEO by additional elements in post header. This elements are <code>keywords:, description:</code>
-for example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">---</span>
-</span><span class='line'><span class="nt">layout</span><span class="o">:</span> <span class="nt">post</span>
-</span><span class='line'><span class="nt">title</span><span class="o">:</span> <span class="s2">&quot;Another blogger switched to Octopress&quot;</span>
-</span><span class='line'><span class="nt">date</span><span class="o">:</span> <span class="nt">2013-03-19</span> <span class="nt">03</span><span class="nd">:01</span>
-</span><span class='line'><span class="nt">comments</span><span class="o">:</span> <span class="nt">true</span>
-</span><span class='line'><span class="nt">categories</span><span class="o">:</span> <span class="s2">&quot;about this blog&quot;</span>
-</span><span class='line'><span class="nt">published</span><span class="o">:</span> <span class="nt">false</span>
-</span><span class='line'><span class="nt">keywords</span><span class="o">:</span> <span class="nt">blog</span><span class="o">,</span><span class="nt">octopress</span><span class="o">,</span><span class="nt">blogger</span><span class="o">,</span><span class="nt">configuration</span><span class="o">,</span><span class="nt">seo</span><span class="o">,</span><span class="nt">tricks</span>
-</span><span class='line'><span class="nt">description</span><span class="o">:</span> <span class="nt">Octopress</span> <span class="nt">configuration</span>
-</span><span class='line'><span class="nt">---</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Octopress will use keywords and description to build meta section of every
-website on your blog.</p>
-
-<p>To not forget keyword and description section in my posts I modified Rakefile:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gh">diff --git a/Rakefile b/Rakefile</span>
-</span><span class='line'><span class="gh">index d3a1cb0..3e2ced7 100644</span>
-</span><span class='line'><span class="gd">--- a/Rakefile</span>
-</span><span class='line'><span class="gi">+++ b/Rakefile</span>
-</span><span class='line'><span class="gu">@@ -111,6 +111,9 @@ task :new_post, :title do |t, args|</span>
-</span><span class='line'>     post.puts &quot;date: #{Time.now.strftime(&#39;%Y-%m-%d %H:%M&#39;)}&quot;
-</span><span class='line'>     post.puts &quot;comments: true&quot;
-</span><span class='line'>     post.puts &quot;categories: &quot;
-</span><span class='line'><span class="gi">+    post.puts &quot;published: false&quot;</span>
-</span><span class='line'><span class="gi">+    post.puts &quot;keywords:&quot;</span>
-</span><span class='line'><span class="gi">+    post.puts &quot;description:&quot;</span>
-</span><span class='line'>     post.puts &quot;---&quot;
-</span><span class='line'>   end
-</span><span class='line'> end
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>5. Others</h3>
-
-<p>Few things that were not so obvious for me:</p>
-
-<ul>
-<li>to create category name that contain few words like <code>about this blog</code> syntax
-like this:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'>categories:
-</span><span class='line'> - about this blog
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>not like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'>categories: about this blog # or &quot;about this blog&quot;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>ordered and unordered lists are not indented by default, this code in <code>sass/custom/_layout.scss</code>
-fix this behavior:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">article</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">ol</span><span class="o">,</span> <span class="n">ul</span> <span class="err">{</span>
-</span><span class='line'>    <span class="k">padding-left</span><span class="o">:</span> <span class="m">3em</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="err">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Hope this tips are useful for you.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/15/short-hint-for-all-those-who-use-vim/">Short Hint for All Those Who Use Vim and Pathogen</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-15T11:51:00+01:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/01/15/short-hint-for-all-those-who-use-vim/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today, after updating my wokspace to latest version I encounter below error during vim running:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Error detected while processing function pathogen#runtime_append_all_bundles:
-</span><span class='line'>line 1:
-</span><span class='line'>E121: Undefined variable: source_path
-</span><span class='line'>E116: Invalid arguments for function string(source_path).') to pathogen#incubate('.string(source_path.'/{}').')') 
-</span><span class='line'>E116: Invalid arguments for function 4_warn
-</span><span class='line'>Press ENTER or type command to continue</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Quick look on pathogen runtime_append_all_bundles function and I found:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>call s:warn<span class="o">(</span><span class="s1">&#39;Change pathogen#runtime_append_all_bundles(&#39;</span>.string<span class="o">(</span>a:1<span class="o">)</span>.<span class="s1">&#39;) to pathogen#incubate(&#39;</span>.string<span class="o">(</span>a:1.<span class="s1">&#39;/{}&#39;</span><span class="o">)</span>.<span class="s1">&#39;)&#39;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So simply replacing:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>call pathogen#runtime_append_all_bundles<span class="o">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>with:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>call pathogen#incubate<span class="o">()</span> in <span class="nv">$HOME</span>/.vimrc fix the problem.
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/">Sqlite3 Gem Not Supported on Heroku</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-18T21:16:00+01:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When I tried to deploy second part of <a href="http://ruby.railstutorial.org/chapters/a-demo-app#top">RoR tutorial</a>
-to Heroku I get this error:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>An error occurred while installing sqlite3 (1.3.5), and Bundler cannot continue.  
-</span><span class='line'>Make sure that `gem install sqlite3 -v '1.3.5'` succeeds before bundling.
-</span><span class='line'>!
-</span><span class='line'>!  Failed to install gems via Bundler.
-</span><span class='line'>!
-</span><span class='line'>! Detected sqlite3 gem which is not supported on Heroku.
-</span><span class='line'>!  http://devcenter.heroku.com/articles/how-do-i-use-sqlite3-for-development
-</span><span class='line'>!
-</span><span class='line'>!  Heroku push rejected, failed to compile Ruby/rails app
-</span><span class='line'>To git@heroku.com:thawing-beyond-7283.git 
-</span><span class='line'>! [remote rejected] master -&gt; master (pre-receive hook declined)
-</span><span class='line'>error: failed to push some refs to 'git@heroku.com:thawing-beyond-7283.git'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I searched a little bit about this error and find <a href="http://stackoverflow.com/questions/3747002/heroku-rails-3-and-sqlite3">this</a>
-stackoverflow post. But when I look more carefully on the Gemfile syntax I
-found a mistake. I used simply:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.5&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>But I should have:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">group</span> <span class="ss">:development</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.5&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">group</span> <span class="ss">:production</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;pg&#39;</span><span class="p">,</span> <span class="s1">&#39;0.12.2&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As RoR tutorial states.</p>
 </div>
   
   
