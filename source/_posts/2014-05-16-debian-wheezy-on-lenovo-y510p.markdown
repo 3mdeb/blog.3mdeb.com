@@ -100,7 +100,7 @@ that's most important thing to me.
 Some of you will say that Linux is a piece of $!#@, but for me this is very
 good opportunity to verify my skills and contribute to community. During my
 research about y510p I found also complains from Windows users that not all
-works smoothly (Optimus), co there are also cons on the other side. Finally if
+works smoothly (Optimus), so there are also cons on the other side. Finally if
 you won't deal with problems simply use Mint or Ubuntu there is much better
 support there. By the way I think that I'm immune to problems with my operating
 system ;)
