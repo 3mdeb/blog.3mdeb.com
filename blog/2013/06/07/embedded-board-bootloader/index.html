@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>0x3: Embedded board bootloader - Linux geek's scratchpad</title>
+  <meta name="author" content="">
+
+  
+  <meta name="description" content="How to compile and configure U-Boot">
+  <meta name="keywords" content="u-boot, embedded, linux, virtual development board">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Linux geek's scratchpad" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39420295-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+<!-- AddThis Smart Layers BEGIN -->
+<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534acd39445ac552"></script>
+<script type="text/javascript">
+  addthis.layers({
+    'theme' : 'gray',
+    'share' : {
+      'position' : 'left',
+      'numPreferredServices' : 5
+    }, 
+    'follow' : {
+      'services' : [
+        {'service': 'facebook', 'id': 'piotr.krol.756859'},
+        {'service': 'twitter', 'id': 'pietrushnic'},
+        {'service': 'linkedin', 'id': 'krolpiotr'},
+        {'service': 'google_follow', 'id': '115979497998056410813'}
+      ]
+    },  
+    'whatsnext' : {},  
+    'recommended' : {} 
+  });
+</script>
+<!-- AddThis Smart Layers END -->
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Linux geek's scratchpad</a></h1>
+  
+    <h2>or embedded dreams about productivity, freedom and liberty</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">0x3: Embedded Board Bootloader</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T10:32:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Table of contents</h2>
+
+<ul>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#what-is-bootloader">What is bootloader ?</a></li>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#why-we-need-bootloader">Why we need bootloader ?</a></li>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#which-bootloader">Which bootloader ?</a></li>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#what-is-versatilepb">What is versatilepb ?</a></li>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#compilation">Compilation</a></li>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#where-to-go-from-here">Where to go from here ?</a></li>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#kudos">Kudos</a></li>
+</ul>
+
+
+<p><a id="what-is-bootloader"></a></p>
+
+<h3>What is bootloader ?</h3>
+
+<p>It is a program written to bring up more complex code (eg. kernel).</p>
+
+<p>On very simple system it can even not exist. Bootloader should prepare all
+required hardware that kernel or different operating software will need at its
+start point. It is hard to create cross platform bootloader because of variety
+of system requirements.</p>
+
+<p><a id="why-we-need-bootloader"></a></p>
+
+<h3>Why we need bootloader ?</h3>
+
+<p>The true is that we don&rsquo;t :) because we can simply pass kernel and initramfs as
+parameters to QEMU, but it is not common practice for real development environment.<br/>
+Usually bootloader is stripped in production environment where boot time is
+crucial. Second thing, bootloader is useful to learn how real development
+environment for embedded system works. From other side using bootloader we can
+create single binary file that contain bootable embedded system, so we can run
+it without giving multiple arguments at QEMU startup. I will try to keep in mind
+idea about being as close to real development environment as possible.</p>
+
+<p><a id="which-bootloader"></a></p>
+
+<h3>Which bootloader ?</h3>
+
+<p>There are many approaches to this problem. The most popular today is
+<a href="http://www.denx.de/wiki/U-Boot">U-Boot</a> but there are alternatives like <a href="http://www.barebox.org/">The Barebox Bootloader</a>.
+I will try to get to know them better in future. Right now I will use U-Boot as
+Virtual Development Board bootloader to make the edit-compile-download-test cycle
+similar to real world situation. So get the code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone http://git.denx.de/u-boot.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>U-Boot configuration depends on pair cpu-board. So right now we know that our
+cpu will be some ARM but what exactly ? It depends on configuration we will use.
+In most scenarios presented in Internet the <code>versatilepb</code> was used. We can also
+think about running different boards.</p>
+
+<p>What pros U-Boot gives us in the light of previous question <code>Why we need
+bootloader ?</code>:
+* simplified process of porting kernel, because low level stuff is handled by
+U-Boot
+* simplified testing environment in easy way you can grab different version of
+  kernel with different version of initrd and test it</p>
+
+<p><a id="what-is-versatilepb"></a></p>
+
+<h3>What is versatilepb ?</h3>
+
+<p>According to <a href="http://www.arm.com/products/tools/development-boards/versatile/index.php">this page</a>
+versatile is highly modular, feature-rich range of development board. <code>pb</code>
+means <code>Platform Baseboard</code> integrated, standalone development system with fixed
+CPU. But this is only corporate babble :)</p>
+
+<p>QEMU shows <code>versatilepb</code> as Versatile/PB
+(<a href="http://www.arm.com/products/processors/classic/arm9/arm926.php">ARM926EJ-S</a>).</p>
+
+<p><a id="compilation"></a></p>
+
+<h3>Compilation</h3>
+
+<p>For <code>Emdebian</code> cross-toolchain:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>u-boot
+</span><span class='line'>make <span class="nv">ARCH</span><span class="o">=</span>arm <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi- versatilepb_config
+</span><span class='line'>make <span class="nv">ARCH</span><span class="o">=</span>arm <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Note</em>: If you wonder what is the convention for cross-toolchain prefix:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>arch<span class="o">]</span>-<span class="o">[</span>vendor<span class="o">]</span>-<span class="o">[</span>os<span class="o">]</span>-<span class="o">[</span>abi<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>Emdebian</code> striped vendor probably to keep name short, but for example
+<code>Corsstool-NG</code> follow convetion and calls toolchain like
+<code>arm-unknown-linux-gnueabi-</code>.</p>
+
+<p><a id="where-to-go-from-here"></a></p>
+
+<h3>Where to go from here ?</h3>
+
+<p><a href="/blog/2013/06/07/linux-kernel-for-embedded-system">Next step</a> will be kernel compilation for our virtual <code>versatilepb</code> board.</p>
+
+<p><a id="kudos"></a></p>
+
+<h3>Kudos</h3>
+
+<p>[1] <a href="http://www.linuxfordevices.com/c/a/Linux-For-Devices-Articles/Introduction-to-Das-UBoot-the-universal-open-source-bootloader/">Introduction to Das U-Boot, the universal open source bootloader</a></br>
+[2] <a href="http://www.denx.de/wiki/U-Boot">U-Boot</a></br>
+[3] <a href="http://forum.xda-developers.com/showthread.php?t=2201146">U-boot for the multi-boot support</a></br>
+[4] <a href="http://balau82.wordpress.com/2010/04/12/booting-linux-with-u-boot-on-qemu-arm/">Booting Linux with U-Boot on QEMU ARM</a></br>
+[5] <a href="http://wiki.osdev.org/Bootloader">Bootloader</a></br></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T10:32:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/embedded/'>embedded</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/u-boot/'>u-boot</a>, <a class='category' href='/blog/categories/vdb/'>vdb</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/" data-via="pietrushnic" data-counturl="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/" >Tweet</a>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/06/07/toolchain-for-virtual-development-board/" title="Previous Post: 0x2: Toolchain for Virtual Development Board">&laquo; 0x2: Toolchain for Virtual Development Board</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/06/07/linux-kernel-for-embedded-system/" title="Next Post: 0x4: Linux kernel for embedded system">0x4: Linux kernel for embedded system &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 -  -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pietrushnics-world';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/';
+        var disqus_url = 'http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

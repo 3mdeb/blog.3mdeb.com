@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: vim | Linux geek's scratchpad]]></title>
+  <link href="http://pietrushnic.github.io/blog/categories/vim/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2014-05-18T22:05:25+02:00</updated>
+  <id>http://pietrushnic.github.io/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Short hint for all those who use vim and pathogen]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/01/15/short-hint-for-all-those-who-use-vim/"/>
+    <updated>2013-01-15T11:51:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/01/15/short-hint-for-all-those-who-use-vim</id>
+    <content type="html"><![CDATA[<p>Today, after updating my wokspace to latest version I encounter below error during vim running:
+<code>
+Error detected while processing function pathogen#runtime_append_all_bundles:
+line 1:
+E121: Undefined variable: source_path
+E116: Invalid arguments for function string(source_path).') to pathogen#incubate('.string(source_path.'/{}').')')
+E116: Invalid arguments for function 4_warn
+Press ENTER or type command to continue
+</code>
+Quick look on pathogen runtime_append_all_bundles function and I found:
+<code>bash
+call s:warn('Change pathogen#runtime_append_all_bundles('.string(a:1).') to pathogen#incubate('.string(a:1.'/{}').')')
+</code>
+So simply replacing:
+<code>bash
+call pathogen#runtime_append_all_bundles()
+</code>
+with:
+<code>bash
+call pathogen#incubate() in $HOME/.vimrc fix the problem.
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

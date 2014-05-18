@@ -1,139 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Linux geek's scratchpad</title>
-  <meta name="author" content="">
-
-  
-  <meta name="description" content="After long analysis I decide to buy new laptop. I had about $1000
-(or 3000PLN) and most important things to me were: i7 CPU &ndash; because of &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://pietrushnic.github.io">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Linux geek's scratchpad" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-39420295-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-<!-- AddThis Smart Layers BEGIN -->
-<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534acd39445ac552"></script>
-<script type="text/javascript">
-  addthis.layers({
-    'theme' : 'gray',
-    'share' : {
-      'position' : 'left',
-      'numPreferredServices' : 5
-    }, 
-    'follow' : {
-      'services' : [
-        {'service': 'facebook', 'id': 'piotr.krol.756859'},
-        {'service': 'twitter', 'id': 'pietrushnic'},
-        {'service': 'linkedin', 'id': 'krolpiotr'},
-        {'service': 'google_follow', 'id': '115979497998056410813'}
-      ]
-    },  
-    'whatsnext' : {},  
-    'recommended' : {} 
-  });
-</script>
-<!-- AddThis Smart Layers END -->
-</head>
-
-<body   class="collapse-sidebar sidebar-footer" >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Linux geek's scratchpad</a></h1>
-  
-    <h2>or embedded dreams about productivity, freedom and liberty</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about">About me</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[Linux geek's scratchpad]]></title>
+  <link href="http://pietrushnic.github.io/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2014-05-18T22:05:25+02:00</updated>
+  <id>http://pietrushnic.github.io/</id>
+  <author>
+    <name><![CDATA[]]></name>
     
-      <h1 class="entry-title"><a href="/blog/2014/05/16/debian-wheezy-on-lenovo-y510p/">Linux (Debian Wheezy) on Lenovo Y510p</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2014-05-16T22:36:27+02:00" pubdate data-updated="true">May 16<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/05/16/debian-wheezy-on-lenovo-y510p/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>After long analysis I decide to buy new laptop. I had about $1000
+  <entry>
+    <title type="html"><![CDATA[Linux (Debian Wheezy) on Lenovo y510p]]></title>
+    <link href="http://pietrushnic.github.io/blog/2014/05/16/debian-wheezy-on-lenovo-y510p/"/>
+    <updated>2014-05-16T22:36:27+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2014/05/16/debian-wheezy-on-lenovo-y510p</id>
+    <content type="html"><![CDATA[<p>After long analysis I decide to buy new laptop. I had about $1000
 (or 3000PLN) and most important things to me were:</p>
 
 <ul>
@@ -161,7 +46,7 @@ other parameters, except RAM expansion possibilities, are the same.</p>
 <p>Today I have it on my desk and trying to install Debian Wheezy. I put Debian
 netinst in drive and get wonderful UEFI message :)</p>
 
-<p><img class="center" src="/assets/images/cdrom-blocked.jpg" width="450" height="450" title="image" alt="images"></p>
+<p><img class="center" src="http://pietrushnic.github.io/assets/images/cdrom-blocked.jpg" width="450" height="450" title="image" alt="images"></p>
 
 <p>I figure out that I have to disable my last days favourite feature from M$ &ndash;
 namely Secure Boot. I was surprised when I realized that there is no hot key to
@@ -183,7 +68,7 @@ option, which cleans keys database. Don&rsquo;t panic your database of
 vendor keys will not disappear you can restore it anytime you want using
 <code>Restore Factory Keys</code>. BTW I didn&rsquo;t found any information about it in <code>User Manual</code>.</p>
 
-<p><img class="center" src="/assets/images/uefi-security.jpg" width="640" height="400" title="image" alt="images"></p>
+<p><img class="center" src="http://pietrushnic.github.io/assets/images/uefi-security.jpg" width="640" height="400" title="image" alt="images"></p>
 
 <h2>Installation</h2>
 
@@ -238,91 +123,33 @@ you won&rsquo;t deal with problems simply use Mint or Ubuntu there is much bette
 support there. By the way I think that I&rsquo;m immune to problems with my operating
 system ;)</p>
 
-<p><img class="center" src="/assets/images/lenovo-y510p.jpg" width="640" height="400" title="image" alt="images"></p>
+<p><img class="center" src="http://pietrushnic.github.io/assets/images/lenovo-y510p.jpg" width="640" height="400" title="image" alt="images"></p>
 
 <p>Thanks for reading.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/13/a-little-bit-of-fresh-air/">A Little Bit of Fresh Air</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-13T19:55:18+02:00" pubdate data-updated="true">Apr 13<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/04/13/a-little-bit-of-fresh-air/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>It is over 9 months since my last post. As you see since then I refreshed look
+  <entry>
+    <title type="html"><![CDATA[A little bit of fresh air]]></title>
+    <link href="http://pietrushnic.github.io/blog/2014/04/13/a-little-bit-of-fresh-air/"/>
+    <updated>2014-04-13T19:55:18+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2014/04/13/a-little-bit-of-fresh-air</id>
+    <content type="html"><![CDATA[<p>It is over 9 months since my last post. As you see since then I refreshed look
 and feel of my blog a little bit. Theme was changed to
 <a href="https://github.com/lucaslew/whitespace">whitespace</a>, because of my
 minimalistic inspiration induced by <a href="http://www.kaikkonendesign.fi/">Tommi Kaikkonen</a>. Meanwhile AddThis improved their
 products offer by <a href="https://www.addthis.com/get/smart-layers">Smart Layers</a> and
 you can see how they works on left and upper right. I hope that thanks to this
 improvement sharing valuable content would be easier.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-30T02:40:00+02:00" pubdate data-updated="true">Jul 30<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p class=intro>
+  <entry>
+    <title type="html"><![CDATA[Improve productivity with Goolge history using bookmarks and Chrome extensions]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/"/>
+    <updated>2013-07-30T02:40:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity</id>
+    <content type="html"><![CDATA[<p class=intro>
 The idea of this post is very simple (as usually)  and I wonder why I didn&#8217;t thought
 about it earlier. The point is to use history of your Google queries to improve
 productivity. Most of things that we google can be replaced for example by browser
@@ -463,44 +290,15 @@ people resign after few tries. Most people also don&rsquo;t like changes as adag
 &ldquo;better the devil you know&rdquo;. However only those who try to change something in
 their lives can reach success. And as story of Thomas Edison proves you have to
 try.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-14T23:22:00+02:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>What the OVMF is ?</h3>
+  <entry>
+    <title type="html"><![CDATA[Build and run OVMF under Qemu]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/06/14/build-and-run-ovmf-under-qemu/"/>
+    <updated>2013-06-14T23:22:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/06/14/build-and-run-ovmf-under-qemu</id>
+    <content type="html"><![CDATA[<h3>What the OVMF is ?</h3>
 
 <p><strong>OVMF</strong> (<em>Open Virtual Machine Firmware</em>) is a firmware actively developed as a
 <strong>EDK2</strong>(<em>EFI Developer Kit</em>) package. It is a packed that aims to support
@@ -536,53 +334,24 @@ place:</p>
 
 <p><code>``
 You may need some additional packages like</code>uuid-dev<code>,</code>iasl<code>or</code>g++`.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-07T10:40:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/07/root-file-system-for-embedded-system/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Table of contents</h2>
+  <entry>
+    <title type="html"><![CDATA[0x6: Root file system for embedded system]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/"/>
+    <updated>2013-06-07T10:40:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system</id>
+    <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#intro">Introduction</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#get-bb">Get and build BusyBox</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#fast-and-simple">Fast and simple</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#setting-up-kernel-through-nfs">Setting up kernel through NFS</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#verify-configuration">Verify Configuration</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#embedded-filesystem-tuning">Embedded filesystem tuning</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#summary">Summary</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#intro">Introduction</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#get-bb">Get and build BusyBox</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#fast-and-simple">Fast and simple</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#setting-up-kernel-through-nfs">Setting up kernel through NFS</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#verify-configuration">Verify Configuration</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#embedded-filesystem-tuning">Embedded filesystem tuning</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#summary">Summary</a></li>
 </ul>
 
 
@@ -621,7 +390,7 @@ you can find informations:</p>
 <h3>Fast and simple</h3>
 
 <p>Of course make sure to use correct toolchain. I made few notes about
-Ubuntu/Linaro toolchain in <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues">previous post</a></p>
+Ubuntu/Linaro toolchain in <a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues">previous post</a></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- menuconfig</span></code></pre></td></tr></table></div></figure>
@@ -642,7 +411,7 @@ shared libs)</code> option. Exit and save.</p>
 
 <h3>Setting up kernel through NFS</h3>
 
-<p><a href="/blog/2013/06/07/linux-kernel-for-embedded-system">Previously</a> we prepared U-Boot
+<p><a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system">Previously</a> we prepared U-Boot
 kenernel image with DHCP and rootfs which we want to expose over NFS. First lets start with NFS
 configuration:</p>
 
@@ -1233,51 +1002,22 @@ hope that I will back to this issues in near future. If you like this series
 please share it, if somethings wrong please comment I will try to help if can.</p>
 
 <p><a href="http://bec-systems.com/site/418/how-to-set-up-a-nfs-rootfs">How to set up a NFS root filesystem for embedded Linux development</a></p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-07T10:36:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Table of contents</h2>
+  <entry>
+    <title type="html"><![CDATA[0x5: Qemu network configuration and tftp for Virtual Development Board]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/"/>
+    <updated>2013-06-07T10:36:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board</id>
+    <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
-<li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#intro">Introduction</a></li>
-<li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd">Setup tftpd</a></li>
-<li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking">QEMU networking</a></li>
-<li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#verify-qemu-with-tftp">Verify all components of Virtual Development Platform</a></li>
-<li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#what-next">What next ?</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#intro">Introduction</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd">Setup tftpd</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking">QEMU networking</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#verify-qemu-with-tftp">Verify all components of Virtual Development Platform</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#what-next">What next ?</a></li>
 </ul>
 
 
@@ -1336,7 +1076,7 @@ section.
 
 <h3>QEMU networking</h3>
 
-<p><em>Update</em>: For Ubuntu users please read <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues">this section</a></p>
+<p><em>Update</em>: For Ubuntu users please read <a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues">this section</a></p>
 
 <p>I mixed <a href="http://toast.djw.org.uk/qemu.html">this</a> BKM and few other resources
 that I found in the net. Setting up network depend a lot on your configuration.
@@ -1505,8 +1245,8 @@ and <a href="">u-boot</a> mailing list thread.</p></li>
 
 <h4>Verify all components of Virtual Development Platform</h4>
 
-<p>So right now we should have built <a href="/blog/2013/06/07/linux-kernel-for-embedded-system">kernel uImage</a>, <a href="/blog/2013/06/07/embedded-board-bootloader">U-Boot image</a>,
-<a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking">configured qemu network</a> and <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd">tftp server</a>. With all this components we can
+<p>So right now we should have built <a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system">kernel uImage</a>, <a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader">U-Boot image</a>,
+<a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking">configured qemu network</a> and <a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd">tftp server</a>. With all this components we can
 verify if our kernel booting on emulated <code>versatilepb</code>.</p>
 
 <p>Run your qemu with network using U-Boot image as a kernel.</p>
@@ -1676,50 +1416,21 @@ be used as a console. Before <code>bootm</code> set:</p>
 <h3>What next ?</h3>
 
 <p>We happily built basic virtual development, what we need right now is some
-<a href="/blog/2013/06/07/root-file-system-for-embedded-system">initial filesystem</a>.</p>
-</div>
+<a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system">initial filesystem</a>.</p>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-07T10:33:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Table of contents</h2>
+  <entry>
+    <title type="html"><![CDATA[0x4: Linux kernel for embedded system]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system/"/>
+    <updated>2013-06-07T10:33:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system</id>
+    <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
-<li><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/#a-little-history">A little history</a></li>
-<li><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/#get-linux-and-build-it">Get linux and build it</a></li>
-<li><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/#kudos">Kudos</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system/#a-little-history">A little history</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system/#get-linux-and-build-it">Get linux and build it</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system/#kudos">Kudos</a></li>
 </ul>
 
 
@@ -1808,10 +1519,10 @@ First is <code>IP: DHCP support</code> and can be found under:</p>
 
 
 <p>We have kernel. How we can provide this kernel to our development environment ?
-As I discuss in <a href="/blog/2013/06/07/embedded-board-bootloader">previous post</a> we
+As I discuss in <a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader">previous post</a> we
 can use bare-metal qemu, but not with uImage kernel. This is special U-Boot
 kernel, so easiest way will be using it with bootloader. We will figure out how
-to do this in <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board">next section</a>
+to do this in <a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board">next section</a>
 about tftp and qemu network configuration.</p>
 
 <p><strong>TODO</strong>: add picture of configuration in intro &ndash; vdb, link it here
@@ -1851,53 +1562,24 @@ manually modified. So using uImage is easiest</p>
 
 <p>[1] <a href="http://digital-domain.net/lug/unix-linux-history.html">UNIX/Linux History</a></br>
 [2] <a href="http://www.arm.linux.org.uk/docs/history.php">The History of ARM Linux</a></p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/embedded-board-bootloader/">0x3: Embedded Board Bootloader</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-07T10:32:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/07/embedded-board-bootloader/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Table of contents</h2>
+  <entry>
+    <title type="html"><![CDATA[0x3: Embedded board bootloader]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/"/>
+    <updated>2013-06-07T10:32:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader</id>
+    <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#what-is-bootloader">What is bootloader ?</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#why-we-need-bootloader">Why we need bootloader ?</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#which-bootloader">Which bootloader ?</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#what-is-versatilepb">What is versatilepb ?</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#compilation">Compilation</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#where-to-go-from-here">Where to go from here ?</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#kudos">Kudos</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#what-is-bootloader">What is bootloader ?</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#why-we-need-bootloader">Why we need bootloader ?</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#which-bootloader">Which bootloader ?</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#what-is-versatilepb">What is versatilepb ?</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#compilation">Compilation</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#where-to-go-from-here">Where to go from here ?</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#kudos">Kudos</a></li>
 </ul>
 
 
@@ -1994,7 +1676,7 @@ CPU. But this is only corporate babble :)</p>
 
 <h3>Where to go from here ?</h3>
 
-<p><a href="/blog/2013/06/07/linux-kernel-for-embedded-system">Next step</a> will be kernel compilation for our virtual <code>versatilepb</code> board.</p>
+<p><a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system">Next step</a> will be kernel compilation for our virtual <code>versatilepb</code> board.</p>
 
 <p><a id="kudos"></a></p>
 
@@ -2005,53 +1687,24 @@ CPU. But this is only corporate babble :)</p>
 [3] <a href="http://forum.xda-developers.com/showthread.php?t=2201146">U-boot for the multi-boot support</a></br>
 [4] <a href="http://balau82.wordpress.com/2010/04/12/booting-linux-with-u-boot-on-qemu-arm/">Booting Linux with U-Boot on QEMU ARM</a></br>
 [5] <a href="http://wiki.osdev.org/Bootloader">Bootloader</a></br></p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/">0x2: Toolchain for Virtual Development Board</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-07T08:42:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Table of contents</h2>
+  <entry>
+    <title type="html"><![CDATA[0x2: Toolchain for Virtual Development Board]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/"/>
+    <updated>2013-06-07T08:42:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board</id>
+    <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#intro">Introduction</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#what-is-toolchain">What is toolchain ?</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#why-we-need-cross-toolchain">Why we need cross-toolchain ?</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#how-to-create-toolchain">How to create toolchain ?</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#emdebian-path">Emdebian path</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#summary">Summary</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#kudos">Kudos</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#intro">Introduction</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#what-is-toolchain">What is toolchain ?</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#why-we-need-cross-toolchain">Why we need cross-toolchain ?</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#how-to-create-toolchain">How to create toolchain ?</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#emdebian-path">Emdebian path</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#summary">Summary</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#kudos">Kudos</a></li>
 </ul>
 
 
@@ -2095,7 +1748,7 @@ or <code>Bitbake</code>. I will not deal with preparing toolchain in this series
 because procedure for creating it takes pretty long. So we have two options:</p>
 
 <ul>
-<li>read my article about <a href="/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">Crosstool-NG arm-unknown-linux-gnueabi</a></li>
+<li>read my article about <a href="http://pietrushnic.github.io/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">Crosstool-NG arm-unknown-linux-gnueabi</a></li>
 <li>or install toolchain ready to use like <a href="http://www.emdebian.org/">Emdebian</a></li>
 </ul>
 
@@ -2205,7 +1858,7 @@ something like this in log:</p>
 <p><em>Note 2</em>: If you&rsquo;re <code>Ubuntu</code> user I have to suggest experiments with toolchain
 build by your own, because I get really hard times trying to go through this
 tutorial with Ubuntu/Linaro cross compiler provided in repository. Finally I
-used <a href="/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">this</a>
+used <a href="http://pietrushnic.github.io/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">this</a>
 to push things forward. U-boot compiled with Ubuntu/Linaro toolchain had problem
 with <code>__udivsi3</code> instruction. This cause loop in initialization process.</p>
 
@@ -2214,12 +1867,12 @@ with <code>__udivsi3</code> instruction. This cause loop in initialization proce
 <h3>Summary</h3>
 
 <p>If you take effort of creating toolchain using <code>Crosstool-NG</code> than
-congratulations.  But for simplifying whole <a href="/blog/2013/06/07/intro-to-virtual-development-board-building"><strong>Virtual Development Board</strong></a>
+congratulations.  But for simplifying whole <a href="http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building"><strong>Virtual Development Board</strong></a>
 series I will use <code>Emdebian</code> toolchain in further posts. Of course you can use
 your brand new <code>Crosstool-NG</code> toolchain by simply remember that tools prefixes are
 different. <code>Emdebian</code> uses <code>arm-linux-gnueabi-</code> and <code>Crosstool-NG</code> was created with
 <code>arm-unknown-linux-gnueabi-</code>. Replace one with another every time when needed.
-In <a href="/blog/2013/06/07/embedded-board-bootloader">next post</a> we will deal with
+In <a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader">next post</a> we will deal with
 bootloader.</p>
 
 <p><a id="kudos"></a></p>
@@ -2227,49 +1880,20 @@ bootloader.</p>
 <h3>Kudos</h3>
 
 <p>[1] <a href="http://elinux.org/Toolchains">Toolchains</a></p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/">0x1: Qemu as an Environment for Embedded Board Emulation</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-07T08:27:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Table of contents</h2>
+  <entry>
+    <title type="html"><![CDATA[0x1: Qemu as an environment for embedded board emulation]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/"/>
+    <updated>2013-06-07T08:27:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation</id>
+    <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
-<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#intro">Introduction</a></li>
-<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#compilation">Compilation</a></li>
-<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#kudos">Kudos</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#intro">Introduction</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#compilation">Compilation</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#kudos">Kudos</a></li>
 </ul>
 
 
@@ -2330,88 +1954,1057 @@ offer to initialize it as a submodule.</p>
 <p>If compilation ends without problem than our first component is ready to use.
 Right now we can emulate our ARM based board with many types of CPUs. List of
 all available can be retrieved by running command <code>qemu-system-arm -cpu ?</code>, list
-of emulated machines by <code>-M ?</code>. Now, let&rsquo;s talk about <a href="/blog/2013/06/07/toolchain-for-virtual-development-board">toolchains</a>.</p>
+of emulated machines by <code>-M ?</code>. Now, let&rsquo;s talk about <a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board">toolchains</a>.</p>
 
 <p><a id="kudos"></a></p>
 
 <h3>Kudos</h3>
 
 <p>[1] <a href="http://infoscience.epfl.ch/record/149975/files/x86-llvm-translator-chipounov_2.pdf">Dynamically Translating x86 to LLVM using QEMU</a></p>
-</div>
+]]></content>
+  </entry>
   
+  <entry>
+    <title type="html"><![CDATA[0x0: Intro to Virtual Development Board building]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building/"/>
+    <updated>2013-06-07T01:27:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building</id>
+    <content type="html"><![CDATA[<ul>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building/#preface">Preface</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building/#first-question">First question: How to start ?</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building/#virtual-development-board">Virtual Development Board &ndash; table of contents</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building/#kudos">Kudos</a></li>
+</ul>
+
+
+<p><a id="preface"></a></p>
+
+<h3>Preface</h3>
+
+<p>There are many reasons why ambitious programmers should care about huge rush in
+embedded market. IMO there is great potential in it. I don&rsquo;t want to go deep into
+this but take a look at all tablets, phones, smart TVs and other cool stuff
+like wireless in you washing machine or refrigerator (ok this two are right now only a gadgets :) ).
+This is all embedded. Another thing is that wages of experienced embedded
+developers are really high.</p>
+
+<p>This environment is very interesting. A lot to learn, a lot to do, so why not get
+your hands dirty ?</p>
+
+<p><a id="first-question"></a></p>
+
+<h3>First question: How to start ?</h3>
+
+<p>To do real embedded development, to learn the most, you simply buy hardware like
+all this <code>${animal}board (animal={panda,beagle,hawk})</code>. This is the best way but
+if you&rsquo;re beginner (like me) you probably don&rsquo;t want to spend $50 for stuff that
+you throw away after month because you don&rsquo;t like to deal with it or problems
+are not on your level, than maybe you should take a look around and wonder if it
+is possible to build virtual environment to check what kind of problem you may
+encounter learning embedded ? BTW this is cheap and fun, so potential ROI is big
+enough to try.</p>
+
+<p>IMHO this is where world going: proof of concept embedded platforms affordable
+for common man (not only for US/West Europe), testing environment based on
+virtualized/emulated solution, to check basic features, speed up testing, development
+and deployment. That&rsquo;s why we see so active development of software like Qemu/KVM.</p>
+
+<p><a id="virtual-development-board"></a></p>
+
+<h3>Virtual Development Board &ndash; table of contents</h3>
+
+<p>I realize that it is achievable and I will learn a lot trying to implement this
+idea. Finally I was convinced reading <a href="http://www.elinux.org/Virtual_Development_Board">this</a>
+two years old article on <a href="http://www.elinux.org">eLinux.org</a>.</p>
+
+<p>I decide to divide this article on few parts because IMHO it was to big to read
+it at once. Also people interesting in particular topic won&rsquo;t have to scrolling <code>&gt;2k</code>
+words post. List of all articles in this series:</p>
+
+<ol>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/">Qemu as an environment for embedded board emulation</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/">Toolchain for Virtual Development Board</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/">Embedded board bootloader</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system/">Linux kernel for embedded system</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">Qemu network configuration and tftp for Virtual Development Board</a></li>
+<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/">Root file system for embedded system</a></li>
+</ol>
+
+
+<p><a id="kudos"></a></p>
+
+<h3>Kudos</h3>
+
+<p>At the and of this intro I want to give big kudos to all those hackers without
+whom creating this article would not be possible. Thanks for sharing your
+knowledge. Every time when I use knowledge that found by googling I&rsquo;m trying
+to stick link for further reading.</p>
+
+<h4><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation"><em>Enjoy!</em></a></h4>
+]]></content>
+  </entry>
   
+  <entry>
+    <title type="html"><![CDATA[Octopress depoying problem after migrating to *.github.io]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/05/16/octopress-depoying-problem-after-migrating-to-star-dot-github-dot-io/"/>
+    <updated>2013-05-16T22:20:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/05/16/octopress-depoying-problem-after-migrating-to-star-dot-github-dot-io</id>
+    <content type="html"><![CDATA[<p>My story was that I migrate to new environment and want to recover my octopress
+setup. I thought that it will be as simple as cloning my blog github repository
+and start to work.</p>
+
+<p>First problem that I experienced was lack of octopress repository as a remote
+branch &ndash; it is required to update your ocotpress blog to latest code. Fix was
+simple:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git remote add octopress git://github.com/imathis/octopress.git</span></code></pre></td></tr></table></div></figure>
 
 
-    </article>
+<p>After updating my blog I tried to deploy new article and I get:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>## Pushing generated _deploy website
+</span><span class='line'>ERROR: Repository not found.
+</span><span class='line'>fatal: The remote end hung up unexpectedly</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I figured out that my github pages were incorrectly set, so I run <code>rake
+setup_github_pages</code>. If you&rsquo;re user of github pages long enough you know that
+few weeks ago github decide to migrate domain from <code>*.github.com</code> to
+<code>*.github.io</code>. So I followed instructions in setup process and used <code>io</code> domain,
+this is incorrect. If you have github repository for your pages with <code>com</code> in
+name you should use your orginal repository address. Repository was not changed.
+This is obvious but I lost few minutes to figure out whats going on.</p>
+]]></content>
+  </entry>
   
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
+  <entry>
+    <title type="html"><![CDATA[Workflow imporovement with Open Source tools - part 1]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/05/16/workflow-imporovement-with-open-source-tools/"/>
+    <updated>2013-05-16T22:16:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/05/16/workflow-imporovement-with-open-source-tools</id>
+    <content type="html"><![CDATA[<h3>Introduction</h3>
+
+<p>I want to start a series of articles to describe how I improve my workflow with
+geeky Open Source applications. I will concentrate on terminal applications that
+I try to use in my GTD process.</p>
+
+<h3>Terminal</h3>
+
+<h4>Solarized gnome-terminal</h4>
+
+<p>If you already don&rsquo;t know what solarized color scheme is then please take a look
+at <a href="http://ethanschoonover.com/solarized">this page</a>. To install solarized
+colorscheme in gnome-terminal simply follow instruction from this <a href="https://github.com/sigurdga/gnome-terminal-colors-solarized">git repository</a>.</p>
+
+<h3>Mutt again</h3>
+
+<p>During last days I spent a lot of time to tweak my mutt configuration. Here I
+will give you few hints about things that I learned.</p>
+
+<h4>Solarized mutt</h4>
+
+<p>To enable solarized colorscheme in mutt simply download one of scheme files from <a href="https://github.com/altercation/mutt-colors-solarized">github</a>. If you installed
+dark scheme for your gnome-terminal then I suggest <code>mutt-colors-solarized-dark-16.muttrc</code>.
+Copy this file for example to <code>$HOME/.mutt</code> and source it in muttrc file:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>source $HOME/.mutt/mutt-colors-solarized-dark-16.muttrc</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Width of From column</h4>
+
+<p>Usually from field in today&rsquo;s emails is longer than 19 characters. If this
+happens mutt by default will not display whole string. To change this behavior
+you can manipulate <code>index_format</code> variable. I set mine to 30:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set index_format="%4C %Z %{%b %d} %-30.30L (%4l) %s"</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Sidebar</h4>
+
+<p>Finally I gave up sidebar for using latest code without annoying <code>tls_socket_read</code> error.
+Switching between IMAP folders is not so bad, you can quickly display all
+folders by <code>c&lt;Tab&gt;&lt;Tab&gt;</code> or simply <code>y</code></p>
+
+<h4>Offlineimap</h4>
+
+<p>This is probably best program to synchronize your emails with local storage. It
+also has feature that allow synchronization between different IMAP servers but
+I&rsquo;m not using it. Few things are crucial when using <code>offlineimap</code>:</p>
+
+<ul>
+<li>probably easiest way to keep passwords secret is using python hooks for gnome-keyring,
+detailed description how to integrate it with <code>offlineimap</code> is
+<a href="http://www.clasohm.com/blog/one-entry?entry_id=90957">here</a>. Debian name of
+<code>gnome-python2-gnomekeyring</code> is different: <code>python-gnomekeyring</code>.</li>
+<li>Use meaningful <code>localfolders</code> because you will use it in <code>mutt</code> configuration</li>
+</ul>
+
+
+<p>Typical configuration of <code>$HOME/.offlineimaprc</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[mbnames]
+</span><span class='line'>enabled = yes
+</span><span class='line'>filename = ~/.mutt/muttrc.mailboxes
+</span><span class='line'>header = "mailboxes "
+</span><span class='line'>peritem = "+%(accountname)s/%(foldername)s"
+</span><span class='line'>sep = " "
+</span><span class='line'>footer = "\n"
+</span><span class='line'>
+</span><span class='line'>[general]
+</span><span class='line'>metadata = ~/.offlineimap
+</span><span class='line'>maxsyncaccounts = 5
+</span><span class='line'>maxconnections = 2
+</span><span class='line'>accounts = account1, account2
+</span><span class='line'>status_backend = sqlite
+</span><span class='line'>pythonfile = ~/.mutt/offlineimap.py
+</span><span class='line'>
+</span><span class='line'>[Account account1]
+</span><span class='line'>autorefresh = 3
+</span><span class='line'>localrepository = acc1_local
+</span><span class='line'>remoterepository = acc1_remote
+</span><span class='line'>
+</span><span class='line'>[Repository acc1_local]
+</span><span class='line'>type = Maildir
+</span><span class='line'>localfolders = ~/.mail/account1
+</span><span class='line'>
+</span><span class='line'>[Repository acc2_remote]
+</span><span class='line'>type = Gmail
+</span><span class='line'>remoteusereval = get_username("account1")
+</span><span class='line'>remotepasseval = get_password("account1")
+</span><span class='line'>sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+</span><span class='line'>
+</span><span class='line'>[Account account2]
+</span><span class='line'>autorefresh = 3
+</span><span class='line'>localrepository = acc2_local
+</span><span class='line'>remoterepository = acc2_remote
+</span><span class='line'>
+</span><span class='line'>[Repository acc2_local]
+</span><span class='line'>type = Maildir
+</span><span class='line'>localfolders = ~/.mail/account2
+</span><span class='line'>
+</span><span class='line'>[Repository acc2_remote]
+</span><span class='line'>type = Gmail
+</span><span class='line'>remoteusereval = get_username("account2")
+</span><span class='line'>remotepasseval = get_password("account2")
+</span><span class='line'>sslcacertfile = /etc/ssl/certs/ca-certificates.crt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What this means by section:</p>
+
+<ul>
+<li><code>[mbnames]</code> &ndash; automatically create mailboxes folders according to your
+configuration on IMAP server</li>
+<li><code>[general]</code> &ndash; most important things here are self explanatory accounts
+variable and <code>max{syncaccounts,connections}</code>, first said how many accounts
+should be synchronized and second how many simultaneous connections should be
+used</li>
+<li><code>[Account *]</code> &ndash; contain sync refresh time in minutes (<code>autorefresh</code>) and link
+to local and remote repository definitions (<code>localrepository</code> and
+<code>remoterepository</code>)</li>
+<li><code>[Repository *]</code> &ndash; for local folder and its type and for remote gnome-keyring
+configuration</li>
+</ul>
+
+
+<h4>Multiple account configuration</h4>
+
+<p>To simplify multiple accounts configuration I added two things:</p>
+
+<ul>
+<li>separated account files configuration &ndash; in my case placed in <code>$HOME/.mutt/accounts</code></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set postponed   = +account1@server.com/Drafts
+</span><span class='line'>set spoolfile   = +account1@server.com/INBOX
+</span><span class='line'>set record      = +account1@server.com/Sent
+</span><span class='line'>set from        = 'account1@server.com'
+</span><span class='line'>set realname    = 'My Name'
+</span><span class='line'>set smtp_url    = smtps://acc1@smtp.server.com:587
+</span><span class='line'>set smtp_pass   = $my_pass
+</span><span class='line'>set signature   = "~/.mutt/signature.example"</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>folder hooks for particular account &ndash; it cause automatic loading of
+configurations when folder was changed (in <code>$HOME/muttrc</code>):</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>folder-hook 'account1@server.com' 'source $HOME/.mutt/accounts/account1'</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Separate mailing list file</h4>
+
+<p>I keep my mailing list configuration file separated and source it in my
+<code>$HOME/.muttrc</code>. I&rsquo;m not mailing list advanced user, so right now I have manually
+created IMAP folders and Gmail filters to move mails from mailing list to this
+folders. On the mutt side I use <code>subscribe</code> command to indicate that particular
+mail id is a mailing list.</p>
+
+<h3>Personal informations</h3>
+
+<p>Some informations in my configuration files shouldn&rsquo;t be available for all. I
+mean my email account configuration, my todo list, passwords and things like
+that. To store this informations I use additional private git repository and use
+it as a submodule for my workspace configuration. I wrote post about keeping
+configuration using git
+<a href="http://pietrushnic.github.io/blog/2012/02/19/improve-productivity-by-tracking-work">here</a> and
+<a href="http://pietrushnic.github.io/blog/2012/02/20/improve-productivity-by-tracking-work_20">here</a>.</p>
+
+<h3>Taskwarrior and vit</h3>
+
+<p>I really like <code>taskwarrior</code> as a GTD tool but I was tired of writing everything
+every time I wanted to change sth. I found <code>vit</code>. Vit is a vi-like interface
+to task list generated by <code>taskwarrior</code> it works really great. Mostly it is
+written in perl and there is no official repository for its code base but latest
+version is from April 2013. I use lot of <code>project:</code> and <code>+flag</code> to update my
+TODO list. I prefer <code>long</code> filter.</p>
+
+<h4>My taskwarrior projects and flags</h4>
+
+<p>I have few ongoing projects like <code>blog</code>, <code>productivity</code> and <code>ideas</code>. In addition I use
+few flags like <code>ideas</code>, <code>finish</code>, <code>enhancement</code>, <code>fix</code> or <code>bug</code>. So when I
+connect project and flag I get few categories like:</p>
+
+<ul>
+<li><code>blog ideas</code> for new articles ideas</li>
+<li><code>blog finish</code> for articles that should be finished ASAP</li>
+<li><code>blog bug/fix</code> for articles that have to be changed for some reason</li>
+<li><code>productivity bug/fix</code> for productivity tools configuration improvements</li>
+<li><code>productivity ideas</code> for new improvements</li>
+</ul>
+
+
+<h3>Summary</h3>
+
+<p>I think this is enough for first post from this series. Hope it was helpful. If
+yes then please share, if no then comment what I should improve. Thanks for
+reading.</p>
+]]></content>
+  </entry>
   
-    
+  <entry>
+    <title type="html"><![CDATA[Thunderbird to Mutt migration - tips & tricks]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/05/15/thunderbird-to-mutt-migration/"/>
+    <updated>2013-05-15T18:40:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/05/15/thunderbird-to-mutt-migration</id>
+    <content type="html"><![CDATA[<h3>Preface</h3>
+
+<p>I migrate with my working environment to laptop. My workstation going older and
+I don&rsquo;t have time to maintain few systems to keep it clean and in sync. I
+probably have to improve my work flow but right now I have different problems.
+Few weeks ago after changing environment to mobile and powerful laptop I also
+changed OS to Ubuntu and mail client to Thunderbird. I have to admit that both
+choices were mistake and I want to came back to Debian and Mutt. This post is
+about throwing out Thunderbird and a logical continuation of Mutt tutorial (part
+<a href="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account">1</a>, <a href="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-2-secure-login">2</a>,
+<a href="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e">3</a> and <a href="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-4-html-mails-address">4</a>).</p>
+
+<p>So what was wrong with Thunderbrid ?</p>
+
+<ul>
+<li>Not clear configuration settings &ndash; for example I tried to wrap word at 80th
+character, default value was set to 72 but it seems not work anyway. I try to
+use few googled hints but nothing works.</li>
+<li>Setting up Thunderbird to work as a community developer tool was not so
+obvious.</li>
+<li>Junk messages was marked but default filter show everything so for some IMAP
+boxes I get lot of spam and had hard time to find anything out there.</li>
+<li>Conversation mode should be easily toggled.</li>
+<li>GUI slow switching between different modes.</li>
+<li>Lack of my editor of choice.</li>
+</ul>
+
+
+<p>If I decide to use GUI tool for some reason I require from it to be intuitive
+and most of my options should be available at few clicks. Probably most of my
+problems I could solve by giving enough effort to google it but if I have to
+choose hard to configure MUA I will probably be in favor of terminal tool like
+Mutt. So right now I&rsquo;m back with Mutt and determination to adjust Mutt to my
+work flow.</p>
+
+<h3>Git and undelete old configuration</h3>
+
+<p>I won&rsquo;t go through whole Mutt tutorial once more time. I remember that there was
+muttrc in my workspace git repository. So first goolge query returned what
+needed I found <a href="http://stackoverflow.com/questions/953481/restore-a-deleted-file-in-a-git-repo">this</a> stackoverflow post.
+I reverted muttrc and other related files deletion.</p>
+
+<h3>Short informations</h3>
+
+<ul>
+<li>In Ubuntu there is no <code>gpg</code> package, to get encryption you can use <code>gpgsm</code>.</li>
+<li>If your e-mail account provider require user name with <code>@</code> (at sign), then you
+can pass it in mutt using below pattern:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set folder = imaps://[login]@[imap_server]/ # i.e. imaps://foo@bar.pl@imap.srv.pl/</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>You can debug Mutt using <code>-d 5</code> parameter, this option creates
+<code>$HOME/.muttdebug0</code> file with verbose output, debug option can be changed in
+range 1-5.</li>
+<li>Use latest-greatest version compiled from source instead version provided
+by distribution repository. It can help you get rid of problems like <code>tls_socket_read (Decryption has failed.)</code>.</li>
+<li>Some accounts will not work with authenticating method presented in my
+previous post about gpg (<a href="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-2-secure-login">mutt tutorial part 2</a>).
+To workaround this you can use different format of folder variable:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set folder = imaps://[login]:[passwd_var]@[imap_server]/ # i.e. imaps://foo:$my_bar_passwd@bar.pl@imap.srv.pl/</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Compile Mutt from source</h3>
+
+<p>If you looking for latest Mutt version consider compiling mutt by yourself.
+First, download sources:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hg clone http://dev.mutt.org/hg/mutt#HEAD
+</span><span class='line'>hg update -C HEAD
+</span><span class='line'>hg pull -u</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are lot of options to prepare Mutt compilation, but right now I can
+suggest this parameters:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd mutt
+</span><span class='line'>./prepare --with-ssl --enable-debug --enable-imap --enable-smtp --enable-pop \
+</span><span class='line'>-enable-hcache --with-gss --with-gnutls --with-sasl
+</span><span class='line'>make && sudo make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If make will complain about <code>gssapi/gssapi.h: No such file or directory</code> then
+you need to install <code>libkrb5-dev</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libkrb5-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Summary</h3>
+
+<p>That&rsquo;s all in this post but I&rsquo;m sure that there will be next in this topic. I
+hope to improve my whole workflow and write few posts about improving
+productivity using open source tools.</p>
+]]></content>
+  </entry>
   
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 -  -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
-</p>
-
-</footer>
+  <entry>
+    <title type="html"><![CDATA[Kernel developers tools - based on '30 Linux Kernel Developers in 30 Weeks']]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/05/12/kernel-developers-tools/"/>
+    <updated>2013-05-12T02:41:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/05/12/kernel-developers-tools</id>
+    <content type="html"><![CDATA[<p>git, cscope, vi, bash, awk, and the rare bout with python.
+Ubuntu with Unity2D
+terminal, make, gcc, make me happy. Quilt for patch management, Git or
+Subversion for source code management. I&rsquo;m using Nedit
+SLED for work and openSUSE
+email client (mutt), and my editor (vim),
+git and quilt for kernel development, Chrome and Firefox for web browsing, and
+irssi for irc communication
+NOME 3 on my desktop, but sometimes get frustrated with it and revert back to
+OpenBox or i3m
+Xfce
+fbcon, vim, and mutt
+fvwm2
+bash shell, joe editor, gcc, make, git
+ Fedora
+ Xfce
+ git, sparse, smatch and spatch
+ joe
+  xterm, emacs, perl, mc and git.
+  i3
+  Emacs, ocaml, xfce
+  Emacs, Evolution, GNOME 3, Iceweasel (aka Firefox)
+  git, gcc, gmake, bash, perl
+  Thunderbird</p>
+]]></content>
+  </entry>
   
+  <entry>
+    <title type="html"><![CDATA[Tmux as screen replacement and productivity accelerator]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/04/06/tmux/"/>
+    <updated>2013-04-06T05:29:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/04/06/tmux</id>
+    <content type="html"><![CDATA[<p>As I wrote in <a href="http://pietrushnic.github.io/blog/2013/03/19/debian-switching-to-unstable">previous post</a> I
+switched from GNU screen to <a href="http://tmux.sourceforge.net">tmux</a>. I use it for a
+few moths and have to said that I&rsquo;m really impressed by simplicity, performance
+and community support in this project. In this post I want to discuss my
+configuration and useful additions for it like tmuxinator, session logging,
+colors or status bar configuration.</p>
 
-<script type="text/javascript">
-      var disqus_shortname = 'pietrushnics-world';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+<h3>Basics</h3>
 
+<p>Debian contain <code>tmux</code> package but for stable and testing release it is pretty
+old version. Personally I use <code>unstable</code> version where <code>tmux</code> was delivered in
+<code>1.7~svn2819-1</code> version.</p>
 
-
-
-
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install tmux</span></code></pre></td></tr></table></div></figure>
 
 
+<p>To start session simply type <code>tmux</code>. Tmux uses <code>C-b</code>/ <code>Ctrl-b</code> as a prefix for
+commands. If you switch from GNU screen then at the beginning you can experience
+some annoying situations but after few days everything should back to normal.</p>
+
+<p>Most used keybiddings:</p>
+
+<ul>
+<li><code>C-b c</code> &ndash; create new window</li>
+<li><code>C-b ,</code> &ndash; rename current window</li>
+<li><code>C-b n</code> &ndash; next window</li>
+<li><code>C-b p</code> &ndash; previous window</li>
+<li><code>C-b l</code> &ndash; last window</li>
+<li><code>C-b d</code> &ndash; disconnect</li>
+<li><code>C-b k</code> &ndash; kill current window</li>
+<li><code>C-b K</code> &ndash; kill tmux server</li>
+<li><code>C-b [</code> &ndash; enter copy mode</li>
+<li><code>C-b ]</code> &ndash; paste last copied buffer</li>
+<li><code>C-b :</code> &ndash; tmux command line</li>
+<li><code>C-b w</code> &ndash; windows list</li>
+<li><code>C-b ?</code> &ndash; help</li>
+</ul>
 
 
+<p>Full list can be found <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tmux&amp;sektion=1#KEY+BINDINGS">here</a>.</p>
 
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+<h3>Configuration</h3>
+
+<p>Tmux keeps its configuration in <code>$HOME/.tmux.conf</code>. My configuration mixes
+some tmux examples with code that I found in the net. This file can be found on
+my github repository <a href="https://github.com/pietrushnic/workspace/blob/master/dotfiles/tmux.conf">here</a>. First section contain some general configuration:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># confirm before killing a window or the server
+</span><span class='line'>bind-key k confirm kill-window
+</span><span class='line'>bind-key K confirm kill-server
+</span><span class='line'>
+</span><span class='line'># toggle statusbar
+</span><span class='line'>bind-key b set-option status
+</span><span class='line'>
+</span><span class='line'># ctrl+left/right cycles thru windows
+</span><span class='line'>bind-key -n C-right next
+</span><span class='line'>bind-key -n C-left prev
+</span><span class='line'>
+</span><span class='line'># scrollback buffer n lines
+</span><span class='line'>set -g history-limit 10000
+</span><span class='line'>
+</span><span class='line'># listen for activity on all windows
+</span><span class='line'>set -g bell-action any
+</span><span class='line'>
+</span><span class='line'># on-screen time for display-panes in ms
+</span><span class='line'>set -g display-panes-time 2000
+</span><span class='line'>
+</span><span class='line'># start window indexing at one instead of zero
+</span><span class='line'>set -g base-index 1
+</span><span class='line'>
+</span><span class='line'># enable wm window titles
+</span><span class='line'>set -g set-titles on
+</span><span class='line'>
+</span><span class='line'># wm window title string (uses statusbar variables)
+</span><span class='line'>set -g set-titles-string "tmux.#I.#W"
+</span><span class='line'>
+</span><span class='line'># statusbar 
+</span><span class='line'>set -g display-time 2000</span></code></pre></td></tr></table></div></figure>
 
 
+<p>After that I have implemented <a href="http://ethanschoonover.com/solarized">solarized</a> colors (dark theme):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>### COLOUR (Solarized dark)
+</span><span class='line'>
+</span><span class='line'># default statusbar colors
+</span><span class='line'>set-option -g status-bg black #base02
+</span><span class='line'>set-option -g status-fg yellow #yellow
+</span><span class='line'>set-option -g status-attr default
+</span><span class='line'>
+</span><span class='line'># default window title colors
+</span><span class='line'>set-window-option -g window-status-fg brightblue #base0
+</span><span class='line'>set-window-option -g window-status-bg default
+</span><span class='line'>#set-window-option -g window-status-attr dim
+</span><span class='line'>
+</span><span class='line'># active window title colors
+</span><span class='line'>set-window-option -g window-status-current-fg brightred #orange
+</span><span class='line'>set-window-option -g window-status-current-bg default
+</span><span class='line'>#set-window-option -g window-status-current-attr bright
+</span><span class='line'>
+</span><span class='line'># use vi-like keys
+</span><span class='line'>setw -g mode-keys vi
+</span><span class='line'>
+</span><span class='line'># pane border
+</span><span class='line'>set-option -g pane-border-fg black #base02
+</span><span class='line'>set-option -g pane-active-border-fg brightgreen #base01
+</span><span class='line'>
+</span><span class='line'># message text
+</span><span class='line'>set-option -g message-bg black #base02
+</span><span class='line'>set-option -g message-fg brightred #orange
+</span><span class='line'>
+</span><span class='line'># pane number display
+</span><span class='line'>set-option -g display-panes-active-colour blue #blue
+</span><span class='line'>set-option -g display-panes-colour brightred #orange</span></code></pre></td></tr></table></div></figure>
 
 
+<p>To make solarized colors work on my setup was quite challenging, because there
+are many things to set (vim, terminal, putty etc.). If you need any advice I can
+write something about this. Right now it is beyond the scope of this post.</p>
 
-</body>
-</html>
+<p>At the end of my tmux configuration I&rsquo;ve some fancy status bar:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># clock
+</span><span class='line'>set-window-option -g clock-mode-colour green #green
+</span><span class='line'>
+</span><span class='line'># center align the window list
+</span><span class='line'>set -g status-justify centre
+</span><span class='line'>
+</span><span class='line'># show some useful stats but only when tmux is started 
+</span><span class='line'># outside of Xorg, otherwise dwm statusbar shows these already
+</span><span class='line'>set -g status-right ""
+</span><span class='line'>set -g status-left ""
+</span><span class='line'>if '[ -z "$DISPLAY" ]' 'set -g status-left "[#[fg=green] #H ][#[default]]"'
+</span><span class='line'>if '[ -z "$DISPLAY" ]' 'set -g status-right "[ #[fg=magenta]#(cat /proc/loadavg | cut -d \" \" -f 1,2,3)#[default] ][ #[fg=cyan,bright]%a %Y-%m-%d %H:%M #[default]]"'
+</span><span class='line'>if '[ -z "$DISPLAY" ]' 'set -g status-right-length 50'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I think that mostly this is self explanatory. This how it look in work:
+<a href="http://pietrushnic.github.io/assets/images/tmux-screen.png"><img class="center" src="http://pietrushnic.github.io/assets/images/tmux-screen.png" width="300" height="400"></a></p>
+
+<h3>tmuxinator</h3>
+
+<p>I spend some time to realize what is the best way of managing windows and panes
+in tmux. Especially I was interested in setting some windows at tmux startup.
+Finally I found <a href="https://github.com/aziz/tmuxinator">tmuxinator</a> small but useful
+project delivered through <code>gem</code> system. Follow tmuxinator page to set it up
+correctly. If you want to see my primitive configuration it is also available on
+my github in <a href="https://github.com/pietrushnic/workspace/blob/master/dotfiles/tmux.conf">werkspace project</a>.</p>
+
+<h3>Window logging</h3>
+
+<p>Last hint I found on this
+<a href="http://0xfeedface.org/blog/lattera/2012-03-19/using-tmux-screencasting-tool">blog</a>.
+How to log your work in console for example to write a blog post :) ? There is a
+universal method for piping all console output to our program of choice. For
+example run command like this (command mode available under <code>C-b :</code>):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pipe-pane -o 'cat &gt;&gt; ~/tmuxcast.#h.#T'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will give you file with logged session output (all curses windows, editor
+windows and so on). Curses output can be unreadable because of control escape
+sequences. Use <code>cat</code> it will interpret escape sequences in terminal.</p>
+
+<p>As always I hope hints were useful. Please share this content if think its
+valuable. Comment if you think id needs improvements. Thank you for reading.</p>
+
+<p>P.S. I should probably create a footer with last paragraph :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Yet another quick build of arm-unknown-linux-gnueabi]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi/"/>
+    <updated>2013-04-03T19:00:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi</id>
+    <content type="html"><![CDATA[<p>So I decide to check what is going on with
+<a href="http://crosstool-ng.org">crosstool-ng</a> and refresh my <a href="http://pietrushnic.github.io/blog/2012/03/14/quick-build-of-arm-unknown-linux">old post</a>
+about building <code>arm-unknown-linux-gnueabi</code> toolchain. Last post was pretty
+popular, so definitely this is direction I should follow :). I will not repeat
+myself, so if you encounter any problems please check last post, section with
+known problems in crosstool-ng <code>doc/</code> directory or RTFM. Let&rsquo;s begin:</p>
+
+<h3>Get the latest crosstool-ng</h3>
+
+<p>As usual I&rsquo;m trying to use latest version possible. Following the crosstool-ng page:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hg clone http://crosstool-ng.org/hg/crosstool-ng
+</span><span class='line'>cd crosstool-ng
+</span><span class='line'>./bootstrap</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the time of writing this article my changeset was <code>3200:0fc56e62cecf</code> 16 Mar
+2013, two weeks old.</p>
+
+<h3>Installation</h3>
+
+<p>I prefer to use local directory for <code>ct-ng</code> in case it will change in feature I
+will not need to mess with <code>/usr</code> subsystem. Simply tryin&#8217; to keep it clean when I can.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir $HOME/ct-ng
+</span><span class='line'>./configure --prefix=$HOME/ct-ng
+</span><span class='line'>make
+</span><span class='line'>make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No problems on my up to date Debian wheezy.
+You will probably want to add <code>$HOME/ct-ng</code> to your <code>PATH</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH="$HOME/ct-ng/bin:${PATH}"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add bash completion as it is advised in message at the end of compilation process. My <code>.bashrc</code>
+automatically sources <code>$HOME/.bash_completion</code> so there is a place for local
+code completion.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat ct-ng.comp &gt;&gt; $HOME/.bash_completion</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Build sample toolchain</h3>
+
+<p>There is a long list of predefined samples toolchains which you can get build.
+If <code>ct-ng</code> bash completion was correctly added, than you can explore it by <code>&lt;Tab&gt;</code> or simply
+<code>ct-ng list-samples</code>. Let&rsquo;s try to build <code>arm-unknown-linux-gnueabi</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir -p $HOME/embedded/arm-unknown-linux-gnueabi
+</span><span class='line'>cd $HOME/embedded/arm-unknown-linux-gnueabi
+</span><span class='line'>ct-ng arm-unknown-linux-gnueabi</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Before you start build consider some debugging options to make build process
+easier to continue when problems encountered.</p>
+
+<h3>Additional debugging options</h3>
+
+<p>crosstool-ng contain interesting mechanism of saving finished phases of
+toolchain. This helps when for some reason our build process failed. To enable
+this feature simply enter menuconfig:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ct-ng menuconfig</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Mark option <code>Paths and mix options -&gt; Debug crosstool-NG -&gt; Save intermediate steps</code>
+as enabled. If something goes wrong you can check what last state was by:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ls -lt .build/arm-unknown-linux-gnueabi/state</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Directory on top with the latest modification date is now your first state where you
+should restart after fail. To restart build in given point:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ct-ng &lt;state&gt;+ #assuming that &lt;state&gt; is where we fail last time</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ordered list of possible states can be retrieved by <code>ct-ng list-steps</code>.</p>
+
+<h3>Start build</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ct-ng build.4</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>4</code> is the number of concurrent jobs and depends on your setup performance.
+Building process takes a while so make coffee or anything else to drink :).</p>
+
+<h3>Known problems</h3>
+
+<p>I encounter few different problems than during <a href="http://pietrushnic.github.io/blog/2012/03/14/quick-build-of-arm-unknown-linux">previous building</a>.</p>
+
+<h4>Missing expat library</h4>
+
+<p>Signature looks like that:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[ERROR]    configure: error: expat is missing or unusable
+</span><span class='line'>[ERROR]    make[3]: *** [configure-gdb] Error 1
+</span><span class='line'>[ERROR]    make[2]: *** [all] Error 2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Simply install <code>libexpat</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libexpat1-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>gcj internal error</h4>
+
+<p>Few times I encountered something like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[ERROR]    gcj: internal compiler error: Killed (program jc1)
+</span><span class='line'>[ERROR]    make[5]: *** [ecjx] Error 4
+</span><span class='line'>[ERROR]    make[4]: *** [all-recursive] Error 1
+</span><span class='line'>[ERROR]    make[3]: *** [all-target-libjava] Error 2
+</span><span class='line'>[ERROR]    make[2]: *** [all] Error 2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The reason is that <code>oom_kiler</code> takes care about <code>gcj</code>. It means that you run out
+of memory during compilation Java related code. I experience that when trying to
+build toolchain with 512MB of RAM :)</p>
+
+<p>So this was short reminder. I work on new post about creating virtual
+embedded development environment based on <a href="http://wiki.qemu.org/Main_Page">qemu</a>.
+I was inspired by <a href="http://www.elinux.org/Virtual_Development_Board">this article</a>.
+Hope this article was useful. If you have any comments or difficulties please
+comment below. If think this post was useful &ndash; share.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Useful hints for blogging using Octopress with Vim]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/03/30/useful-hints-for-blogging-using-octopress-with-vim/"/>
+    <updated>2013-03-30T05:49:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/03/30/useful-hints-for-blogging-using-octopress-with-vim</id>
+    <content type="html"><![CDATA[<h3>1. Dictionary</h3>
+
+<p>Use dictionary. I wrote about how to start it automatically for <code>markdown</code> files
+<a href="http://pietrushnic.github.io/blog/2013/03/19/another-blogger-switched-to-octopress">here</a>.</p>
+
+<ul>
+<li><code>z=</code> &ndash; probably most useful function for me right now, as you probably noticed
+I&rsquo;m not great in English, so if you see some glaring errors &ndash; let me know I
+will fix it</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Music for programming]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/03/30/music-for-programming/"/>
+    <updated>2013-03-30T03:27:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/03/30/music-for-programming</id>
+    <content type="html"><![CDATA[<p>Of course this is strongly associated with personal taste but I will write my
+experience.</p>
+
+<ol>
+<li><a href="www.pandora.com">www.pandora.com</a> &ndash; really great radio station, choose your
+genre or artist and it will lead you through all variety of this type.
+unfortunately if you are fan of Iron Maiden, Blind Guardian, prog rock or
+irish folk you will be bored after 2 hours or less. Sadly not available in
+Poland <i class='emoji disappointed'></i> &ndash; maybe some proxy will work but I wasn&rsquo;t able to find one.</li>
+<li><a href="http://www.kohina.com/">kohina/demo scene</a> &ndash; very good radio for long night
+coding sessions. I&rsquo;m not big fan of demo scene but I appreciate what guys do
+and did. And somtimes you will hit Super Mario or Contra theme.</li>
+<li><a href="http://www.progarchives.com/subgenre.asp?style=32">post rock/math rock</a> &ndash; if you like any variety of prog rock you probably
+know <a href="http://www.progarchives.com/">ProgArchives</a>. It is really hard to find
+good prog rock radio where classics are well mixed with newcomers. I really
+like to listen guys like <a href="http://www.progarchives.com/subgenre.asp?style=32">God Is An Astronaut</a>,
+<a href="http://www.explosionsinthesky.com/">Explosions In The Sky</a>, <a href="http://twdy.tumblr.com/">This Will Destroy You</a>,
+<a href="http://www.65daysofstatic.com/">65daysofstatic</a>, <a href="http://www.redsparowes.com/News.aspx">Red Sparowes</a> or even
+<a href="http://mogwai.sandbag.uk.com/lesrevenants/">Mogwai</a> or <a href="http://www.sigur-ros.co.uk/">Sigur Ros</a>.
+Very good for programming if you drink cofee/tea <i class='emoji smile'></i></li>
+<li>movie soundtracks &ndash; This one I use when really need to concentrate
+especially when working daylight hours. What&rsquo;s best here most of people will
+agree that <a href="http://www.enniomorricone.it/uk/news.php">Ennio Moricone</a>, <a href="http://elsew.com/">Vangelis</a> and <a href="http://www.hans-zimmer.com/">Hans Zimmer</a>
+are famous one and most recognizable for my generation.</li>
+<li><a href="http://nsbradio.co.uk/content/">breakbeat</a> &ndash; this one reminds me some stories about mythical cyberpunk
+hackers, its usually noisy and help me isolate from environment and
+concentrate on my work. I will said that if you like freaked electronics than
+you can try this.</li>
+<li><a href="http://www.shoutcast.com/Internet-Radio/drum%20and%20base">dnb</a> &ndash; if
+breakbeat is to hard for you try this <i class='emoji smile'></i>. This music tune me in channel of
+rhythmical work.</li>
+<li>When googling this topic I found <a href="http://musicforprogramming.net/">this site</a>
+it was worth to check. Some links are broken. Most of those playlists have too
+low tempo for me.</li>
+</ol>
+
+
+<p>I can also suggest some Irish Folk influenced stuff if don&rsquo;t have &ldquo;The End is
+near&rdquo; wallpaper on your desktop <i class='emoji smile'></i> There was a time when I was listen a lot of
+psybient, but it is really hard to find good psychodelic ambient radio and this
+music is for me more like movie soundtracks I cannot listen it at night.
+Hope it will give some kind of direction. Let me know what you listen when coding.
+Maybe I will discover new universe.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[tmux multiplexer and vi-like keys in copy-mode]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/03/19/debian-switching-to-unstable/"/>
+    <updated>2013-03-19T16:30:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/03/19/debian-switching-to-unstable</id>
+    <content type="html"><![CDATA[<p>So I tried to write second post for my new blog but to effectively work using
+terminal I need terminal multiplexer. I switched to tmux from screen
+because I reach point that I can&rsquo;t do some things in it in easy way and
+performance was poor. Also activity of tmux developers is better than for gnu
+screen. I also experienced annoy buffer crashing especially after come back from
+lock mode or cmatrix much but after reading few articles about alternative for
+screen I switched to tmux.</p>
+
+<p>It seems that in wheezy(testing) version of tmux is outdated (1.6.2). Last tag
+on tmux <a href="http://sourceforge.net/p/tmux/tmux-code/?source=navbar">sourceforge repo</a>
+is 1.7 and there is almost 300 additional commits on top of the master branch.
+Debian unstable contain version 1.7.2 it is pretty new.</p>
+
+<p>Awesome thing in tmux is emacs/vi keybiding for copy-mode. It really helps with
+writing technical articles about linux stuff with this console outputs and logs
+excerpts.</p>
+
+<p>To enable copy-mode in vi like way put to <code>$HOME/.tmux.conf</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># use vi-like keys</span>
+</span><span class='line'>setw -g mode-keys vi
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+</feed>

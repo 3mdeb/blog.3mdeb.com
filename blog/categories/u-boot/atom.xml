@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: u-boot | Linux geek's scratchpad]]></title>
+  <link href="http://pietrushnic.github.io/blog/categories/u-boot/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2014-05-18T22:05:25+02:00</updated>
+  <id>http://pietrushnic.github.io/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[0x3: Embedded board bootloader]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/"/>
+    <updated>2013-06-07T10:32:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader</id>
+    <content type="html"><![CDATA[<h2>Table of contents</h2>
+
+<ul>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#what-is-bootloader">What is bootloader ?</a></li>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#why-we-need-bootloader">Why we need bootloader ?</a></li>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#which-bootloader">Which bootloader ?</a></li>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#what-is-versatilepb">What is versatilepb ?</a></li>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#compilation">Compilation</a></li>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#where-to-go-from-here">Where to go from here ?</a></li>
+<li><a href="/blog/2013/06/07/embedded-board-bootloader/#kudos">Kudos</a></li>
+</ul>
+
+
+<p><a id="what-is-bootloader"></a></p>
+
+<h3>What is bootloader ?</h3>
+
+<p>It is a program written to bring up more complex code (eg. kernel).</p>
+
+<p>On very simple system it can even not exist. Bootloader should prepare all
+required hardware that kernel or different operating software will need at its
+start point. It is hard to create cross platform bootloader because of variety
+of system requirements.</p>
+
+<p><a id="why-we-need-bootloader"></a></p>
+
+<h3>Why we need bootloader ?</h3>
+
+<p>The true is that we don&rsquo;t :) because we can simply pass kernel and initramfs as
+parameters to QEMU, but it is not common practice for real development environment.<br/>
+Usually bootloader is stripped in production environment where boot time is
+crucial. Second thing, bootloader is useful to learn how real development
+environment for embedded system works. From other side using bootloader we can
+create single binary file that contain bootable embedded system, so we can run
+it without giving multiple arguments at QEMU startup. I will try to keep in mind
+idea about being as close to real development environment as possible.</p>
+
+<p><a id="which-bootloader"></a></p>
+
+<h3>Which bootloader ?</h3>
+
+<p>There are many approaches to this problem. The most popular today is
+<a href="http://www.denx.de/wiki/U-Boot">U-Boot</a> but there are alternatives like <a href="http://www.barebox.org/">The Barebox Bootloader</a>.
+I will try to get to know them better in future. Right now I will use U-Boot as
+Virtual Development Board bootloader to make the edit-compile-download-test cycle
+similar to real world situation. So get the code:
+<code>bash
+git clone http://git.denx.de/u-boot.git
+</code></p>
+
+<p>U-Boot configuration depends on pair cpu-board. So right now we know that our
+cpu will be some ARM but what exactly ? It depends on configuration we will use.
+In most scenarios presented in Internet the <code>versatilepb</code> was used. We can also
+think about running different boards.</p>
+
+<p>What pros U-Boot gives us in the light of previous question <code>Why we need
+bootloader ?</code>:
+* simplified process of porting kernel, because low level stuff is handled by
+U-Boot
+* simplified testing environment in easy way you can grab different version of
+  kernel with different version of initrd and test it</p>
+
+<p><a id="what-is-versatilepb"></a></p>
+
+<h3>What is versatilepb ?</h3>
+
+<p>According to <a href="http://www.arm.com/products/tools/development-boards/versatile/index.php">this page</a>
+versatile is highly modular, feature-rich range of development board. <code>pb</code>
+means <code>Platform Baseboard</code> integrated, standalone development system with fixed
+CPU. But this is only corporate babble :)</p>
+
+<p>QEMU shows <code>versatilepb</code> as Versatile/PB
+(<a href="http://www.arm.com/products/processors/classic/arm9/arm926.php">ARM926EJ-S</a>).</p>
+
+<p><a id="compilation"></a></p>
+
+<h3>Compilation</h3>
+
+<p>For <code>Emdebian</code> cross-toolchain:
+<code>bash
+cd u-boot
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- versatilepb_config
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-
+</code></p>
+
+<p><em>Note</em>: If you wonder what is the convention for cross-toolchain prefix:
+<code>
+[arch]-[vendor]-[os]-[abi]
+</code>
+<code>Emdebian</code> striped vendor probably to keep name short, but for example
+<code>Corsstool-NG</code> follow convetion and calls toolchain like
+<code>arm-unknown-linux-gnueabi-</code>.</p>
+
+<p><a id="where-to-go-from-here"></a></p>
+
+<h3>Where to go from here ?</h3>
+
+<p><a href="/blog/2013/06/07/linux-kernel-for-embedded-system">Next step</a> will be kernel compilation for our virtual <code>versatilepb</code> board.</p>
+
+<p><a id="kudos"></a></p>
+
+<h3>Kudos</h3>
+
+<p>[1] <a href="http://www.linuxfordevices.com/c/a/Linux-For-Devices-Articles/Introduction-to-Das-UBoot-the-universal-open-source-bootloader/">Introduction to Das U-Boot, the universal open source bootloader</a></br>
+[2] <a href="http://www.denx.de/wiki/U-Boot">U-Boot</a></br>
+[3] <a href="http://forum.xda-developers.com/showthread.php?t=2201146">U-boot for the multi-boot support</a></br>
+[4] <a href="http://balau82.wordpress.com/2010/04/12/booting-linux-with-u-boot-on-qemu-arm/">Booting Linux with U-Boot on QEMU ARM</a></br>
+[5] <a href="http://wiki.osdev.org/Bootloader">Bootloader</a></br></p>
+]]></content>
+  </entry>
+  
+</feed>

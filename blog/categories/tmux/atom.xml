@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tmux | Linux geek's scratchpad]]></title>
+  <link href="http://pietrushnic.github.io/blog/categories/tmux/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2014-05-18T22:05:25+02:00</updated>
+  <id>http://pietrushnic.github.io/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tmux as screen replacement and productivity accelerator]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/04/06/tmux/"/>
+    <updated>2013-04-06T05:29:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/04/06/tmux</id>
+    <content type="html"><![CDATA[<p>As I wrote in <a href="/blog/2013/03/19/debian-switching-to-unstable">previous post</a> I
+switched from GNU screen to <a href="http://tmux.sourceforge.net">tmux</a>. I use it for a
+few moths and have to said that I&rsquo;m really impressed by simplicity, performance
+and community support in this project. In this post I want to discuss my
+configuration and useful additions for it like tmuxinator, session logging,
+colors or status bar configuration.</p>
+
+<h3>Basics</h3>
+
+<p>Debian contain <code>tmux</code> package but for stable and testing release it is pretty
+old version. Personally I use <code>unstable</code> version where <code>tmux</code> was delivered in
+<code>1.7~svn2819-1</code> version.
+<code>
+sudo apt-get install tmux
+</code>
+To start session simply type <code>tmux</code>. Tmux uses <code>C-b</code>/ <code>Ctrl-b</code> as a prefix for
+commands. If you switch from GNU screen then at the beginning you can experience
+some annoying situations but after few days everything should back to normal.</p>
+
+<p>Most used keybiddings:</p>
+
+<ul>
+<li><code>C-b c</code> &ndash; create new window</li>
+<li><code>C-b ,</code> &ndash; rename current window</li>
+<li><code>C-b n</code> &ndash; next window</li>
+<li><code>C-b p</code> &ndash; previous window</li>
+<li><code>C-b l</code> &ndash; last window</li>
+<li><code>C-b d</code> &ndash; disconnect</li>
+<li><code>C-b k</code> &ndash; kill current window</li>
+<li><code>C-b K</code> &ndash; kill tmux server</li>
+<li><code>C-b [</code> &ndash; enter copy mode</li>
+<li><code>C-b ]</code> &ndash; paste last copied buffer</li>
+<li><code>C-b :</code> &ndash; tmux command line</li>
+<li><code>C-b w</code> &ndash; windows list</li>
+<li><code>C-b ?</code> &ndash; help</li>
+</ul>
+
+
+<p>Full list can be found <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tmux&amp;sektion=1#KEY+BINDINGS">here</a>.</p>
+
+<h3>Configuration</h3>
+
+<p>Tmux keeps its configuration in <code>$HOME/.tmux.conf</code>. My configuration mixes
+some tmux examples with code that I found in the net. This file can be found on
+my github repository <a href="https://github.com/pietrushnic/workspace/blob/master/dotfiles/tmux.conf">here</a>. First section contain some general configuration:
+```</p>
+
+<h1>confirm before killing a window or the server</h1>
+
+<p>bind-key k confirm kill-window
+bind-key K confirm kill-server</p>
+
+<h1>toggle statusbar</h1>
+
+<p>bind-key b set-option status</p>
+
+<h1>ctrl+left/right cycles thru windows</h1>
+
+<p>bind-key -n C-right next
+bind-key -n C-left prev</p>
+
+<h1>scrollback buffer n lines</h1>
+
+<p>set -g history-limit 10000</p>
+
+<h1>listen for activity on all windows</h1>
+
+<p>set -g bell-action any</p>
+
+<h1>on-screen time for display-panes in ms</h1>
+
+<p>set -g display-panes-time 2000</p>
+
+<h1>start window indexing at one instead of zero</h1>
+
+<p>set -g base-index 1</p>
+
+<h1>enable wm window titles</h1>
+
+<p>set -g set-titles on</p>
+
+<h1>wm window title string (uses statusbar variables)</h1>
+
+<p>set -g set-titles-string &ldquo;tmux.#I.#W&rdquo;</p>
+
+<h1>statusbar</h1>
+
+<p>set -g display-time 2000
+<code>
+After that I have implemented [solarized](http://ethanschoonover.com/solarized) colors (dark theme):
+</code></p>
+
+<h3>COLOUR (Solarized dark)</h3>
+
+<h1>default statusbar colors</h1>
+
+<p>set-option -g status-bg black #base02
+set-option -g status-fg yellow #yellow
+set-option -g status-attr default</p>
+
+<h1>default window title colors</h1>
+
+<p>set-window-option -g window-status-fg brightblue #base0
+set-window-option -g window-status-bg default</p>
+
+<h1>set-window-option -g window-status-attr dim</h1>
+
+<h1>active window title colors</h1>
+
+<p>set-window-option -g window-status-current-fg brightred #orange
+set-window-option -g window-status-current-bg default</p>
+
+<h1>set-window-option -g window-status-current-attr bright</h1>
+
+<h1>use vi-like keys</h1>
+
+<p>setw -g mode-keys vi</p>
+
+<h1>pane border</h1>
+
+<p>set-option -g pane-border-fg black #base02
+set-option -g pane-active-border-fg brightgreen #base01</p>
+
+<h1>message text</h1>
+
+<p>set-option -g message-bg black #base02
+set-option -g message-fg brightred #orange</p>
+
+<h1>pane number display</h1>
+
+<p>set-option -g display-panes-active-colour blue #blue
+set-option -g display-panes-colour brightred #orange
+```
+To make solarized colors work on my setup was quite challenging, because there
+are many things to set (vim, terminal, putty etc.). If you need any advice I can
+write something about this. Right now it is beyond the scope of this post.</p>
+
+<p>At the end of my tmux configuration I&rsquo;ve some fancy status bar:
+```</p>
+
+<h1>clock</h1>
+
+<p>set-window-option -g clock-mode-colour green #green</p>
+
+<h1>center align the window list</h1>
+
+<p>set -g status-justify centre</p>
+
+<h1>show some useful stats but only when tmux is started</h1>
+
+<h1>outside of Xorg, otherwise dwm statusbar shows these already</h1>
+
+<p>set -g status-right &ldquo;&rdquo;
+set -g status-left &ldquo;&rdquo;
+if &lsquo;[ -z &ldquo;$DISPLAY&rdquo; ]&rsquo; &lsquo;set -g status-left &ldquo;[#[fg=green] #H ][#[default]]&rdquo;&rsquo;
+if &lsquo;[ -z &ldquo;$DISPLAY&rdquo; ]&rsquo; &lsquo;set -g status-right &ldquo;[ #[fg=magenta]#(cat /proc/loadavg | cut -d \&rdquo; \&ldquo; -f 1,2,3)#[default] ][ #[fg=cyan,bright]%a %Y-%m-%d %H:%M #[default]]&rdquo;&rsquo;
+if &lsquo;[ -z &ldquo;$DISPLAY&rdquo; ]&rsquo; &lsquo;set -g status-right-length 50&rsquo;
+```
+I think that mostly this is self explanatory. This how it look in work:
+<a href="/assets/images/tmux-screen.png"><img class="center" src="/assets/images/tmux-screen.png" width="300" height="400"></a></p>
+
+<h3>tmuxinator</h3>
+
+<p>I spend some time to realize what is the best way of managing windows and panes
+in tmux. Especially I was interested in setting some windows at tmux startup.
+Finally I found <a href="https://github.com/aziz/tmuxinator">tmuxinator</a> small but useful
+project delivered through <code>gem</code> system. Follow tmuxinator page to set it up
+correctly. If you want to see my primitive configuration it is also available on
+my github in <a href="https://github.com/pietrushnic/workspace/blob/master/dotfiles/tmux.conf">werkspace project</a>.</p>
+
+<h3>Window logging</h3>
+
+<p>Last hint I found on this
+<a href="http://0xfeedface.org/blog/lattera/2012-03-19/using-tmux-screencasting-tool">blog</a>.
+How to log your work in console for example to write a blog post :) ? There is a
+universal method for piping all console output to our program of choice. For
+example run command like this (command mode available under <code>C-b :</code>):
+<code>
+pipe-pane -o 'cat &gt;&gt; ~/tmuxcast.#h.#T'
+</code>
+This will give you file with logged session output (all curses windows, editor
+windows and so on). Curses output can be unreadable because of control escape
+sequences. Use <code>cat</code> it will interpret escape sequences in terminal.</p>
+
+<p>As always I hope hints were useful. Please share this content if think its
+valuable. Comment if you think id needs improvements. Thank you for reading.</p>
+
+<p>P.S. I should probably create a footer with last paragraph :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[tmux multiplexer and vi-like keys in copy-mode]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/03/19/debian-switching-to-unstable/"/>
+    <updated>2013-03-19T16:30:00+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/03/19/debian-switching-to-unstable</id>
+    <content type="html"><![CDATA[<p>So I tried to write second post for my new blog but to effectively work using
+terminal I need terminal multiplexer. I switched to tmux from screen
+because I reach point that I can&rsquo;t do some things in it in easy way and
+performance was poor. Also activity of tmux developers is better than for gnu
+screen. I also experienced annoy buffer crashing especially after come back from
+lock mode or cmatrix much but after reading few articles about alternative for
+screen I switched to tmux.</p>
+
+<p>It seems that in wheezy(testing) version of tmux is outdated (1.6.2). Last tag
+on tmux <a href="http://sourceforge.net/p/tmux/tmux-code/?source=navbar">sourceforge repo</a>
+is 1.7 and there is almost 300 additional commits on top of the master branch.
+Debian unstable contain version 1.7.2 it is pretty new.</p>
+
+<p>Awesome thing in tmux is emacs/vi keybiding for copy-mode. It really helps with
+writing technical articles about linux stuff with this console outputs and logs
+excerpts.</p>
+
+<p>To enable copy-mode in vi like way put to <code>$HOME/.tmux.conf</code>:
+```bash</p>
+
+<h1>use vi-like keys</h1>
+
+<p>setw -g mode-keys vi
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

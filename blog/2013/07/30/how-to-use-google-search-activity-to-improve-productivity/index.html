@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Improve productivity with Goolge history using bookmarks and Chrome extensions - Linux geek's scratchpad</title>
+  <meta name="author" content="">
+
+  
+  <meta name="description" content="How to improve your productivity with google history">
+  <meta name="keywords" content="google history, productivity">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Linux geek's scratchpad" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39420295-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+<!-- AddThis Smart Layers BEGIN -->
+<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534acd39445ac552"></script>
+<script type="text/javascript">
+  addthis.layers({
+    'theme' : 'gray',
+    'share' : {
+      'position' : 'left',
+      'numPreferredServices' : 5
+    }, 
+    'follow' : {
+      'services' : [
+        {'service': 'facebook', 'id': 'piotr.krol.756859'},
+        {'service': 'twitter', 'id': 'pietrushnic'},
+        {'service': 'linkedin', 'id': 'krolpiotr'},
+        {'service': 'google_follow', 'id': '115979497998056410813'}
+      ]
+    },  
+    'whatsnext' : {},  
+    'recommended' : {} 
+  });
+</script>
+<!-- AddThis Smart Layers END -->
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Linux geek's scratchpad</a></h1>
+  
+    <h2>or embedded dreams about productivity, freedom and liberty</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-30T02:40:00+02:00" pubdate data-updated="true">Jul 30<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p class=intro>
+The idea of this post is very simple (as usually)  and I wonder why I didn&#8217;t thought
+about it earlier. The point is to use history of your Google queries to improve
+productivity. Most of things that we google can be replaced for example by browser
+extensions, bookmarks or rss feeds. Thats how we can gain few additional free seconds on 
+each google-type-click cycle.
+</p>
+
+
+<h2>Statistics</h2>
+
+<p>Depending on different factors we spend a lot of time in browser. I cannot find
+statistics for desktops but for mobile <a href="http://blog.flurry.com/bid/95723/Flurry-Five-Year-Report-It-s-an-App-World-The-Just-Web-Lives-in-It">Flurry</a>
+researches are probably relevant enough. Simplifying this statistics and assuming that desktop market
+is similar (it is probably to big simplification for some of you but IMHO it is
+good for reflections on this blog):</p>
+
+<ul>
+<li>access Facebook, social networks (+18%, +6%)</li>
+<li>play some games (<a href="http://allthingsd.com/20130325/a-look-ahead-at-gdc-its-mobile-vs-consoles-in-fight-for-game-developers-attention/">lets say 30%</a> of our 32% from Flurry report +13%)</li>
+<li>web browsing time (+20%)</li>
+<li>entertain</li>
+<li>read news</li>
+<li>use productivity tools</li>
+</ul>
+
+
+<p>We have at least 60 percent of our time in web browser. That&rsquo;s explain Google&rsquo;s
+ideas about ChromOS and competition on browser market. Of course if take look a
+this in short therm it look ridiculous but in long term it may be true. Even if this estimation
+not match your behavior than ask yourself what percentage of time spent in
+browser proves that improving productivity using google queries data does not
+make sense ? Especially when doing this will not consume lot of your time.</p>
+
+<h2>Productivity improvements based on my google history</h2>
+
+<p>Below I will show how I improve my productivity using top queries and top sites
+from <a href="https://history.google.com/history/">google history</a>. These are my results
+that I found after choosing <code>Show more trends</code>:</p>
+
+<h3>Top queries</h3>
+
+<ol>
+<li><code>ztm gdańsk</code>          &ndash; public transportation in my home town</li>
+<li><code>usdpln</code>              &ndash; Polish Zloty to US Dollar rate</li>
+<li><code>rozkład jazdy pkp</code>   &ndash; Polish state railways schedule</li>
+<li><code>intc</code>                &ndash; Intel Corporation stocks rate</li>
+<li><code>radio polska stacja</code> &ndash; Polish Internet radio station</li>
+</ol>
+
+
+<p>First of all I was surprised that I googled these things so many times. Especially
+for point 5 :). To improve my daily routine with these data I use following
+applications:</p>
+
+<h3>Public transporation</h3>
+
+<p>I used well known Polish application for public transpiration in biggest cities
+&ndash; <a href="http://jakdojade.pl/">jakdojade.pl</a>. If you register on their page they give
+you possibility to save travel directions, so I used it to save my common
+destinations. Of course I put it on my bookmark bar as it is one of the most
+used links.</p>
+
+<h3>Currency ratio</h3>
+
+<p>After thinking a while I realize that few requirements have to be met for me.
+I need below fields:</p>
+
+<ul>
+<li>USD/PLN rate</li>
+<li>EUR/PLN rate</li>
+<li>gold ounce in US Dollars or XAUUSD</li>
+<li>silver ounce in US Dollars or XAGUSD</li>
+</ul>
+
+
+<p>Unfortunately I was unhappy with choice presented on Chrome extension site
+because I find that it is not easy to met my expectations &ndash; this is probably
+market niche to explore. For today I choose <a href="https://chrome.google.com/webstore/detail/currency-converter/lncdobdbibdgoiohgnflmjajfphcnakg">Currency Converter</a>.
+It has pretty good rate 4.5 star/444 opinions. One thing I don&rsquo;t like is that I
+cannot set every field as I wish. Ratio always relate to recent changed position.
+I also cannot display stock rate. That&rsquo;s why I will have to use one another
+extension.</p>
+
+<h3>Railways schedule</h3>
+
+<p>Right now there is nothing I can do for this one than adding to bookmark bar as
+a recently visited site.</p>
+
+<h3>Stocks ticker</h3>
+
+<p>There are plenty of extensions for Chrome and not a lot of really good one. I
+found <a href="https://chrome.google.com/webstore/detail/stock-tracker/gphdmnilpmjaioploikmbpgkjfbagidf">Stock Tracker</a>
+useful because it shows price in the icon on toolbar. But it is not free from
+small bugs, for example INTC price is 4 digit with dot (00.00) and inadequate
+font size selection causing that last digit is visible only in half, which cause
+it hard to read. Good thing is that after pushing extension button on toolbar I
+get stock chart and can see the trend.</p>
+
+<h3>Top sites</h3>
+
+<ol>
+<li><code>stackoverflow.com</code></li>
+<li><code>en.wikipedia.org</code></li>
+<li><code>github.com</code></li>
+<li><code>www.chessgames.com</code></li>
+<li><code>pl.wikipedia.org</code></li>
+</ol>
+
+
+<p>Probably most of this pages are well known for you. What we can do with this
+information ?</p>
+
+<p>For
+<a href="https://chrome.google.com/webstore/detail/lookup-companion-for-wiki/dhgpkiiipkgmckicafkhcihkcldbdeej">wiki</a> and <a href="https://chrome.google.com/webstore/detail/search-stackoverflow/gmdolelhfhbldobljhbhdgljbajhfilj">stackoverflow</a> there are extensions that help get search engine of
+those sites. I found that usually google +stockoverflow works better than this
+extension but it is worth a try. Wiki works without any problem and only our
+habits can stop us by using it.</p>
+
+<p>I use a lot of <a href="http://www.chess.com">chess.com</a> what I found useful with this
+is <a href="https://chrome.google.com/webstore/detail/chesscom-notifier/khihkgdcfbjdnfgalkjnimbmofnhhpho">Chess.com Notifier</a>
+it change color when some pending move in my games. Unfortunately I get to
+<a href="http://www.chessgames.com">www.chessgames.com</a> though google looking for
+particular position in game &ndash; right now I can&rsquo;t find easy way to improve this
+other than paying for access to good database with defined interface or using my
+own database.</p>
+
+<p>I&rsquo;m sure that you have some clues how to improve your productivity using Google
+history or you will find application for suggested plugins. Anyway, I whish you
+good luck.</p>
+
+<h2>At the end &ndash; the hard thing</h2>
+
+<p>Switching our behaviors to something different is really hard thing. If we
+always go to google and type well know query and trying to switch to something
+new like replacing this behavior with clicking link or running extension could
+be hard. This new action at the begging can be even slower than old. That&rsquo;s why
+people resign after few tries. Most people also don&rsquo;t like changes as adage said
+&ldquo;better the devil you know&rdquo;. However only those who try to change something in
+their lives can reach success. And as story of Thomas Edison proves you have to
+try.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-30T02:40:00+02:00" pubdate data-updated="true">Jul 30<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/productivity/'>productivity</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/" data-via="pietrushnic" data-counturl="http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/" >Tweet</a>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/" title="Previous Post: Build and run OVMF under Qemu">&laquo; Build and run OVMF under Qemu</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/04/13/a-little-bit-of-fresh-air/" title="Next Post: A little bit of fresh air">A little bit of fresh air &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 -  -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pietrushnics-world';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/';
+        var disqus_url = 'http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
