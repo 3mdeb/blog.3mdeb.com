@@ -9,9 +9,8 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="In previous post
-coreboot was configured and installed. Here we try to establish good debugging
-environment for it. To create a good emulated &hellip;">
+  <meta name="description" content="Searching the Internet for information on how to build arm toolchain from
+scratch I realize that it is very hard to find  information about this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,611 +102,6 @@ environment for it. To create a good emulated &hellip;">
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/18/qemu-as-debugging-environment-for/">Debugging Coreboot in Qemu Environment - Part 2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-18T22:41:00+02:00" pubdate data-updated="true">Apr 18<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/04/18/qemu-as-debugging-environment-for/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In <a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment">previous post</a>
-<code>coreboot</code> was configured and installed. Here we try to establish good debugging
-environment for it. To create a good emulated environment to debug, research and
-learn <code>coreboot</code> few tricks are required. First of all we need to know how to run
-our emulated environment (qemu). What I mean by that ?</p>
-
-<ul>
-<li>load coreboot image (-bios option),
-
-<ul>
-<li>freeze CPU at startup (-S),</li>
-</ul>
-</li>
-<li>get appropriate feedback about virtual machine state (-d in_asm,cpu),</li>
-<li>set up remote gdb server to run qemu step by step (-s).</li>
-</ul>
-
-
-<p>So finally we get:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>qemu -bios src/coreboot/build/coreboot.rom -s -S -d in_asm,cpu -nographic</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We don&rsquo;t need graphics so it also could be disable (-nographic). Run above
-command and prepare debugging environment as described below.</p>
-
-<ul>
-<li>load bootblock file in gdb:</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>file path/to/coreboot/build/bootblock.elf</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>use objdump to find out at what address .text, .bss and .data sections are:</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>objdump -h src/coreboot/build/coreboot\_ram|grep -E "text|bss|\.data"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>my output looks like that:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>0 .text 00010810 00100000 00100000 00001000 2**2 3 .data 000004d8 001174e8 
-</span><span class='line'>001174e8 000184e8 2**2 4 .bss  0000080c 001179c0 001179c0 000189c0 2**3</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>use above addresses to load symbols from <code>coreboot_ram</code> file in gdb:</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>add-symbol-file src/coreboot/build/coreboot_ram 0x00100000 -s .data \
-</span><span class='line'>0x001174e8 -s .bss 0x001179c0</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>In another terminal or screen window</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vim /tmp/qemu.log</span></code></pre></td></tr></table></div></figure>
-
-
-<p>(use :e to reload qemu.log file after every instruction), in this file we will
-get information about all registers of virtual machine
-* target remote :1234
-* Run next instruction (ni command in gdb) and refresh qemu.log, if you get
-   something like:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>EAX=00000000 EBX=00000000 ECX=00000000 EDX=00000633 
-</span><span class='line'>ESI=00000000 EDI=00000000 EBP=00000000 ESP=00000000 
-</span><span class='line'>EIP=0000fff0 EFL=00000002 [-------] CPL=0 II=0 A20=1 SMM=0 HLT=0
-</span><span class='line'>ES =0000 00000000 0000ffff 00009300
-</span><span class='line'>CS =f000 ffff0000 0000ffff 00009b00
-</span><span class='line'>SS =0000 00000000 0000ffff 00009300
-</span><span class='line'>DS =0000 00000000 0000ffff 00009300 
-</span><span class='line'>FS =0000 00000000 0000ffff 00009300
-</span><span class='line'>GS =0000 00000000 0000ffff 00009300
-</span><span class='line'>LDT=0000 00000000 0000ffff 00008200
-</span><span class='line'>TR =0000 00000000 0000ffff 00008b00
-</span><span class='line'>GDT= 00000000 0000ffff
-</span><span class='line'>IDT= 00000000 0000ffff
-</span><span class='line'>CR0=60000010 CR2=00000000 CR3=00000000 CR4=00000000
-</span><span class='line'>DR0=00000000 DR1=00000000 DR2=00000000 DR3=00000000
-</span><span class='line'>DR6=ffff0ff0 DR7=00000400</span></code></pre></td></tr></table></div></figure>
-
-
-<p>it means that your debugging enviroment was set correctly.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/12/building-arm-toolchain-part-2-gcc-and/">Building ARM Toolchain - Part 2: Gcc and Eglibc</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-12T23:54:00+02:00" pubdate data-updated="true">Apr 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/04/12/building-arm-toolchain-part-2-gcc-and/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Unfortunately after few tries of cross compiling eglibc using different source
-for instructions I alway end with hard to solve issues. Luckily, in the sources
-of eglibc I noticed instructions for cross-compiling written long time ago by
-Jim Blandy(I know i should start <a href="http://www.eglibc.org/cgi-bin/viewvc.cgi/trunk/libc/EGLIBC.cross-building?revision=2037&amp;view=markup">here</a>).
-Lot of thanks to him for it. Below I describe my experience which I gained
-during eglibc cross compilation for <code>arm-unknown-linux-gnueabi</code> and procedure that
-I used. Commands below contain some constants that I used in previous works. See
-<a href="/blog/2012/03/20/building-arm-toolchain-part-1-libs-and">this post.</a>
-Eglibc library and the compiler itself is built with many various parameters
-this post is not the place to explain their meaning, please RTFM.</p>
-
-<ol>
-<li>Checkout eglibc from svn (as alwyas I try to use a latest sources possible).
-Version used r17815:</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>svn co http://www.eglibc.org/svn/trunk eglibc</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Link working ports to GNU/Linux on some machine architectures. They are not
-maintained in the official glibc source tree so we need to add it in this way:</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ln -s ../ports eglibc/libc/ports/</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Create eglibc-headers directory:</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir eglib-headers; cd eglib-headers</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Configure eglibc and preliminary objects:</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>BUILD_CC=gcc CC=arm-unknown-linux-gnueabi-gcc CXX=arm-unknown-linux-gnueabi-cpp \
-</span><span class='line'>AR=arm-unknown-linux-gnueabi-ar RANLIB=arm-unknown-linux-gnueabi-ranlib \
-</span><span class='line'>../eglibc/libc/configure --prefix=/usr --with-headers=$TARGET/usr/include \
-</span><span class='line'>--build=x86_64-pc-linux-gnu --host=arm-unknown-linux-gnueabi --disable-profile \
-</span><span class='line'>--without-gd --without-cvs --enable-add-ons</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Install eglibc headers:</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make install-headers install_root=$TARGET install-bootstrap-headers=yes</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>We need few object file to link shared libraries, which will be built and installed by hand:</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir -p $TARGET/usr/lib make csu/subdir_lib cp csu/crt1.o csu/crti.o csu/crtn.o $TARGET/usr/lib</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>To produce libgcc_s.so we need libc.so, but only need its dummy version because
-we&rsquo;ll never use it. It doesn&rsquo;t matter what we will point as a libc.so we use /dev/null as C file.</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>arm-unknown-linux-gnueabi-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o \
-</span><span class='line'>$TARGET/usr/lib/libc.so</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Get latest gcc sources using git repository mirror. Latest commit while writing
-this post was 5b9a8c3:</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd .. git clone git://repo.or.cz/official-gcc.git</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Now, we can build gcc which can compile eglibc.</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir eglibc-gcc; cd eglibc-gcc ../official-gcc/configure --target=arm-unknown-linux-gnueabi \
-</span><span class='line'>--prefix=$TARGET/arm-x-tools --with-sysroot=$TARGET --disable-libssp \
-</span><span class='line'>--disable-libgomp --disable-libmudflap --enable-languages=c \
-</span><span class='line'>--with-gmp=$TARGET/arm-x-tools --with-mpfr=$TARGET/arm-x-tools \
-</span><span class='line'>--with-mpc=$TARGET/arm-x-tools --disable-libquadmath --build=$MACHTYPE \
-</span><span class='line'>--host=$MACHTYPE --with-local-prefix=$TARGET/arm-x-tools --disable-multilib \
-</span><span class='line'>--with-float=soft --with-pkgversion="pietrushnic" --enable-threads=no \
-</span><span class='line'>--enable-target-optspace --disable-nls --enable-c99 --enable-long-long
-</span><span class='line'>make -j4
-</span><span class='line'>make install</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Confugure and compile final version of eglibc.</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir eglibc-final
-</span><span class='line'>cd eglibc-final/ BUILD_CC=gcc CC=arm-unknown-linux-gnueabi-gcc CXX=arm-unknown-linux-gnueabi-cpp \
-</span><span class='line'>AR=arm-unknown-linux-gnueabi-ar RANLIB=arm-unknown-linux-gnueabi-ranlib \
-</span><span class='line'>../eglibc/libc/configure --prefix=/usr --with-headers=$TARGET/usr/include \
-</span><span class='line'>--build=x86_64-pc-linux-gnu --host=arm-unknown-linux-gnueabi --disable-profile \
-</span><span class='line'>--without-gd --without-cvs --enable-add-ons
-</span><span class='line'>make
-</span><span class='line'>make install install_root=$TARGET</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Install libelf library</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://www.mr511.de/software/libelf-0.8.13.tar.gz
-</span><span class='line'>tar zxvf libelf-0.8.13.tar.gz
-</span><span class='line'>cd libelf-0.8.13/
-</span><span class='line'>./configure --prefix=$TARGET/arm-x-tools --disable-shared --enable-static
-</span><span class='line'>make;make install</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Prepare final version of gcc.</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ..
-</span><span class='line'>mkdir final-gcc
-</span><span class='line'>cd final-gcc
-</span><span class='line'>../official-gcc/configure --target=arm-unknown-linux-gnueabi \
-</span><span class='line'>--prefix=$TARGET/arm-x-tools --with-sysroot=$TARGET --disable-libssp \
-</span><span class='line'>--disable-libgomp --disable-libmudflap --enable-languages=c,c++ --with-gmp=$TARGET/arm-x-tools \
-</span><span class='line'>--with-mpfr=$TARGET/arm-x-tools --with-mpc=$TARGET/arm-x-tools --disable-libquadmath \
-</span><span class='line'>--build=$MACHTYPE --host=$MACHTYPE --with-local-prefix=$TARGET/arm-x-tools --disable-multilib \
-</span><span class='line'>--with-float=soft --with-pkgversion="pietrushnic" --enable-threads=posix \
-</span><span class='line'>--enable-target-optspace --disable-nls --enable-c99 --enable-long-long \
-</span><span class='line'>--enable-__cxa_atexit --enable-symvers=gnu --with-libelf=$TARGET/arm-x-tools \
-</span><span class='line'>--enable-lto
-</span><span class='line'>make
-</span><span class='line'>make install</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Few libraries should be copied manualy</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cp -d $TARGET/arm-x-tools/arm-unknown-linux-gnueabi/lib/libgcc\_s.so\* $TARGET/lib
-</span><span class='line'>cp -d $TARGET/arm-x-tools/arm-unknown-linux-gnueabi/lib/libstdc++.so\* $TARGET/lib</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Compile and install chrpath &ndash; this is useful tool to remove the rpath or runpath setting from binary.</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ..
-</span><span class='line'>sudo apt-get install libc6-i386 gcc-multilib
-</span><span class='line'>apt-get source chrpath
-</span><span class='line'>cd chrpath-0.13/ CFLAGS=-m32
-</span><span class='line'>./configure --prefix=$TARGET/arm-x-tools \
-</span><span class='line'>--program-prefix=arm-unknown-linux-gnueabi-
-</span><span class='line'>make
-</span><span class='line'>make install</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Strip debug symbols</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>strip --strip-debug $TARGET/arm-x-tools/lib/* \
-</span><span class='line'>$TARGET/arm-x-tools/arm-unknown-linux-gnueabi/lib/* $TARGET/arm-x-tools/libexec/*
-</span><span class='line'>strip --strip-unneeded $TARGET/arm-x-tools/bin/* \
-</span><span class='line'>$TARGET/arm-x-tools/arm-unknown-linux-gnueabi/bin/*
-</span><span class='line'>arm-unknown-linux-gnueabi-strip --strip-debug $TARGET/lib/* $TARGET/usr/lib/*</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>At the end simple test to find out if basic functionality works:</li>
-</ol>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">cat</span> <span class="o">&gt;</span> <span class="n">hello</span><span class="p">.</span><span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">EOF</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">stdio</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="kt">int</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="n">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="p">{</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="n">puts</span> <span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="n">EOF</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Try to cross compile C file:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span><span class="n">TARGET</span><span class="o">/</span><span class="n">arm</span><span class="o">-</span><span class="n">x</span><span class="o">-</span><span class="n">tools</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">arm</span><span class="o">-</span><span class="n">unknown</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabi</span><span class="o">-</span><span class="n">gcc</span> <span class="o">-</span><span class="n">Wall</span> <span class="n">hello</span><span class="p">.</span><span class="n">c</span> <span class="o">-</span><span class="n">o</span> <span class="n">hello</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">cat</span> <span class="o">&gt;</span> <span class="n">c</span><span class="o">++-</span><span class="n">hello</span><span class="p">.</span><span class="n">cc</span> <span class="o">&lt;&lt;</span><span class="n">EOF</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="kt">int</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="n">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="p">{</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="p">}</span>
-</span><span class='line'><span class="o">&gt;</span> <span class="n">EOF</span>
-</span><span class='line'><span class="n">Try</span> <span class="n">to</span> <span class="n">cross</span> <span class="n">compile</span> <span class="n">C</span><span class="o">++</span> <span class="nl">file:</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>$TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-g++ -Wall c++-hello.cc -o \
-c++-hello</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">Displays</span> <span class="n">the</span> <span class="n">information</span> <span class="n">contained</span> <span class="n">in</span> <span class="n">the</span> <span class="n">ELF</span> <span class="n">header</span> <span class="n">and</span> <span class="n">in</span> <span class="n">the</span> <span class="n">file</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">segment</span> <span class="nl">headers:</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>$TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-readelf -hl hello
-$TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-readelf -hl c++-hello</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">Result</span> <span class="n">should</span> <span class="n">look</span> <span class="n">like</span> <span class="nl">that:</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ELF Header:
-  Magic: 7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00
-  Class: ELF32
-  Data: 2&rsquo;s complement, little endian
-  Version: 1 (current)
-  OS/ABI: UNIX &ndash; System V ABI
-  Version: 0
-  Type: EXEC (Executable file)
-  Machine: ARM
-  (&hellip;)
-  Flags: 0x5000002, has entry point, Version5 EABI
-  (&hellip;)
-  Program Headers:
-  (&hellip;)
-  INTERP 0x000134 0x00008134 0x00008134 0x00013 0x00013 R 0x1</p>
-
-<pre><code>  [Requesting program interpreter: /lib/ld-linux.so.3]
-</code></pre>
-
-<p>  LOAD 0x000000 0x00008000 0x00008000 0x004b8 0x004b8 R E 0x8000
-  (&hellip;)
-  &#8220;`</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="err">$</span><span class="n">TARGET</span><span class="o">/</span><span class="n">arm</span><span class="o">-</span><span class="n">x</span><span class="o">-</span><span class="n">tools</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">arm</span><span class="o">-</span><span class="n">unknown</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabi</span><span class="o">-</span><span class="n">readelf</span> <span class="o">-</span><span class="n">d</span> \
-</span><span class='line'><span class="err">$</span><span class="n">TARGET</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libgcc_s</span><span class="p">.</span><span class="n">so</span><span class="mf">.1</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Result should look like that:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="p">(...)</span>
-</span><span class='line'><span class="n">Tag</span>          <span class="n">Type</span>           <span class="n">Name</span><span class="o">/</span><span class="n">Value</span>
-</span><span class='line'><span class="mh">0x00000001</span> <span class="p">(</span><span class="n">NEEDED</span><span class="p">)</span> <span class="n">Shared</span> <span class="nl">library:</span> <span class="p">[</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">]</span>
-</span><span class='line'><span class="mh">0x0000000e</span> <span class="p">(</span><span class="n">SONAME</span><span class="p">)</span> <span class="n">Library</span> <span class="nl">soname:</span> <span class="p">[</span><span class="n">libgcc_s</span><span class="p">.</span><span class="n">so</span><span class="mf">.1</span><span class="p">]</span>
-</span><span class='line'><span class="mh">0x0000000c</span> <span class="p">(</span><span class="n">INIT</span><span class="p">)</span> <span class="mh">0xcc2c</span> <span class="p">(...)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I hope you find above manual useful. If you need more detailed descriptions it
-can be found <a href="http://www.eglibc.org/cgi-bin/viewvc.cgi/trunk/libc/EGLIBC.cross-building?view=markup">here</a>.
-Also don&rsquo;t bother to ask me by comment below.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/06/therefore-im-leaving-for-easter/">How to Download Videos From videos.linux.com</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-06T22:48:00+02:00" pubdate data-updated="true">Apr 6<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/04/06/therefore-im-leaving-for-easter/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Therefore, I&rsquo;m leaving for the Easter holidays I wanted to download some lecture on embedded systems, which was presented at the 2012 Embedded Linux Conference. Although I regret I found that I could not find as good quality copy in the network as on the Linux Foundation page. It is unfortunate that linux.com site does not have the possibility of direct downloading video files. But there is a workaround. Follow below tutorial:</p>
-
-<ol>
-<li>Go to page with video. For example:  <a href="http://video.linux.com/videos/to-provide-a-long-term-stable-linux-for-industry">http://video.linux.com/videos/to-provide-a-long-term-stable-linux-for-industry</a></li>
-<li><p>Click play on the video and if you using Chrome browser right click on player window and inspect this element. Result should look like that: 
-<img src="http://1.bp.blogspot.com/-ivNLyF3IFwc/T39S_IwbntI/AAAAAAAAAEg/mVgiu6CXqhs/s400/Untitled.png" alt="" /></p></li>
-<li><p>Expand div tag marked in red on screenshot above. If video was start you should see video tag which contain two links to video files mp4 and webm. Screen shot below shows hot it should look like:
-<img src="http://3.bp.blogspot.com/-waLmSIB4LAI/T39VlAF5P7I/AAAAAAAAAEo/7T9bUg5p-sw/s400/Untitled1.png" alt="" /></p></li>
-</ol>
-
-
-<p>These links are only temporary, so if you want to use them do it as soon as possible. The sad part of all is that the organization intended to promote one of the most libertarian solutions in software history does not provide materials for download.</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -1438,6 +832,306 @@ should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 
 
 
   <div class="entry-content"><p>Blog has changed slightly. I&rsquo;ve added two new sections: social media and afk. In &ldquo;social media&rdquo; I will add links to my profiles on various social networking sites. You&rsquo;ll find my most recent development achievements ( <a href="https://github.com/pietrushnic">@github</a>) and twitts on topics of interest to me ( <a href="https://twitter.com/#!/pietrushnic">@twitter</a>). The second section, &ldquo;afk&rdquo; (away from keyboard) is intended for the information of life beyond the keyboard, which in my case is not too extensive. I will publish here information about the books we read, watched movies and many other interesting things, which can be passionate away from the keyboard.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/20/improve-productivity-by-tracking-work_20/">Improve Productivity by Tracking Work Environment With Git - Vim</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T21:43:00+01:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/20/improve-productivity-by-tracking-work_20/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In this post I try to describe my vim configuration procedure and how it is
+connected with git. The whole concept is based on keeping all the configuration
+files in a separate directory. These files are connected using symbolic links in
+places where system or application requires it (eg <code>$HOME/.vimrc -&gt;
+/home/jdoe/workspace/dotfiles/vimrc</code>). So first let&rsquo;s create local directory for
+vim:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/workspace/dotfiles;mkdir vim  </span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Pathogen</h3>
+
+<p>The first plugin that will be installed is pathogen created by tpope and
+accessible through github. Pathogen is a vim script to manage all vim plugins
+with ease. Below line add pathogen as submodule to our workspace repository
+created in <a href="/blog/2012/02/19/improve-productivity-by-tracking-work/">previous
+post</a>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule add https://github.com/tpope/vim-pathogen.git dotfiles/vim/pathogen</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Initialize repository and update it:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule init && git submodule update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create additional directories need to complete pathogen installation, change
+directory to autoload:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd dotfiles/vim;mkdir {autoload,bundle};cd autoload</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In autoload directory pathogen should be installed, bundle directory is a place
+for all plugins installed in future. Finally we need to link vim script from
+pathogen submodule to current directory (<code>dotfiles/vim/autoload</code>):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ln -s ../pathogen/autoload/pathogen.vim .</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Directory structure should look like below:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pietrushnic@eriador:~/workspace/dotfiles$ tree .
+</span><span class='line'>└── vim
+</span><span class='line'>├── autoload
+</span><span class='line'>│   └── pathogen.vim -&gt; ../pathogen/autoload/pathogen.vim
+</span><span class='line'>├── bundle
+</span><span class='line'>└── pathogen
+</span><span class='line'>├── autoload
+</span><span class='line'>│   └── pathogen.vim
+</span><span class='line'>└── README.markdown</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the end of pathogen installation few lines to <code>$HOME/.vimrc</code> should be added.
+Of course following rules about dotfiles management <code>.vimrc</code> should be created as
+separate file in <code>~/workspace/dotfiles</code> and linked to <code>$HOME/.vimrc</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>touch vimrc;ln -s $PWD/vimrc $HOME/.vimrc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add below lines to <code>$HOME/.vimrc</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>call pathogen#infect()
+</span><span class='line'>call pathogen#runtime_append_all_bundles()
+</span><span class='line'>call pathogen#helptags()
+</span><span class='line'>syntax on
+</span><span class='line'>filetype plugin
+</span><span class='line'>indent on</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Fuzzyfinder</h3>
+
+<p>This is second plugin without which I cannot work. It speeds up searching though
+files, directories and tags. Has multiple useful features. RTFM if you want knew
+them. I will be also added as a git submodule:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule add https://github.com/vim-scripts/FuzzyFinder.git dotfiles/vim/bundle/fuzzyfinder</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Additional plugin is needed to correctly install fuzzyfinder:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule add https://github.com/vim-scripts/L9.git dotfiles/vim/bundle/l9</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Initialize and update submodules:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule init && git submodule update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Configuration I suggest to configure fuzzyfinder with accordance to example provided in help. </p>
+
+<ul>
+<li>Run vim and type :h fuf@en<Enter>. </li>
+<li>Choose tag fuf-vimrc-example and press Ctrl-]. </li>
+<li>Mark whole keybindings copy and paste to <code>~/.vimrc</code></li>
+</ul>
+
+
+<p>Right now I think it is enough with vim configuration. Of course I use plenty of
+other plugins but I don&rsquo;t have to time to describe my them all (maybe in future
+posts). Don&rsquo;t forget to commit your changes, there could be a lot of them,
+however, to deal with the distribution of these changes and improve your skills
+try to use git add -p interface, suggesting after linux code style &ndash; each commit
+should contain separate logical part of the changes, personally I add prefix to
+my commits (eg . vim, git, etc.) to ease deal with git log.  Notes:</p>
+
+<ul>
+<li>vim helpfiles generates tags files, which should be ignored by git, so I
+recommend to create .gitignore in every module with blow content:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.gitignore
+</span><span class='line'>tags*</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>by default fuzzyfinder operate on unfriendly color palette espessicaly when
+using it through putty, highlighted pattern could be changed by added below
+lines to .vimrc (9 = black)</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" fuzzy-finder - fix colors highlight PmenuSel ctermbg=9</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/20/hostname-generator/">Hostname Generator</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T20:58:00+01:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/20/hostname-generator/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Many times happened that I spend time, during the installation of the new system, whether it be a virtual physical machine, wondering about it&rsquo;s hostname. One day I asked myself the trouble searching for host name generator. Best I could find (currently second in the results of google) is rospo.net. It gives you the choice of category for the host name. My favorite, as a fan of fantasy is &ldquo;Characters from Tolkien&rdquo;. Although the category name does not reflect the truth, because in addition also includes a set of known sites in middlearth and more. So I recommend:</p>
+
+<p>  <a href="http://rospo.net/webproducts/name/index.php">http://rospo.net/webproducts/name/index.php</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/19/improve-productivity-by-tracking-work/">Improve Productivity by Tracking Work Environment With Git - Preparation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-19T21:12:00+01:00" pubdate data-updated="true">Feb 19<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/19/improve-productivity-by-tracking-work/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>Update</em>: My repository is available
+<a href="https://github.com/pietrushnic/workspace.git">here</a>.</p>
+
+<p>Below is first post from series in which I want to describe my experience gained
+in attempt to enhance my productivity by using git to control the contents of
+some files in my home directory. The first step to improve the productivity
+is good organization of working environment. It happens very often that I work
+on multiple machines both physical and virtual. Therefore I need a
+good mechanism to share knowledge, experience, code, configuration and many
+other things. Configuration described below is only an example that actually
+fits my way of working.  First of all simple concept of directory structure is
+needed. Let&rsquo;s start with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir -p $HOME/workspace/blog;mkdir -p $HOME/workspace/dotfiles
+</span><span class='line'>cd workspace </span></code></pre></td></tr></table></div></figure>
+
+
+<p>Write some files (i.e. for your blog) with your favourite editor, initialize
+repository and prepare first commit</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git init
+</span><span class='line'>git add .;git commit -m "Initial commit for environment tracking" </span></code></pre></td></tr></table></div></figure>
+
+
+<p>To avoid information about untracked vim swp files add $HOME/workspace/.gitignore with following content:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.gitignore
+</span><span class='line'>*.swp</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
