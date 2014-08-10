@@ -54,10 +54,19 @@ cannot find issuer of instruction that cause problem. Namely:
 0x6001024f:  ldmia.w sp!, {r2, r3, r4, r5, r6, r7, r9, r10, r11, pc}
 ```
 
-Unfortunately there is no sign about this instruction in coreboot and qemu
-code.
+This instruction cause that PC goes to 0 and then run instruction from zeroed
+memory, which in ARM instructions means:
+
+```
+andeq   r0, r0, r0
+```
+
+It happens till PC reach 0x4000000 which is out of 'RAM or ROM' for qemu.
+Unfortunately there is no sign about `ldmia` instruction with above range of
+registers in coreboot and qemu code. This is probably result of compiler
+optimization.
 
 ## God bless bisection
 
-I was able to narrow down problem to one commit that came from linaro developer. ``
+I was able to narrow down problem to one commit that came from linaro developer.
  
