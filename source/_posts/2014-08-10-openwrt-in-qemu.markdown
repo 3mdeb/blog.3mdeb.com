@@ -27,3 +27,8 @@ Compile using simple:
 ```
 make
 ```
+After those operations we are ready to boot OpenWRT:
+```
+QEMU_AUDIO_DRV=none qemu-system-arm -M realview-eb-mpcore -kernel bin/realview/openwrt-realview-vmlinux-initramfs.elf -net nic -net user -nographic
+```
+Because of obvious reason `openwrt-realview-vmlinux.elf` will not boot - no rootfs.
