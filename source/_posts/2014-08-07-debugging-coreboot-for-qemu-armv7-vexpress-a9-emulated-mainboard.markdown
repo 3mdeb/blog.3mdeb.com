@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Debugging coreboot for QEMU armv7 (vexpress-a9) emulated mainboard"
+title: "Coreboot for QEMU armv7 (vexpress-a9) emulated mainboard"
 date: 2014-08-07 23:08:39 +0200
 comments: true
 categories: coreboot
@@ -9,9 +9,11 @@ categories: coreboot
 Recently I came back to look into coreboot mainly because I figured out that
 there is some demand for low level skills
 ([1](http://bit.ly/1sBSybZ),[2](http://bit.ly/1sBSR6F)). I was surprised that
-under the wings of Google coreboot team start to support ARM (BTW next great
+under the wings of Google coreboot team start to support ARM (BTW ARM programming is IMHO next great
 skill to learn). So I took latest code compile QEMU armv7 mainboard model and
-tried to kick it in latest qemu-system-arm. Unfortunately it didn't boot.
+tried to kick it in latest qemu-system-arm. Unfortunately it didn't boot. 
+
+## Noob dead end
 
 Command for running qemu that I found in one commit log:
 ```
@@ -45,4 +47,17 @@ PSR=600000f3 -ZC- T svc32
 ```
 
 Obviously qemu complains on value in R15 (PC - Program Counter), which is the
-address of current instruction (like EIP in x86).
+address of current instruction (like EIP in x86). After digging a while I
+figured out that I am unable to narrow down the problem. Mainly because I
+cannot find issuer of instruction that cause problem. Namely:
+```
+0x6001024f:  ldmia.w sp!, {r2, r3, r4, r5, r6, r7, r9, r10, r11, pc}
+```
+
+Unfortunately there is no sign about this instruction in coreboot and qemu
+code.
+
+## God bless bisection
+
+I was able to narrow down problem to one commit that came from linaro developer. ``
+ 
