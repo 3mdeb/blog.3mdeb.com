@@ -9,8 +9,8 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="1. Introduction It&rsquo;s been over 3 months when I published my last post. In chaos of daily jobs I
-realize that there is so much things that I don &hellip;">
+  <meta name="description" content="I start to learn Ruby on Rails. As always when you learn new programming
+language toolchain is required. In this tutorial I will try to go through &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -102,458 +102,6 @@ realize that there is so much things that I don &hellip;">
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/19/another-blogger-switched-to-octopress/">Yet Another Blogger Switched to Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-19T03:01:00+01:00" pubdate data-updated="true">Mar 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/19/another-blogger-switched-to-octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>1. Introduction</h3>
-
-<p>It&rsquo;s been over 3 months when I published my last post. In chaos of daily jobs I
-realize that there is so much things that I don&rsquo;t like in Google Blogger that I
-have to find different solution for my blogging aspirations. So first of all
-requirements, what do I hate most in Blogger:</p>
-
-<ul>
-<li> <strong>editor</strong> &ndash; I used to vim and cannot stand that there is no bracket matching,
-vertical/block modification, and other cool stuff that I use</li>
-<li> <strong>the way that page was stored</strong> &ndash; I want to have control on my blog and if I can
-use for example git to track its content that would be great</li>
-<li>  <strong>lamish</strong> &ndash; with Blogger I learned nothing, I look for something related with new
-trends in web development, it looks that ruby on rails is the most interesting
-framework</li>
-</ul>
-
-
-<p>And I found <a href="http://octopress.org">Octopress</a> it has all I need. The page states
-&ldquo;A blogging framework for hackers&rdquo;. I don&rsquo;t know if I can or should call myself
-hacker but the idea is great for me.</p>
-
-<p>So I start to move my blog to Octopress. Of course there is a plenty of things
-to do but also many to learn.</p>
-
-<p>Lets start with first part of hints that I found useful:</p>
-
-<h3>2. Blogger post conversion to markdown and import to Octopress</h3>
-
-<p><strong>Update</strong>: <em>after I wrote this post I found interesting article on <a href="https://github.com/mojombo/jekyll/wiki/blog-migrations">this page</a></em></p>
-
-<ul>
-<li>Export Blogger posts.
-To do this go to your blog <code>Design-&gt;Settings-&gt;Other-&gt;Export blog-&gt;Donwload blog</code></li>
-<li>Convert xml to html files.
-I used latest modification of <a href="https://gist.github.com/dnagir/1765496/forks">import.rb</a>
-but you probably can find better solution.</li>
-<li>Convert html files to markdown for example by using <a href="https://github.com/xijo/reverse_markdown">reverse_markdown</a>:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo gem install reverse_markdown
-</span><span class='line'>d path/with/your/html/files
-</span><span class='line'>find -name <span class="s2">&quot;*.html&quot;</span> | sed -e <span class="s1">&#39;s/\.html//&#39;</span> | xargs -n 1 -I @ sh -c <span class="s1">&#39;reverse_markdown @.html &gt; @.markdown&#39;</span>
-</span><span class='line'>mv *.markdown path/to/your/octopress/source/_posts/
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>At the end of this process you should take a look at generated code, so setup
-your octopress and run <code>rake preview</code></li>
-<li>Fix syntax and enjoy your posts in markdown.
-
-<ul>
-<li>useful thing here for me was markdown syntax highlighting in vim by tpope
-<a href="https://github.com/tpope/vim-markdown">vim-markdown</a></li>
-<li>liquid syntax <a href="https://github.com/tpope/vim-liquid">vim-liquid</a></li>
-<li>also setting spellchecker could be useful, add below line to your <code>$HOME/.vimrc</code>
-and you will get spell cheking with en_us dictionary and word wraping on 80
-character:</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="err">&quot;</span> blogging with markdown
-</span><span class='line'>au BufRead,BufEnter *.markdown setlocal <span class="nv">textwidth</span><span class="o">=</span>80 formatoptions+<span class="o">=</span>w spell <span class="nv">spelllang</span><span class="o">=</span>en_us
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>3. Octopress configuration &ndash; tricks that I used for this blog</h3>
-
-<ul>
-<li>Configure your social networks as it was explained in <a href="http://octopress.org/docs/configuring">Octopress documentation</a></li>
-<li>It is good to register on <a href="http://disqus.com/">Disqus</a> the idea of keeping
-comments separated from blog is very good. I realized it when was trying
-migrate my comments from Blogger and didn&rsquo;t have installed Disqus.</li>
-<li><a href="http://www.google.com/analytics/">Google Analytics</a> and <a href="http://www.addthis.com/">AddThis</a>
-also are very helpful in tracking how your content was shared and what of this
-stuff has greatest interest. I will write article how to integrate <a href="http://www.addthis.com/">AddThis</a>
-because there is lack of information about it in google.</li>
-<li>Header background image can be changed by dealing with sass files. I did this
-in <code>sass/custom/_layout.scss</code> using below lines:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">header</span><span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s2">&quot;banner&quot;</span><span class="o">]</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(/images/header_bg2_1200x168.png)</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background-repeat</span><span class="o">:</span> <span class="k">no-repeat</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>If you add some background you probably want to set position of your title and
-subtitle. You can do this in the same file as background image using something
-like this:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">header</span> <span class="nt">h2</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span><span class="k">relative</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding-left</span><span class="o">:</span><span class="m">6.6em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">header</span> <span class="nt">h1</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">font-weight</span><span class="o">:</span><span class="k">bold</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span><span class="k">relative</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding-left</span><span class="o">:</span><span class="m">3em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Do not forget about updating your Octopress frequently. Instructions how to do
-that can be found in <a href="http://octopress.org/docs/updating/">documentation</a></li>
-</ul>
-
-
-<h3>4. SEO</h3>
-
-<p>Most interesting article about SEO is surprisingly on top of google search <a href="http://www.yatishmehta.in/seo-for-octopress">&lsquo;octopress seo&rsquo;</a>.
-Main thing that I take from the article is that Octopress already have built in
-support for SEO by additional elements in post header. This elements are <code>keywords:, description:</code>
-for example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">---</span>
-</span><span class='line'><span class="nt">layout</span><span class="o">:</span> <span class="nt">post</span>
-</span><span class='line'><span class="nt">title</span><span class="o">:</span> <span class="s2">&quot;Another blogger switched to Octopress&quot;</span>
-</span><span class='line'><span class="nt">date</span><span class="o">:</span> <span class="nt">2013-03-19</span> <span class="nt">03</span><span class="nd">:01</span>
-</span><span class='line'><span class="nt">comments</span><span class="o">:</span> <span class="nt">true</span>
-</span><span class='line'><span class="nt">categories</span><span class="o">:</span> <span class="s2">&quot;about this blog&quot;</span>
-</span><span class='line'><span class="nt">published</span><span class="o">:</span> <span class="nt">false</span>
-</span><span class='line'><span class="nt">keywords</span><span class="o">:</span> <span class="nt">blog</span><span class="o">,</span><span class="nt">octopress</span><span class="o">,</span><span class="nt">blogger</span><span class="o">,</span><span class="nt">configuration</span><span class="o">,</span><span class="nt">seo</span><span class="o">,</span><span class="nt">tricks</span>
-</span><span class='line'><span class="nt">description</span><span class="o">:</span> <span class="nt">Octopress</span> <span class="nt">configuration</span>
-</span><span class='line'><span class="nt">---</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Octopress will use keywords and description to build meta section of every
-website on your blog.</p>
-
-<p>To not forget keyword and description section in my posts I modified Rakefile:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gh">diff --git a/Rakefile b/Rakefile</span>
-</span><span class='line'><span class="gh">index d3a1cb0..3e2ced7 100644</span>
-</span><span class='line'><span class="gd">--- a/Rakefile</span>
-</span><span class='line'><span class="gi">+++ b/Rakefile</span>
-</span><span class='line'><span class="gu">@@ -111,6 +111,9 @@ task :new_post, :title do |t, args|</span>
-</span><span class='line'>     post.puts &quot;date: #{Time.now.strftime(&#39;%Y-%m-%d %H:%M&#39;)}&quot;
-</span><span class='line'>     post.puts &quot;comments: true&quot;
-</span><span class='line'>     post.puts &quot;categories: &quot;
-</span><span class='line'><span class="gi">+    post.puts &quot;published: false&quot;</span>
-</span><span class='line'><span class="gi">+    post.puts &quot;keywords:&quot;</span>
-</span><span class='line'><span class="gi">+    post.puts &quot;description:&quot;</span>
-</span><span class='line'>     post.puts &quot;---&quot;
-</span><span class='line'>   end
-</span><span class='line'> end
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>5. Others</h3>
-
-<p>Few things that were not so obvious for me:</p>
-
-<ul>
-<li>to create category name that contain few words like <code>about this blog</code> syntax
-like this:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'>categories:
-</span><span class='line'> - about this blog
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>not like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'>categories: about this blog # or &quot;about this blog&quot;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>ordered and unordered lists are not indented by default, this code in <code>sass/custom/_layout.scss</code>
-fix this behavior:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">article</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">ol</span><span class="o">,</span> <span class="n">ul</span> <span class="err">{</span>
-</span><span class='line'>    <span class="k">padding-left</span><span class="o">:</span> <span class="m">3em</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="err">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Hope this tips are useful for you.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/15/short-hint-for-all-those-who-use-vim/">Short Hint for All Those Who Use Vim and Pathogen</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-15T11:51:00+01:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/01/15/short-hint-for-all-those-who-use-vim/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today, after updating my wokspace to latest version I encounter below error during vim running:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Error detected while processing function pathogen#runtime_append_all_bundles:
-</span><span class='line'>line 1:
-</span><span class='line'>E121: Undefined variable: source_path
-</span><span class='line'>E116: Invalid arguments for function string(source_path).') to pathogen#incubate('.string(source_path.'/{}').')') 
-</span><span class='line'>E116: Invalid arguments for function 4_warn
-</span><span class='line'>Press ENTER or type command to continue</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Quick look on pathogen runtime_append_all_bundles function and I found:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>call s:warn<span class="o">(</span><span class="s1">&#39;Change pathogen#runtime_append_all_bundles(&#39;</span>.string<span class="o">(</span>a:1<span class="o">)</span>.<span class="s1">&#39;) to pathogen#incubate(&#39;</span>.string<span class="o">(</span>a:1.<span class="s1">&#39;/{}&#39;</span><span class="o">)</span>.<span class="s1">&#39;)&#39;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So simply replacing:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>call pathogen#runtime_append_all_bundles<span class="o">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>with:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>call pathogen#incubate<span class="o">()</span> in <span class="nv">$HOME</span>/.vimrc fix the problem.
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/">Sqlite3 Gem Not Supported on Heroku</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-18T21:16:00+01:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When I tried to deploy second part of <a href="http://ruby.railstutorial.org/chapters/a-demo-app#top">RoR tutorial</a>
-to Heroku I get this error:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>An error occurred while installing sqlite3 (1.3.5), and Bundler cannot continue.  
-</span><span class='line'>Make sure that `gem install sqlite3 -v '1.3.5'` succeeds before bundling.
-</span><span class='line'>!
-</span><span class='line'>!  Failed to install gems via Bundler.
-</span><span class='line'>!
-</span><span class='line'>! Detected sqlite3 gem which is not supported on Heroku.
-</span><span class='line'>!  http://devcenter.heroku.com/articles/how-do-i-use-sqlite3-for-development
-</span><span class='line'>!
-</span><span class='line'>!  Heroku push rejected, failed to compile Ruby/rails app
-</span><span class='line'>To git@heroku.com:thawing-beyond-7283.git 
-</span><span class='line'>! [remote rejected] master -&gt; master (pre-receive hook declined)
-</span><span class='line'>error: failed to push some refs to 'git@heroku.com:thawing-beyond-7283.git'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I searched a little bit about this error and find <a href="http://stackoverflow.com/questions/3747002/heroku-rails-3-and-sqlite3">this</a>
-stackoverflow post. But when I look more carefully on the Gemfile syntax I
-found a mistake. I used simply:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.5&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>But I should have:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">group</span> <span class="ss">:development</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.5&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">group</span> <span class="ss">:production</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;pg&#39;</span><span class="p">,</span> <span class="s1">&#39;0.12.2&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As RoR tutorial states.</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -1250,7 +798,7 @@ beginning we create <code>$HOME/.muttrc</code> file:</li>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>&lt;account_name&gt;</code> &ndash; for <a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#102;&#111;&#111;&#x2e;&#98;&#97;&#x72;&#64;&#x67;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#109;">&#x66;&#111;&#x6f;&#x2e;&#x62;&#x61;&#114;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;</a> it will be foo.bar
+<p><code>&lt;account_name&gt;</code> &ndash; for <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#102;&#111;&#x6f;&#46;&#x62;&#x61;&#x72;&#64;&#x67;&#109;&#x61;&#105;&#108;&#46;&#x63;&#x6f;&#109;">&#102;&#111;&#111;&#46;&#98;&#x61;&#114;&#64;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#111;&#109;</a> it will be foo.bar
 <code>&lt;imap_server_address&gt;</code> &ndash; this information you can get from your e-mail provider
 help pages or from the settings of web e-mail client, for Gmail it is
 imap.gmail.com
@@ -1334,6 +882,611 @@ simply add another <code>&lt;folder_name&gt;</code> to mailboxes line.</li>
 <p>:e blogger:list If list of you see all your posts than it seems that plugin works good. Finally check writing feature. Create file with some text and type:</p>
 
 <p>:w blogger:create Few things doesn&rsquo;t work as it should. Meybe I will find enough time to fix it. This article was created by using blogger.vim script.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/18/qemu-as-debugging-environment-for/">Debugging Coreboot in Qemu Environment - Part 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-18T22:41:00+02:00" pubdate data-updated="true">Apr 18<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/04/18/qemu-as-debugging-environment-for/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In <a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment">previous post</a>
+<code>coreboot</code> was configured and installed. Here we try to establish good debugging
+environment for it. To create a good emulated environment to debug, research and
+learn <code>coreboot</code> few tricks are required. First of all we need to know how to run
+our emulated environment (qemu). What I mean by that ?</p>
+
+<ul>
+<li>load coreboot image (-bios option),
+
+<ul>
+<li>freeze CPU at startup (-S),</li>
+</ul>
+</li>
+<li>get appropriate feedback about virtual machine state (-d in_asm,cpu),</li>
+<li>set up remote gdb server to run qemu step by step (-s).</li>
+</ul>
+
+
+<p>So finally we get:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu -bios src/coreboot/build/coreboot.rom -s -S -d in_asm,cpu -nographic</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We don&rsquo;t need graphics so it also could be disable (-nographic). Run above
+command and prepare debugging environment as described below.</p>
+
+<ul>
+<li>load bootblock file in gdb:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>file path/to/coreboot/build/bootblock.elf</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>use objdump to find out at what address .text, .bss and .data sections are:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>objdump -h src/coreboot/build/coreboot\_ram|grep -E "text|bss|\.data"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>my output looks like that:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>0 .text 00010810 00100000 00100000 00001000 2**2 3 .data 000004d8 001174e8 
+</span><span class='line'>001174e8 000184e8 2**2 4 .bss  0000080c 001179c0 001179c0 000189c0 2**3</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>use above addresses to load symbols from <code>coreboot_ram</code> file in gdb:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>add-symbol-file src/coreboot/build/coreboot_ram 0x00100000 -s .data \
+</span><span class='line'>0x001174e8 -s .bss 0x001179c0</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>In another terminal or screen window</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vim /tmp/qemu.log</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(use :e to reload qemu.log file after every instruction), in this file we will
+get information about all registers of virtual machine
+* target remote :1234
+* Run next instruction (ni command in gdb) and refresh qemu.log, if you get
+   something like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>EAX=00000000 EBX=00000000 ECX=00000000 EDX=00000633 
+</span><span class='line'>ESI=00000000 EDI=00000000 EBP=00000000 ESP=00000000 
+</span><span class='line'>EIP=0000fff0 EFL=00000002 [-------] CPL=0 II=0 A20=1 SMM=0 HLT=0
+</span><span class='line'>ES =0000 00000000 0000ffff 00009300
+</span><span class='line'>CS =f000 ffff0000 0000ffff 00009b00
+</span><span class='line'>SS =0000 00000000 0000ffff 00009300
+</span><span class='line'>DS =0000 00000000 0000ffff 00009300 
+</span><span class='line'>FS =0000 00000000 0000ffff 00009300
+</span><span class='line'>GS =0000 00000000 0000ffff 00009300
+</span><span class='line'>LDT=0000 00000000 0000ffff 00008200
+</span><span class='line'>TR =0000 00000000 0000ffff 00008b00
+</span><span class='line'>GDT= 00000000 0000ffff
+</span><span class='line'>IDT= 00000000 0000ffff
+</span><span class='line'>CR0=60000010 CR2=00000000 CR3=00000000 CR4=00000000
+</span><span class='line'>DR0=00000000 DR1=00000000 DR2=00000000 DR3=00000000
+</span><span class='line'>DR6=ffff0ff0 DR7=00000400</span></code></pre></td></tr></table></div></figure>
+
+
+<p>it means that your debugging enviroment was set correctly.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/12/building-arm-toolchain-part-2-gcc-and/">Building ARM Toolchain - Part 2: Gcc and Eglibc</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-12T23:54:00+02:00" pubdate data-updated="true">Apr 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/04/12/building-arm-toolchain-part-2-gcc-and/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Unfortunately after few tries of cross compiling eglibc using different source
+for instructions I alway end with hard to solve issues. Luckily, in the sources
+of eglibc I noticed instructions for cross-compiling written long time ago by
+Jim Blandy(I know i should start <a href="http://www.eglibc.org/cgi-bin/viewvc.cgi/trunk/libc/EGLIBC.cross-building?revision=2037&amp;view=markup">here</a>).
+Lot of thanks to him for it. Below I describe my experience which I gained
+during eglibc cross compilation for <code>arm-unknown-linux-gnueabi</code> and procedure that
+I used. Commands below contain some constants that I used in previous works. See
+<a href="/blog/2012/03/20/building-arm-toolchain-part-1-libs-and">this post.</a>
+Eglibc library and the compiler itself is built with many various parameters
+this post is not the place to explain their meaning, please RTFM.</p>
+
+<ol>
+<li>Checkout eglibc from svn (as alwyas I try to use a latest sources possible).
+Version used r17815:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>svn co http://www.eglibc.org/svn/trunk eglibc</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Link working ports to GNU/Linux on some machine architectures. They are not
+maintained in the official glibc source tree so we need to add it in this way:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ln -s ../ports eglibc/libc/ports/</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Create eglibc-headers directory:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir eglib-headers; cd eglib-headers</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Configure eglibc and preliminary objects:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>BUILD_CC=gcc CC=arm-unknown-linux-gnueabi-gcc CXX=arm-unknown-linux-gnueabi-cpp \
+</span><span class='line'>AR=arm-unknown-linux-gnueabi-ar RANLIB=arm-unknown-linux-gnueabi-ranlib \
+</span><span class='line'>../eglibc/libc/configure --prefix=/usr --with-headers=$TARGET/usr/include \
+</span><span class='line'>--build=x86_64-pc-linux-gnu --host=arm-unknown-linux-gnueabi --disable-profile \
+</span><span class='line'>--without-gd --without-cvs --enable-add-ons</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Install eglibc headers:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make install-headers install_root=$TARGET install-bootstrap-headers=yes</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>We need few object file to link shared libraries, which will be built and installed by hand:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir -p $TARGET/usr/lib make csu/subdir_lib cp csu/crt1.o csu/crti.o csu/crtn.o $TARGET/usr/lib</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>To produce libgcc_s.so we need libc.so, but only need its dummy version because
+we&rsquo;ll never use it. It doesn&rsquo;t matter what we will point as a libc.so we use /dev/null as C file.</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>arm-unknown-linux-gnueabi-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o \
+</span><span class='line'>$TARGET/usr/lib/libc.so</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Get latest gcc sources using git repository mirror. Latest commit while writing
+this post was 5b9a8c3:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd .. git clone git://repo.or.cz/official-gcc.git</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Now, we can build gcc which can compile eglibc.</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir eglibc-gcc; cd eglibc-gcc ../official-gcc/configure --target=arm-unknown-linux-gnueabi \
+</span><span class='line'>--prefix=$TARGET/arm-x-tools --with-sysroot=$TARGET --disable-libssp \
+</span><span class='line'>--disable-libgomp --disable-libmudflap --enable-languages=c \
+</span><span class='line'>--with-gmp=$TARGET/arm-x-tools --with-mpfr=$TARGET/arm-x-tools \
+</span><span class='line'>--with-mpc=$TARGET/arm-x-tools --disable-libquadmath --build=$MACHTYPE \
+</span><span class='line'>--host=$MACHTYPE --with-local-prefix=$TARGET/arm-x-tools --disable-multilib \
+</span><span class='line'>--with-float=soft --with-pkgversion="pietrushnic" --enable-threads=no \
+</span><span class='line'>--enable-target-optspace --disable-nls --enable-c99 --enable-long-long
+</span><span class='line'>make -j4
+</span><span class='line'>make install</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Confugure and compile final version of eglibc.</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir eglibc-final
+</span><span class='line'>cd eglibc-final/ BUILD_CC=gcc CC=arm-unknown-linux-gnueabi-gcc CXX=arm-unknown-linux-gnueabi-cpp \
+</span><span class='line'>AR=arm-unknown-linux-gnueabi-ar RANLIB=arm-unknown-linux-gnueabi-ranlib \
+</span><span class='line'>../eglibc/libc/configure --prefix=/usr --with-headers=$TARGET/usr/include \
+</span><span class='line'>--build=x86_64-pc-linux-gnu --host=arm-unknown-linux-gnueabi --disable-profile \
+</span><span class='line'>--without-gd --without-cvs --enable-add-ons
+</span><span class='line'>make
+</span><span class='line'>make install install_root=$TARGET</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Install libelf library</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://www.mr511.de/software/libelf-0.8.13.tar.gz
+</span><span class='line'>tar zxvf libelf-0.8.13.tar.gz
+</span><span class='line'>cd libelf-0.8.13/
+</span><span class='line'>./configure --prefix=$TARGET/arm-x-tools --disable-shared --enable-static
+</span><span class='line'>make;make install</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Prepare final version of gcc.</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ..
+</span><span class='line'>mkdir final-gcc
+</span><span class='line'>cd final-gcc
+</span><span class='line'>../official-gcc/configure --target=arm-unknown-linux-gnueabi \
+</span><span class='line'>--prefix=$TARGET/arm-x-tools --with-sysroot=$TARGET --disable-libssp \
+</span><span class='line'>--disable-libgomp --disable-libmudflap --enable-languages=c,c++ --with-gmp=$TARGET/arm-x-tools \
+</span><span class='line'>--with-mpfr=$TARGET/arm-x-tools --with-mpc=$TARGET/arm-x-tools --disable-libquadmath \
+</span><span class='line'>--build=$MACHTYPE --host=$MACHTYPE --with-local-prefix=$TARGET/arm-x-tools --disable-multilib \
+</span><span class='line'>--with-float=soft --with-pkgversion="pietrushnic" --enable-threads=posix \
+</span><span class='line'>--enable-target-optspace --disable-nls --enable-c99 --enable-long-long \
+</span><span class='line'>--enable-__cxa_atexit --enable-symvers=gnu --with-libelf=$TARGET/arm-x-tools \
+</span><span class='line'>--enable-lto
+</span><span class='line'>make
+</span><span class='line'>make install</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Few libraries should be copied manualy</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cp -d $TARGET/arm-x-tools/arm-unknown-linux-gnueabi/lib/libgcc\_s.so\* $TARGET/lib
+</span><span class='line'>cp -d $TARGET/arm-x-tools/arm-unknown-linux-gnueabi/lib/libstdc++.so\* $TARGET/lib</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Compile and install chrpath &ndash; this is useful tool to remove the rpath or runpath setting from binary.</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ..
+</span><span class='line'>sudo apt-get install libc6-i386 gcc-multilib
+</span><span class='line'>apt-get source chrpath
+</span><span class='line'>cd chrpath-0.13/ CFLAGS=-m32
+</span><span class='line'>./configure --prefix=$TARGET/arm-x-tools \
+</span><span class='line'>--program-prefix=arm-unknown-linux-gnueabi-
+</span><span class='line'>make
+</span><span class='line'>make install</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Strip debug symbols</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>strip --strip-debug $TARGET/arm-x-tools/lib/* \
+</span><span class='line'>$TARGET/arm-x-tools/arm-unknown-linux-gnueabi/lib/* $TARGET/arm-x-tools/libexec/*
+</span><span class='line'>strip --strip-unneeded $TARGET/arm-x-tools/bin/* \
+</span><span class='line'>$TARGET/arm-x-tools/arm-unknown-linux-gnueabi/bin/*
+</span><span class='line'>arm-unknown-linux-gnueabi-strip --strip-debug $TARGET/lib/* $TARGET/usr/lib/*</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>At the end simple test to find out if basic functionality works:</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">cat</span> <span class="o">&gt;</span> <span class="n">hello</span><span class="p">.</span><span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">EOF</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">stdio</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="kt">int</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="p">{</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">puts</span> <span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">EOF</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Try to cross compile C file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span><span class="n">TARGET</span><span class="o">/</span><span class="n">arm</span><span class="o">-</span><span class="n">x</span><span class="o">-</span><span class="n">tools</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">arm</span><span class="o">-</span><span class="n">unknown</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabi</span><span class="o">-</span><span class="n">gcc</span> <span class="o">-</span><span class="n">Wall</span> <span class="n">hello</span><span class="p">.</span><span class="n">c</span> <span class="o">-</span><span class="n">o</span> <span class="n">hello</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">cat</span> <span class="o">&gt;</span> <span class="n">c</span><span class="o">++-</span><span class="n">hello</span><span class="p">.</span><span class="n">cc</span> <span class="o">&lt;&lt;</span><span class="n">EOF</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="kt">int</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="p">{</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="p">}</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">EOF</span>
+</span><span class='line'><span class="n">Try</span> <span class="n">to</span> <span class="n">cross</span> <span class="n">compile</span> <span class="n">C</span><span class="o">++</span> <span class="nl">file:</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>$TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-g++ -Wall c++-hello.cc -o \
+c++-hello</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">Displays</span> <span class="n">the</span> <span class="n">information</span> <span class="n">contained</span> <span class="n">in</span> <span class="n">the</span> <span class="n">ELF</span> <span class="n">header</span> <span class="n">and</span> <span class="n">in</span> <span class="n">the</span> <span class="n">file</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">segment</span> <span class="nl">headers:</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>$TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-readelf -hl hello
+$TARGET/arm-x-tools/bin/arm-unknown-linux-gnueabi-readelf -hl c++-hello</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">Result</span> <span class="n">should</span> <span class="n">look</span> <span class="n">like</span> <span class="nl">that:</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ELF Header:
+  Magic: 7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00
+  Class: ELF32
+  Data: 2&rsquo;s complement, little endian
+  Version: 1 (current)
+  OS/ABI: UNIX &ndash; System V ABI
+  Version: 0
+  Type: EXEC (Executable file)
+  Machine: ARM
+  (&hellip;)
+  Flags: 0x5000002, has entry point, Version5 EABI
+  (&hellip;)
+  Program Headers:
+  (&hellip;)
+  INTERP 0x000134 0x00008134 0x00008134 0x00013 0x00013 R 0x1</p>
+
+<pre><code>  [Requesting program interpreter: /lib/ld-linux.so.3]
+</code></pre>
+
+<p>  LOAD 0x000000 0x00008000 0x00008000 0x004b8 0x004b8 R E 0x8000
+  (&hellip;)
+  &#8220;`</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="err">$</span><span class="n">TARGET</span><span class="o">/</span><span class="n">arm</span><span class="o">-</span><span class="n">x</span><span class="o">-</span><span class="n">tools</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">arm</span><span class="o">-</span><span class="n">unknown</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabi</span><span class="o">-</span><span class="n">readelf</span> <span class="o">-</span><span class="n">d</span> \
+</span><span class='line'><span class="err">$</span><span class="n">TARGET</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libgcc_s</span><span class="p">.</span><span class="n">so</span><span class="mf">.1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Result should look like that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="p">(...)</span>
+</span><span class='line'><span class="n">Tag</span>          <span class="n">Type</span>           <span class="n">Name</span><span class="o">/</span><span class="n">Value</span>
+</span><span class='line'><span class="mh">0x00000001</span> <span class="p">(</span><span class="n">NEEDED</span><span class="p">)</span> <span class="n">Shared</span> <span class="nl">library:</span> <span class="p">[</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">]</span>
+</span><span class='line'><span class="mh">0x0000000e</span> <span class="p">(</span><span class="n">SONAME</span><span class="p">)</span> <span class="n">Library</span> <span class="nl">soname:</span> <span class="p">[</span><span class="n">libgcc_s</span><span class="p">.</span><span class="n">so</span><span class="mf">.1</span><span class="p">]</span>
+</span><span class='line'><span class="mh">0x0000000c</span> <span class="p">(</span><span class="n">INIT</span><span class="p">)</span> <span class="mh">0xcc2c</span> <span class="p">(...)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I hope you find above manual useful. If you need more detailed descriptions it
+can be found <a href="http://www.eglibc.org/cgi-bin/viewvc.cgi/trunk/libc/EGLIBC.cross-building?view=markup">here</a>.
+Also don&rsquo;t bother to ask me by comment below.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/06/therefore-im-leaving-for-easter/">How to Download Videos From videos.linux.com</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-06T22:48:00+02:00" pubdate data-updated="true">Apr 6<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/04/06/therefore-im-leaving-for-easter/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Therefore, I&rsquo;m leaving for the Easter holidays I wanted to download some lecture on embedded systems, which was presented at the 2012 Embedded Linux Conference. Although I regret I found that I could not find as good quality copy in the network as on the Linux Foundation page. It is unfortunate that linux.com site does not have the possibility of direct downloading video files. But there is a workaround. Follow below tutorial:</p>
+
+<ol>
+<li>Go to page with video. For example:  <a href="http://video.linux.com/videos/to-provide-a-long-term-stable-linux-for-industry">http://video.linux.com/videos/to-provide-a-long-term-stable-linux-for-industry</a></li>
+<li><p>Click play on the video and if you using Chrome browser right click on player window and inspect this element. Result should look like that: 
+<img src="http://1.bp.blogspot.com/-ivNLyF3IFwc/T39S_IwbntI/AAAAAAAAAEg/mVgiu6CXqhs/s400/Untitled.png" alt="" /></p></li>
+<li><p>Expand div tag marked in red on screenshot above. If video was start you should see video tag which contain two links to video files mp4 and webm. Screen shot below shows hot it should look like:
+<img src="http://3.bp.blogspot.com/-waLmSIB4LAI/T39VlAF5P7I/AAAAAAAAAEo/7T9bUg5p-sw/s400/Untitled1.png" alt="" /></p></li>
+</ol>
+
+
+<p>These links are only temporary, so if you want to use them do it as soon as possible. The sad part of all is that the organization intended to promote one of the most libertarian solutions in software history does not provide materials for download.</p>
 </div>
   
   
