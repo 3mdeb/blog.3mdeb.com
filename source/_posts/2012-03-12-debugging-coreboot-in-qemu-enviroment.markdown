@@ -11,8 +11,8 @@ description: Hw to setup qemu for coreboot booting
 
 First of all I use testing version of Debian - wheezy. Clone coreboot repository:  
 ```
-git clone http://review.coreboot.org/p/coreboot Conifigure:  
-cd coreboot; make menuconfig Set:  
+git clone http://review.coreboot.org/p/coreboot
+cd coreboot; make menuconfig
 ```
 
 Configure FILO as apayload and use its latest version:

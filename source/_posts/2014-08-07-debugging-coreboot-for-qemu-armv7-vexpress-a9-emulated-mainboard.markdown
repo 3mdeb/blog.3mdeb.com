@@ -8,14 +8,31 @@ categories: coreboot
 
 Recently I came back to look into coreboot mainly because I figured out that
 there is some demand for low level skills
-([1](http://bit.ly/1sBSybZ),[2](http://bit.ly/1sBSR6F)). I was surprised that
+([first odesk job](http://bit.ly/1sBSybZ), [second odesk job](http://bit.ly/1sBSR6F)). I was surprised that
 under the wings of Google coreboot team start to support ARM (BTW ARM programming is IMHO next great
 skill to learn). So I took latest code compile QEMU armv7 mainboard model and
 tried to kick it in latest qemu-system-arm. Unfortunately it didn't boot. 
 
+## QEMU armv7 compilation - very quick steps
+```
+git clone http://review.coreboot.org/p/coreboot
+cd coreboot
+git submodule update --init --checkout
+make menuconfig
+```
+
+Set: `Mainboard -> Mainboard model -> QEMU armv7 (vexpress-a9)`
+
+```
+cd util/crossgcc
+./buildgcc -y -j 8 -p armv7
+cd ../..
+make
+```
+
 ## Noob dead end
 
-Command for running qemu that I found in one commit log:
+Command for running qemu that I found in early qemu-armv7 commit log:
 ```
 qemu-system-arm -M vexpress-a9 -m 1024M -nographic -kernel build/coreboot.rom
 ```
@@ -66,7 +83,13 @@ Unfortunately there is no sign about `ldmia` instruction with above range of
 registers in coreboot and qemu code. This is probably result of compiler
 optimization.
 
-## God bless bisection
+## Bisection
 
-I was able to narrow down problem to one commit that came from linaro developer.
- 
+For `-kernel` switch I was able to narrow down problem to one commit that
+change `VE_NORFLASHALIAS` option for vexpress-a9 to 0
+([6ec1588](http://git.qemu.org/?p=qemu.git;a=commit;h=6ec1588e09770ac7e9c60194faff6101111fc7f0)).
+It looks like for vexpress-a9 qemu place kernel at 0x60000000
+(vexpress.highmem), which is aliased to range 0x0-0x3ffffff. `VE_NORFLASHALIAS=0`
+cause mapping of vexpress.flash0 to the same region as kernel and because flash
+(`-bios`) was not added we have empty space (all zeros) what gives `andeq r0, r0, r0`.
+
