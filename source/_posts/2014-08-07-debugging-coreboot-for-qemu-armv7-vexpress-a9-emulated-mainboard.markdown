@@ -103,26 +103,58 @@ andeq   r0, r0, r0
 
 It happens till PC reach 0x4000000 which is out of 'RAM or ROM' for qemu.
 Unfortunately there is no sign about `ldmia` instruction with above range of
-registers in coreboot and qemu code. This is probably result of compiler
-optimization.
+registers in coreboot and qemu code.
 
 ## Bisection
 
-For `-kernel` switch I was able to narrow down problem to one commit that
-change `VE_NORFLASHALIAS` option for vexpress-a9 to 0
+I knew that at some point qemu worked with coreboot. I tried few versions and
+it points me to some commit between v2.1.0-rc1 and v2.1.0-rc0. For `-kernel`
+switch I was able to narrow down problem to one commit that change
+`VE_NORFLASHALIAS` option for vexpress-a9 to 0
 ([6ec1588](http://git.qemu.org/?p=qemu.git;a=commit;h=6ec1588e09770ac7e9c60194faff6101111fc7f0)).
 It looks like for vexpress-a9 qemu place kernel at 0x60000000
-(vexpress.highmem), which is aliased to range 0x0-0x3ffffff. `VE_NORFLASHALIAS=0`
-cause mapping of vexpress.flash0 to the same region as kernel and because flash
-(`-bios`) was not added we have empty space (all zeros) what gives `andeq r0, r0, r0`.
+(vexpress.highmem), which is aliased to range 0x0-0x3ffffff.
+`VE_NORFLASHALIAS=0` cause mapping of vexpress.flash0 to the same region as
+kernel and because flash (`-bios`) was not added we have empty space (all
+zeros) what gives `andeq r0, r0, r0`.
 
-armv7 bootblockflow:
-reset
-init_stack_loop
-call_bootblock
-main
-|- armv7_invalidate_caches
-  |- icache_invalidate_all
-  |- dcache_invalidate_all
-    |- dcache_foreach
+Right now I have working version of coreboot but only with `-kernel` and
+`VE_NORFLASHALIAS=-1` set in hw/arm/vexpress.c. The main questions are:
+
+* what is the correct memory map for qemu-armv7 and how coreboot should be mapped ?
+* what's going on with coreboot or qemu that I can't go through bootblock ?
+
+## Debugging
+
+Coreboot as UEFI has few phases. For UEFI we distinguish SEC, PEI, DXE and BDS
+(there are also TSL, RT and AL, but not important for this considerations). On
+coreboot side we have bootblock, romstage, ramstage and payload.
+
+### qemu-armv7 bootblock failure
+
+qemu-armv7 booting procedure start from `_rom` section which contain hardcoded
+jump to `reset` procedure. After that go through few methods like on below flow:
+
+```
+_rom
+|-> reset
+    |-> init_stack_loop
+        |-> call_bootblock
+            |-> main
+                |-> armv7_invalidate_caches
+                    |-> icache_invalidate_all
+                    |-> dcache_invalidate_all
+                      |-> dcache_foreach
+```
+
+At the end of `dcache_foreach` we experience failure because `ldmia`
+instruction tries to restore registers from stack, which should be stored at
+the beginning of `dcache_foreach`, by:
+
+```
+stmdb›  sp!, {r0, r1, r4, r5, r6, r7, r9, sl, fp, lr}
+```
+
+Unfortunately for some reason stack doesn't contain any reasonable values (all
+0xffffffff). Why is that ?
 
