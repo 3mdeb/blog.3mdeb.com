@@ -152,7 +152,7 @@ instruction tries to restore registers from stack, which should be stored at
 the beginning of `dcache_foreach`, by:
 
 ```
-stmdb›  sp!, {r0, r1, r4, r5, r6, r7, r9, sl, fp, lr}
+stmdb  sp!, {r0, r1, r4, r5, r6, r7, r9, sl, fp, lr}
 ```
 
 Unfortunately for some reason stack doesn't contain any reasonable values (all
