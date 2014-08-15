@@ -6,12 +6,12 @@ comments: true
 categories: coreboot
 ---
 
-Recently I came back to look into coreboot mainly because I figured out that
-there is some demand for low level skills
+Recently I came back to look into coreboot. Mainly because low level is fun and I figured out that
+there is some demand for this kind of skills
 ([first odesk job](http://bit.ly/1sBSybZ), [second odesk job](http://bit.ly/1sBSR6F)). I was surprised that
 under the wings of Google coreboot team start to support ARM (BTW ARM programming is IMHO next great
 skill to learn). So I took latest code compile QEMU armv7 mainboard model and
-tried to kick it in latest qemu-system-arm. Unfortunately it didn't boot. 
+tried to kick it in latest qemu-system-arm. Unfortunately it didn't boot. Below you can find my TL;DR story.
 
 ## QEMU armv7 compilation - very quick steps
 ```
@@ -51,8 +51,6 @@ will use 8 parallel jobs.
 
 <a class="fancybox" rel="group" href="/assets/images/gdbinit.png"><img src="/assets/images/gdbinit.png" alt="" /></a>
 
-* If you encounter `
-
 ## Noob dead end
 
 Command for running qemu that I found in early qemu-armv7 commit log:
@@ -87,14 +85,16 @@ PSR=600000f3 -ZC- T svc32
 ```
 
 Obviously qemu complains on value in R15 (PC - Program Counter), which is the
-address of current instruction (like EIP in x86). After digging a while I
-figured out that I am unable to narrow down the problem. Mainly because I
-cannot find issuer of instruction that cause problem. Namely:
+address of current instruction (like EIP in x86). 
+
+Stepping through assembler instructions using cross-compiled debugger
+(`util/crossgcc/xgcc/bin/armv7-a-eabi-gdb`) points to:
+
 ```
 0x6001024f:  ldmia.w sp!, {r2, r3, r4, r5, r6, r7, r9, r10, r11, pc}
 ```
 
-This instruction cause that PC goes to 0 and then run instruction from zeroed
+This instruction cause that PC goes to 0x0 and then run instruction from zeroed
 memory, which in ARM instructions means:
 
 ```
