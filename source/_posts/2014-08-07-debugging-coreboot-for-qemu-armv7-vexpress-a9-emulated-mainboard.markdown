@@ -23,12 +23,35 @@ make menuconfig
 
 Set: `Mainboard -> Mainboard model -> QEMU armv7 (vexpress-a9)`
 
+NOTE: To prevent annoying warning when running gdb, namely:
 ```
+warning: Can not parse XML target description; XML support was disabled at compile time
+```
+`libexpat1-dev` should be installed.
+
+```
+sudo apt-get install libexpat1-dev
 cd util/crossgcc
-./buildgcc -y -j 8 -p armv7
+./buildgcc -y -j 8 -p armv7 -G
 cd ../..
 make
 ```
+
+`buildgcc` will provide armv7 toolchain with debugger (`-G`) and compilation
+will use 8 parallel jobs.
+
+
+## qemu-armv7 debugging tips and tricks
+
+* Use good gdbinit, so every instruction gdb will automatically provide most
+  useful informations. IMHO good choice is `fG!` gdbinit shared on
+  [github](https://github.com/gdbinit/Gdbinit). It contain support for ARM and x86.
+  To switch to ARM mode inside gdb simple use `arm` command.
+  Output looks pretty awesome:
+
+<a class="fancybox" rel="group" href="/assets/images/gdbinit.png"><img src="/assets/images/gdbinit.png" alt="" /></a>
+
+* If you encounter `
 
 ## Noob dead end
 
@@ -92,4 +115,14 @@ It looks like for vexpress-a9 qemu place kernel at 0x60000000
 (vexpress.highmem), which is aliased to range 0x0-0x3ffffff. `VE_NORFLASHALIAS=0`
 cause mapping of vexpress.flash0 to the same region as kernel and because flash
 (`-bios`) was not added we have empty space (all zeros) what gives `andeq r0, r0, r0`.
+
+armv7 bootblockflow:
+reset
+init_stack_loop
+call_bootblock
+main
+|- armv7_invalidate_caches
+  |- icache_invalidate_all
+  |- dcache_invalidate_all
+    |- dcache_foreach
 
