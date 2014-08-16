@@ -158,3 +158,101 @@ stmdb  sp!, {r0, r1, r4, r5, r6, r7, r9, sl, fp, lr}
 Unfortunately for some reason stack doesn't contain any reasonable values (all
 0xffffffff). Why is that ?
 
+### Obvious things are not so obvious
+
+As I point above everything seems to be related with correct memory map for
+vexpress-a9. I wrote question to qemu developers mailing list describing all
+the problems. You can read it
+[here](http://lists.nongnu.org/archive/html/qemu-devel/2014-08/msg02599.html).
+So the answer is that ARM Versatile Express boards usually have two different
+memory maps. First is legacy with RAM in low memory and second is modern way
+with flash mapped to low memory instead of RAM. Flash in qemu is not writable
+that's why stack was unusable.
+
+### coreboot stack location fix
+
+I though that fix would be easy one thing that I have to do is changing place
+where stack is initialized. The question is where, so I took a look at qemu memory map:
+
+```
+(qemu) info mtree
+(...)
+0000000040000000-0000000043ffffff (prio 0, R-): vexpress.flash0
+0000000044000000-0000000047ffffff (prio 0, R-): vexpress.flash1
+0000000048000000-0000000049ffffff (prio 0, RW): vexpress.sram
+000000004c000000-000000004c7fffff (prio 0, RW): vexpress.vram
+000000004e000000-000000004e0000ff (prio 0, RW): lan9118-mmio
+0000000060000000-000000009fffffff (prio 0, RW): vexpress.highmem
+```
+
+SRAM is temporary storage where I decide to put stack. The change in coreboot
+looks like below:
+
+```c src/mainboard/emulation/qemu-armv7/Kconfig
+config STACK_TOP
+	hex
+	default 0x4807ff00
+
+config STACK_BOTTOM
+	hex
+	default 0x48040000
+
+config STACK_SIZE
+	hex
+	default 0x0003ff00
+```
+I changed STACK_TOP and STACK_BOTTOM.
+
+Unfortunately still I was unable to boot coreboot on vexpress-a9. Situation
+improved because I was able to push and pop data to/from stack, but next
+problem occure in `init_default_cbfs_media`.
+
+### init_default_cbfs_media problem
+
+As CBFS specification explains:
+{% blockquote Jordan Crouse http://review.coreboot.org/gitweb?p=coreboot.git;a=blob;f=documentation/cbfs.txt;h=7ecc9014a1cb2e0a86bbbf514e17f6b0360b9c0c;hb=HEAD %}
+CBFS is a scheme for managing independent chunks of data in a system ROM.
+{% endblockquote %}
+
+Default cbfs media initialization for qemu-armv7 leads to
+`init_emu_rom_cbfs_media` that fills cbfs_media structures with function
+pointers that help to operate on cbfs.
+
+```c src/mainboard/emulation/qemu-armv7/media.c
+int init_emu_rom_cbfs_media(struct cbfs_media *media)
+{
+	media->open = emu_rom_open;
+	media->close = emu_rom_close;
+	media->map = emu_rom_map;
+	media->unmap = emu_rom_unmap;
+	media->read = emu_rom_read;
+	return 0;
+}
+```
+
+The problem was that pointers were relative to bootblock base address
+`0x00010000` and '-bios' option maps coreboot.rom from address `0x0`. This
+leads to change in bootblock base address to `0x0`:
+
+```c src/mainboard/emulation/qemu-armv7/Kconfig
+config BOOTBLOCK_BASE
+	hex
+	default 0x00000000
+```
+
+This solve other strange situation for me, because I didn't know why I cant
+load symbols for bootblock using `add-symbol-file` in gdb. Since this moment I
+could debug bootblock using lines of C code.
+
+At this point trying to boot qemu gives me another error:
+```
+Bad ram pointer 0x3b8
+```
+
+### CBFS location problems
+
+Problem is with storing registers `stmia` during memcpy. For some reason R0 (to
+which we store), contain strange address 0x10000. No values was stored in this
+memory because it is flash. Address is passed from upper layers - `cbfs_get_file_content`
+
+
