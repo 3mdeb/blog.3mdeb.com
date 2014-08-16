@@ -910,79 +910,6 @@ try.</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-14T23:22:00+02:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>What the OVMF is ?</h3>
-
-<p><strong>OVMF</strong> (<em>Open Virtual Machine Firmware</em>) is a firmware actively developed as a
-<strong>EDK2</strong>(<em>EFI Developer Kit</em>) package. It is a packed that aims to support
-firmware for virtual machines like Qemu.</p>
-
-<h3>Simplified build process</h3>
-
-<p>First of all lets get latest version of the code. For some time <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=Welcome">EFI and
-Framework Open Source
-Community</a> share edk2 code also on <a href="https://github.com/tianocore/edk2">github</a> mirror.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/tianocore/edk2.git</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Building process was simplified by OvmfPkg contributors. But I found that
-toolchain for latest gcc compilers is not ready in main repository. So I suggest
-to remove <code>BaseTools</code> directory and clone up to date git repository in this
-place:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd edk2
-</span><span class='line'>rm -rf BaseTools
-</span><span class='line'>git clone https://github.com/tianocore/buildtools-BaseTools.git BaseTools
-</span><span class='line'>. edksetup.sh</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So to build firmware we need only one command:
-&#8220;`</p>
-
-<p><code>``
-You may need some additional packages like</code>uuid-dev<code>,</code>iasl<code>or</code>g++`.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a></h1>
     
     
@@ -2662,6 +2589,116 @@ bootloader.</p>
 <h3>Kudos</h3>
 
 <p>[1] <a href="http://elinux.org/Toolchains">Toolchains</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/">0x1: Qemu as an Environment for Embedded Board Emulation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T08:27:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Table of contents</h2>
+
+<ul>
+<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#intro">Introduction</a></li>
+<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#compilation">Compilation</a></li>
+<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#kudos">Kudos</a></li>
+</ul>
+
+
+<p><a id="intro"></a></p>
+
+<h3>Introduction</h3>
+
+<p>QEMU is a CPU emulator using dynamic binary translation to convert guest CPU
+instructions into host CPU instructions<a href="http://infoscience.epfl.ch/record/149975/files/x86-llvm-translator-chipounov_2.pdf">[1]</a>. It supports many architectures from
+x86, through ARM and MIPS, to MicroBlaze. According to compilation configuration
+target list QEMU targets 26 different softmmu types.  Only for ARM it supports
+33 machines (like ARM Versatile/PB (ARM926EJ-S) or Samsung NURI board
+(Exynos4210)) and 28 CPUs (with cortex-a9 and pxa270). It gives access to
+network, storage, video, usb, serial and other peripheral, also user defined. It
+is developed under GNU GPL, so everybody are free to make modifications, improve
+and extend it. This properties makes QEMU very good candidate for virtual board
+emulator.</p>
+
+<p><a id="compilation"></a></p>
+
+<h3>Compilation</h3>
+
+<p>Let&rsquo;s start creating our Virtual Development Board. As usually I will use latest
+greatest version from git:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone http://git.qemu.org/git/qemu.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Compile it and install. Right now I will use only <code>arm-softmmu</code> target because it
+will emulate whole arm system for me. ARM right now dominated big part of
+embedded market but we will see if situation won&rsquo;t change in feature.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>qemu
+</span><span class='line'>./configure --target-list<span class="o">=</span>arm-softmmu
+</span><span class='line'>make
+</span><span class='line'>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>During configuration process you can encounter lack of <code>pixman</code>, just accept qemu
+offer to initialize it as a submodule.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git submodule update --init pixman
+</span><span class='line'>make <span class="c"># restart compilation process</span>
+</span><span class='line'>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If compilation ends without problem than our first component is ready to use.
+Right now we can emulate our ARM based board with many types of CPUs. List of
+all available can be retrieved by running command <code>qemu-system-arm -cpu ?</code>, list
+of emulated machines by <code>-M ?</code>. Now, let&rsquo;s talk about <a href="/blog/2013/06/07/toolchain-for-virtual-development-board">toolchains</a>.</p>
+
+<p><a id="kudos"></a></p>
+
+<h3>Kudos</h3>
+
+<p>[1] <a href="http://infoscience.epfl.ch/record/149975/files/x86-llvm-translator-chipounov_2.pdf">Dynamically Translating x86 to LLVM using QEMU</a></p>
 </div>
   
   
