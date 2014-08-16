@@ -6,14 +6,16 @@ comments: true
 categories: coreboot
 ---
 
-Recently I came back to look into coreboot. Mainly because low level is fun and I figured out that
-there is some demand for this kind of skills
-([first odesk job](http://bit.ly/1sBSybZ), [second odesk job](http://bit.ly/1sBSR6F)). I was surprised that
-under the wings of Google coreboot team start to support ARM (BTW ARM programming is IMHO next great
-skill to learn). So I took latest code compile QEMU armv7 mainboard model and
-tried to kick it in latest qemu-system-arm. Unfortunately it didn't boot. Below you can find my TL;DR story.
+Recently I came back to look into coreboot. Mainly because low level is fun and
+skills related to firmware (even coreboot) starting get attention on freelance
+portals ([first odesk job](http://bit.ly/1sBSybZ), [second odesk job](http://bit.ly/1sBSR6F)).
+ I was surprised that under the wings of Google
+coreboot team start to support ARM (BTW ARM programming is IMHO next great
+skill to learn). So I cloned latest, code compiled QEMU armv7 mainboard model and
+tried to kick it in latest qemu-system-arm. Unfortunately it didn't boot. Below
+you can find my TL;DR debugging story.
 
-## QEMU armv7 compilation - very quick steps
+## coreboot qemu-armv7 mainboard compilation - very quick steps
 ```
 git clone http://review.coreboot.org/p/coreboot
 cd coreboot
@@ -23,7 +25,8 @@ make menuconfig
 
 Set: `Mainboard -> Mainboard model -> QEMU armv7 (vexpress-a9)`
 
-NOTE: To prevent annoying warning when running gdb, namely:
+NOTE: To prevent annoying warning about XML when running gdb from coreboot
+crossgcc utilities:
 ```
 warning: Can not parse XML target description; XML support was disabled at compile time
 ```
@@ -40,14 +43,22 @@ make
 `buildgcc` will provide armv7 toolchain with debugger (`-G`) and compilation
 will use 8 parallel jobs.
 
+## qemu-system-arm compilation - very quick steps
+```
+git clone git://git.qemu.org/qemu.git
+cd qemu
+git submodule update --init --checkout
+make clean && ./configure --target-list=arm-softmmu && make -j8
+sudo make install
+```
 
-## qemu-armv7 debugging tips and tricks
+## Debugging hint
 
-* Use good gdbinit, so every instruction gdb will automatically provide most
-  useful informations. IMHO good choice is `fG!` gdbinit shared on
-  [github](https://github.com/gdbinit/Gdbinit). It contain support for ARM and x86.
-  To switch to ARM mode inside gdb simple use `arm` command.
-  Output looks pretty awesome:
+Use good gdbinit, so with every instruction executed gdb will automatically
+provide most useful informations. IMHO good choice is `fG!` gdbinit shared on
+[github](https://github.com/gdbinit/Gdbinit). It contain support for ARM and
+x86. To switch to ARM mode inside gdb simple use `arm` command. Output looks
+pretty awesome:
 
 <a class="fancybox" rel="group" href="/assets/images/gdbinit.png"><img src="/assets/images/gdbinit.png" alt="" /></a>
 
@@ -94,8 +105,9 @@ Stepping through assembler instructions using cross-compiled debugger
 0x6001024f:  ldmia.w sp!, {r2, r3, r4, r5, r6, r7, r9, r10, r11, pc}
 ```
 
-This instruction cause that PC goes to 0x0 and then run instruction from zeroed
-memory, which in ARM instructions means:
+`ldmia` will load from stack values of all given registers. This cause that PC
+goes to 0x0 and then run instruction from zeroed memory, which in ARM
+instructions means:
 
 ```
 andeq   r0, r0, r0
@@ -108,7 +120,7 @@ registers in coreboot and qemu code.
 ## Bisection
 
 I knew that at some point qemu worked with coreboot. I tried few versions and
-it points me to some commit between v2.1.0-rc1 and v2.1.0-rc0. For `-kernel`
+it leads me to some commit between `v2.1.0-rc1` and `v2.1.0-rc0`. For `-kernel`
 switch I was able to narrow down problem to one commit that change
 `VE_NORFLASHALIAS` option for vexpress-a9 to 0
 ([6ec1588](http://git.qemu.org/?p=qemu.git;a=commit;h=6ec1588e09770ac7e9c60194faff6101111fc7f0)).
@@ -125,6 +137,11 @@ Right now I have working version of coreboot but only with `-kernel` and
 * what's going on with coreboot or qemu that I can't go through bootblock ?
 
 ## Debugging
+
+I tried to debug coreboot executed from flash:
+```
+qemu-system-arm -M vexpress-a9 -m 1024M -nographic -bios build/coreboot.rom -s -S
+```
 
 Coreboot as UEFI has few phases. For UEFI we distinguish SEC, PEI, DXE and BDS
 (there are also TSL, RT and AL, but not important for this considerations). On
@@ -156,23 +173,25 @@ stmdb  sp!, {r0, r1, r4, r5, r6, r7, r9, sl, fp, lr}
 ```
 
 Unfortunately for some reason stack doesn't contain any reasonable values (all
-0xffffffff). Why is that ?
+0xffffffff) after `stmdb`. Why is that ?
 
 ### Obvious things are not so obvious
 
-As I point above everything seems to be related with correct memory map for
+As I point above everything seems to be related with memory map for
 vexpress-a9. I wrote question to qemu developers mailing list describing all
 the problems. You can read it
 [here](http://lists.nongnu.org/archive/html/qemu-devel/2014-08/msg02599.html).
-So the answer is that ARM Versatile Express boards usually have two different
-memory maps. First is legacy with RAM in low memory and second is modern way
-with flash mapped to low memory instead of RAM. Flash in qemu is not writable
-that's why stack was unusable.
+So the answer is that ARM Versatile Express boards in general have two
+different memory maps. First is legacy with RAM in low memory and second is
+modern with flash in low memory instead of RAM. Since qemu `v2.1.0` modern
+memory map was used. That's why I saw change in behavior. Obviously flash in
+qemu is read only, so no matter what pushing on stack didn't work.
 
 ### coreboot stack location fix
 
-I though that fix would be easy one thing that I have to do is changing place
-where stack is initialized. The question is where, so I took a look at qemu memory map:
+I though that fix would be easy. One thing that I have to do is change stack
+address. The question is where to place the stack ? So I took a look at qemu
+memory map:
 
 ```
 (qemu) info mtree
@@ -191,11 +210,11 @@ looks like below:
 ```c src/mainboard/emulation/qemu-armv7/Kconfig
 config STACK_TOP
 	hex
-	default 0x4807ff00
+	default 0x4803ff00
 
 config STACK_BOTTOM
 	hex
-	default 0x48040000
+	default 0x48000000
 
 config STACK_SIZE
 	hex
@@ -204,8 +223,8 @@ config STACK_SIZE
 I changed STACK_TOP and STACK_BOTTOM.
 
 Unfortunately still I was unable to boot coreboot on vexpress-a9. Situation
-improved because I was able to push and pop data to/from stack, but next
-problem occure in `init_default_cbfs_media`.
+improved because stack start to work correctly and accept push and pop data
+to/from, but next problem occurs in `init_default_cbfs_media`.
 
 ### init_default_cbfs_media problem
 
@@ -214,9 +233,9 @@ As CBFS specification explains:
 CBFS is a scheme for managing independent chunks of data in a system ROM.
 {% endblockquote %}
 
-Default cbfs media initialization for qemu-armv7 leads to
-`init_emu_rom_cbfs_media` that fills cbfs_media structures with function
-pointers that help to operate on cbfs.
+Default CBFS media initialization for qemu-armv7 leads to
+`init_emu_rom_cbfs_media` that fills `cbfs_media` structures with function
+pointers that help to operate on CBFS.
 
 ```c src/mainboard/emulation/qemu-armv7/media.c
 int init_emu_rom_cbfs_media(struct cbfs_media *media)
@@ -231,7 +250,7 @@ int init_emu_rom_cbfs_media(struct cbfs_media *media)
 ```
 
 The problem was that pointers were relative to bootblock base address
-`0x00010000` and '-bios' option maps coreboot.rom from address `0x0`. This
+`0x00010000` and `-bios` option maps coreboot.rom from address `0x0`. This
 leads to change in bootblock base address to `0x0`:
 
 ```c src/mainboard/emulation/qemu-armv7/Kconfig
@@ -240,19 +259,56 @@ config BOOTBLOCK_BASE
 	default 0x00000000
 ```
 
-This solve other strange situation for me, because I didn't know why I cant
-load symbols for bootblock using `add-symbol-file` in gdb. Since this moment I
-could debug bootblock using lines of C code.
+This solve other issue not mentioned till now. I didn't know why I can't load
+symbols for bootblock using `add-symbol-file` in gdb. Of course reason was
+bootblock didn't start at 0x0 but at 0x10000. Since this moment I could debug
+bootblock using lines of C code, by simply:
 
-At this point trying to boot qemu gives me another error:
+```text
+gdb$ add-symbol-file build/cbfs/fallback/bootblock.debug 0x0
+```
+
+It was not the end because another error popped up:
 ```
 Bad ram pointer 0x3b8
 ```
 
-### CBFS location problems
+### memcpy during CBFS decompression
 
-Problem is with storing registers `stmia` during memcpy. For some reason R0 (to
-which we store), contain strange address 0x10000. No values was stored in this
-memory because it is flash. Address is passed from upper layers - `cbfs_get_file_content`
+Problem was with storing registers `stmia` during memcpy. Backtrace:
+```
+#0  memcpy () at src/arch/armv7/memcpy.S:64
+#1  0x000015b2 in cbfs_decompress (algo=<optimized out>, src=<optimized out>, dst=<optimized out>, len=0x3310) at src/lib/cbfs_core.c:227
+#2  0x00001702 in cbfs_load_stage (media=media@entry=0x0 <_start>, name=name@entry=0x2260 "fallback/romstage") at src/lib/cbfs.c:137
+#3  0x00002236 in main () at src/arch/armv7/bootblock_simple.c:63
+```
+
+For some reason R0 (to which we store), contain strange address 0x10000. No
+value was stored in this memory range, because again it was read only flash.
+Address is passed from upper layers - `cbfs_get_file_content`. During debugging
+I realize that this address means `ROMSTAGE_BASE`. So I changed `ROMSTAGE_BASE`
+to somewhere in SRAM.
+
+```c src/mainboard/emulation/qemu-armv7/Kconfig
+config ROMSTAGE_BASE
+	hex
+	default 0x48040000
+```
+
+What I saw when trying to boot coreboot with this fix was wonderful log proved
+that coreboot boots without problems.
+
+## Conclusion
+
+Above debugging session was all about memory map. It was really fun to
+experience all those issues because I had to understand lot of ARM assembly
+instructions, track memory, read the spec, read coreboot and qemu code. It gave
+me a lot of good experience. If you have any questions or comments please let
+me know. And finally what is most important it was next thing done on my list.
+
+I think next challenge could be experiment with Linux kernel booting. Coreboot
+can boot kernel directly or through payload with bootloader.
+
+Thanks for reading.
 
 
