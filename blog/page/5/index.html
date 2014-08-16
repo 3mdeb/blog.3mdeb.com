@@ -9,8 +9,7 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="Very short manual on how to set up irssi to work with freenode servers.
-Fist, install irssi: sudo apt-get install irssi Run: irssi For freenode write &hellip;">
+  <meta name="description" content="Blog has changed slightly. I&rsquo;ve added two new sections: social media and afk. In &ldquo;social media&rdquo; I will add links to my profiles on &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,6 +30,12 @@ Fist, install irssi: sudo apt-get install irssi Run: irssi For freenode write &h
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -102,6 +107,344 @@ Fist, install irssi: sudo apt-get install irssi Run: irssi For freenode write &h
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/07/blog-has-changed-slightly/">Nice Small Additions for My Blog</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-07T23:15:00+01:00" pubdate data-updated="true">Mar 7<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/03/07/blog-has-changed-slightly/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Blog has changed slightly. I&rsquo;ve added two new sections: social media and afk. In &ldquo;social media&rdquo; I will add links to my profiles on various social networking sites. You&rsquo;ll find my most recent development achievements ( <a href="https://github.com/pietrushnic">@github</a>) and twitts on topics of interest to me ( <a href="https://twitter.com/#!/pietrushnic">@twitter</a>). The second section, &ldquo;afk&rdquo; (away from keyboard) is intended for the information of life beyond the keyboard, which in my case is not too extensive. I will publish here information about the books we read, watched movies and many other interesting things, which can be passionate away from the keyboard.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/20/improve-productivity-by-tracking-work_20/">Improve Productivity by Tracking Work Environment With Git - Vim</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T21:43:00+01:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/20/improve-productivity-by-tracking-work_20/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In this post I try to describe my vim configuration procedure and how it is
+connected with git. The whole concept is based on keeping all the configuration
+files in a separate directory. These files are connected using symbolic links in
+places where system or application requires it (eg <code>$HOME/.vimrc -&gt;
+/home/jdoe/workspace/dotfiles/vimrc</code>). So first let&rsquo;s create local directory for
+vim:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/workspace/dotfiles;mkdir vim  </span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Pathogen</h3>
+
+<p>The first plugin that will be installed is pathogen created by tpope and
+accessible through github. Pathogen is a vim script to manage all vim plugins
+with ease. Below line add pathogen as submodule to our workspace repository
+created in <a href="/blog/2012/02/19/improve-productivity-by-tracking-work/">previous
+post</a>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule add https://github.com/tpope/vim-pathogen.git dotfiles/vim/pathogen</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Initialize repository and update it:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule init && git submodule update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create additional directories need to complete pathogen installation, change
+directory to autoload:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd dotfiles/vim;mkdir {autoload,bundle};cd autoload</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In autoload directory pathogen should be installed, bundle directory is a place
+for all plugins installed in future. Finally we need to link vim script from
+pathogen submodule to current directory (<code>dotfiles/vim/autoload</code>):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ln -s ../pathogen/autoload/pathogen.vim .</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Directory structure should look like below:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pietrushnic@eriador:~/workspace/dotfiles$ tree .
+</span><span class='line'>└── vim
+</span><span class='line'>├── autoload
+</span><span class='line'>│   └── pathogen.vim -&gt; ../pathogen/autoload/pathogen.vim
+</span><span class='line'>├── bundle
+</span><span class='line'>└── pathogen
+</span><span class='line'>├── autoload
+</span><span class='line'>│   └── pathogen.vim
+</span><span class='line'>└── README.markdown</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the end of pathogen installation few lines to <code>$HOME/.vimrc</code> should be added.
+Of course following rules about dotfiles management <code>.vimrc</code> should be created as
+separate file in <code>~/workspace/dotfiles</code> and linked to <code>$HOME/.vimrc</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>touch vimrc;ln -s $PWD/vimrc $HOME/.vimrc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add below lines to <code>$HOME/.vimrc</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>call pathogen#infect()
+</span><span class='line'>call pathogen#runtime_append_all_bundles()
+</span><span class='line'>call pathogen#helptags()
+</span><span class='line'>syntax on
+</span><span class='line'>filetype plugin
+</span><span class='line'>indent on</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Fuzzyfinder</h3>
+
+<p>This is second plugin without which I cannot work. It speeds up searching though
+files, directories and tags. Has multiple useful features. RTFM if you want knew
+them. I will be also added as a git submodule:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule add https://github.com/vim-scripts/FuzzyFinder.git dotfiles/vim/bundle/fuzzyfinder</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Additional plugin is needed to correctly install fuzzyfinder:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule add https://github.com/vim-scripts/L9.git dotfiles/vim/bundle/l9</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Initialize and update submodules:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule init && git submodule update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Configuration I suggest to configure fuzzyfinder with accordance to example provided in help. </p>
+
+<ul>
+<li>Run vim and type :h fuf@en<Enter>. </li>
+<li>Choose tag fuf-vimrc-example and press Ctrl-]. </li>
+<li>Mark whole keybindings copy and paste to <code>~/.vimrc</code></li>
+</ul>
+
+
+<p>Right now I think it is enough with vim configuration. Of course I use plenty of
+other plugins but I don&rsquo;t have to time to describe my them all (maybe in future
+posts). Don&rsquo;t forget to commit your changes, there could be a lot of them,
+however, to deal with the distribution of these changes and improve your skills
+try to use git add -p interface, suggesting after linux code style &ndash; each commit
+should contain separate logical part of the changes, personally I add prefix to
+my commits (eg . vim, git, etc.) to ease deal with git log.  Notes:</p>
+
+<ul>
+<li>vim helpfiles generates tags files, which should be ignored by git, so I
+recommend to create .gitignore in every module with blow content:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.gitignore
+</span><span class='line'>tags*</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>by default fuzzyfinder operate on unfriendly color palette espessicaly when
+using it through putty, highlighted pattern could be changed by added below
+lines to .vimrc (9 = black)</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" fuzzy-finder - fix colors highlight PmenuSel ctermbg=9</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/20/hostname-generator/">Hostname Generator</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T20:58:00+01:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/20/hostname-generator/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Many times happened that I spend time, during the installation of the new system, whether it be a virtual physical machine, wondering about it&rsquo;s hostname. One day I asked myself the trouble searching for host name generator. Best I could find (currently second in the results of google) is rospo.net. It gives you the choice of category for the host name. My favorite, as a fan of fantasy is &ldquo;Characters from Tolkien&rdquo;. Although the category name does not reflect the truth, because in addition also includes a set of known sites in middlearth and more. So I recommend:</p>
+
+<p>  <a href="http://rospo.net/webproducts/name/index.php">http://rospo.net/webproducts/name/index.php</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/19/improve-productivity-by-tracking-work/">Improve Productivity by Tracking Work Environment With Git - Preparation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-19T21:12:00+01:00" pubdate data-updated="true">Feb 19<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/19/improve-productivity-by-tracking-work/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>Update</em>: My repository is available
+<a href="https://github.com/pietrushnic/workspace.git">here</a>.</p>
+
+<p>Below is first post from series in which I want to describe my experience gained
+in attempt to enhance my productivity by using git to control the contents of
+some files in my home directory. The first step to improve the productivity
+is good organization of working environment. It happens very often that I work
+on multiple machines both physical and virtual. Therefore I need a
+good mechanism to share knowledge, experience, code, configuration and many
+other things. Configuration described below is only an example that actually
+fits my way of working.  First of all simple concept of directory structure is
+needed. Let&rsquo;s start with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir -p $HOME/workspace/blog;mkdir -p $HOME/workspace/dotfiles
+</span><span class='line'>cd workspace </span></code></pre></td></tr></table></div></figure>
+
+
+<p>Write some files (i.e. for your blog) with your favourite editor, initialize
+repository and prepare first commit</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git init
+</span><span class='line'>git add .;git commit -m "Initial commit for environment tracking" </span></code></pre></td></tr></table></div></figure>
+
+
+<p>To avoid information about untracked vim swp files add $HOME/workspace/.gitignore with following content:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.gitignore
+</span><span class='line'>*.swp</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -389,203 +732,6 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/06/syntax-highlighter-and-code-formatter/">Syntax Highlighter and Code Formatter for Blogger</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-06T18:14:00+01:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/06/syntax-highlighter-and-code-formatter/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Another time-waster was a decent code formatter and syntax highlighter. I google out <a href="http://www.commonitman.com/2010/09/how-to-use-syntax-highlighter-3-in.html">following solution</a>, it is based on <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter 3</a> It has interesting options:</p>
-
-<ol>
-<li>You can select the language for which a syntax-colored</li>
-<li>Turn on/off line numbering</li>
-<li>Themes &ndash; this one is pretty nice for my blog</li>
-<li>Customizable tabs size</li>
-<li>The option to disable toolbar</li>
-</ol>
-
-
-<p>My dream would be to create a theme that would look similar to vim syntax highlighing.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/06/flashrom-and-shuttle-av18e2/">Flashrom and Shuttle AV18E2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-06T14:31:00+01:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/06/flashrom-and-shuttle-av18e2/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>During Christmas break I found an old unused motherboard in my home, right away I thought that it maybe useful as learning environment for coreboot. First you need to do with this kind of board is to check if it is possible to flash its BIOS with user space tool called <a href="http://www.flashrom.org/">flashrom</a> list of supported hardware can be found <a href="http://www.flashrom.org/Supported_hardware">here</a>.</p>
-
-<p>All you need to do is go through <a href="http://www.flashrom.org/Board_Testing_HOWTO">this HOWTO</a>. Be aware that these operations can cause you will not be able to run your motherboard if something goes wrong. Therefore, I suggest protect yourself by supplying checked programmer or other memory chip for your board containing a working BIOS.</p>
-
-<p>For my <a href="http://www.shuttle.eu/_archive/older/de/av18.htm">Shuttle board</a> I checked if the Winbond W49F002U chip on it is supported by flashrom. Fortunately it was. After that I read my BIOS by:</p>
-
-<p>flashrom -Vr bios_bckp.bin
-And write it by:</p>
-
-<p>flashrom -Vw bios_bckp.bin At the end I&rsquo;ve got VERIFIED message but when I look carefully inside the log there was something like this:</p>
-
-<p>Erasing and writing flash chip&hellip; Trying erase function 0&hellip; 0x000000-0x01ffff:S, 0x020000-0x037fff:S, 0x038000-0x039fff:S, 0x03a000-0x03bfff:S, 0x03c000-0x03ffff:S Erase/write done. Verifying flash&hellip; VERIFIED. This means that these addresses have not been overwritten but skipped, becuse the fact that the data which were to be overridden were identical with what we wanted to write. So if we found such output to properly verify flashrom we need to clear our memory and write it again with BIOS backup. Correct output should look like this:</p>
-
-<p>Erasing and writing flash chip&hellip; Trying erase function 0&hellip; 0x000000-0x01ffff:W, 0x020000-0x037fff:W, 0x038000-0x039fff:W, 0x03a000-0x03bfff:W, 0x03c000-0x03ffff:W Erase/write done. Verifying flash&hellip; VERIFIED.</p>
-
-<p>Next post I will try to familiarize you with the process of debugging coreboot using <a href="http://wiki.qemu.org/Main_Page">QEMU</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/06/how-to-begin-with-coreboot/">How to Begin With Coreboot</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-06T14:23:00+01:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/06/how-to-begin-with-coreboot/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>About a month ago I started my adventure with coreboot. As <a href="http://www.coreboot.org/">coreboot home</a> page says &ldquo;coreboot is a Free Software project aimed at replacing the proprietary BIOS (firmware) found in most computers&rdquo;. Although I read the majority of materials from mentioned page I still suffered from a lack of basic information that would help me to arrange everything in my head. Therefore, I decided to write a series of posts described my actions associated with this interesting project.</p>
-
-<p>At the beginning I would recommend some interesting sources of information on coreboot:</p>
-
-<ul>
-<li><a href="http://www.coreboot.org/QEMU">http://www.coreboot.org/QEMU</a> - If you&rsquo;re impatient and want to start as soon as possible</li>
-<li><a href="http://www.coreboot.org/Screenshots#Videos">Coreboot videos</a> - One of the easiest ways to obtain general information about the project</li>
-<li><a href="http://lennartb.home.xs4all.nl/coreboot/coreboot.html">Start to understand</a> - I found this page by accident while googling materials, thanks to its author I understood basics and found out what&rsquo;s next</li>
-<li><a href="http://www.coreboot.org/Documentation">Documentation</a> - Many different types of documents, a large proportion of them are not applying to the latest version of coreboot v4, however, still has a educational value.</li>
-</ul>
-
-
-<p>After reviewing the above materials, you should understand the basics of coreboot. In the <a href="http://pietrushnic.blogspot.com/2012/01/flashrom-and-shuttle-av18e2.html">next post</a> I will describe <a href="http://flashrom.org/">flashrom</a> application and my experience with one of the old motherboard.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/05/blogger-favicon-in-chrome-and-ff/">Blogger Favicon in Chrome and FF</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-05T00:22:00+01:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/05/blogger-favicon-in-chrome-and-ff/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I didn&rsquo;t imagine that placing the code for favicon can be so time consuming. Here are some tpis and tricks that can be useful to others.<br/>
-1. First find or create favicon ( <a href="http://www.google.pl/search?q=favicon&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;tbm=isch&amp;source=og&amp;sa=N&amp;tab=wi&amp;ei=udsET4OiG8vO-Qbd27j5Cw&amp;biw=1600&amp;bih=732&amp;sei=u9sET_miJsztOf-2uLYO#um=1&amp;hl=en&amp;tbs=isz:ex%2Ciszw%3A32%2Ciszh%3A32&amp;tbm=isch&amp;sa=1&amp;q=favicon&amp;pbx=1&amp;oq=favicon&amp;aq=f&amp;aqi=g10&amp;aql=&amp;gs_sm=s&amp;gs_upl=1959l2847l0l4598l6l5l0l0l0l3l407l1119l0.3.1.0.1l5l0&amp;bav=on.2,or.r_gc.r_pw.,cf.osb&amp;fp=7c76d7186cf3fdc4&amp;biw=1600&amp;bih=732">google</a> or <a href="http://favicon.cc/">favicon.cc</a>)<br/>
-2. Make sure that you have not set any favicon (Design-> Page Elelments-> Favicon)<br/>
-3. Add this code below </head> tag</p>
-
-<p><link href='http://bsaves.com/HowHero/Blogger%20Templates/moonspot/images/favicon.ico' rel='shortcut icon' type='image/vnd.microsoft.icon' /> <link href='http://bsaves.com/HowHero/Blogger%20Templates/moonspot/images/favicon.ico' rel='icon'/> This tip comes from <a href="http://widgetsforfree.blogspot.com/2009/08/how-to-change-favicon-in-blogger.html">here</a>. It doesn&rsquo;t work on IE but this did not bother me.</p>
-
-<p>If you want put the favicon in the network to imageshack.us to receive a direct link from them you must register. For those who do not want to do that I propose to use available in Chrome the &ldquo;inspect element&rdquo; feature with its help you can easily read the entire value of the field &ldquo;Direct Link&rdquo; on imageshack.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -655,6 +801,11 @@ And write it by:</p>
 
 
 
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".fancybox").fancybox();
+  });
+</script>
 
 
 </body>

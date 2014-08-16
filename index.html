@@ -9,8 +9,8 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="After long analysis I decide to buy new laptop. I had about $1000
-(or 3000PLN) and most important things to me were: i7 CPU &ndash; because of &hellip;">
+  <meta name="description" content="Recently I came back to look into coreboot. Mainly because low level is fun and
+skills related to firmware (even coreboot) starting get attention on &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,6 +31,12 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -102,6 +108,435 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/">Coreboot for QEMU Armv7 (Vexpress-a9) Emulated Mainboard</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-07T23:08:39+02:00" pubdate data-updated="true">Aug 7<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently I came back to look into coreboot. Mainly because low level is fun and
+skills related to firmware (even coreboot) starting get attention on freelance
+portals (<a href="http://bit.ly/1sBSybZ">first odesk job</a>, <a href="http://bit.ly/1sBSR6F">second odesk job</a>).
+ I was surprised that under the wings of Google
+coreboot team start to support ARM (BTW ARM programming is IMHO next great
+skill to learn). So I cloned latest, code compiled QEMU armv7 mainboard model and
+tried to kick it in latest qemu-system-arm. Unfortunately it didn&rsquo;t boot. Below
+you can find my TL;DR debugging story.</p>
+
+<h2>coreboot qemu-armv7 mainboard compilation &ndash; very quick steps</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone http://review.coreboot.org/p/coreboot
+</span><span class='line'>cd coreboot
+</span><span class='line'>git submodule update --init --checkout
+</span><span class='line'>make menuconfig</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Set: <code>Mainboard -&gt; Mainboard model -&gt; QEMU armv7 (vexpress-a9)</code></p>
+
+<p>NOTE: To prevent annoying warning about XML when running gdb from coreboot
+crossgcc utilities:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>warning: Can not parse XML target description; XML support was disabled at compile time</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>libexpat1-dev</code> should be installed.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libexpat1-dev
+</span><span class='line'>cd util/crossgcc
+</span><span class='line'>./buildgcc -y -j 8 -p armv7 -G
+</span><span class='line'>cd ../..
+</span><span class='line'>make</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>buildgcc</code> will provide armv7 toolchain with debugger (<code>-G</code>) and compilation
+will use 8 parallel jobs.</p>
+
+<h2>qemu-system-arm compilation &ndash; very quick steps</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://git.qemu.org/qemu.git
+</span><span class='line'>cd qemu
+</span><span class='line'>git submodule update --init --checkout
+</span><span class='line'>make clean && ./configure --target-list=arm-softmmu && make -j8
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Debugging hint</h2>
+
+<p>Use good gdbinit, so with every instruction executed gdb will automatically
+provide most useful informations. IMHO good choice is <code>fG!</code> gdbinit shared on
+<a href="https://github.com/gdbinit/Gdbinit">github</a>. It contain support for ARM and
+x86. To switch to ARM mode inside gdb simple use <code>arm</code> command. Output looks
+pretty awesome:</p>
+
+<p><a class="fancybox" rel="group" href="/assets/images/gdbinit.png"><img src="/assets/images/gdbinit.png" alt="" /></a></p>
+
+<h2>Noob dead end</h2>
+
+<p>Command for running qemu that I found in early qemu-armv7 commit log:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -M vexpress-a9 -m 1024M -nographic -kernel build/coreboot.rom</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It ends with qemu error:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu: fatal: Trying to execute code outside RAM or ROM at 0x04000000
+</span><span class='line'>
+</span><span class='line'>R00=00000002 R01=00000000 R02=00000000 R03=00000000
+</span><span class='line'>R04=00000000 R05=00000000 R06=00000000 R07=00000000
+</span><span class='line'>R08=00000000 R09=00000000 R10=00000000 R11=00000000
+</span><span class='line'>R12=00000000 R13=0007fed0 R14=6001032f R15=04000000
+</span><span class='line'>PSR=600000d3 -ZC- A svc32
+</span><span class='line'>(...)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the beginning I thought that it is a mistake so I tried:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -M vexpress-a9 -m 1024M -nographic -bios build/coreboot.rom</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What ends with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu: fatal: Trying to execute code outside RAM or ROM at 0xfffffffe
+</span><span class='line'>
+</span><span class='line'>R00=00000002 R01=ffffffff R02=ffffffff R03=ffffffff
+</span><span class='line'>R04=ffffffff R05=ffffffff R06=ffffffff R07=ffffffff
+</span><span class='line'>R08=00000000 R09=ffffffff R10=ffffffff R11=ffffffff
+</span><span class='line'>R12=00000000 R13=0007fed0 R14=0000032f R15=fffffffe
+</span><span class='line'>PSR=600000f3 -ZC- T svc32</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obviously qemu complains on value in R15 (PC &ndash; Program Counter), which is the
+address of current instruction (like EIP in x86).</p>
+
+<p>Stepping through assembler instructions using cross-compiled debugger
+(<code>util/crossgcc/xgcc/bin/armv7-a-eabi-gdb</code>) points to:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>0x6001024f:  ldmia.w sp!, {r2, r3, r4, r5, r6, r7, r9, r10, r11, pc}</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>ldmia</code> will load from stack values of all given registers. This cause that PC
+goes to 0x0 and then run instruction from zeroed memory, which in ARM
+instructions means:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>andeq   r0, r0, r0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It happens till PC reach 0x4000000 which is out of &lsquo;RAM or ROM&rsquo; for qemu.
+Unfortunately there is no sign about <code>ldmia</code> instruction with above range of
+registers in coreboot and qemu code.</p>
+
+<h2>Bisection</h2>
+
+<p>I knew that at some point qemu worked with coreboot. I tried few versions and
+it leads me to some commit between <code>v2.1.0-rc1</code> and <code>v2.1.0-rc0</code>. For <code>-kernel</code>
+switch I was able to narrow down problem to one commit that change
+<code>VE_NORFLASHALIAS</code> option for vexpress-a9 to 0
+(<a href="http://git.qemu.org/?p=qemu.git;a=commit;h=6ec1588e09770ac7e9c60194faff6101111fc7f0">6ec1588</a>).
+It looks like for vexpress-a9 qemu place kernel at 0x60000000
+(vexpress.highmem), which is aliased to range 0x0-0x3ffffff.
+<code>VE_NORFLASHALIAS=0</code> cause mapping of vexpress.flash0 to the same region as
+kernel and because flash (<code>-bios</code>) was not added we have empty space (all
+zeros) what gives <code>andeq r0, r0, r0</code>.</p>
+
+<p>Right now I have working version of coreboot but only with <code>-kernel</code> and
+<code>VE_NORFLASHALIAS=-1</code> set in hw/arm/vexpress.c. The main questions are:</p>
+
+<ul>
+<li>what is the correct memory map for qemu-armv7 and how coreboot should be mapped ?</li>
+<li>what&rsquo;s going on with coreboot or qemu that I can&rsquo;t go through bootblock ?</li>
+</ul>
+
+
+<h2>Debugging</h2>
+
+<p>I tried to debug coreboot executed from flash:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -M vexpress-a9 -m 1024M -nographic -bios build/coreboot.rom -s -S</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Coreboot as UEFI has few phases. For UEFI we distinguish SEC, PEI, DXE and BDS
+(there are also TSL, RT and AL, but not important for this considerations). On
+coreboot side we have bootblock, romstage, ramstage and payload.</p>
+
+<h3>qemu-armv7 bootblock failure</h3>
+
+<p>qemu-armv7 booting procedure start from <code>_rom</code> section which contain hardcoded
+jump to <code>reset</code> procedure. After that go through few methods like on below flow:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>_rom
+</span><span class='line'>|-&gt; reset
+</span><span class='line'>    |-&gt; init_stack_loop
+</span><span class='line'>        |-&gt; call_bootblock
+</span><span class='line'>            |-&gt; main
+</span><span class='line'>                |-&gt; armv7_invalidate_caches
+</span><span class='line'>                    |-&gt; icache_invalidate_all
+</span><span class='line'>                    |-&gt; dcache_invalidate_all
+</span><span class='line'>                      |-&gt; dcache_foreach</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the end of <code>dcache_foreach</code> we experience failure because <code>ldmia</code>
+instruction tries to restore registers from stack, which should be stored at
+the beginning of <code>dcache_foreach</code>, by:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>stmdb  sp!, {r0, r1, r4, r5, r6, r7, r9, sl, fp, lr}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unfortunately for some reason stack doesn&rsquo;t contain any reasonable values (all
+0xffffffff) after <code>stmdb</code>. Why is that ?</p>
+
+<h3>Obvious things are not so obvious</h3>
+
+<p>As I point above everything seems to be related with memory map for
+vexpress-a9. I wrote question to qemu developers mailing list describing all
+the problems. You can read it
+<a href="http://lists.nongnu.org/archive/html/qemu-devel/2014-08/msg02599.html">here</a>.
+So the answer is that ARM Versatile Express boards in general have two
+different memory maps. First is legacy with RAM in low memory and second is
+modern with flash in low memory instead of RAM. Since qemu <code>v2.1.0</code> modern
+memory map was used. That&rsquo;s why I saw change in behavior. Obviously flash in
+qemu is read only, so no matter what pushing on stack didn&rsquo;t work.</p>
+
+<h3>coreboot stack location fix</h3>
+
+<p>I though that fix would be easy. One thing that I have to do is change stack
+address. The question is where to place the stack ? So I took a look at qemu
+memory map:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(qemu) info mtree
+</span><span class='line'>(...)
+</span><span class='line'>0000000040000000-0000000043ffffff (prio 0, R-): vexpress.flash0
+</span><span class='line'>0000000044000000-0000000047ffffff (prio 0, R-): vexpress.flash1
+</span><span class='line'>0000000048000000-0000000049ffffff (prio 0, RW): vexpress.sram
+</span><span class='line'>000000004c000000-000000004c7fffff (prio 0, RW): vexpress.vram
+</span><span class='line'>000000004e000000-000000004e0000ff (prio 0, RW): lan9118-mmio
+</span><span class='line'>0000000060000000-000000009fffffff (prio 0, RW): vexpress.highmem</span></code></pre></td></tr></table></div></figure>
+
+
+<p>SRAM is temporary storage where I decide to put stack. The change in coreboot
+looks like below:</p>
+
+<figure class='code'><figcaption><span>src/mainboard/emulation/qemu-armv7/Kconfig</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">config</span> <span class="n">STACK_TOP</span>
+</span><span class='line'>  <span class="n">hex</span>
+</span><span class='line'>  <span class="k">default</span> <span class="mh">0x4803ff00</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">config</span> <span class="n">STACK_BOTTOM</span>
+</span><span class='line'>  <span class="n">hex</span>
+</span><span class='line'>  <span class="k">default</span> <span class="mh">0x48000000</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">config</span> <span class="n">STACK_SIZE</span>
+</span><span class='line'>  <span class="n">hex</span>
+</span><span class='line'>  <span class="k">default</span> <span class="mh">0x0003ff00</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I changed STACK_TOP and STACK_BOTTOM.</p>
+
+<p>Unfortunately still I was unable to boot coreboot on vexpress-a9. Situation
+improved because stack start to work correctly and accept push and pop data
+to/from, but next problem occurs in <code>init_default_cbfs_media</code>.</p>
+
+<h3>init_default_cbfs_media problem</h3>
+
+<p>As CBFS specification explains:</p>
+
+<blockquote><p>CBFS is a scheme for managing independent chunks of data in a system ROM.</p><footer><strong>Jordan Crouse</strong> <cite><a href='http://review.coreboot.org/gitweb?p=coreboot.git;a=blob;f=documentation/cbfs.txt;h=7ecc9014a1cb2e0a86bbbf514e17f6b0360b9c0c;hb=HEAD'>review.coreboot.org/&hellip;</a></cite></footer></blockquote>
+
+
+<p>Default CBFS media initialization for qemu-armv7 leads to
+<code>init_emu_rom_cbfs_media</code> that fills <code>cbfs_media</code> structures with function
+pointers that help to operate on CBFS.</p>
+
+<figure class='code'><figcaption><span>src/mainboard/emulation/qemu-armv7/media.c</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="nf">init_emu_rom_cbfs_media</span><span class="p">(</span><span class="k">struct</span> <span class="n">cbfs_media</span> <span class="o">*</span><span class="n">media</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">media</span><span class="o">-&gt;</span><span class="n">open</span> <span class="o">=</span> <span class="n">emu_rom_open</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">media</span><span class="o">-&gt;</span><span class="n">close</span> <span class="o">=</span> <span class="n">emu_rom_close</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">media</span><span class="o">-&gt;</span><span class="n">map</span> <span class="o">=</span> <span class="n">emu_rom_map</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">media</span><span class="o">-&gt;</span><span class="n">unmap</span> <span class="o">=</span> <span class="n">emu_rom_unmap</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">media</span><span class="o">-&gt;</span><span class="n">read</span> <span class="o">=</span> <span class="n">emu_rom_read</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The problem was that pointers were relative to bootblock base address
+<code>0x00010000</code> and <code>-bios</code> option maps coreboot.rom from address <code>0x0</code>. This
+leads to change in bootblock base address to <code>0x0</code>:</p>
+
+<figure class='code'><figcaption><span>src/mainboard/emulation/qemu-armv7/Kconfig</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">config</span> <span class="n">BOOTBLOCK_BASE</span>
+</span><span class='line'>  <span class="n">hex</span>
+</span><span class='line'>  <span class="k">default</span> <span class="mh">0x00000000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This solve other issue not mentioned till now. I didn&rsquo;t know why I can&rsquo;t load
+symbols for bootblock using <code>add-symbol-file</code> in gdb. Of course reason was
+bootblock didn&rsquo;t start at 0x0 but at 0x10000. Since this moment I could debug
+bootblock using lines of C code, by simply:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>gdb$ add-symbol-file build/cbfs/fallback/bootblock.debug 0x0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It was not the end because another error popped up:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>Bad ram pointer 0x3b8
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>memcpy during CBFS decompression</h3>
+
+<p>Problem was with storing registers <code>stmia</code> during memcpy. Backtrace:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>#0  memcpy () at src/arch/armv7/memcpy.S:64
+</span><span class='line'>#1  0x000015b2 in cbfs_decompress (algo=&lt;optimized out&gt;, src=&lt;optimized out&gt;, dst=&lt;optimized out&gt;, len=0x3310) at src/lib/cbfs_core.c:227
+</span><span class='line'>#2  0x00001702 in cbfs_load_stage (media=media@entry=0x0 &lt;_start&gt;, name=name@entry=0x2260 &quot;fallback/romstage&quot;) at src/lib/cbfs.c:137
+</span><span class='line'>#3  0x00002236 in main () at src/arch/armv7/bootblock_simple.c:63
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For some reason R0 (to which we store), contain strange address 0x10000. No
+value was stored in this memory range, because again it was read only flash.
+Address is passed from upper layers &ndash; <code>cbfs_get_file_content</code>. During debugging
+I realize that this address means <code>ROMSTAGE_BASE</code>. So I changed <code>ROMSTAGE_BASE</code>
+to somewhere in SRAM.</p>
+
+<figure class='code'><figcaption><span>src/mainboard/emulation/qemu-armv7/Kconfig</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">config</span> <span class="n">ROMSTAGE_BASE</span>
+</span><span class='line'>  <span class="n">hex</span>
+</span><span class='line'>  <span class="k">default</span> <span class="mh">0x48040000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What I saw when trying to boot coreboot with this fix was wonderful log proved
+that coreboot boots without problems.</p>
+
+<h2>Conclusion</h2>
+
+<p>Above debugging session was all about memory map. It was really fun to
+experience all those issues because I had to understand lot of ARM assembly
+instructions, track memory, read the spec, read coreboot and qemu code. It gave
+me a lot of good experience. If you have any questions or comments please let
+me know. And finally what is most important it was next thing done on my list.</p>
+
+<p>I think next challenge could be experiment with Linux kernel booting. Coreboot
+can boot kernel directly or through payload with bootloader.</p>
+
+<p>Thanks for reading.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -463,6 +898,79 @@ people resign after few tries. Most people also don&rsquo;t like changes as adag
 &ldquo;better the devil you know&rdquo;. However only those who try to change something in
 their lives can reach success. And as story of Thomas Edison proves you have to
 try.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-14T23:22:00+02:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>What the OVMF is ?</h3>
+
+<p><strong>OVMF</strong> (<em>Open Virtual Machine Firmware</em>) is a firmware actively developed as a
+<strong>EDK2</strong>(<em>EFI Developer Kit</em>) package. It is a packed that aims to support
+firmware for virtual machines like Qemu.</p>
+
+<h3>Simplified build process</h3>
+
+<p>First of all lets get latest version of the code. For some time <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=Welcome">EFI and
+Framework Open Source
+Community</a> share edk2 code also on <a href="https://github.com/tianocore/edk2">github</a> mirror.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/tianocore/edk2.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Building process was simplified by OvmfPkg contributors. But I found that
+toolchain for latest gcc compilers is not ready in main repository. So I suggest
+to remove <code>BaseTools</code> directory and clone up to date git repository in this
+place:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd edk2
+</span><span class='line'>rm -rf BaseTools
+</span><span class='line'>git clone https://github.com/tianocore/buildtools-BaseTools.git BaseTools
+</span><span class='line'>. edksetup.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So to build firmware we need only one command:
+&#8220;`</p>
+
+<p><code>``
+You may need some additional packages like</code>uuid-dev<code>,</code>iasl<code>or</code>g++`.</p>
 </div>
   
   
@@ -2161,225 +2669,6 @@ bootloader.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/">0x1: Qemu as an Environment for Embedded Board Emulation</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-07T08:27:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Table of contents</h2>
-
-<ul>
-<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#intro">Introduction</a></li>
-<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#compilation">Compilation</a></li>
-<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#kudos">Kudos</a></li>
-</ul>
-
-
-<p><a id="intro"></a></p>
-
-<h3>Introduction</h3>
-
-<p>QEMU is a CPU emulator using dynamic binary translation to convert guest CPU
-instructions into host CPU instructions<a href="http://infoscience.epfl.ch/record/149975/files/x86-llvm-translator-chipounov_2.pdf">[1]</a>. It supports many architectures from
-x86, through ARM and MIPS, to MicroBlaze. According to compilation configuration
-target list QEMU targets 26 different softmmu types.  Only for ARM it supports
-33 machines (like ARM Versatile/PB (ARM926EJ-S) or Samsung NURI board
-(Exynos4210)) and 28 CPUs (with cortex-a9 and pxa270). It gives access to
-network, storage, video, usb, serial and other peripheral, also user defined. It
-is developed under GNU GPL, so everybody are free to make modifications, improve
-and extend it. This properties makes QEMU very good candidate for virtual board
-emulator.</p>
-
-<p><a id="compilation"></a></p>
-
-<h3>Compilation</h3>
-
-<p>Let&rsquo;s start creating our Virtual Development Board. As usually I will use latest
-greatest version from git:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone http://git.qemu.org/git/qemu.git
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Compile it and install. Right now I will use only <code>arm-softmmu</code> target because it
-will emulate whole arm system for me. ARM right now dominated big part of
-embedded market but we will see if situation won&rsquo;t change in feature.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>qemu
-</span><span class='line'>./configure --target-list<span class="o">=</span>arm-softmmu
-</span><span class='line'>make
-</span><span class='line'>make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>During configuration process you can encounter lack of <code>pixman</code>, just accept qemu
-offer to initialize it as a submodule.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git submodule update --init pixman
-</span><span class='line'>make <span class="c"># restart compilation process</span>
-</span><span class='line'>make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If compilation ends without problem than our first component is ready to use.
-Right now we can emulate our ARM based board with many types of CPUs. List of
-all available can be retrieved by running command <code>qemu-system-arm -cpu ?</code>, list
-of emulated machines by <code>-M ?</code>. Now, let&rsquo;s talk about <a href="/blog/2013/06/07/toolchain-for-virtual-development-board">toolchains</a>.</p>
-
-<p><a id="kudos"></a></p>
-
-<h3>Kudos</h3>
-
-<p>[1] <a href="http://infoscience.epfl.ch/record/149975/files/x86-llvm-translator-chipounov_2.pdf">Dynamically Translating x86 to LLVM using QEMU</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/">0x0: Intro to Virtual Development Board Building</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-07T01:27:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#preface">Preface</a></li>
-<li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#first-question">First question: How to start ?</a></li>
-<li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#virtual-development-board">Virtual Development Board &ndash; table of contents</a></li>
-<li><a href="/blog/2013/06/07/intro-to-virtual-development-board-building/#kudos">Kudos</a></li>
-</ul>
-
-
-<p><a id="preface"></a></p>
-
-<h3>Preface</h3>
-
-<p>There are many reasons why ambitious programmers should care about huge rush in
-embedded market. IMO there is great potential in it. I don&rsquo;t want to go deep into
-this but take a look at all tablets, phones, smart TVs and other cool stuff
-like wireless in you washing machine or refrigerator (ok this two are right now only a gadgets :) ).
-This is all embedded. Another thing is that wages of experienced embedded
-developers are really high.</p>
-
-<p>This environment is very interesting. A lot to learn, a lot to do, so why not get
-your hands dirty ?</p>
-
-<p><a id="first-question"></a></p>
-
-<h3>First question: How to start ?</h3>
-
-<p>To do real embedded development, to learn the most, you simply buy hardware like
-all this <code>${animal}board (animal={panda,beagle,hawk})</code>. This is the best way but
-if you&rsquo;re beginner (like me) you probably don&rsquo;t want to spend $50 for stuff that
-you throw away after month because you don&rsquo;t like to deal with it or problems
-are not on your level, than maybe you should take a look around and wonder if it
-is possible to build virtual environment to check what kind of problem you may
-encounter learning embedded ? BTW this is cheap and fun, so potential ROI is big
-enough to try.</p>
-
-<p>IMHO this is where world going: proof of concept embedded platforms affordable
-for common man (not only for US/West Europe), testing environment based on
-virtualized/emulated solution, to check basic features, speed up testing, development
-and deployment. That&rsquo;s why we see so active development of software like Qemu/KVM.</p>
-
-<p><a id="virtual-development-board"></a></p>
-
-<h3>Virtual Development Board &ndash; table of contents</h3>
-
-<p>I realize that it is achievable and I will learn a lot trying to implement this
-idea. Finally I was convinced reading <a href="http://www.elinux.org/Virtual_Development_Board">this</a>
-two years old article on <a href="http://www.elinux.org">eLinux.org</a>.</p>
-
-<p>I decide to divide this article on few parts because IMHO it was to big to read
-it at once. Also people interesting in particular topic won&rsquo;t have to scrolling <code>&gt;2k</code>
-words post. List of all articles in this series:</p>
-
-<ol>
-<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/">Qemu as an environment for embedded board emulation</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/">Toolchain for Virtual Development Board</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/">Embedded board bootloader</a></li>
-<li><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">Linux kernel for embedded system</a></li>
-<li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">Qemu network configuration and tftp for Virtual Development Board</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/">Root file system for embedded system</a></li>
-</ol>
-
-
-<p><a id="kudos"></a></p>
-
-<h3>Kudos</h3>
-
-<p>At the and of this intro I want to give big kudos to all those hackers without
-whom creating this article would not be possible. Thanks for sharing your
-knowledge. Every time when I use knowledge that found by googling I&rsquo;m trying
-to stick link for further reading.</p>
-
-<h4><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation"><em>Enjoy!</em></a></h4>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -2447,6 +2736,11 @@ to stick link for further reading.</p>
 
 
 
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".fancybox").fancybox();
+  });
+</script>
 
 
 </body>

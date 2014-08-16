@@ -30,6 +30,12 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -133,8 +139,8 @@
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone http://review.coreboot.org/p/coreboot Conifigure:  
-</span><span class='line'>cd coreboot; make menuconfig Set:  </span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone http://review.coreboot.org/p/coreboot
+</span><span class='line'>cd coreboot; make menuconfig</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Configure FILO as apayload and use its latest version:</p>
@@ -314,6 +320,11 @@ should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 
 
 
 
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".fancybox").fancybox();
+  });
+</script>
 
 
 </body>

@@ -9,7 +9,8 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="During Christmas break I found an old unused motherboard in my home, right away I thought that it maybe useful as learning environment for coreboot. &hellip;">
+  <meta name="description" content="During Christmas break I found an old unused motherboard in my home, right away
+I thought that it maybe useful as learning environment for coreboot. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -30,6 +31,12 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -129,20 +136,52 @@
   </header>
 
 
-<div class="entry-content"><p>During Christmas break I found an old unused motherboard in my home, right away I thought that it maybe useful as learning environment for coreboot. First you need to do with this kind of board is to check if it is possible to flash its BIOS with user space tool called <a href="http://www.flashrom.org/">flashrom</a> list of supported hardware can be found <a href="http://www.flashrom.org/Supported_hardware">here</a>.</p>
+<div class="entry-content"><p>During Christmas break I found an old unused motherboard in my home, right away
+I thought that it maybe useful as learning environment for coreboot. First you
+need to do with this kind of board is to check if it is possible to flash its
+BIOS with user space tool called <a href="http://www.flashrom.org/">flashrom</a>  List of
+supported hardware can be found <a href="http://www.flashrom.org/Supported_hardware">here</a>.</p>
 
-<p>All you need to do is go through <a href="http://www.flashrom.org/Board_Testing_HOWTO">this HOWTO</a>. Be aware that these operations can cause you will not be able to run your motherboard if something goes wrong. Therefore, I suggest protect yourself by supplying checked programmer or other memory chip for your board containing a working BIOS.</p>
+<p>All you need to do is go through <a href="http://www.flashrom.org/Board_Testing_HOWTO">this
+HOWTO</a>. Be aware that these
+operations can cause you will not be able to run your motherboard if something
+goes wrong. Therefore, I suggest protect yourself by supplying checked
+programmer or other memory chip for your board containing a working BIOS.</p>
 
-<p>For my <a href="http://www.shuttle.eu/_archive/older/de/av18.htm">Shuttle board</a> I checked if the Winbond W49F002U chip on it is supported by flashrom. Fortunately it was. After that I read my BIOS by:</p>
+<p>For my <a href="http://www.shuttle.eu/_archive/older/de/av18.htm">Shuttle board</a> I
+checked if the Winbond W49F002U chip on it is supported by flashrom.
+Fortunately it was. After that I read my BIOS by:</p>
 
-<p>flashrom -Vr bios_bckp.bin
-And write it by:</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>flashrom -Vr bios\_bckp.bin</span></code></pre></td></tr></table></div></figure>
 
-<p>flashrom -Vw bios_bckp.bin At the end I&rsquo;ve got VERIFIED message but when I look carefully inside the log there was something like this:</p>
 
-<p>Erasing and writing flash chip&hellip; Trying erase function 0&hellip; 0x000000-0x01ffff:S, 0x020000-0x037fff:S, 0x038000-0x039fff:S, 0x03a000-0x03bfff:S, 0x03c000-0x03ffff:S Erase/write done. Verifying flash&hellip; VERIFIED. This means that these addresses have not been overwritten but skipped, becuse the fact that the data which were to be overridden were identical with what we wanted to write. So if we found such output to properly verify flashrom we need to clear our memory and write it again with BIOS backup. Correct output should look like this:</p>
+<p>And write it by:</p>
 
-<p>Erasing and writing flash chip&hellip; Trying erase function 0&hellip; 0x000000-0x01ffff:W, 0x020000-0x037fff:W, 0x038000-0x039fff:W, 0x03a000-0x03bfff:W, 0x03c000-0x03ffff:W Erase/write done. Verifying flash&hellip; VERIFIED.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>flashrom -Vw bios\_bckp.bin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the end I&rsquo;ve got VERIFIED message but when I look carefully inside the log
+there was something like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Erasing and writing flash chip... Trying erase function 0... 0x000000-0x01ffff:S, 0x020000-0x037fff:S,
+</span><span class='line'>0x038000-0x039fff:S, 0x03a000-0x03bfff:S, 0x03c000-0x03ffff:S Erase/write done. Verifying flash... VERIFIED.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This means that these addresses have not been overwritten but skipped, becuse
+the fact that the data which were to be overridden were identical with what we
+wanted to write. So if we found such output to properly verify flashrom we need
+to clear our memory and write it again with BIOS backup. Correct output should
+look like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Erasing and writing flash chip... Trying erase function 0... 0x000000-0x01ffff:W, 0x020000-0x037fff:W,
+</span><span class='line'>0x038000-0x039fff:W, 0x03a000-0x03bfff:W, 0x03c000-0x03ffff:W Erase/write done. Verifying flash... VERIFIED.  </span></code></pre></td></tr></table></div></figure>
+
 
 <p>Next post I will try to familiarize you with the process of debugging coreboot using <a href="http://wiki.qemu.org/Main_Page">QEMU</a>.</p>
 </div>
@@ -269,6 +308,11 @@ And write it by:</p>
 
 
 
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".fancybox").fancybox();
+  });
+</script>
 
 
 </body>

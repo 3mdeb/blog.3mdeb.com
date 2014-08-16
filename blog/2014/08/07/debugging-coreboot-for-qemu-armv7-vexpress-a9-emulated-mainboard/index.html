@@ -1,0 +1,661 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Coreboot for QEMU armv7 (vexpress-a9) emulated mainboard - Linux geek's scratchpad</title>
+  <meta name="author" content="">
+
+  
+  <meta name="description" content="Recently I came back to look into coreboot. Mainly because low level is fun and
+skills related to firmware (even coreboot) starting get attention on &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pietrushnic.github.io/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Linux geek's scratchpad" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39420295-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+<!-- AddThis Smart Layers BEGIN -->
+<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534acd39445ac552"></script>
+<script type="text/javascript">
+  addthis.layers({
+    'theme' : 'gray',
+    'share' : {
+      'position' : 'left',
+      'numPreferredServices' : 5
+    }, 
+    'follow' : {
+      'services' : [
+        {'service': 'facebook', 'id': 'piotr.krol.756859'},
+        {'service': 'twitter', 'id': 'pietrushnic'},
+        {'service': 'linkedin', 'id': 'krolpiotr'},
+        {'service': 'google_follow', 'id': '115979497998056410813'}
+      ]
+    },  
+    'whatsnext' : {},  
+    'recommended' : {} 
+  });
+</script>
+<!-- AddThis Smart Layers END -->
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Linux geek's scratchpad</a></h1>
+  
+    <h2>or embedded dreams about productivity, freedom and liberty</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Coreboot for QEMU Armv7 (Vexpress-a9) Emulated Mainboard</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-07T23:08:39+02:00" pubdate data-updated="true">Aug 7<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Recently I came back to look into coreboot. Mainly because low level is fun and
+skills related to firmware (even coreboot) starting get attention on freelance
+portals (<a href="http://bit.ly/1sBSybZ">first odesk job</a>, <a href="http://bit.ly/1sBSR6F">second odesk job</a>).
+ I was surprised that under the wings of Google
+coreboot team start to support ARM (BTW ARM programming is IMHO next great
+skill to learn). So I cloned latest, code compiled QEMU armv7 mainboard model and
+tried to kick it in latest qemu-system-arm. Unfortunately it didn&rsquo;t boot. Below
+you can find my TL;DR debugging story.</p>
+
+<h2>coreboot qemu-armv7 mainboard compilation &ndash; very quick steps</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone http://review.coreboot.org/p/coreboot
+</span><span class='line'>cd coreboot
+</span><span class='line'>git submodule update --init --checkout
+</span><span class='line'>make menuconfig</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Set: <code>Mainboard -&gt; Mainboard model -&gt; QEMU armv7 (vexpress-a9)</code></p>
+
+<p>NOTE: To prevent annoying warning about XML when running gdb from coreboot
+crossgcc utilities:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>warning: Can not parse XML target description; XML support was disabled at compile time</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>libexpat1-dev</code> should be installed.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libexpat1-dev
+</span><span class='line'>cd util/crossgcc
+</span><span class='line'>./buildgcc -y -j 8 -p armv7 -G
+</span><span class='line'>cd ../..
+</span><span class='line'>make</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>buildgcc</code> will provide armv7 toolchain with debugger (<code>-G</code>) and compilation
+will use 8 parallel jobs.</p>
+
+<h2>qemu-system-arm compilation &ndash; very quick steps</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://git.qemu.org/qemu.git
+</span><span class='line'>cd qemu
+</span><span class='line'>git submodule update --init --checkout
+</span><span class='line'>make clean && ./configure --target-list=arm-softmmu && make -j8
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Debugging hint</h2>
+
+<p>Use good gdbinit, so with every instruction executed gdb will automatically
+provide most useful informations. IMHO good choice is <code>fG!</code> gdbinit shared on
+<a href="https://github.com/gdbinit/Gdbinit">github</a>. It contain support for ARM and
+x86. To switch to ARM mode inside gdb simple use <code>arm</code> command. Output looks
+pretty awesome:</p>
+
+<p><a class="fancybox" rel="group" href="/assets/images/gdbinit.png"><img src="/assets/images/gdbinit.png" alt="" /></a></p>
+
+<h2>Noob dead end</h2>
+
+<p>Command for running qemu that I found in early qemu-armv7 commit log:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -M vexpress-a9 -m 1024M -nographic -kernel build/coreboot.rom</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It ends with qemu error:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu: fatal: Trying to execute code outside RAM or ROM at 0x04000000
+</span><span class='line'>
+</span><span class='line'>R00=00000002 R01=00000000 R02=00000000 R03=00000000
+</span><span class='line'>R04=00000000 R05=00000000 R06=00000000 R07=00000000
+</span><span class='line'>R08=00000000 R09=00000000 R10=00000000 R11=00000000
+</span><span class='line'>R12=00000000 R13=0007fed0 R14=6001032f R15=04000000
+</span><span class='line'>PSR=600000d3 -ZC- A svc32
+</span><span class='line'>(...)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the beginning I thought that it is a mistake so I tried:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -M vexpress-a9 -m 1024M -nographic -bios build/coreboot.rom</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What ends with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu: fatal: Trying to execute code outside RAM or ROM at 0xfffffffe
+</span><span class='line'>
+</span><span class='line'>R00=00000002 R01=ffffffff R02=ffffffff R03=ffffffff
+</span><span class='line'>R04=ffffffff R05=ffffffff R06=ffffffff R07=ffffffff
+</span><span class='line'>R08=00000000 R09=ffffffff R10=ffffffff R11=ffffffff
+</span><span class='line'>R12=00000000 R13=0007fed0 R14=0000032f R15=fffffffe
+</span><span class='line'>PSR=600000f3 -ZC- T svc32</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obviously qemu complains on value in R15 (PC &ndash; Program Counter), which is the
+address of current instruction (like EIP in x86).</p>
+
+<p>Stepping through assembler instructions using cross-compiled debugger
+(<code>util/crossgcc/xgcc/bin/armv7-a-eabi-gdb</code>) points to:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>0x6001024f:  ldmia.w sp!, {r2, r3, r4, r5, r6, r7, r9, r10, r11, pc}</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>ldmia</code> will load from stack values of all given registers. This cause that PC
+goes to 0x0 and then run instruction from zeroed memory, which in ARM
+instructions means:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>andeq   r0, r0, r0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It happens till PC reach 0x4000000 which is out of &lsquo;RAM or ROM&rsquo; for qemu.
+Unfortunately there is no sign about <code>ldmia</code> instruction with above range of
+registers in coreboot and qemu code.</p>
+
+<h2>Bisection</h2>
+
+<p>I knew that at some point qemu worked with coreboot. I tried few versions and
+it leads me to some commit between <code>v2.1.0-rc1</code> and <code>v2.1.0-rc0</code>. For <code>-kernel</code>
+switch I was able to narrow down problem to one commit that change
+<code>VE_NORFLASHALIAS</code> option for vexpress-a9 to 0
+(<a href="http://git.qemu.org/?p=qemu.git;a=commit;h=6ec1588e09770ac7e9c60194faff6101111fc7f0">6ec1588</a>).
+It looks like for vexpress-a9 qemu place kernel at 0x60000000
+(vexpress.highmem), which is aliased to range 0x0-0x3ffffff.
+<code>VE_NORFLASHALIAS=0</code> cause mapping of vexpress.flash0 to the same region as
+kernel and because flash (<code>-bios</code>) was not added we have empty space (all
+zeros) what gives <code>andeq r0, r0, r0</code>.</p>
+
+<p>Right now I have working version of coreboot but only with <code>-kernel</code> and
+<code>VE_NORFLASHALIAS=-1</code> set in hw/arm/vexpress.c. The main questions are:</p>
+
+<ul>
+<li>what is the correct memory map for qemu-armv7 and how coreboot should be mapped ?</li>
+<li>what&rsquo;s going on with coreboot or qemu that I can&rsquo;t go through bootblock ?</li>
+</ul>
+
+
+<h2>Debugging</h2>
+
+<p>I tried to debug coreboot executed from flash:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>qemu-system-arm -M vexpress-a9 -m 1024M -nographic -bios build/coreboot.rom -s -S</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Coreboot as UEFI has few phases. For UEFI we distinguish SEC, PEI, DXE and BDS
+(there are also TSL, RT and AL, but not important for this considerations). On
+coreboot side we have bootblock, romstage, ramstage and payload.</p>
+
+<h3>qemu-armv7 bootblock failure</h3>
+
+<p>qemu-armv7 booting procedure start from <code>_rom</code> section which contain hardcoded
+jump to <code>reset</code> procedure. After that go through few methods like on below flow:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>_rom
+</span><span class='line'>|-&gt; reset
+</span><span class='line'>    |-&gt; init_stack_loop
+</span><span class='line'>        |-&gt; call_bootblock
+</span><span class='line'>            |-&gt; main
+</span><span class='line'>                |-&gt; armv7_invalidate_caches
+</span><span class='line'>                    |-&gt; icache_invalidate_all
+</span><span class='line'>                    |-&gt; dcache_invalidate_all
+</span><span class='line'>                      |-&gt; dcache_foreach</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the end of <code>dcache_foreach</code> we experience failure because <code>ldmia</code>
+instruction tries to restore registers from stack, which should be stored at
+the beginning of <code>dcache_foreach</code>, by:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>stmdb  sp!, {r0, r1, r4, r5, r6, r7, r9, sl, fp, lr}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unfortunately for some reason stack doesn&rsquo;t contain any reasonable values (all
+0xffffffff) after <code>stmdb</code>. Why is that ?</p>
+
+<h3>Obvious things are not so obvious</h3>
+
+<p>As I point above everything seems to be related with memory map for
+vexpress-a9. I wrote question to qemu developers mailing list describing all
+the problems. You can read it
+<a href="http://lists.nongnu.org/archive/html/qemu-devel/2014-08/msg02599.html">here</a>.
+So the answer is that ARM Versatile Express boards in general have two
+different memory maps. First is legacy with RAM in low memory and second is
+modern with flash in low memory instead of RAM. Since qemu <code>v2.1.0</code> modern
+memory map was used. That&rsquo;s why I saw change in behavior. Obviously flash in
+qemu is read only, so no matter what pushing on stack didn&rsquo;t work.</p>
+
+<h3>coreboot stack location fix</h3>
+
+<p>I though that fix would be easy. One thing that I have to do is change stack
+address. The question is where to place the stack ? So I took a look at qemu
+memory map:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(qemu) info mtree
+</span><span class='line'>(...)
+</span><span class='line'>0000000040000000-0000000043ffffff (prio 0, R-): vexpress.flash0
+</span><span class='line'>0000000044000000-0000000047ffffff (prio 0, R-): vexpress.flash1
+</span><span class='line'>0000000048000000-0000000049ffffff (prio 0, RW): vexpress.sram
+</span><span class='line'>000000004c000000-000000004c7fffff (prio 0, RW): vexpress.vram
+</span><span class='line'>000000004e000000-000000004e0000ff (prio 0, RW): lan9118-mmio
+</span><span class='line'>0000000060000000-000000009fffffff (prio 0, RW): vexpress.highmem</span></code></pre></td></tr></table></div></figure>
+
+
+<p>SRAM is temporary storage where I decide to put stack. The change in coreboot
+looks like below:</p>
+
+<figure class='code'><figcaption><span>src/mainboard/emulation/qemu-armv7/Kconfig</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">config</span> <span class="n">STACK_TOP</span>
+</span><span class='line'>  <span class="n">hex</span>
+</span><span class='line'>  <span class="k">default</span> <span class="mh">0x4803ff00</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">config</span> <span class="n">STACK_BOTTOM</span>
+</span><span class='line'>  <span class="n">hex</span>
+</span><span class='line'>  <span class="k">default</span> <span class="mh">0x48000000</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">config</span> <span class="n">STACK_SIZE</span>
+</span><span class='line'>  <span class="n">hex</span>
+</span><span class='line'>  <span class="k">default</span> <span class="mh">0x0003ff00</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I changed STACK_TOP and STACK_BOTTOM.</p>
+
+<p>Unfortunately still I was unable to boot coreboot on vexpress-a9. Situation
+improved because stack start to work correctly and accept push and pop data
+to/from, but next problem occurs in <code>init_default_cbfs_media</code>.</p>
+
+<h3>init_default_cbfs_media problem</h3>
+
+<p>As CBFS specification explains:</p>
+
+<blockquote><p>CBFS is a scheme for managing independent chunks of data in a system ROM.</p><footer><strong>Jordan Crouse</strong> <cite><a href='http://review.coreboot.org/gitweb?p=coreboot.git;a=blob;f=documentation/cbfs.txt;h=7ecc9014a1cb2e0a86bbbf514e17f6b0360b9c0c;hb=HEAD'>review.coreboot.org/&hellip;</a></cite></footer></blockquote>
+
+
+<p>Default CBFS media initialization for qemu-armv7 leads to
+<code>init_emu_rom_cbfs_media</code> that fills <code>cbfs_media</code> structures with function
+pointers that help to operate on CBFS.</p>
+
+<figure class='code'><figcaption><span>src/mainboard/emulation/qemu-armv7/media.c</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="nf">init_emu_rom_cbfs_media</span><span class="p">(</span><span class="k">struct</span> <span class="n">cbfs_media</span> <span class="o">*</span><span class="n">media</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">media</span><span class="o">-&gt;</span><span class="n">open</span> <span class="o">=</span> <span class="n">emu_rom_open</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">media</span><span class="o">-&gt;</span><span class="n">close</span> <span class="o">=</span> <span class="n">emu_rom_close</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">media</span><span class="o">-&gt;</span><span class="n">map</span> <span class="o">=</span> <span class="n">emu_rom_map</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">media</span><span class="o">-&gt;</span><span class="n">unmap</span> <span class="o">=</span> <span class="n">emu_rom_unmap</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">media</span><span class="o">-&gt;</span><span class="n">read</span> <span class="o">=</span> <span class="n">emu_rom_read</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The problem was that pointers were relative to bootblock base address
+<code>0x00010000</code> and <code>-bios</code> option maps coreboot.rom from address <code>0x0</code>. This
+leads to change in bootblock base address to <code>0x0</code>:</p>
+
+<figure class='code'><figcaption><span>src/mainboard/emulation/qemu-armv7/Kconfig</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">config</span> <span class="n">BOOTBLOCK_BASE</span>
+</span><span class='line'>  <span class="n">hex</span>
+</span><span class='line'>  <span class="k">default</span> <span class="mh">0x00000000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This solve other issue not mentioned till now. I didn&rsquo;t know why I can&rsquo;t load
+symbols for bootblock using <code>add-symbol-file</code> in gdb. Of course reason was
+bootblock didn&rsquo;t start at 0x0 but at 0x10000. Since this moment I could debug
+bootblock using lines of C code, by simply:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>gdb$ add-symbol-file build/cbfs/fallback/bootblock.debug 0x0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It was not the end because another error popped up:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>Bad ram pointer 0x3b8
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>memcpy during CBFS decompression</h3>
+
+<p>Problem was with storing registers <code>stmia</code> during memcpy. Backtrace:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>#0  memcpy () at src/arch/armv7/memcpy.S:64
+</span><span class='line'>#1  0x000015b2 in cbfs_decompress (algo=&lt;optimized out&gt;, src=&lt;optimized out&gt;, dst=&lt;optimized out&gt;, len=0x3310) at src/lib/cbfs_core.c:227
+</span><span class='line'>#2  0x00001702 in cbfs_load_stage (media=media@entry=0x0 &lt;_start&gt;, name=name@entry=0x2260 &quot;fallback/romstage&quot;) at src/lib/cbfs.c:137
+</span><span class='line'>#3  0x00002236 in main () at src/arch/armv7/bootblock_simple.c:63
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For some reason R0 (to which we store), contain strange address 0x10000. No
+value was stored in this memory range, because again it was read only flash.
+Address is passed from upper layers &ndash; <code>cbfs_get_file_content</code>. During debugging
+I realize that this address means <code>ROMSTAGE_BASE</code>. So I changed <code>ROMSTAGE_BASE</code>
+to somewhere in SRAM.</p>
+
+<figure class='code'><figcaption><span>src/mainboard/emulation/qemu-armv7/Kconfig</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">config</span> <span class="n">ROMSTAGE_BASE</span>
+</span><span class='line'>  <span class="n">hex</span>
+</span><span class='line'>  <span class="k">default</span> <span class="mh">0x48040000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What I saw when trying to boot coreboot with this fix was wonderful log proved
+that coreboot boots without problems.</p>
+
+<h2>Conclusion</h2>
+
+<p>Above debugging session was all about memory map. It was really fun to
+experience all those issues because I had to understand lot of ARM assembly
+instructions, track memory, read the spec, read coreboot and qemu code. It gave
+me a lot of good experience. If you have any questions or comments please let
+me know. And finally what is most important it was next thing done on my list.</p>
+
+<p>I think next challenge could be experiment with Linux kernel booting. Coreboot
+can boot kernel directly or through payload with bootloader.</p>
+
+<p>Thanks for reading.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-07T23:08:39+02:00" pubdate data-updated="true">Aug 7<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/coreboot/'>coreboot</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pietrushnic.github.io/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/" data-via="pietrushnic" data-counturl="http://pietrushnic.github.io/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/" >Tweet</a>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/05/16/debian-wheezy-on-lenovo-y510p/" title="Previous Post: Linux (Debian Wheezy) on Lenovo y510p">&laquo; Linux (Debian Wheezy) on Lenovo y510p</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 -  -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pietrushnics-world';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pietrushnic.github.io/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/';
+        var disqus_url = 'http://pietrushnic.github.io/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".fancybox").fancybox();
+  });
+</script>
+
+
+</body>
+</html>

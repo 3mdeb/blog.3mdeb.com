@@ -4,7 +4,7 @@
   <title><![CDATA[Category: coreboot | Linux geek's scratchpad]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/coreboot/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-08-12T23:16:14+02:00</updated>
+  <updated>2014-08-16T22:51:55+02:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,345 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Coreboot for QEMU armv7 (vexpress-a9) emulated mainboard]]></title>
+    <link href="http://pietrushnic.github.io/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/"/>
+    <updated>2014-08-07T23:08:39+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard</id>
+    <content type="html"><![CDATA[<p>Recently I came back to look into coreboot. Mainly because low level is fun and
+skills related to firmware (even coreboot) starting get attention on freelance
+portals (<a href="http://bit.ly/1sBSybZ">first odesk job</a>, <a href="http://bit.ly/1sBSR6F">second odesk job</a>).
+ I was surprised that under the wings of Google
+coreboot team start to support ARM (BTW ARM programming is IMHO next great
+skill to learn). So I cloned latest, code compiled QEMU armv7 mainboard model and
+tried to kick it in latest qemu-system-arm. Unfortunately it didn&rsquo;t boot. Below
+you can find my TL;DR debugging story.</p>
+
+<h2>coreboot qemu-armv7 mainboard compilation &ndash; very quick steps</h2>
+
+<p><code>
+git clone http://review.coreboot.org/p/coreboot
+cd coreboot
+git submodule update --init --checkout
+make menuconfig
+</code></p>
+
+<p>Set: <code>Mainboard -&gt; Mainboard model -&gt; QEMU armv7 (vexpress-a9)</code></p>
+
+<p>NOTE: To prevent annoying warning about XML when running gdb from coreboot
+crossgcc utilities:
+<code>
+warning: Can not parse XML target description; XML support was disabled at compile time
+</code>
+<code>libexpat1-dev</code> should be installed.</p>
+
+<p><code>
+sudo apt-get install libexpat1-dev
+cd util/crossgcc
+./buildgcc -y -j 8 -p armv7 -G
+cd ../..
+make
+</code></p>
+
+<p><code>buildgcc</code> will provide armv7 toolchain with debugger (<code>-G</code>) and compilation
+will use 8 parallel jobs.</p>
+
+<h2>qemu-system-arm compilation &ndash; very quick steps</h2>
+
+<p><code>
+git clone git://git.qemu.org/qemu.git
+cd qemu
+git submodule update --init --checkout
+make clean &amp;&amp; ./configure --target-list=arm-softmmu &amp;&amp; make -j8
+sudo make install
+</code></p>
+
+<h2>Debugging hint</h2>
+
+<p>Use good gdbinit, so with every instruction executed gdb will automatically
+provide most useful informations. IMHO good choice is <code>fG!</code> gdbinit shared on
+<a href="https://github.com/gdbinit/Gdbinit">github</a>. It contain support for ARM and
+x86. To switch to ARM mode inside gdb simple use <code>arm</code> command. Output looks
+pretty awesome:</p>
+
+<p><a class="fancybox" rel="group" href="http://pietrushnic.github.io/assets/images/gdbinit.png"><img src="http://pietrushnic.github.io/assets/images/gdbinit.png" alt="" /></a></p>
+
+<h2>Noob dead end</h2>
+
+<p>Command for running qemu that I found in early qemu-armv7 commit log:
+<code>
+qemu-system-arm -M vexpress-a9 -m 1024M -nographic -kernel build/coreboot.rom
+</code>
+It ends with qemu error:
+```
+qemu: fatal: Trying to execute code outside RAM or ROM at 0x04000000</p>
+
+<p>R00=00000002 R01=00000000 R02=00000000 R03=00000000
+R04=00000000 R05=00000000 R06=00000000 R07=00000000
+R08=00000000 R09=00000000 R10=00000000 R11=00000000
+R12=00000000 R13=0007fed0 R14=6001032f R15=04000000
+PSR=600000d3 -ZC- A svc32
+(&hellip;)
+```</p>
+
+<p>At the beginning I thought that it is a mistake so I tried:
+<code>
+qemu-system-arm -M vexpress-a9 -m 1024M -nographic -bios build/coreboot.rom
+</code>
+What ends with:
+```
+qemu: fatal: Trying to execute code outside RAM or ROM at 0xfffffffe</p>
+
+<p>R00=00000002 R01=ffffffff R02=ffffffff R03=ffffffff
+R04=ffffffff R05=ffffffff R06=ffffffff R07=ffffffff
+R08=00000000 R09=ffffffff R10=ffffffff R11=ffffffff
+R12=00000000 R13=0007fed0 R14=0000032f R15=fffffffe
+PSR=600000f3 -ZC- T svc32
+```</p>
+
+<p>Obviously qemu complains on value in R15 (PC &ndash; Program Counter), which is the
+address of current instruction (like EIP in x86).</p>
+
+<p>Stepping through assembler instructions using cross-compiled debugger
+(<code>util/crossgcc/xgcc/bin/armv7-a-eabi-gdb</code>) points to:</p>
+
+<p><code>
+0x6001024f:  ldmia.w sp!, {r2, r3, r4, r5, r6, r7, r9, r10, r11, pc}
+</code></p>
+
+<p><code>ldmia</code> will load from stack values of all given registers. This cause that PC
+goes to 0x0 and then run instruction from zeroed memory, which in ARM
+instructions means:</p>
+
+<p><code>
+andeq   r0, r0, r0
+</code></p>
+
+<p>It happens till PC reach 0x4000000 which is out of &lsquo;RAM or ROM&rsquo; for qemu.
+Unfortunately there is no sign about <code>ldmia</code> instruction with above range of
+registers in coreboot and qemu code.</p>
+
+<h2>Bisection</h2>
+
+<p>I knew that at some point qemu worked with coreboot. I tried few versions and
+it leads me to some commit between <code>v2.1.0-rc1</code> and <code>v2.1.0-rc0</code>. For <code>-kernel</code>
+switch I was able to narrow down problem to one commit that change
+<code>VE_NORFLASHALIAS</code> option for vexpress-a9 to 0
+(<a href="http://git.qemu.org/?p=qemu.git;a=commit;h=6ec1588e09770ac7e9c60194faff6101111fc7f0">6ec1588</a>).
+It looks like for vexpress-a9 qemu place kernel at 0x60000000
+(vexpress.highmem), which is aliased to range 0x0-0x3ffffff.
+<code>VE_NORFLASHALIAS=0</code> cause mapping of vexpress.flash0 to the same region as
+kernel and because flash (<code>-bios</code>) was not added we have empty space (all
+zeros) what gives <code>andeq r0, r0, r0</code>.</p>
+
+<p>Right now I have working version of coreboot but only with <code>-kernel</code> and
+<code>VE_NORFLASHALIAS=-1</code> set in hw/arm/vexpress.c. The main questions are:</p>
+
+<ul>
+<li>what is the correct memory map for qemu-armv7 and how coreboot should be mapped ?</li>
+<li>what&rsquo;s going on with coreboot or qemu that I can&rsquo;t go through bootblock ?</li>
+</ul>
+
+
+<h2>Debugging</h2>
+
+<p>I tried to debug coreboot executed from flash:
+<code>
+qemu-system-arm -M vexpress-a9 -m 1024M -nographic -bios build/coreboot.rom -s -S
+</code></p>
+
+<p>Coreboot as UEFI has few phases. For UEFI we distinguish SEC, PEI, DXE and BDS
+(there are also TSL, RT and AL, but not important for this considerations). On
+coreboot side we have bootblock, romstage, ramstage and payload.</p>
+
+<h3>qemu-armv7 bootblock failure</h3>
+
+<p>qemu-armv7 booting procedure start from <code>_rom</code> section which contain hardcoded
+jump to <code>reset</code> procedure. After that go through few methods like on below flow:</p>
+
+<p>```
+_rom
+|&ndash;> reset</p>
+
+<pre><code>|-&gt; init_stack_loop
+    |-&gt; call_bootblock
+        |-&gt; main
+            |-&gt; armv7_invalidate_caches
+                |-&gt; icache_invalidate_all
+                |-&gt; dcache_invalidate_all
+                  |-&gt; dcache_foreach
+</code></pre>
+
+<p>```</p>
+
+<p>At the end of <code>dcache_foreach</code> we experience failure because <code>ldmia</code>
+instruction tries to restore registers from stack, which should be stored at
+the beginning of <code>dcache_foreach</code>, by:</p>
+
+<p><code>
+stmdb  sp!, {r0, r1, r4, r5, r6, r7, r9, sl, fp, lr}
+</code></p>
+
+<p>Unfortunately for some reason stack doesn&rsquo;t contain any reasonable values (all
+0xffffffff) after <code>stmdb</code>. Why is that ?</p>
+
+<h3>Obvious things are not so obvious</h3>
+
+<p>As I point above everything seems to be related with memory map for
+vexpress-a9. I wrote question to qemu developers mailing list describing all
+the problems. You can read it
+<a href="http://lists.nongnu.org/archive/html/qemu-devel/2014-08/msg02599.html">here</a>.
+So the answer is that ARM Versatile Express boards in general have two
+different memory maps. First is legacy with RAM in low memory and second is
+modern with flash in low memory instead of RAM. Since qemu <code>v2.1.0</code> modern
+memory map was used. That&rsquo;s why I saw change in behavior. Obviously flash in
+qemu is read only, so no matter what pushing on stack didn&rsquo;t work.</p>
+
+<h3>coreboot stack location fix</h3>
+
+<p>I though that fix would be easy. One thing that I have to do is change stack
+address. The question is where to place the stack ? So I took a look at qemu
+memory map:</p>
+
+<p><code>
+(qemu) info mtree
+(...)
+0000000040000000-0000000043ffffff (prio 0, R-): vexpress.flash0
+0000000044000000-0000000047ffffff (prio 0, R-): vexpress.flash1
+0000000048000000-0000000049ffffff (prio 0, RW): vexpress.sram
+000000004c000000-000000004c7fffff (prio 0, RW): vexpress.vram
+000000004e000000-000000004e0000ff (prio 0, RW): lan9118-mmio
+0000000060000000-000000009fffffff (prio 0, RW): vexpress.highmem
+</code></p>
+
+<p>SRAM is temporary storage where I decide to put stack. The change in coreboot
+looks like below:</p>
+
+<p>```c src/mainboard/emulation/qemu-armv7/Kconfig
+config STACK_TOP</p>
+
+<pre><code>hex
+default 0x4803ff00
+</code></pre>
+
+<p>config STACK_BOTTOM</p>
+
+<pre><code>hex
+default 0x48000000
+</code></pre>
+
+<p>config STACK_SIZE</p>
+
+<pre><code>hex
+default 0x0003ff00
+</code></pre>
+
+<p>```
+I changed STACK_TOP and STACK_BOTTOM.</p>
+
+<p>Unfortunately still I was unable to boot coreboot on vexpress-a9. Situation
+improved because stack start to work correctly and accept push and pop data
+to/from, but next problem occurs in <code>init_default_cbfs_media</code>.</p>
+
+<h3>init_default_cbfs_media problem</h3>
+
+<p>As CBFS specification explains:
+<blockquote><p>CBFS is a scheme for managing independent chunks of data in a system ROM.</p><footer><strong>Jordan Crouse <a href="http://review.coreboot.org/gitweb?p=coreboot.git;a=blob;f=documentation/cbfs.txt;h=7ecc9014a1cb2e0a86bbbf514e17f6b0360b9c0c;hb=HEAD">http://review.coreboot.org/gitweb?p=coreboot.git;a=blob;f=documentation/cbfs.txt;h=7ecc9014a1cb2e0a86bbbf514e17f6b0360b9c0c;hb=HEAD</a></strong></footer></blockquote></p>
+
+<p>Default CBFS media initialization for qemu-armv7 leads to
+<code>init_emu_rom_cbfs_media</code> that fills <code>cbfs_media</code> structures with function
+pointers that help to operate on CBFS.</p>
+
+<p>```c src/mainboard/emulation/qemu-armv7/media.c
+int init_emu_rom_cbfs_media(struct cbfs_media *media)
+{</p>
+
+<pre><code>media-&gt;open = emu_rom_open;
+media-&gt;close = emu_rom_close;
+media-&gt;map = emu_rom_map;
+media-&gt;unmap = emu_rom_unmap;
+media-&gt;read = emu_rom_read;
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The problem was that pointers were relative to bootblock base address
+<code>0x00010000</code> and <code>-bios</code> option maps coreboot.rom from address <code>0x0</code>. This
+leads to change in bootblock base address to <code>0x0</code>:</p>
+
+<p>```c src/mainboard/emulation/qemu-armv7/Kconfig
+config BOOTBLOCK_BASE</p>
+
+<pre><code>hex
+default 0x00000000
+</code></pre>
+
+<p>```</p>
+
+<p>This solve other issue not mentioned till now. I didn&rsquo;t know why I can&rsquo;t load
+symbols for bootblock using <code>add-symbol-file</code> in gdb. Of course reason was
+bootblock didn&rsquo;t start at 0x0 but at 0x10000. Since this moment I could debug
+bootblock using lines of C code, by simply:</p>
+
+<p><code>text
+gdb$ add-symbol-file build/cbfs/fallback/bootblock.debug 0x0
+</code></p>
+
+<p>It was not the end because another error popped up:
+<code>
+Bad ram pointer 0x3b8
+</code></p>
+
+<h3>memcpy during CBFS decompression</h3>
+
+<p>Problem was with storing registers <code>stmia</code> during memcpy. Backtrace:
+```</p>
+
+<h1>0  memcpy () at src/arch/armv7/memcpy.S:64</h1>
+
+<h1>1  0x000015b2 in cbfs_decompress (algo=<optimized out>, src=<optimized out>, dst=<optimized out>, len=0x3310) at src/lib/cbfs_core.c:227</h1>
+
+<h1>2  0x00001702 in cbfs_load_stage (media=media@entry=0x0 &lt;_start>, name=name@entry=0x2260 &ldquo;fallback/romstage&rdquo;) at src/lib/cbfs.c:137</h1>
+
+<h1>3  0x00002236 in main () at src/arch/armv7/bootblock_simple.c:63</h1>
+
+<p>```</p>
+
+<p>For some reason R0 (to which we store), contain strange address 0x10000. No
+value was stored in this memory range, because again it was read only flash.
+Address is passed from upper layers &ndash; <code>cbfs_get_file_content</code>. During debugging
+I realize that this address means <code>ROMSTAGE_BASE</code>. So I changed <code>ROMSTAGE_BASE</code>
+to somewhere in SRAM.</p>
+
+<p>```c src/mainboard/emulation/qemu-armv7/Kconfig
+config ROMSTAGE_BASE</p>
+
+<pre><code>hex
+default 0x48040000
+</code></pre>
+
+<p>```</p>
+
+<p>What I saw when trying to boot coreboot with this fix was wonderful log proved
+that coreboot boots without problems.</p>
+
+<h2>Conclusion</h2>
+
+<p>Above debugging session was all about memory map. It was really fun to
+experience all those issues because I had to understand lot of ARM assembly
+instructions, track memory, read the spec, read coreboot and qemu code. It gave
+me a lot of good experience. If you have any questions or comments please let
+me know. And finally what is most important it was next thing done on my list.</p>
+
+<p>I think next challenge could be experiment with Linux kernel booting. Coreboot
+can boot kernel directly or through payload with bootloader.</p>
+
+<p>Thanks for reading.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Debugging coreboot in qemu environment - part 2]]></title>
@@ -102,8 +441,8 @@ it means that your debugging enviroment was set correctly.</li>
     <id>http://pietrushnic.github.io/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment</id>
     <content type="html"><![CDATA[<p>First of all I use testing version of Debian &ndash; wheezy. Clone coreboot repository:<br/>
 <code>
-git clone http://review.coreboot.org/p/coreboot Conifigure:  
-cd coreboot; make menuconfig Set:  
+git clone http://review.coreboot.org/p/coreboot
+cd coreboot; make menuconfig
 </code></p>
 
 <p>Configure FILO as apayload and use its latest version:
@@ -159,20 +498,50 @@ should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 
     <link href="http://pietrushnic.github.io/blog/2012/01/06/flashrom-and-shuttle-av18e2/"/>
     <updated>2012-01-06T14:31:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/01/06/flashrom-and-shuttle-av18e2</id>
-    <content type="html"><![CDATA[<p>During Christmas break I found an old unused motherboard in my home, right away I thought that it maybe useful as learning environment for coreboot. First you need to do with this kind of board is to check if it is possible to flash its BIOS with user space tool called <a href="http://www.flashrom.org/">flashrom</a> list of supported hardware can be found <a href="http://www.flashrom.org/Supported_hardware">here</a>.</p>
+    <content type="html"><![CDATA[<p>During Christmas break I found an old unused motherboard in my home, right away
+I thought that it maybe useful as learning environment for coreboot. First you
+need to do with this kind of board is to check if it is possible to flash its
+BIOS with user space tool called <a href="http://www.flashrom.org/">flashrom</a>  List of
+supported hardware can be found <a href="http://www.flashrom.org/Supported_hardware">here</a>.</p>
 
-<p>All you need to do is go through <a href="http://www.flashrom.org/Board_Testing_HOWTO">this HOWTO</a>. Be aware that these operations can cause you will not be able to run your motherboard if something goes wrong. Therefore, I suggest protect yourself by supplying checked programmer or other memory chip for your board containing a working BIOS.</p>
+<p>All you need to do is go through <a href="http://www.flashrom.org/Board_Testing_HOWTO">this
+HOWTO</a>. Be aware that these
+operations can cause you will not be able to run your motherboard if something
+goes wrong. Therefore, I suggest protect yourself by supplying checked
+programmer or other memory chip for your board containing a working BIOS.</p>
 
-<p>For my <a href="http://www.shuttle.eu/_archive/older/de/av18.htm">Shuttle board</a> I checked if the Winbond W49F002U chip on it is supported by flashrom. Fortunately it was. After that I read my BIOS by:</p>
+<p>For my <a href="http://www.shuttle.eu/_archive/older/de/av18.htm">Shuttle board</a> I
+checked if the Winbond W49F002U chip on it is supported by flashrom.
+Fortunately it was. After that I read my BIOS by:</p>
 
-<p>flashrom -Vr bios_bckp.bin
-And write it by:</p>
+<p><code>
+flashrom -Vr bios\_bckp.bin
+</code></p>
 
-<p>flashrom -Vw bios_bckp.bin At the end I&rsquo;ve got VERIFIED message but when I look carefully inside the log there was something like this:</p>
+<p>And write it by:</p>
 
-<p>Erasing and writing flash chip&hellip; Trying erase function 0&hellip; 0x000000-0x01ffff:S, 0x020000-0x037fff:S, 0x038000-0x039fff:S, 0x03a000-0x03bfff:S, 0x03c000-0x03ffff:S Erase/write done. Verifying flash&hellip; VERIFIED. This means that these addresses have not been overwritten but skipped, becuse the fact that the data which were to be overridden were identical with what we wanted to write. So if we found such output to properly verify flashrom we need to clear our memory and write it again with BIOS backup. Correct output should look like this:</p>
+<p><code>
+flashrom -Vw bios\_bckp.bin
+</code></p>
 
-<p>Erasing and writing flash chip&hellip; Trying erase function 0&hellip; 0x000000-0x01ffff:W, 0x020000-0x037fff:W, 0x038000-0x039fff:W, 0x03a000-0x03bfff:W, 0x03c000-0x03ffff:W Erase/write done. Verifying flash&hellip; VERIFIED.</p>
+<p>At the end I&rsquo;ve got VERIFIED message but when I look carefully inside the log
+there was something like this:</p>
+
+<p><code>
+Erasing and writing flash chip... Trying erase function 0... 0x000000-0x01ffff:S, 0x020000-0x037fff:S,
+0x038000-0x039fff:S, 0x03a000-0x03bfff:S, 0x03c000-0x03ffff:S Erase/write done. Verifying flash... VERIFIED.
+</code></p>
+
+<p>This means that these addresses have not been overwritten but skipped, becuse
+the fact that the data which were to be overridden were identical with what we
+wanted to write. So if we found such output to properly verify flashrom we need
+to clear our memory and write it again with BIOS backup. Correct output should
+look like this:</p>
+
+<p><code>
+Erasing and writing flash chip... Trying erase function 0... 0x000000-0x01ffff:W, 0x020000-0x037fff:W,
+0x038000-0x039fff:W, 0x03a000-0x03bfff:W, 0x03c000-0x03ffff:W Erase/write done. Verifying flash... VERIFIED.  
+</code></p>
 
 <p>Next post I will try to familiarize you with the process of debugging coreboot using <a href="http://wiki.qemu.org/Main_Page">QEMU</a>.</p>
 ]]></content>
@@ -183,7 +552,13 @@ And write it by:</p>
     <link href="http://pietrushnic.github.io/blog/2012/01/06/how-to-begin-with-coreboot/"/>
     <updated>2012-01-06T14:23:00+01:00</updated>
     <id>http://pietrushnic.github.io/blog/2012/01/06/how-to-begin-with-coreboot</id>
-    <content type="html"><![CDATA[<p>About a month ago I started my adventure with coreboot. As <a href="http://www.coreboot.org/">coreboot home</a> page says &ldquo;coreboot is a Free Software project aimed at replacing the proprietary BIOS (firmware) found in most computers&rdquo;. Although I read the majority of materials from mentioned page I still suffered from a lack of basic information that would help me to arrange everything in my head. Therefore, I decided to write a series of posts described my actions associated with this interesting project.</p>
+    <content type="html"><![CDATA[<p>About a month ago I started my adventure with coreboot. As <a href="http://www.coreboot.org/">coreboot
+home</a> page says &ldquo;coreboot is a Free Software project
+aimed at replacing the proprietary BIOS (firmware) found in most
+computers&rdquo;. Although I read the majority of materials from mentioned page I
+still suffered from a lack of basic information that would help me to arrange
+everything in my head. Therefore, I decided to write a series of posts
+described my actions associated with this interesting project.</p>
 
 <p>At the beginning I would recommend some interesting sources of information on coreboot:</p>
 
@@ -195,7 +570,11 @@ And write it by:</p>
 </ul>
 
 
-<p>After reviewing the above materials, you should understand the basics of coreboot. In the <a href="http://pietrushnic.blogspot.com/2012/01/flashrom-and-shuttle-av18e2.html">next post</a> I will describe <a href="http://flashrom.org/">flashrom</a> application and my experience with one of the old motherboard.</p>
+<p>After reviewing the above materials, you should understand the basics of
+coreboot. In the <a href="http://pietrushnic.github.io/blog/2012/01/06/flashrom-and-shuttle-av18e2/">next
+post</a>
+I will describe <a href="http://flashrom.org/">flashrom</a> application and my experience
+with one of the old motherboard.</p>
 ]]></content>
   </entry>
   
