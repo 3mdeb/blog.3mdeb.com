@@ -32,3 +32,17 @@ After those operations we are ready to boot OpenWRT:
 QEMU_AUDIO_DRV=none qemu-system-arm -M realview-eb-mpcore -kernel bin/realview/openwrt-realview-vmlinux-initramfs.elf -net nic -net user -nographic
 ```
 Because of obvious reason `openwrt-realview-vmlinux.elf` will not boot - no rootfs.
+
+## Non-volatile OpenWRT configuration
+
+The main problem with above configuration is that all we can do happens on
+`make manuconfig` time. We cannot do a lot inside initramsfsa, because we have
+only tmpfs. What are the options for persistent storage:
+
+* SCSI disk - known as `-hda` option in QEMU
+* NFS
+* SD card
+
+Unfortunately none of those solution works right from the box.
+
+### SCSI disk
