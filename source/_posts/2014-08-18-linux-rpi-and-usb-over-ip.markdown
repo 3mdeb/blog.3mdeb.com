@@ -1,48 +1,44 @@
 ---
 layout: post
-title: "Linux RPi and USB over IP"
+title: "Linux, RPi and USB over IP"
 date: 2014-08-18 21:26:37 +0200
 comments: true
 categories: raspberry-pi, linux, usb
 ---
 
-Recently I came to the idea of remote access for embedded development kits like
-[Arduino](http://www.arduino.cc/), [RPi](http://www.raspberrypi.org/) or more
-powerful [Jetson TK1](https://developer.nvidia.com/jetson-tk1). During
-exploration of remote access for embedded boards I figured out that as usually
-someone else thought about this before:
-
-* [REMBL - Remote Embedded Lab](https://www.youtube.com/watch?v=F6ZUVKnr-Qk)
-* [REMBL 1st phase offer](https://www.youtube.com/watch?v=0SHeJgbC0FQ)
-* [Google Groups post](https://groups.google.com/forum/#!topic/omapdiscuss/YF9024BwR_0)
-
-I wrote to Ayman (the author of REMBL idea) to ask about the project and
-because I found him to be open source and collaborative development enthusiast
-I decide to write this post. So our short e-mail conversation leads us to USB
-over IP topic. Why ? Simply because it is most used interface that almost all
-boards have included and it would be fun to share it over the Internet.
-
-## USB over IP
-
-Trying to google this term doesn't give much except many companies that give
+Trying to google 'USB over IP' doesn't give much except some business web pages that give
 you it as a service. This brings some information about potential on the
 market IMHO. Main idea is well presented on open source project page for [usbip](http://usbip.sourceforge.net/).
 I really recommend to read [USB/IP - a Peripheral Bus Extension for Device Sharing over IP Network](https://www.usenix.org/legacy/events/usenix05/tech/freenix/hirofuchi.html)
 technical paper it describe briefly technical details and capability.
 
+In short USB over IP is a sharing system aim to expose USB devices from server
+to client encapsulating USB I/O messages in TCP/IP payload.
+
+`usbip` contain client and server side (called stub and VHCI (_Virtual Host
+Controller Interface_). Stub is used on server side to hijack USB traffic
+from/to connected device and send/receive it over the network. VHCI expose
+stubbed device on client side and also send and receive data to/from server. We
+can say that stub-VHCI pair working as intermediate layer in USB stack, giving
+ability to connect over the netowork. `usbip` project provided both Linux and
+Windows version. In mid of 2008 `usbip` was introduced to Linux kernel and
+matured a while in staging directory. Few days ago I read
+[this](http://thread.gmane.org/gmane.linux.kernel/1763771) were Greg KH mention
+that if it will be possible he will include `usbip` in `3.17-rc2`.
+
 As you can expect the biggest problem with USB over IP is how to handle
-480Mbit/s (USB2.0) or more over TCP/IP payload. The answer is that recommended
-use case for `usbip` is LAN environment with low latency. Of course you can try
-to use it over long distance but you will get best effort, which varies
-according to device and application profile. Author of the idea (Takahiro
-Hirofuchi) tested his solution and created some models for queue management for
-different devices - you can read about it in technical paper.
+480Mbit/s (USB2.0) or more over TCP/IP payload. The answer is it can't.
+Recommended use case for `usbip` is LAN environment with low latency. Of course
+you can try to use it over long distance but you will get best effort, which
+varies according to device and application profile. Author of the idea
+(Takahiro Hirofuchi) tested his solution and created some models for queue
+management for different devices - you can read about it in technical paper.
+Below I present Kingston USB stick test in function of delay.
 
 ## Seting up usbip
 
 What I tried to do was setting up my Rasberry Pi and connect it through my home
-LAN to share some USB devices (memory stick and HDD). Then use all USB devices
-that I have to see how they work. My configuration looks like that:
+LAN to share USB device (Kingston DataTraveler). My configuration looks like that:
 
 <a class="fancybox" rel="group" href="/assets/images/usb-over-ip-net.png"><img src="/assets/images/usb-over-ip-net.png" alt="" /></a>
 
@@ -77,7 +73,7 @@ pi@raspberrypi /boot $ zcat /proc/config.gz |grep USBIP
 Compiling Linux kernel on RPi can take number of hours. I saw different values
 like 5-6, 10 and even 22. It depends on many factors. But we should not bother
 and try to cross compile RPi on development machine. I will use my Y510P laptop
-with i7 4700MQ@2.4GHz (4 cores).
+with i7 4700MQ 2.4GHz (4 cores).
 
 ```
 git clone https://github.com/raspberrypi/tools tools-rpi
@@ -88,12 +84,12 @@ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcmrpi_defconfig
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
 ```
 
-RPi kernel was on 3.12.y branch, so I used this version. Go to `Device Drivers ->
-Staging drivers -> USB/IP support`. I choose to compile usbip-core as
-loadable module. `Device Drivers -> Staging drivers -> USB/IP support -> Host driver`
-also is needed it compiles usbip-host module. Optionally `Debug messages for USB/IP`
-can be set if you want to see kernel debug messages from driver. After saving
-changes to config file we can start compilation:
+I compiled kernel on `3.12.y` branch. Go to `Device Drivers -> Staging drivers ->
+USB/IP support`. I choose to compile usbip-core as loadable module. `Device Drivers->
+Staging drivers -> USB/IP support -> Host driver` also is needed it
+compiles usbip-host module. Optionally `Debug messages for USB/IP` can be set
+if you want to see kernel debug messages from driver. After saving changes to
+config file we can start compilation:
 
 ```
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j8
@@ -117,11 +113,12 @@ loaded.
 
 ### Running usbip on RPi
 
-Now on RPi we can load modules needed for `usbipd`:
+Now on RPi we can load modules needed for `usbipd` and run it:
 
 ```
 sudo modprobe usbip-core
 sudo modprobe usbip-host
+sudo usbipd -D
 ```
 
 To what USB devices are connected to our system we can use:
@@ -160,9 +157,19 @@ bind device on busid 1-1.2: complete
 As you can see communication to `usbip-host` module is through writing into
 sysfs file.
 
+*NOTE* : if you will try to bind device without root privileges or when modules
+are not loaded you will get errors like below:
+```
+pi@raspberrypi ~ $ usbip bind -b 1-1.2
+usbip: error: could not unbind driver from device on busid 1-1.2
+pi@raspberrypi ~ $ sudo usbip bind -b 1-1.2
+usbip: error: unable to bind device on 1-1.2
+```
+
+
 ### usbip - client side 
 
-Our device should wait for communication. Let's got to client side of our LAN
+Our device should wait for communication. Let's go to client side of our LAN
 and try to check if we can use our USB device. To check if device is available:
 
 ```
@@ -176,7 +183,8 @@ Exportable USB devices
            :  0 - Mass Storage / SCSI / Bulk-Only (08/06/50)
 ```
 
-Everything seems to be ok. So let's try to attach it and do some test:
+Where `192.168.1.3` is an IP of RPi. Everything seems to be ok. So let's try to
+attach it and do some test:
 
 ```
 [22:31:11] pietrushnic:~ $ sudo usbip attach -r 192.168.1.3 -b 1-1.2 
@@ -317,17 +325,29 @@ With various results I tried other devices.
 
 ### Android phone
 I also tried to connect my Samsung GT-I9070. Unfortunately without luck:
+
 ```
 hub 5-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
 hub 5-0:1.0: unable to enumerate USB device on port 1
 ```
 
-I see this as opportunity to debug, understand and fix the driver.
+I think it could be related with fact that my smartphone expose multiple
+devices over one USB connection. What can be observed on `usbip` list:
+
+```
+ - busid 1-1.2 (04e8:6860)
+         1-1.2:1.0 -> unknown
+         1-1.2:1.1 -> cdc_acm
+         1-1.2:1.2 -> cdc_acm
+```
+I see this as opportunity to debug, understand
+and fix the driver.
 
 ### Arduino
 
-There was no problem with Arduino. I was even able to problem it successfully.
-As an experiment I tried to problem it with higher delay, what cause problems:
+There was no problem with Arduino. I was even able to program it successfully.
+Unfortunately to big delay (in my case 300ms) cause software errors:
+
 ```
 Binary sketch size: 1,056 bytes (of a 30,720 byte maximum)
 
@@ -340,7 +360,14 @@ avrdude: initialization failed, rc=-1
          this check.
 ```
 
-
 ## Summary
 
-Looks like `usbip` is usable 
+Looks like `usbip` is usable in low delay network. It would be great to test it
+in real WAN. It is possible to use `usbip` with more sophisticated devices but
+potential driver tweaking is required. As a telecommunication graduate I cannot
+say about possible improvements in queue algorithms, like adaptive queueing
+which depends on data transfer profile. It was interesting experience to play
+with `usbip` and probably I will back to it especially to testing part of this
+post.
+
+If you have questions, suggestions or comments please let me know.
