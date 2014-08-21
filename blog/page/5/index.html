@@ -9,9 +9,7 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="Update: My repository is available
-here. Below is first post from series in which I want to describe my experience gained
-in attempt to enhance my &hellip;">
+  <meta name="description" content="&ldquo;Human Action&rdquo; Ludwig von Mises&rsquo;s work by some of called the pope of free market. IMHO is one of the best books on economics I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +107,312 @@ in attempt to enhance my &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/07/human-action-ludwig-von-misess-work-by/">&#8220;Human Action&#8221; Ludwig Von Mises</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-07T23:37:00+01:00" pubdate data-updated="true">Mar 7<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/03/07/human-action-ludwig-von-misess-work-by/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>  <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Ludzkie_dzialanie_okladka.jpg/166px-Ludzkie_dzialanie_okladka.jpg" alt="" /></p>
+
+<p>&ldquo;Human Action&rdquo; Ludwig von Mises&rsquo;s work by some of called the pope of free market. IMHO is one of the best books on economics I read in my life. It is not easy, however, giving it time with certainly pays off. Allows to understand the basic laws which ruled the modern world of finance. Mises in a sensational way talk about the myths explaining what is inflation, why it has impact on our lives, what is and how works the supply of credit, and who depend most on the production of money without coverage (<em>fiat</em> money). I can say that until I read this book, I was lost in the dark. Thanks to it I received a weapon to overthrow ridiculous  world order concepts, absurd messages communicated in the media. I recommend:  <a href="http://mises.org/store/Human-Action-The-Scholars-Edition-P119.aspx">mises.org store &ndash; Human Action </a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/07/blog-has-changed-slightly/">Nice Small Additions for My Blog</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-07T23:15:00+01:00" pubdate data-updated="true">Mar 7<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/03/07/blog-has-changed-slightly/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Blog has changed slightly. I&rsquo;ve added two new sections: social media and afk. In &ldquo;social media&rdquo; I will add links to my profiles on various social networking sites. You&rsquo;ll find my most recent development achievements ( <a href="https://github.com/pietrushnic">@github</a>) and twitts on topics of interest to me ( <a href="https://twitter.com/#!/pietrushnic">@twitter</a>). The second section, &ldquo;afk&rdquo; (away from keyboard) is intended for the information of life beyond the keyboard, which in my case is not too extensive. I will publish here information about the books we read, watched movies and many other interesting things, which can be passionate away from the keyboard.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/20/improve-productivity-by-tracking-work_20/">Improve Productivity by Tracking Work Environment With Git - Vim</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T21:43:00+01:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/20/improve-productivity-by-tracking-work_20/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In this post I try to describe my vim configuration procedure and how it is
+connected with git. The whole concept is based on keeping all the configuration
+files in a separate directory. These files are connected using symbolic links in
+places where system or application requires it (eg <code>$HOME/.vimrc -&gt;
+/home/jdoe/workspace/dotfiles/vimrc</code>). So first let&rsquo;s create local directory for
+vim:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/workspace/dotfiles;mkdir vim  </span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Pathogen</h3>
+
+<p>The first plugin that will be installed is pathogen created by tpope and
+accessible through github. Pathogen is a vim script to manage all vim plugins
+with ease. Below line add pathogen as submodule to our workspace repository
+created in <a href="/blog/2012/02/19/improve-productivity-by-tracking-work/">previous
+post</a>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule add https://github.com/tpope/vim-pathogen.git dotfiles/vim/pathogen</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Initialize repository and update it:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule init && git submodule update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create additional directories need to complete pathogen installation, change
+directory to autoload:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd dotfiles/vim;mkdir {autoload,bundle};cd autoload</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In autoload directory pathogen should be installed, bundle directory is a place
+for all plugins installed in future. Finally we need to link vim script from
+pathogen submodule to current directory (<code>dotfiles/vim/autoload</code>):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ln -s ../pathogen/autoload/pathogen.vim .</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Directory structure should look like below:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pietrushnic@eriador:~/workspace/dotfiles$ tree .
+</span><span class='line'>└── vim
+</span><span class='line'>├── autoload
+</span><span class='line'>│   └── pathogen.vim -&gt; ../pathogen/autoload/pathogen.vim
+</span><span class='line'>├── bundle
+</span><span class='line'>└── pathogen
+</span><span class='line'>├── autoload
+</span><span class='line'>│   └── pathogen.vim
+</span><span class='line'>└── README.markdown</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the end of pathogen installation few lines to <code>$HOME/.vimrc</code> should be added.
+Of course following rules about dotfiles management <code>.vimrc</code> should be created as
+separate file in <code>~/workspace/dotfiles</code> and linked to <code>$HOME/.vimrc</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>touch vimrc;ln -s $PWD/vimrc $HOME/.vimrc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add below lines to <code>$HOME/.vimrc</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>call pathogen#infect()
+</span><span class='line'>call pathogen#runtime_append_all_bundles()
+</span><span class='line'>call pathogen#helptags()
+</span><span class='line'>syntax on
+</span><span class='line'>filetype plugin
+</span><span class='line'>indent on</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Fuzzyfinder</h3>
+
+<p>This is second plugin without which I cannot work. It speeds up searching though
+files, directories and tags. Has multiple useful features. RTFM if you want knew
+them. I will be also added as a git submodule:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule add https://github.com/vim-scripts/FuzzyFinder.git dotfiles/vim/bundle/fuzzyfinder</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Additional plugin is needed to correctly install fuzzyfinder:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule add https://github.com/vim-scripts/L9.git dotfiles/vim/bundle/l9</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Initialize and update submodules:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule init && git submodule update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Configuration I suggest to configure fuzzyfinder with accordance to example provided in help. </p>
+
+<ul>
+<li>Run vim and type :h fuf@en<Enter>. </li>
+<li>Choose tag fuf-vimrc-example and press Ctrl-]. </li>
+<li>Mark whole keybindings copy and paste to <code>~/.vimrc</code></li>
+</ul>
+
+
+<p>Right now I think it is enough with vim configuration. Of course I use plenty of
+other plugins but I don&rsquo;t have to time to describe my them all (maybe in future
+posts). Don&rsquo;t forget to commit your changes, there could be a lot of them,
+however, to deal with the distribution of these changes and improve your skills
+try to use git add -p interface, suggesting after linux code style &ndash; each commit
+should contain separate logical part of the changes, personally I add prefix to
+my commits (eg . vim, git, etc.) to ease deal with git log.  Notes:</p>
+
+<ul>
+<li>vim helpfiles generates tags files, which should be ignored by git, so I
+recommend to create .gitignore in every module with blow content:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.gitignore
+</span><span class='line'>tags*</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>by default fuzzyfinder operate on unfriendly color palette espessicaly when
+using it through putty, highlighted pattern could be changed by added below
+lines to .vimrc (9 = black)</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" fuzzy-finder - fix colors highlight PmenuSel ctermbg=9</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/20/hostname-generator/">Hostname Generator</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T20:58:00+01:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/20/hostname-generator/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Many times happened that I spend time, during the installation of the new system, whether it be a virtual physical machine, wondering about it&rsquo;s hostname. One day I asked myself the trouble searching for host name generator. Best I could find (currently second in the results of google) is rospo.net. It gives you the choice of category for the host name. My favorite, as a fan of fantasy is &ldquo;Characters from Tolkien&rdquo;. Although the category name does not reflect the truth, because in addition also includes a set of known sites in middlearth and more. So I recommend:</p>
+
+<p>  <a href="http://rospo.net/webproducts/name/index.php">http://rospo.net/webproducts/name/index.php</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -414,247 +718,6 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
 <p>We&rsquo;ll see how strong it will move. From a technical point of view, per half year MACD is narrow, and the RSI is equal to 54 and is far from the area to buy. Moving averages of 50 and 200 are to each other in nearly parallel position and technically in the next few months should not be anything happening. The three-year term MACD lines have not yet crossed, RSI is less than 50 recent declines lasted too short to harm long distance running averages of 50 and 200 on a 3-year chart.</p>
 
 <p>Precisely because there is little evidence for any event you may receive move. Of course, seriously people know that long-term perspective and fundamental considerations leave no doubt that the bull will have long reigned in the areas of commodity. While speculation is paper, and this can lead astray careless player.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/09/ideas-for-development/">Ideas for Development</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-09T22:24:00+01:00" pubdate data-updated="true">Jan 9<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/09/ideas-for-development/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>All the time come to my mind new ideas about what could be added to the blog and what information to post. I&rsquo;m interested in so many things that many of the ideas are killed before reaching the plane of the keyboard and has no chance to be introduced even as a draft to the blog. It seems that for myself I should store ideas for development in order to easily return to them when ripe.</p>
-
-<ol>
-<li>I want occasionally write something about the commodity markets, however, I&rsquo;m interested in it very briefly, because only about a year it seems to me that sometimes I have something to say.</li>
-<li>I begin learning about the <a href="http://www.uefi.org/home/">UEFI</a> environment and, therefore, that I am an advocate of freedom in the broad sense of the word, I would like to refer to this solution. I also want to understand the advantages and disadvantages of this solution in the context of freedom and relate them to other solutions such as <a href="http://www.coreboot.org/Welcome_to_coreboot">coreboot</a>.</li>
-<li>I would also like to implement a section that could be titled &ldquo;what I&rsquo;m interested now ?&rdquo;, &ldquo;what I read now?&rdquo; and &ldquo;what was last seen?&rdquo;</li>
-</ol>
-
-
-<p>I would like to set a specific time for blogging during the week, what with certainty contribute to faster realization of these ideas.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/06/syntax-highlighter-and-code-formatter/">Syntax Highlighter and Code Formatter for Blogger</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-06T18:14:00+01:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/06/syntax-highlighter-and-code-formatter/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Another time-waster was a decent code formatter and syntax highlighter. I google out <a href="http://www.commonitman.com/2010/09/how-to-use-syntax-highlighter-3-in.html">following solution</a>, it is based on <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter 3</a> It has interesting options:</p>
-
-<ol>
-<li>You can select the language for which a syntax-colored</li>
-<li>Turn on/off line numbering</li>
-<li>Themes &ndash; this one is pretty nice for my blog</li>
-<li>Customizable tabs size</li>
-<li>The option to disable toolbar</li>
-</ol>
-
-
-<p>My dream would be to create a theme that would look similar to vim syntax highlighing.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/06/flashrom-and-shuttle-av18e2/">Flashrom and Shuttle AV18E2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-06T14:31:00+01:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/06/flashrom-and-shuttle-av18e2/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>During Christmas break I found an old unused motherboard in my home, right away
-I thought that it maybe useful as learning environment for coreboot. First you
-need to do with this kind of board is to check if it is possible to flash its
-BIOS with user space tool called <a href="http://www.flashrom.org/">flashrom</a>  List of
-supported hardware can be found <a href="http://www.flashrom.org/Supported_hardware">here</a>.</p>
-
-<p>All you need to do is go through <a href="http://www.flashrom.org/Board_Testing_HOWTO">this
-HOWTO</a>. Be aware that these
-operations can cause you will not be able to run your motherboard if something
-goes wrong. Therefore, I suggest protect yourself by supplying checked
-programmer or other memory chip for your board containing a working BIOS.</p>
-
-<p>For my <a href="http://www.shuttle.eu/_archive/older/de/av18.htm">Shuttle board</a> I
-checked if the Winbond W49F002U chip on it is supported by flashrom.
-Fortunately it was. After that I read my BIOS by:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>flashrom -Vr bios\_bckp.bin</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And write it by:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>flashrom -Vw bios\_bckp.bin</span></code></pre></td></tr></table></div></figure>
-
-
-<p>At the end I&rsquo;ve got VERIFIED message but when I look carefully inside the log
-there was something like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Erasing and writing flash chip... Trying erase function 0... 0x000000-0x01ffff:S, 0x020000-0x037fff:S,
-</span><span class='line'>0x038000-0x039fff:S, 0x03a000-0x03bfff:S, 0x03c000-0x03ffff:S Erase/write done. Verifying flash... VERIFIED.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This means that these addresses have not been overwritten but skipped, becuse
-the fact that the data which were to be overridden were identical with what we
-wanted to write. So if we found such output to properly verify flashrom we need
-to clear our memory and write it again with BIOS backup. Correct output should
-look like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Erasing and writing flash chip... Trying erase function 0... 0x000000-0x01ffff:W, 0x020000-0x037fff:W,
-</span><span class='line'>0x038000-0x039fff:W, 0x03a000-0x03bfff:W, 0x03c000-0x03ffff:W Erase/write done. Verifying flash... VERIFIED.  </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next post I will try to familiarize you with the process of debugging coreboot using <a href="http://wiki.qemu.org/Main_Page">QEMU</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/06/how-to-begin-with-coreboot/">How to Begin With Coreboot</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-06T14:23:00+01:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/06/how-to-begin-with-coreboot/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>About a month ago I started my adventure with coreboot. As <a href="http://www.coreboot.org/">coreboot
-home</a> page says &ldquo;coreboot is a Free Software project
-aimed at replacing the proprietary BIOS (firmware) found in most
-computers&rdquo;. Although I read the majority of materials from mentioned page I
-still suffered from a lack of basic information that would help me to arrange
-everything in my head. Therefore, I decided to write a series of posts
-described my actions associated with this interesting project.</p>
-
-<p>At the beginning I would recommend some interesting sources of information on coreboot:</p>
-
-<ul>
-<li><a href="http://www.coreboot.org/QEMU">http://www.coreboot.org/QEMU</a> - If you&rsquo;re impatient and want to start as soon as possible</li>
-<li><a href="http://www.coreboot.org/Screenshots#Videos">Coreboot videos</a> - One of the easiest ways to obtain general information about the project</li>
-<li><a href="http://lennartb.home.xs4all.nl/coreboot/coreboot.html">Start to understand</a> - I found this page by accident while googling materials, thanks to its author I understood basics and found out what&rsquo;s next</li>
-<li><a href="http://www.coreboot.org/Documentation">Documentation</a> - Many different types of documents, a large proportion of them are not applying to the latest version of coreboot v4, however, still has a educational value.</li>
-</ul>
-
-
-<p>After reviewing the above materials, you should understand the basics of
-coreboot. In the <a href="http://pietrushnic.github.io/blog/2012/01/06/flashrom-and-shuttle-av18e2/">next
-post</a>
-I will describe <a href="http://flashrom.org/">flashrom</a> application and my experience
-with one of the old motherboard.</p>
 </div>
   
   

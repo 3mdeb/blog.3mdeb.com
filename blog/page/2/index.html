@@ -9,10 +9,13 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="Preface
-First question: How to start ?
-Virtual Development Board &ndash; table of contents
-Kudos Preface There are many reasons why ambitious &hellip;">
+  <meta name="description" content="Table of contents Introduction
+What is toolchain ?
+Why we need cross-toolchain ?
+How to create toolchain ?
+Emdebian path
+Summary
+Kudos Introduction &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +113,338 @@ Kudos Preface There are many reasons why ambitious &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/">0x2: Toolchain for Virtual Development Board</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T08:42:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Table of contents</h2>
+
+<ul>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#intro">Introduction</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#what-is-toolchain">What is toolchain ?</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#why-we-need-cross-toolchain">Why we need cross-toolchain ?</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#how-to-create-toolchain">How to create toolchain ?</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#emdebian-path">Emdebian path</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#summary">Summary</a></li>
+<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#kudos">Kudos</a></li>
+</ul>
+
+
+<p><a id="intro"></a></p>
+
+<h3>Introduction</h3>
+
+<p>This is probably the most complicated topic of all related to embedded
+development but we need to deal with it at the beginning. I read a lot about
+toolchains but still don&rsquo;t know enough to explain details. I think that best
+answers are in crosstool-ng <a href="http://crosstool-ng.org/hg/crosstool-ng/file/0fc56e62cecf/docs">documentation</a>.</p>
+
+<p><a id="what-is-toolchain"></a></p>
+
+<h3>What is toolchain ?</h3>
+
+<p><em>Toolchain</em> as the name said is a set of tools chained together, so output of
+one tool is the input for different tool. This is well known concept in
+Linux (eg. pipes). In embedded environment toolchain is called cross-toolchain or
+cross-compiler, because usually it compiles on one architecture and generate
+code for another (eg. it compiles on x86 and generate code for arm)<a href="http://elinux.org/Toolchains">[1]</a>.</p>
+
+<p><a id="why-we-need-cross-toolchain"></a></p>
+
+<h3>Why we need cross-toolchain ?</h3>
+
+<p>I suspect that your laptop/PC is not based on ARM processor, most probably it based on
+x86 architecture so you cannot simply compile code and run it in our
+virtual-arm-based environment. To prepare operating system and tools for it we
+need cross-toolchain.</p>
+
+<p><a id="how-to-create-toolchain"></a></p>
+
+<h3>How to create toolchain ?</h3>
+
+<p>Process of creating cross-toolchain from scratch is not easy and takes some
+time. There are few other ways to get toolchain, than creating it from scratch.
+First we can use prebuilt toolchain providers like: <code>CodeSourcery</code>, <code>Linaro</code>, <code>DENX
+EDLK</code> or <code>Emdebian</code>. Second we can create toolchain using special building system like: <code>Buildroot</code>, <code>Crosstool-NG</code>
+or <code>Bitbake</code>. I will not deal with preparing toolchain in this series
+because procedure for creating it takes pretty long. So we have two options:</p>
+
+<ul>
+<li>read my article about <a href="/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">Crosstool-NG arm-unknown-linux-gnueabi</a></li>
+<li>or install toolchain ready to use like <a href="http://www.emdebian.org/">Emdebian</a></li>
+</ul>
+
+
+<p><a id="emdebian-path"></a></p>
+
+<h4>Emdebian path</h4>
+
+<p>Add below lines to you <code>/etc/apt/sources.list</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>deb http://ftp.uk.debian.org/emdebian/toolchains unstable main
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install Emdebian keys, update and install cross-compiler with all related
+packages:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install emdebian-archive-keyring
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install gcc-4.7-arm-linux-gnueabi
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Dependency problems during installation</h5>
+
+<p>If above attempt to install cross-compiler ends with:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>pietrushnic@eglarest:~/src<span class="nv">$ </span>sudo apt-get install gcc-4.7-arm-linux-gnueabi
+</span><span class='line'>Reading package lists... Done
+</span><span class='line'>Building dependency tree
+</span><span class='line'>Reading state information... Done
+</span><span class='line'>Some packages could not be installed. This may mean that you have
+</span><span class='line'>requested an impossible situation or <span class="k">if </span>you are using the unstable
+</span><span class='line'>distribution that some required packages have not yet been created
+</span><span class='line'>or been moved out of Incoming.
+</span><span class='line'>The following information may <span class="nb">help </span>to resolve the situation:
+</span><span class='line'>
+</span><span class='line'>The following packages have unmet dependencies:
+</span><span class='line'> gcc-4.7-arm-linux-gnueabi : Depends: libgomp1-armel-cross <span class="o">(</span>&gt;<span class="o">=</span> 4.7.2-5<span class="o">)</span> but it
+</span><span class='line'> is not going to be installed
+</span><span class='line'> E: Unable to correct problems, you have held broken packages.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This means that Debian ustable cross-compiler is not available for you
+configuration. You can read more about that
+<a href="http://lists.debian.org/debian-embedded/2011/05/msg00029.html">here</a>.
+To fix that issue simply change emdebian toochain repository to testing in
+<code>/etc/apt/source.list</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>deb http://ftp.uk.debian.org/emdebian/toolchains testing main
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Emdebian toolchain configuration</h5>
+
+<p>Check where <code>arm-linux-eabi-gcc-4.7</code> was installed:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>whereis arm-linux-gnueabi-gcc-4.7
+</span><span class='line'>arm-linux-gnueabi-gcc-4: /usr/bin/arm-linux-gnueabi-gcc-4.7 /usr/bin/X11/arm-linux-gnueabi-gcc-4.7
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It is not linked to <code>arm-linux-gnueabi-gcc</code>, so we cannot give its prefix as <code>CROSS_COMPILE</code>
+variable value, which is needed for bootloader and kernel compilation. We have to link
+it to <code>arm-linux-gnueabi-gcc</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo ln -s /usr/bin/arm-linux-gnueabi-gcc-4.7 /usr/bin/arm-linux-gnueabi-gcc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Toolchain is ready to use.</p>
+
+<p><em>Note</em>: I tried <code>CodeSourcery</code> toolchain <code>arm-2012.09-64-arm-none-linux-gnueabi.bin</code>,
+but it contain <code>binutils</code> defect that not allow correctly build kernel. If you see
+something like this in log:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Error: selected processor does not support ARM mode <span class="sb">`</span>ldralt lr,<span class="o">[</span>r1<span class="o">]</span>,#4<span class="err">&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That means you experience same thing, please use <code>Emdebian</code> or <code>Crosstool-NG</code> toolchain.</p>
+
+<p><em>Note 2</em>: If you&rsquo;re <code>Ubuntu</code> user I have to suggest experiments with toolchain
+build by your own, because I get really hard times trying to go through this
+tutorial with Ubuntu/Linaro cross compiler provided in repository. Finally I
+used <a href="/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">this</a>
+to push things forward. U-boot compiled with Ubuntu/Linaro toolchain had problem
+with <code>__udivsi3</code> instruction. This cause loop in initialization process.</p>
+
+<p><a id="summary"></a></p>
+
+<h3>Summary</h3>
+
+<p>If you take effort of creating toolchain using <code>Crosstool-NG</code> than
+congratulations.  But for simplifying whole <a href="/blog/2013/06/07/intro-to-virtual-development-board-building"><strong>Virtual Development Board</strong></a>
+series I will use <code>Emdebian</code> toolchain in further posts. Of course you can use
+your brand new <code>Crosstool-NG</code> toolchain by simply remember that tools prefixes are
+different. <code>Emdebian</code> uses <code>arm-linux-gnueabi-</code> and <code>Crosstool-NG</code> was created with
+<code>arm-unknown-linux-gnueabi-</code>. Replace one with another every time when needed.
+In <a href="/blog/2013/06/07/embedded-board-bootloader">next post</a> we will deal with
+bootloader.</p>
+
+<p><a id="kudos"></a></p>
+
+<h3>Kudos</h3>
+
+<p>[1] <a href="http://elinux.org/Toolchains">Toolchains</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/">0x1: Qemu as an Environment for Embedded Board Emulation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T08:27:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Table of contents</h2>
+
+<ul>
+<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#intro">Introduction</a></li>
+<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#compilation">Compilation</a></li>
+<li><a href="/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#kudos">Kudos</a></li>
+</ul>
+
+
+<p><a id="intro"></a></p>
+
+<h3>Introduction</h3>
+
+<p>QEMU is a CPU emulator using dynamic binary translation to convert guest CPU
+instructions into host CPU instructions<a href="http://infoscience.epfl.ch/record/149975/files/x86-llvm-translator-chipounov_2.pdf">[1]</a>. It supports many architectures from
+x86, through ARM and MIPS, to MicroBlaze. According to compilation configuration
+target list QEMU targets 26 different softmmu types.  Only for ARM it supports
+33 machines (like ARM Versatile/PB (ARM926EJ-S) or Samsung NURI board
+(Exynos4210)) and 28 CPUs (with cortex-a9 and pxa270). It gives access to
+network, storage, video, usb, serial and other peripheral, also user defined. It
+is developed under GNU GPL, so everybody are free to make modifications, improve
+and extend it. This properties makes QEMU very good candidate for virtual board
+emulator.</p>
+
+<p><a id="compilation"></a></p>
+
+<h3>Compilation</h3>
+
+<p>Let&rsquo;s start creating our Virtual Development Board. As usually I will use latest
+greatest version from git:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone http://git.qemu.org/git/qemu.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Compile it and install. Right now I will use only <code>arm-softmmu</code> target because it
+will emulate whole arm system for me. ARM right now dominated big part of
+embedded market but we will see if situation won&rsquo;t change in feature.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>qemu
+</span><span class='line'>./configure --target-list<span class="o">=</span>arm-softmmu
+</span><span class='line'>make
+</span><span class='line'>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>During configuration process you can encounter lack of <code>pixman</code>, just accept qemu
+offer to initialize it as a submodule.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git submodule update --init pixman
+</span><span class='line'>make <span class="c"># restart compilation process</span>
+</span><span class='line'>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If compilation ends without problem than our first component is ready to use.
+Right now we can emulate our ARM based board with many types of CPUs. List of
+all available can be retrieved by running command <code>qemu-system-arm -cpu ?</code>, list
+of emulated machines by <code>-M ?</code>. Now, let&rsquo;s talk about <a href="/blog/2013/06/07/toolchain-for-virtual-development-board">toolchains</a>.</p>
+
+<p><a id="kudos"></a></p>
+
+<h3>Kudos</h3>
+
+<p>[1] <a href="http://infoscience.epfl.ch/record/149975/files/x86-llvm-translator-chipounov_2.pdf">Dynamically Translating x86 to LLVM using QEMU</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -729,6 +1064,67 @@ productivity using open source tools.</p>
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/05/12/kernel-developers-tools/">Kernel Developers Tools - Based on &#8216;30 Linux Kernel Developers in 30 Weeks&#8217;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-12T02:41:00+02:00" pubdate data-updated="true">May 12<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/12/kernel-developers-tools/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>git, cscope, vi, bash, awk, and the rare bout with python.
+Ubuntu with Unity2D
+terminal, make, gcc, make me happy. Quilt for patch management, Git or
+Subversion for source code management. I&rsquo;m using Nedit
+SLED for work and openSUSE
+email client (mutt), and my editor (vim),
+git and quilt for kernel development, Chrome and Firefox for web browsing, and
+irssi for irc communication
+NOME 3 on my desktop, but sometimes get frustrated with it and revert back to
+OpenBox or i3m
+Xfce
+fbcon, vim, and mutt
+fvwm2
+bash shell, joe editor, gcc, make, git
+ Fedora
+ Xfce
+ git, sparse, smatch and spatch
+ joe
+  xterm, emacs, perl, mc and git.
+  i3
+  Emacs, ocaml, xfce
+  Emacs, Evolution, GNOME 3, Iceweasel (aka Firefox)
+  git, gcc, gmake, bash, perl
+  Thunderbird</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/04/06/tmux/">Tmux as Screen Replacement and Productivity Accelerator</a></h1>
     
     
@@ -1198,7 +1594,7 @@ comment below. If think this post was useful &ndash; share.</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/03/30/music-for-programming/">Music for Programming</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/03/30/useful-hints-for-blogging-using-octopress-with-vim/">Useful Hints for Blogging Using Octopress With Vim</a></h1>
     
     
       <p class="meta">
@@ -1214,478 +1610,25 @@ comment below. If think this post was useful &ndash; share.</p>
   
 
 
-<time datetime="2013-03-30T03:27:00+01:00" pubdate data-updated="true">Mar 30<span>th</span>, 2013</time>
+<time datetime="2013-03-30T05:49:00+01:00" pubdate data-updated="true">Mar 30<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/03/30/music-for-programming/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Of course this is strongly associated with personal taste but I will write my
-experience.</p>
-
-<ol>
-<li><a href="www.pandora.com">www.pandora.com</a> &ndash; really great radio station, choose your
-genre or artist and it will lead you through all variety of this type.
-unfortunately if you are fan of Iron Maiden, Blind Guardian, prog rock or
-irish folk you will be bored after 2 hours or less. Sadly not available in
-Poland <i class='emoji disappointed'></i> &ndash; maybe some proxy will work but I wasn&rsquo;t able to find one.</li>
-<li><a href="http://www.kohina.com/">kohina/demo scene</a> &ndash; very good radio for long night
-coding sessions. I&rsquo;m not big fan of demo scene but I appreciate what guys do
-and did. And somtimes you will hit Super Mario or Contra theme.</li>
-<li><a href="http://www.progarchives.com/subgenre.asp?style=32">post rock/math rock</a> &ndash; if you like any variety of prog rock you probably
-know <a href="http://www.progarchives.com/">ProgArchives</a>. It is really hard to find
-good prog rock radio where classics are well mixed with newcomers. I really
-like to listen guys like <a href="http://www.progarchives.com/subgenre.asp?style=32">God Is An Astronaut</a>,
-<a href="http://www.explosionsinthesky.com/">Explosions In The Sky</a>, <a href="http://twdy.tumblr.com/">This Will Destroy You</a>,
-<a href="http://www.65daysofstatic.com/">65daysofstatic</a>, <a href="http://www.redsparowes.com/News.aspx">Red Sparowes</a> or even
-<a href="http://mogwai.sandbag.uk.com/lesrevenants/">Mogwai</a> or <a href="http://www.sigur-ros.co.uk/">Sigur Ros</a>.
-Very good for programming if you drink cofee/tea <i class='emoji smile'></i></li>
-<li>movie soundtracks &ndash; This one I use when really need to concentrate
-especially when working daylight hours. What&rsquo;s best here most of people will
-agree that <a href="http://www.enniomorricone.it/uk/news.php">Ennio Moricone</a>, <a href="http://elsew.com/">Vangelis</a> and <a href="http://www.hans-zimmer.com/">Hans Zimmer</a>
-are famous one and most recognizable for my generation.</li>
-<li><a href="http://nsbradio.co.uk/content/">breakbeat</a> &ndash; this one reminds me some stories about mythical cyberpunk
-hackers, its usually noisy and help me isolate from environment and
-concentrate on my work. I will said that if you like freaked electronics than
-you can try this.</li>
-<li><a href="http://www.shoutcast.com/Internet-Radio/drum%20and%20base">dnb</a> &ndash; if
-breakbeat is to hard for you try this <i class='emoji smile'></i>. This music tune me in channel of
-rhythmical work.</li>
-<li>When googling this topic I found <a href="http://musicforprogramming.net/">this site</a>
-it was worth to check. Some links are broken. Most of those playlists have too
-low tempo for me.</li>
-</ol>
-
-
-<p>I can also suggest some Irish Folk influenced stuff if don&rsquo;t have &ldquo;The End is
-near&rdquo; wallpaper on your desktop <i class='emoji smile'></i> There was a time when I was listen a lot of
-psybient, but it is really hard to find good psychodelic ambient radio and this
-music is for me more like movie soundtracks I cannot listen it at night.
-Hope it will give some kind of direction. Let me know what you listen when coding.
-Maybe I will discover new universe.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/19/debian-switching-to-unstable/">Tmux Multiplexer and Vi-like Keys in Copy-mode</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-19T16:30:00+01:00" pubdate data-updated="true">Mar 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/19/debian-switching-to-unstable/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/03/30/useful-hints-for-blogging-using-octopress-with-vim/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>So I tried to write second post for my new blog but to effectively work using
-terminal I need terminal multiplexer. I switched to tmux from screen
-because I reach point that I can&rsquo;t do some things in it in easy way and
-performance was poor. Also activity of tmux developers is better than for gnu
-screen. I also experienced annoy buffer crashing especially after come back from
-lock mode or cmatrix much but after reading few articles about alternative for
-screen I switched to tmux.</p>
+  <div class="entry-content"><h3>1. Dictionary</h3>
 
-<p>It seems that in wheezy(testing) version of tmux is outdated (1.6.2). Last tag
-on tmux <a href="http://sourceforge.net/p/tmux/tmux-code/?source=navbar">sourceforge repo</a>
-is 1.7 and there is almost 300 additional commits on top of the master branch.
-Debian unstable contain version 1.7.2 it is pretty new.</p>
-
-<p>Awesome thing in tmux is emacs/vi keybiding for copy-mode. It really helps with
-writing technical articles about linux stuff with this console outputs and logs
-excerpts.</p>
-
-<p>To enable copy-mode in vi like way put to <code>$HOME/.tmux.conf</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># use vi-like keys</span>
-</span><span class='line'>setw -g mode-keys vi
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/19/another-blogger-switched-to-octopress/">Yet Another Blogger Switched to Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-19T03:01:00+01:00" pubdate data-updated="true">Mar 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/19/another-blogger-switched-to-octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>1. Introduction</h3>
-
-<p>It&rsquo;s been over 3 months when I published my last post. In chaos of daily jobs I
-realize that there is so much things that I don&rsquo;t like in Google Blogger that I
-have to find different solution for my blogging aspirations. So first of all
-requirements, what do I hate most in Blogger:</p>
+<p>Use dictionary. I wrote about how to start it automatically for <code>markdown</code> files
+<a href="/blog/2013/03/19/another-blogger-switched-to-octopress">here</a>.</p>
 
 <ul>
-<li> <strong>editor</strong> &ndash; I used to vim and cannot stand that there is no bracket matching,
-vertical/block modification, and other cool stuff that I use</li>
-<li> <strong>the way that page was stored</strong> &ndash; I want to have control on my blog and if I can
-use for example git to track its content that would be great</li>
-<li>  <strong>lamish</strong> &ndash; with Blogger I learned nothing, I look for something related with new
-trends in web development, it looks that ruby on rails is the most interesting
-framework</li>
+<li><code>z=</code> &ndash; probably most useful function for me right now, as you probably noticed
+I&rsquo;m not great in English, so if you see some glaring errors &ndash; let me know I
+will fix it</li>
 </ul>
-
-
-<p>And I found <a href="http://octopress.org">Octopress</a> it has all I need. The page states
-&ldquo;A blogging framework for hackers&rdquo;. I don&rsquo;t know if I can or should call myself
-hacker but the idea is great for me.</p>
-
-<p>So I start to move my blog to Octopress. Of course there is a plenty of things
-to do but also many to learn.</p>
-
-<p>Lets start with first part of hints that I found useful:</p>
-
-<h3>2. Blogger post conversion to markdown and import to Octopress</h3>
-
-<p><strong>Update</strong>: <em>after I wrote this post I found interesting article on <a href="https://github.com/mojombo/jekyll/wiki/blog-migrations">this page</a></em></p>
-
-<ul>
-<li>Export Blogger posts.
-To do this go to your blog <code>Design-&gt;Settings-&gt;Other-&gt;Export blog-&gt;Donwload blog</code></li>
-<li>Convert xml to html files.
-I used latest modification of <a href="https://gist.github.com/dnagir/1765496/forks">import.rb</a>
-but you probably can find better solution.</li>
-<li>Convert html files to markdown for example by using <a href="https://github.com/xijo/reverse_markdown">reverse_markdown</a>:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo gem install reverse_markdown
-</span><span class='line'>d path/with/your/html/files
-</span><span class='line'>find -name <span class="s2">&quot;*.html&quot;</span> | sed -e <span class="s1">&#39;s/\.html//&#39;</span> | xargs -n 1 -I @ sh -c <span class="s1">&#39;reverse_markdown @.html &gt; @.markdown&#39;</span>
-</span><span class='line'>mv *.markdown path/to/your/octopress/source/_posts/
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>At the end of this process you should take a look at generated code, so setup
-your octopress and run <code>rake preview</code></li>
-<li>Fix syntax and enjoy your posts in markdown.
-
-<ul>
-<li>useful thing here for me was markdown syntax highlighting in vim by tpope
-<a href="https://github.com/tpope/vim-markdown">vim-markdown</a></li>
-<li>liquid syntax <a href="https://github.com/tpope/vim-liquid">vim-liquid</a></li>
-<li>also setting spellchecker could be useful, add below line to your <code>$HOME/.vimrc</code>
-and you will get spell cheking with en_us dictionary and word wraping on 80
-character:</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="err">&quot;</span> blogging with markdown
-</span><span class='line'>au BufRead,BufEnter *.markdown setlocal <span class="nv">textwidth</span><span class="o">=</span>80 formatoptions+<span class="o">=</span>w spell <span class="nv">spelllang</span><span class="o">=</span>en_us
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>3. Octopress configuration &ndash; tricks that I used for this blog</h3>
-
-<ul>
-<li>Configure your social networks as it was explained in <a href="http://octopress.org/docs/configuring">Octopress documentation</a></li>
-<li>It is good to register on <a href="http://disqus.com/">Disqus</a> the idea of keeping
-comments separated from blog is very good. I realized it when was trying
-migrate my comments from Blogger and didn&rsquo;t have installed Disqus.</li>
-<li><a href="http://www.google.com/analytics/">Google Analytics</a> and <a href="http://www.addthis.com/">AddThis</a>
-also are very helpful in tracking how your content was shared and what of this
-stuff has greatest interest. I will write article how to integrate <a href="http://www.addthis.com/">AddThis</a>
-because there is lack of information about it in google.</li>
-<li>Header background image can be changed by dealing with sass files. I did this
-in <code>sass/custom/_layout.scss</code> using below lines:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">header</span><span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s2">&quot;banner&quot;</span><span class="o">]</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(/images/header_bg2_1200x168.png)</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">background-repeat</span><span class="o">:</span> <span class="k">no-repeat</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>If you add some background you probably want to set position of your title and
-subtitle. You can do this in the same file as background image using something
-like this:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">header</span> <span class="nt">h2</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span><span class="k">relative</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding-left</span><span class="o">:</span><span class="m">6.6em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">header</span> <span class="nt">h1</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">font-weight</span><span class="o">:</span><span class="k">bold</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">position</span><span class="o">:</span><span class="k">relative</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">padding-left</span><span class="o">:</span><span class="m">3em</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Do not forget about updating your Octopress frequently. Instructions how to do
-that can be found in <a href="http://octopress.org/docs/updating/">documentation</a></li>
-</ul>
-
-
-<h3>4. SEO</h3>
-
-<p>Most interesting article about SEO is surprisingly on top of google search <a href="http://www.yatishmehta.in/seo-for-octopress">&lsquo;octopress seo&rsquo;</a>.
-Main thing that I take from the article is that Octopress already have built in
-support for SEO by additional elements in post header. This elements are <code>keywords:, description:</code>
-for example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">---</span>
-</span><span class='line'><span class="nt">layout</span><span class="o">:</span> <span class="nt">post</span>
-</span><span class='line'><span class="nt">title</span><span class="o">:</span> <span class="s2">&quot;Another blogger switched to Octopress&quot;</span>
-</span><span class='line'><span class="nt">date</span><span class="o">:</span> <span class="nt">2013-03-19</span> <span class="nt">03</span><span class="nd">:01</span>
-</span><span class='line'><span class="nt">comments</span><span class="o">:</span> <span class="nt">true</span>
-</span><span class='line'><span class="nt">categories</span><span class="o">:</span> <span class="s2">&quot;about this blog&quot;</span>
-</span><span class='line'><span class="nt">published</span><span class="o">:</span> <span class="nt">false</span>
-</span><span class='line'><span class="nt">keywords</span><span class="o">:</span> <span class="nt">blog</span><span class="o">,</span><span class="nt">octopress</span><span class="o">,</span><span class="nt">blogger</span><span class="o">,</span><span class="nt">configuration</span><span class="o">,</span><span class="nt">seo</span><span class="o">,</span><span class="nt">tricks</span>
-</span><span class='line'><span class="nt">description</span><span class="o">:</span> <span class="nt">Octopress</span> <span class="nt">configuration</span>
-</span><span class='line'><span class="nt">---</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Octopress will use keywords and description to build meta section of every
-website on your blog.</p>
-
-<p>To not forget keyword and description section in my posts I modified Rakefile:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gh">diff --git a/Rakefile b/Rakefile</span>
-</span><span class='line'><span class="gh">index d3a1cb0..3e2ced7 100644</span>
-</span><span class='line'><span class="gd">--- a/Rakefile</span>
-</span><span class='line'><span class="gi">+++ b/Rakefile</span>
-</span><span class='line'><span class="gu">@@ -111,6 +111,9 @@ task :new_post, :title do |t, args|</span>
-</span><span class='line'>     post.puts &quot;date: #{Time.now.strftime(&#39;%Y-%m-%d %H:%M&#39;)}&quot;
-</span><span class='line'>     post.puts &quot;comments: true&quot;
-</span><span class='line'>     post.puts &quot;categories: &quot;
-</span><span class='line'><span class="gi">+    post.puts &quot;published: false&quot;</span>
-</span><span class='line'><span class="gi">+    post.puts &quot;keywords:&quot;</span>
-</span><span class='line'><span class="gi">+    post.puts &quot;description:&quot;</span>
-</span><span class='line'>     post.puts &quot;---&quot;
-</span><span class='line'>   end
-</span><span class='line'> end
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>5. Others</h3>
-
-<p>Few things that were not so obvious for me:</p>
-
-<ul>
-<li>to create category name that contain few words like <code>about this blog</code> syntax
-like this:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'>categories:
-</span><span class='line'> - about this blog
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>not like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'>categories: about this blog # or &quot;about this blog&quot;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>ordered and unordered lists are not indented by default, this code in <code>sass/custom/_layout.scss</code>
-fix this behavior:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">article</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">ol</span><span class="o">,</span> <span class="n">ul</span> <span class="err">{</span>
-</span><span class='line'>    <span class="k">padding-left</span><span class="o">:</span> <span class="m">3em</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="err">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Hope this tips are useful for you.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/15/short-hint-for-all-those-who-use-vim/">Short Hint for All Those Who Use Vim and Pathogen</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-15T11:51:00+01:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/01/15/short-hint-for-all-those-who-use-vim/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today, after updating my wokspace to latest version I encounter below error during vim running:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Error detected while processing function pathogen#runtime_append_all_bundles:
-</span><span class='line'>line 1:
-</span><span class='line'>E121: Undefined variable: source_path
-</span><span class='line'>E116: Invalid arguments for function string(source_path).') to pathogen#incubate('.string(source_path.'/{}').')') 
-</span><span class='line'>E116: Invalid arguments for function 4_warn
-</span><span class='line'>Press ENTER or type command to continue</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Quick look on pathogen runtime_append_all_bundles function and I found:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>call s:warn<span class="o">(</span><span class="s1">&#39;Change pathogen#runtime_append_all_bundles(&#39;</span>.string<span class="o">(</span>a:1<span class="o">)</span>.<span class="s1">&#39;) to pathogen#incubate(&#39;</span>.string<span class="o">(</span>a:1.<span class="s1">&#39;/{}&#39;</span><span class="o">)</span>.<span class="s1">&#39;)&#39;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So simply replacing:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>call pathogen#runtime_append_all_bundles<span class="o">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>with:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>call pathogen#incubate<span class="o">()</span> in <span class="nv">$HOME</span>/.vimrc fix the problem.
-</span></code></pre></td></tr></table></div></figure>
 
 </div>
   
