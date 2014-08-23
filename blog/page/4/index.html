@@ -9,8 +9,9 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="Mutt is one of those programs that make people call you a linux geek, nerd or a
-snob. This is because using TUI or command line tools in world of &hellip;">
+  <meta name="description" content="This is second post of mutt tutorial series. As in the previous post
+for below information I need to thank Kousik for posts about gpg
+and using it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +109,124 @@ snob. This is because using TUI or command line tools in world of &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/13/mutt-tutorial-part-2-secure-login/">Mutt Tutorial Part 2 - Secure Login</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T14:13:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/13/mutt-tutorial-part-2-secure-login/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is second post of mutt tutorial series. As in the <a href="/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account">previous post</a>
+for below information I need to thank Kousik for posts about <a href="http://nixtricks.wordpress.com/2009/10/04/introduction-to-encryption-of-files-using-gpg/">gpg</a>
+and <a href="http://nixtricks.wordpress.com/2010/05/05/mutt-configure-mutt-to-receive-email-via-imap-and-send-via-smtp/">using it with mutt</a>.
+But probably the most important to simplify this method was Fau comment <a href="http://nixtricks.wordpress.com/2010/05/20/mutt-multiple-email-accounts-using-hooks/#comment-162">here</a>.
+So going to the point of secure login for mutt we need gpg. First of all we need
+to install it by simply:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install gpg
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After that we generate our keys by:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gpg --gen-key
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I choose all default answers. So first is key type: <code>'RSA and RSA'</code>.
+Second &ndash; <code>keysize: 2048</code>. Third &ndash; time for key expiration: <code>'0 = key does not expire'</code>.
+After that you need to identify your key with some data. This data will be used
+to find your key so IMHO it should be short and simple but meaningful. At the end
+of this process you will be asked about pass phrase, which will be used to decrypt
+files encrypted with generated key. When you end with key generation you can
+encrypt file with passwords. Best way to do this is to write some script that will
+be sourced by mutt after decryption. For storing passwords I create directory in my <code>$HOME</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir <span class="nv">$HOME</span>/.passwd
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Inside this directory I create text file with the script, which look like below:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vim <span class="nv">$HOME</span>/.passwd/mutt.txt
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp1</span> <span class="o">=</span> <span class="s2">&quot;password1&quot;</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp2</span> <span class="o">=</span> <span class="s2">&quot;password2&quot;</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp3</span> <span class="o">=</span> <span class="s2">&quot;password3&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This script of course mean to set value of variable name <code>my_isp{1,2,3}</code> to some
+password string. Remember to use <code>my\_</code> prefix because this is the way that user
+variables should be defined in mutt scripts. After writing this file we need to
+encrypt it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gpg -e -o mutt.gpg mutt.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we should delete txt file. To use our newly created encrypted password script
+we need to add some lines to <code>$HOME/.muttrc</code>. So <code>vim $HOME/.muttrc</code>. Line that
+we need before sourcing encrypted scripts is declaration of variables in the script:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">set </span><span class="nv">my_isp1</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp2</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp3</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After this line we can source and decrypt out file with the passwords:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">source</span> <span class="s2">&quot;gpg --textmode -d ~/.passwd/mutt.gpg |&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the end wee need to replace all out plain text passwords (<code>smtp_pass</code> and
+<code>imap_pass</code> variables) with variables defined in out encrypted file. This
+settings will cause that mutt during start will run gpg to ask about password
+to decrypt password script file. In the <a href="/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/">next post</a>
+I will discuss mutt with sidebar and how to open html files from inside mutt.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -216,7 +335,7 @@ beginning we create <code>$HOME/.muttrc</code> file:</li>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>&lt;account_name&gt;</code> &ndash; for <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#x3a;&#x66;&#x6f;&#x6f;&#46;&#x62;&#x61;&#x72;&#64;&#103;&#109;&#97;&#x69;&#108;&#46;&#99;&#111;&#x6d;">&#x66;&#111;&#111;&#46;&#x62;&#97;&#114;&#64;&#103;&#x6d;&#97;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;</a> it will be foo.bar
+<p><code>&lt;account_name&gt;</code> &ndash; for <a href="&#109;&#x61;&#105;&#108;&#x74;&#x6f;&#x3a;&#x66;&#111;&#111;&#46;&#98;&#97;&#114;&#64;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;">&#102;&#x6f;&#x6f;&#x2e;&#98;&#97;&#114;&#x40;&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#99;&#111;&#x6d;</a> it will be foo.bar
 <code>&lt;imap_server_address&gt;</code> &ndash; this information you can get from your e-mail provider
 help pages or from the settings of web e-mail client, for Gmail it is
 imap.gmail.com
@@ -1465,104 +1584,6 @@ Any additional items should be removed. We get a lot of unwanted stuff today, at
 every opportunity. From an economic point of view, it is known that very often
 margin value law is used here i.e. by hypermarkets, I will touch on this subject
 on another occasion, related to economics.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/">Debugging Coreboot in Qemu Environment - Part 1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-12T21:30:00+01:00" pubdate data-updated="true">Mar 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>First of all I use testing version of Debian &ndash; wheezy. Clone coreboot repository:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone http://review.coreboot.org/p/coreboot
-</span><span class='line'>cd coreboot; make menuconfig</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Configure FILO as apayload and use its latest version:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Payload -&gt; Add a payload -&gt; FILO Payload -&gt; FILO version -&gt; HEAD</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add verbose debugging messages:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Debugging -&gt; Check PIRQ table consistency Debugging -&gt; Output verbose malloc debug messages
-</span><span class='line'>Debugging -&gt; Output verbose ACPI debug messages Debugging -&gt; Enable debug messages for option ROM execution
-</span><span class='line'>Debugging -&gt; Built-in low-level shell Debugging -&gt; Trace function calls</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Try to build:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If everything builds correctly you can process. Sometimes there is need to use
-cross compiler. To build one:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd util/crossgcc
-</span><span class='line'>./buildgcc</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To explore <code>coreboot</code> code effectively I suggest to create tags and cscope
-database for <code>coreboot</code>. In my personal workspace I&rsquo;ve got process that I go
-through before I start work (if you use my workspace configuration which
-is available <a href="https://github.com/pietrushnic/workspace">@github</a> you
-can follow below steps directly, if not adjust to your environment):</p>
-
-<ol>
-<li>run vim ;)</li>
-<li><code>:cd /path/to/code</code></li>
-<li><code>s&lt;Tab&gt;</code> (fuzzyfinder &ndash;> bookmark dir)</li>
-<li><code>si</code> (fuzzyfinder &ndash;> change dir)</li>
-<li><code>sr</code> (run ctags to generate tags and cscope to build symbol database &ndash; <code>ctags -R;cscope -R -q -b -v</code>)</li>
-</ol>
-
-
-<p>After steps above we can start work with code. Run vim in <code>coreboot</code> directory.
-Type:
-<code>:e src/cpu/x86/16bit/reset16.inc</code>
-Put cursor over <code>protected_start</code> and press <code>Ctrl-]</code>. If everything goes ok you
-should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 537.</p>
-
-<p>In second article we dive into first phase of <code>coreboot</code> execution in emulated environment.</p>
 </div>
   
   

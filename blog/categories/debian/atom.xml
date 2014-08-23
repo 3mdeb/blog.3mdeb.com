@@ -4,7 +4,7 @@
   <title><![CDATA[Category: debian | Linux geek's scratchpad]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/debian/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-08-21T22:34:00+02:00</updated>
+  <updated>2014-08-24T00:06:57+02:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to fix backlight issue on IdeaPad y510p]]></title>
+    <link href="http://pietrushnic.github.io/blog/2014/08/23/how-to-fix-backlight-issue-on-ideapad-y510p/"/>
+    <updated>2014-08-23T23:49:03+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2014/08/23/how-to-fix-backlight-issue-on-ideapad-y510p</id>
+    <content type="html"><![CDATA[<p>Today I decide to switch to latest kernel (<code>3.17-rc1</code>) on my IdeaPad y510p. I
+hit only one annoying problem until now &ndash; after booting my main screen was dimmed. I
+tried all instructions from top google hits for all possible configurations of
+keywords <code>linux</code>, <code>y510p</code>, <code>backlight issue</code>, etc.</p>
+
+<p>Especially I tried all methods from <a href="https://wiki.archlinux.org/index.php/Intel_graphics#Backlight_is_not_adjustable">Arch Wiki</a>.</p>
+
+<p>Finally I found solution, by greping <code>modinfo</code> for my Intel graphics card:</p>
+
+<p><code>
+[23:55:24] pietrushnic:~ $ sudo modinfo i915|grep backlight
+parm:           invert_brightness:Invert backlight brightness (-1 force normal, \
+ 0 machine defaults, 1 force inversion), please report PCI device ID, subsystem \
+vendor and subsystem device ID to dri-devel@lists.freedesktop.org, if your \
+machine needs it. It will then be included in an upcoming module version. (int)
+</code></p>
+
+<p>So simple modification in <code>/etc/default/grub</code> by adding kernel parameter to
+<code>GRUB_CMDLINE_LINUX_DEFAULT</code> fix the issue:</p>
+
+<p>```</p>
+
+<h1>If you change this file, run &lsquo;update-grub&rsquo; afterwards to update</h1>
+
+<h1>/boot/grub/grub.cfg.</h1>
+
+<h1>For full documentation of the options in this file, see:</h1>
+
+<h1>info -f grub -n &lsquo;Simple configuration&rsquo;</h1>
+
+<p>GRUB_DEFAULT=0
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR=<code>lsb_release -i -s 2&gt; /dev/null || echo Debian</code>
+GRUB_CMDLINE_LINUX_DEFAULT=&ldquo;rcutree.rcu_idle_gp_delay=1 i915.invert_brightness=1&rdquo;
+GRUB_CMDLINE_LINUX=&ldquo;&rdquo;
+(&hellip;)
+```</p>
+
+<p>After that:</p>
+
+<p><code>
+sudo update-grub
+</code></p>
+
+<p>And all things should work fine.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linux (Debian Wheezy) on Lenovo y510p]]></title>

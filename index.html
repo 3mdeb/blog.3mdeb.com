@@ -9,8 +9,8 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="Trying to google &lsquo;USB over IP&rsquo; doesn&rsquo;t give much except some business web pages that give
-you it as a service. This brings some &hellip;">
+  <meta name="description" content="Today I decide to switch to latest kernel (3.17-rc1) on my IdeaPad y510p. I
+hit only one annoying problem until now &ndash; after booting my main &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,98 @@ you it as a service. This brings some &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/23/how-to-fix-backlight-issue-on-ideapad-y510p/">How to Fix Backlight Issue on IdeaPad Y510p</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-23T23:49:03+02:00" pubdate data-updated="true">Aug 23<span>rd</span>, 2014</time>
+        
+         | <a href="/blog/2014/08/23/how-to-fix-backlight-issue-on-ideapad-y510p/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today I decide to switch to latest kernel (<code>3.17-rc1</code>) on my IdeaPad y510p. I
+hit only one annoying problem until now &ndash; after booting my main screen was dimmed. I
+tried all instructions from top google hits for all possible configurations of
+keywords <code>linux</code>, <code>y510p</code>, <code>backlight issue</code>, etc.</p>
+
+<p>Especially I tried all methods from <a href="https://wiki.archlinux.org/index.php/Intel_graphics#Backlight_is_not_adjustable">Arch Wiki</a>.</p>
+
+<p>Finally I found solution, by greping <code>modinfo</code> for my Intel graphics card:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[23:55:24] pietrushnic:~ $ sudo modinfo i915|grep backlight
+</span><span class='line'>parm:           invert_brightness:Invert backlight brightness (-1 force normal, \
+</span><span class='line'> 0 machine defaults, 1 force inversion), please report PCI device ID, subsystem \
+</span><span class='line'>vendor and subsystem device ID to dri-devel@lists.freedesktop.org, if your \
+</span><span class='line'>machine needs it. It will then be included in an upcoming module version. (int)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So simple modification in <code>/etc/default/grub</code> by adding kernel parameter to
+<code>GRUB_CMDLINE_LINUX_DEFAULT</code> fix the issue:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># If you change this file, run 'update-grub' afterwards to update
+</span><span class='line'># /boot/grub/grub.cfg.
+</span><span class='line'># For full documentation of the options in this file, see:
+</span><span class='line'>#   info -f grub -n 'Simple configuration'
+</span><span class='line'>
+</span><span class='line'>GRUB_DEFAULT=0
+</span><span class='line'>GRUB_TIMEOUT=5
+</span><span class='line'>GRUB_DISTRIBUTOR=`lsb_release -i -s 2&gt; /dev/null || echo Debian`
+</span><span class='line'>GRUB_CMDLINE_LINUX_DEFAULT="rcutree.rcu_idle_gp_delay=1 i915.invert_brightness=1"
+</span><span class='line'>GRUB_CMDLINE_LINUX=""
+</span><span class='line'>(...)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After that:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo update-grub</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And all things should work fine.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2804,160 +2896,6 @@ manually modified. So using uImage is easiest</p>
 
 <p>[1] <a href="http://digital-domain.net/lug/unix-linux-history.html">UNIX/Linux History</a></br>
 [2] <a href="http://www.arm.linux.org.uk/docs/history.php">The History of ARM Linux</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/embedded-board-bootloader/">0x3: Embedded Board Bootloader</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-07T10:32:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/07/embedded-board-bootloader/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Table of contents</h2>
-
-<ul>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#what-is-bootloader">What is bootloader ?</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#why-we-need-bootloader">Why we need bootloader ?</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#which-bootloader">Which bootloader ?</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#what-is-versatilepb">What is versatilepb ?</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#compilation">Compilation</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#where-to-go-from-here">Where to go from here ?</a></li>
-<li><a href="/blog/2013/06/07/embedded-board-bootloader/#kudos">Kudos</a></li>
-</ul>
-
-
-<p><a id="what-is-bootloader"></a></p>
-
-<h3>What is bootloader ?</h3>
-
-<p>It is a program written to bring up more complex code (eg. kernel).</p>
-
-<p>On very simple system it can even not exist. Bootloader should prepare all
-required hardware that kernel or different operating software will need at its
-start point. It is hard to create cross platform bootloader because of variety
-of system requirements.</p>
-
-<p><a id="why-we-need-bootloader"></a></p>
-
-<h3>Why we need bootloader ?</h3>
-
-<p>The true is that we don&rsquo;t :) because we can simply pass kernel and initramfs as
-parameters to QEMU, but it is not common practice for real development environment.<br/>
-Usually bootloader is stripped in production environment where boot time is
-crucial. Second thing, bootloader is useful to learn how real development
-environment for embedded system works. From other side using bootloader we can
-create single binary file that contain bootable embedded system, so we can run
-it without giving multiple arguments at QEMU startup. I will try to keep in mind
-idea about being as close to real development environment as possible.</p>
-
-<p><a id="which-bootloader"></a></p>
-
-<h3>Which bootloader ?</h3>
-
-<p>There are many approaches to this problem. The most popular today is
-<a href="http://www.denx.de/wiki/U-Boot">U-Boot</a> but there are alternatives like <a href="http://www.barebox.org/">The Barebox Bootloader</a>.
-I will try to get to know them better in future. Right now I will use U-Boot as
-Virtual Development Board bootloader to make the edit-compile-download-test cycle
-similar to real world situation. So get the code:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone http://git.denx.de/u-boot.git
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>U-Boot configuration depends on pair cpu-board. So right now we know that our
-cpu will be some ARM but what exactly ? It depends on configuration we will use.
-In most scenarios presented in Internet the <code>versatilepb</code> was used. We can also
-think about running different boards.</p>
-
-<p>What pros U-Boot gives us in the light of previous question <code>Why we need
-bootloader ?</code>:
-* simplified process of porting kernel, because low level stuff is handled by
-U-Boot
-* simplified testing environment in easy way you can grab different version of
-  kernel with different version of initrd and test it</p>
-
-<p><a id="what-is-versatilepb"></a></p>
-
-<h3>What is versatilepb ?</h3>
-
-<p>According to <a href="http://www.arm.com/products/tools/development-boards/versatile/index.php">this page</a>
-versatile is highly modular, feature-rich range of development board. <code>pb</code>
-means <code>Platform Baseboard</code> integrated, standalone development system with fixed
-CPU. But this is only corporate babble :)</p>
-
-<p>QEMU shows <code>versatilepb</code> as Versatile/PB
-(<a href="http://www.arm.com/products/processors/classic/arm9/arm926.php">ARM926EJ-S</a>).</p>
-
-<p><a id="compilation"></a></p>
-
-<h3>Compilation</h3>
-
-<p>For <code>Emdebian</code> cross-toolchain:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>u-boot
-</span><span class='line'>make <span class="nv">ARCH</span><span class="o">=</span>arm <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi- versatilepb_config
-</span><span class='line'>make <span class="nv">ARCH</span><span class="o">=</span>arm <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><em>Note</em>: If you wonder what is the convention for cross-toolchain prefix:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>arch<span class="o">]</span>-<span class="o">[</span>vendor<span class="o">]</span>-<span class="o">[</span>os<span class="o">]</span>-<span class="o">[</span>abi<span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>Emdebian</code> striped vendor probably to keep name short, but for example
-<code>Corsstool-NG</code> follow convetion and calls toolchain like
-<code>arm-unknown-linux-gnueabi-</code>.</p>
-
-<p><a id="where-to-go-from-here"></a></p>
-
-<h3>Where to go from here ?</h3>
-
-<p><a href="/blog/2013/06/07/linux-kernel-for-embedded-system">Next step</a> will be kernel compilation for our virtual <code>versatilepb</code> board.</p>
-
-<p><a id="kudos"></a></p>
-
-<h3>Kudos</h3>
-
-<p>[1] <a href="http://www.linuxfordevices.com/c/a/Linux-For-Devices-Articles/Introduction-to-Das-UBoot-the-universal-open-source-bootloader/">Introduction to Das U-Boot, the universal open source bootloader</a></br>
-[2] <a href="http://www.denx.de/wiki/U-Boot">U-Boot</a></br>
-[3] <a href="http://forum.xda-developers.com/showthread.php?t=2201146">U-boot for the multi-boot support</a></br>
-[4] <a href="http://balau82.wordpress.com/2010/04/12/booting-linux-with-u-boot-on-qemu-arm/">Booting Linux with U-Boot on QEMU ARM</a></br>
-[5] <a href="http://wiki.osdev.org/Bootloader">Bootloader</a></br></p>
 </div>
   
   
