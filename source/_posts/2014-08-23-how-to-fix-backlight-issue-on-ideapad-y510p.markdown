@@ -24,7 +24,7 @@ machine needs it. It will then be included in an upcoming module version. (int)
 ```
 
 So simple modification in `/etc/default/grub` by adding kernel parameter to
-GRUB_CMDLINE_LINUX_DEFAULT fix the issue:
+`GRUB_CMDLINE_LINUX_DEFAULT` fix the issue:
 
 ```
 # If you change this file, run 'update-grub' afterwards to update
