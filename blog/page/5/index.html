@@ -9,10 +9,7 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="First of all I use testing version of Debian &ndash; wheezy. Clone coreboot repository: 1
-2
-git clone http://review.coreboot.org/p/coreboot
-cd &hellip;">
+  <meta name="description" content="Blog has changed slightly. I&rsquo;ve added two new sections: social media and afk. In &ldquo;social media&rdquo; I will add links to my profiles on &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -116,145 +113,7 @@ cd &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/">Debugging Coreboot in Qemu Environment - Part 1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-12T21:30:00+01:00" pubdate data-updated="true">Mar 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>First of all I use testing version of Debian &ndash; wheezy. Clone coreboot repository:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone http://review.coreboot.org/p/coreboot
-</span><span class='line'>cd coreboot; make menuconfig</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Configure FILO as apayload and use its latest version:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Payload -&gt; Add a payload -&gt; FILO Payload -&gt; FILO version -&gt; HEAD</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add verbose debugging messages:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Debugging -&gt; Check PIRQ table consistency Debugging -&gt; Output verbose malloc debug messages
-</span><span class='line'>Debugging -&gt; Output verbose ACPI debug messages Debugging -&gt; Enable debug messages for option ROM execution
-</span><span class='line'>Debugging -&gt; Built-in low-level shell Debugging -&gt; Trace function calls</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Try to build:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If everything builds correctly you can process. Sometimes there is need to use
-cross compiler. To build one:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd util/crossgcc
-</span><span class='line'>./buildgcc</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To explore <code>coreboot</code> code effectively I suggest to create tags and cscope
-database for <code>coreboot</code>. In my personal workspace I&rsquo;ve got process that I go
-through before I start work (if you use my workspace configuration which
-is available <a href="https://github.com/pietrushnic/workspace">@github</a> you
-can follow below steps directly, if not adjust to your environment):</p>
-
-<ol>
-<li>run vim ;)</li>
-<li><code>:cd /path/to/code</code></li>
-<li><code>s&lt;Tab&gt;</code> (fuzzyfinder &ndash;> bookmark dir)</li>
-<li><code>si</code> (fuzzyfinder &ndash;> change dir)</li>
-<li><code>sr</code> (run ctags to generate tags and cscope to build symbol database &ndash; <code>ctags -R;cscope -R -q -b -v</code>)</li>
-</ol>
-
-
-<p>After steps above we can start work with code. Run vim in <code>coreboot</code> directory.
-Type:
-<code>:e src/cpu/x86/16bit/reset16.inc</code>
-Put cursor over <code>protected_start</code> and press <code>Ctrl-]</code>. If everything goes ok you
-should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 537.</p>
-
-<p>In second article we dive into first phase of <code>coreboot</code> execution in emulated environment.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/07/human-action-ludwig-von-misess-work-by/">&#8220;Human Action&#8221; Ludwig Von Mises</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-07T23:37:00+01:00" pubdate data-updated="true">Mar 7<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/03/07/human-action-ludwig-von-misess-work-by/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>  <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Ludzkie_dzialanie_okladka.jpg/166px-Ludzkie_dzialanie_okladka.jpg" alt="" /></p>
-
-<p>&ldquo;Human Action&rdquo; Ludwig von Mises&rsquo;s work by some of called the pope of free market. IMHO is one of the best books on economics I read in my life. It is not easy, however, giving it time with certainly pays off. Allows to understand the basic laws which ruled the modern world of finance. Mises in a sensational way talk about the myths explaining what is inflation, why it has impact on our lives, what is and how works the supply of credit, and who depend most on the production of money without coverage (<em>fiat</em> money). I can say that until I read this book, I was lost in the dark. Thanks to it I received a weapon to overthrow ridiculous  world order concepts, absurd messages communicated in the media. I recommend:  <a href="http://mises.org/store/Human-Action-The-Scholars-Edition-P119.aspx">mises.org store &ndash; Human Action </a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/07/blog-has-changed-slightly/">Nice Small Additions for My Blog</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/03/07/blog-has-changed-slightly/">Nice small additions for my blog</a></h1>
     
     
       <p class="meta">
@@ -292,7 +151,7 @@ should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/02/20/improve-productivity-by-tracking-work_20/">Improve Productivity by Tracking Work Environment With Git - Vim</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/02/20/improve-productivity-by-tracking-work_20/">Improve productivity by tracking work environment with git - vim</a></h1>
     
     
       <p class="meta">
@@ -480,7 +339,7 @@ lines to .vimrc (9 = black)</li>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/02/20/hostname-generator/">Hostname Generator</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/02/20/hostname-generator/">Hostname generator</a></h1>
     
     
       <p class="meta">
@@ -520,7 +379,7 @@ lines to .vimrc (9 = black)</li>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/02/19/improve-productivity-by-tracking-work/">Improve Productivity by Tracking Work Environment With Git - Preparation</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/02/19/improve-productivity-by-tracking-work/">Improve productivity by tracking work environment with git - preparation</a></h1>
     
     
       <p class="meta">
@@ -592,7 +451,7 @@ repository and prepare first commit</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/02/15/set-irssi-under-debian-to-use-freenode/">Set Irssi Under Debian to Use Freenode Server</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/02/15/set-irssi-under-debian-to-use-freenode/">Set irssi under debian to use freenode server</a></h1>
     
     
       <p class="meta">
@@ -649,7 +508,7 @@ Fist, install irssi:</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/02/06/arbtt-as-productivity-improver-for/">Arbtt as Productivity Improver For</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/02/06/arbtt-as-productivity-improver-for/">Arbtt As Productivity Improver For</a></h1>
     
     
       <p class="meta">
@@ -699,7 +558,7 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/02/05/first-steps-to-improve-work/">First Steps to Improve Work Productivity in Linux Environment</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/02/05/first-steps-to-improve-work/">First steps to improve work productivity in Linux environment</a></h1>
     
     
       <p class="meta">
@@ -743,7 +602,7 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/01/15/another-interesting-topic-with-which-i/">UEFI From Linux Enthusiast Perspective</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/01/15/another-interesting-topic-with-which-i/">UEFI from Linux enthusiast perspective</a></h1>
     
     
       <p class="meta">
@@ -775,6 +634,97 @@ For now that&rsquo;s all. In the future I wanted to write how to synchronize the
 <p>Personally, I really do not like it, because I believe that everyone who buys the equipment has the right to exploit its capabilities in such a manner it deems appropriate.</p>
 
 <p>Of course, as usual, I change the subject. I wanted to write about the project <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=Welcome">TianoCore</a>, which is an open source implementation of UEFI implemented by Intel. When you do not have the strength nor the resources to fight the system, use the system to gather strength and resources, and then start fighting. So in the next post I will try to describe my first experience with <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=EDK2">EDKII</a> in emulated environment of QEMU.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/09/my-view-for-silver-perspective/">My view for silver perspective</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-09T22:31:00+01:00" pubdate data-updated="true">Jan 9<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/01/09/my-view-for-silver-perspective/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the morning when reading RSS feeds (I should think about placing its list somewhere on the blog) from several sources the information came to me that silver is highly underrated recent times. I try to carefully analyze such information, despite the fact that I use more of niche sources of information and what is in them is served rather carefully selected. Although I looked at this subject a little closer.</p>
+
+<p>One of the factors that should be taken into account is the silver to gold ratio. It is said that historically it was 16, or 16 ounces of silver buys one ounce of gold. In view of the massive derivatives trading, selling certificates based on complex rules (that basically said &ldquo;do not try to take this physical&rdquo;), the silver market manipulation and the like rip accounting, the ratio is 3-4 times higher. After reading information about undervalued silver I looked at my favorite website provides charts <a href="http://stockcharts.com/h-sc/ui">stockcharts.com</a> and yesterday I checked, this ratio it was 56 and today fallen slightly due to movements in silver. Six months ago this ratio was below 40. What I learn until now silver reacts slower than gold and gold is taking action now. When I check stockcharts before New Year I found out that price per kilogram of gold was about 38 000 euro. Right now it is 41 100 and seems still rise. Silver seemed to wondering all the moves, and this morning took off. At the same time when I check gold silver became the shockingly low price of 663 euros per kilo. The new year saw a jump to level 730 and it looks like that this morning go after gold and now cost 760.</p>
+
+<p>We&rsquo;ll see how strong it will move. From a technical point of view, per half year MACD is narrow, and the RSI is equal to 54 and is far from the area to buy. Moving averages of 50 and 200 are to each other in nearly parallel position and technically in the next few months should not be anything happening. The three-year term MACD lines have not yet crossed, RSI is less than 50 recent declines lasted too short to harm long distance running averages of 50 and 200 on a 3-year chart.</p>
+
+<p>Precisely because there is little evidence for any event you may receive move. Of course, seriously people know that long-term perspective and fundamental considerations leave no doubt that the bull will have long reigned in the areas of commodity. While speculation is paper, and this can lead astray careless player.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/09/ideas-for-development/">Ideas for development</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-09T22:24:00+01:00" pubdate data-updated="true">Jan 9<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/01/09/ideas-for-development/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>All the time come to my mind new ideas about what could be added to the blog and what information to post. I&rsquo;m interested in so many things that many of the ideas are killed before reaching the plane of the keyboard and has no chance to be introduced even as a draft to the blog. It seems that for myself I should store ideas for development in order to easily return to them when ripe.</p>
+
+<ol>
+<li>I want occasionally write something about the commodity markets, however, I&rsquo;m interested in it very briefly, because only about a year it seems to me that sometimes I have something to say.</li>
+<li>I begin learning about the <a href="http://www.uefi.org/home/">UEFI</a> environment and, therefore, that I am an advocate of freedom in the broad sense of the word, I would like to refer to this solution. I also want to understand the advantages and disadvantages of this solution in the context of freedom and relate them to other solutions such as <a href="http://www.coreboot.org/Welcome_to_coreboot">coreboot</a>.</li>
+<li>I would also like to implement a section that could be titled &ldquo;what I&rsquo;m interested now ?&rdquo;, &ldquo;what I read now?&rdquo; and &ldquo;what was last seen?&rdquo;</li>
+</ol>
+
+
+<p>I would like to set a specific time for blogging during the week, what with certainty contribute to faster realization of these ideas.</p>
 </div>
   
   

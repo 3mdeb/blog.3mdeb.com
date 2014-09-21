@@ -9,8 +9,8 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="Today I decide to switch to latest kernel (3.17-rc1) on my IdeaPad y510p. I
-hit only one annoying problem until now &ndash; after booting my main &hellip;">
+  <meta name="description" content="Intro Because of my bug hunting approach of using latest kernel I experienced problem
+with compiling VirtualBox modules with 3.17.0-rc5 version on my &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -114,7 +114,368 @@ hit only one annoying problem until now &ndash; after booting my main &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/08/23/how-to-fix-backlight-issue-on-ideapad-y510p/">How to Fix Backlight Issue on IdeaPad Y510p</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/09/20/virtualbox-dkms-fix-alloc-netdev-problems-when-compiling-with-3-dot-17-dot-0-rcx-headers/">virtualbox-dkms: fix alloc_netdev problems when compiling with 3.17.0-rcX headers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-20T22:55:00+02:00" pubdate data-updated="true">Sep 20<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/09/20/virtualbox-dkms-fix-alloc-netdev-problems-when-compiling-with-3-dot-17-dot-0-rcx-headers/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Intro</h2>
+
+<p>Because of my bug hunting approach of using latest kernel I experienced problem
+with compiling VirtualBox modules with <code>3.17.0-rc5</code> version on my Debian Jessie. Issue is well
+known and described for examples <a href="https://bugs.launchpad.net/ubuntu/+source/virtualbox/+bug/1358157">here</a>.
+Problem manifest itself with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>------------------------------
+</span><span class='line'>Deleting module version: 4.3.14
+</span><span class='line'>completely from the DKMS tree.
+</span><span class='line'>------------------------------
+</span><span class='line'>Done.
+</span><span class='line'>Loading new virtualbox-4.3.14 DKMS files...
+</span><span class='line'>Building only for 3.17.0-rc5+
+</span><span class='line'>Building initial module for 3.17.0-rc5+
+</span><span class='line'>Error! Bad return status for module build on kernel: 3.17.0-rc5+ (x86_64)
+</span><span class='line'>Consult /var/lib/dkms/virtualbox/4.3.14/build/make.log for more information.
+</span><span class='line'>Job for virtualbox.service failed. See 'systemctl status virtualbox.service' and 'journalctl -xn' for details.
+</span><span class='line'>invoke-rc.d: initscript virtualbox, action "restart" failed.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>during <code>virtualbox-dkms</code> package installation or reconfiguration. In <code>make.log</code> you will find compilation error:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  CC [M]  /var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp/linux/VBoxNetAdp-linux.o
+</span><span class='line'>/var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp/linux/VBoxNetAdp-linux.c: In function ‘vboxNetAdpOsCreate’:
+</span><span class='line'>/var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp/linux/VBoxNetAdp-linux.c:186:48: error: macro "alloc_netdev" requires 4 arguments, but only 3 given
+</span><span class='line'>                            vboxNetAdpNetDevInit);
+</span><span class='line'>                                                ^
+</span><span class='line'>/var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp/linux/VBoxNetAdp-linux.c:184:15: error: ‘alloc_netdev’ undeclared (first use in this function)
+</span><span class='line'>     pNetDev = alloc_netdev(sizeof(VBOXNETADPPRIV),
+</span><span class='line'>               ^
+</span><span class='line'>/var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp/linux/VBoxNetAdp-linux.c:184:15: note: each undeclared identifier is reported only once for each function it appears in
+</span><span class='line'>/var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp/linux/VBoxNetAdp-linux.c: At top level:
+</span><span class='line'>/var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp/linux/VBoxNetAdp-linux.c:159:13: warning: ‘vboxNetAdpNetDevInit’ defined but not used [-Wunused-function]
+</span><span class='line'> static void vboxNetAdpNetDevInit(struct net_device *pNetDev)
+</span><span class='line'>             ^
+</span><span class='line'>scripts/Makefile.build:257: recipe for target '/var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp/linux/VBoxNetAdp-linux.o' failed
+</span><span class='line'>make[2]: *** [/var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp/linux/VBoxNetAdp-linux.o] Error 1
+</span><span class='line'>scripts/Makefile.build:404: recipe for target '/var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp' failed
+</span><span class='line'>make[1]: *** [/var/lib/dkms/virtualbox/4.3.14/build/vboxnetadp] Error 2
+</span><span class='line'>Makefile:1373: recipe for target '_module_/var/lib/dkms/virtualbox/4.3.14/build' failed
+</span><span class='line'>make: *** [_module_/var/lib/dkms/virtualbox/4.3.14/build] Error 2
+</span><span class='line'>make: Leaving directory '/usr/src/linux-headers-3.17.0-rc5+'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For sure we have to wait for some time before new version of kernel and
+VirtualBox will catch up each other in Debian.</p>
+
+<h2>Fix source code of Debian package</h2>
+
+<p>Let&rsquo;s get get virtualbox package source, fix issues rebuild package and install
+in the system. Patch to apply can be found <a href="https://forums.virtualbox.org/viewtopic.php?p=296650#p296650">here</a>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apt-get source virtualbox-dkms
+</span><span class='line'>cd virtualbox-4.3.14-dfsg</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can patch the sources with:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gh">diff --git a/src/VBox/HostDrivers/VBoxNetAdp/linux/VBoxNetAdp-linux.c b/src/VBox/HostDrivers/VBoxNetAdp/linux/VBoxNetAdp-linux.c</span>
+</span><span class='line'><span class="gh">index c6b21a9cc199..9ccce6f32218 100644</span>
+</span><span class='line'><span class="gd">--- a/src/VBox/HostDrivers/VBoxNetAdp/linux/VBoxNetAdp-linux.c</span>
+</span><span class='line'><span class="gi">+++ b/src/VBox/HostDrivers/VBoxNetAdp/linux/VBoxNetAdp-linux.c</span>
+</span><span class='line'><span class="gu">@@ -52,6 +52,25 @@</span>
+</span><span class='line'>
+</span><span class='line'> #define VBOXNETADP_FROM_IFACE(iface) ((PVBOXNETADP) ifnet_softc(iface))
+</span><span class='line'>
+</span><span class='line'><span class="gi">+/*******************************</span>
+</span><span class='line'><span class="gi">+source for the 4th parameter alloc_netdev fix for kernel 3.17-rc1 is:</span>
+</span><span class='line'><span class="gi">+https://github.com/proski/madwifi/commit/c5246021b7b8580c2aeb0a145903acc07d246ac1</span>
+</span><span class='line'><span class="gi">+*/</span>
+</span><span class='line'><span class="gi">+#ifndef NET_NAME_UNKNOWN</span>
+</span><span class='line'><span class="gi">+#undef alloc_netdev</span>
+</span><span class='line'><span class="gi">+#if LINUX_VERSION_CODE &lt; KERNEL_VERSION(2,6,23)</span>
+</span><span class='line'><span class="gi">+#define alloc_netdev(sizeof_priv, name, name_assign_type, setup) \</span>
+</span><span class='line'><span class="gi">+  alloc_netdev(sizeof_priv, name, setup)</span>
+</span><span class='line'><span class="gi">+#elif LINUX_VERSION_CODE &lt; KERNEL_VERSION(2,6,38)</span>
+</span><span class='line'><span class="gi">+#define alloc_netdev(sizeof_priv, name, name_assign_type, setup) \</span>
+</span><span class='line'><span class="gi">+  alloc_netdev_mq(sizeof_priv, name, setup, 1)</span>
+</span><span class='line'><span class="gi">+#else</span>
+</span><span class='line'><span class="gi">+#define alloc_netdev(sizeof_priv, name, name_assign_type, setup) \</span>
+</span><span class='line'><span class="gi">+  alloc_netdev_mqs(sizeof_priv, name, setup, 1, 1)</span>
+</span><span class='line'><span class="gi">+#endif</span>
+</span><span class='line'><span class="gi">+#endif</span>
+</span><span class='line'><span class="gi">+/*******************************/</span>
+</span><span class='line'><span class="gi">+</span>
+</span><span class='line'> /*******************************************************************************
+</span><span class='line'> *   Internal Functions                                                         *
+</span><span class='line'> *******************************************************************************/
+</span><span class='line'><span class="gu">@@ -183,6 +202,7 @@ int vboxNetAdpOsCreate(PVBOXNETADP pThis, PCRTMAC pMACAddress)</span>
+</span><span class='line'>     /* No need for private data. */
+</span><span class='line'>     pNetDev = alloc_netdev(sizeof(VBOXNETADPPRIV),
+</span><span class='line'>                            pThis-&gt;szName[0] ? pThis-&gt;szName : VBOXNETADP_LINUX_NAME,
+</span><span class='line'><span class="gi">+                           NET_NAME_UNKNOWN,</span>
+</span><span class='line'>                            vboxNetAdpNetDevInit);
+</span><span class='line'>     if (pNetDev)
+</span><span class='line'>     {
+</span><span class='line'><span class="gh">diff --git a/src/VBox/Runtime/r0drv/linux/alloc-r0drv-linux.c b/src/VBox/Runtime/r0drv/linux/alloc-r0drv-linux.c</span>
+</span><span class='line'><span class="gh">index 21e124bda039..2a046a3b254a 100644</span>
+</span><span class='line'><span class="gd">--- a/src/VBox/Runtime/r0drv/linux/alloc-r0drv-linux.c</span>
+</span><span class='line'><span class="gi">+++ b/src/VBox/Runtime/r0drv/linux/alloc-r0drv-linux.c</span>
+</span><span class='line'><span class="gu">@@ -191,7 +191,7 @@ static PRTMEMHDR rtR0MemAllocExecVmArea(size_t cb)</span>
+</span><span class='line'>         struct page **papPagesIterator = papPages;
+</span><span class='line'>         pVmArea-&gt;nr_pages = cPages;
+</span><span class='line'>         pVmArea-&gt;pages    = papPages;
+</span><span class='line'><span class="gd">-        if (!map_vm_area(pVmArea, PAGE_KERNEL_EXEC, &amp;papPagesIterator))</span>
+</span><span class='line'><span class="gi">+        if (!map_vm_area(pVmArea, PAGE_KERNEL_EXEC, papPagesIterator))</span>
+</span><span class='line'>         {
+</span><span class='line'>             PRTMEMLNXHDREX pHdrEx = (PRTMEMLNXHDREX)pVmArea-&gt;addr;
+</span><span class='line'>             pHdrEx-&gt;pVmArea     = pVmArea;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Assuming you save above code in <code>my_patch</code> file and you are in <code>virtualbox</code>
+dpkg source directory:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>patch -p1 &lt; my_patch
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install packages required to build:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo apt-get build-dep virtualbox
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And build with:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>dpkg-buildpackage -uc -b
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In result we should get all <code>virtualbox</code> packages. We need only <code>dkms</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo dpkg -i ../virtualbox-dkms_4.3.14-dfsg-1_all.deb
+</span><span class='line'>
+</span><span class='line'><span class="o">(</span>Reading database ... 432638 files and directories currently installed.<span class="o">)</span>
+</span><span class='line'>Preparing to unpack .../virtualbox-dkms_4.3.14-dfsg-1_all.deb ...
+</span><span class='line'>
+</span><span class='line'>------------------------------
+</span><span class='line'>Deleting module version: 4.3.14
+</span><span class='line'>completely from the DKMS tree.
+</span><span class='line'>------------------------------
+</span><span class='line'>Done.
+</span><span class='line'>Unpacking virtualbox-dkms <span class="o">(</span>4.3.14-dfsg-1<span class="o">)</span> over <span class="o">(</span>4.3.14-dfsg-1<span class="o">)</span> ...
+</span><span class='line'>Setting up virtualbox-dkms <span class="o">(</span>4.3.14-dfsg-1<span class="o">)</span> ...
+</span><span class='line'>Loading new virtualbox-4.3.14 DKMS files...
+</span><span class='line'>Building only <span class="k">for </span>3.17.0-rc5+
+</span><span class='line'>Building initial module <span class="k">for </span>3.17.0-rc5+
+</span><span class='line'>Done.
+</span><span class='line'>
+</span><span class='line'>vboxdrv:
+</span><span class='line'>Running module version sanity check.
+</span><span class='line'> - Original module
+</span><span class='line'>   - No original module exists within this kernel
+</span><span class='line'> - Installation
+</span><span class='line'>   - Installing to /lib/modules/3.17.0-rc5+/updates/dkms/
+</span><span class='line'>
+</span><span class='line'>vboxnetadp.ko:
+</span><span class='line'>Running module version sanity check.
+</span><span class='line'> - Original module
+</span><span class='line'>   - No original module exists within this kernel
+</span><span class='line'> - Installation
+</span><span class='line'>   - Installing to /lib/modules/3.17.0-rc5+/updates/dkms/
+</span><span class='line'>
+</span><span class='line'>vboxnetflt.ko:
+</span><span class='line'>Running module version sanity check.
+</span><span class='line'> - Original module
+</span><span class='line'>   - No original module exists within this kernel
+</span><span class='line'> - Installation
+</span><span class='line'>   - Installing to /lib/modules/3.17.0-rc5+/updates/dkms/
+</span><span class='line'>
+</span><span class='line'>vboxpci.ko:
+</span><span class='line'>Running module version sanity check.
+</span><span class='line'> - Original module
+</span><span class='line'>   - No original module exists within this kernel
+</span><span class='line'> - Installation
+</span><span class='line'>   - Installing to /lib/modules/3.17.0-rc5+/updates/dkms/
+</span><span class='line'>
+</span><span class='line'>sed: -e expression <span class="c">#1, char 6: unknown command: `m&#39;</span>
+</span><span class='line'>depmod....
+</span><span class='line'>
+</span><span class='line'>DKMS: install completed.<span class="sb">`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And we can happily use VirtualBox with <code>3.17.0-rc5</code> kernel.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/23/how-to-fix-backlight-issue-on-ideapad-y510p/">How to fix backlight issue on IdeaPad y510p</a></h1>
     
     
       <p class="meta">
@@ -206,7 +567,7 @@ keywords <code>linux</code>, <code>y510p</code>, <code>backlight issue</code>, e
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/08/18/linux-rpi-and-usb-over-ip/">Linux, RPi and USB Over IP</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/08/18/linux-rpi-and-usb-over-ip/">Linux, RPi and USB over IP</a></h1>
     
     
       <p class="meta">
@@ -724,7 +1085,7 @@ post.</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/">Coreboot for QEMU Armv7 (Vexpress-a9) Emulated Mainboard</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/">Coreboot for QEMU armv7 (vexpress-a9) emulated mainboard</a></h1>
     
     
       <p class="meta">
@@ -1153,7 +1514,7 @@ can boot kernel directly or through payload with bootloader.</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/05/16/debian-wheezy-on-lenovo-y510p/">Linux (Debian Wheezy) on Lenovo Y510p</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/05/16/debian-wheezy-on-lenovo-y510p/">Linux (Debian Wheezy) on Lenovo y510p</a></h1>
     
     
       <p class="meta">
@@ -1298,7 +1659,7 @@ system ;)</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/04/13/a-little-bit-of-fresh-air/">A Little Bit of Fresh Air</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/04/13/a-little-bit-of-fresh-air/">A little bit of fresh air</a></h1>
     
     
       <p class="meta">
@@ -1342,7 +1703,7 @@ improvement sharing valuable content would be easier.</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve Productivity With Goolge History Using Bookmarks and Chrome Extensions</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/">Improve productivity with Goolge history using bookmarks and Chrome extensions</a></h1>
     
     
       <p class="meta">
@@ -1520,80 +1881,7 @@ try.</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and Run OVMF Under Qemu</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-14T23:22:00+02:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>What the OVMF is ?</h3>
-
-<p><strong>OVMF</strong> (<em>Open Virtual Machine Firmware</em>) is a firmware actively developed as a
-<strong>EDK2</strong>(<em>EFI Developer Kit</em>) package. It is a packed that aims to support
-firmware for virtual machines like Qemu.</p>
-
-<h3>Simplified build process</h3>
-
-<p>First of all lets get latest version of the code. For some time <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=Welcome">EFI and
-Framework Open Source
-Community</a> share edk2 code also on <a href="https://github.com/tianocore/edk2">github</a> mirror.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/tianocore/edk2.git</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Building process was simplified by OvmfPkg contributors. But I found that
-toolchain for latest gcc compilers is not ready in main repository. So I suggest
-to remove <code>BaseTools</code> directory and clone up to date git repository in this
-place:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd edk2
-</span><span class='line'>rm -rf BaseTools
-</span><span class='line'>git clone https://github.com/tianocore/buildtools-BaseTools.git BaseTools
-</span><span class='line'>. edksetup.sh</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So to build firmware we need only one command:
-&#8220;`</p>
-
-<p><code>``
-You may need some additional packages like</code>uuid-dev<code>,</code>iasl<code>or</code>g++`.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root File System for Embedded System</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root file system for embedded system</a></h1>
     
     
       <p class="meta">
@@ -2290,7 +2578,7 @@ please share it, if somethings wrong please comment I will try to help if can.</
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu Network Configuration and Tftp for Virtual Development Board</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu network configuration and tftp for Virtual Development Board</a></h1>
     
     
       <p class="meta">
@@ -2734,7 +3022,7 @@ be used as a console. Before <code>bootm</code> set:</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux Kernel for Embedded System</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux kernel for embedded system</a></h1>
     
     
       <p class="meta">
