@@ -9,7 +9,8 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="Blog has changed slightly. I&rsquo;ve added two new sections: social media and afk. In &ldquo;social media&rdquo; I will add links to my profiles on &hellip;">
+  <meta name="description" content="You might be surprised at how much you have to make to correctly build
+arm-unknown-linux-gnueabi config based toolchain with crosstool-ng. As you can &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +108,351 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/14/quick-build-of-arm-unknown-linux/">Quick build of arm-unknown-linux-gnueabi with crosstool-ng</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-14T23:42:00+01:00" pubdate data-updated="true">Mar 14<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/03/14/quick-build-of-arm-unknown-linux/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>You might be surprised at how much you have to make to correctly build
+<code>arm-unknown-linux-gnueabi</code> config based toolchain with <a href="http://crosstool-ng.org/">crosstool-ng</a>. As you can
+see examples of many open source projects, the man&rsquo;s work is a rare resource.
+The result of this economic fact is that the attempt to build configuration
+<code>arm-unknown-linux-gnueabi</code> is not a simple task and during an operation you can
+come across many problems. Although I am not afraid of problems and effectively
+try to fight them and of course sharing the results of my work. My build system
+parameters:  <code>Debian GNU/Linux wheezy/sid 3.2.0-2-amd64</code></p>
+
+<ul>
+<li>Clone crosstools-ng (you need mercurial)</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>hg clone http://crosstool-ng.org/hg/crosstool-ng
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Create temporary directory and run</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ct-ng arm-unknown-linux-eabi <span class="c">#choose latest kernel (for me it was 3.2.9)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>We probably want to change directory to which all stuff will be build (default is <code>$HOME/x-tools</code>):</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ct-ng menuconfig
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And go to:
+<code>Paths and misc options ---&gt; (${HOME}/x-tools/${CT_TARGET}) Prefix directory</code>
+Change it according to your needs. Exit end save configuration.
+* Build (number after dot depend on how many command we want to run simultaneously):
+<code>ct-ng build.4</code>
+It can take a lot of time. On my machine with 5k BogoMips it takes over 1h.</p>
+
+<h3>Problems that you can encounter:</h3>
+
+<ul>
+<li><code>gcj</code> &ndash; latest changeset <code>2916:6f758ed4c0b9</code> have trouble finding <code>gcj</code> binary,
+which it show using following message:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>ERROR<span class="o">]</span> Missing: <span class="s1">&#39;x86_64-unknown-linux-gnu-gcj&#39;</span> or <span class="s1">&#39;x86_64-unknown-linux-gnu-gcj&#39;</span> or <span class="s1">&#39;gcj&#39;</span> : either needed!
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To workaround this install <code>gcj</code> and link binary like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo ln -s /usr/bin/gcj-4.6 /usr/bin/gcj
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>duma</code> &ndash; mentioned changeset also has problem with url to D.U.M.A library,
+apply below changes to workaround problems:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gd">--- a/scripts/build/debug/200-duma.sh Mon Mar 12 21:19:26 2012 +0100</span>
+</span><span class='line'><span class="gi">+++ b/scripts/build/debug/200-duma.sh Wed Mar 14 20:02:22 2012 +0100</span>
+</span><span class='line'><span class="gu">@@ -4,7 +4,7 @@ # Downloading an non-existing file from sourceforge will give you an</span>
+</span><span class='line'> # HTML file containing an error message, instead of returning a 404.
+</span><span class='line'> # Sigh...
+</span><span class='line'><span class="gd">- CT_GetFile &quot;duma_${CT_DUMA_VERSION}&quot; .tar.gz http://kent.dl.sourceforge.net/sourceforge/duma/ </span>
+</span><span class='line'><span class="gi">+ CT_GetFile &quot;duma_${CT_DUMA_VERSION}&quot; .tar.gz http://downloads.sourceforge.net/project/duma/duma/2.5.15</span>
+</span><span class='line'> # Downloading from sourceforge may leave garbage, cleanup
+</span><span class='line'> CT_DoExecLog ALL rm -f &quot;${CT_TARBALLS_DIR}/showfiles.php&quot;\* }
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>mawk</code> &ndash; if mawk return syntax error like this:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'>mawk: scripts/gen-sorted.awk: line 19: regular expression compile failed (bad
+</span><span class='line'>class -- [], [^] or [)
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It could be fixed in two ways. First is to change <code>line 19</code> in <code>/path/to/tmp/dir/.build/src/glibc-2.9/scripts/gen-sorted.awk</code>
+Is:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'>sub(/\/[^/]+$/, &quot;&quot;, subdir);
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Should be:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'>sub(/\/[^\/]+$/, &quot;&quot;, subdir);
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or simply by installing gawk, reconfigure and recompile <code>crosstools-ng</code>.</p>
+
+<p>This was my first post related to linux embedded enviroment. Hope it will be more. Enjoy!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/14/splitting-my-personal-repository/">Splitting my personal repository</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-14T23:26:00+01:00" pubdate data-updated="true">Mar 14<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/03/14/splitting-my-personal-repository/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After writing a few posts in which my workspace scripts could be useful, I
+realized that I should split blog works from the scripts that can be useful to
+others. From now materials related to the blog I will track in a separate
+repository and I&rsquo;ll add them as submodule into my environment. This implies that
+if we intend to deliver something to a broader audience this should include only
+those things which the recipient is expected and which we say that we provide.
+Any additional items should be removed. We get a lot of unwanted stuff today, at
+every opportunity. From an economic point of view, it is known that very often
+margin value law is used here i.e. by hypermarkets, I will touch on this subject
+on another occasion, related to economics.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/">Debugging coreboot in qemu environment - part 1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-12T21:30:00+01:00" pubdate data-updated="true">Mar 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>First of all I use testing version of Debian &ndash; wheezy. Clone coreboot repository:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone http://review.coreboot.org/p/coreboot
+</span><span class='line'>cd coreboot; make menuconfig</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Configure FILO as apayload and use its latest version:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Payload -&gt; Add a payload -&gt; FILO Payload -&gt; FILO version -&gt; HEAD</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add verbose debugging messages:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Debugging -&gt; Check PIRQ table consistency Debugging -&gt; Output verbose malloc debug messages
+</span><span class='line'>Debugging -&gt; Output verbose ACPI debug messages Debugging -&gt; Enable debug messages for option ROM execution
+</span><span class='line'>Debugging -&gt; Built-in low-level shell Debugging -&gt; Trace function calls</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Try to build:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If everything builds correctly you can process. Sometimes there is need to use
+cross compiler. To build one:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd util/crossgcc
+</span><span class='line'>./buildgcc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To explore <code>coreboot</code> code effectively I suggest to create tags and cscope
+database for <code>coreboot</code>. In my personal workspace I&rsquo;ve got process that I go
+through before I start work (if you use my workspace configuration which
+is available <a href="https://github.com/pietrushnic/workspace">@github</a> you
+can follow below steps directly, if not adjust to your environment):</p>
+
+<ol>
+<li>run vim ;)</li>
+<li><code>:cd /path/to/code</code></li>
+<li><code>s&lt;Tab&gt;</code> (fuzzyfinder &ndash;> bookmark dir)</li>
+<li><code>si</code> (fuzzyfinder &ndash;> change dir)</li>
+<li><code>sr</code> (run ctags to generate tags and cscope to build symbol database &ndash; <code>ctags -R;cscope -R -q -b -v</code>)</li>
+</ol>
+
+
+<p>After steps above we can start work with code. Run vim in <code>coreboot</code> directory.
+Type:
+<code>:e src/cpu/x86/16bit/reset16.inc</code>
+Put cursor over <code>protected_start</code> and press <code>Ctrl-]</code>. If everything goes ok you
+should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 537.</p>
+
+<p>In second article we dive into first phase of <code>coreboot</code> execution in emulated environment.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/07/human-action-ludwig-von-misess-work-by/">&#8220;Human Action&#8221; Ludwig von Mises</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-07T23:37:00+01:00" pubdate data-updated="true">Mar 7<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/03/07/human-action-ludwig-von-misess-work-by/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>  <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Ludzkie_dzialanie_okladka.jpg/166px-Ludzkie_dzialanie_okladka.jpg" alt="" /></p>
+
+<p>&ldquo;Human Action&rdquo; Ludwig von Mises&rsquo;s work by some of called the pope of free market. IMHO is one of the best books on economics I read in my life. It is not easy, however, giving it time with certainly pays off. Allows to understand the basic laws which ruled the modern world of finance. Mises in a sensational way talk about the myths explaining what is inflation, why it has impact on our lives, what is and how works the supply of credit, and who depend most on the production of money without coverage (<em>fiat</em> money). I can say that until I read this book, I was lost in the dark. Thanks to it I received a weapon to overthrow ridiculous  world order concepts, absurd messages communicated in the media. I recommend:  <a href="http://mises.org/store/Human-Action-The-Scholars-Edition-P119.aspx">mises.org store &ndash; Human Action </a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -546,185 +892,6 @@ To effectively work with arbtt I had to run a daemon that collects information. 
 
 <p>termcapinfo xterm* &lsquo;hs:ts=\E]0;:fs=\007:ds=\E]0;\007&rsquo; defhstatus &ldquo;[screen] ^Et&rdquo; hardstatus off # Set the scrollback length: defscrollback 10000 # Select whether you want to see the copyright notice during startup: startup_message off # Display a caption string below, appearing like tabs and # displaying the window number and application name (by default). caption always caption string &ldquo;%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W}%c %{g}]&rdquo; #&ldquo;%{= kb}[ %=%{w}%?%-Lw%?%{b}(%{W}%n*%f %t%?(%u)%?%{b})%{w}%?%+Lw%?%?%= %{b}][%{B} %H %{W}%l %{b}][%{B} %d.%m.%Y %{W}%0c %{b}]&rdquo; #&ldquo;%{bw}[%H] [%?%-Lw%?%{wb}%n*%f%t%{bw}%?%+Lw%?]%=%{bw} [%1`] [%c:%s] [%l]&rdquo; # &ldquo;%{kw}%-w%{wr}%n %t%{&ndash;}%+w&rdquo; defhstatus set terminal title and caption keeps data about my open windows in screen. Every time I open new window or change current one terminal title is updated.<br/>
 For now that&rsquo;s all. In the future I wanted to write how to synchronize the title of the window in the screen with vim editor to include information about the currently edited file.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/05/first-steps-to-improve-work/">First steps to improve work productivity in Linux environment</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-05T03:08:00+01:00" pubdate data-updated="true">Feb 5<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/02/05/first-steps-to-improve-work/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The problem encountered on several occasions over several months. Now it is time to deal with it. How did this happen? As always, resources were not sufficient, and if we can not increase the amount of resources we must strive to optimize their use.In this case, it was about time.</p>
-
-<p>While reading my last acquisition, once again I faced the problem of re-configure Linux account. Every time when I need new account for some reasons I need to configure some things manually. Most things are simple enough, we copy configuration files from the already existing user directory, and voila. Of course Murphy&rsquo;s law works, and something goes wrong. Sometimes we need to create a new account with just a few of the tools configured as in other existing accounts. So we have a problem, however, reflecting on the solution, my mind was deepened in the increasing number of new issues, which caused the solution became more distant.</p>
-
-<p>How this process looks like? First we need new account, it should get automatically some configuration files that I create for other accounts. Second I realize that I don&rsquo;t have methods for storing configs that I use most. I heard about dotfiles tracking with git with cloud help (e.g. <a href="https://github.com/">github</a>). When I google this issue I found <a href="https://github.com/trym/dotty">dotty</a>. But after that I ask myself about productivity improvements in broad sense and the conclusion was that my work scheme should be changed. So I try to find some hints about improving productivity, there are thousand of web pages about that. Few things I found useful first of all the idea of &ldquo;automated time tracking&rdquo;. Second that chaos that I produced during solving simple problem meant that I thought about controlling of its flow, and this led me to <a href="http://en.wikipedia.org/wiki/Mind_map">mind mapping</a> technique. AFAIK <a href="http://freemind.sourceforge.net/wiki/index.php/Main_Page">FreeMind</a> is the best free software for playing with this way of data presentation. Below I attach my first mind map in FreeMind, this is of course beta version.</p>
-
-<p>  <img src="http://4.bp.blogspot.com/-JCXeznxAkyM/Ty3jqvKH1UI/AAAAAAAAAD8/6Rye6fkesjM/s640/improve_productivity.png" alt="" /></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/15/another-interesting-topic-with-which-i/">UEFI from Linux enthusiast perspective</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-15T23:04:00+01:00" pubdate data-updated="true">Jan 15<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/15/another-interesting-topic-with-which-i/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Another interesting topic with which I am dealing with recently is the <a href="http://www.uefi.org/home/">UEFI</a>. As we read on wikipedia: &ldquo;The Unified Extensible Firmware Interface (UEFI) is a specification that defines a software interface between an operating system and platform firmware.&rdquo;. The purpose of this specification is to create something what in the future fully replace the BIOS.</p>
-
-<p>Of course, as always in such a situation, I wonder what OpenSource and Linux gurus have to say. A brief googling and I found <a href="http://kerneltrap.org/node/6884">this</a>. On the one hand are noticeable advantages: better design, formalized structure of the code, the C programming language, but you can feel that community fears and feared that the &ldquo;standard&rdquo; will be used in an inappropriate manner. Therefore, I regularly read <a href="http://lwn.net/">LWN</a> RSS feeds, and it seems that on the horizon you can see already the first ideas on how to use UEFI to limit freedom. You can read about it in this article: <a href="http://lwn.net/Articles/475359/">&ldquo;SFLC: Microsoft confirms UEFI fears, locks down ARM devices&rdquo;</a>.</p>
-
-<p>Personally, I really do not like it, because I believe that everyone who buys the equipment has the right to exploit its capabilities in such a manner it deems appropriate.</p>
-
-<p>Of course, as usual, I change the subject. I wanted to write about the project <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=Welcome">TianoCore</a>, which is an open source implementation of UEFI implemented by Intel. When you do not have the strength nor the resources to fight the system, use the system to gather strength and resources, and then start fighting. So in the next post I will try to describe my first experience with <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=EDK2">EDKII</a> in emulated environment of QEMU.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/09/my-view-for-silver-perspective/">My view for silver perspective</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-09T22:31:00+01:00" pubdate data-updated="true">Jan 9<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/09/my-view-for-silver-perspective/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In the morning when reading RSS feeds (I should think about placing its list somewhere on the blog) from several sources the information came to me that silver is highly underrated recent times. I try to carefully analyze such information, despite the fact that I use more of niche sources of information and what is in them is served rather carefully selected. Although I looked at this subject a little closer.</p>
-
-<p>One of the factors that should be taken into account is the silver to gold ratio. It is said that historically it was 16, or 16 ounces of silver buys one ounce of gold. In view of the massive derivatives trading, selling certificates based on complex rules (that basically said &ldquo;do not try to take this physical&rdquo;), the silver market manipulation and the like rip accounting, the ratio is 3-4 times higher. After reading information about undervalued silver I looked at my favorite website provides charts <a href="http://stockcharts.com/h-sc/ui">stockcharts.com</a> and yesterday I checked, this ratio it was 56 and today fallen slightly due to movements in silver. Six months ago this ratio was below 40. What I learn until now silver reacts slower than gold and gold is taking action now. When I check stockcharts before New Year I found out that price per kilogram of gold was about 38 000 euro. Right now it is 41 100 and seems still rise. Silver seemed to wondering all the moves, and this morning took off. At the same time when I check gold silver became the shockingly low price of 663 euros per kilo. The new year saw a jump to level 730 and it looks like that this morning go after gold and now cost 760.</p>
-
-<p>We&rsquo;ll see how strong it will move. From a technical point of view, per half year MACD is narrow, and the RSI is equal to 54 and is far from the area to buy. Moving averages of 50 and 200 are to each other in nearly parallel position and technically in the next few months should not be anything happening. The three-year term MACD lines have not yet crossed, RSI is less than 50 recent declines lasted too short to harm long distance running averages of 50 and 200 on a 3-year chart.</p>
-
-<p>Precisely because there is little evidence for any event you may receive move. Of course, seriously people know that long-term perspective and fundamental considerations leave no doubt that the bull will have long reigned in the areas of commodity. While speculation is paper, and this can lead astray careless player.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/09/ideas-for-development/">Ideas for development</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-09T22:24:00+01:00" pubdate data-updated="true">Jan 9<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/01/09/ideas-for-development/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>All the time come to my mind new ideas about what could be added to the blog and what information to post. I&rsquo;m interested in so many things that many of the ideas are killed before reaching the plane of the keyboard and has no chance to be introduced even as a draft to the blog. It seems that for myself I should store ideas for development in order to easily return to them when ripe.</p>
-
-<ol>
-<li>I want occasionally write something about the commodity markets, however, I&rsquo;m interested in it very briefly, because only about a year it seems to me that sometimes I have something to say.</li>
-<li>I begin learning about the <a href="http://www.uefi.org/home/">UEFI</a> environment and, therefore, that I am an advocate of freedom in the broad sense of the word, I would like to refer to this solution. I also want to understand the advantages and disadvantages of this solution in the context of freedom and relate them to other solutions such as <a href="http://www.coreboot.org/Welcome_to_coreboot">coreboot</a>.</li>
-<li>I would also like to implement a section that could be titled &ldquo;what I&rsquo;m interested now ?&rdquo;, &ldquo;what I read now?&rdquo; and &ldquo;what was last seen?&rdquo;</li>
-</ol>
-
-
-<p>I would like to set a specific time for blogging during the week, what with certainty contribute to faster realization of these ideas.</p>
 </div>
   
   

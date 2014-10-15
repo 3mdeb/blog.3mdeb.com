@@ -204,12 +204,22 @@
     </url>
     <url>
         <loc>
+            http://pietrushnic.github.io/blog/2013/03/30/useful-hints-for-blogging-using-octopress-with-vim/
+        </loc>
+        <lastmod>2014-08-21T01:26:29+02:00</lastmod>
+    </url>
+    <url>
+        <loc>
             http://pietrushnic.github.io/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi/
         </loc>
         <lastmod>2014-08-21T01:26:29+02:00</lastmod>
     </url>
     <url>
         <loc>http://pietrushnic.github.io/blog/2013/04/06/tmux/</loc>
+        <lastmod>2014-08-21T01:26:29+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://pietrushnic.github.io/blog/2013/05/12/kernel-developers-tools/</loc>
         <lastmod>2014-08-21T01:26:29+02:00</lastmod>
     </url>
     <url>
@@ -267,6 +277,10 @@
         <lastmod>2014-08-21T01:26:29+02:00</lastmod>
     </url>
     <url>
+        <loc>http://pietrushnic.github.io/blog/2013/06/14/build-and-run-ovmf-under-qemu/</loc>
+        <lastmod>2014-08-21T01:26:29+02:00</lastmod>
+    </url>
+    <url>
         <loc>
             http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/
         </loc>
@@ -303,6 +317,12 @@
         <lastmod>2014-09-21T03:19:57+02:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://pietrushnic.github.io/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/
+        </loc>
+        <lastmod>2014-10-16T01:08:40+02:00</lastmod>
+    </url>
+    <url>
         <loc>http://pietrushnic.github.io/about/</loc>
         <lastmod>2014-09-13T01:31:27+02:00</lastmod>
     </url>
@@ -312,10 +332,10 @@
     </url>
     <url>
         <loc>http://pietrushnic.github.io/blog/archives/</loc>
-        <lastmod>2014-09-21T03:19:57+02:00</lastmod>
+        <lastmod>2014-10-16T01:08:40+02:00</lastmod>
     </url>
     <url>
         <loc>http://pietrushnic.github.io/</loc>
-        <lastmod>2014-09-21T03:19:57+02:00</lastmod>
+        <lastmod>2014-10-16T01:08:40+02:00</lastmod>
     </url>
 </urlset>

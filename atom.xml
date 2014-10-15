@@ -4,7 +4,7 @@
   <title><![CDATA[Linux geek's scratchpad]]></title>
   <link href="http://pietrushnic.github.io/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-09-21T03:20:20+02:00</updated>
+  <updated>2014-10-16T01:09:40+02:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,148 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi kernel repository aggregating patches for Linux mainline]]></title>
+    <link href="http://pietrushnic.github.io/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/"/>
+    <updated>2014-10-15T23:23:11+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline</id>
+    <content type="html"><![CDATA[<p>Since several months I&rsquo;m trying to find my way to embedded Linux programming.
+My hardware set was very limited I had only one board that can be called
+&ldquo;embedded&rdquo; and it was Raspberry Pi. Because I am more interested in firmware/OS
+level then hardware I tried to figure out what is going on with RPi kernel.
+After taking brief review of
+<a href="https://github.com/raspberrypi/linux">raspberrypi/linux</a> GitHub repository I
+realized that close to my heart is upstreaming effort. So with noob attitude I
+contacted RPi Upstreaming wiki page author (<a href="https://github.com/notro">notro</a>)
+and we started to create some foundation.</p>
+
+<p><em>Disclaimer: These are for testing purposes and considered unstable. Use at your own risk.</em></p>
+
+<h2>What we have now ?</h2>
+
+<p>We created set of repositories to handle upstreaming process.</p>
+
+<p>First there is <a href="https://github.com/pietrushnic/rpi-dt-linux.git">rpi-dt-linux</a>
+it is Linux kernel based on
+<a href="https://git.kernel.org/cgit/linux/kernel/git/stable/linux-stable.git/">linux-stable</a>
+with patches on top of every branch. This repository aims to aggregate all
+patches required for Raspberry Pi support in upstream kernel. <code>rpi-dt-linux</code>
+use <code>bcm2835_defconfig</code> with device tree support. We want to introduce every
+driver that supports device tree. Right now a lot of stuff is missing, but I
+will dive into it later.</p>
+
+<p>After consulting with
+<a href="https://github.com/raspberrypi/linux/issues/698">popcornmix</a> we decide to
+rebase all patches to keep them on top of every branch. This of course mean
+that repository will be broken, but patches will be more visible in history.</p>
+
+<p><code>rpi-dt-linux</code> repository can be cloned with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/pietrushnic/rpi-dt-linux.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Second <a href="https://github.com/pietrushnic/rpi-dt-firmware">rpi-dt-firmware</a> is ready
+to use firmware files for Raspberry Pi with already built modules and kernel.
+If you are familiar with <a href="https://github.com/Hexxeh">Hexxeh</a>
+<a href="https://github.com/Hexxeh/rpi-update">rpi-update</a> and his repository
+<a href="https://github.com/Hexxeh/rpi-firmware">rpi-firmware</a> this should not be
+anything new for you. Repository can be cloned with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/pietrushnic/rpi-dt-firmware.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Third <a href="https://github.com/notro/rpi-bcm2835">rpi-bcm2835</a> which simplifies
+build and release process of <code>rpi-dt-linux</code>. You can clone it with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/notro/rpi-bcm2835.git</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>How to use it ?</h2>
+
+<h2>User</h2>
+
+<p>If you simply want to try new kernel on your RPi then install <code>rpi-update</code>, by:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install rpi-update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>on Raspbian or follow instruction from
+<a href="https://github.com/Hexxeh/rpi-update">Readme.md</a> for other distributions.</p>
+
+<p>To install latest release of <code>rpi-dt-firmware</code> use <code>rpi-update</code> on RPi:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo REPO_URI=https://github.com/pietrushnic/rpi-dt-firmware rpi-update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After update simply reboot your Pi and enjoy our upstream kernel :).</p>
+
+<h2>Developer</h2>
+
+<p>If you want to play with the code I have few hints that can help.</p>
+
+<p>First please clone <code>rpi-dt-linux</code> and <code>rpi-bcm2835</code> mentioned above. Then
+install <a href="https://github.com/notro/rpi-build">rpi-build</a> following instructions
+on <a href="https://github.com/notro/rpi-build/wiki">wiki</a>. Then you can do few thigns:</p>
+
+<p>Build <code>rpi-dt-linux</code> locally. This will download latest snapshot of
+<code>rpi-dt-linux</code> and other dependencies like <code>u-boot</code> and cross-compiler.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd path/to/rpi-bcm2835
+</span><span class='line'>rpi-build rpi-dt-linux clean build</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can install already built kernel on your machine over ssh (replace
+<code>&lt;RPI_IP&gt;</code> with your Pi IP address):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rpi-build rpi-dt-linux install SSHIP=&lt;RPI_IP&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to use your own kernel repository just use <code>rpi-bcm2835</code> with local
+path:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RPI_DT_LINUX_LOCAL=../../rpi-dt-linux rpi-build rpi-dt-linux clean build</span></code></pre></td></tr></table></div></figure>
+
+
+<p>NOTE: that additional level of <code>../</code> was added because rpi-build creates
+workdir which is reference directory for it.</p>
+
+<p>It is also possible to release your own firmware repository. To help with
+process there are two commands:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>FW_REPO=/home/pietrushnic/src/rpi-dt-firmware FW_BRANCH=master rpi-build rpi-dt-linux commit
+</span><span class='line'>FW_REPO=/home/pietrushnic/src/rpi-dt-firmware FW_BRANCH=master rpi-build rpi-dt-linux push</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obviously <code>FW_REPO</code> is a directory with firmware git repository.</p>
+
+<h2>Changelog</h2>
+
+<p>At the point of writing this post there were 3 releases of <code>rpi-dt-firmware</code>. We
+applied v10 of <a href="http://lwn.net/Articles/607424/">mailbox API</a> and Lubomir
+Rintel <code>bcm2835-mbox</code>, <code>bcm2835-cpufreq</code> and <code>bcm2835-thermal</code> drivers from his
+<a href="https://github.com/hackerspace/rpi-linux/commits/lr-raspberry-pi-new-mailbox">repository</a>.
+All updates are published in
+<a href="https://github.com/pietrushnic/rpi-dt-firmware/blob/master/README.md">README.md</a>
+with every release.</p>
+
+<h2>Summary</h2>
+
+<p>Of course we are happy with every contribution small and big, critique and
+process improvement hints. Let us know what you think about this effort.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[virtualbox-dkms: fix alloc_netdev problems when compiling with 3.17.0-rcX headers]]></title>
@@ -1574,6 +1716,50 @@ people resign after few tries. Most people also don&rsquo;t like changes as adag
 &ldquo;better the devil you know&rdquo;. However only those who try to change something in
 their lives can reach success. And as story of Thomas Edison proves you have to
 try.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Build and run OVMF under Qemu]]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/06/14/build-and-run-ovmf-under-qemu/"/>
+    <updated>2013-06-14T23:22:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/06/14/build-and-run-ovmf-under-qemu</id>
+    <content type="html"><![CDATA[<h3>What the OVMF is ?</h3>
+
+<p><strong>OVMF</strong> (<em>Open Virtual Machine Firmware</em>) is a firmware actively developed as a
+<strong>EDK2</strong>(<em>EFI Developer Kit</em>) package. It is a packed that aims to support
+firmware for virtual machines like Qemu.</p>
+
+<h3>Simplified build process</h3>
+
+<p>First of all lets get latest version of the code. For some time <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=Welcome">EFI and
+Framework Open Source
+Community</a> share edk2 code also on <a href="https://github.com/tianocore/edk2">github</a> mirror.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/tianocore/edk2.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Building process was simplified by OvmfPkg contributors. But I found that
+toolchain for latest gcc compilers is not ready in main repository. So I suggest
+to remove <code>BaseTools</code> directory and clone up to date git repository in this
+place:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd edk2
+</span><span class='line'>rm -rf BaseTools
+</span><span class='line'>git clone https://github.com/tianocore/buildtools-BaseTools.git BaseTools
+</span><span class='line'>. edksetup.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So to build firmware we need only one command:
+&#8220;`</p>
+
+<p><code>``
+You may need some additional packages like</code>uuid-dev<code>,</code>iasl<code>or</code>g++`.</p>
 ]]></content>
   </entry>
   
@@ -3702,464 +3888,34 @@ productivity using open source tools.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Tmux as screen replacement and productivity accelerator]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/04/06/tmux/"/>
-    <updated>2013-04-06T05:29:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/04/06/tmux</id>
-    <content type="html"><![CDATA[<p>As I wrote in <a href="http://pietrushnic.github.io/blog/2013/03/19/debian-switching-to-unstable">previous post</a> I
-switched from GNU screen to <a href="http://tmux.sourceforge.net">tmux</a>. I use it for a
-few moths and have to said that I&rsquo;m really impressed by simplicity, performance
-and community support in this project. In this post I want to discuss my
-configuration and useful additions for it like tmuxinator, session logging,
-colors or status bar configuration.</p>
-
-<h3>Basics</h3>
-
-<p>Debian contain <code>tmux</code> package but for stable and testing release it is pretty
-old version. Personally I use <code>unstable</code> version where <code>tmux</code> was delivered in
-<code>1.7~svn2819-1</code> version.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install tmux</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To start session simply type <code>tmux</code>. Tmux uses <code>C-b</code>/ <code>Ctrl-b</code> as a prefix for
-commands. If you switch from GNU screen then at the beginning you can experience
-some annoying situations but after few days everything should back to normal.</p>
-
-<p>Most used keybiddings:</p>
-
-<ul>
-<li><code>C-b c</code> &ndash; create new window</li>
-<li><code>C-b ,</code> &ndash; rename current window</li>
-<li><code>C-b n</code> &ndash; next window</li>
-<li><code>C-b p</code> &ndash; previous window</li>
-<li><code>C-b l</code> &ndash; last window</li>
-<li><code>C-b d</code> &ndash; disconnect</li>
-<li><code>C-b k</code> &ndash; kill current window</li>
-<li><code>C-b K</code> &ndash; kill tmux server</li>
-<li><code>C-b [</code> &ndash; enter copy mode</li>
-<li><code>C-b ]</code> &ndash; paste last copied buffer</li>
-<li><code>C-b :</code> &ndash; tmux command line</li>
-<li><code>C-b w</code> &ndash; windows list</li>
-<li><code>C-b ?</code> &ndash; help</li>
-</ul>
-
-
-<p>Full list can be found <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tmux&amp;sektion=1#KEY+BINDINGS">here</a>.</p>
-
-<h3>Configuration</h3>
-
-<p>Tmux keeps its configuration in <code>$HOME/.tmux.conf</code>. My configuration mixes
-some tmux examples with code that I found in the net. This file can be found on
-my github repository <a href="https://github.com/pietrushnic/workspace/blob/master/dotfiles/tmux.conf">here</a>. First section contain some general configuration:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># confirm before killing a window or the server
-</span><span class='line'>bind-key k confirm kill-window
-</span><span class='line'>bind-key K confirm kill-server
-</span><span class='line'>
-</span><span class='line'># toggle statusbar
-</span><span class='line'>bind-key b set-option status
-</span><span class='line'>
-</span><span class='line'># ctrl+left/right cycles thru windows
-</span><span class='line'>bind-key -n C-right next
-</span><span class='line'>bind-key -n C-left prev
-</span><span class='line'>
-</span><span class='line'># scrollback buffer n lines
-</span><span class='line'>set -g history-limit 10000
-</span><span class='line'>
-</span><span class='line'># listen for activity on all windows
-</span><span class='line'>set -g bell-action any
-</span><span class='line'>
-</span><span class='line'># on-screen time for display-panes in ms
-</span><span class='line'>set -g display-panes-time 2000
-</span><span class='line'>
-</span><span class='line'># start window indexing at one instead of zero
-</span><span class='line'>set -g base-index 1
-</span><span class='line'>
-</span><span class='line'># enable wm window titles
-</span><span class='line'>set -g set-titles on
-</span><span class='line'>
-</span><span class='line'># wm window title string (uses statusbar variables)
-</span><span class='line'>set -g set-titles-string "tmux.#I.#W"
-</span><span class='line'>
-</span><span class='line'># statusbar 
-</span><span class='line'>set -g display-time 2000</span></code></pre></td></tr></table></div></figure>
-
-
-<p>After that I have implemented <a href="http://ethanschoonover.com/solarized">solarized</a> colors (dark theme):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>### COLOUR (Solarized dark)
-</span><span class='line'>
-</span><span class='line'># default statusbar colors
-</span><span class='line'>set-option -g status-bg black #base02
-</span><span class='line'>set-option -g status-fg yellow #yellow
-</span><span class='line'>set-option -g status-attr default
-</span><span class='line'>
-</span><span class='line'># default window title colors
-</span><span class='line'>set-window-option -g window-status-fg brightblue #base0
-</span><span class='line'>set-window-option -g window-status-bg default
-</span><span class='line'>#set-window-option -g window-status-attr dim
-</span><span class='line'>
-</span><span class='line'># active window title colors
-</span><span class='line'>set-window-option -g window-status-current-fg brightred #orange
-</span><span class='line'>set-window-option -g window-status-current-bg default
-</span><span class='line'>#set-window-option -g window-status-current-attr bright
-</span><span class='line'>
-</span><span class='line'># use vi-like keys
-</span><span class='line'>setw -g mode-keys vi
-</span><span class='line'>
-</span><span class='line'># pane border
-</span><span class='line'>set-option -g pane-border-fg black #base02
-</span><span class='line'>set-option -g pane-active-border-fg brightgreen #base01
-</span><span class='line'>
-</span><span class='line'># message text
-</span><span class='line'>set-option -g message-bg black #base02
-</span><span class='line'>set-option -g message-fg brightred #orange
-</span><span class='line'>
-</span><span class='line'># pane number display
-</span><span class='line'>set-option -g display-panes-active-colour blue #blue
-</span><span class='line'>set-option -g display-panes-colour brightred #orange</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To make solarized colors work on my setup was quite challenging, because there
-are many things to set (vim, terminal, putty etc.). If you need any advice I can
-write something about this. Right now it is beyond the scope of this post.</p>
-
-<p>At the end of my tmux configuration I&rsquo;ve some fancy status bar:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># clock
-</span><span class='line'>set-window-option -g clock-mode-colour green #green
-</span><span class='line'>
-</span><span class='line'># center align the window list
-</span><span class='line'>set -g status-justify centre
-</span><span class='line'>
-</span><span class='line'># show some useful stats but only when tmux is started 
-</span><span class='line'># outside of Xorg, otherwise dwm statusbar shows these already
-</span><span class='line'>set -g status-right ""
-</span><span class='line'>set -g status-left ""
-</span><span class='line'>if '[ -z "$DISPLAY" ]' 'set -g status-left "[#[fg=green] #H ][#[default]]"'
-</span><span class='line'>if '[ -z "$DISPLAY" ]' 'set -g status-right "[ #[fg=magenta]#(cat /proc/loadavg | cut -d \" \" -f 1,2,3)#[default] ][ #[fg=cyan,bright]%a %Y-%m-%d %H:%M #[default]]"'
-</span><span class='line'>if '[ -z "$DISPLAY" ]' 'set -g status-right-length 50'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I think that mostly this is self explanatory. This how it look in work:
-<a href="http://pietrushnic.github.io/assets/images/tmux-screen.png"><img class="center" src="http://pietrushnic.github.io/assets/images/tmux-screen.png" width="300" height="400"></a></p>
-
-<h3>tmuxinator</h3>
-
-<p>I spend some time to realize what is the best way of managing windows and panes
-in tmux. Especially I was interested in setting some windows at tmux startup.
-Finally I found <a href="https://github.com/aziz/tmuxinator">tmuxinator</a> small but useful
-project delivered through <code>gem</code> system. Follow tmuxinator page to set it up
-correctly. If you want to see my primitive configuration it is also available on
-my github in <a href="https://github.com/pietrushnic/workspace/blob/master/dotfiles/tmux.conf">werkspace project</a>.</p>
-
-<h3>Window logging</h3>
-
-<p>Last hint I found on this
-<a href="http://0xfeedface.org/blog/lattera/2012-03-19/using-tmux-screencasting-tool">blog</a>.
-How to log your work in console for example to write a blog post :) ? There is a
-universal method for piping all console output to our program of choice. For
-example run command like this (command mode available under <code>C-b :</code>):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>pipe-pane -o 'cat &gt;&gt; ~/tmuxcast.#h.#T'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This will give you file with logged session output (all curses windows, editor
-windows and so on). Curses output can be unreadable because of control escape
-sequences. Use <code>cat</code> it will interpret escape sequences in terminal.</p>
-
-<p>As always I hope hints were useful. Please share this content if think its
-valuable. Comment if you think id needs improvements. Thank you for reading.</p>
-
-<p>P.S. I should probably create a footer with last paragraph :)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Yet another quick build of arm-unknown-linux-gnueabi]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi/"/>
-    <updated>2013-04-03T19:00:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi</id>
-    <content type="html"><![CDATA[<p>So I decide to check what is going on with
-<a href="http://crosstool-ng.org">crosstool-ng</a> and refresh my <a href="http://pietrushnic.github.io/blog/2012/03/14/quick-build-of-arm-unknown-linux">old post</a>
-about building <code>arm-unknown-linux-gnueabi</code> toolchain. Last post was pretty
-popular, so definitely this is direction I should follow :). I will not repeat
-myself, so if you encounter any problems please check last post, section with
-known problems in crosstool-ng <code>doc/</code> directory or RTFM. Let&rsquo;s begin:</p>
-
-<h3>Get the latest crosstool-ng</h3>
-
-<p>As usual I&rsquo;m trying to use latest version possible. Following the crosstool-ng page:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>hg clone http://crosstool-ng.org/hg/crosstool-ng
-</span><span class='line'>cd crosstool-ng
-</span><span class='line'>./bootstrap</span></code></pre></td></tr></table></div></figure>
-
-
-<p>At the time of writing this article my changeset was <code>3200:0fc56e62cecf</code> 16 Mar
-2013, two weeks old.</p>
-
-<h3>Installation</h3>
-
-<p>I prefer to use local directory for <code>ct-ng</code> in case it will change in feature I
-will not need to mess with <code>/usr</code> subsystem. Simply tryin&#8217; to keep it clean when I can.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir $HOME/ct-ng
-</span><span class='line'>./configure --prefix=$HOME/ct-ng
-</span><span class='line'>make
-</span><span class='line'>make install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>No problems on my up to date Debian wheezy.
-You will probably want to add <code>$HOME/ct-ng</code> to your <code>PATH</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH="$HOME/ct-ng/bin:${PATH}"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add bash completion as it is advised in message at the end of compilation process. My <code>.bashrc</code>
-automatically sources <code>$HOME/.bash_completion</code> so there is a place for local
-code completion.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat ct-ng.comp &gt;&gt; $HOME/.bash_completion</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Build sample toolchain</h3>
-
-<p>There is a long list of predefined samples toolchains which you can get build.
-If <code>ct-ng</code> bash completion was correctly added, than you can explore it by <code>&lt;Tab&gt;</code> or simply
-<code>ct-ng list-samples</code>. Let&rsquo;s try to build <code>arm-unknown-linux-gnueabi</code>:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir -p $HOME/embedded/arm-unknown-linux-gnueabi
-</span><span class='line'>cd $HOME/embedded/arm-unknown-linux-gnueabi
-</span><span class='line'>ct-ng arm-unknown-linux-gnueabi</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Before you start build consider some debugging options to make build process
-easier to continue when problems encountered.</p>
-
-<h3>Additional debugging options</h3>
-
-<p>crosstool-ng contain interesting mechanism of saving finished phases of
-toolchain. This helps when for some reason our build process failed. To enable
-this feature simply enter menuconfig:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ct-ng menuconfig</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Mark option <code>Paths and mix options -&gt; Debug crosstool-NG -&gt; Save intermediate steps</code>
-as enabled. If something goes wrong you can check what last state was by:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ls -lt .build/arm-unknown-linux-gnueabi/state</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Directory on top with the latest modification date is now your first state where you
-should restart after fail. To restart build in given point:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ct-ng &lt;state&gt;+ #assuming that &lt;state&gt; is where we fail last time</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Ordered list of possible states can be retrieved by <code>ct-ng list-steps</code>.</p>
-
-<h3>Start build</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ct-ng build.4</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>4</code> is the number of concurrent jobs and depends on your setup performance.
-Building process takes a while so make coffee or anything else to drink :).</p>
-
-<h3>Known problems</h3>
-
-<p>I encounter few different problems than during <a href="http://pietrushnic.github.io/blog/2012/03/14/quick-build-of-arm-unknown-linux">previous building</a>.</p>
-
-<h4>Missing expat library</h4>
-
-<p>Signature looks like that:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[ERROR]    configure: error: expat is missing or unusable
-</span><span class='line'>[ERROR]    make[3]: *** [configure-gdb] Error 1
-</span><span class='line'>[ERROR]    make[2]: *** [all] Error 2</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Simply install <code>libexpat</code>:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install libexpat1-dev</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>gcj internal error</h4>
-
-<p>Few times I encountered something like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[ERROR]    gcj: internal compiler error: Killed (program jc1)
-</span><span class='line'>[ERROR]    make[5]: *** [ecjx] Error 4
-</span><span class='line'>[ERROR]    make[4]: *** [all-recursive] Error 1
-</span><span class='line'>[ERROR]    make[3]: *** [all-target-libjava] Error 2
-</span><span class='line'>[ERROR]    make[2]: *** [all] Error 2</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The reason is that <code>oom_kiler</code> takes care about <code>gcj</code>. It means that you run out
-of memory during compilation Java related code. I experience that when trying to
-build toolchain with 512MB of RAM :)</p>
-
-<p>So this was short reminder. I work on new post about creating virtual
-embedded development environment based on <a href="http://wiki.qemu.org/Main_Page">qemu</a>.
-I was inspired by <a href="http://www.elinux.org/Virtual_Development_Board">this article</a>.
-Hope this article was useful. If you have any comments or difficulties please
-comment below. If think this post was useful &ndash; share.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Music for programming]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/03/30/music-for-programming/"/>
-    <updated>2013-03-30T03:27:00+01:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/03/30/music-for-programming</id>
-    <content type="html"><![CDATA[<p>Of course this is strongly associated with personal taste but I will write my
-experience.</p>
-
-<ol>
-<li><a href="www.pandora.com">www.pandora.com</a> &ndash; really great radio station, choose your
-genre or artist and it will lead you through all variety of this type.
-unfortunately if you are fan of Iron Maiden, Blind Guardian, prog rock or
-irish folk you will be bored after 2 hours or less. Sadly not available in
-Poland <i class='emoji disappointed'></i> &ndash; maybe some proxy will work but I wasn&rsquo;t able to find one.</li>
-<li><a href="http://www.kohina.com/">kohina/demo scene</a> &ndash; very good radio for long night
-coding sessions. I&rsquo;m not big fan of demo scene but I appreciate what guys do
-and did. And somtimes you will hit Super Mario or Contra theme.</li>
-<li><a href="http://www.progarchives.com/subgenre.asp?style=32">post rock/math rock</a> &ndash; if you like any variety of prog rock you probably
-know <a href="http://www.progarchives.com/">ProgArchives</a>. It is really hard to find
-good prog rock radio where classics are well mixed with newcomers. I really
-like to listen guys like <a href="http://www.progarchives.com/subgenre.asp?style=32">God Is An Astronaut</a>,
-<a href="http://www.explosionsinthesky.com/">Explosions In The Sky</a>, <a href="http://twdy.tumblr.com/">This Will Destroy You</a>,
-<a href="http://www.65daysofstatic.com/">65daysofstatic</a>, <a href="http://www.redsparowes.com/News.aspx">Red Sparowes</a> or even
-<a href="http://mogwai.sandbag.uk.com/lesrevenants/">Mogwai</a> or <a href="http://www.sigur-ros.co.uk/">Sigur Ros</a>.
-Very good for programming if you drink cofee/tea <i class='emoji smile'></i></li>
-<li>movie soundtracks &ndash; This one I use when really need to concentrate
-especially when working daylight hours. What&rsquo;s best here most of people will
-agree that <a href="http://www.enniomorricone.it/uk/news.php">Ennio Moricone</a>, <a href="http://elsew.com/">Vangelis</a> and <a href="http://www.hans-zimmer.com/">Hans Zimmer</a>
-are famous one and most recognizable for my generation.</li>
-<li><a href="http://nsbradio.co.uk/content/">breakbeat</a> &ndash; this one reminds me some stories about mythical cyberpunk
-hackers, its usually noisy and help me isolate from environment and
-concentrate on my work. I will said that if you like freaked electronics than
-you can try this.</li>
-<li><a href="http://www.shoutcast.com/Internet-Radio/drum%20and%20base">dnb</a> &ndash; if
-breakbeat is to hard for you try this <i class='emoji smile'></i>. This music tune me in channel of
-rhythmical work.</li>
-<li>When googling this topic I found <a href="http://musicforprogramming.net/">this site</a>
-it was worth to check. Some links are broken. Most of those playlists have too
-low tempo for me.</li>
-</ol>
-
-
-<p>I can also suggest some Irish Folk influenced stuff if don&rsquo;t have &ldquo;The End is
-near&rdquo; wallpaper on your desktop <i class='emoji smile'></i> There was a time when I was listen a lot of
-psybient, but it is really hard to find good psychodelic ambient radio and this
-music is for me more like movie soundtracks I cannot listen it at night.
-Hope it will give some kind of direction. Let me know what you listen when coding.
-Maybe I will discover new universe.</p>
+    <title type="html"><![CDATA[Kernel developers tools - based on '30 Linux Kernel Developers in 30 Weeks']]></title>
+    <link href="http://pietrushnic.github.io/blog/2013/05/12/kernel-developers-tools/"/>
+    <updated>2013-05-12T02:41:00+02:00</updated>
+    <id>http://pietrushnic.github.io/blog/2013/05/12/kernel-developers-tools</id>
+    <content type="html"><![CDATA[<p>git, cscope, vi, bash, awk, and the rare bout with python.
+Ubuntu with Unity2D
+terminal, make, gcc, make me happy. Quilt for patch management, Git or
+Subversion for source code management. I&rsquo;m using Nedit
+SLED for work and openSUSE
+email client (mutt), and my editor (vim),
+git and quilt for kernel development, Chrome and Firefox for web browsing, and
+irssi for irc communication
+NOME 3 on my desktop, but sometimes get frustrated with it and revert back to
+OpenBox or i3m
+Xfce
+fbcon, vim, and mutt
+fvwm2
+bash shell, joe editor, gcc, make, git
+ Fedora
+ Xfce
+ git, sparse, smatch and spatch
+ joe
+  xterm, emacs, perl, mc and git.
+  i3
+  Emacs, ocaml, xfce
+  Emacs, Evolution, GNOME 3, Iceweasel (aka Firefox)
+  git, gcc, gmake, bash, perl
+  Thunderbird</p>
 ]]></content>
   </entry>
   

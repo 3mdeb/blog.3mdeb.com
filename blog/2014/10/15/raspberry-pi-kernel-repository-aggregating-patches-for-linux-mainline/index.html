@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Raspberry Pi kernel repository aggregating patches for Linux mainline - Linux geek's scratchpad</title>
+  <meta name="author" content="">
+
+  
+  <meta name="description" content="Since several months I&rsquo;m trying to find my way to embedded Linux programming.
+My hardware set was very limited I had only one board that can be &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pietrushnic.github.io/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Linux geek's scratchpad" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39420295-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+<!-- AddThis Smart Layers BEGIN -->
+<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534acd39445ac552"></script>
+<script type="text/javascript">
+  addthis.layers({
+    'theme' : 'gray',
+    'share' : {
+      'position' : 'left',
+      'numPreferredServices' : 5
+    }, 
+    'follow' : {
+      'services' : [
+        {'service': 'facebook', 'id': 'piotr.krol.756859'},
+        {'service': 'twitter', 'id': 'pietrushnic'},
+        {'service': 'linkedin', 'id': 'krolpiotr'},
+        {'service': 'google_follow', 'id': '115979497998056410813'}
+      ]
+    },  
+    'whatsnext' : {},  
+    'recommended' : {} 
+  });
+</script>
+<!-- AddThis Smart Layers END -->
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Linux geek's scratchpad</a></h1>
+  
+    <h2>or embedded dreams about productivity, freedom and liberty</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Raspberry Pi kernel repository aggregating patches for Linux mainline</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-15T23:23:11+02:00" pubdate data-updated="true">Oct 15<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Since several months I&rsquo;m trying to find my way to embedded Linux programming.
+My hardware set was very limited I had only one board that can be called
+&ldquo;embedded&rdquo; and it was Raspberry Pi. Because I am more interested in firmware/OS
+level then hardware I tried to figure out what is going on with RPi kernel.
+After taking brief review of
+<a href="https://github.com/raspberrypi/linux">raspberrypi/linux</a> GitHub repository I
+realized that close to my heart is upstreaming effort. So with noob attitude I
+contacted RPi Upstreaming wiki page author (<a href="https://github.com/notro">notro</a>)
+and we started to create some foundation.</p>
+
+<p><em>Disclaimer: These are for testing purposes and considered unstable. Use at your own risk.</em></p>
+
+<h2>What we have now ?</h2>
+
+<p>We created set of repositories to handle upstreaming process.</p>
+
+<p>First there is <a href="https://github.com/pietrushnic/rpi-dt-linux.git">rpi-dt-linux</a>
+it is Linux kernel based on
+<a href="https://git.kernel.org/cgit/linux/kernel/git/stable/linux-stable.git/">linux-stable</a>
+with patches on top of every branch. This repository aims to aggregate all
+patches required for Raspberry Pi support in upstream kernel. <code>rpi-dt-linux</code>
+use <code>bcm2835_defconfig</code> with device tree support. We want to introduce every
+driver that supports device tree. Right now a lot of stuff is missing, but I
+will dive into it later.</p>
+
+<p>After consulting with
+<a href="https://github.com/raspberrypi/linux/issues/698">popcornmix</a> we decide to
+rebase all patches to keep them on top of every branch. This of course mean
+that repository will be broken, but patches will be more visible in history.</p>
+
+<p><code>rpi-dt-linux</code> repository can be cloned with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/pietrushnic/rpi-dt-linux.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Second <a href="https://github.com/pietrushnic/rpi-dt-firmware">rpi-dt-firmware</a> is ready
+to use firmware files for Raspberry Pi with already built modules and kernel.
+If you are familiar with <a href="https://github.com/Hexxeh">Hexxeh</a>
+<a href="https://github.com/Hexxeh/rpi-update">rpi-update</a> and his repository
+<a href="https://github.com/Hexxeh/rpi-firmware">rpi-firmware</a> this should not be
+anything new for you. Repository can be cloned with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/pietrushnic/rpi-dt-firmware.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Third <a href="https://github.com/notro/rpi-bcm2835">rpi-bcm2835</a> which simplifies
+build and release process of <code>rpi-dt-linux</code>. You can clone it with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/notro/rpi-bcm2835.git</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>How to use it ?</h2>
+
+<h2>User</h2>
+
+<p>If you simply want to try new kernel on your RPi then install <code>rpi-update</code>, by:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install rpi-update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>on Raspbian or follow instruction from
+<a href="https://github.com/Hexxeh/rpi-update">Readme.md</a> for other distributions.</p>
+
+<p>To install latest release of <code>rpi-dt-firmware</code> use <code>rpi-update</code> on RPi:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo REPO_URI=https://github.com/pietrushnic/rpi-dt-firmware rpi-update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After update simply reboot your Pi and enjoy our upstream kernel :).</p>
+
+<h2>Developer</h2>
+
+<p>If you want to play with the code I have few hints that can help.</p>
+
+<p>First please clone <code>rpi-dt-linux</code> and <code>rpi-bcm2835</code> mentioned above. Then
+install <a href="https://github.com/notro/rpi-build">rpi-build</a> following instructions
+on <a href="https://github.com/notro/rpi-build/wiki">wiki</a>. Then you can do few thigns:</p>
+
+<p>Build <code>rpi-dt-linux</code> locally. This will download latest snapshot of
+<code>rpi-dt-linux</code> and other dependencies like <code>u-boot</code> and cross-compiler.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd path/to/rpi-bcm2835
+</span><span class='line'>rpi-build rpi-dt-linux clean build</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can install already built kernel on your machine over ssh (replace
+<code>&lt;RPI_IP&gt;</code> with your Pi IP address):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rpi-build rpi-dt-linux install SSHIP=&lt;RPI_IP&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to use your own kernel repository just use <code>rpi-bcm2835</code> with local
+path:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RPI_DT_LINUX_LOCAL=../../rpi-dt-linux rpi-build rpi-dt-linux clean build</span></code></pre></td></tr></table></div></figure>
+
+
+<p>NOTE: that additional level of <code>../</code> was added because rpi-build creates
+workdir which is reference directory for it.</p>
+
+<p>It is also possible to release your own firmware repository. To help with
+process there are two commands:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>FW_REPO=/home/pietrushnic/src/rpi-dt-firmware FW_BRANCH=master rpi-build rpi-dt-linux commit
+</span><span class='line'>FW_REPO=/home/pietrushnic/src/rpi-dt-firmware FW_BRANCH=master rpi-build rpi-dt-linux push</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obviously <code>FW_REPO</code> is a directory with firmware git repository.</p>
+
+<h2>Changelog</h2>
+
+<p>At the point of writing this post there were 3 releases of <code>rpi-dt-firmware</code>. We
+applied v10 of <a href="http://lwn.net/Articles/607424/">mailbox API</a> and Lubomir
+Rintel <code>bcm2835-mbox</code>, <code>bcm2835-cpufreq</code> and <code>bcm2835-thermal</code> drivers from his
+<a href="https://github.com/hackerspace/rpi-linux/commits/lr-raspberry-pi-new-mailbox">repository</a>.
+All updates are published in
+<a href="https://github.com/pietrushnic/rpi-dt-firmware/blob/master/README.md">README.md</a>
+with every release.</p>
+
+<h2>Summary</h2>
+
+<p>Of course we are happy with every contribution small and big, critique and
+process improvement hints. Let us know what you think about this effort.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-15T23:23:11+02:00" pubdate data-updated="true">Oct 15<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/rpi/'>rpi,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pietrushnic.github.io/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/" data-via="pietrushnic" data-counturl="http://pietrushnic.github.io/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/" >Tweet</a>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/09/20/virtualbox-dkms-fix-alloc-netdev-problems-when-compiling-with-3-dot-17-dot-0-rcx-headers/" title="Previous Post: virtualbox-dkms: fix alloc_netdev problems when compiling with 3.17.0-rcX headers">&laquo; virtualbox-dkms: fix alloc_netdev problems when compiling with 3.17.0-rcX headers</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 -  -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pietrushnics-world';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pietrushnic.github.io/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/';
+        var disqus_url = 'http://pietrushnic.github.io/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".fancybox").fancybox();
+  });
+</script>
+
+
+</body>
+</html>

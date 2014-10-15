@@ -9,8 +9,8 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="Intro Because of my bug hunting approach of using latest kernel I experienced problem
-with compiling VirtualBox modules with 3.17.0-rc5 version on my &hellip;">
+  <meta name="description" content="Since several months I&rsquo;m trying to find my way to embedded Linux programming.
+My hardware set was very limited I had only one board that can be &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,177 @@ with compiling VirtualBox modules with 3.17.0-rc5 version on my &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/">Raspberry Pi kernel repository aggregating patches for Linux mainline</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-15T23:23:11+02:00" pubdate data-updated="true">Oct 15<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Since several months I&rsquo;m trying to find my way to embedded Linux programming.
+My hardware set was very limited I had only one board that can be called
+&ldquo;embedded&rdquo; and it was Raspberry Pi. Because I am more interested in firmware/OS
+level then hardware I tried to figure out what is going on with RPi kernel.
+After taking brief review of
+<a href="https://github.com/raspberrypi/linux">raspberrypi/linux</a> GitHub repository I
+realized that close to my heart is upstreaming effort. So with noob attitude I
+contacted RPi Upstreaming wiki page author (<a href="https://github.com/notro">notro</a>)
+and we started to create some foundation.</p>
+
+<p><em>Disclaimer: These are for testing purposes and considered unstable. Use at your own risk.</em></p>
+
+<h2>What we have now ?</h2>
+
+<p>We created set of repositories to handle upstreaming process.</p>
+
+<p>First there is <a href="https://github.com/pietrushnic/rpi-dt-linux.git">rpi-dt-linux</a>
+it is Linux kernel based on
+<a href="https://git.kernel.org/cgit/linux/kernel/git/stable/linux-stable.git/">linux-stable</a>
+with patches on top of every branch. This repository aims to aggregate all
+patches required for Raspberry Pi support in upstream kernel. <code>rpi-dt-linux</code>
+use <code>bcm2835_defconfig</code> with device tree support. We want to introduce every
+driver that supports device tree. Right now a lot of stuff is missing, but I
+will dive into it later.</p>
+
+<p>After consulting with
+<a href="https://github.com/raspberrypi/linux/issues/698">popcornmix</a> we decide to
+rebase all patches to keep them on top of every branch. This of course mean
+that repository will be broken, but patches will be more visible in history.</p>
+
+<p><code>rpi-dt-linux</code> repository can be cloned with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/pietrushnic/rpi-dt-linux.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Second <a href="https://github.com/pietrushnic/rpi-dt-firmware">rpi-dt-firmware</a> is ready
+to use firmware files for Raspberry Pi with already built modules and kernel.
+If you are familiar with <a href="https://github.com/Hexxeh">Hexxeh</a>
+<a href="https://github.com/Hexxeh/rpi-update">rpi-update</a> and his repository
+<a href="https://github.com/Hexxeh/rpi-firmware">rpi-firmware</a> this should not be
+anything new for you. Repository can be cloned with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/pietrushnic/rpi-dt-firmware.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Third <a href="https://github.com/notro/rpi-bcm2835">rpi-bcm2835</a> which simplifies
+build and release process of <code>rpi-dt-linux</code>. You can clone it with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/notro/rpi-bcm2835.git</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>How to use it ?</h2>
+
+<h2>User</h2>
+
+<p>If you simply want to try new kernel on your RPi then install <code>rpi-update</code>, by:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install rpi-update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>on Raspbian or follow instruction from
+<a href="https://github.com/Hexxeh/rpi-update">Readme.md</a> for other distributions.</p>
+
+<p>To install latest release of <code>rpi-dt-firmware</code> use <code>rpi-update</code> on RPi:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo REPO_URI=https://github.com/pietrushnic/rpi-dt-firmware rpi-update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After update simply reboot your Pi and enjoy our upstream kernel :).</p>
+
+<h2>Developer</h2>
+
+<p>If you want to play with the code I have few hints that can help.</p>
+
+<p>First please clone <code>rpi-dt-linux</code> and <code>rpi-bcm2835</code> mentioned above. Then
+install <a href="https://github.com/notro/rpi-build">rpi-build</a> following instructions
+on <a href="https://github.com/notro/rpi-build/wiki">wiki</a>. Then you can do few thigns:</p>
+
+<p>Build <code>rpi-dt-linux</code> locally. This will download latest snapshot of
+<code>rpi-dt-linux</code> and other dependencies like <code>u-boot</code> and cross-compiler.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd path/to/rpi-bcm2835
+</span><span class='line'>rpi-build rpi-dt-linux clean build</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can install already built kernel on your machine over ssh (replace
+<code>&lt;RPI_IP&gt;</code> with your Pi IP address):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rpi-build rpi-dt-linux install SSHIP=&lt;RPI_IP&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to use your own kernel repository just use <code>rpi-bcm2835</code> with local
+path:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RPI_DT_LINUX_LOCAL=../../rpi-dt-linux rpi-build rpi-dt-linux clean build</span></code></pre></td></tr></table></div></figure>
+
+
+<p>NOTE: that additional level of <code>../</code> was added because rpi-build creates
+workdir which is reference directory for it.</p>
+
+<p>It is also possible to release your own firmware repository. To help with
+process there are two commands:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>FW_REPO=/home/pietrushnic/src/rpi-dt-firmware FW_BRANCH=master rpi-build rpi-dt-linux commit
+</span><span class='line'>FW_REPO=/home/pietrushnic/src/rpi-dt-firmware FW_BRANCH=master rpi-build rpi-dt-linux push</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obviously <code>FW_REPO</code> is a directory with firmware git repository.</p>
+
+<h2>Changelog</h2>
+
+<p>At the point of writing this post there were 3 releases of <code>rpi-dt-firmware</code>. We
+applied v10 of <a href="http://lwn.net/Articles/607424/">mailbox API</a> and Lubomir
+Rintel <code>bcm2835-mbox</code>, <code>bcm2835-cpufreq</code> and <code>bcm2835-thermal</code> drivers from his
+<a href="https://github.com/hackerspace/rpi-linux/commits/lr-raspberry-pi-new-mailbox">repository</a>.
+All updates are published in
+<a href="https://github.com/pietrushnic/rpi-dt-firmware/blob/master/README.md">README.md</a>
+with every release.</p>
+
+<h2>Summary</h2>
+
+<p>Of course we are happy with every contribution small and big, critique and
+process improvement hints. Let us know what you think about this effort.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1881,6 +2052,79 @@ try.</p>
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/">Build and run OVMF under Qemu</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-14T23:22:00+02:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/14/build-and-run-ovmf-under-qemu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>What the OVMF is ?</h3>
+
+<p><strong>OVMF</strong> (<em>Open Virtual Machine Firmware</em>) is a firmware actively developed as a
+<strong>EDK2</strong>(<em>EFI Developer Kit</em>) package. It is a packed that aims to support
+firmware for virtual machines like Qemu.</p>
+
+<h3>Simplified build process</h3>
+
+<p>First of all lets get latest version of the code. For some time <a href="http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=Welcome">EFI and
+Framework Open Source
+Community</a> share edk2 code also on <a href="https://github.com/tianocore/edk2">github</a> mirror.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/tianocore/edk2.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Building process was simplified by OvmfPkg contributors. But I found that
+toolchain for latest gcc compilers is not ready in main repository. So I suggest
+to remove <code>BaseTools</code> directory and clone up to date git repository in this
+place:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd edk2
+</span><span class='line'>rm -rf BaseTools
+</span><span class='line'>git clone https://github.com/tianocore/buildtools-BaseTools.git BaseTools
+</span><span class='line'>. edksetup.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So to build firmware we need only one command:
+&#8220;`</p>
+
+<p><code>``
+You may need some additional packages like</code>uuid-dev<code>,</code>iasl<code>or</code>g++`.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root file system for embedded system</a></h1>
     
     
@@ -2566,624 +2810,6 @@ hope that I will back to this issues in near future. If you like this series
 please share it, if somethings wrong please comment I will try to help if can.</p>
 
 <p><a href="http://bec-systems.com/site/418/how-to-set-up-a-nfs-rootfs">How to set up a NFS root filesystem for embedded Linux development</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">0x5: Qemu network configuration and tftp for Virtual Development Board</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-07T10:36:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Table of contents</h2>
-
-<ul>
-<li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#intro">Introduction</a></li>
-<li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd">Setup tftpd</a></li>
-<li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking">QEMU networking</a></li>
-<li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#verify-qemu-with-tftp">Verify all components of Virtual Development Platform</a></li>
-<li><a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#what-next">What next ?</a></li>
-</ul>
-
-
-<p><a id="intro"></a></p>
-
-<h3>Introduction</h3>
-
-<p>This was not trivial task to me. As usual <code>google is your friend</code> and <code>RTFM</code> works.
-First we will set tftp which we use to download modified kernel for U-Boot.
-Second I will show how to setup bridged network for QEMU needs and finally we
-will perform some basic test of our setup. Let&rsquo;s go.</p>
-
-<p><a id="setup-tftpd"></a></p>
-
-<h3>Setup tftpd</h3>
-
-<p>First install:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install tftpd tftp
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Make sure that <code>/srv/tftp</code> is writable for your user. If directory doesn&rsquo;t exist
-create it and give needed privileges. If you want to change some server options
-edit <code>/etc/inetd.conf</code>. Copy or link our kernel to tftp server
-directory.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /path/to/kernel/arch/arm/boot
-</span><span class='line'>ln -s <span class="nv">$PWD</span>/uImage /srv/tftp/uImage
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Verify if everything works correctly:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span>             <span class="c"># go to home or any other directory different than arch/arm/boot</span>
-</span><span class='line'>tftp 127.0.0.1 <span class="c"># connect to localhost tftp server</span>
-</span><span class='line'>get uImage     <span class="c"># get kernel file</span>
-</span><span class='line'>q              <span class="c"># quit tftp</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Check if kernel file is in current directory. If yes than you tftp server is
-configured correctly, if not then google or ask me a question in comments
-section.
-<em>Note</em>: For Ubuntu follow instructions from
-<a href="http://www.davidsudjiman.info/2006/03/27/installing-and-setting-tftpd-in-ubuntu/">here</a>.</p>
-
-<p><a id="qemu-networking"></a></p>
-
-<h3>QEMU networking</h3>
-
-<p><em>Update</em>: For Ubuntu users please read <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues">this section</a></p>
-
-<p>I mixed <a href="http://toast.djw.org.uk/qemu.html">this</a> BKM and few other resources
-that I found in the net. Setting up network depend a lot on your configuration.
-I will briefly describe my situation. It is quite possible that this won&rsquo;t fit
-yours.</p>
-
-<p>I&rsquo;ve <code>eth0</code> with ip <code>10.0.2.15</code>. What I want to do is create another interface <code>tap0</code> and
-bridge <code>br0</code> that will connect <code>eth0</code> and <code>tap0</code>. To do this I need few things:</p>
-
-<ul>
-<li><code>brctl</code> is provided in Debian by <code>bridge-utils</code></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install bridge-utils
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>check if TUN module was installed</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>grep <span class="nv">CONFIG_TUN</span><span class="o">=</span> /boot/config-<span class="sb">`</span>uname -r<span class="sb">`</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>you should get <code>y</code> or <code>m</code>, if it is <code>m</code> than <code>modprobe tun</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo modprobe tun
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>create tun device</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo mknod /dev/net/tun c 10 200
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>update <code>/etc/network/interfaces</code>:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># This file describes the network interfaces available on your system</span>
-</span><span class='line'><span class="c"># and how to activate them. For more information, see interfaces(5).</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># The loopback network interface</span>
-</span><span class='line'>auto lo
-</span><span class='line'>iface lo inet loopback
-</span><span class='line'>
-</span><span class='line'><span class="c"># add br0 configuration</span>
-</span><span class='line'>auto br0
-</span><span class='line'>iface br0 inet dhcp
-</span><span class='line'>bridge_ports eth0 <span class="c"># do not forget to attach eth0 to br0</span>
-</span><span class='line'>bridge_fd 9
-</span><span class='line'>bridge_hello 2
-</span><span class='line'>bridge_maxage 12
-</span><span class='line'>bridge_stp off
-</span><span class='line'>
-</span><span class='line'><span class="c"># The primary network interface</span>
-</span><span class='line'>allow-hotplug eth0     <span class="c"># comment this</span>
-</span><span class='line'>iface eth0 inet dhcp   <span class="c"># and this</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>use <code>/etc/qemu-ifup</code> script to bring up your network:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Executing /etc/qemu-ifup&quot;</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Bringing up $1 for bridged mode...&quot;</span>
-</span><span class='line'>sudo /sbin/ifconfig <span class="nv">$1</span> 0.0.0.0 promisc up
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Adding $1 to br0...&quot;</span>
-</span><span class='line'>sudo /sbin/brctl addif br0 <span class="nv">$1</span>
-</span><span class='line'>sleep 2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Give executable permissions for this file:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo chmod +x /etc/qemu-ifup
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Restart networking services locally:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo service networking restart
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This should prepare you environment for tftp booting in qemu.</p>
-
-<p><a id="ubuntu-issues"></a></p>
-
-<h4>Ubuntu issues</h4>
-
-<p>I had experienced few problems with my Ubuntu 12.04.</p>
-
-<ul>
-<li><p>First thing was defect that cause looping u-boot during emulation in
-qemu-system-arm. I checked latest qemu and version delivered in distro
-repository but qemu wasn&rsquo;t issue. I tried debug problem with gdb and qemu
-<code>-s -S</code> switches and find out that u-boot crashes at <code>__udivsi3</code> instruction
-in <code>serial_init</code>. I tried to google this issue but found only one comment
-about this on <a href="http://balau82.wordpress.com/2010/04/12/booting-linux-with-u-boot-on-qemu-arm/">Balau blog</a>:
-<blockquote><p>For anyone trying to reproduce this, at least on a recent Ubuntu host, you may need to pass “-cpu all” or “-cpu cortex-a8″ to qemu. The libgcc that gets linked to u-boot appears to be compiled with thumb2 instructions which are not implemented in the Versatile cpu. I don’t get any u-boot console output without this flag, and using gdb I can see that the cpu takes an exception during <code>__udivsi3()</code> called from serial_init().</p><footer><strong>[Grant Likely]</strong></footer></blockquote>
-Problem is at least 2-years old and still occurs. Unfortunately Grant&rsquo;s tricks
-didn&rsquo;t help. I move to toolchain built by my own and problem was fixed. So the
-moral of the story is: DO NOT USE TOOLCHAIN PROVIDED BY UBUNTU at least in
-12.04.</p></li>
-<li><p>Second thing also involve a lot of debugging time and when I found workaround
-it was accidentally. I saw that using procedure correct for Debian on Ubuntu I
-was unable to obtain any packet inside U-Boot. Network traffic analysis show
-that U-Boot correctly send DHCP discovery and server reply with DHCP offer,
-but bootloader behaves like no packet was received.  Static configuration also
-didn&rsquo;t work. Finally I get to information how to capture traffic from inside
-of emulated setup (parameter <code>-net dump,file=/path/to/file.pcap</code> do the
-thing). Surprisingly for some reason adding dump param fix problem and U-Boot
-received DHCP Offer and ACK. I will try to narrow down this problem for
-further reading please take a look <a href="http://lists.nongnu.org/archive/html/qemu-discuss/2013-05/msg00013.html">qemu</a>
-and <a href="">u-boot</a> mailing list thread.</p></li>
-</ul>
-
-
-<p><a id="verify-qemu-with-tftp"></a></p>
-
-<h4>Verify all components of Virtual Development Platform</h4>
-
-<p>So right now we should have built <a href="/blog/2013/06/07/linux-kernel-for-embedded-system">kernel uImage</a>, <a href="/blog/2013/06/07/embedded-board-bootloader">U-Boot image</a>,
-<a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking">configured qemu network</a> and <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd">tftp server</a>. With all this components we can
-verify if our kernel booting on emulated <code>versatilepb</code>.</p>
-
-<p>Run your qemu with network using U-Boot image as a kernel.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo qemu-system-arm -kernel /path/to/u-boot/u-boot -net nic,vlan<span class="o">=</span>0 -net tap,vlan<span class="o">=</span>0,ifname<span class="o">=</span>tap0,script<span class="o">=</span>/etc/qemu-ifup -nographic -M versatilepb
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><em>NOTE</em>: We want to use u-boot file instead of u-boot.bin. First is ELF binary
-image and second is raw binary. Raw binary image can be used with <code>-bios</code>
-parameter for qemu. If you try to give raw binary as a kernel parameter it will result with error:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu: fatal: Trying to execute code outside RAM or ROM at 0x08000000
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><em>NOTE 2</em>: We have to specify <code>versatilepb</code> machine. If we forget it we will get
-error:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>qemu: hardware error: integratorcm_read: Unimplemented offset 0x1e0000
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Right now we have u-boot booted. Let&rsquo;s set ip addresses to boot uImage from our
-tftp server. For verification needs we don&rsquo;t want to <code>autoload</code> downloaded
-image, so we disable this through environment variable.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>setenv autoload no
-</span><span class='line'>dhcp
-</span><span class='line'>setenv serverip 192.168.1.2
-</span><span class='line'>setenv bootfile uImage
-</span><span class='line'>tftpboot
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Set addresses according to your configuration. For some reason I was unable to
-use u-boot <code>dhcp</code> feature. It assign me address that exist in the network.</p>
-
-<p>We can take a close look on out downloaded image with <code>iminfo</code> command.
-<code>tftpboot</code> and <code>iminfo</code> should looks like that:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>VersatilePB <span class="c"># tftpboot</span>
-</span><span class='line'>SMC91111: PHY auto-negotiate timed out
-</span><span class='line'>SMC91111: MAC 52:54:00:12:34:56
-</span><span class='line'>Using SMC91111-0 device
-</span><span class='line'>TFTP from server 10.0.2.15; our IP address is 10.0.2.16
-</span><span class='line'>Filename <span class="s1">&#39;uImage&#39;</span>.
-</span><span class='line'>Load address: 0x7fc0
-</span><span class='line'>Loading: <span class="c">#################################################################</span>
-</span><span class='line'>         <span class="c">#################################################################</span>
-</span><span class='line'>         <span class="c">#################################################################</span>
-</span><span class='line'>         <span class="c">#################################################################</span>
-</span><span class='line'>         <span class="c">#################################################################</span>
-</span><span class='line'>         <span class="c">##############################################</span>
-</span><span class='line'>         0 Bytes/s
-</span><span class='line'><span class="k">done</span>
-</span><span class='line'>Bytes <span class="nv">transferred</span> <span class="o">=</span>
-</span><span class='line'>1895064 <span class="o">(</span>1cea98 hex<span class="o">)</span>
-</span><span class='line'>VersatilePB <span class="c"># iminfo</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">## Checking Image at </span>
-</span><span class='line'>00007fc0 ...
-</span><span class='line'>    Legacy image found
-</span><span class='line'>    Image Name:   Linux-3.9.0-rc8
-</span><span class='line'>    Image Type:   ARM Linux Kernel Image <span class="o">(</span>uncompressed<span class="o">)</span>
-</span><span class='line'>    Data Size:    1895000 <span class="nv">Bytes</span> <span class="o">=</span> 1.8 MiB
-</span><span class='line'>    Load Address: 00008000
-</span><span class='line'>    Entry Point:  00008000
-</span><span class='line'>    Verifying Checksum ... OK
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So, that what we want to see. Pretty new kernel <code>3.9.0-rc8</code> compiled as ARM
-image. We can try to boot it but we will end with kernel panic because lack of
-filesystem.</p>
-
-<p><em>NOTE 3</em>: If you want to see anything after booting this image with <code>bootm</code> you
-have to pass to kernel additional boot argument with serial device that should
-be used as a console. Before <code>bootm</code> set:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>setenv bootargs <span class="nv">console</span><span class="o">=</span>ttyAMA0
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You should get something similar to below log:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">(</span>...<span class="o">)</span>
-</span><span class='line'>eth0: SMC91C11xFD <span class="o">(</span>rev 1<span class="o">)</span> at c89c8000 IRQ 57 <span class="o">[</span>nowait<span class="o">]</span>
-</span><span class='line'>eth0: Ethernet addr: 52:54:00:12:34:56
-</span><span class='line'>mousedev: PS/2 mouse device common <span class="k">for </span>all mice
-</span><span class='line'>TCP: cubic registered
-</span><span class='line'>NET: Registered protocol family 17
-</span><span class='line'>VFP support v0.3: implementor 41 architecture 1 part 10 variant 9 rev 0
-</span><span class='line'>VFS: Cannot open root device <span class="s2">&quot;(null)&quot;</span> or unknown-block<span class="o">(</span>0,0<span class="o">)</span>: error -6
-</span><span class='line'>Please append a correct <span class="s2">&quot;root=&quot;</span> boot option; here are the available partitions:
-</span><span class='line'>1f00           65536 mtdblock0  <span class="o">(</span>driver?<span class="o">)</span>
-</span><span class='line'>Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block<span class="o">(</span>0,0<span class="o">)</span>
-</span><span class='line'><span class="o">[</span>&lt;c0018afc&gt;<span class="o">]</span> <span class="o">(</span>unwind_backtrace+0x0/0xf0<span class="o">)</span> from <span class="o">[</span>&lt;c027af8c&gt;<span class="o">]</span> <span class="o">(</span>panic+0x80/0x1d0<span class="o">)</span>
-</span><span class='line'><span class="o">[</span>&lt;c027af8c&gt;<span class="o">]</span> <span class="o">(</span>panic+0x80/0x1d0<span class="o">)</span> from <span class="o">[</span>&lt;c0343c64&gt;<span class="o">]</span> <span class="o">(</span>mount_block_root+0x1a0/0x258<span class="o">)</span>
-</span><span class='line'><span class="o">[</span>&lt;c0343c64&gt;<span class="o">]</span> <span class="o">(</span>mount_block_root+0x1a0/0x258<span class="o">)</span> from <span class="o">[</span>&lt;c0343f08&gt;<span class="o">]</span> <span class="o">(</span>mount_root+0xf0/0x118<span class="o">)</span>
-</span><span class='line'><span class="o">[</span>&lt;c0343f08&gt;<span class="o">]</span> <span class="o">(</span>mount_root+0xf0/0x118<span class="o">)</span> from <span class="o">[</span>&lt;c0344090&gt;<span class="o">]</span> <span class="o">(</span>prepare_namespace+0x160/0x1b4<span class="o">)</span>
-</span><span class='line'><span class="o">[</span>&lt;c0344090&gt;<span class="o">]</span> <span class="o">(</span>prepare_namespace+0x160/0x1b4<span class="o">)</span> from <span class="o">[</span>&lt;c03438ec&gt;<span class="o">]</span> <span class="o">(</span>kernel_init_freeable+0x168/0x1ac<span class="o">)</span>
-</span><span class='line'><span class="o">[</span>&lt;c03438ec&gt;<span class="o">]</span> <span class="o">(</span>kernel_init_freeable+0x168/0x1ac<span class="o">)</span> from <span class="o">[</span>&lt;c027a074&gt;<span class="o">]</span> <span class="o">(</span>kernel_init+0x8/0xe4<span class="o">)</span>
-</span><span class='line'><span class="o">[</span>&lt;c027a074&gt;<span class="o">]</span> <span class="o">(</span>kernel_init+0x8/0xe4<span class="o">)</span> from <span class="o">[</span>&lt;c0013df0&gt;<span class="o">]</span> <span class="o">(</span>ret_from_fork+0x14/0x24<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is expected result.</p>
-
-<p><a id="what-next"></a></p>
-
-<h3>What next ?</h3>
-
-<p>We happily built basic virtual development, what we need right now is some
-<a href="/blog/2013/06/07/root-file-system-for-embedded-system">initial filesystem</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/">0x4: Linux kernel for embedded system</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-07T10:33:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/07/linux-kernel-for-embedded-system/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Table of contents</h2>
-
-<ul>
-<li><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/#a-little-history">A little history</a></li>
-<li><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/#get-linux-and-build-it">Get linux and build it</a></li>
-<li><a href="/blog/2013/06/07/linux-kernel-for-embedded-system/#kudos">Kudos</a></li>
-</ul>
-
-
-<p><a id="a-little-history"></a></p>
-
-<h3>A little history</h3>
-
-<p>Thinking about embedded linux probably leads to  first try of porting linux to
-different architecture. I did google research (I know I should probably read
-mailing list archive) and found that there were few attempt to port linux to
-different platform. There is no clear information about which port of linux was
-first. This is probably because many hackers didn&rsquo;t report their effort. Arguably
-earliest out-of-tree version was probably for Acron A5000 (arm), Motorola 68000
-(m68k) around Spring/Summer of 1994. I found also notes about SPARC port in
-1993. Some sources also tells story about 1993 Amiga and Atari port. But first
-port that get in to official linux tree was DEC Alpha.<a href="http://digital-domain.net/lug/unix-linux-history.html">[1]</a><a href="http://www.arm.linux.org.uk/docs/history.php">[2]</a></p>
-
-<p>So linux is already 22 years old and first port start when it was 2-3 years old,
-so we can assume it is mature enough to support most of non-x86 architectures.</p>
-
-<p><a id="get-linux-and-build-it"></a></p>
-
-<h3>Get linux and build it</h3>
-
-<p>To deal with our <em>embedded</em> board we need operating system or some kind of
-software that will allow us to use board features. Right now to boot system we
-need at least kernel. So we have to prepare kernel for board of choice
-<code>versatilepb</code>.</p>
-
-<p>Let&rsquo;s start with cloning Linux repository:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and configure kernel for <code>versatilepb</code>.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd linux
-</span><span class='line'>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- versatile_defconfig</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It looks some feature is disabled in <code>versatile_defconfig</code>. I mean
-<code>CONFIG_AEABI</code>. It specifies file format, data types, register usage and other
-things. The main difference between EABI and ABI is that privileged instructions
-are allowed in application code. More about EABI
-<a href="http://en.wikipedia.org/wiki/Application_binary_interface#EABI">here</a>.
-To enable this option run:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- menuconfig</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and go to:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Kernel Features -&gt; Use the ARM EABI to compile the kernel</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We will also need DHCP and NFS support (CONFIG_IP_PNP_DHCP and CONFIG_ROOT_NFS).
-First is <code>IP: DHCP support</code> and can be found under:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>-&gt; Networking support (NET [=y])
-</span><span class='line'>  -&gt; Networking options
-</span><span class='line'>    -&gt; TCP/IP networking (INET [=y])
-</span><span class='line'>      -&gt; IP: kernel level autoconfiguration (IP_PNP [=y])</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Second is :</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>-&gt; File systems
-</span><span class='line'>  -&gt; Network File Systems (NETWORK_FILESYSTEMS [=y])  </span></code></pre></td></tr></table></div></figure>
-
-
-<p>let&rsquo;s build image with U-Boot support.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- uImage</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We have kernel. How we can provide this kernel to our development environment ?
-As I discuss in <a href="/blog/2013/06/07/embedded-board-bootloader">previous post</a> we
-can use bare-metal qemu, but not with uImage kernel. This is special U-Boot
-kernel, so easiest way will be using it with bootloader. We will figure out how
-to do this in <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board">next section</a>
-about tftp and qemu network configuration.</p>
-
-<p><strong>TODO</strong>: add picture of configuration in intro &ndash; vdb, link it here
-Target configuration will consist on providing kernel through tftp server using U-Boot. Also
-want to use NFS root filesystem to boot our small distro. As it is in real
-development environment.</p>
-
-<p><em>NOTE</em>: During compilation process you can encounter error like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(...)
-</span><span class='line'>  UIMAGE  arch/arm/boot/uImage
-</span><span class='line'>  "mkimage" command not found - U-Boot images will not be built
-</span><span class='line'>  make[1]: *** [arch/arm/boot/uImage] Error 1
-</span><span class='line'>  make: *** [uImage] Error 2</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Of course it means that we need mkimage to create U-Boot image, so:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install uboot-mkimage</span></code></pre></td></tr></table></div></figure>
-
-
-<p><em>Update</em>: in Debian jessie/sid this package was replaced by <code>u-boot-tools</code>.</p>
-
-<p>We have to use uImage special build because load and execute address differes
-from board to board. If we will use vmlinux image then addresses should be
-manually modified. So using uImage is easiest</p>
-
-<p><a id="kudos"></a></p>
-
-<h3>Kudos</h3>
-
-<p>[1] <a href="http://digital-domain.net/lug/unix-linux-history.html">UNIX/Linux History</a></br>
-[2] <a href="http://www.arm.linux.org.uk/docs/history.php">The History of ARM Linux</a></p>
 </div>
   
   

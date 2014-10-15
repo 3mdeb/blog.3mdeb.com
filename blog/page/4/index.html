@@ -9,7 +9,8 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="Blogger.vim is a vim plugin for interfacing with Google&rsquo;s Blogger. Below I will use my workspace git repository. To use this plugin we need &hellip;">
+  <meta name="description" content="How mutt can handle mails in html format ? Takling about html mail handling is
+talking about handling any type of Multipurpose Internet Mail &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +108,466 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/13/mutt-tutorial-part-4-html-mails-address/">Mutt tutorial part 4 - html mails, address book and other useful features</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T17:21:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/13/mutt-tutorial-part-4-html-mails-address/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>How mutt can handle mails in html format ? Takling about html mail handling is
+talking about handling any type of <a href="http://en.wikipedia.org/wiki/MIME">Multipurpose Internet Mail Extensions</a>.
+Mutt supports handling for all MIME types in one place for all programs. This
+place is <code>.mailcap</code> file. Googling a little bit I found below mailcap file
+configuration (kudos to <a href="http://trembits.blogspot.com/2011/12/viewing-html-in-mutt.html">Bart Nagel</a>).</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>text/html; pandoc -f html -t markdown; copiousoutput; description=HTML Text; test=type pandoc &gt;/dev/null
+</span><span class='line'>text/html;lynx -stdin -dump -force\_html -width 70; copiousoutput; description=HTML Text; test=type lynx &gt;/dev/null
+</span><span class='line'>text/html; w3m -dump -T text/html -cols 70; copiousoutput; description=HTML Text; test=type w3m &gt;/dev/null
+</span><span class='line'>text/html; html2text -width 70; copiousoutput; description=HTML Text; test=type html2text &gt;/dev/null</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Of course we need to install all applications to make mailcap work correct:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install pandoc lynx w3m html2text
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To bring address book functionality to mutt we need abook application:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install abook
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also few new line in <code>$HOME/.muttrc</code> will be needed:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># add alias file for addresses</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">alias_file</span><span class="o">=</span>~/.mutt/alias <span class="nb">source</span> ~/.mutt/alias
+</span><span class='line'><span class="c"># configure addressbook</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">query_command</span><span class="o">=</span> <span class="s2">&quot;abook --mutt-query &#39;%s&#39;&quot;</span>
+</span><span class='line'>macro index,pager A <span class="s2">&quot;&lt;pipe-message&gt;</span>
+</span><span class='line'><span class="s2">abook --add-email-quiet&lt;return&gt;&quot;</span> <span class="s2">&quot;add the sender address to abook&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Adding new address simply create entry in alias file. During adding new alias
+abook asks about alias name, e-mail address, personal name and confirmation for
+given data.  Some this fields could be filled automatically by interaction
+between abook and mutt. Of course file <code>$HOME/.mutt/alias</code> have to exist before
+running mutt:
+touch <code>$HOME/.mutt/alias</code> To access saved aliases simply click <Tab> button in
+cc, to or bcc filed.  There is few more options that I found useful. To find it
+please go to my <a href="https://github.com/pietrushnic/workspace">workspace</a> scripts at
+github. Also if you have any issues with the configuration or comments please
+let me know by commenting below the post.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/">Mutt tutorial part 3 - sidebar, URLs in e-mails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T15:43:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Information in this post came from <a href="http://www.lunar-linux.org/mutt-sidebar/">lunar linux page</a>. Kudos to its author. In this
+post I want to discuss two topics: sidebar and how to open urls form inside
+mutt. Sidebar is mutt feature delivered in mutt-patched package in Debian. It
+cause to split standard mutt window in two parts. In first we can find list of
+folders defined in the <code>$HOME/.muttrc</code> file, second window is a known old window
+with the list of posts. Mutt window with sidebar looks like on the picture
+below:</p>
+
+<p>  <img src="http://lunar-linux.org/~tchan/mutt/mutt-screenshot.png" alt="" /></p>
+
+<p>To use side bar we need to install mutt-patched packed in Debian:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install mutt-patched
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To make side bar more accessible I use default settings from lunar linux page.
+Add below lines to <code>$HOME/.muttrc</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">set </span><span class="nv">sidebar_width</span> <span class="o">=</span> 30
+</span><span class='line'><span class="nb">set </span><span class="nv">sidebar_visible</span> <span class="o">=</span> yes
+</span><span class='line'>color sidebar_new yellow default
+</span><span class='line'><span class="nb">bind </span>index CP sidebar-prev
+</span><span class='line'><span class="nb">bind </span>index CN sidebar-next
+</span><span class='line'><span class="nb">bind </span>index CO sidebar-open
+</span><span class='line'><span class="nb">bind </span>pager CP sidebar-prev
+</span><span class='line'><span class="nb">bind </span>pager CN sidebar-next
+</span><span class='line'><span class="nb">bind </span>pager CO sidebar-open
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>First line sets width of side bar it depends on how long are your folder names.
+Second line makes sidebar by default visible. Third makes folders with new
+messages yellow. Other lines create shortcuts for navigating sidebar. Note that
+C is not Ctrl but uppercase &lsquo;c&rsquo; key. Second topic I want to discuss is how to
+open urls from inside e-mails. To do this we can use tip from <a href="http://www.mutt.org/doc/manual/manual-4.html#ss4.13">mutt site</a>. As it said we need
+urlview application:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install urlview
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To correctly configure this tool you need to create <code>$HOME/.urlview</code> file. So:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vim <span class="nv">$HOME</span>/.urlview
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this file we define two things. First will be regular expression which match
+urls and second will be command line to run when regexp was matched. File looks like below:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>REGEXP <span class="o">(((</span>https?|ftp|gopher<span class="o">)</span>://|<span class="o">(</span>mailto|file|news<span class="o">)</span>:<span class="o">)[</span>^’ <span class="s2">&quot;]+|(www|web|w3).[-a-z0-9.]+)[^’ .,;&quot;</span>:<span class="o">]</span> COMMAND chromium %s
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Chromuim is my browser of choice but you can use firefox, lynx or anything you want.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/13/mutt-tutorial-part-2-secure-login/">Mutt tutorial part 2 - secure login</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T14:13:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/13/mutt-tutorial-part-2-secure-login/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is second post of mutt tutorial series. As in the <a href="/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account">previous post</a>
+for below information I need to thank Kousik for posts about <a href="http://nixtricks.wordpress.com/2009/10/04/introduction-to-encryption-of-files-using-gpg/">gpg</a>
+and <a href="http://nixtricks.wordpress.com/2010/05/05/mutt-configure-mutt-to-receive-email-via-imap-and-send-via-smtp/">using it with mutt</a>.
+But probably the most important to simplify this method was Fau comment <a href="http://nixtricks.wordpress.com/2010/05/20/mutt-multiple-email-accounts-using-hooks/#comment-162">here</a>.
+So going to the point of secure login for mutt we need gpg. First of all we need
+to install it by simply:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install gpg
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After that we generate our keys by:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gpg --gen-key
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I choose all default answers. So first is key type: <code>'RSA and RSA'</code>.
+Second &ndash; <code>keysize: 2048</code>. Third &ndash; time for key expiration: <code>'0 = key does not expire'</code>.
+After that you need to identify your key with some data. This data will be used
+to find your key so IMHO it should be short and simple but meaningful. At the end
+of this process you will be asked about pass phrase, which will be used to decrypt
+files encrypted with generated key. When you end with key generation you can
+encrypt file with passwords. Best way to do this is to write some script that will
+be sourced by mutt after decryption. For storing passwords I create directory in my <code>$HOME</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir <span class="nv">$HOME</span>/.passwd
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Inside this directory I create text file with the script, which look like below:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vim <span class="nv">$HOME</span>/.passwd/mutt.txt
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp1</span> <span class="o">=</span> <span class="s2">&quot;password1&quot;</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp2</span> <span class="o">=</span> <span class="s2">&quot;password2&quot;</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp3</span> <span class="o">=</span> <span class="s2">&quot;password3&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This script of course mean to set value of variable name <code>my_isp{1,2,3}</code> to some
+password string. Remember to use <code>my\_</code> prefix because this is the way that user
+variables should be defined in mutt scripts. After writing this file we need to
+encrypt it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gpg -e -o mutt.gpg mutt.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we should delete txt file. To use our newly created encrypted password script
+we need to add some lines to <code>$HOME/.muttrc</code>. So <code>vim $HOME/.muttrc</code>. Line that
+we need before sourcing encrypted scripts is declaration of variables in the script:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">set </span><span class="nv">my_isp1</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp2</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">my_isp3</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After this line we can source and decrypt out file with the passwords:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">source</span> <span class="s2">&quot;gpg --textmode -d ~/.passwd/mutt.gpg |&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the end wee need to replace all out plain text passwords (<code>smtp_pass</code> and
+<code>imap_pass</code> variables) with variables defined in out encrypted file. This
+settings will cause that mutt during start will run gpg to ask about password
+to decrypt password script file. In the <a href="/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/">next post</a>
+I will discuss mutt with sidebar and how to open html files from inside mutt.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account/">Mutt tutorial part 1 - setup IMAP account</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-13T11:43:00+02:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Mutt is one of those programs that make people call you a linux geek, nerd or a
+snob. This is because using TUI or command line tools in world of fancy GUI for
+most people is wierd. What&rsquo;s so great about mutt? I probably still have not
+found much of its advantages, but at first glance we can notice a few things.
+First, it keeps Unix convention of small programs for specific task <a href="http://www.faqs.org/docs/artu/ch01s06.html">&ldquo;Make each program to one thing well&rdquo;</a> or
+<a href="http://en.wikipedia.org/wiki/KISS_principle">KISS</a>. This means that mutt is
+only <a href="http://en.wikipedia.org/wiki/Mail_user_agent">MUA</a>, which is used to
+retrieve e-mails and for other tasks you need to use another application.
+However, due to the philosophy most applications are well suited to each other
+and usually everything works good. So you can easily combine it with Vim as the
+mail editor, abook as a address book, urlview as a browser launcher for html and
+graphics elements and so on. Third, it has support for IMAP which gives very
+nice usage model for most of e-mail account providers. Fourth, is used by such
+notables as Greg Kroah-Hartman and as <a href="http://www.mjmwired.net/kernel/Documentation/email-clients.txt">kernel documentation suggest</a> by
+other kernel developers. So lets start to discover mutt. Below I will discuss
+some basic features that until now (few days of using mutt) I found useful.</p>
+
+<ol>
+<li>Big kudos to Shinobu for <a href="http://zuttobenkyou.wordpress.com/2010/11/05/mutt-multiple-gmail-imap-setup/">this</a>
+post it helps me a lot. So first of all we need support for multiple
+accounts. In my case I have 4 accounts. Three of them got working IMAP
+access. 4th provider screw up something and access to IMAP server doesn&rsquo;t
+work so I need to workaround this with one of the Gmail features. At the
+beginning we create <code>$HOME/.muttrc</code> file:</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vim <span class="nv">$HOME</span>/.muttrc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>IMAP account configuration for looks like that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># unset important variables</span>
+</span><span class='line'>account-hook . <span class="s2">&quot;unset imap_user; unset imap_pass&quot;</span>
+</span><span class='line'>account-hook <span class="s2">&quot;imaps://&lt;account_name&gt;@&lt;imap_server_address&gt;/&quot;</span> <span class="s2">&quot;\</span>
+</span><span class='line'><span class="s2">    set imap_user = &lt;e-mail_address&gt;</span>
+</span><span class='line'><span class="s2">        imap_pass = &lt;e-mail_password&gt;&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Setup for &lt;e-mail_address&gt;:</span>
+</span><span class='line'><span class="nb">set </span><span class="nv">folder</span> <span class="o">=</span> imaps://&lt;account_name&gt;@&lt;imap_server_address&gt;/
+</span><span class='line'><span class="c"># setup needed folders</span>
+</span><span class='line'><span class="nv">mailboxes</span> <span class="o">=</span> +INBOX <span class="o">=</span>&lt;folder_name&gt;
+</span><span class='line'><span class="nb">set </span><span class="nv">spoolfile</span> <span class="o">=</span> +INBOX
+</span><span class='line'>folder-hook imaps://&lt;account_name&gt;@&lt;imap_server_address&gt;/ <span class="err">&quot;</span><span class="se">\</span>
+</span><span class='line'>   <span class="nb">set </span><span class="nv">folder</span> <span class="o">=</span> imaps://&lt;account_name&gt;@&lt;imap_server_address&gt;/
+</span><span class='line'>   <span class="nv">spoolfile</span> <span class="o">=</span> +INBOX
+</span><span class='line'>   <span class="nv">postponed</span> <span class="o">=</span> +<span class="o">[</span>Gmail<span class="o">]</span>/Drafts
+</span><span class='line'>   <span class="nv">record</span> <span class="o">=</span> +<span class="o">[</span>Gmail<span class="o">]</span>/<span class="s1">&#39;Sent Mail&#39;</span>
+</span><span class='line'>   <span class="nv">from</span> <span class="o">=</span> <span class="s1">&#39;&lt;your_name&gt; &lt;e-mail_address&gt; &#39;</span>
+</span><span class='line'>   <span class="nv">realname</span> <span class="o">=</span> <span class="s1">&#39;&lt;real_name&gt;&#39;</span>
+</span><span class='line'>   <span class="nv">smtp_url</span> <span class="o">=</span> smtps://&lt;account_name&gt;@&lt;smpt_server_address&gt;
+</span><span class='line'>   <span class="nv">smtp_pass</span> <span class="o">=</span>  <span class="nb">unset </span>important variables
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>&lt;account_name&gt;</code> &ndash; for <a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#58;&#x66;&#x6f;&#x6f;&#46;&#x62;&#x61;&#114;&#x40;&#103;&#109;&#97;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#x66;&#x6f;&#x6f;&#x2e;&#98;&#x61;&#114;&#64;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;</a> it will be foo.bar
+<code>&lt;imap_server_address&gt;</code> &ndash; this information you can get from your e-mail provider
+help pages or from the settings of web e-mail client, for Gmail it is
+imap.gmail.com
+<code>&lt;e-mail_address&gt;</code> &ndash; your e-mail address
+<code>&lt;e-mail_password&gt;</code> &ndash; your e-mail password, later we will discuss how to store this more secure than
+plain text :)
+<code>&lt;folder_name&gt;</code> &ndash; any folder (for gmail account also filters) you
+have on you IMAP account, so for gmail account it could be Drafts, Starred,
+Important or others.
+<code>&lt;your_name&gt;</code> &ndash; your real name or nick anything you want
+to show in from field
+<code>&lt;real_name&gt;</code> &ndash; could be the same as <code>&lt;your_name&gt;</code>
+<code>&lt;smpt_server_address&gt;</code> &ndash; your SMTP server address, for gmail users it will be
+smtp.gmail.com</p>
+
+<ol>
+<li>If your e-mail provider have only pop3 access and you have gmail account you
+can use one of gmail account features to make your pop3 account visible as a
+IMAP folder. To do this got to Settings &ndash;> Accounts and Import and in the
+section &ldquo;Check mail from other accounts&rdquo; add your POP3 account. After that
+make sure to label your mails from POP3 account. Try to not use &lsquo;@&rsquo; in the
+label name because this cause problems during mutt configuration. If you set
+label for your POP3 account check if your label in Label tab have &ldquo;Show in
+IMAP&rdquo; marked, if yes everything was set correctly. To use this label in mutt
+simply add another <code>&lt;folder_name&gt;</code> to mailboxes line.</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1115,351 +1576,6 @@ power distributed to locally living people. Let them decide if they want
 conflict with town or village near them. Or maybe better live in peace, trade
 freely and make world better. Centralized systems are slow, inefficient and cost
 a lot. Distributed systems are those in which life of one man is important.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/14/quick-build-of-arm-unknown-linux/">Quick build of arm-unknown-linux-gnueabi with crosstool-ng</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-14T23:42:00+01:00" pubdate data-updated="true">Mar 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/03/14/quick-build-of-arm-unknown-linux/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>You might be surprised at how much you have to make to correctly build
-<code>arm-unknown-linux-gnueabi</code> config based toolchain with <a href="http://crosstool-ng.org/">crosstool-ng</a>. As you can
-see examples of many open source projects, the man&rsquo;s work is a rare resource.
-The result of this economic fact is that the attempt to build configuration
-<code>arm-unknown-linux-gnueabi</code> is not a simple task and during an operation you can
-come across many problems. Although I am not afraid of problems and effectively
-try to fight them and of course sharing the results of my work. My build system
-parameters:  <code>Debian GNU/Linux wheezy/sid 3.2.0-2-amd64</code></p>
-
-<ul>
-<li>Clone crosstools-ng (you need mercurial)</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>hg clone http://crosstool-ng.org/hg/crosstool-ng
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Create temporary directory and run</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>ct-ng arm-unknown-linux-eabi <span class="c">#choose latest kernel (for me it was 3.2.9)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>We probably want to change directory to which all stuff will be build (default is <code>$HOME/x-tools</code>):</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>ct-ng menuconfig
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And go to:
-<code>Paths and misc options ---&gt; (${HOME}/x-tools/${CT_TARGET}) Prefix directory</code>
-Change it according to your needs. Exit end save configuration.
-* Build (number after dot depend on how many command we want to run simultaneously):
-<code>ct-ng build.4</code>
-It can take a lot of time. On my machine with 5k BogoMips it takes over 1h.</p>
-
-<h3>Problems that you can encounter:</h3>
-
-<ul>
-<li><code>gcj</code> &ndash; latest changeset <code>2916:6f758ed4c0b9</code> have trouble finding <code>gcj</code> binary,
-which it show using following message:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>ERROR<span class="o">]</span> Missing: <span class="s1">&#39;x86_64-unknown-linux-gnu-gcj&#39;</span> or <span class="s1">&#39;x86_64-unknown-linux-gnu-gcj&#39;</span> or <span class="s1">&#39;gcj&#39;</span> : either needed!
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To workaround this install <code>gcj</code> and link binary like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo ln -s /usr/bin/gcj-4.6 /usr/bin/gcj
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><code>duma</code> &ndash; mentioned changeset also has problem with url to D.U.M.A library,
-apply below changes to workaround problems:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gd">--- a/scripts/build/debug/200-duma.sh Mon Mar 12 21:19:26 2012 +0100</span>
-</span><span class='line'><span class="gi">+++ b/scripts/build/debug/200-duma.sh Wed Mar 14 20:02:22 2012 +0100</span>
-</span><span class='line'><span class="gu">@@ -4,7 +4,7 @@ # Downloading an non-existing file from sourceforge will give you an</span>
-</span><span class='line'> # HTML file containing an error message, instead of returning a 404.
-</span><span class='line'> # Sigh...
-</span><span class='line'><span class="gd">- CT_GetFile &quot;duma_${CT_DUMA_VERSION}&quot; .tar.gz http://kent.dl.sourceforge.net/sourceforge/duma/ </span>
-</span><span class='line'><span class="gi">+ CT_GetFile &quot;duma_${CT_DUMA_VERSION}&quot; .tar.gz http://downloads.sourceforge.net/project/duma/duma/2.5.15</span>
-</span><span class='line'> # Downloading from sourceforge may leave garbage, cleanup
-</span><span class='line'> CT_DoExecLog ALL rm -f &quot;${CT_TARBALLS_DIR}/showfiles.php&quot;\* }
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><code>mawk</code> &ndash; if mawk return syntax error like this:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'>mawk: scripts/gen-sorted.awk: line 19: regular expression compile failed (bad
-</span><span class='line'>class -- [], [^] or [)
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It could be fixed in two ways. First is to change <code>line 19</code> in <code>/path/to/tmp/dir/.build/src/glibc-2.9/scripts/gen-sorted.awk</code>
-Is:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'>sub(/\/[^/]+$/, &quot;&quot;, subdir);
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Should be:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='diff'><span class='line'>sub(/\/[^\/]+$/, &quot;&quot;, subdir);
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Or simply by installing gawk, reconfigure and recompile <code>crosstools-ng</code>.</p>
-
-<p>This was my first post related to linux embedded enviroment. Hope it will be more. Enjoy!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/14/splitting-my-personal-repository/">Splitting my personal repository</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-14T23:26:00+01:00" pubdate data-updated="true">Mar 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/03/14/splitting-my-personal-repository/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>After writing a few posts in which my workspace scripts could be useful, I
-realized that I should split blog works from the scripts that can be useful to
-others. From now materials related to the blog I will track in a separate
-repository and I&rsquo;ll add them as submodule into my environment. This implies that
-if we intend to deliver something to a broader audience this should include only
-those things which the recipient is expected and which we say that we provide.
-Any additional items should be removed. We get a lot of unwanted stuff today, at
-every opportunity. From an economic point of view, it is known that very often
-margin value law is used here i.e. by hypermarkets, I will touch on this subject
-on another occasion, related to economics.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/">Debugging coreboot in qemu environment - part 1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-12T21:30:00+01:00" pubdate data-updated="true">Mar 12<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>First of all I use testing version of Debian &ndash; wheezy. Clone coreboot repository:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone http://review.coreboot.org/p/coreboot
-</span><span class='line'>cd coreboot; make menuconfig</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Configure FILO as apayload and use its latest version:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Payload -&gt; Add a payload -&gt; FILO Payload -&gt; FILO version -&gt; HEAD</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add verbose debugging messages:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Debugging -&gt; Check PIRQ table consistency Debugging -&gt; Output verbose malloc debug messages
-</span><span class='line'>Debugging -&gt; Output verbose ACPI debug messages Debugging -&gt; Enable debug messages for option ROM execution
-</span><span class='line'>Debugging -&gt; Built-in low-level shell Debugging -&gt; Trace function calls</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Try to build:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If everything builds correctly you can process. Sometimes there is need to use
-cross compiler. To build one:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd util/crossgcc
-</span><span class='line'>./buildgcc</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To explore <code>coreboot</code> code effectively I suggest to create tags and cscope
-database for <code>coreboot</code>. In my personal workspace I&rsquo;ve got process that I go
-through before I start work (if you use my workspace configuration which
-is available <a href="https://github.com/pietrushnic/workspace">@github</a> you
-can follow below steps directly, if not adjust to your environment):</p>
-
-<ol>
-<li>run vim ;)</li>
-<li><code>:cd /path/to/code</code></li>
-<li><code>s&lt;Tab&gt;</code> (fuzzyfinder &ndash;> bookmark dir)</li>
-<li><code>si</code> (fuzzyfinder &ndash;> change dir)</li>
-<li><code>sr</code> (run ctags to generate tags and cscope to build symbol database &ndash; <code>ctags -R;cscope -R -q -b -v</code>)</li>
-</ol>
-
-
-<p>After steps above we can start work with code. Run vim in <code>coreboot</code> directory.
-Type:
-<code>:e src/cpu/x86/16bit/reset16.inc</code>
-Put cursor over <code>protected_start</code> and press <code>Ctrl-]</code>. If everything goes ok you
-should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 537.</p>
-
-<p>In second article we dive into first phase of <code>coreboot</code> execution in emulated environment.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/07/human-action-ludwig-von-misess-work-by/">&#8220;Human Action&#8221; Ludwig von Mises</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-07T23:37:00+01:00" pubdate data-updated="true">Mar 7<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/03/07/human-action-ludwig-von-misess-work-by/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>  <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Ludzkie_dzialanie_okladka.jpg/166px-Ludzkie_dzialanie_okladka.jpg" alt="" /></p>
-
-<p>&ldquo;Human Action&rdquo; Ludwig von Mises&rsquo;s work by some of called the pope of free market. IMHO is one of the best books on economics I read in my life. It is not easy, however, giving it time with certainly pays off. Allows to understand the basic laws which ruled the modern world of finance. Mises in a sensational way talk about the myths explaining what is inflation, why it has impact on our lives, what is and how works the supply of credit, and who depend most on the production of money without coverage (<em>fiat</em> money). I can say that until I read this book, I was lost in the dark. Thanks to it I received a weapon to overthrow ridiculous  world order concepts, absurd messages communicated in the media. I recommend:  <a href="http://mises.org/store/Human-Action-The-Scholars-Edition-P119.aspx">mises.org store &ndash; Human Action </a></p>
 </div>
   
   
