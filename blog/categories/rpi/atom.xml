@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rpi, | Linux geek's scratchpad]]></title>
   <link href="http://pietrushnic.github.io/blog/categories/rpi/atom.xml" rel="self"/>
   <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-10-16T01:09:40+02:00</updated>
+  <updated>2014-10-20T01:25:56+02:00</updated>
   <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -28,7 +28,8 @@ realized that close to my heart is upstreaming effort. So with noob attitude I
 contacted RPi Upstreaming wiki page author (<a href="https://github.com/notro">notro</a>)
 and we started to create some foundation.</p>
 
-<p><em>Disclaimer: These are for testing purposes and considered unstable. Use at your own risk.</em></p>
+<p><em>Disclaimer: These are for testing purposes and considered unstable. Use at your own risk.</em>
+<em>Edit: 20/10/2014:</em> minor typo, clone instructions moved to &ldquo;How to use it ?&rdquo; section</p>
 
 <h2>What we have now ?</h2>
 
@@ -48,29 +49,15 @@ will dive into it later.</p>
 rebase all patches to keep them on top of every branch. This of course mean
 that repository will be broken, but patches will be more visible in history.</p>
 
-<p><code>rpi-dt-linux</code> repository can be cloned with:</p>
-
-<p><code>
-git clone https://github.com/pietrushnic/rpi-dt-linux.git
-</code></p>
-
 <p>Second <a href="https://github.com/pietrushnic/rpi-dt-firmware">rpi-dt-firmware</a> is ready
 to use firmware files for Raspberry Pi with already built modules and kernel.
 If you are familiar with <a href="https://github.com/Hexxeh">Hexxeh</a>
 <a href="https://github.com/Hexxeh/rpi-update">rpi-update</a> and his repository
 <a href="https://github.com/Hexxeh/rpi-firmware">rpi-firmware</a> this should not be
-anything new for you. Repository can be cloned with:</p>
-
-<p><code>
-git clone https://github.com/pietrushnic/rpi-dt-firmware.git
-</code></p>
+anything new for you.</p>
 
 <p>Third <a href="https://github.com/notro/rpi-bcm2835">rpi-bcm2835</a> which simplifies
-build and release process of <code>rpi-dt-linux</code>. You can clone it with:</p>
-
-<p><code>
-git clone https://github.com/notro/rpi-bcm2835.git
-</code></p>
+build and release process of <code>rpi-dt-linux</code>.</p>
 
 <h2>How to use it ?</h2>
 
@@ -97,9 +84,16 @@ sudo REPO_URI=https://github.com/pietrushnic/rpi-dt-firmware rpi-update
 
 <p>If you want to play with the code I have few hints that can help.</p>
 
-<p>First please clone <code>rpi-dt-linux</code> and <code>rpi-bcm2835</code> mentioned above. Then
-install <a href="https://github.com/notro/rpi-build">rpi-build</a> following instructions
-on <a href="https://github.com/notro/rpi-build/wiki">wiki</a>. Then you can do few thigns:</p>
+<p>First please clone <code>rpi-dt-linux</code> and <code>rpi-bcm2835</code> mentioned above.</p>
+
+<p><code>
+git clone https://github.com/pietrushnic/rpi-dt-linux.git
+git clone https://github.com/notro/rpi-bcm2835.git
+</code></p>
+
+<p>Then install <a href="https://github.com/notro/rpi-build">rpi-build</a> following
+instructions on <a href="https://github.com/notro/rpi-build/wiki">wiki</a>. Then you can
+do few things:</p>
 
 <p>Build <code>rpi-dt-linux</code> locally. This will download latest snapshot of
 <code>rpi-dt-linux</code> and other dependencies like <code>u-boot</code> and cross-compiler.</p>
