@@ -398,3 +398,15 @@ task :list do
   puts "Tasks: #{(Rake::Task.tasks - [Rake::Task[:list]]).join(', ')}"
   puts "(type rake -T for more detail)\n\n"
 end
+
+## -- LFTP Deploy config -- ##
+ftp_user = "pkrol@3mdeb.com"
+ftp_server = "az0017.srv.az.pl"
+ftp_target = "/blog"
+deploy_default = "lftp"
+
+desc "Deploy website via LFTP"
+task :lftp do
+  puts "## Deploying website via LFTP"
+  ok_failed system("lftp -e 'mirror -R --ignore-time --delete -v #{public_dir} #{ftp_target}; bye' -u #{ftp_user} #{ftp_server}")
+end
