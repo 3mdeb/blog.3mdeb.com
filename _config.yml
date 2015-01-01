@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://blog.3mdeb.com
+url: http://3mdeb.com
 title: Linux geek's scratchpad
 subtitle: or embedded dreams about productivity, freedom and liberty
 autho: Piort Król
@@ -26,7 +26,7 @@ email:
 # ----------------------- #
 
 # If publishing to a subdirectory as in http://site.com/project set 'root: /project'
-root: /
+root: /blog
 permalink: /blog/:year/:month/:day/:title/
 source: source
 destination: public
