@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://pietrushnic.github.io
+url: http://blog.3mdeb.com
 title: Linux geek's scratchpad
 subtitle: or embedded dreams about productivity, freedom and liberty
 autho: Piort Król
@@ -94,7 +94,7 @@ disqus_short_name: 'pietrushnics-world'
 disqus_show_comment_count: true
 
 # Google Analytics
-google_analytics_tracking_id: UA-39420295-1
+google_analytics_tracking_id: UA-39420295-3
 
 # Facebook Like
 facebook_like: true
