@@ -403,7 +403,7 @@ end
 ftp_user = "pkrol@3mdeb.com"
 ftp_server = "az0017.srv.az.pl"
 ftp_target = "/blog"
-deploy_default = "lftp"
+#deploy_default = "lftp"
 
 desc "Deploy website via LFTP"
 task :lftp do
