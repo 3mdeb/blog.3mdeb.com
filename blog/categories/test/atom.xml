@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: test | Linux geek's scratchpad]]></title>
-  <link href="http://pietrushnic.github.io/blog/categories/test/atom.xml" rel="self"/>
-  <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-10-20T01:25:56+02:00</updated>
-  <id>http://pietrushnic.github.io/</id>
+  <link href="http://3mdeb.com/blog/categories/test/atom.xml" rel="self"/>
+  <link href="http://3mdeb.com/"/>
+  <updated>2015-01-24T03:01:50+01:00</updated>
+  <id>http://3mdeb.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Test]]></title>
-    <link href="http://pietrushnic.github.io/blog/2012/01/04/test/"/>
+    <link href="http://3mdeb.com/blog/2012/01/04/test/"/>
     <updated>2012-01-04T21:46:00+01:00</updated>
-    <id>http://pietrushnic.github.io/blog/2012/01/04/test</id>
+    <id>http://3mdeb.com/blog/2012/01/04/test</id>
     <content type="html"><![CDATA[<p>01234567890123456789012345678901234567890123456789012345678901234567890123456789 This first test for blogger.vim plugin. THis will be used as sandbox, it looks like blogger vim works fine, need to check features that mostly use. Continue testing: <a href="http://google.pl">this is link</a> &ndash; this is dash &ndash; 2nd dash
 this is bash code
 plain text
@@ -34,9 +34,9 @@ plain text
   
   <entry>
     <title type="html"><![CDATA[First post]]></title>
-    <link href="http://pietrushnic.github.io/blog/2012/01/03/first-post/"/>
+    <link href="http://3mdeb.com/blog/2012/01/03/first-post/"/>
     <updated>2012-01-03T00:01:00+01:00</updated>
-    <id>http://pietrushnic.github.io/blog/2012/01/03/first-post</id>
+    <id>http://3mdeb.com/blog/2012/01/03/first-post</id>
     <content type="html"><![CDATA[<p>This is first post to see how blog looks like.</p>
 
 <h2>Comments</h2>

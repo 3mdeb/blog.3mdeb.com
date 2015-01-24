@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: virtualbox, | Linux geek's scratchpad]]></title>
-  <link href="http://pietrushnic.github.io/blog/categories/virtualbox/atom.xml" rel="self"/>
-  <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-10-20T01:25:56+02:00</updated>
-  <id>http://pietrushnic.github.io/</id>
+  <link href="http://3mdeb.com/blog/categories/virtualbox/atom.xml" rel="self"/>
+  <link href="http://3mdeb.com/"/>
+  <updated>2015-01-24T03:01:50+01:00</updated>
+  <id>http://3mdeb.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[virtualbox-dkms: fix alloc_netdev problems when compiling with 3.17.0-rcX headers]]></title>
-    <link href="http://pietrushnic.github.io/blog/2014/09/20/virtualbox-dkms-fix-alloc-netdev-problems-when-compiling-with-3-dot-17-dot-0-rcx-headers/"/>
+    <link href="http://3mdeb.com/blog/2014/09/20/virtualbox-dkms-fix-alloc-netdev-problems-when-compiling-with-3-dot-17-dot-0-rcx-headers/"/>
     <updated>2014-09-20T22:55:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2014/09/20/virtualbox-dkms-fix-alloc-netdev-problems-when-compiling-with-3-dot-17-dot-0-rcx-headers</id>
+    <id>http://3mdeb.com/blog/2014/09/20/virtualbox-dkms-fix-alloc-netdev-problems-when-compiling-with-3-dot-17-dot-0-rcx-headers</id>
     <content type="html"><![CDATA[<h2>Intro</h2>
 
 <p>Because of my bug hunting approach of using latest kernel I experienced problem

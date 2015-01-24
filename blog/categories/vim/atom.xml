@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: vim | Linux geek's scratchpad]]></title>
-  <link href="http://pietrushnic.github.io/blog/categories/vim/atom.xml" rel="self"/>
-  <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-10-20T01:25:56+02:00</updated>
-  <id>http://pietrushnic.github.io/</id>
+  <link href="http://3mdeb.com/blog/categories/vim/atom.xml" rel="self"/>
+  <link href="http://3mdeb.com/"/>
+  <updated>2015-01-24T03:01:50+01:00</updated>
+  <id>http://3mdeb.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Short hint for all those who use vim and pathogen]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/01/15/short-hint-for-all-those-who-use-vim/"/>
+    <link href="http://3mdeb.com/blog/2013/01/15/short-hint-for-all-those-who-use-vim/"/>
     <updated>2013-01-15T11:51:00+01:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/01/15/short-hint-for-all-those-who-use-vim</id>
+    <id>http://3mdeb.com/blog/2013/01/15/short-hint-for-all-those-who-use-vim</id>
     <content type="html"><![CDATA[<p>Today, after updating my wokspace to latest version I encounter below error during vim running:
 <code>
 Error detected while processing function pathogen#runtime_append_all_bundles:

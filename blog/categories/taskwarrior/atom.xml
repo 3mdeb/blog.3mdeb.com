@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: taskwarrior | Linux geek's scratchpad]]></title>
-  <link href="http://pietrushnic.github.io/blog/categories/taskwarrior/atom.xml" rel="self"/>
-  <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-10-20T01:25:56+02:00</updated>
-  <id>http://pietrushnic.github.io/</id>
+  <link href="http://3mdeb.com/blog/categories/taskwarrior/atom.xml" rel="self"/>
+  <link href="http://3mdeb.com/"/>
+  <updated>2015-01-24T03:01:50+01:00</updated>
+  <id>http://3mdeb.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Workflow imporovement with Open Source tools - part 1]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/05/16/workflow-imporovement-with-open-source-tools/"/>
+    <link href="http://3mdeb.com/blog/2013/05/16/workflow-imporovement-with-open-source-tools/"/>
     <updated>2013-05-16T22:16:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/05/16/workflow-imporovement-with-open-source-tools</id>
+    <id>http://3mdeb.com/blog/2013/05/16/workflow-imporovement-with-open-source-tools</id>
     <content type="html"><![CDATA[<h3>Introduction</h3>
 
 <p>I want to start a series of articles to describe how I improve my workflow with

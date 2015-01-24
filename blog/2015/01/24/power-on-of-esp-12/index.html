@@ -1,0 +1,351 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Power on of ESP-12 (ESP8266) - Linux geek's scratchpad</title>
+  <meta name="author" content="">
+
+  
+  <meta name="description" content="ESP8266 is a SoC made by Espressif. For last couple of
+months this chip is a rockstar of HackADay and makers
+community around the Internet. Mostly &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://3mdeb.com/blog/2015/01/24/power-on-of-esp-12">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Linux geek's scratchpad" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39420295-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+<!-- AddThis Smart Layers BEGIN -->
+<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534acd39445ac552"></script>
+<script type="text/javascript">
+  addthis.layers({
+    'theme' : 'gray',
+    'share' : {
+      'position' : 'left',
+      'numPreferredServices' : 5
+    }, 
+    'follow' : {
+      'services' : [
+        {'service': 'facebook', 'id': 'piotr.krol.756859'},
+        {'service': 'twitter', 'id': 'pietrushnic'},
+        {'service': 'linkedin', 'id': 'krolpiotr'},
+        {'service': 'google_follow', 'id': '115979497998056410813'}
+      ]
+    },  
+    'whatsnext' : {},  
+    'recommended' : {} 
+  });
+</script>
+<!-- AddThis Smart Layers END -->
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Linux geek's scratchpad</a></h1>
+  
+    <h2>or embedded dreams about productivity, freedom and liberty</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:3mdeb.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Power on of ESP-12 (ESP8266)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-24T00:25:05+01:00" pubdate data-updated="true">Jan 24<span>th</span>, 2015</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>ESP8266 is a SoC made by <a href="https://espressif.com">Espressif</a>. For last couple of
+months this chip is a rockstar of <a href="http://hackaday.com/">HackADay</a> and makers
+community around the Internet. Mostly because of WiFi modules built based on it
+(ESP-XX family). Rich interface (GPIO, SPI, SDIO, I2C) give those boards
+potential to be standalone MCU with WiFi capability for wide range of
+applications. In quantity you can get ESP-01 for $2.7 (for 1kpcs). Of course
+there is no free lunch. Documentation is weak (this is no TI), but
+<a href="http://www.esp8266.com/">community</a> doing it&rsquo;s best to change this state.
+Native interface of AT commands is also not the friendliest way of
+communicating by beginners. But also for that market found solution &ndash; namely
+<a href="https://github.com/nodemcu/nodemcu-firmware">NodeMCU</a>.</p>
+
+<p>A while ago I bought ESP-01 and experiment a little bit with it. I quickly
+realize that to release additional powers from this module I need access to
+other pins. ESP-01 expose only 2 GPIOs newer versions of the board provide more
+and more. Of course there was a way to hack ESP-01, but using latest version
+usually provide better feature set. Latest version known to wide public is
+ESP-12 which expose ADC and 9 GPIO pins. Finally I took in possession couple of
+them.</p>
+
+<h2>Soldering</h2>
+
+<p>Because this board came in SMD package I found that
+<a href="http://www.electrodragon.com/">ElectroDragon</a> provides also adapter to solder
+module and easily expose pins.</p>
+
+<p><a class="fancybox" rel="group" href="/assets/images/esp-12-adapter.jpg"><img src="/assets/images/esp-12-adapter.jpg" alt="" /></a></p>
+
+<p>After applying my soldering-fu I get rewarding result.</p>
+
+<p><a class="fancybox" rel="group" href="/assets/images/esp-12-soldered.jpg"><img src="/assets/images/esp-12-soldered.jpg" alt="" /></a></p>
+
+<h2>Wiring</h2>
+
+<p>ESP-12 adapter from ElectroDragon got width of 31mm and pin distance match
+ideally to prototype board. There is only one problem that adapter width put
+pins into first and last column of the standard 10 column (A-J) breadboard.
+Which give no ability to connect parallel wires, which was my initial idea.
+Because I didn&rsquo;t have u shape solderless jumpers to make connection clean I
+splitted old Ethernet cable and get this:</p>
+
+<p><a class="fancybox" rel="group" href="/assets/images/u-shape-jumpers.jpg"><img src="/assets/images/u-shape-jumpers.jpg" alt="" /></a></p>
+
+<p><a class="fancybox" rel="group" href="/assets/images/esp-12-breadboard.jpg"><img src="/assets/images/esp-12-breadboard.jpg" alt="" /></a></p>
+
+<p>Check connections couple of time to make sure that everything works fine. As
+USB UART I used FT232RL based module. Current provided by USB UART module can
+be insufficient that&rsquo;s why I used lab DC power supply.</p>
+
+<p>NOTE: Both ESP-12 and USB UART should be connected to the same GND.</p>
+
+<h2>Power on</h2>
+
+<p>It wasn&rsquo;t simple. First I tried minicom with 115200 UART speed:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>minicom -b 115200 -o -D /dev/ttyUSB0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This module display bootloader messages at 115200. After booting it switches to
+9600. If you booted and can&rsquo;t communicate but blue LED blinking when you type
+this may indicate that you need reset try <code>AT+RST&lt;Ctrl-M&gt;&lt;Ctrl-J&gt;</code>. You
+should get something like this:</p>
+
+<p><a class="fancybox" rel="group" href="/assets/images/esp-12-minicom-1.png"><img src="/assets/images/esp-12-minicom-1.png" /></a></p>
+
+<p>There are lot of other commands like <code>AT+GMR</code> which give you firmware version.
+More commands you can find
+<a href="http://wiki.iteadstudio.com/ESP8266_Serial_WIFI_Module#AT_Commands">here</a>. Not
+every firmware support all commands. To use more robust firmware you can
+compile latest version of AT command or even modify it according to your needs.
+Some instructions can be found
+<a href="https://github.com/esp8266/esp8266-wiki/wiki">here</a>.</p>
+
+<h2>Summary</h2>
+
+<p>I think that ESP8266 has great potential to make pressure on market and
+squeeze better solutions. There is a lot of interesting things going on around
+ESP like MQTT implementation of firmware or recently released FreeRTOS SDK
+from Espressif. I hope to write more about ESP-12 in future. If you think this
+post was useful please leave a comment or share with friends.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-24T00:25:05+01:00" pubdate data-updated="true">Jan 24<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/esp8266-embedded/'>ESP8266,embedded</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://3mdeb.com/blog/2015/01/24/power-on-of-esp-12/" data-via="pietrushnic" data-counturl="http://3mdeb.com/blog/2015/01/24/power-on-of-esp-12/" >Tweet</a>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/" title="Previous Post: Raspberry Pi kernel repository aggregating patches for Linux mainline">&laquo; Raspberry Pi kernel repository aggregating patches for Linux mainline</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 -  -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pietrushnics-world';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://3mdeb.com/blog/2015/01/24/power-on-of-esp-12/';
+        var disqus_url = 'http://3mdeb.com/blog/2015/01/24/power-on-of-esp-12/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".fancybox").fancybox();
+  });
+</script>
+
+
+</body>
+</html>

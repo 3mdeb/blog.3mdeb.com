@@ -9,8 +9,9 @@
   <meta name="author" content="">
 
   
-  <meta name="description" content="Since several months I&rsquo;m trying to find my way to embedded Linux programming.
-My hardware set was very limited I had only one board that can be &hellip;">
+  <meta name="description" content="ESP8266 is a SoC made by Espressif. For last couple of
+months this chip is a rockstar of HackADay and makers
+community around the Internet. Mostly &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@ My hardware set was very limited I had only one board that can be &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pietrushnic.github.io">
+  <link rel="canonical" href="http://3mdeb.com">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Linux geek's scratchpad" type="application/atom+xml">
@@ -40,7 +41,7 @@ My hardware set was very limited I had only one board that can be &hellip;">
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-39420295-1']);
+    _gaq.push(['_setAccount', 'UA-39420295-3']);
     _gaq.push(['_trackPageview']);
 
     (function() {
@@ -92,7 +93,7 @@ My hardware set was very limited I had only one board that can be &hellip;">
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input type="hidden" name="q" value="site:3mdeb.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -108,6 +109,124 @@ My hardware set was very limited I had only one board that can be &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/24/power-on-of-esp-12/">Power on of ESP-12 (ESP8266)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-24T00:25:05+01:00" pubdate data-updated="true">Jan 24<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/01/24/power-on-of-esp-12/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ESP8266 is a SoC made by <a href="https://espressif.com">Espressif</a>. For last couple of
+months this chip is a rockstar of <a href="http://hackaday.com/">HackADay</a> and makers
+community around the Internet. Mostly because of WiFi modules built based on it
+(ESP-XX family). Rich interface (GPIO, SPI, SDIO, I2C) give those boards
+potential to be standalone MCU with WiFi capability for wide range of
+applications. In quantity you can get ESP-01 for $2.7 (for 1kpcs). Of course
+there is no free lunch. Documentation is weak (this is no TI), but
+<a href="http://www.esp8266.com/">community</a> doing it&rsquo;s best to change this state.
+Native interface of AT commands is also not the friendliest way of
+communicating by beginners. But also for that market found solution &ndash; namely
+<a href="https://github.com/nodemcu/nodemcu-firmware">NodeMCU</a>.</p>
+
+<p>A while ago I bought ESP-01 and experiment a little bit with it. I quickly
+realize that to release additional powers from this module I need access to
+other pins. ESP-01 expose only 2 GPIOs newer versions of the board provide more
+and more. Of course there was a way to hack ESP-01, but using latest version
+usually provide better feature set. Latest version known to wide public is
+ESP-12 which expose ADC and 9 GPIO pins. Finally I took in possession couple of
+them.</p>
+
+<h2>Soldering</h2>
+
+<p>Because this board came in SMD package I found that
+<a href="http://www.electrodragon.com/">ElectroDragon</a> provides also adapter to solder
+module and easily expose pins.</p>
+
+<p><a class="fancybox" rel="group" href="/assets/images/esp-12-adapter.jpg"><img src="/assets/images/esp-12-adapter.jpg" alt="" /></a></p>
+
+<p>After applying my soldering-fu I get rewarding result.</p>
+
+<p><a class="fancybox" rel="group" href="/assets/images/esp-12-soldered.jpg"><img src="/assets/images/esp-12-soldered.jpg" alt="" /></a></p>
+
+<h2>Wiring</h2>
+
+<p>ESP-12 adapter from ElectroDragon got width of 31mm and pin distance match
+ideally to prototype board. There is only one problem that adapter width put
+pins into first and last column of the standard 10 column (A-J) breadboard.
+Which give no ability to connect parallel wires, which was my initial idea.
+Because I didn&rsquo;t have u shape solderless jumpers to make connection clean I
+splitted old Ethernet cable and get this:</p>
+
+<p><a class="fancybox" rel="group" href="/assets/images/u-shape-jumpers.jpg"><img src="/assets/images/u-shape-jumpers.jpg" alt="" /></a></p>
+
+<p><a class="fancybox" rel="group" href="/assets/images/esp-12-breadboard.jpg"><img src="/assets/images/esp-12-breadboard.jpg" alt="" /></a></p>
+
+<p>Check connections couple of time to make sure that everything works fine. As
+USB UART I used FT232RL based module. Current provided by USB UART module can
+be insufficient that&rsquo;s why I used lab DC power supply.</p>
+
+<p>NOTE: Both ESP-12 and USB UART should be connected to the same GND.</p>
+
+<h2>Power on</h2>
+
+<p>It wasn&rsquo;t simple. First I tried minicom with 115200 UART speed:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>minicom -b 115200 -o -D /dev/ttyUSB0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This module display bootloader messages at 115200. After booting it switches to
+9600. If you booted and can&rsquo;t communicate but blue LED blinking when you type
+this may indicate that you need reset try <code>AT+RST&lt;Ctrl-M&gt;&lt;Ctrl-J&gt;</code>. You
+should get something like this:</p>
+
+<p><a class="fancybox" rel="group" href="/assets/images/esp-12-minicom-1.png"><img src="/assets/images/esp-12-minicom-1.png" /></a></p>
+
+<p>There are lot of other commands like <code>AT+GMR</code> which give you firmware version.
+More commands you can find
+<a href="http://wiki.iteadstudio.com/ESP8266_Serial_WIFI_Module#AT_Commands">here</a>. Not
+every firmware support all commands. To use more robust firmware you can
+compile latest version of AT command or even modify it according to your needs.
+Some instructions can be found
+<a href="https://github.com/esp8266/esp8266-wiki/wiki">here</a>.</p>
+
+<h2>Summary</h2>
+
+<p>I think that ESP8266 has great potential to make pressure on market and
+squeeze better solutions. There is a lot of interesting things going on around
+ESP like MQTT implementation of firmware or recently released FreeRTOS SDK
+from Espressif. I hope to write more about ESP-12 in future. If you think this
+post was useful please leave a comment or share with friends.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2115,703 +2234,6 @@ You may need some additional packages like</code>uuid-dev<code>,</code>iasl<code
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/07/root-file-system-for-embedded-system/">0x6: Root file system for embedded system</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-07T10:40:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/07/root-file-system-for-embedded-system/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Table of contents</h2>
-
-<ul>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#intro">Introduction</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#get-bb">Get and build BusyBox</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#fast-and-simple">Fast and simple</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#setting-up-kernel-through-nfs">Setting up kernel through NFS</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#verify-configuration">Verify Configuration</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#embedded-filesystem-tuning">Embedded filesystem tuning</a></li>
-<li><a href="/blog/2013/06/07/root-file-system-for-embedded-system/#summary">Summary</a></li>
-</ul>
-
-
-<p><a id="intro"></a></p>
-
-<h3>Introduction</h3>
-
-<p>To make our embedded linux work as virtual development platform we need some
-environment after booting. There is many approaches to get working root file
-system but I will use the easiest one as an exercise. I don&rsquo;t want to create full
-embedded distribution (this is good plan for future works). Right now I will be
-happy with simple initramfs based on <a href="http://busybox.net/">BusyBox</a>.</p>
-
-<p>For all interested in creating own root filesystem there are few places where
-you can find informations:</p>
-
-<ul>
-<li><a href="http://lwn.net/Articles/210046/">Embedded Linux: Small Root Filesystems</a></li>
-<li><a href="https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt">ramfs-rootfs-initramfs</a></li>
-<li><a href="http://processors.wiki.ti.com/index.php/Creating_a_Root_File_System_for_Linux_on_OMAP35x">Creating a Root File System for Linux on OMAP35x</a></li>
-</ul>
-
-
-<p><a id="get-bb"></a></p>
-
-<h3>Get and build BusyBox</h3>
-
-<p>Clone git repository:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://git.busybox.net/busybox</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a id="fast-and-simple"></a></p>
-
-<h3>Fast and simple</h3>
-
-<p>Of course make sure to use correct toolchain. I made few notes about
-Ubuntu/Linaro toolchain in <a href="/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues">previous post</a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- menuconfig</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Mark <code>Busybox Settings -&gt; Build Options -&gt; Build BusyBox as a static binary (no
-shared libs)</code> option. Exit and save.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-
-</span><span class='line'>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- install
-</span><span class='line'>cd _install/</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a id="setting-up-kernel-through-nfs"></a></p>
-
-<h3>Setting up kernel through NFS</h3>
-
-<p><a href="/blog/2013/06/07/linux-kernel-for-embedded-system">Previously</a> we prepared U-Boot
-kenernel image with DHCP and rootfs which we want to expose over NFS. First lets start with NFS
-configuration:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install nfs-kernel-server</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I use simple <code>/etc/exports</code> configuration:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/srv/homes 192.168.1.0/255.255.255.0(rw,sync,no_subtree_check,no_root_squash)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Make sure that <code>/srv/homes</code> exist, if no than create it. After editing nfs
-configuration file we have to restart NFS server:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo service nfs-kernel-server restart</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a id="verify-configuration"></a></p>
-
-<h3>Verify configuration</h3>
-
-<p>I assume that you go through all previous articles in this series.
-To verify configuration we have to copy whole BusyBox <code>_install</code> directory to
-known nfs location:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir /srv/homes/rootfs
-</span><span class='line'>sudo chmod 777 /srv/homes/rootfs
-</span><span class='line'>cd /srv/homes/rootfs
-</span><span class='line'>cp -R /path/to/busybox/_install/* .</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now we can try our Virtual Development Board:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo qemu-system-arm -kernel src/u-boot/u-boot -net nic,vlan=0 -net \
-</span><span class='line'>tap,vlan=0,ifname=tap0,script=/etc/qemu-ifup -nographic -M versatilepb</span></code></pre></td></tr></table></div></figure>
-
-
-<p>After U-Boot booting:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>VersatilePB # setenv autload no
-</span><span class='line'>VersatilePB # dhcp
-</span><span class='line'>MC91111: PHY auto-negotiate timed out
-</span><span class='line'>SMC91111: MAC 52:54:00:12:34:56
-</span><span class='line'>BOOTP broadcast 1
-</span><span class='line'>DHCP client bound to address 192.168.1.13
-</span><span class='line'>VersatilePB # setenv serverip 192.168.1.24
-</span><span class='line'>VersatilePB # setenv bootfile uImage
-</span><span class='line'>VersatilePB # tftp</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note that <code>192.168.1.24</code> should be replaced with correct address of TFTP server.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>VersatilePB # tftp
-</span><span class='line'>SMC91111: PHY auto-negotiate timed out
-</span><span class='line'>SMC91111: MAC 52:54:00:12:34:56
-</span><span class='line'>Using SMC91111-0 device
-</span><span class='line'>TFTP from server 192.168.1.20; our IP address is 192.168.1.13
-</span><span class='line'>Filename 'uImage'.
-</span><span class='line'>Load address: 0x7fc0
-</span><span class='line'>Loading: #################################################################
-</span><span class='line'>         #################################################################
-</span><span class='line'>         #################################################################
-</span><span class='line'>         #################################################################
-</span><span class='line'>         #################################################################
-</span><span class='line'>         ##################################################
-</span><span class='line'>         252 KiB/s
-</span><span class='line'>done
-</span><span class='line'>Bytes transferred = 1917944 (1d43f8 hex)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Right now we will set boot arguments for our kernel:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>setenv bootargs 'root=/dev/nfs mem=128M ip=dhcp netdev=25,0,0xf1010000,0xf1010010,eth0 nfsroot=192.168.1.20:/srv/homes/rootfs console=ttyAMA0'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>What does it mean:</p>
-
-<ul>
-<li><code>root=/dev/nfs</code> &ndash; following
-<a href="https://www.kernel.org/doc/Documentation/filesystems/nfs/nfsroot.txt">kernel.org</a>:</li>
-</ul>
-
-
-<blockquote><p>This is necessary to enable the pseudo-NFS-device. Note that it&#8217;s not a real device but just a synonym to tell the kernel to use NFS instead of a real device.</p></blockquote>
-
-
-<ul>
-<li><code>mem=128M ip=dhcp</code> &ndash; self-explaining</li>
-<li><code>netdev=25,0,0xf1010000,0xf1010010,eth0</code> &ndash; network device configuration
-(<code>Format: &lt;irq&gt;,&lt;io&gt;,&lt;mem_start&gt;,&lt;mem_end&gt;,&lt;name&gt;</code>), this was provided by
-default <code>U-Boot</code> bootargs</li>
-<li><code>nfsroot=192.168.1.20:/srv/homes/rootfs</code> &ndash; NFS server ip and path to rootfs</li>
-<li><code>console=ttyAMA0</code> &ndash; very importanat if you want to see anything in <code>-nographic</code> mode</li>
-</ul>
-
-
-<p>After setting bootargs we can boot our Virtual Development Board:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bootm</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As you can see that&rsquo;s not all, our current configuration end with:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(...)
-</span><span class='line'>Sending DHCP requests .input: AT Raw Set 2 keyboard as 
-</span><span class='line'>/devices/fpga:06/serio0/input/input0
-</span><span class='line'>, OK
-</span><span class='line'>IP-Config: Got DHCP answer from 192.168.1.1, my address is 192.168.1.13
-</span><span class='line'>IP-Config: Complete:
-</span><span class='line'>     device=eth0, hwaddr=52:54:00:12:34:56, ipaddr=192.168.1.13, mask=255.255.255.0, gw=192.168.1.1
-</span><span class='line'>     host=192.168.1.13, domain=, nis-domain=(none)
-</span><span class='line'>     bootserver=0.0.0.0, rootserver=192.168.1.20, rootpath=
-</span><span class='line'>     nameserver0=192.168.1.1
-</span><span class='line'>input: ImExPS/2 Generic Explorer Mouse as 
-</span><span class='line'>/devices/fpga:07/serio1/input/input1
-</span><span class='line'>VFS: Mounted root (nfs filesystem) on device 0:9.
-</span><span class='line'>Freeing unused kernel memory: 112K (c034e000 - c036a000)
-</span><span class='line'>nfs: server 192.168.1.20 not responding, still trying
-</span><span class='line'>nfs: server 192.168.1.20 OK
-</span><span class='line'>can't run '/etc/init.d/rcS': No such file or directory
-</span><span class='line'>can't open /dev/tty2: No such file or directory
-</span><span class='line'>can't open /dev/tty3: No such file or directory
-</span><span class='line'>
-</span><span class='line'>can't open /dev/tty4: No such file or directory
-</span><span class='line'>can't open /dev/tty2: No such file or directory
-</span><span class='line'>can't open /dev/tty3: No such file or directory
-</span><span class='line'>can't open /dev/tty4: No such file or directory
-</span><span class='line'>can't open /dev/tty2: No such file or directory
-</span><span class='line'>can't open /dev/tty3: No such file or directory</span></code></pre></td></tr></table></div></figure>
-
-
-<p>try to open ttys loop. This is because of default behavior of <code>BusyBox</code> when <code>inittab</code>
-was not found.</p>
-
-<p><a id="embedded-filesystem-tuning"></a></p>
-
-<h3>Embedded filesystem tuning</h3>
-
-<p>To override above behavior we have to create <code>/etc/inittab</code> file:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd /srv/homes/rootfs
-</span><span class='line'>mkdir etc
-</span><span class='line'>vim etc/inittab</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Our <code>inittab</code> is very simple:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>::sysinit:/etc/init.d/rcS
-</span><span class='line'>::askfirst:/bin/ash
-</span><span class='line'>::ctrlaltdel:/sbin/reboot
-</span><span class='line'>::shutdown:/sbin/swapoff -a
-</span><span class='line'>::shutdown:/bin/umount -a -r
-</span><span class='line'>::restart:/sbin/init</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you want to learn more about inittab &ndash; <code>man inittab</code> .We need improve out filesystem with few directories:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir sys proc etc/init.d</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In <code>/etc/init.d/rcS</code> we will mount sysfs and procfs:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#! /bin/sh</span>
-</span><span class='line'>mount -t proc proc /proc
-</span><span class='line'>mount -t sysfs sysfs /sys
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Give executable permission to <code>rcS</code> script:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>chmod +x etc/init.d/rcS
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We also have to create <code>dev</code> directory with <code>ttyAMA0</code> block device:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir dev
-</span><span class='line'>sudo mknod dev/ttyAMA0 c 204 64
-</span><span class='line'>sudo mknod dev/null c 1 3
-</span><span class='line'>sudo mknod dev/console c 5 1
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Right now we should be able to boot our Virtual Development Board. Let&rsquo;s try
-again:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-<span class='line-number'>104</span>
-<span class='line-number'>105</span>
-<span class='line-number'>106</span>
-<span class='line-number'>107</span>
-<span class='line-number'>108</span>
-<span class='line-number'>109</span>
-<span class='line-number'>110</span>
-<span class='line-number'>111</span>
-<span class='line-number'>112</span>
-<span class='line-number'>113</span>
-<span class='line-number'>114</span>
-<span class='line-number'>115</span>
-<span class='line-number'>116</span>
-<span class='line-number'>117</span>
-<span class='line-number'>118</span>
-<span class='line-number'>119</span>
-<span class='line-number'>120</span>
-<span class='line-number'>121</span>
-<span class='line-number'>122</span>
-<span class='line-number'>123</span>
-<span class='line-number'>124</span>
-<span class='line-number'>125</span>
-<span class='line-number'>126</span>
-<span class='line-number'>127</span>
-<span class='line-number'>128</span>
-<span class='line-number'>129</span>
-<span class='line-number'>130</span>
-<span class='line-number'>131</span>
-<span class='line-number'>132</span>
-<span class='line-number'>133</span>
-<span class='line-number'>134</span>
-<span class='line-number'>135</span>
-<span class='line-number'>136</span>
-<span class='line-number'>137</span>
-<span class='line-number'>138</span>
-<span class='line-number'>139</span>
-<span class='line-number'>140</span>
-<span class='line-number'>141</span>
-<span class='line-number'>142</span>
-<span class='line-number'>143</span>
-<span class='line-number'>144</span>
-<span class='line-number'>145</span>
-<span class='line-number'>146</span>
-<span class='line-number'>147</span>
-<span class='line-number'>148</span>
-<span class='line-number'>149</span>
-<span class='line-number'>150</span>
-<span class='line-number'>151</span>
-<span class='line-number'>152</span>
-<span class='line-number'>153</span>
-<span class='line-number'>154</span>
-<span class='line-number'>155</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>pietrushnic@eglarest:~<span class="nv">$ </span>sudo qemu-system-arm -m 256M -kernel src/u-boot/u-boot -net nic,vlan<span class="o">=</span>0 -net tap,vlan<span class="o">=</span>0,ifname<span class="o">=</span>tap0,script<span class="o">=</span>/etc/qemu-ifup -nographic -M versatilepb -net dump,file<span class="o">=</span>/tmp/dump.pcap
-</span><span class='line'>Executing /etc/qemu-ifup
-</span><span class='line'>Bringing up tap0 <span class="k">for </span>bridged mode...
-</span><span class='line'>Adding tap0 to br0...
-</span><span class='line'>oss: Could not initialize DAC
-</span><span class='line'>oss: Failed to open <span class="sb">`</span>/dev/dsp<span class="s1">&#39;</span>
-</span><span class='line'><span class="s1">oss: Reason: No such file or directory</span>
-</span><span class='line'><span class="s1">oss: Could not initialize DAC</span>
-</span><span class='line'><span class="s1">oss: Failed to open `/dev/dsp&#39;</span>
-</span><span class='line'>oss: Reason: No such file or directory
-</span><span class='line'>audio: Failed to create voice <span class="sb">`</span>lm4549.out<span class="s1">&#39;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="s1">U-Boot 2013.04-00274-ga71d45d (May 27 2013 - 17:36:14)</span>
-</span><span class='line'>
-</span><span class='line'><span class="s1">DRAM:  128 MiB</span>
-</span><span class='line'><span class="s1">WARNING: Caches not enabled</span>
-</span><span class='line'><span class="s1">Flash: 64 MiB</span>
-</span><span class='line'><span class="s1">*** Warning - bad CRC, using default environment</span>
-</span><span class='line'>
-</span><span class='line'><span class="s1">In:    serial</span>
-</span><span class='line'><span class="s1">Out:   serial</span>
-</span><span class='line'><span class="s1">Err:   serial</span>
-</span><span class='line'><span class="s1">Net:   SMC91111-0</span>
-</span><span class='line'><span class="s1">Warning: SMC91111-0 using MAC address from net device</span>
-</span><span class='line'>
-</span><span class='line'><span class="s1">VersatilePB # setenv serverip 192.168.1.24</span>
-</span><span class='line'><span class="s1">VersatilePB # setenv bootfile uImage</span>
-</span><span class='line'><span class="s1">VersatilePB # setenv bootargs &#39;</span><span class="nv">root</span><span class="o">=</span>/dev/nfs <span class="nv">mem</span><span class="o">=</span>128M <span class="nv">ip</span><span class="o">=</span>dhcp <span class="nv">netdev</span><span class="o">=</span>25,0,0xf1010000,0xf1010010,eth0 <span class="nv">nfsroot</span><span class="o">=</span>192.168.1.24:/sv/homes/rootfs <span class="nv">console</span><span class="o">=</span>ttyAMA0<span class="s1">&#39;</span>
-</span><span class='line'><span class="s1">VersatilePB # dhcp</span>
-</span><span class='line'><span class="s1">SMC91111: PHY auto-negotiate timed out</span>
-</span><span class='line'><span class="s1">SMC91111: MAC 52:54:00:12:34:56</span>
-</span><span class='line'><span class="s1">BOOTP broadcast 1</span>
-</span><span class='line'><span class="s1">DHCP client bound to address 192.168.1.13</span>
-</span><span class='line'><span class="s1">Using SMC91111-0 device</span>
-</span><span class='line'><span class="s1">TFTP from server 192.168.1.24; our IP address is 192.168.1.13</span>
-</span><span class='line'><span class="s1">Filename &#39;</span>uImage<span class="s1">&#39;.</span>
-</span><span class='line'><span class="s1">Load address: 0x7fc0</span>
-</span><span class='line'><span class="s1">Loading: *############T #####################################################</span>
-</span><span class='line'><span class="s1">  #################################################################</span>
-</span><span class='line'><span class="s1">  #################################################################</span>
-</span><span class='line'><span class="s1">  #################################################################</span>
-</span><span class='line'><span class="s1">  #################################################################</span>
-</span><span class='line'><span class="s1">  ##################################################</span>
-</span><span class='line'><span class="s1">  0 Bytes/s</span>
-</span><span class='line'><span class="s1">done</span>
-</span><span class='line'><span class="s1">Bytes transferred = 1917944 (1d43f8 hex)</span>
-</span><span class='line'><span class="s1">VersatilePB # bootm</span>
-</span><span class='line'><span class="s1">## Booting kernel from Legacy Image at 00007fc0 ...</span>
-</span><span class='line'><span class="s1">   Image Name:   Linux-3.10.0-rc3</span>
-</span><span class='line'><span class="s1">   Image Type:   ARM Linux Kernel Image (uncompressed)</span>
-</span><span class='line'><span class="s1">   Data Size:    1917880 Bytes = 1.8 MiB</span>
-</span><span class='line'><span class="s1">   Load Address: 00008000</span>
-</span><span class='line'><span class="s1">   Entry Point:  00008000</span>
-</span><span class='line'><span class="s1">   XIP Kernel Image ... OK</span>
-</span><span class='line'><span class="s1">OK</span>
-</span><span class='line'>
-</span><span class='line'><span class="s1">Starting kernel ...</span>
-</span><span class='line'>
-</span><span class='line'><span class="s1">Uncompressing Linux... done, booting the kernel.</span>
-</span><span class='line'><span class="s1">Booting Linux on physical CPU 0x0</span>
-</span><span class='line'><span class="s1">Linux version 3.10.0-rc3 (pietrushnic@eglarest) (gcc version 4.7.2 (Debian 4.7.2-4) ) #2 Sun Jun 2 20:25:23 CEST 2013</span>
-</span><span class='line'><span class="s1">CPU: ARM926EJ-S [41069265] revision 5 (ARMv5TEJ), cr=00093177</span>
-</span><span class='line'><span class="s1">CPU: VIVT data cache, VIVT instruction cache</span>
-</span><span class='line'><span class="s1">Machine: ARM-Versatile PB</span>
-</span><span class='line'><span class="s1">Memory policy: ECC disabled, Data cache writeback</span>
-</span><span class='line'><span class="s1">sched_clock: 32 bits at 24MHz, resolution 41ns, wraps every 178956ms</span>
-</span><span class='line'><span class="s1">Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 32512</span>
-</span><span class='line'><span class="s1">Kernel command line: root=/dev/nfs mem=128M ip=dhcp netdev=25,0,0xf1010000,0xf1010010,eth0 nfsroot=192.168.1.24:/srv/homes/rootfs console=ttyAMA0</span>
-</span><span class='line'><span class="s1">PID hash table entries: 512 (order: -1, 2048 bytes)</span>
-</span><span class='line'><span class="s1">Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)</span>
-</span><span class='line'><span class="s1">Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)</span>
-</span><span class='line'><span class="s1">Memory: 128MB = 128MB total</span>
-</span><span class='line'><span class="s1">Memory: 126136k/126136k available, 4936k reserved, 0K highmem</span>
-</span><span class='line'><span class="s1">Virtual kernel memory layout:</span>
-</span><span class='line'><span class="s1">    vector  : 0xffff0000 - 0xffff1000   (   4 kB)</span>
-</span><span class='line'><span class="s1">    fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)</span>
-</span><span class='line'><span class="s1">    vmalloc : 0xc8800000 - 0xff000000   ( 872 MB)</span>
-</span><span class='line'><span class="s1">    lowmem  : 0xc0000000 - 0xc8000000   ( 128 MB)</span>
-</span><span class='line'><span class="s1">    modules : 0xbf000000 - 0xc0000000   (  16 MB)</span>
-</span><span class='line'><span class="s1">      .text : 0xc0008000 - 0xc034dd58   (3352 kB)</span>
-</span><span class='line'><span class="s1">      .init : 0xc034e000 - 0xc036ae8c   ( 116 kB)</span>
-</span><span class='line'><span class="s1">      .data : 0xc036c000 - 0xc0391de0   ( 152 kB)</span>
-</span><span class='line'><span class="s1">       .bss : 0xc0391de0 - 0xc03ad6cc   ( 111 kB)</span>
-</span><span class='line'><span class="s1">NR_IRQS:224</span>
-</span><span class='line'><span class="s1">VIC @f1140000: id 0x00041190, vendor 0x41</span>
-</span><span class='line'><span class="s1">FPGA IRQ chip 0 &quot;SIC&quot; @ f1003000, 13 irqs</span>
-</span><span class='line'><span class="s1">Console: colour dummy device 80x30</span>
-</span><span class='line'><span class="s1">Calibrating delay loop... 649.21 BogoMIPS (lpj=3246080)</span>
-</span><span class='line'><span class="s1">pid_max: default: 32768 minimum: 301</span>
-</span><span class='line'><span class="s1">Mount-cache hash table entries: 512</span>
-</span><span class='line'><span class="s1">CPU: Testing write buffer coherency: ok</span>
-</span><span class='line'><span class="s1">Setting up static identity map for 0xc0286e90 - 0xc0286ee8</span>
-</span><span class='line'><span class="s1">NET: Registered protocol family 16</span>
-</span><span class='line'><span class="s1">DMA: preallocated 256 KiB pool for atomic coherent allocations</span>
-</span><span class='line'><span class="s1">Serial: AMBA PL011 UART driver</span>
-</span><span class='line'><span class="s1">dev:f1: ttyAMA0 at MMIO 0x101f1000 (irq = 44) is a PL011 rev1</span>
-</span><span class='line'><span class="s1">console [ttyAMA0] enabled</span>
-</span><span class='line'><span class="s1">dev:f2: ttyAMA1 at MMIO 0x101f2000 (irq = 45) is a PL011 rev1</span>
-</span><span class='line'><span class="s1">dev:f3: ttyAMA2 at MMIO 0x101f3000 (irq = 46) is a PL011 rev1</span>
-</span><span class='line'><span class="s1">fpga:09: ttyAMA3 at MMIO 0x10009000 (irq = 70) is a PL011 rev1</span>
-</span><span class='line'><span class="s1">bio: create slab &lt;bio-0&gt; at 0</span>
-</span><span class='line'><span class="s1">Switching to clocksource timer3</span>
-</span><span class='line'><span class="s1">NET: Registered protocol family 2</span>
-</span><span class='line'><span class="s1">TCP established hash table entries: 1024 (order: 1, 8192 bytes)</span>
-</span><span class='line'><span class="s1">TCP bind hash table entries: 1024 (order: 0, 4096 bytes)</span>
-</span><span class='line'><span class="s1">TCP: Hash tables configured (established 1024 bind 1024)</span>
-</span><span class='line'><span class="s1">TCP: reno registered</span>
-</span><span class='line'><span class="s1">UDP hash table entries: 256 (order: 0, 4096 bytes)</span>
-</span><span class='line'><span class="s1">UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)</span>
-</span><span class='line'><span class="s1">NET: Registered protocol family 1</span>
-</span><span class='line'><span class="s1">RPC: Registered named UNIX socket transport module.</span>
-</span><span class='line'><span class="s1">RPC: Registered udp transport module.</span>
-</span><span class='line'><span class="s1">RPC: Registered tcp transport module.</span>
-</span><span class='line'><span class="s1">RPC: Registered tcp NFSv4.1 backchannel transport module.</span>
-</span><span class='line'><span class="s1">NetWinder Floating Point Emulator V0.97 (double precision)</span>
-</span><span class='line'><span class="s1">Installing knfsd (copyright (C) 1996 okir@monad.swb.de).</span>
-</span><span class='line'><span class="s1">jffs2: version 2.2. (NAND) © 2001-2006 Red Hat, Inc.</span>
-</span><span class='line'><span class="s1">ROMFS MTD (C) 2007 Red Hat, Inc.</span>
-</span><span class='line'><span class="s1">msgmni has been set to 246</span>
-</span><span class='line'><span class="s1">Block layer SCSI generic (bsg) driver version 0.4 loaded (major 254)</span>
-</span><span class='line'><span class="s1">io scheduler noop registered</span>
-</span><span class='line'><span class="s1">io scheduler deadline registered</span>
-</span><span class='line'><span class="s1">io scheduler cfq registered (default)</span>
-</span><span class='line'><span class="s1">clcd-pl11x dev:20: PL110 rev0 at 0x10120000</span>
-</span><span class='line'><span class="s1">clcd-pl11x dev:20: Versatile hardware, VGA display</span>
-</span><span class='line'><span class="s1">Console: switching to colour frame buffer device 80x60</span>
-</span><span class='line'><span class="s1">brd: module loaded</span>
-</span><span class='line'><span class="s1">physmap platform flash device: 04000000 at 34000000</span>
-</span><span class='line'><span class="s1">physmap-flash.0: Found 1 x32 devices at 0x0 in 32-bit bank. Manufacturer ID 0x000000 Chip ID 0x000000</span>
-</span><span class='line'><span class="s1">Intel/Sharp Extended Query Table at 0x0031</span>
-</span><span class='line'><span class="s1">Using buffer write method</span>
-</span><span class='line'><span class="s1">smc91x.c: v1.1, sep 22 2004 by Nicolas Pitre &lt;nico@fluxnic.net&gt;</span>
-</span><span class='line'><span class="s1">eth0: SMC91C11xFD (rev 1) at c89c8000 IRQ 57 [nowait]</span>
-</span><span class='line'><span class="s1">eth0: Ethernet addr: 52:54:00:12:34:56</span>
-</span><span class='line'><span class="s1">mousedev: PS/2 mouse device common for all mice</span>
-</span><span class='line'><span class="s1">TCP: cubic registered</span>
-</span><span class='line'><span class="s1">NET: Registered protocol family 17</span>
-</span><span class='line'><span class="s1">VFP support v0.3: implementor 41 architecture 1 part 10 variant 9 rev 0</span>
-</span><span class='line'><span class="s1">eth0: link up</span>
-</span><span class='line'><span class="s1">Sending DHCP requests ., OK</span>
-</span><span class='line'><span class="s1">IP-Config: Got DHCP answer from 192.168.1.1, my address is 192.168.1.13</span>
-</span><span class='line'><span class="s1">IP-Config: Complete:</span>
-</span><span class='line'><span class="s1">     device=eth0, hwaddr=52:54:00:12:34:56, ipaddr=192.168.1.13, mask=255.255.255.0, gw=192.168.1.1</span>
-</span><span class='line'><span class="s1">     host=192.168.1.13, domain=, nis-domain=(none)</span>
-</span><span class='line'><span class="s1">     bootserver=0.0.0.0, rootserver=192.168.1.24, rootpath=</span>
-</span><span class='line'><span class="s1">     nameserver0=192.168.1.1</span>
-</span><span class='line'><span class="s1">input: AT Raw Set 2 keyboard as /devices/fpga:06/serio0/input/input0</span>
-</span><span class='line'><span class="s1">input: ImExPS/2 Generic Explorer Mouse as /devices/fpga:07/serio1/input/input1</span>
-</span><span class='line'><span class="s1">VFS: Mounted root (nfs filesystem) on device 0:9.</span>
-</span><span class='line'><span class="s1">Freeing unused kernel memory: 112K (c034e000 - c036a000)</span>
-</span><span class='line'>
-</span><span class='line'><span class="s1">Please press Enter to activate this console. </span>
-</span><span class='line'><span class="s1">/bin/ash: can&#39;</span>t access tty; job control turned off
-</span><span class='line'>/ <span class="c"># </span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a id="summary"></a></p>
-
-<h3>Summary</h3>
-
-<p>This setup need few minor tweaks like adding U-Boot environment variables
-storage to not enter it every time or removing annoying message <code>can't access
-tty(...)</code>. I&rsquo;m done for now, its time to take care about other challenges. I
-hope that I will back to this issues in near future. If you like this series
-please share it, if somethings wrong please comment I will try to help if can.</p>
-
-<p><a href="http://bec-systems.com/site/418/how-to-set-up-a-nfs-rootfs">How to set up a NFS root filesystem for embedded Linux development</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -2829,7 +2251,7 @@ please share it, if somethings wrong please comment I will try to help if can.</
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 -  -
+  Copyright &copy; 2015 -  -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
 </p>
 

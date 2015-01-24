@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Linux geek's scratchpad]]></title>
-  <link href="http://pietrushnic.github.io/atom.xml" rel="self"/>
-  <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-10-20T01:25:56+02:00</updated>
-  <id>http://pietrushnic.github.io/</id>
+  <link href="http://3mdeb.com/atom.xml" rel="self"/>
+  <link href="http://3mdeb.com/"/>
+  <updated>2015-01-24T03:01:50+01:00</updated>
+  <id>http://3mdeb.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -14,10 +14,99 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Power on of ESP-12 (ESP8266)]]></title>
+    <link href="http://3mdeb.com/blog/2015/01/24/power-on-of-esp-12/"/>
+    <updated>2015-01-24T00:25:05+01:00</updated>
+    <id>http://3mdeb.com/blog/2015/01/24/power-on-of-esp-12</id>
+    <content type="html"><![CDATA[<p>ESP8266 is a SoC made by <a href="https://espressif.com">Espressif</a>. For last couple of
+months this chip is a rockstar of <a href="http://hackaday.com/">HackADay</a> and makers
+community around the Internet. Mostly because of WiFi modules built based on it
+(ESP-XX family). Rich interface (GPIO, SPI, SDIO, I2C) give those boards
+potential to be standalone MCU with WiFi capability for wide range of
+applications. In quantity you can get ESP-01 for $2.7 (for 1kpcs). Of course
+there is no free lunch. Documentation is weak (this is no TI), but
+<a href="http://www.esp8266.com/">community</a> doing it&rsquo;s best to change this state.
+Native interface of AT commands is also not the friendliest way of
+communicating by beginners. But also for that market found solution &ndash; namely
+<a href="https://github.com/nodemcu/nodemcu-firmware">NodeMCU</a>.</p>
+
+<p>A while ago I bought ESP-01 and experiment a little bit with it. I quickly
+realize that to release additional powers from this module I need access to
+other pins. ESP-01 expose only 2 GPIOs newer versions of the board provide more
+and more. Of course there was a way to hack ESP-01, but using latest version
+usually provide better feature set. Latest version known to wide public is
+ESP-12 which expose ADC and 9 GPIO pins. Finally I took in possession couple of
+them.</p>
+
+<h2>Soldering</h2>
+
+<p>Because this board came in SMD package I found that
+<a href="http://www.electrodragon.com/">ElectroDragon</a> provides also adapter to solder
+module and easily expose pins.</p>
+
+<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/esp-12-adapter.jpg"><img src="http://3mdeb.com/assets/images/esp-12-adapter.jpg" alt="" /></a></p>
+
+<p>After applying my soldering-fu I get rewarding result.</p>
+
+<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/esp-12-soldered.jpg"><img src="http://3mdeb.com/assets/images/esp-12-soldered.jpg" alt="" /></a></p>
+
+<h2>Wiring</h2>
+
+<p>ESP-12 adapter from ElectroDragon got width of 31mm and pin distance match
+ideally to prototype board. There is only one problem that adapter width put
+pins into first and last column of the standard 10 column (A-J) breadboard.
+Which give no ability to connect parallel wires, which was my initial idea.
+Because I didn&rsquo;t have u shape solderless jumpers to make connection clean I
+splitted old Ethernet cable and get this:</p>
+
+<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/u-shape-jumpers.jpg"><img src="http://3mdeb.com/assets/images/u-shape-jumpers.jpg" alt="" /></a></p>
+
+<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/esp-12-breadboard.jpg"><img src="http://3mdeb.com/assets/images/esp-12-breadboard.jpg" alt="" /></a></p>
+
+<p>Check connections couple of time to make sure that everything works fine. As
+USB UART I used FT232RL based module. Current provided by USB UART module can
+be insufficient that&rsquo;s why I used lab DC power supply.</p>
+
+<p>NOTE: Both ESP-12 and USB UART should be connected to the same GND.</p>
+
+<h2>Power on</h2>
+
+<p>It wasn&rsquo;t simple. First I tried minicom with 115200 UART speed:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>minicom -b 115200 -o -D /dev/ttyUSB0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This module display bootloader messages at 115200. After booting it switches to
+9600. If you booted and can&rsquo;t communicate but blue LED blinking when you type
+this may indicate that you need reset try <code>AT+RST&lt;Ctrl-M&gt;&lt;Ctrl-J&gt;</code>. You
+should get something like this:</p>
+
+<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/esp-12-minicom-1.png"><img src="http://3mdeb.com/assets/images/esp-12-minicom-1.png" /></a></p>
+
+<p>There are lot of other commands like <code>AT+GMR</code> which give you firmware version.
+More commands you can find
+<a href="http://wiki.iteadstudio.com/ESP8266_Serial_WIFI_Module#AT_Commands">here</a>. Not
+every firmware support all commands. To use more robust firmware you can
+compile latest version of AT command or even modify it according to your needs.
+Some instructions can be found
+<a href="https://github.com/esp8266/esp8266-wiki/wiki">here</a>.</p>
+
+<h2>Summary</h2>
+
+<p>I think that ESP8266 has great potential to make pressure on market and
+squeeze better solutions. There is a lot of interesting things going on around
+ESP like MQTT implementation of firmware or recently released FreeRTOS SDK
+from Espressif. I hope to write more about ESP-12 in future. If you think this
+post was useful please leave a comment or share with friends.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Raspberry Pi kernel repository aggregating patches for Linux mainline]]></title>
-    <link href="http://pietrushnic.github.io/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/"/>
+    <link href="http://3mdeb.com/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/"/>
     <updated>2014-10-15T23:23:11+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline</id>
+    <id>http://3mdeb.com/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline</id>
     <content type="html"><![CDATA[<p>Since several months I&rsquo;m trying to find my way to embedded Linux programming.
 My hardware set was very limited I had only one board that can be called
 &ldquo;embedded&rdquo; and it was Raspberry Pi. Because I am more interested in firmware/OS
@@ -152,9 +241,9 @@ process improvement hints. Let us know what you think about this effort.</p>
   
   <entry>
     <title type="html"><![CDATA[virtualbox-dkms: fix alloc_netdev problems when compiling with 3.17.0-rcX headers]]></title>
-    <link href="http://pietrushnic.github.io/blog/2014/09/20/virtualbox-dkms-fix-alloc-netdev-problems-when-compiling-with-3-dot-17-dot-0-rcx-headers/"/>
+    <link href="http://3mdeb.com/blog/2014/09/20/virtualbox-dkms-fix-alloc-netdev-problems-when-compiling-with-3-dot-17-dot-0-rcx-headers/"/>
     <updated>2014-09-20T22:55:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2014/09/20/virtualbox-dkms-fix-alloc-netdev-problems-when-compiling-with-3-dot-17-dot-0-rcx-headers</id>
+    <id>http://3mdeb.com/blog/2014/09/20/virtualbox-dkms-fix-alloc-netdev-problems-when-compiling-with-3-dot-17-dot-0-rcx-headers</id>
     <content type="html"><![CDATA[<h2>Intro</h2>
 
 <p>Because of my bug hunting approach of using latest kernel I experienced problem
@@ -484,9 +573,9 @@ dpkg source directory:</p>
   
   <entry>
     <title type="html"><![CDATA[How to fix backlight issue on IdeaPad y510p]]></title>
-    <link href="http://pietrushnic.github.io/blog/2014/08/23/how-to-fix-backlight-issue-on-ideapad-y510p/"/>
+    <link href="http://3mdeb.com/blog/2014/08/23/how-to-fix-backlight-issue-on-ideapad-y510p/"/>
     <updated>2014-08-23T23:49:03+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2014/08/23/how-to-fix-backlight-issue-on-ideapad-y510p</id>
+    <id>http://3mdeb.com/blog/2014/08/23/how-to-fix-backlight-issue-on-ideapad-y510p</id>
     <content type="html"><![CDATA[<p>Today I decide to switch to latest kernel (<code>3.17-rc1</code>) on my IdeaPad y510p. I
 hit only one annoying problem until now &ndash; after booting my main screen was dimmed. I
 tried all instructions from top google hits for all possible configurations of
@@ -547,9 +636,9 @@ keywords <code>linux</code>, <code>y510p</code>, <code>backlight issue</code>, e
   
   <entry>
     <title type="html"><![CDATA[Linux, RPi and USB over IP]]></title>
-    <link href="http://pietrushnic.github.io/blog/2014/08/18/linux-rpi-and-usb-over-ip/"/>
+    <link href="http://3mdeb.com/blog/2014/08/18/linux-rpi-and-usb-over-ip/"/>
     <updated>2014-08-18T21:26:37+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2014/08/18/linux-rpi-and-usb-over-ip</id>
+    <id>http://3mdeb.com/blog/2014/08/18/linux-rpi-and-usb-over-ip</id>
     <content type="html"><![CDATA[<p>Trying to google &lsquo;USB over IP&rsquo; doesn&rsquo;t give much except some business web pages that give
 you it as a service. This brings some information about potential on the
 market IMHO. Main idea is well presented on open source project page for <a href="http://usbip.sourceforge.net/">usbip</a>.
@@ -584,7 +673,7 @@ Below I present Kingston USB stick test in function of delay.</p>
 <p>What I tried to do was setting up my Rasberry Pi and connect it through my home
 LAN to share USB device (Kingston DataTraveler). My configuration looks like that:</p>
 
-<p><a class="fancybox" rel="group" href="http://pietrushnic.github.io/assets/images/usb-over-ip-net.png"><img src="http://pietrushnic.github.io/assets/images/usb-over-ip-net.png" alt="" /></a></p>
+<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/usb-over-ip-net.png"><img src="http://3mdeb.com/assets/images/usb-over-ip-net.png" alt="" /></a></p>
 
 <p>First I installed latest <a href="http://www.raspberrypi.org/downloads/">Raspbian</a>.
 Assuming SD card is <code>/dev/sdb</code>:</p>
@@ -940,7 +1029,7 @@ in Raspbian:</p>
 
 <p>And something from <code>gnuplot</code> noob:</p>
 
-<p><a class="fancybox" rel="group" href="http://pietrushnic.github.io/assets/images/usbip-rate.png"><img src="http://pietrushnic.github.io/assets/images/usbip-rate.png" alt="" /></a></p>
+<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/usbip-rate.png"><img src="http://3mdeb.com/assets/images/usbip-rate.png" alt="" /></a></p>
 
 <h3>Cleanup</h3>
 
@@ -1036,9 +1125,9 @@ post.</p>
   
   <entry>
     <title type="html"><![CDATA[Coreboot for QEMU armv7 (vexpress-a9) emulated mainboard]]></title>
-    <link href="http://pietrushnic.github.io/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/"/>
+    <link href="http://3mdeb.com/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/"/>
     <updated>2014-08-07T23:08:39+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard</id>
+    <id>http://3mdeb.com/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard</id>
     <content type="html"><![CDATA[<p>Recently I came back to look into coreboot. Mainly because low level is fun and
 skills related to firmware (even coreboot) starting get attention on freelance
 portals (<a href="http://bit.ly/1sBSybZ">first odesk job</a>, <a href="http://bit.ly/1sBSR6F">second odesk job</a>).
@@ -1108,7 +1197,7 @@ provide most useful informations. IMHO good choice is <code>fG!</code> gdbinit s
 x86. To switch to ARM mode inside gdb simple use <code>arm</code> command. Output looks
 pretty awesome:</p>
 
-<p><a class="fancybox" rel="group" href="http://pietrushnic.github.io/assets/images/gdbinit.png"><img src="http://pietrushnic.github.io/assets/images/gdbinit.png" alt="" /></a></p>
+<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/gdbinit.png"><img src="http://3mdeb.com/assets/images/gdbinit.png" alt="" /></a></p>
 
 <h2>Noob dead end</h2>
 
@@ -1436,9 +1525,9 @@ can boot kernel directly or through payload with bootloader.</p>
   
   <entry>
     <title type="html"><![CDATA[Linux (Debian Wheezy) on Lenovo y510p]]></title>
-    <link href="http://pietrushnic.github.io/blog/2014/05/16/debian-wheezy-on-lenovo-y510p/"/>
+    <link href="http://3mdeb.com/blog/2014/05/16/debian-wheezy-on-lenovo-y510p/"/>
     <updated>2014-05-16T22:36:27+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2014/05/16/debian-wheezy-on-lenovo-y510p</id>
+    <id>http://3mdeb.com/blog/2014/05/16/debian-wheezy-on-lenovo-y510p</id>
     <content type="html"><![CDATA[<p>After long analysis I decide to buy new laptop. I had about $1000
 (or 3000PLN) and most important things to me were:</p>
 
@@ -1467,7 +1556,7 @@ other parameters, except RAM expansion possibilities, are the same.</p>
 <p>Today I have it on my desk and trying to install Debian Wheezy. I put Debian
 netinst in drive and get wonderful UEFI message :)</p>
 
-<p><img class="center" src="http://pietrushnic.github.io/assets/images/cdrom-blocked.jpg" width="450" height="450" title="image" alt="images"></p>
+<p><img class="center" src="http://3mdeb.com/assets/images/cdrom-blocked.jpg" width="450" height="450" title="image" alt="images"></p>
 
 <p>I figure out that I have to disable my last days favourite feature from M$ &ndash;
 namely Secure Boot. I was surprised when I realized that there is no hot key to
@@ -1489,7 +1578,7 @@ option, which cleans keys database. Don&rsquo;t panic your database of
 vendor keys will not disappear you can restore it anytime you want using
 <code>Restore Factory Keys</code>. BTW I didn&rsquo;t found any information about it in <code>User Manual</code>.</p>
 
-<p><img class="center" src="http://pietrushnic.github.io/assets/images/uefi-security.jpg" width="640" height="400" title="image" alt="images"></p>
+<p><img class="center" src="http://3mdeb.com/assets/images/uefi-security.jpg" width="640" height="400" title="image" alt="images"></p>
 
 <h2>Installation</h2>
 
@@ -1544,7 +1633,7 @@ you won&rsquo;t deal with problems simply use Mint or Ubuntu there is much bette
 support there. By the way I think that I&rsquo;m immune to problems with my operating
 system ;)</p>
 
-<p><img class="center" src="http://pietrushnic.github.io/assets/images/lenovo-y510p.jpg" width="640" height="400" title="image" alt="images"></p>
+<p><img class="center" src="http://3mdeb.com/assets/images/lenovo-y510p.jpg" width="640" height="400" title="image" alt="images"></p>
 
 <p>Thanks for reading.</p>
 ]]></content>
@@ -1552,9 +1641,9 @@ system ;)</p>
   
   <entry>
     <title type="html"><![CDATA[A little bit of fresh air]]></title>
-    <link href="http://pietrushnic.github.io/blog/2014/04/13/a-little-bit-of-fresh-air/"/>
+    <link href="http://3mdeb.com/blog/2014/04/13/a-little-bit-of-fresh-air/"/>
     <updated>2014-04-13T19:55:18+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2014/04/13/a-little-bit-of-fresh-air</id>
+    <id>http://3mdeb.com/blog/2014/04/13/a-little-bit-of-fresh-air</id>
     <content type="html"><![CDATA[<p>It is over 9 months since my last post. As you see since then I refreshed look
 and feel of my blog a little bit. Theme was changed to
 <a href="https://github.com/lucaslew/whitespace">whitespace</a>, because of my
@@ -1567,9 +1656,9 @@ improvement sharing valuable content would be easier.</p>
   
   <entry>
     <title type="html"><![CDATA[Improve productivity with Goolge history using bookmarks and Chrome extensions]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/"/>
+    <link href="http://3mdeb.com/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/"/>
     <updated>2013-07-30T02:40:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity</id>
+    <id>http://3mdeb.com/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity</id>
     <content type="html"><![CDATA[<p class=intro>
 The idea of this post is very simple (as usually)  and I wonder why I didn&#8217;t thought
 about it earlier. The point is to use history of your Google queries to improve
@@ -1716,9 +1805,9 @@ try.</p>
   
   <entry>
     <title type="html"><![CDATA[Build and run OVMF under Qemu]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/06/14/build-and-run-ovmf-under-qemu/"/>
+    <link href="http://3mdeb.com/blog/2013/06/14/build-and-run-ovmf-under-qemu/"/>
     <updated>2013-06-14T23:22:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/06/14/build-and-run-ovmf-under-qemu</id>
+    <id>http://3mdeb.com/blog/2013/06/14/build-and-run-ovmf-under-qemu</id>
     <content type="html"><![CDATA[<h3>What the OVMF is ?</h3>
 
 <p><strong>OVMF</strong> (<em>Open Virtual Machine Firmware</em>) is a firmware actively developed as a
@@ -1760,19 +1849,19 @@ You may need some additional packages like</code>uuid-dev<code>,</code>iasl<code
   
   <entry>
     <title type="html"><![CDATA[0x6: Root file system for embedded system]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/"/>
+    <link href="http://3mdeb.com/blog/2013/06/07/root-file-system-for-embedded-system/"/>
     <updated>2013-06-07T10:40:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system</id>
+    <id>http://3mdeb.com/blog/2013/06/07/root-file-system-for-embedded-system</id>
     <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#intro">Introduction</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#get-bb">Get and build BusyBox</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#fast-and-simple">Fast and simple</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#setting-up-kernel-through-nfs">Setting up kernel through NFS</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#verify-configuration">Verify Configuration</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#embedded-filesystem-tuning">Embedded filesystem tuning</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/#summary">Summary</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/root-file-system-for-embedded-system/#intro">Introduction</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/root-file-system-for-embedded-system/#get-bb">Get and build BusyBox</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/root-file-system-for-embedded-system/#fast-and-simple">Fast and simple</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/root-file-system-for-embedded-system/#setting-up-kernel-through-nfs">Setting up kernel through NFS</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/root-file-system-for-embedded-system/#verify-configuration">Verify Configuration</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/root-file-system-for-embedded-system/#embedded-filesystem-tuning">Embedded filesystem tuning</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/root-file-system-for-embedded-system/#summary">Summary</a></li>
 </ul>
 
 
@@ -1811,7 +1900,7 @@ you can find informations:</p>
 <h3>Fast and simple</h3>
 
 <p>Of course make sure to use correct toolchain. I made few notes about
-Ubuntu/Linaro toolchain in <a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues">previous post</a></p>
+Ubuntu/Linaro toolchain in <a href="http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues">previous post</a></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- menuconfig</span></code></pre></td></tr></table></div></figure>
@@ -1832,7 +1921,7 @@ shared libs)</code> option. Exit and save.</p>
 
 <h3>Setting up kernel through NFS</h3>
 
-<p><a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system">Previously</a> we prepared U-Boot
+<p><a href="http://3mdeb.com/blog/2013/06/07/linux-kernel-for-embedded-system">Previously</a> we prepared U-Boot
 kenernel image with DHCP and rootfs which we want to expose over NFS. First lets start with NFS
 configuration:</p>
 
@@ -2428,17 +2517,17 @@ please share it, if somethings wrong please comment I will try to help if can.</
   
   <entry>
     <title type="html"><![CDATA[0x5: Qemu network configuration and tftp for Virtual Development Board]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/"/>
+    <link href="http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/"/>
     <updated>2013-06-07T10:36:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board</id>
+    <id>http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board</id>
     <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#intro">Introduction</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd">Setup tftpd</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking">QEMU networking</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#verify-qemu-with-tftp">Verify all components of Virtual Development Platform</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#what-next">What next ?</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#intro">Introduction</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd">Setup tftpd</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking">QEMU networking</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#verify-qemu-with-tftp">Verify all components of Virtual Development Platform</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#what-next">What next ?</a></li>
 </ul>
 
 
@@ -2497,7 +2586,7 @@ section.
 
 <h3>QEMU networking</h3>
 
-<p><em>Update</em>: For Ubuntu users please read <a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues">this section</a></p>
+<p><em>Update</em>: For Ubuntu users please read <a href="http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues">this section</a></p>
 
 <p>I mixed <a href="http://toast.djw.org.uk/qemu.html">this</a> BKM and few other resources
 that I found in the net. Setting up network depend a lot on your configuration.
@@ -2666,8 +2755,8 @@ and <a href="">u-boot</a> mailing list thread.</p></li>
 
 <h4>Verify all components of Virtual Development Platform</h4>
 
-<p>So right now we should have built <a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system">kernel uImage</a>, <a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader">U-Boot image</a>,
-<a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking">configured qemu network</a> and <a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd">tftp server</a>. With all this components we can
+<p>So right now we should have built <a href="http://3mdeb.com/blog/2013/06/07/linux-kernel-for-embedded-system">kernel uImage</a>, <a href="http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader">U-Boot image</a>,
+<a href="http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking">configured qemu network</a> and <a href="http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd">tftp server</a>. With all this components we can
 verify if our kernel booting on emulated <code>versatilepb</code>.</p>
 
 <p>Run your qemu with network using U-Boot image as a kernel.</p>
@@ -2837,21 +2926,21 @@ be used as a console. Before <code>bootm</code> set:</p>
 <h3>What next ?</h3>
 
 <p>We happily built basic virtual development, what we need right now is some
-<a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system">initial filesystem</a>.</p>
+<a href="http://3mdeb.com/blog/2013/06/07/root-file-system-for-embedded-system">initial filesystem</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[0x4: Linux kernel for embedded system]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system/"/>
+    <link href="http://3mdeb.com/blog/2013/06/07/linux-kernel-for-embedded-system/"/>
     <updated>2013-06-07T10:33:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system</id>
+    <id>http://3mdeb.com/blog/2013/06/07/linux-kernel-for-embedded-system</id>
     <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system/#a-little-history">A little history</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system/#get-linux-and-build-it">Get linux and build it</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system/#kudos">Kudos</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/linux-kernel-for-embedded-system/#a-little-history">A little history</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/linux-kernel-for-embedded-system/#get-linux-and-build-it">Get linux and build it</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/linux-kernel-for-embedded-system/#kudos">Kudos</a></li>
 </ul>
 
 
@@ -2940,10 +3029,10 @@ First is <code>IP: DHCP support</code> and can be found under:</p>
 
 
 <p>We have kernel. How we can provide this kernel to our development environment ?
-As I discuss in <a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader">previous post</a> we
+As I discuss in <a href="http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader">previous post</a> we
 can use bare-metal qemu, but not with uImage kernel. This is special U-Boot
 kernel, so easiest way will be using it with bootloader. We will figure out how
-to do this in <a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board">next section</a>
+to do this in <a href="http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board">next section</a>
 about tftp and qemu network configuration.</p>
 
 <p><strong>TODO</strong>: add picture of configuration in intro &ndash; vdb, link it here
@@ -2988,19 +3077,19 @@ manually modified. So using uImage is easiest</p>
   
   <entry>
     <title type="html"><![CDATA[0x3: Embedded board bootloader]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/"/>
+    <link href="http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader/"/>
     <updated>2013-06-07T10:32:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader</id>
+    <id>http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader</id>
     <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#what-is-bootloader">What is bootloader ?</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#why-we-need-bootloader">Why we need bootloader ?</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#which-bootloader">Which bootloader ?</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#what-is-versatilepb">What is versatilepb ?</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#compilation">Compilation</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#where-to-go-from-here">Where to go from here ?</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/#kudos">Kudos</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader/#what-is-bootloader">What is bootloader ?</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader/#why-we-need-bootloader">Why we need bootloader ?</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader/#which-bootloader">Which bootloader ?</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader/#what-is-versatilepb">What is versatilepb ?</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader/#compilation">Compilation</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader/#where-to-go-from-here">Where to go from here ?</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader/#kudos">Kudos</a></li>
 </ul>
 
 
@@ -3097,7 +3186,7 @@ CPU. But this is only corporate babble :)</p>
 
 <h3>Where to go from here ?</h3>
 
-<p><a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system">Next step</a> will be kernel compilation for our virtual <code>versatilepb</code> board.</p>
+<p><a href="http://3mdeb.com/blog/2013/06/07/linux-kernel-for-embedded-system">Next step</a> will be kernel compilation for our virtual <code>versatilepb</code> board.</p>
 
 <p><a id="kudos"></a></p>
 
@@ -3113,19 +3202,19 @@ CPU. But this is only corporate babble :)</p>
   
   <entry>
     <title type="html"><![CDATA[0x2: Toolchain for Virtual Development Board]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/"/>
+    <link href="http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board/"/>
     <updated>2013-06-07T08:42:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board</id>
+    <id>http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board</id>
     <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#intro">Introduction</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#what-is-toolchain">What is toolchain ?</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#why-we-need-cross-toolchain">Why we need cross-toolchain ?</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#how-to-create-toolchain">How to create toolchain ?</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#emdebian-path">Emdebian path</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#summary">Summary</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/#kudos">Kudos</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board/#intro">Introduction</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board/#what-is-toolchain">What is toolchain ?</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board/#why-we-need-cross-toolchain">Why we need cross-toolchain ?</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board/#how-to-create-toolchain">How to create toolchain ?</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board/#emdebian-path">Emdebian path</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board/#summary">Summary</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board/#kudos">Kudos</a></li>
 </ul>
 
 
@@ -3169,7 +3258,7 @@ or <code>Bitbake</code>. I will not deal with preparing toolchain in this series
 because procedure for creating it takes pretty long. So we have two options:</p>
 
 <ul>
-<li>read my article about <a href="http://pietrushnic.github.io/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">Crosstool-NG arm-unknown-linux-gnueabi</a></li>
+<li>read my article about <a href="http://3mdeb.com/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">Crosstool-NG arm-unknown-linux-gnueabi</a></li>
 <li>or install toolchain ready to use like <a href="http://www.emdebian.org/">Emdebian</a></li>
 </ul>
 
@@ -3279,7 +3368,7 @@ something like this in log:</p>
 <p><em>Note 2</em>: If you&rsquo;re <code>Ubuntu</code> user I have to suggest experiments with toolchain
 build by your own, because I get really hard times trying to go through this
 tutorial with Ubuntu/Linaro cross compiler provided in repository. Finally I
-used <a href="http://pietrushnic.github.io/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">this</a>
+used <a href="http://3mdeb.com/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">this</a>
 to push things forward. U-boot compiled with Ubuntu/Linaro toolchain had problem
 with <code>__udivsi3</code> instruction. This cause loop in initialization process.</p>
 
@@ -3288,12 +3377,12 @@ with <code>__udivsi3</code> instruction. This cause loop in initialization proce
 <h3>Summary</h3>
 
 <p>If you take effort of creating toolchain using <code>Crosstool-NG</code> than
-congratulations.  But for simplifying whole <a href="http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building"><strong>Virtual Development Board</strong></a>
+congratulations.  But for simplifying whole <a href="http://3mdeb.com/blog/2013/06/07/intro-to-virtual-development-board-building"><strong>Virtual Development Board</strong></a>
 series I will use <code>Emdebian</code> toolchain in further posts. Of course you can use
 your brand new <code>Crosstool-NG</code> toolchain by simply remember that tools prefixes are
 different. <code>Emdebian</code> uses <code>arm-linux-gnueabi-</code> and <code>Crosstool-NG</code> was created with
 <code>arm-unknown-linux-gnueabi-</code>. Replace one with another every time when needed.
-In <a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader">next post</a> we will deal with
+In <a href="http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader">next post</a> we will deal with
 bootloader.</p>
 
 <p><a id="kudos"></a></p>
@@ -3306,15 +3395,15 @@ bootloader.</p>
   
   <entry>
     <title type="html"><![CDATA[0x1: Qemu as an environment for embedded board emulation]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/"/>
+    <link href="http://3mdeb.com/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/"/>
     <updated>2013-06-07T08:27:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation</id>
+    <id>http://3mdeb.com/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation</id>
     <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#intro">Introduction</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#compilation">Compilation</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#kudos">Kudos</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#intro">Introduction</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#compilation">Compilation</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/#kudos">Kudos</a></li>
 </ul>
 
 
@@ -3375,7 +3464,7 @@ offer to initialize it as a submodule.</p>
 <p>If compilation ends without problem than our first component is ready to use.
 Right now we can emulate our ARM based board with many types of CPUs. List of
 all available can be retrieved by running command <code>qemu-system-arm -cpu ?</code>, list
-of emulated machines by <code>-M ?</code>. Now, let&rsquo;s talk about <a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board">toolchains</a>.</p>
+of emulated machines by <code>-M ?</code>. Now, let&rsquo;s talk about <a href="http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board">toolchains</a>.</p>
 
 <p><a id="kudos"></a></p>
 
@@ -3387,14 +3476,14 @@ of emulated machines by <code>-M ?</code>. Now, let&rsquo;s talk about <a href="
   
   <entry>
     <title type="html"><![CDATA[0x0: Intro to Virtual Development Board building]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building/"/>
+    <link href="http://3mdeb.com/blog/2013/06/07/intro-to-virtual-development-board-building/"/>
     <updated>2013-06-07T01:27:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building</id>
+    <id>http://3mdeb.com/blog/2013/06/07/intro-to-virtual-development-board-building</id>
     <content type="html"><![CDATA[<ul>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building/#preface">Preface</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building/#first-question">First question: How to start ?</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building/#virtual-development-board">Virtual Development Board &ndash; table of contents</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/intro-to-virtual-development-board-building/#kudos">Kudos</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/intro-to-virtual-development-board-building/#preface">Preface</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/intro-to-virtual-development-board-building/#first-question">First question: How to start ?</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/intro-to-virtual-development-board-building/#virtual-development-board">Virtual Development Board &ndash; table of contents</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/intro-to-virtual-development-board-building/#kudos">Kudos</a></li>
 </ul>
 
 
@@ -3443,12 +3532,12 @@ it at once. Also people interesting in particular topic won&rsquo;t have to scro
 words post. List of all articles in this series:</p>
 
 <ol>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/">Qemu as an environment for embedded board emulation</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/">Toolchain for Virtual Development Board</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/">Embedded board bootloader</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system/">Linux kernel for embedded system</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">Qemu network configuration and tftp for Virtual Development Board</a></li>
-<li><a href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/">Root file system for embedded system</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/">Qemu as an environment for embedded board emulation</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board/">Toolchain for Virtual Development Board</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader/">Embedded board bootloader</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/linux-kernel-for-embedded-system/">Linux kernel for embedded system</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/">Qemu network configuration and tftp for Virtual Development Board</a></li>
+<li><a href="http://3mdeb.com/blog/2013/06/07/root-file-system-for-embedded-system/">Root file system for embedded system</a></li>
 </ol>
 
 
@@ -3461,15 +3550,15 @@ whom creating this article would not be possible. Thanks for sharing your
 knowledge. Every time when I use knowledge that found by googling I&rsquo;m trying
 to stick link for further reading.</p>
 
-<h4><a href="http://pietrushnic.github.io/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation"><em>Enjoy!</em></a></h4>
+<h4><a href="http://3mdeb.com/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation"><em>Enjoy!</em></a></h4>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress depoying problem after migrating to *.github.io]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/05/16/octopress-depoying-problem-after-migrating-to-star-dot-github-dot-io/"/>
+    <link href="http://3mdeb.com/blog/2013/05/16/octopress-depoying-problem-after-migrating-to-star-dot-github-dot-io/"/>
     <updated>2013-05-16T22:20:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/05/16/octopress-depoying-problem-after-migrating-to-star-dot-github-dot-io</id>
+    <id>http://3mdeb.com/blog/2013/05/16/octopress-depoying-problem-after-migrating-to-star-dot-github-dot-io</id>
     <content type="html"><![CDATA[<p>My story was that I migrate to new environment and want to recover my octopress
 setup. I thought that it will be as simple as cloning my blog github repository
 and start to work.</p>
@@ -3504,9 +3593,9 @@ This is obvious but I lost few minutes to figure out whats going on.</p>
   
   <entry>
     <title type="html"><![CDATA[Workflow imporovement with Open Source tools - part 1]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/05/16/workflow-imporovement-with-open-source-tools/"/>
+    <link href="http://3mdeb.com/blog/2013/05/16/workflow-imporovement-with-open-source-tools/"/>
     <updated>2013-05-16T22:16:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/05/16/workflow-imporovement-with-open-source-tools</id>
+    <id>http://3mdeb.com/blog/2013/05/16/workflow-imporovement-with-open-source-tools</id>
     <content type="html"><![CDATA[<h3>Introduction</h3>
 
 <p>I want to start a series of articles to describe how I improve my workflow with
@@ -3730,8 +3819,8 @@ mean my email account configuration, my todo list, passwords and things like
 that. To store this informations I use additional private git repository and use
 it as a submodule for my workspace configuration. I wrote post about keeping
 configuration using git
-<a href="http://pietrushnic.github.io/blog/2012/02/19/improve-productivity-by-tracking-work">here</a> and
-<a href="http://pietrushnic.github.io/blog/2012/02/20/improve-productivity-by-tracking-work_20">here</a>.</p>
+<a href="http://3mdeb.com/blog/2012/02/19/improve-productivity-by-tracking-work">here</a> and
+<a href="http://3mdeb.com/blog/2012/02/20/improve-productivity-by-tracking-work_20">here</a>.</p>
 
 <h3>Taskwarrior and vit</h3>
 
@@ -3767,9 +3856,9 @@ reading.</p>
   
   <entry>
     <title type="html"><![CDATA[Thunderbird to Mutt migration - tips & tricks]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/05/15/thunderbird-to-mutt-migration/"/>
+    <link href="http://3mdeb.com/blog/2013/05/15/thunderbird-to-mutt-migration/"/>
     <updated>2013-05-15T18:40:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/05/15/thunderbird-to-mutt-migration</id>
+    <id>http://3mdeb.com/blog/2013/05/15/thunderbird-to-mutt-migration</id>
     <content type="html"><![CDATA[<h3>Preface</h3>
 
 <p>I migrate with my working environment to laptop. My workstation going older and
@@ -3779,8 +3868,8 @@ Few weeks ago after changing environment to mobile and powerful laptop I also
 changed OS to Ubuntu and mail client to Thunderbird. I have to admit that both
 choices were mistake and I want to came back to Debian and Mutt. This post is
 about throwing out Thunderbird and a logical continuation of Mutt tutorial (part
-<a href="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account">1</a>, <a href="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-2-secure-login">2</a>,
-<a href="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e">3</a> and <a href="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-4-html-mails-address">4</a>).</p>
+<a href="http://3mdeb.com/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account">1</a>, <a href="http://3mdeb.com/blog/2012/05/13/mutt-tutorial-part-2-secure-login">2</a>,
+<a href="http://3mdeb.com/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e">3</a> and <a href="http://3mdeb.com/blog/2012/05/13/mutt-tutorial-part-4-html-mails-address">4</a>).</p>
 
 <p>So what was wrong with Thunderbrid ?</p>
 
@@ -3832,7 +3921,7 @@ range 1-5.</li>
 <li>Use latest-greatest version compiled from source instead version provided
 by distribution repository. It can help you get rid of problems like <code>tls_socket_read (Decryption has failed.)</code>.</li>
 <li>Some accounts will not work with authenticating method presented in my
-previous post about gpg (<a href="http://pietrushnic.github.io/blog/2012/05/13/mutt-tutorial-part-2-secure-login">mutt tutorial part 2</a>).
+previous post about gpg (<a href="http://3mdeb.com/blog/2012/05/13/mutt-tutorial-part-2-secure-login">mutt tutorial part 2</a>).
 To workaround this you can use different format of folder variable:</li>
 </ul>
 
@@ -3879,38 +3968,6 @@ you need to install <code>libkrb5-dev</code>:</p>
 <p>That&rsquo;s all in this post but I&rsquo;m sure that there will be next in this topic. I
 hope to improve my whole workflow and write few posts about improving
 productivity using open source tools.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Kernel developers tools - based on '30 Linux Kernel Developers in 30 Weeks']]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/05/12/kernel-developers-tools/"/>
-    <updated>2013-05-12T02:41:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/05/12/kernel-developers-tools</id>
-    <content type="html"><![CDATA[<p>git, cscope, vi, bash, awk, and the rare bout with python.
-Ubuntu with Unity2D
-terminal, make, gcc, make me happy. Quilt for patch management, Git or
-Subversion for source code management. I&rsquo;m using Nedit
-SLED for work and openSUSE
-email client (mutt), and my editor (vim),
-git and quilt for kernel development, Chrome and Firefox for web browsing, and
-irssi for irc communication
-NOME 3 on my desktop, but sometimes get frustrated with it and revert back to
-OpenBox or i3m
-Xfce
-fbcon, vim, and mutt
-fvwm2
-bash shell, joe editor, gcc, make, git
- Fedora
- Xfce
- git, sparse, smatch and spatch
- joe
-  xterm, emacs, perl, mc and git.
-  i3
-  Emacs, ocaml, xfce
-  Emacs, Evolution, GNOME 3, Iceweasel (aka Firefox)
-  git, gcc, gmake, bash, perl
-  Thunderbird</p>
 ]]></content>
   </entry>
   

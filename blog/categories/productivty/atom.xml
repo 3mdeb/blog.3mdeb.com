@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: productivty | Linux geek's scratchpad]]></title>
-  <link href="http://pietrushnic.github.io/blog/categories/productivty/atom.xml" rel="self"/>
-  <link href="http://pietrushnic.github.io/"/>
-  <updated>2014-10-20T01:25:56+02:00</updated>
-  <id>http://pietrushnic.github.io/</id>
+  <link href="http://3mdeb.com/blog/categories/productivty/atom.xml" rel="self"/>
+  <link href="http://3mdeb.com/"/>
+  <updated>2015-01-24T03:01:50+01:00</updated>
+  <id>http://3mdeb.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Thunderbird to Mutt migration - tips & tricks]]></title>
-    <link href="http://pietrushnic.github.io/blog/2013/05/15/thunderbird-to-mutt-migration/"/>
+    <link href="http://3mdeb.com/blog/2013/05/15/thunderbird-to-mutt-migration/"/>
     <updated>2013-05-15T18:40:00+02:00</updated>
-    <id>http://pietrushnic.github.io/blog/2013/05/15/thunderbird-to-mutt-migration</id>
+    <id>http://3mdeb.com/blog/2013/05/15/thunderbird-to-mutt-migration</id>
     <content type="html"><![CDATA[<h3>Preface</h3>
 
 <p>I migrate with my working environment to laptop. My workstation going older and
