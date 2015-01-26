@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: coreboot | Linux geek's scratchpad]]></title>
-  <link href="http://3mdeb.com/blog/categories/coreboot/atom.xml" rel="self"/>
-  <link href="http://3mdeb.com/"/>
-  <updated>2015-01-24T03:07:02+01:00</updated>
-  <id>http://3mdeb.com/</id>
+  <link href="http://pietrushnic.github.io/blog/categories/coreboot/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2015-01-26T01:32:55+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Coreboot for QEMU armv7 (vexpress-a9) emulated mainboard]]></title>
-    <link href="http://3mdeb.com/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/"/>
+    <link href="http://pietrushnic.github.io/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard/"/>
     <updated>2014-08-07T23:08:39+02:00</updated>
-    <id>http://3mdeb.com/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard</id>
+    <id>http://pietrushnic.github.io/blog/2014/08/07/debugging-coreboot-for-qemu-armv7-vexpress-a9-emulated-mainboard</id>
     <content type="html"><![CDATA[<p>Recently I came back to look into coreboot. Mainly because low level is fun and
 skills related to firmware (even coreboot) starting get attention on freelance
 portals (<a href="http://bit.ly/1sBSybZ">first odesk job</a>, <a href="http://bit.ly/1sBSR6F">second odesk job</a>).
@@ -74,7 +74,7 @@ provide most useful informations. IMHO good choice is <code>fG!</code> gdbinit s
 x86. To switch to ARM mode inside gdb simple use <code>arm</code> command. Output looks
 pretty awesome:</p>
 
-<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/gdbinit.png"><img src="http://3mdeb.com/assets/images/gdbinit.png" alt="" /></a></p>
+<p><a class="fancybox" rel="group" href="http://pietrushnic.github.io/assets/images/gdbinit.png"><img src="http://pietrushnic.github.io/assets/images/gdbinit.png" alt="" /></a></p>
 
 <h2>Noob dead end</h2>
 
@@ -354,9 +354,9 @@ can boot kernel directly or through payload with bootloader.</p>
   
   <entry>
     <title type="html"><![CDATA[Debugging coreboot in qemu environment - part 2]]></title>
-    <link href="http://3mdeb.com/blog/2012/04/18/qemu-as-debugging-environment-for/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/04/18/qemu-as-debugging-environment-for/"/>
     <updated>2012-04-18T22:41:00+02:00</updated>
-    <id>http://3mdeb.com/blog/2012/04/18/qemu-as-debugging-environment-for</id>
+    <id>http://pietrushnic.github.io/blog/2012/04/18/qemu-as-debugging-environment-for</id>
     <content type="html"><![CDATA[<p>In <a href="/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment">previous post</a>
 <code>coreboot</code> was configured and installed. Here we try to establish good debugging
 environment for it. To create a good emulated environment to debug, research and
@@ -436,9 +436,9 @@ it means that your debugging enviroment was set correctly.</li>
   
   <entry>
     <title type="html"><![CDATA[Debugging coreboot in qemu environment - part 1]]></title>
-    <link href="http://3mdeb.com/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment/"/>
     <updated>2012-03-12T21:30:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment</id>
+    <id>http://pietrushnic.github.io/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment</id>
     <content type="html"><![CDATA[<p>First of all I use testing version of Debian &ndash; wheezy. Clone coreboot repository:<br/>
 <code>
 git clone http://review.coreboot.org/p/coreboot
@@ -495,9 +495,9 @@ should jump to <code>build/mainboard/emulation/qemu-x86/bootblock.s</code> line 
   
   <entry>
     <title type="html"><![CDATA[flashrom and Shuttle AV18E2]]></title>
-    <link href="http://3mdeb.com/blog/2012/01/06/flashrom-and-shuttle-av18e2/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/01/06/flashrom-and-shuttle-av18e2/"/>
     <updated>2012-01-06T14:31:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/01/06/flashrom-and-shuttle-av18e2</id>
+    <id>http://pietrushnic.github.io/blog/2012/01/06/flashrom-and-shuttle-av18e2</id>
     <content type="html"><![CDATA[<p>During Christmas break I found an old unused motherboard in my home, right away
 I thought that it maybe useful as learning environment for coreboot. First you
 need to do with this kind of board is to check if it is possible to flash its
@@ -549,9 +549,9 @@ Erasing and writing flash chip... Trying erase function 0... 0x000000-0x01ffff:W
   
   <entry>
     <title type="html"><![CDATA[How to begin with coreboot]]></title>
-    <link href="http://3mdeb.com/blog/2012/01/06/how-to-begin-with-coreboot/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/01/06/how-to-begin-with-coreboot/"/>
     <updated>2012-01-06T14:23:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/01/06/how-to-begin-with-coreboot</id>
+    <id>http://pietrushnic.github.io/blog/2012/01/06/how-to-begin-with-coreboot</id>
     <content type="html"><![CDATA[<p>About a month ago I started my adventure with coreboot. As <a href="http://www.coreboot.org/">coreboot
 home</a> page says &ldquo;coreboot is a Free Software project
 aimed at replacing the proprietary BIOS (firmware) found in most

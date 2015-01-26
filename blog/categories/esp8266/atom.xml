@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ESP8266, | Linux geek's scratchpad]]></title>
+  <link href="http://pietrushnic.github.io/blog/categories/esp8266/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2015-01-26T01:32:55+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ESP-12 update to SDK v0.9.5 and AT v0.21.0.0 - noobs tutorial]]></title>
+    <link href="http://pietrushnic.github.io/blog/2015/01/25/esp-12-upgrade-to-esp-iot-sdk-v0-dot-9-5-using-esp-open-sdk-toolchain/"/>
+    <updated>2015-01-25T22:32:01+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2015/01/25/esp-12-upgrade-to-esp-iot-sdk-v0-dot-9-5-using-esp-open-sdk-toolchain</id>
+    <content type="html"><![CDATA[<p>January 23th Espressif published new ESP IOT SDK on their forum
+<a href="http://bbs.espressif.com/viewtopic.php?f=5&amp;t=154">v0.9.5</a>. My ESP-12 came with
+with pretty old version so I decide to update it to latest one:</p>
+
+<p>```
+AT+RST</p>
+
+<p>OK
+y_RSöfJ[úndor:www.ai-thinker.com Version:0.9.2.4]</p>
+
+<p>ready
+AT+GMR
+0018000902-AI03</p>
+
+<p>OK
+```</p>
+
+<h2>ESP-12 firmware update pin configuration</h2>
+
+<p><a class="fancybox" rel="group" href="http://pietrushnic.github.io/assets/images/esp-12-update.jpg"><img src="http://pietrushnic.github.io/assets/images/esp-12-update.jpg" alt="" /></a></p>
+
+<p>As picture presents in addition to normal operation we have to pull down GPIO0
+and pull up GPIO2.</p>
+
+<h2>Upgrade using binaries from Espressif</h2>
+
+<p>To upgrade you can use binaries that where delivered in zip packaged and python <a href="">esptool</a>. Run following commands:</p>
+
+<p><code>
+git clone git@github.com:themadinventor/esptool.git
+wget --content-disposition "http://bbs.espressif.com/download/file.php?id=189"
+unzip esp_iot_sdk_v0.9.5_15_01_23.zip
+cd esp_iot_sdk_v0.9.5/bin
+../../esptool/esptool.py write_flash 0x00000 boot_v1.2.bin 0x01000 at/user1.512.new.bin 0x3e000 blank.bin 0x7e000 blank.bin
+</code></p>
+
+<p>First we clone <code>esptool</code> repository, then we get latest SDK release directly
+from forum and finally we ran <code>esptool</code>.</p>
+
+<p>If you will get something like this:</p>
+
+<p>```
+Connecting&hellip;
+Traceback (most recent call last):
+  File &ldquo;../../esptool/esptool.py&rdquo;, line 408, in <module></p>
+
+<pre><code>esp.connect()
+</code></pre>
+
+<p>  File &ldquo;../../esptool/esptool.py&rdquo;, line 143, in connect</p>
+
+<pre><code>raise Exception('Failed to connect')
+</code></pre>
+
+<p>Exception: Failed to connect
+```</p>
+
+<p>You can work around this by toggling power to the module right before executing
+<code>esptool</code> command. It works on my side.</p>
+
+<p>Successful flashing looks like this:</p>
+
+<p>```
+[1:00:21] pietrushnic:bin $ ../../esptool/esptool.py write_flash 0x00000 boot_v1.2.bin 0x01000 at/user1.512.new.bin 0x3e000 blank.bin 0x7e000 blank.bin
+Connecting&hellip;
+Erasing flash&hellip;
+Writing at 0x00000400&hellip; (100 %)
+Erasing flash&hellip;
+Writing at 0x00034800&hellip; (100 %)
+Erasing flash&hellip;
+Writing at 0x0003ec00&hellip; (100 %)
+Erasing flash&hellip;
+Writing at 0x0007ec00&hellip; (100 %)</p>
+
+<p>Leaving&hellip;
+```</p>
+
+<p>After disconnecting GPIO0 and GPIO2 you can boot new firmware. Results should
+look like this:</p>
+
+<p>```
+AT+RST</p>
+
+<p>OK</p>
+
+<p> ets Jan  8 2013,rst cause:4, boot mode:(3,4)</p>
+
+<p>wdt reset
+load 0x40100000, len 816, room 16
+tail 0
+chksum 0x8d
+load 0x3ffe8000, len 788, room 8
+tail 12
+chksum 0xcf
+ho 0 tail 12 room 4
+load 0x3ffe8314, len 288, room 12
+tail 4
+chksum 0xcf
+csum 0xcf</p>
+
+<p>2nd boot version : 1.2
+  SPI Speed      : 40MHz
+  SPI Mode       : QIO
+  SPI Flash Size : 4Mbit
+jump to run user1</p>
+
+<p>rNÿ
+ready
+AT+GMR
+AT version:0.21.0.0
+SDK version:0.9.5</p>
+
+<p>OK
+```</p>
+
+<p>Of course you will need the toolchain to use new SDK.</p>
+
+<h2>Toolchain</h2>
+
+<p><a href="https://github.com/pfalcon/esp-open-sdk">esp-open-sdk</a> is probably easiest to
+use toolchain that I found for ESP8266. <code>esp-open-sdk</code> puts together steps
+created by <a href="http://www.esp8266.com/">ESP8266 Community Forum</a> published in
+<a href="https://github.com/esp8266/esp8266-wiki/wiki">esp8266-wiki</a> repository.</p>
+
+<p><code>esp-open-sdk</code> at the moment of writing this post didn&rsquo;t support <code>v0.9.5</code> SDK,
+but adding this support was pretty straight forward and can be found on my
+github for of the <a href="https://github.com/pietrushnic/esp-open-sdk.git">repo</a>.
+There is also <a href="https://github.com/pfalcon/esp-open-sdk/pull/18">pending PR</a> that hopefully will be merged.</p>
+
+<p>Procedure is straight forward to follow:</p>
+
+<p><code>
+git clone git@github.com:pietrushnic/esp-open-sdk.git #or use https with https://github.com/pietrushnic/esp-open-sdk.git
+cd esp-open-sdk
+git co v0.9.5-support
+sed -i -e '/\s0.9.4/s/^/#/g' -e '/\s0.9.5/s/^#//g' Makefile
+make
+</code></p>
+
+<p><code>sed</code> command will cause using <code>0.9.5</code> string as <code>VENDOR_SDK</code> for default build.</p>
+
+<p>On my i7-4700 single threaded compilation takes ~20min. BTW I&rsquo;m trying to
+figure out why I cannot use multiple jobs
+<a href="https://github.com/pfalcon/esp-open-sdk/issues/19">here</a>.</p>
+
+<p>Final message should contain something like:</p>
+
+<p><code>
+export PATH=/home/pietrushnic/tmp/esp-open-sdk/xtensa-lx106-elf/bin:$PATH
+</code></p>
+
+<p>Just execute this command in your shell. If you missed that message run <code>make</code>
+again it should skip all already compiled parts and display final message
+again.</p>
+
+<h2>Toolchain usage</h2>
+
+<p>To use toolchain with example code from <code>v0.9.5</code> SDK you can simply:</p>
+
+<p><code>
+cd esp_iot_sdk_v0.9.5
+</code></p>
+
+<p>Use package like it was presented in &ldquo;Upgrade using binaries from Espressif&rdquo; section. Trying to compile exmaples in <code>esp-open-sdk</code> will give you error like this:</p>
+
+<p><code>
+../../Makefile:154: warning: overriding recipe for target 'clean'
+../Makefile:258: warning: ignoring old recipe for target 'clean'
+You cloned without --recursive, fetching submodules for you.
+git submodule update --init --recursive
+make -C crosstool-NG -f ../Makefile _ct-ng
+make[1]: *** crosstool-NG: No such file or directory.  Stop.
+../../Makefile:140: recipe for target 'crosstool-NG/ct-ng' failed
+make: *** [crosstool-NG/ct-ng] Error 2
+</code></p>
+
+<p>When inside <code>esp_iot_sdk_v0.9.5</code>:</p>
+
+<p><code>
+cp -r examples/at .
+make COMPILE=gcc
+</code></p>
+
+<p>Ommiting <code>COMPILE=gcc</code> will result in error caused by using differen compiler name:</p>
+
+<p><code>
+make[1]: Entering directory '/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user'
+DEPEND: xt-xcc -M -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -DICACHE_FLASH -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle user_main.c
+/bin/sh: 2: xt-xcc: not found
+xt-xcc -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals  -DICACHE_FLASH   -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle  -o .output/eagle/debug/obj/user_main.o -c user_main.c
+make[1]: xt-xcc: Command not found
+../../Makefile:280: recipe for target '.output/eagle/debug/obj/user_main.o' failed
+make[1]: *** [.output/eagle/debug/obj/user_main.o] Error 127
+make[1]: Leaving directory '/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user'
+../Makefile:266: recipe for target '.subdirs' failed
+make: *** [.subdirs] Error 2
+</code></p>
+
+<p>Correct output looks like this:</p>
+
+<p>```
+make[1]: Entering directory &lsquo;/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user&rsquo;
+DEPEND: xtensa-lx106-elf-gcc -M -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -DICACHE_FLASH -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle user_main.c
+xtensa-lx106-elf-gcc -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals  -DICACHE_FLASH   -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle  -o .output/eagle/debug/obj/user_main.o -c user_main.c
+xtensa-lx106-elf-ar ru .output/eagle/debug/lib/libuser.a .output/eagle/debug/obj/user_main.o
+xtensa-lx106-elf-ar: creating .output/eagle/debug/lib/libuser.a
+make[1]: Leaving directory &lsquo;/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user&rsquo;
+xtensa-lx106-elf-gcc  -L../lib -nostdlib -T../ld/eagle.app.v6.ld -Wl,&mdash;no-check-sections -u call_user_start -Wl,-static -Wl,&mdash;start-group -lc -lgcc -lhal -lphy -lpp -lnet80211 -llwip -lwpa -lmain -ljson -lupgrade user/.output/eagle/debug/lib/libuser.a                                    -lat -Wl,&mdash;end-group -o .output/eagle/debug/image/eagle.app.v6.out</p>
+
+<p>!!!
+No boot needed.
+Generate eagle.flash.bin and eagle.irom0text.bin successully in folder bin.
+eagle.flash.bin&mdash;&mdash;&mdash;&mdash;>0x00000
+eagle.irom0text.bin&mdash;&mdash;>0x40000
+!!!
+```</p>
+
+<p>Now <code>../bin</code> directory contain <code>eagle.flash.bin</code> and <code>eagle.irom0text.bin</code>,
+which you can use to flash your ESP8266 using <code>esptool</code>:</p>
+
+<p><code>
+../../esptool/esptool.py write_flash 0x00000 eagle.flash.bin 0x40000 eagle.irom0text.bin
+</code></p>
+
+<h2>Summary</h2>
+
+<p>Thanks for reading. Hope that this post fill the gap that some of beginner can
+experience when goolging through straight forward tutorial about playing with
+ESP. If you like this post please share. If you see some bias or you just want
+to share some facts, ask question then please leave a comment.</p>
+]]></content>
+  </entry>
+  
+</feed>

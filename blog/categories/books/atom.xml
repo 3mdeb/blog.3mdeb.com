@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: books | Linux geek's scratchpad]]></title>
-  <link href="http://3mdeb.com/blog/categories/books/atom.xml" rel="self"/>
-  <link href="http://3mdeb.com/"/>
-  <updated>2015-01-24T03:07:02+01:00</updated>
-  <id>http://3mdeb.com/</id>
+  <link href="http://pietrushnic.github.io/blog/categories/books/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2015-01-26T01:32:55+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA["Democracy: The God That Failed" Hans-Hermann Hoppe]]></title>
-    <link href="http://3mdeb.com/blog/2012/03/20/-democracy-the-god-that-failed-hans-hermann-hoppe/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/03/20/-democracy-the-god-that-failed-hans-hermann-hoppe/"/>
     <updated>2012-03-20T21:16:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/03/20/-democracy-the-god-that-failed-hans-hermann-hoppe</id>
+    <id>http://pietrushnic.github.io/blog/2012/03/20/-democracy-the-god-that-failed-hans-hermann-hoppe</id>
     <content type="html"><![CDATA[<p>I began this article last year. Until now I wonder if anyone could be interested
 in reading about book that I read. I saw great interesting in linux/embedded
 stuff but what about different things that we met every day. What about
@@ -76,9 +76,9 @@ a lot. Distributed systems are those in which life of one man is important.</p>
   
   <entry>
     <title type="html"><![CDATA["Human Action" Ludwig von Mises]]></title>
-    <link href="http://3mdeb.com/blog/2012/03/07/human-action-ludwig-von-misess-work-by/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/03/07/human-action-ludwig-von-misess-work-by/"/>
     <updated>2012-03-07T23:37:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/03/07/human-action-ludwig-von-misess-work-by</id>
+    <id>http://pietrushnic.github.io/blog/2012/03/07/human-action-ludwig-von-misess-work-by</id>
     <content type="html"><![CDATA[<p>  <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Ludzkie_dzialanie_okladka.jpg/166px-Ludzkie_dzialanie_okladka.jpg" alt="" /></p>
 
 <p>&ldquo;Human Action&rdquo; Ludwig von Mises&rsquo;s work by some of called the pope of free market. IMHO is one of the best books on economics I read in my life. It is not easy, however, giving it time with certainly pays off. Allows to understand the basic laws which ruled the modern world of finance. Mises in a sensational way talk about the myths explaining what is inflation, why it has impact on our lives, what is and how works the supply of credit, and who depend most on the production of money without coverage (<em>fiat</em> money). I can say that until I read this book, I was lost in the dark. Thanks to it I received a weapon to overthrow ridiculous  world order concepts, absurd messages communicated in the media. I recommend:  <a href="http://mises.org/store/Human-Action-The-Scholars-Edition-P119.aspx">mises.org store &ndash; Human Action </a></p>

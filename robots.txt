@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: http://3mdeb.com/sitemap.xml
+Sitemap: http://pietrushnic.github.io/sitemap.xml

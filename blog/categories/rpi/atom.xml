@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: rpi, | Linux geek's scratchpad]]></title>
-  <link href="http://3mdeb.com/blog/categories/rpi/atom.xml" rel="self"/>
-  <link href="http://3mdeb.com/"/>
-  <updated>2015-01-24T03:07:02+01:00</updated>
-  <id>http://3mdeb.com/</id>
+  <link href="http://pietrushnic.github.io/blog/categories/rpi/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2015-01-26T01:32:55+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi kernel repository aggregating patches for Linux mainline]]></title>
-    <link href="http://3mdeb.com/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/"/>
+    <link href="http://pietrushnic.github.io/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline/"/>
     <updated>2014-10-15T23:23:11+02:00</updated>
-    <id>http://3mdeb.com/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline</id>
+    <id>http://pietrushnic.github.io/blog/2014/10/15/raspberry-pi-kernel-repository-aggregating-patches-for-linux-mainline</id>
     <content type="html"><![CDATA[<p>Since several months I&rsquo;m trying to find my way to embedded Linux programming.
 My hardware set was very limited I had only one board that can be called
 &ldquo;embedded&rdquo; and it was Raspberry Pi. Because I am more interested in firmware/OS

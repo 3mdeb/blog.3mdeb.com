@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: productivity | Linux geek's scratchpad]]></title>
-  <link href="http://3mdeb.com/blog/categories/productivity/atom.xml" rel="self"/>
-  <link href="http://3mdeb.com/"/>
-  <updated>2015-01-24T03:07:02+01:00</updated>
-  <id>http://3mdeb.com/</id>
+  <link href="http://pietrushnic.github.io/blog/categories/productivity/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2015-01-26T01:32:55+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Improve productivity with Goolge history using bookmarks and Chrome extensions]]></title>
-    <link href="http://3mdeb.com/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/"/>
+    <link href="http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity/"/>
     <updated>2013-07-30T02:40:00+02:00</updated>
-    <id>http://3mdeb.com/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity</id>
+    <id>http://pietrushnic.github.io/blog/2013/07/30/how-to-use-google-search-activity-to-improve-productivity</id>
     <content type="html"><![CDATA[<p class=intro>
 The idea of this post is very simple (as usually)  and I wonder why I didn't thought
 about it earlier. The point is to use history of your Google queries to improve
@@ -164,9 +164,9 @@ try.</p>
   
   <entry>
     <title type="html"><![CDATA[Workflow imporovement with Open Source tools - part 1]]></title>
-    <link href="http://3mdeb.com/blog/2013/05/16/workflow-imporovement-with-open-source-tools/"/>
+    <link href="http://pietrushnic.github.io/blog/2013/05/16/workflow-imporovement-with-open-source-tools/"/>
     <updated>2013-05-16T22:16:00+02:00</updated>
-    <id>http://3mdeb.com/blog/2013/05/16/workflow-imporovement-with-open-source-tools</id>
+    <id>http://pietrushnic.github.io/blog/2013/05/16/workflow-imporovement-with-open-source-tools</id>
     <content type="html"><![CDATA[<h3>Introduction</h3>
 
 <p>I want to start a series of articles to describe how I improve my workflow with
@@ -369,9 +369,9 @@ reading.</p>
   
   <entry>
     <title type="html"><![CDATA[Tmux as screen replacement and productivity accelerator]]></title>
-    <link href="http://3mdeb.com/blog/2013/04/06/tmux/"/>
+    <link href="http://pietrushnic.github.io/blog/2013/04/06/tmux/"/>
     <updated>2013-04-06T05:29:00+02:00</updated>
-    <id>http://3mdeb.com/blog/2013/04/06/tmux</id>
+    <id>http://pietrushnic.github.io/blog/2013/04/06/tmux</id>
     <content type="html"><![CDATA[<p>As I wrote in <a href="/blog/2013/03/19/debian-switching-to-unstable">previous post</a> I
 switched from GNU screen to <a href="http://tmux.sourceforge.net">tmux</a>. I use it for a
 few moths and have to said that I&rsquo;m really impressed by simplicity, performance
@@ -565,9 +565,9 @@ valuable. Comment if you think id needs improvements. Thank you for reading.</p>
   
   <entry>
     <title type="html"><![CDATA[Music for programming]]></title>
-    <link href="http://3mdeb.com/blog/2013/03/30/music-for-programming/"/>
+    <link href="http://pietrushnic.github.io/blog/2013/03/30/music-for-programming/"/>
     <updated>2013-03-30T03:27:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2013/03/30/music-for-programming</id>
+    <id>http://pietrushnic.github.io/blog/2013/03/30/music-for-programming</id>
     <content type="html"><![CDATA[<p>Of course this is strongly associated with personal taste but I will write my
 experience.</p>
 
@@ -616,9 +616,9 @@ Maybe I will discover new universe.</p>
   
   <entry>
     <title type="html"><![CDATA[Short hint for all those who use vim and pathogen]]></title>
-    <link href="http://3mdeb.com/blog/2013/01/15/short-hint-for-all-those-who-use-vim/"/>
+    <link href="http://pietrushnic.github.io/blog/2013/01/15/short-hint-for-all-those-who-use-vim/"/>
     <updated>2013-01-15T11:51:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2013/01/15/short-hint-for-all-those-who-use-vim</id>
+    <id>http://pietrushnic.github.io/blog/2013/01/15/short-hint-for-all-those-who-use-vim</id>
     <content type="html"><![CDATA[<p>Today, after updating my wokspace to latest version I encounter below error during vim running:
 <code>
 Error detected while processing function pathogen#runtime_append_all_bundles:

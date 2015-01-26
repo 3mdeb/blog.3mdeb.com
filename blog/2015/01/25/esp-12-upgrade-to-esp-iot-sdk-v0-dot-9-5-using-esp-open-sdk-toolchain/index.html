@@ -1,0 +1,589 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ESP-12 update to SDK v0.9.5 and AT v0.21.0.0 - noobs tutorial - Linux geek's scratchpad</title>
+  <meta name="author" content="">
+
+  
+  <meta name="description" content="January 23th Espressif published new ESP IOT SDK on their forum
+v0.9.5. My ESP-12 came with
+with pretty old version so I decide to update it to &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pietrushnic.github.io/blog/2015/01/25/esp-12-upgrade-to-esp-iot-sdk-v0-dot-9-5-using-esp-open-sdk-toolchain">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Linux geek's scratchpad" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39420295-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+<!-- AddThis Smart Layers BEGIN -->
+<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534acd39445ac552"></script>
+<script type="text/javascript">
+  addthis.layers({
+    'theme' : 'gray',
+    'share' : {
+      'position' : 'left',
+      'numPreferredServices' : 5
+    }, 
+    'follow' : {
+      'services' : [
+        {'service': 'facebook', 'id': 'piotr.krol.756859'},
+        {'service': 'twitter', 'id': 'pietrushnic'},
+        {'service': 'linkedin', 'id': 'krolpiotr'},
+        {'service': 'google_follow', 'id': '115979497998056410813'}
+      ]
+    },  
+    'whatsnext' : {},  
+    'recommended' : {} 
+  });
+</script>
+<!-- AddThis Smart Layers END -->
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Linux geek's scratchpad</a></h1>
+  
+    <h2>or embedded dreams about productivity, freedom and liberty</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pietrushnic.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">ESP-12 update to SDK v0.9.5 and AT v0.21.0.0 - noobs tutorial</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-25T22:32:01+01:00" pubdate data-updated="true">Jan 25<span>th</span>, 2015</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>January 23th Espressif published new ESP IOT SDK on their forum
+<a href="http://bbs.espressif.com/viewtopic.php?f=5&amp;t=154">v0.9.5</a>. My ESP-12 came with
+with pretty old version so I decide to update it to latest one:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>AT+RST
+</span><span class='line'>
+</span><span class='line'>OK
+</span><span class='line'>y_RSöfJ[úndor:www.ai-thinker.com Version:0.9.2.4]
+</span><span class='line'>
+</span><span class='line'>ready
+</span><span class='line'>AT+GMR
+</span><span class='line'>0018000902-AI03
+</span><span class='line'>
+</span><span class='line'>OK</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ESP-12 firmware update pin configuration</h2>
+
+<p><a class="fancybox" rel="group" href="/assets/images/esp-12-update.jpg"><img src="/assets/images/esp-12-update.jpg" alt="" /></a></p>
+
+<p>As picture presents in addition to normal operation we have to pull down GPIO0
+and pull up GPIO2.</p>
+
+<h2>Upgrade using binaries from Espressif</h2>
+
+<p>To upgrade you can use binaries that where delivered in zip packaged and python <a href="">esptool</a>. Run following commands:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git@github.com:themadinventor/esptool.git
+</span><span class='line'>wget --content-disposition "http://bbs.espressif.com/download/file.php?id=189"
+</span><span class='line'>unzip esp_iot_sdk_v0.9.5_15_01_23.zip
+</span><span class='line'>cd esp_iot_sdk_v0.9.5/bin
+</span><span class='line'>../../esptool/esptool.py write_flash 0x00000 boot_v1.2.bin 0x01000 at/user1.512.new.bin 0x3e000 blank.bin 0x7e000 blank.bin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>First we clone <code>esptool</code> repository, then we get latest SDK release directly
+from forum and finally we ran <code>esptool</code>.</p>
+
+<p>If you will get something like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Connecting...
+</span><span class='line'>Traceback (most recent call last):
+</span><span class='line'>  File "../../esptool/esptool.py", line 408, in &lt;module&gt;
+</span><span class='line'>    esp.connect()
+</span><span class='line'>  File "../../esptool/esptool.py", line 143, in connect
+</span><span class='line'>    raise Exception('Failed to connect')
+</span><span class='line'>Exception: Failed to connect</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can work around this by toggling power to the module right before executing
+<code>esptool</code> command. It works on my side.</p>
+
+<p>Successful flashing looks like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[1:00:21] pietrushnic:bin $ ../../esptool/esptool.py write_flash 0x00000 boot_v1.2.bin 0x01000 at/user1.512.new.bin 0x3e000 blank.bin 0x7e000 blank.bin
+</span><span class='line'>Connecting...
+</span><span class='line'>Erasing flash...
+</span><span class='line'>Writing at 0x00000400... (100 %)
+</span><span class='line'>Erasing flash...
+</span><span class='line'>Writing at 0x00034800... (100 %)
+</span><span class='line'>Erasing flash...
+</span><span class='line'>Writing at 0x0003ec00... (100 %)
+</span><span class='line'>Erasing flash...
+</span><span class='line'>Writing at 0x0007ec00... (100 %)
+</span><span class='line'>
+</span><span class='line'>Leaving...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After disconnecting GPIO0 and GPIO2 you can boot new firmware. Results should
+look like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>AT+RST
+</span><span class='line'>
+</span><span class='line'>OK
+</span><span class='line'>
+</span><span class='line'> ets Jan  8 2013,rst cause:4, boot mode:(3,4)
+</span><span class='line'>
+</span><span class='line'>wdt reset
+</span><span class='line'>load 0x40100000, len 816, room 16
+</span><span class='line'>tail 0
+</span><span class='line'>chksum 0x8d
+</span><span class='line'>load 0x3ffe8000, len 788, room 8
+</span><span class='line'>tail 12
+</span><span class='line'>chksum 0xcf
+</span><span class='line'>ho 0 tail 12 room 4
+</span><span class='line'>load 0x3ffe8314, len 288, room 12
+</span><span class='line'>tail 4
+</span><span class='line'>chksum 0xcf
+</span><span class='line'>csum 0xcf
+</span><span class='line'>
+</span><span class='line'>2nd boot version : 1.2
+</span><span class='line'>  SPI Speed      : 40MHz
+</span><span class='line'>  SPI Mode       : QIO
+</span><span class='line'>  SPI Flash Size : 4Mbit
+</span><span class='line'>jump to run user1
+</span><span class='line'>
+</span><span class='line'>rNÿ
+</span><span class='line'>ready
+</span><span class='line'>AT+GMR
+</span><span class='line'>AT version:0.21.0.0
+</span><span class='line'>SDK version:0.9.5
+</span><span class='line'>
+</span><span class='line'>OK</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Of course you will need the toolchain to use new SDK.</p>
+
+<h2>Toolchain</h2>
+
+<p><a href="https://github.com/pfalcon/esp-open-sdk">esp-open-sdk</a> is probably easiest to
+use toolchain that I found for ESP8266. <code>esp-open-sdk</code> puts together steps
+created by <a href="http://www.esp8266.com/">ESP8266 Community Forum</a> published in
+<a href="https://github.com/esp8266/esp8266-wiki/wiki">esp8266-wiki</a> repository.</p>
+
+<p><code>esp-open-sdk</code> at the moment of writing this post didn&rsquo;t support <code>v0.9.5</code> SDK,
+but adding this support was pretty straight forward and can be found on my
+github for of the <a href="https://github.com/pietrushnic/esp-open-sdk.git">repo</a>.
+There is also <a href="https://github.com/pfalcon/esp-open-sdk/pull/18">pending PR</a> that hopefully will be merged.</p>
+
+<p>Procedure is straight forward to follow:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git@github.com:pietrushnic/esp-open-sdk.git #or use https with https://github.com/pietrushnic/esp-open-sdk.git
+</span><span class='line'>cd esp-open-sdk
+</span><span class='line'>git co v0.9.5-support
+</span><span class='line'>sed -i -e '/\s0.9.4/s/^/#/g' -e '/\s0.9.5/s/^#//g' Makefile
+</span><span class='line'>make</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>sed</code> command will cause using <code>0.9.5</code> string as <code>VENDOR_SDK</code> for default build.</p>
+
+<p>On my i7-4700 single threaded compilation takes ~20min. BTW I&rsquo;m trying to
+figure out why I cannot use multiple jobs
+<a href="https://github.com/pfalcon/esp-open-sdk/issues/19">here</a>.</p>
+
+<p>Final message should contain something like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH=/home/pietrushnic/tmp/esp-open-sdk/xtensa-lx106-elf/bin:$PATH</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Just execute this command in your shell. If you missed that message run <code>make</code>
+again it should skip all already compiled parts and display final message
+again.</p>
+
+<h2>Toolchain usage</h2>
+
+<p>To use toolchain with example code from <code>v0.9.5</code> SDK you can simply:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd esp_iot_sdk_v0.9.5 </span></code></pre></td></tr></table></div></figure>
+
+
+<p>Use package like it was presented in &ldquo;Upgrade using binaries from Espressif&rdquo; section. Trying to compile exmaples in <code>esp-open-sdk</code> will give you error like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>../../Makefile:154: warning: overriding recipe for target 'clean'
+</span><span class='line'>../Makefile:258: warning: ignoring old recipe for target 'clean'
+</span><span class='line'>You cloned without --recursive, fetching submodules for you.
+</span><span class='line'>git submodule update --init --recursive
+</span><span class='line'>make -C crosstool-NG -f ../Makefile _ct-ng
+</span><span class='line'>make[1]: *** crosstool-NG: No such file or directory.  Stop.
+</span><span class='line'>../../Makefile:140: recipe for target 'crosstool-NG/ct-ng' failed
+</span><span class='line'>make: *** [crosstool-NG/ct-ng] Error 2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When inside <code>esp_iot_sdk_v0.9.5</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cp -r examples/at .
+</span><span class='line'>make COMPILE=gcc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ommiting <code>COMPILE=gcc</code> will result in error caused by using differen compiler name:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make[1]: Entering directory '/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user'
+</span><span class='line'>DEPEND: xt-xcc -M -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -DICACHE_FLASH -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle user_main.c
+</span><span class='line'>/bin/sh: 2: xt-xcc: not found
+</span><span class='line'>xt-xcc -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals  -DICACHE_FLASH   -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle  -o .output/eagle/debug/obj/user_main.o -c user_main.c
+</span><span class='line'>make[1]: xt-xcc: Command not found
+</span><span class='line'>../../Makefile:280: recipe for target '.output/eagle/debug/obj/user_main.o' failed
+</span><span class='line'>make[1]: *** [.output/eagle/debug/obj/user_main.o] Error 127
+</span><span class='line'>make[1]: Leaving directory '/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user'
+</span><span class='line'>../Makefile:266: recipe for target '.subdirs' failed
+</span><span class='line'>make: *** [.subdirs] Error 2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Correct output looks like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make[1]: Entering directory '/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user'
+</span><span class='line'>DEPEND: xtensa-lx106-elf-gcc -M -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -DICACHE_FLASH -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle user_main.c
+</span><span class='line'>xtensa-lx106-elf-gcc -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals  -DICACHE_FLASH   -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle  -o .output/eagle/debug/obj/user_main.o -c user_main.c
+</span><span class='line'>xtensa-lx106-elf-ar ru .output/eagle/debug/lib/libuser.a .output/eagle/debug/obj/user_main.o 
+</span><span class='line'>xtensa-lx106-elf-ar: creating .output/eagle/debug/lib/libuser.a
+</span><span class='line'>make[1]: Leaving directory '/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user'
+</span><span class='line'>xtensa-lx106-elf-gcc  -L../lib -nostdlib -T../ld/eagle.app.v6.ld -Wl,--no-check-sections -u call_user_start -Wl,-static -Wl,--start-group -lc -lgcc -lhal -lphy -lpp -lnet80211 -llwip -lwpa -lmain -ljson -lupgrade user/.output/eagle/debug/lib/libuser.a                                    -lat -Wl,--end-group -o .output/eagle/debug/image/eagle.app.v6.out 
+</span><span class='line'>
+</span><span class='line'>!!!
+</span><span class='line'>No boot needed.
+</span><span class='line'>Generate eagle.flash.bin and eagle.irom0text.bin successully in folder bin.
+</span><span class='line'>eagle.flash.bin--------&gt;0x00000
+</span><span class='line'>eagle.irom0text.bin----&gt;0x40000
+</span><span class='line'>!!!</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now <code>../bin</code> directory contain <code>eagle.flash.bin</code> and <code>eagle.irom0text.bin</code>,
+which you can use to flash your ESP8266 using <code>esptool</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>../../esptool/esptool.py write_flash 0x00000 eagle.flash.bin 0x40000 eagle.irom0text.bin</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Summary</h2>
+
+<p>Thanks for reading. Hope that this post fill the gap that some of beginner can
+experience when goolging through straight forward tutorial about playing with
+ESP. If you like this post please share. If you see some bias or you just want
+to share some facts, ask question then please leave a comment.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-25T22:32:01+01:00" pubdate data-updated="true">Jan 25<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/esp8266/'>ESP8266,</a>, <a class='category' href='/blog/categories/embedded/'>embedded</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pietrushnic.github.io/blog/2015/01/25/esp-12-upgrade-to-esp-iot-sdk-v0-dot-9-5-using-esp-open-sdk-toolchain/" data-via="pietrushnic" data-counturl="http://pietrushnic.github.io/blog/2015/01/25/esp-12-upgrade-to-esp-iot-sdk-v0-dot-9-5-using-esp-open-sdk-toolchain/" >Tweet</a>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/01/24/power-on-of-esp-12/" title="Previous Post: Power on of ESP-12 (ESP8266)">&laquo; Power on of ESP-12 (ESP8266)</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 -  -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pietrushnics-world';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pietrushnic.github.io/blog/2015/01/25/esp-12-upgrade-to-esp-iot-sdk-v0-dot-9-5-using-esp-open-sdk-toolchain/';
+        var disqus_url = 'http://pietrushnic.github.io/blog/2015/01/25/esp-12-upgrade-to-esp-iot-sdk-v0-dot-9-5-using-esp-open-sdk-toolchain/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".fancybox").fancybox();
+  });
+</script>
+
+
+</body>
+</html>

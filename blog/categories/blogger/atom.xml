@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: blogger | Linux geek's scratchpad]]></title>
-  <link href="http://3mdeb.com/blog/categories/blogger/atom.xml" rel="self"/>
-  <link href="http://3mdeb.com/"/>
-  <updated>2015-01-24T03:07:02+01:00</updated>
-  <id>http://3mdeb.com/</id>
+  <link href="http://pietrushnic.github.io/blog/categories/blogger/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2015-01-26T01:32:55+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Syntax highlighter and code formatter for Blogger]]></title>
-    <link href="http://3mdeb.com/blog/2012/01/06/syntax-highlighter-and-code-formatter/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/01/06/syntax-highlighter-and-code-formatter/"/>
     <updated>2012-01-06T18:14:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/01/06/syntax-highlighter-and-code-formatter</id>
+    <id>http://pietrushnic.github.io/blog/2012/01/06/syntax-highlighter-and-code-formatter</id>
     <content type="html"><![CDATA[<p>Another time-waster was a decent code formatter and syntax highlighter. I google out <a href="http://www.commonitman.com/2010/09/how-to-use-syntax-highlighter-3-in.html">following solution</a>, it is based on <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter 3</a> It has interesting options:</p>
 
 <ol>
@@ -35,9 +35,9 @@
   
   <entry>
     <title type="html"><![CDATA[Blogger favicon in Chrome and FF]]></title>
-    <link href="http://3mdeb.com/blog/2012/01/05/blogger-favicon-in-chrome-and-ff/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/01/05/blogger-favicon-in-chrome-and-ff/"/>
     <updated>2012-01-05T00:22:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/01/05/blogger-favicon-in-chrome-and-ff</id>
+    <id>http://pietrushnic.github.io/blog/2012/01/05/blogger-favicon-in-chrome-and-ff</id>
     <content type="html"><![CDATA[<p>I didn&rsquo;t imagine that placing the code for favicon can be so time consuming. Here are some tpis and tricks that can be useful to others.<br/>
 1. First find or create favicon ( <a href="http://www.google.pl/search?q=favicon&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;tbm=isch&amp;source=og&amp;sa=N&amp;tab=wi&amp;ei=udsET4OiG8vO-Qbd27j5Cw&amp;biw=1600&amp;bih=732&amp;sei=u9sET_miJsztOf-2uLYO#um=1&amp;hl=en&amp;tbs=isz:ex%2Ciszw%3A32%2Ciszh%3A32&amp;tbm=isch&amp;sa=1&amp;q=favicon&amp;pbx=1&amp;oq=favicon&amp;aq=f&amp;aqi=g10&amp;aql=&amp;gs_sm=s&amp;gs_upl=1959l2847l0l4598l6l5l0l0l0l3l407l1119l0.3.1.0.1l5l0&amp;bav=on.2,or.r_gc.r_pw.,cf.osb&amp;fp=7c76d7186cf3fdc4&amp;biw=1600&amp;bih=732">google</a> or <a href="http://favicon.cc/">favicon.cc</a>)<br/>
 2. Make sure that you have not set any favicon (Design-> Page Elelments-> Favicon)<br/>
@@ -51,9 +51,9 @@
   
   <entry>
     <title type="html"><![CDATA[Blogspot beginning]]></title>
-    <link href="http://3mdeb.com/blog/2012/01/05/blogspot-beginning/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/01/05/blogspot-beginning/"/>
     <updated>2012-01-05T00:02:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/01/05/blogspot-beginning</id>
+    <id>http://pietrushnic.github.io/blog/2012/01/05/blogspot-beginning</id>
     <content type="html"><![CDATA[<ol>
 <li>Blog should be correctly displayed under lynx<br/>
 2. I&rsquo;m not a sophisticated graphic designer, so I can not afford a sensational appearance (so far).</li>
@@ -64,18 +64,18 @@
   
   <entry>
     <title type="html"><![CDATA[Blog look and feel idea]]></title>
-    <link href="http://3mdeb.com/blog/2012/01/04/blog-look-and-feel-idea/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/01/04/blog-look-and-feel-idea/"/>
     <updated>2012-01-04T19:30:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/01/04/blog-look-and-feel-idea</id>
+    <id>http://pietrushnic.github.io/blog/2012/01/04/blog-look-and-feel-idea</id>
     <content type="html"><![CDATA[<p>Because I&rsquo;m a fan of Linux climate of terminals and this kind of stuff. I will try to tweak blogspot tamplete (fonts, background etc.) to terminal (right know I don&rsquo;t know which one) style. </p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Blogspot begin: todo list]]></title>
-    <link href="http://3mdeb.com/blog/2012/01/03/blogspot-begin-todo-list/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/01/03/blogspot-begin-todo-list/"/>
     <updated>2012-01-03T00:38:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/01/03/blogspot-begin-todo-list</id>
+    <id>http://pietrushnic.github.io/blog/2012/01/03/blogspot-begin-todo-list</id>
     <content type="html"><![CDATA[<ol>
 <li>Learn Blogspot</li>
 <li>Consider Google Analytics</li>

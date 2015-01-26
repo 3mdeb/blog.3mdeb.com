@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ESP8266,embedded | Linux geek's scratchpad]]></title>
-  <link href="http://3mdeb.com/blog/categories/esp8266-embedded/atom.xml" rel="self"/>
-  <link href="http://3mdeb.com/"/>
-  <updated>2015-01-24T03:07:02+01:00</updated>
-  <id>http://3mdeb.com/</id>
+  <link href="http://pietrushnic.github.io/blog/categories/esp8266-embedded/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2015-01-26T01:32:55+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Power on of ESP-12 (ESP8266)]]></title>
-    <link href="http://3mdeb.com/blog/2015/01/24/power-on-of-esp-12/"/>
+    <link href="http://pietrushnic.github.io/blog/2015/01/24/power-on-of-esp-12/"/>
     <updated>2015-01-24T00:25:05+01:00</updated>
-    <id>http://3mdeb.com/blog/2015/01/24/power-on-of-esp-12</id>
+    <id>http://pietrushnic.github.io/blog/2015/01/24/power-on-of-esp-12</id>
     <content type="html"><![CDATA[<p>ESP8266 is a SoC made by <a href="https://espressif.com">Espressif</a>. For last couple of
 months this chip is a rockstar of <a href="http://hackaday.com/">HackADay</a> and makers
 community around the Internet. Mostly because of WiFi modules built based on it
@@ -44,11 +44,11 @@ them.</p>
 <a href="http://www.electrodragon.com/">ElectroDragon</a> provides also adapter to solder
 module and easily expose pins.</p>
 
-<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/esp-12-adapter.jpg"><img src="http://3mdeb.com/assets/images/esp-12-adapter.jpg" alt="" /></a></p>
+<p><a class="fancybox" rel="group" href="http://pietrushnic.github.io/assets/images/esp-12-adapter.jpg"><img src="http://pietrushnic.github.io/assets/images/esp-12-adapter.jpg" alt="" /></a></p>
 
 <p>After applying my soldering-fu I get rewarding result.</p>
 
-<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/esp-12-soldered.jpg"><img src="http://3mdeb.com/assets/images/esp-12-soldered.jpg" alt="" /></a></p>
+<p><a class="fancybox" rel="group" href="http://pietrushnic.github.io/assets/images/esp-12-soldered.jpg"><img src="http://pietrushnic.github.io/assets/images/esp-12-soldered.jpg" alt="" /></a></p>
 
 <h2>Wiring</h2>
 
@@ -59,9 +59,9 @@ Which give no ability to connect parallel wires, which was my initial idea.
 Because I didn&rsquo;t have u shape solderless jumpers to make connection clean I
 splitted old Ethernet cable and get this:</p>
 
-<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/u-shape-jumpers.jpg"><img src="http://3mdeb.com/assets/images/u-shape-jumpers.jpg" alt="" /></a></p>
+<p><a class="fancybox" rel="group" href="http://pietrushnic.github.io/assets/images/u-shape-jumpers.jpg"><img src="http://pietrushnic.github.io/assets/images/u-shape-jumpers.jpg" alt="" /></a></p>
 
-<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/esp-12-breadboard.jpg"><img src="http://3mdeb.com/assets/images/esp-12-breadboard.jpg" alt="" /></a></p>
+<p><a class="fancybox" rel="group" href="http://pietrushnic.github.io/assets/images/esp-12-breadboard.jpg"><img src="http://pietrushnic.github.io/assets/images/esp-12-breadboard.jpg" alt="" /></a></p>
 
 <p>Check connections couple of time to make sure that everything works fine. As
 USB UART I used FT232RL based module. Current provided by USB UART module can
@@ -82,7 +82,7 @@ minicom -b 115200 -o -D /dev/ttyUSB0
 this may indicate that you need reset try <code>AT+RST&lt;Ctrl-M&gt;&lt;Ctrl-J&gt;</code>. You
 should get something like this:</p>
 
-<p><a class="fancybox" rel="group" href="http://3mdeb.com/assets/images/esp-12-minicom-1.png"><img src="http://3mdeb.com/assets/images/esp-12-minicom-1.png" /></a></p>
+<p><a class="fancybox" rel="group" href="http://pietrushnic.github.io/assets/images/esp-12-minicom-1.png"><img src="http://pietrushnic.github.io/assets/images/esp-12-minicom-1.png" /></a></p>
 
 <p>There are lot of other commands like <code>AT+GMR</code> which give you firmware version.
 More commands you can find

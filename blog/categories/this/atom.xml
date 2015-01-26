@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: this | Linux geek's scratchpad]]></title>
-  <link href="http://3mdeb.com/blog/categories/this/atom.xml" rel="self"/>
-  <link href="http://3mdeb.com/"/>
-  <updated>2015-01-24T03:07:02+01:00</updated>
-  <id>http://3mdeb.com/</id>
+  <link href="http://pietrushnic.github.io/blog/categories/this/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2015-01-26T01:32:55+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[New background and not so big "coming back"]]></title>
-    <link href="http://3mdeb.com/blog/2012/11/13/new-background-and-not-so-big-coming/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/11/13/new-background-and-not-so-big-coming/"/>
     <updated>2012-11-13T00:04:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/11/13/new-background-and-not-so-big-coming</id>
+    <id>http://pietrushnic.github.io/blog/2012/11/13/new-background-and-not-so-big-coming</id>
     <content type="html"><![CDATA[<p>It&rsquo;s been a long time since I last wrote anything on the blog. Because I hear complains about the background causing my blog hard to read I decide to change it.</p>
 
 <p>I have little break in my side project and noticed that most read posts are related to some technical workarounds and solutions for different problems I decide to write a series about gcc errors and some solutions for it. I know it may sound like some complete spam and trash for blog, but when I searched for some explanation and solution of this errors sometimes it was hard to find them, sometimes it was hard to match with my code and finally sometimes I was unable to understand what is going on. I want to share what I learned and even if it wouldn&rsquo;t help anyone I want to have this in one place.</p>
@@ -28,18 +28,18 @@
   
   <entry>
     <title type="html"><![CDATA[Nice small additions for my blog]]></title>
-    <link href="http://3mdeb.com/blog/2012/03/07/blog-has-changed-slightly/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/03/07/blog-has-changed-slightly/"/>
     <updated>2012-03-07T23:15:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/03/07/blog-has-changed-slightly</id>
+    <id>http://pietrushnic.github.io/blog/2012/03/07/blog-has-changed-slightly</id>
     <content type="html"><![CDATA[<p>Blog has changed slightly. I&rsquo;ve added two new sections: social media and afk. In &ldquo;social media&rdquo; I will add links to my profiles on various social networking sites. You&rsquo;ll find my most recent development achievements ( <a href="https://github.com/pietrushnic">@github</a>) and twitts on topics of interest to me ( <a href="https://twitter.com/#!/pietrushnic">@twitter</a>). The second section, &ldquo;afk&rdquo; (away from keyboard) is intended for the information of life beyond the keyboard, which in my case is not too extensive. I will publish here information about the books we read, watched movies and many other interesting things, which can be passionate away from the keyboard.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Ideas for development]]></title>
-    <link href="http://3mdeb.com/blog/2012/01/09/ideas-for-development/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/01/09/ideas-for-development/"/>
     <updated>2012-01-09T22:24:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/01/09/ideas-for-development</id>
+    <id>http://pietrushnic.github.io/blog/2012/01/09/ideas-for-development</id>
     <content type="html"><![CDATA[<p>All the time come to my mind new ideas about what could be added to the blog and what information to post. I&rsquo;m interested in so many things that many of the ideas are killed before reaching the plane of the keyboard and has no chance to be introduced even as a draft to the blog. It seems that for myself I should store ideas for development in order to easily return to them when ripe.</p>
 
 <ol>
@@ -55,9 +55,9 @@
   
   <entry>
     <title type="html"><![CDATA[Why I decided to write a blog ?]]></title>
-    <link href="http://3mdeb.com/blog/2012/01/03/why-i-decided-to-write-blog/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/01/03/why-i-decided-to-write-blog/"/>
     <updated>2012-01-03T00:20:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/01/03/why-i-decided-to-write-blog</id>
+    <id>http://pietrushnic.github.io/blog/2012/01/03/why-i-decided-to-write-blog</id>
     <content type="html"><![CDATA[<p>Of course there are plenty of reasons. This idea haunted me for many months but finally insomnia pushed me to start.</p>
 ]]></content>
   </entry>

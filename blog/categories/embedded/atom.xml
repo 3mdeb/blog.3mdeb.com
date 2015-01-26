@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: embedded | Linux geek's scratchpad]]></title>
-  <link href="http://3mdeb.com/blog/categories/embedded/atom.xml" rel="self"/>
-  <link href="http://3mdeb.com/"/>
-  <updated>2015-01-24T03:07:02+01:00</updated>
-  <id>http://3mdeb.com/</id>
+  <link href="http://pietrushnic.github.io/blog/categories/embedded/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2015-01-26T01:32:55+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -14,10 +14,248 @@
 
   
   <entry>
+    <title type="html"><![CDATA[ESP-12 update to SDK v0.9.5 and AT v0.21.0.0 - noobs tutorial]]></title>
+    <link href="http://pietrushnic.github.io/blog/2015/01/25/esp-12-upgrade-to-esp-iot-sdk-v0-dot-9-5-using-esp-open-sdk-toolchain/"/>
+    <updated>2015-01-25T22:32:01+01:00</updated>
+    <id>http://pietrushnic.github.io/blog/2015/01/25/esp-12-upgrade-to-esp-iot-sdk-v0-dot-9-5-using-esp-open-sdk-toolchain</id>
+    <content type="html"><![CDATA[<p>January 23th Espressif published new ESP IOT SDK on their forum
+<a href="http://bbs.espressif.com/viewtopic.php?f=5&amp;t=154">v0.9.5</a>. My ESP-12 came with
+with pretty old version so I decide to update it to latest one:</p>
+
+<p>```
+AT+RST</p>
+
+<p>OK
+y_RSöfJ[úndor:www.ai-thinker.com Version:0.9.2.4]</p>
+
+<p>ready
+AT+GMR
+0018000902-AI03</p>
+
+<p>OK
+```</p>
+
+<h2>ESP-12 firmware update pin configuration</h2>
+
+<p><a class="fancybox" rel="group" href="http://pietrushnic.github.io/assets/images/esp-12-update.jpg"><img src="http://pietrushnic.github.io/assets/images/esp-12-update.jpg" alt="" /></a></p>
+
+<p>As picture presents in addition to normal operation we have to pull down GPIO0
+and pull up GPIO2.</p>
+
+<h2>Upgrade using binaries from Espressif</h2>
+
+<p>To upgrade you can use binaries that where delivered in zip packaged and python <a href="">esptool</a>. Run following commands:</p>
+
+<p><code>
+git clone git@github.com:themadinventor/esptool.git
+wget --content-disposition "http://bbs.espressif.com/download/file.php?id=189"
+unzip esp_iot_sdk_v0.9.5_15_01_23.zip
+cd esp_iot_sdk_v0.9.5/bin
+../../esptool/esptool.py write_flash 0x00000 boot_v1.2.bin 0x01000 at/user1.512.new.bin 0x3e000 blank.bin 0x7e000 blank.bin
+</code></p>
+
+<p>First we clone <code>esptool</code> repository, then we get latest SDK release directly
+from forum and finally we ran <code>esptool</code>.</p>
+
+<p>If you will get something like this:</p>
+
+<p>```
+Connecting&hellip;
+Traceback (most recent call last):
+  File &ldquo;../../esptool/esptool.py&rdquo;, line 408, in <module></p>
+
+<pre><code>esp.connect()
+</code></pre>
+
+<p>  File &ldquo;../../esptool/esptool.py&rdquo;, line 143, in connect</p>
+
+<pre><code>raise Exception('Failed to connect')
+</code></pre>
+
+<p>Exception: Failed to connect
+```</p>
+
+<p>You can work around this by toggling power to the module right before executing
+<code>esptool</code> command. It works on my side.</p>
+
+<p>Successful flashing looks like this:</p>
+
+<p>```
+[1:00:21] pietrushnic:bin $ ../../esptool/esptool.py write_flash 0x00000 boot_v1.2.bin 0x01000 at/user1.512.new.bin 0x3e000 blank.bin 0x7e000 blank.bin
+Connecting&hellip;
+Erasing flash&hellip;
+Writing at 0x00000400&hellip; (100 %)
+Erasing flash&hellip;
+Writing at 0x00034800&hellip; (100 %)
+Erasing flash&hellip;
+Writing at 0x0003ec00&hellip; (100 %)
+Erasing flash&hellip;
+Writing at 0x0007ec00&hellip; (100 %)</p>
+
+<p>Leaving&hellip;
+```</p>
+
+<p>After disconnecting GPIO0 and GPIO2 you can boot new firmware. Results should
+look like this:</p>
+
+<p>```
+AT+RST</p>
+
+<p>OK</p>
+
+<p> ets Jan  8 2013,rst cause:4, boot mode:(3,4)</p>
+
+<p>wdt reset
+load 0x40100000, len 816, room 16
+tail 0
+chksum 0x8d
+load 0x3ffe8000, len 788, room 8
+tail 12
+chksum 0xcf
+ho 0 tail 12 room 4
+load 0x3ffe8314, len 288, room 12
+tail 4
+chksum 0xcf
+csum 0xcf</p>
+
+<p>2nd boot version : 1.2
+  SPI Speed      : 40MHz
+  SPI Mode       : QIO
+  SPI Flash Size : 4Mbit
+jump to run user1</p>
+
+<p>rNÿ
+ready
+AT+GMR
+AT version:0.21.0.0
+SDK version:0.9.5</p>
+
+<p>OK
+```</p>
+
+<p>Of course you will need the toolchain to use new SDK.</p>
+
+<h2>Toolchain</h2>
+
+<p><a href="https://github.com/pfalcon/esp-open-sdk">esp-open-sdk</a> is probably easiest to
+use toolchain that I found for ESP8266. <code>esp-open-sdk</code> puts together steps
+created by <a href="http://www.esp8266.com/">ESP8266 Community Forum</a> published in
+<a href="https://github.com/esp8266/esp8266-wiki/wiki">esp8266-wiki</a> repository.</p>
+
+<p><code>esp-open-sdk</code> at the moment of writing this post didn&rsquo;t support <code>v0.9.5</code> SDK,
+but adding this support was pretty straight forward and can be found on my
+github for of the <a href="https://github.com/pietrushnic/esp-open-sdk.git">repo</a>.
+There is also <a href="https://github.com/pfalcon/esp-open-sdk/pull/18">pending PR</a> that hopefully will be merged.</p>
+
+<p>Procedure is straight forward to follow:</p>
+
+<p><code>
+git clone git@github.com:pietrushnic/esp-open-sdk.git #or use https with https://github.com/pietrushnic/esp-open-sdk.git
+cd esp-open-sdk
+git co v0.9.5-support
+sed -i -e '/\s0.9.4/s/^/#/g' -e '/\s0.9.5/s/^#//g' Makefile
+make
+</code></p>
+
+<p><code>sed</code> command will cause using <code>0.9.5</code> string as <code>VENDOR_SDK</code> for default build.</p>
+
+<p>On my i7-4700 single threaded compilation takes ~20min. BTW I&rsquo;m trying to
+figure out why I cannot use multiple jobs
+<a href="https://github.com/pfalcon/esp-open-sdk/issues/19">here</a>.</p>
+
+<p>Final message should contain something like:</p>
+
+<p><code>
+export PATH=/home/pietrushnic/tmp/esp-open-sdk/xtensa-lx106-elf/bin:$PATH
+</code></p>
+
+<p>Just execute this command in your shell. If you missed that message run <code>make</code>
+again it should skip all already compiled parts and display final message
+again.</p>
+
+<h2>Toolchain usage</h2>
+
+<p>To use toolchain with example code from <code>v0.9.5</code> SDK you can simply:</p>
+
+<p><code>
+cd esp_iot_sdk_v0.9.5
+</code></p>
+
+<p>Use package like it was presented in &ldquo;Upgrade using binaries from Espressif&rdquo; section. Trying to compile exmaples in <code>esp-open-sdk</code> will give you error like this:</p>
+
+<p><code>
+../../Makefile:154: warning: overriding recipe for target 'clean'
+../Makefile:258: warning: ignoring old recipe for target 'clean'
+You cloned without --recursive, fetching submodules for you.
+git submodule update --init --recursive
+make -C crosstool-NG -f ../Makefile _ct-ng
+make[1]: *** crosstool-NG: No such file or directory.  Stop.
+../../Makefile:140: recipe for target 'crosstool-NG/ct-ng' failed
+make: *** [crosstool-NG/ct-ng] Error 2
+</code></p>
+
+<p>When inside <code>esp_iot_sdk_v0.9.5</code>:</p>
+
+<p><code>
+cp -r examples/at .
+make COMPILE=gcc
+</code></p>
+
+<p>Ommiting <code>COMPILE=gcc</code> will result in error caused by using differen compiler name:</p>
+
+<p><code>
+make[1]: Entering directory '/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user'
+DEPEND: xt-xcc -M -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -DICACHE_FLASH -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle user_main.c
+/bin/sh: 2: xt-xcc: not found
+xt-xcc -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals  -DICACHE_FLASH   -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle  -o .output/eagle/debug/obj/user_main.o -c user_main.c
+make[1]: xt-xcc: Command not found
+../../Makefile:280: recipe for target '.output/eagle/debug/obj/user_main.o' failed
+make[1]: *** [.output/eagle/debug/obj/user_main.o] Error 127
+make[1]: Leaving directory '/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user'
+../Makefile:266: recipe for target '.subdirs' failed
+make: *** [.subdirs] Error 2
+</code></p>
+
+<p>Correct output looks like this:</p>
+
+<p>```
+make[1]: Entering directory &lsquo;/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user&rsquo;
+DEPEND: xtensa-lx106-elf-gcc -M -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -DICACHE_FLASH -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle user_main.c
+xtensa-lx106-elf-gcc -Os -g -O2 -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals  -DICACHE_FLASH   -I include -I ./ -I ../../include/ets -I ../include -I ../../include -I ../../include/eagle  -o .output/eagle/debug/obj/user_main.o -c user_main.c
+xtensa-lx106-elf-ar ru .output/eagle/debug/lib/libuser.a .output/eagle/debug/obj/user_main.o
+xtensa-lx106-elf-ar: creating .output/eagle/debug/lib/libuser.a
+make[1]: Leaving directory &lsquo;/home/pietrushnic/src/espressif/esp_iot_sdk_v0.9.5/at/user&rsquo;
+xtensa-lx106-elf-gcc  -L../lib -nostdlib -T../ld/eagle.app.v6.ld -Wl,&mdash;no-check-sections -u call_user_start -Wl,-static -Wl,&mdash;start-group -lc -lgcc -lhal -lphy -lpp -lnet80211 -llwip -lwpa -lmain -ljson -lupgrade user/.output/eagle/debug/lib/libuser.a                                    -lat -Wl,&mdash;end-group -o .output/eagle/debug/image/eagle.app.v6.out</p>
+
+<p>!!!
+No boot needed.
+Generate eagle.flash.bin and eagle.irom0text.bin successully in folder bin.
+eagle.flash.bin&mdash;&mdash;&mdash;&mdash;>0x00000
+eagle.irom0text.bin&mdash;&mdash;>0x40000
+!!!
+```</p>
+
+<p>Now <code>../bin</code> directory contain <code>eagle.flash.bin</code> and <code>eagle.irom0text.bin</code>,
+which you can use to flash your ESP8266 using <code>esptool</code>:</p>
+
+<p><code>
+../../esptool/esptool.py write_flash 0x00000 eagle.flash.bin 0x40000 eagle.irom0text.bin
+</code></p>
+
+<h2>Summary</h2>
+
+<p>Thanks for reading. Hope that this post fill the gap that some of beginner can
+experience when goolging through straight forward tutorial about playing with
+ESP. If you like this post please share. If you see some bias or you just want
+to share some facts, ask question then please leave a comment.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[0x6: Root file system for embedded system]]></title>
-    <link href="http://3mdeb.com/blog/2013/06/07/root-file-system-for-embedded-system/"/>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/"/>
     <updated>2013-06-07T10:40:00+02:00</updated>
-    <id>http://3mdeb.com/blog/2013/06/07/root-file-system-for-embedded-system</id>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system</id>
     <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
@@ -375,7 +613,7 @@ RPC: Registered udp transport module.
 RPC: Registered tcp transport module.
 RPC: Registered tcp NFSv4.1 backchannel transport module.
 NetWinder Floating Point Emulator V0.97 (double precision)
-Installing knfsd (copyright &copy; 1996 <a href="&#x6d;&#x61;&#105;&#108;&#116;&#111;&#x3a;&#111;&#107;&#105;&#114;&#64;&#x6d;&#111;&#110;&#x61;&#x64;&#x2e;&#115;&#x77;&#x62;&#46;&#x64;&#x65;">&#x6f;&#x6b;&#x69;&#x72;&#64;&#x6d;&#x6f;&#110;&#97;&#100;&#46;&#115;&#119;&#x62;&#x2e;&#x64;&#101;</a>).
+Installing knfsd (copyright &copy; 1996 <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#x6b;&#105;&#x72;&#64;&#x6d;&#x6f;&#110;&#97;&#x64;&#x2e;&#x73;&#x77;&#98;&#x2e;&#x64;&#101;">&#x6f;&#107;&#x69;&#x72;&#64;&#109;&#111;&#x6e;&#97;&#100;&#x2e;&#115;&#119;&#98;&#46;&#x64;&#101;</a>).
 jffs2: version 2.2. (NAND) © 2001-2006 Red Hat, Inc.
 ROMFS MTD &copy; 2007 Red Hat, Inc.
 msgmni has been set to 246
@@ -391,7 +629,7 @@ physmap platform flash device: 04000000 at 34000000
 physmap-flash.0: Found 1 x32 devices at 0x0 in 32-bit bank. Manufacturer ID 0x000000 Chip ID 0x000000
 Intel/Sharp Extended Query Table at 0x0031
 Using buffer write method
-smc91x.c: v1.1, sep 22 2004 by Nicolas Pitre <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#x6e;&#105;&#99;&#111;&#x40;&#x66;&#x6c;&#117;&#120;&#x6e;&#x69;&#x63;&#46;&#x6e;&#x65;&#116;">&#x6e;&#x69;&#x63;&#x6f;&#x40;&#102;&#108;&#x75;&#x78;&#110;&#105;&#x63;&#46;&#x6e;&#x65;&#x74;</a>
+smc91x.c: v1.1, sep 22 2004 by Nicolas Pitre <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#x6e;&#x69;&#x63;&#111;&#64;&#102;&#108;&#x75;&#x78;&#x6e;&#105;&#x63;&#x2e;&#110;&#101;&#x74;">&#110;&#105;&#99;&#x6f;&#64;&#102;&#108;&#117;&#120;&#110;&#105;&#x63;&#46;&#x6e;&#x65;&#116;</a>
 eth0: SMC91C11xFD (rev 1) at c89c8000 IRQ 57 [nowait]
 eth0: Ethernet addr: 52:54:00:12:34:56
 mousedev: PS/2 mouse device common for all mice
@@ -436,9 +674,9 @@ please share it, if somethings wrong please comment I will try to help if can.</
   
   <entry>
     <title type="html"><![CDATA[0x5: Qemu network configuration and tftp for Virtual Development Board]]></title>
-    <link href="http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/"/>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/"/>
     <updated>2013-06-07T10:36:00+02:00</updated>
-    <id>http://3mdeb.com/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board</id>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board</id>
     <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
@@ -726,9 +964,9 @@ This is expected result.</p>
   
   <entry>
     <title type="html"><![CDATA[0x4: Linux kernel for embedded system]]></title>
-    <link href="http://3mdeb.com/blog/2013/06/07/linux-kernel-for-embedded-system/"/>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system/"/>
     <updated>2013-06-07T10:33:00+02:00</updated>
-    <id>http://3mdeb.com/blog/2013/06/07/linux-kernel-for-embedded-system</id>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/linux-kernel-for-embedded-system</id>
     <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
@@ -848,9 +1086,9 @@ manually modified. So using uImage is easiest</p>
   
   <entry>
     <title type="html"><![CDATA[0x3: Embedded board bootloader]]></title>
-    <link href="http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader/"/>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader/"/>
     <updated>2013-06-07T10:32:00+02:00</updated>
-    <id>http://3mdeb.com/blog/2013/06/07/embedded-board-bootloader</id>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/embedded-board-bootloader</id>
     <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>
@@ -959,165 +1197,6 @@ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-
 [3] <a href="http://forum.xda-developers.com/showthread.php?t=2201146">U-boot for the multi-boot support</a></br>
 [4] <a href="http://balau82.wordpress.com/2010/04/12/booting-linux-with-u-boot-on-qemu-arm/">Booting Linux with U-Boot on QEMU ARM</a></br>
 [5] <a href="http://wiki.osdev.org/Bootloader">Bootloader</a></br></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[0x2: Toolchain for Virtual Development Board]]></title>
-    <link href="http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board/"/>
-    <updated>2013-06-07T08:42:00+02:00</updated>
-    <id>http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board</id>
-    <content type="html"><![CDATA[<h2>Table of contents</h2>
-
-<ul>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#intro">Introduction</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#what-is-toolchain">What is toolchain ?</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#why-we-need-cross-toolchain">Why we need cross-toolchain ?</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#how-to-create-toolchain">How to create toolchain ?</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#emdebian-path">Emdebian path</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#summary">Summary</a></li>
-<li><a href="/blog/2013/06/07/toolchain-for-virtual-development-board/#kudos">Kudos</a></li>
-</ul>
-
-
-<p><a id="intro"></a></p>
-
-<h3>Introduction</h3>
-
-<p>This is probably the most complicated topic of all related to embedded
-development but we need to deal with it at the beginning. I read a lot about
-toolchains but still don&rsquo;t know enough to explain details. I think that best
-answers are in crosstool-ng <a href="http://crosstool-ng.org/hg/crosstool-ng/file/0fc56e62cecf/docs">documentation</a>.</p>
-
-<p><a id="what-is-toolchain"></a></p>
-
-<h3>What is toolchain ?</h3>
-
-<p><em>Toolchain</em> as the name said is a set of tools chained together, so output of
-one tool is the input for different tool. This is well known concept in
-Linux (eg. pipes). In embedded environment toolchain is called cross-toolchain or
-cross-compiler, because usually it compiles on one architecture and generate
-code for another (eg. it compiles on x86 and generate code for arm)<a href="http://elinux.org/Toolchains">[1]</a>.</p>
-
-<p><a id="why-we-need-cross-toolchain"></a></p>
-
-<h3>Why we need cross-toolchain ?</h3>
-
-<p>I suspect that your laptop/PC is not based on ARM processor, most probably it based on
-x86 architecture so you cannot simply compile code and run it in our
-virtual-arm-based environment. To prepare operating system and tools for it we
-need cross-toolchain.</p>
-
-<p><a id="how-to-create-toolchain"></a></p>
-
-<h3>How to create toolchain ?</h3>
-
-<p>Process of creating cross-toolchain from scratch is not easy and takes some
-time. There are few other ways to get toolchain, than creating it from scratch.
-First we can use prebuilt toolchain providers like: <code>CodeSourcery</code>, <code>Linaro</code>, <code>DENX
-EDLK</code> or <code>Emdebian</code>. Second we can create toolchain using special building system like: <code>Buildroot</code>, <code>Crosstool-NG</code>
-or <code>Bitbake</code>. I will not deal with preparing toolchain in this series
-because procedure for creating it takes pretty long. So we have two options:</p>
-
-<ul>
-<li>read my article about <a href="/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">Crosstool-NG arm-unknown-linux-gnueabi</a></li>
-<li>or install toolchain ready to use like <a href="http://www.emdebian.org/">Emdebian</a></li>
-</ul>
-
-
-<p><a id="emdebian-path"></a></p>
-
-<h4>Emdebian path</h4>
-
-<p>Add below lines to you <code>/etc/apt/sources.list</code>:
-<code>bash
-deb http://ftp.uk.debian.org/emdebian/toolchains unstable main
-</code>
-Install Emdebian keys, update and install cross-compiler with all related
-packages:
-<code>bash
-sudo apt-get install emdebian-archive-keyring
-sudo apt-get update
-sudo apt-get install gcc-4.7-arm-linux-gnueabi
-</code></p>
-
-<h5>Dependency problems during installation</h5>
-
-<p>If above attempt to install cross-compiler ends with:
-```
-pietrushnic@eglarest:~/src$ sudo apt-get install gcc-4.7-arm-linux-gnueabi
-Reading package lists&hellip; Done
-Building dependency tree
-Reading state information&hellip; Done
-Some packages could not be installed. This may mean that you have
-requested an impossible situation or if you are using the unstable
-distribution that some required packages have not yet been created
-or been moved out of Incoming.
-The following information may help to resolve the situation:</p>
-
-<p>The following packages have unmet dependencies:
- gcc-4.7-arm-linux-gnueabi : Depends: libgomp1-armel-cross (>= 4.7.2-5) but it
- is not going to be installed
- E: Unable to correct problems, you have held broken packages.
-<code>
-This means that Debian ustable cross-compiler is not available for you
-configuration. You can read more about that
-[here](http://lists.debian.org/debian-embedded/2011/05/msg00029.html).
-To fix that issue simply change emdebian toochain repository to testing in
-`/etc/apt/source.list`:
-</code>
-deb <a href="http://ftp.uk.debian.org/emdebian/toolchains">http://ftp.uk.debian.org/emdebian/toolchains</a> testing main
-```</p>
-
-<h5>Emdebian toolchain configuration</h5>
-
-<p>Check where <code>arm-linux-eabi-gcc-4.7</code> was installed:
-<code>bash
-whereis arm-linux-gnueabi-gcc-4.7
-arm-linux-gnueabi-gcc-4: /usr/bin/arm-linux-gnueabi-gcc-4.7 /usr/bin/X11/arm-linux-gnueabi-gcc-4.7
-</code>
-It is not linked to <code>arm-linux-gnueabi-gcc</code>, so we cannot give its prefix as <code>CROSS_COMPILE</code>
-variable value, which is needed for bootloader and kernel compilation. We have to link
-it to <code>arm-linux-gnueabi-gcc</code>:
-<code>bash
-sudo ln -s /usr/bin/arm-linux-gnueabi-gcc-4.7 /usr/bin/arm-linux-gnueabi-gcc
-</code></p>
-
-<p>Toolchain is ready to use.</p>
-
-<p><em>Note</em>: I tried <code>CodeSourcery</code> toolchain <code>arm-2012.09-64-arm-none-linux-gnueabi.bin</code>,
-but it contain <code>binutils</code> defect that not allow correctly build kernel. If you see
-something like this in log:
-<code>
-Error: selected processor does not support ARM mode `ldralt lr,[r1],#4'
-</code>
-That means you experience same thing, please use <code>Emdebian</code> or <code>Crosstool-NG</code> toolchain.</p>
-
-<p><em>Note 2</em>: If you&rsquo;re <code>Ubuntu</code> user I have to suggest experiments with toolchain
-build by your own, because I get really hard times trying to go through this
-tutorial with Ubuntu/Linaro cross compiler provided in repository. Finally I
-used <a href="/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi">this</a>
-to push things forward. U-boot compiled with Ubuntu/Linaro toolchain had problem
-with <code>__udivsi3</code> instruction. This cause loop in initialization process.</p>
-
-<p><a id="summary"></a></p>
-
-<h3>Summary</h3>
-
-<p>If you take effort of creating toolchain using <code>Crosstool-NG</code> than
-congratulations.  But for simplifying whole <a href="/blog/2013/06/07/intro-to-virtual-development-board-building"><strong>Virtual Development Board</strong></a>
-series I will use <code>Emdebian</code> toolchain in further posts. Of course you can use
-your brand new <code>Crosstool-NG</code> toolchain by simply remember that tools prefixes are
-different. <code>Emdebian</code> uses <code>arm-linux-gnueabi-</code> and <code>Crosstool-NG</code> was created with
-<code>arm-unknown-linux-gnueabi-</code>. Replace one with another every time when needed.
-In <a href="/blog/2013/06/07/embedded-board-bootloader">next post</a> we will deal with
-bootloader.</p>
-
-<p><a id="kudos"></a></p>
-
-<h3>Kudos</h3>
-
-<p>[1] <a href="http://elinux.org/Toolchains">Toolchains</a></p>
 ]]></content>
   </entry>
   

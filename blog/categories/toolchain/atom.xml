@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: toolchain | Linux geek's scratchpad]]></title>
-  <link href="http://3mdeb.com/blog/categories/toolchain/atom.xml" rel="self"/>
-  <link href="http://3mdeb.com/"/>
-  <updated>2015-01-24T03:07:02+01:00</updated>
-  <id>http://3mdeb.com/</id>
+  <link href="http://pietrushnic.github.io/blog/categories/toolchain/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2015-01-26T01:32:55+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[0x2: Toolchain for Virtual Development Board]]></title>
-    <link href="http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board/"/>
+    <link href="http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board/"/>
     <updated>2013-06-07T08:42:00+02:00</updated>
-    <id>http://3mdeb.com/blog/2013/06/07/toolchain-for-virtual-development-board</id>
+    <id>http://pietrushnic.github.io/blog/2013/06/07/toolchain-for-virtual-development-board</id>
     <content type="html"><![CDATA[<h2>Table of contents</h2>
 
 <ul>

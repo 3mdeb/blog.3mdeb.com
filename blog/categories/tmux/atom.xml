@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: tmux | Linux geek's scratchpad]]></title>
-  <link href="http://3mdeb.com/blog/categories/tmux/atom.xml" rel="self"/>
-  <link href="http://3mdeb.com/"/>
-  <updated>2015-01-24T03:07:02+01:00</updated>
-  <id>http://3mdeb.com/</id>
+  <link href="http://pietrushnic.github.io/blog/categories/tmux/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2015-01-26T01:32:55+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Tmux as screen replacement and productivity accelerator]]></title>
-    <link href="http://3mdeb.com/blog/2013/04/06/tmux/"/>
+    <link href="http://pietrushnic.github.io/blog/2013/04/06/tmux/"/>
     <updated>2013-04-06T05:29:00+02:00</updated>
-    <id>http://3mdeb.com/blog/2013/04/06/tmux</id>
+    <id>http://pietrushnic.github.io/blog/2013/04/06/tmux</id>
     <content type="html"><![CDATA[<p>As I wrote in <a href="/blog/2013/03/19/debian-switching-to-unstable">previous post</a> I
 switched from GNU screen to <a href="http://tmux.sourceforge.net">tmux</a>. I use it for a
 few moths and have to said that I&rsquo;m really impressed by simplicity, performance
@@ -211,9 +211,9 @@ valuable. Comment if you think id needs improvements. Thank you for reading.</p>
   
   <entry>
     <title type="html"><![CDATA[tmux multiplexer and vi-like keys in copy-mode]]></title>
-    <link href="http://3mdeb.com/blog/2013/03/19/debian-switching-to-unstable/"/>
+    <link href="http://pietrushnic.github.io/blog/2013/03/19/debian-switching-to-unstable/"/>
     <updated>2013-03-19T16:30:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2013/03/19/debian-switching-to-unstable</id>
+    <id>http://pietrushnic.github.io/blog/2013/03/19/debian-switching-to-unstable</id>
     <content type="html"><![CDATA[<p>So I tried to write second post for my new blog but to effectively work using
 terminal I need terminal multiplexer. I switched to tmux from screen
 because I reach point that I can&rsquo;t do some things in it in easy way and

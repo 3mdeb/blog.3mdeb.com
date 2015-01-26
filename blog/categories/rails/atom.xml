@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: rails | Linux geek's scratchpad]]></title>
-  <link href="http://3mdeb.com/blog/categories/rails/atom.xml" rel="self"/>
-  <link href="http://3mdeb.com/"/>
-  <updated>2015-01-24T03:07:02+01:00</updated>
-  <id>http://3mdeb.com/</id>
+  <link href="http://pietrushnic.github.io/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2015-01-26T01:32:55+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Sqlite3 gem not supported on Heroku]]></title>
-    <link href="http://3mdeb.com/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku/"/>
     <updated>2012-11-18T21:16:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku</id>
+    <id>http://pietrushnic.github.io/blog/2012/11/18/sqlite3-gem-not-supported-on-heroku</id>
     <content type="html"><![CDATA[<p>When I tried to deploy second part of <a href="http://ruby.railstutorial.org/chapters/a-demo-app#top">RoR tutorial</a>
 to Heroku I get this error:
 <code>
@@ -55,9 +55,9 @@ As RoR tutorial states.</p>
   
   <entry>
     <title type="html"><![CDATA[Prepare for Ruby on Rails on Debian wheezy]]></title>
-    <link href="http://3mdeb.com/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian/"/>
     <updated>2012-11-18T18:18:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian</id>
+    <id>http://pietrushnic.github.io/blog/2012/11/18/prepare-for-ruby-on-rails-on-debian</id>
     <content type="html"><![CDATA[<p>I start to learn Ruby on Rails. As always when you learn new programming
 language toolchain is required. In this tutorial I will try to go through
 toolchain preparation for my Debian wheezy. Of course I based on Vim as my

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: crosstool-ng | Linux geek's scratchpad]]></title>
-  <link href="http://3mdeb.com/blog/categories/crosstool-ng/atom.xml" rel="self"/>
-  <link href="http://3mdeb.com/"/>
-  <updated>2015-01-24T03:07:02+01:00</updated>
-  <id>http://3mdeb.com/</id>
+  <link href="http://pietrushnic.github.io/blog/categories/crosstool-ng/atom.xml" rel="self"/>
+  <link href="http://pietrushnic.github.io/"/>
+  <updated>2015-01-26T01:32:55+01:00</updated>
+  <id>http://pietrushnic.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Quick build of arm-unknown-linux-gnueabi with crosstool-ng]]></title>
-    <link href="http://3mdeb.com/blog/2012/03/14/quick-build-of-arm-unknown-linux/"/>
+    <link href="http://pietrushnic.github.io/blog/2012/03/14/quick-build-of-arm-unknown-linux/"/>
     <updated>2012-03-14T23:42:00+01:00</updated>
-    <id>http://3mdeb.com/blog/2012/03/14/quick-build-of-arm-unknown-linux</id>
+    <id>http://pietrushnic.github.io/blog/2012/03/14/quick-build-of-arm-unknown-linux</id>
     <content type="html"><![CDATA[<p>You might be surprised at how much you have to make to correctly build
 <code>arm-unknown-linux-gnueabi</code> config based toolchain with <a href="http://crosstool-ng.org/">crosstool-ng</a>. As you can
 see examples of many open source projects, the man&rsquo;s work is a rare resource.
