@@ -204,22 +204,12 @@
     </url>
     <url>
         <loc>
-            http://pietrushnic.github.io/blog/2013/03/30/useful-hints-for-blogging-using-octopress-with-vim/
-        </loc>
-        <lastmod>2015-01-24T00:24:29+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
             http://pietrushnic.github.io/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi/
         </loc>
         <lastmod>2015-01-24T00:24:29+01:00</lastmod>
     </url>
     <url>
         <loc>http://pietrushnic.github.io/blog/2013/04/06/tmux/</loc>
-        <lastmod>2015-01-24T00:24:29+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pietrushnic.github.io/blog/2013/05/12/kernel-developers-tools/</loc>
         <lastmod>2015-01-24T00:24:29+01:00</lastmod>
     </url>
     <url>
@@ -274,10 +264,6 @@
         <loc>
             http://pietrushnic.github.io/blog/2013/06/07/root-file-system-for-embedded-system/
         </loc>
-        <lastmod>2015-01-24T00:24:29+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pietrushnic.github.io/blog/2013/06/14/build-and-run-ovmf-under-qemu/</loc>
         <lastmod>2015-01-24T00:24:29+01:00</lastmod>
     </url>
     <url>
