@@ -2,10 +2,10 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://3mdeb.com
-title: Linux geek's scratchpad
-subtitle: or embedded dreams about productivity, freedom and liberty
-autho: Piort Król
+url: http://blog.3mdeb.com
+title: '[3mdeb blog]'
+subtitle: Thoughts dereferenced from scratchpad noise
+author: Piort Król
 simple_search: http://google.com/search
 description:
 
