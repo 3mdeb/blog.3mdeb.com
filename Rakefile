@@ -400,8 +400,8 @@ task :list do
 end
 
 ## -- LFTP Deploy config -- ##
-ftp_user = "pkrol@3mdeb.com"
-ftp_server = "az0017.srv.az.pl"
+ftp_user = "piotr.krol@blog.3mdeb.com"
+ftp_server = "serwer1539010.home.pl"
 ftp_target = "/blog"
 deploy_default = "lftp"
 
