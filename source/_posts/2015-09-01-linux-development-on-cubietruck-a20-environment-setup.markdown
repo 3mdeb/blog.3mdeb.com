@@ -21,11 +21,13 @@ Allwinner A20 and Rockchip RK3288.
 
 A20 ship with dozen development boards like Cubieboard or pcDuino series,
 Banana Pi, MarsBoard or Hummingbird. About a year ago I choose to buy
-Cubietruck and this lead to couple interesting projects from porting
+Cubietruck and this led to couple interesting projects from porting
 [USBSniffer](http://elinux.org/BeagleBoard/GSoC/2010_Projects/USBSniffer) to
-writing bare-metal bootloader based on U-boot code. Because I figure out that
-it is hard for me to recover Cubietruck development setup that I made for
-kernel development I decided to write this post and leave notes for me and
+writing bare-metal bootloader based on U-boot code. Below setup is not
+complicated but contain many pieces and looking for correct procedure for each one
+is headache. Especially I felt that when I did it once couple months ago and
+was not able to recover my setup without over a day of googling. Because I
+of that I decided to write this post and leave notes for me and
 others who want bootstrap Cubietruck setup.
 
 Some configs and scripts can be found on [github repo](https://github.com/pietrushnic/ct-dev-setup).
