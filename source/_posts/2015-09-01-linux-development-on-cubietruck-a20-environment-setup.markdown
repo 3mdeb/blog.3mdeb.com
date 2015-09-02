@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Linux development setup for Cubietruck (A20) - dual kernel boot"
+title: "Setup for Linux kernel development on Cubietruck"
 date: 2015-09-01 21:48:55 +0200
 comments: true
 categories: linux embedded cubietruck A20
