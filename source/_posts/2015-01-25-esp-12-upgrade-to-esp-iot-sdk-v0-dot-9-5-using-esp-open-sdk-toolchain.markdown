@@ -3,7 +3,7 @@ layout: post
 title: "ESP-12 update to SDK v0.9.5 and AT v0.21.0.0 - noobs tutorial"
 date: 2015-01-25 22:32:01 +0100
 comments: true
-categories: ESP8266, embedded
+categories: ESP8266 embedded
 ---
 
 January 23th Espressif published new ESP IOT SDK on their forum
