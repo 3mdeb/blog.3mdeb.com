@@ -10,11 +10,11 @@ description: How to configure Qemu netorking with TFTP ?
 ---
 ## Table of contents ##
 
-* [Introduction](/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#intro)
-* [Setup tftpd](/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd)
-* [QEMU networking](/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking)
-* [Verify all components of Virtual Development Platform](/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#verify-qemu-with-tftp)
-* [What next ?](/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#what-next)
+* [Introduction](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#intro)
+* [Setup tftpd](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd)
+* [QEMU networking](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking)
+* [Verify all components of Virtual Development Platform](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#verify-qemu-with-tftp)
+* [What next ?](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#what-next)
 
 
 <a id="intro"></a>
@@ -53,7 +53,7 @@ _Note_: For Ubuntu follow instructions from
 
 <a id="qemu-networking"></a>
 ### QEMU networking ###
-_Update_: For Ubuntu users please read [this section](/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues)
+_Update_: For Ubuntu users please read [this section](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues)
 
 I mixed [this](http://toast.djw.org.uk/qemu.html) BKM and few other resources
 that I found in the net. Setting up network depend a lot on your configuration.
@@ -158,8 +158,8 @@ I had experienced few problems with my Ubuntu 12.04.
 <a id="verify-qemu-with-tftp"></a>
 #### Verify all components of Virtual Development Platform ####
 
-So right now we should have built [kernel uImage](/blog/2013/06/07/linux-kernel-for-embedded-system), [U-Boot image](/blog/2013/06/07/embedded-board-bootloader),
-[configured qemu network](/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking) and [tftp server](/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd). With all this components we can 
+So right now we should have built [kernel uImage](/2013/06/07/linux-kernel-for-embedded-system), [U-Boot image](/2013/06/07/embedded-board-bootloader),
+[configured qemu network](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#qemu-networking) and [tftp server](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#setup-tftpd). With all this components we can 
 verify if our kernel booting on emulated `versatilepb`.
 
 Run your qemu with network using U-Boot image as a kernel.
@@ -260,5 +260,5 @@ This is expected result.
 <a id="what-next"></a>
 ### What next ?###
 We happily built basic virtual development, what we need right now is some 
-[initial filesystem](/blog/2013/06/07/root-file-system-for-embedded-system).
+[initial filesystem](/2013/06/07/root-file-system-for-embedded-system).
 

@@ -22,7 +22,7 @@ The first plugin that will be installed is pathogen created by tpope and
 accessible through github. Pathogen is a vim script to manage all vim plugins 
 with ease. Below line add pathogen as submodule to our workspace repository 
 created in [previous 
-post](/blog/2012/02/19/improve-productivity-by-tracking-work/):  
+post](/2012/02/19/improve-productivity-by-tracking-work/):  
 ```
 git submodule add https://github.com/tpope/vim-pathogen.git dotfiles/vim/pathogen
 ```

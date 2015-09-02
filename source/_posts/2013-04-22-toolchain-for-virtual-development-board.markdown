@@ -10,13 +10,13 @@ description: How to create toolchain for embedded platform
 ---
 ## Table of contents ##
 
-* [Introduction](/blog/2013/06/07/toolchain-for-virtual-development-board/#intro)
-* [What is toolchain ?](/blog/2013/06/07/toolchain-for-virtual-development-board/#what-is-toolchain)
-* [Why we need cross-toolchain ?](/blog/2013/06/07/toolchain-for-virtual-development-board/#why-we-need-cross-toolchain)
-* [How to create toolchain ?](/blog/2013/06/07/toolchain-for-virtual-development-board/#how-to-create-toolchain)
-* [Emdebian path](/blog/2013/06/07/toolchain-for-virtual-development-board/#emdebian-path)
-* [Summary](/blog/2013/06/07/toolchain-for-virtual-development-board/#summary)
-* [Kudos](/blog/2013/06/07/toolchain-for-virtual-development-board/#kudos)
+* [Introduction](/2013/06/07/toolchain-for-virtual-development-board/#intro)
+* [What is toolchain ?](/2013/06/07/toolchain-for-virtual-development-board/#what-is-toolchain)
+* [Why we need cross-toolchain ?](/2013/06/07/toolchain-for-virtual-development-board/#why-we-need-cross-toolchain)
+* [How to create toolchain ?](/2013/06/07/toolchain-for-virtual-development-board/#how-to-create-toolchain)
+* [Emdebian path](/2013/06/07/toolchain-for-virtual-development-board/#emdebian-path)
+* [Summary](/2013/06/07/toolchain-for-virtual-development-board/#summary)
+* [Kudos](/2013/06/07/toolchain-for-virtual-development-board/#kudos)
 
 <a id="intro"></a>
 ### Introduction ###
@@ -53,7 +53,7 @@ EDLK` or `Emdebian`. Second we can create toolchain using special building syste
 or `Bitbake`. I will not deal with preparing toolchain in this series
 because procedure for creating it takes pretty long. So we have two options:
 
-* read my article about [Crosstool-NG arm-unknown-linux-gnueabi](/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi)
+* read my article about [Crosstool-NG arm-unknown-linux-gnueabi](/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi)
 * or install toolchain ready to use like [Emdebian](http://www.emdebian.org/)
 
 <a id="emdebian-path"></a>
@@ -124,19 +124,19 @@ That means you experience same thing, please use `Emdebian` or `Crosstool-NG` to
 _Note 2_: If you're `Ubuntu` user I have to suggest experiments with toolchain 
 build by your own, because I get really hard times trying to go through this 
 tutorial with Ubuntu/Linaro cross compiler provided in repository. Finally I 
-used [this](/blog/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi)
+used [this](/2013/04/03/yet-another-quick-build-of-arm-unknown-linux-gnueabi)
 to push things forward. U-boot compiled with Ubuntu/Linaro toolchain had problem 
 with `__udivsi3` instruction. This cause loop in initialization process.
 
 <a id="summary"></a>
 ### Summary ###
 If you take effort of creating toolchain using `Crosstool-NG` than 
-congratulations.  But for simplifying whole [__Virtual Development Board__](/blog/2013/06/07/intro-to-virtual-development-board-building)
+congratulations.  But for simplifying whole [__Virtual Development Board__](/2013/06/07/intro-to-virtual-development-board-building)
 series I will use `Emdebian` toolchain in further posts. Of course you can use 
 your brand new `Crosstool-NG` toolchain by simply remember that tools prefixes are 
 different. `Emdebian` uses `arm-linux-gnueabi-` and `Crosstool-NG` was created with 
 `arm-unknown-linux-gnueabi-`. Replace one with another every time when needed.
-In [next post](/blog/2013/06/07/embedded-board-bootloader) we will deal with 
+In [next post](/2013/06/07/embedded-board-bootloader) we will deal with 
 bootloader.
 
 <a id="kudos"></a>

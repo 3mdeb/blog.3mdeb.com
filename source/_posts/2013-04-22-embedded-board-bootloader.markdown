@@ -10,13 +10,13 @@ description: How to compile and configure U-Boot
 ---
 ## Table of contents ##
 
-* [What is bootloader ?](/blog/2013/06/07/embedded-board-bootloader/#what-is-bootloader)
-* [Why we need bootloader ?](/blog/2013/06/07/embedded-board-bootloader/#why-we-need-bootloader)
-* [Which bootloader ?](/blog/2013/06/07/embedded-board-bootloader/#which-bootloader)
-* [What is versatilepb ?](/blog/2013/06/07/embedded-board-bootloader/#what-is-versatilepb)
-* [Compilation](/blog/2013/06/07/embedded-board-bootloader/#compilation)
-* [Where to go from here ?](/blog/2013/06/07/embedded-board-bootloader/#where-to-go-from-here)
-* [Kudos](/blog/2013/06/07/embedded-board-bootloader/#kudos)
+* [What is bootloader ?](/2013/06/07/embedded-board-bootloader/#what-is-bootloader)
+* [Why we need bootloader ?](/2013/06/07/embedded-board-bootloader/#why-we-need-bootloader)
+* [Which bootloader ?](/2013/06/07/embedded-board-bootloader/#which-bootloader)
+* [What is versatilepb ?](/2013/06/07/embedded-board-bootloader/#what-is-versatilepb)
+* [Compilation](/2013/06/07/embedded-board-bootloader/#compilation)
+* [Where to go from here ?](/2013/06/07/embedded-board-bootloader/#where-to-go-from-here)
+* [Kudos](/2013/06/07/embedded-board-bootloader/#kudos)
 
 <a id="what-is-bootloader"></a>
 ### What is bootloader ? ###
@@ -91,7 +91,7 @@ _Note_: If you wonder what is the convention for cross-toolchain prefix:
 
 <a id="where-to-go-from-here"></a>
 ### Where to go from here ? ###
-[Next step](/blog/2013/06/07/linux-kernel-for-embedded-system) will be kernel compilation for our virtual `versatilepb` board.
+[Next step](/2013/06/07/linux-kernel-for-embedded-system) will be kernel compilation for our virtual `versatilepb` board.
 
 <a id="kudos"></a>
 ### Kudos ###

@@ -8,7 +8,7 @@ keywords: mutt,gpg,password
 description: Secure login with mutt
 ---
 
-This is second post of mutt tutorial series. As in the [previous post](/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account)
+This is second post of mutt tutorial series. As in the [previous post](/2012/05/13/mutt-tutorial-part-1-setup-imap-account)
 for below information I need to thank Kousik for posts about [gpg](http://nixtricks.wordpress.com/2009/10/04/introduction-to-encryption-of-files-using-gpg/)
 and [using it with mutt](http://nixtricks.wordpress.com/2010/05/05/mutt-configure-mutt-to-receive-email-via-imap-and-send-via-smtp/).
 But probably the most important to simplify this method was Fau comment [here](http://nixtricks.wordpress.com/2010/05/20/mutt-multiple-email-accounts-using-hooks/#comment-162). 
@@ -61,5 +61,5 @@ source "gpg --textmode -d ~/.passwd/mutt.gpg |"
 At the end wee need to replace all out plain text passwords (`smtp_pass` and
 `imap_pass` variables) with variables defined in out encrypted file. This
 settings will cause that mutt during start will run gpg to ask about password
-to decrypt password script file. In the [next post](/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/) 
+to decrypt password script file. In the [next post](/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e/) 
 I will discuss mutt with sidebar and how to open html files from inside mutt.

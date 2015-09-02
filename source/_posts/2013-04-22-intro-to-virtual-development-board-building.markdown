@@ -9,10 +9,10 @@ keywords: virtual development board, qemu, linux, embedded
 description: Intrudction to virtual embedded development board building
 ---
 
-* [Preface](/blog/2013/06/07/intro-to-virtual-development-board-building/#preface)
-* [First question: How to start ?](/blog/2013/06/07/intro-to-virtual-development-board-building/#first-question)
-* [Virtual Development Board - table of contents](/blog/2013/06/07/intro-to-virtual-development-board-building/#virtual-development-board)
-* [Kudos](/blog/2013/06/07/intro-to-virtual-development-board-building/#kudos)
+* [Preface](/2013/06/07/intro-to-virtual-development-board-building/#preface)
+* [First question: How to start ?](/2013/06/07/intro-to-virtual-development-board-building/#first-question)
+* [Virtual Development Board - table of contents](/2013/06/07/intro-to-virtual-development-board-building/#virtual-development-board)
+* [Kudos](/2013/06/07/intro-to-virtual-development-board-building/#kudos)
 
 <a id="preface"></a>
 ### Preface ###
@@ -52,12 +52,12 @@ I decide to divide this article on few parts because IMHO it was to big to read
 it at once. Also people interesting in particular topic won't have to scrolling `>2k`
 words post. List of all articles in this series:
 
-1. [Qemu as an environment for embedded board emulation](/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/)
-2. [Toolchain for Virtual Development Board](/blog/2013/06/07/toolchain-for-virtual-development-board/)
-3. [Embedded board bootloader](/blog/2013/06/07/embedded-board-bootloader/)
-4. [Linux kernel for embedded system](/blog/2013/06/07/linux-kernel-for-embedded-system/)
-5. [Qemu network configuration and tftp for Virtual Development Board](/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/)
-6. [Root file system for embedded system](/blog/2013/06/07/root-file-system-for-embedded-system/)
+1. [Qemu as an environment for embedded board emulation](/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation/)
+2. [Toolchain for Virtual Development Board](/2013/06/07/toolchain-for-virtual-development-board/)
+3. [Embedded board bootloader](/2013/06/07/embedded-board-bootloader/)
+4. [Linux kernel for embedded system](/2013/06/07/linux-kernel-for-embedded-system/)
+5. [Qemu network configuration and tftp for Virtual Development Board](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/)
+6. [Root file system for embedded system](/2013/06/07/root-file-system-for-embedded-system/)
 
 <a id="kudos"></a>
 ### Kudos ###
@@ -67,4 +67,4 @@ whom creating this article would not be possible. Thanks for sharing your
 knowledge. Every time when I use knowledge that found by googling I'm trying
 to stick link for further reading.
 
-####[_Enjoy!_](/blog/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation)####
+####[_Enjoy!_](/2013/06/07/qemu-as-an-environment-for-embedded-board-emulation)####

@@ -10,13 +10,13 @@ description: How to configure root file system for Virtual Development Board ?
 ---
 ## Table of contents ##
 
-* [Introduction](/blog/2013/06/07/root-file-system-for-embedded-system/#intro)
-* [Get and build BusyBox](/blog/2013/06/07/root-file-system-for-embedded-system/#get-bb)
-* [Fast and simple](/blog/2013/06/07/root-file-system-for-embedded-system/#fast-and-simple)
-* [Setting up kernel through NFS](/blog/2013/06/07/root-file-system-for-embedded-system/#setting-up-kernel-through-nfs)
-* [Verify Configuration](/blog/2013/06/07/root-file-system-for-embedded-system/#verify-configuration)
-* [Embedded filesystem tuning](/blog/2013/06/07/root-file-system-for-embedded-system/#embedded-filesystem-tuning)
-* [Summary](/blog/2013/06/07/root-file-system-for-embedded-system/#summary)
+* [Introduction](/2013/06/07/root-file-system-for-embedded-system/#intro)
+* [Get and build BusyBox](/2013/06/07/root-file-system-for-embedded-system/#get-bb)
+* [Fast and simple](/2013/06/07/root-file-system-for-embedded-system/#fast-and-simple)
+* [Setting up kernel through NFS](/2013/06/07/root-file-system-for-embedded-system/#setting-up-kernel-through-nfs)
+* [Verify Configuration](/2013/06/07/root-file-system-for-embedded-system/#verify-configuration)
+* [Embedded filesystem tuning](/2013/06/07/root-file-system-for-embedded-system/#embedded-filesystem-tuning)
+* [Summary](/2013/06/07/root-file-system-for-embedded-system/#summary)
 
 <a id="intro"></a>
 ### Introduction ###
@@ -43,7 +43,7 @@ git clone git://git.busybox.net/busybox
 <a id="fast-and-simple"></a>
 ### Fast and simple ###
 Of course make sure to use correct toolchain. I made few notes about 
-Ubuntu/Linaro toolchain in [previous post](/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues)
+Ubuntu/Linaro toolchain in [previous post](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board/#ubuntu-issues)
 ```
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- menuconfig
 ```
@@ -56,7 +56,7 @@ cd _install/
 ```
 <a id="setting-up-kernel-through-nfs"></a>
 ### Setting up kernel through NFS ###
-[Previously](/blog/2013/06/07/linux-kernel-for-embedded-system) we prepared U-Boot
+[Previously](/2013/06/07/linux-kernel-for-embedded-system) we prepared U-Boot
 kenernel image with DHCP and rootfs which we want to expose over NFS. First lets start with NFS 
 configuration:
 ```

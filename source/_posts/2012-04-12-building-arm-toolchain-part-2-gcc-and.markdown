@@ -15,7 +15,7 @@ Jim Blandy(I know i should start [here](http://www.eglibc.org/cgi-bin/viewvc.cgi
 Lot of thanks to him for it. Below I describe my experience which I gained 
 during eglibc cross compilation for `arm-unknown-linux-gnueabi` and procedure that 
 I used. Commands below contain some constants that I used in previous works. See 
-[this post.](/blog/2012/03/20/building-arm-toolchain-part-1-libs-and) 
+[this post.](/2012/03/20/building-arm-toolchain-part-1-libs-and) 
 Eglibc library and the compiler itself is built with many various parameters 
 this post is not the place to explain their meaning, please RTFM.
 

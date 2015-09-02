@@ -24,7 +24,6 @@ At the beginning I would recommend some interesting sources of information on co
 - [Documentation](http://www.coreboot.org/Documentation) - Many different types of documents, a large proportion of them are not applying to the latest version of coreboot v4, however, still has a educational value.
 
 After reviewing the above materials, you should understand the basics of
-coreboot. In the [next
-post](http://pietrushnic.github.io/blog/2012/01/06/flashrom-and-shuttle-av18e2/)
+coreboot. In the [next post](/2012/01/06/flashrom-and-shuttle-av18e2/)
 I will describe [flashrom](http://flashrom.org/) application and my experience
 with one of the old motherboard.

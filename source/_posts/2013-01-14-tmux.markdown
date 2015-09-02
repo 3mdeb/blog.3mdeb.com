@@ -8,7 +8,7 @@ keywords: tmux,productivity,termianl multiplexer,solarized,pipe-pane
 description: Basic tips and tricks about tmux
 ---
 
-As I wrote in [previous post](/blog/2013/03/19/debian-switching-to-unstable) I 
+As I wrote in [previous post](/2013/03/19/debian-switching-to-unstable) I 
 switched from GNU screen to [tmux](http://tmux.sourceforge.net). I use it for a 
 few moths and have to said that I'm really impressed by simplicity, performance
 and community support in this project. In this post I want to discuss my 

@@ -16,8 +16,8 @@ Few weeks ago after changing environment to mobile and powerful laptop I also
 changed OS to Ubuntu and mail client to Thunderbird. I have to admit that both 
 choices were mistake and I want to came back to Debian and Mutt. This post is 
 about throwing out Thunderbird and a logical continuation of Mutt tutorial (part 
-[1](/blog/2012/05/13/mutt-tutorial-part-1-setup-imap-account), [2](/blog/2012/05/13/mutt-tutorial-part-2-secure-login),
-[3](/blog/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e) and [4](/blog/2012/05/13/mutt-tutorial-part-4-html-mails-address)).
+[1](/2012/05/13/mutt-tutorial-part-1-setup-imap-account), [2](/2012/05/13/mutt-tutorial-part-2-secure-login),
+[3](/2012/05/13/mutt-tutorial-part-3-sidebar-urls-in-e) and [4](/2012/05/13/mutt-tutorial-part-4-html-mails-address)).
 
 So what was wrong with Thunderbrid ?
 
@@ -58,7 +58,7 @@ set folder = imaps://[login]@[imap_server]/ # i.e. imaps://foo@bar.pl@imap.srv.p
 * Use latest-greatest version compiled from source instead version provided 
   by distribution repository. It can help you get rid of problems like `tls_socket_read (Decryption has failed.)`.
 * Some accounts will not work with authenticating method presented in my 
-previous post about gpg ([mutt tutorial part 2](/blog/2012/05/13/mutt-tutorial-part-2-secure-login)).
+previous post about gpg ([mutt tutorial part 2](/2012/05/13/mutt-tutorial-part-2-secure-login)).
 To workaround this you can use different format of folder variable:
 ```
 set folder = imaps://[login]:[passwd_var]@[imap_server]/ # i.e. imaps://foo:$my_bar_passwd@bar.pl@imap.srv.pl/

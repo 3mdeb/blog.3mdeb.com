@@ -154,8 +154,8 @@ mean my email account configuration, my todo list, passwords and things like
 that. To store this informations I use additional private git repository and use 
 it as a submodule for my workspace configuration. I wrote post about keeping 
 configuration using git 
-[here](/blog/2012/02/19/improve-productivity-by-tracking-work) and 
-[here](/blog/2012/02/20/improve-productivity-by-tracking-work_20).
+[here](/2012/02/19/improve-productivity-by-tracking-work) and 
+[here](/2012/02/20/improve-productivity-by-tracking-work_20).
 
 ### Taskwarrior and vit ###
 I really like `taskwarrior` as a GTD tool but I was tired of writing everything 

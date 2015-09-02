@@ -10,9 +10,9 @@ description: How to configure kernel for VersatilPB emulation in Qemu ?
 ---
 ## Table of contents ##
 
-* [A little history](/blog/2013/06/07/linux-kernel-for-embedded-system/#a-little-history)
-* [Get linux and build it](/blog/2013/06/07/linux-kernel-for-embedded-system/#get-linux-and-build-it)
-* [Kudos](/blog/2013/06/07/linux-kernel-for-embedded-system/#kudos)
+* [A little history](/2013/06/07/linux-kernel-for-embedded-system/#a-little-history)
+* [Get linux and build it](/2013/06/07/linux-kernel-for-embedded-system/#get-linux-and-build-it)
+* [Kudos](/2013/06/07/linux-kernel-for-embedded-system/#kudos)
 
 <a id="a-little-history"></a>
 ### A little history ###
@@ -78,10 +78,10 @@ let's build image with U-Boot support.
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- uImage
 ```
 We have kernel. How we can provide this kernel to our development environment ?
-As I discuss in [previous post](/blog/2013/06/07/embedded-board-bootloader) we 
+As I discuss in [previous post](/2013/06/07/embedded-board-bootloader) we 
 can use bare-metal qemu, but not with uImage kernel. This is special U-Boot 
 kernel, so easiest way will be using it with bootloader. We will figure out how
-to do this in [next section](/blog/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board)
+to do this in [next section](/2013/06/07/qemu-network-configuration-and-tftp-for-virtual-development-board)
 about tftp and qemu network configuration.
 
 __TODO__: add picture of configuration in intro - vdb, link it here

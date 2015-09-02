@@ -20,7 +20,7 @@ What is toolchain ? (according to wikipedia):
 
 ### Requirements ###
 - Cross compiler, I create one using corsstool-ng and describe this process in  
-  [previous post](/blog/2012/03/14/quick-build-of-arm-unknown-linux).
+  [previous post](/2012/03/14/quick-build-of-arm-unknown-linux).
   I will use `arm-unknown-linux-gnueabi` as entry point compiler. 
 - $TARGET is defined as my destination directory:
 ```
@@ -130,4 +130,4 @@ it should show that it use library compiled previously by us:
 libz.so.1 => /home/pietrushnic/sandbox/toolchain/arm-x-tools/lib/libz.so.1 \ (0x00007f0086cc5000)
 ```
 
-This set gives us a solid base to build the compiler. However, it will be in the [next section](/blog/2012/04/12/building-arm-toolchain-part-2-gcc-and).
+This set gives us a solid base to build the compiler. However, it will be in the [next section](/2012/04/12/building-arm-toolchain-part-2-gcc-and).

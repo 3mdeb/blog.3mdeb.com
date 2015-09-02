@@ -10,7 +10,7 @@ description: How to build sample corsstool-ng toolchain
 ---
 
 So I decide to check what is going on with 
-[crosstool-ng](http://crosstool-ng.org) and refresh my [old post](/blog/2012/03/14/quick-build-of-arm-unknown-linux)
+[crosstool-ng](http://crosstool-ng.org) and refresh my [old post](/2012/03/14/quick-build-of-arm-unknown-linux)
 about building `arm-unknown-linux-gnueabi` toolchain. Last post was pretty 
 popular, so definitely this is direction I should follow :). I will not repeat 
 myself, so if you encounter any problems please check last post, section with 
@@ -93,7 +93,7 @@ Building process takes a while so make coffee or anything else to drink :).
 
 ### Known problems ###
 
-I encounter few different problems than during [previous building](/blog/2012/03/14/quick-build-of-arm-unknown-linux).
+I encounter few different problems than during [previous building](/2012/03/14/quick-build-of-arm-unknown-linux).
 
 #### Missing expat library ####
 

@@ -10,4 +10,4 @@ categories: blogger
 2. Consider Google Analytics
 3. Find nice backgrounds (probably should be similar to my favourite graphics)
 4. Tune in fonts, blog layout, labels, tags, widgets etc.
-5. Continue [here](/blog/2012/01/03/why-i-decided-to-write-blog/)
+5. Continue [here](/2012/01/03/why-i-decided-to-write-blog/)

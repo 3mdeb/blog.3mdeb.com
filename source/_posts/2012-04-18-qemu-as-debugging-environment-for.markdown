@@ -10,7 +10,7 @@ description: How to debug coreboot under qemu
 ---
 
     
-In [previous post](/blog/2012/03/12/debugging-coreboot-in-qemu-enviroment) 
+In [previous post](/2012/03/12/debugging-coreboot-in-qemu-enviroment) 
 `coreboot` was configured and installed. Here we try to establish good debugging 
 environment for it. To create a good emulated environment to debug, research and 
 learn `coreboot` few tricks are required. First of all we need to know how to run 
