@@ -109,7 +109,7 @@ Add line like this:
 Create direcrtory for root filesystems:
 
 ```
-sudo mkdir -p /srv/nfs/ct/debian_stable
+sudo mkdir -p /srv/nfs/ct
 ```
 
 Restart NFS:
