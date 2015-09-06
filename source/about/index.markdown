@@ -9,10 +9,15 @@ footer: true
 
 {% img left /assets/images/photo.jpg  220 100 Me %}
 
-Hi,
-my name is Piotr Król I'm a firmware and embedded system developer
-currently working for Intel Technology Poland. I'm freedom and liberty
-enthusiast interested in Linux and low level hacking.
+Hello,
+I'm Piotr Król owner of 3mdeb, which is Poland-based brand dedicated to
+help small companies change their idea into products by recommending
+technology, building prototypes and developing required software. I'm a
+Embedded Systems Consultant with over 7 years of professional experience. I was
+involved in firmware development and low level programming for microcomputer
+(x86, ARM) and embedded (ARM, AVR, MSP430) CPU architectures. I'm looking for
+challenging projects in area of embedded systems, general purpose low level
+programming and reverse engineering.
 
 More about me you can find on social media sites.
 
@@ -23,5 +28,6 @@ More about me you can find on social media sites.
 [{% img social-icon /assets/icons/twitter-logo-square.png 64 64 twitter %}](https://twitter.com/pietrushnic)
 [{% img social-icon /assets/icons/you-tube2-s.png 64 64 youtube %}](https://www.youtube.com/user/pietrushnic)
 
-_Disclaimer_: Of course, all opinions on this blog are my own not my employer.
-
+If you need professional support I'm available [directly](http://3mdeb.com/#contact) or
+over [Upwork](https://www.upwork.com/o/profiles/users/_~01f19997d41c4867dc/)
+and other freelance portals.
