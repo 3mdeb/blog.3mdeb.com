@@ -333,8 +333,8 @@ sudo dd if=u-boot-sunxi-with-spl.bin of=${card} bs=1024 seek=8
 Format and mount boot partition:
 
 ```
-sudo mkfs.vfat ${card}
-sudo mount ${card} /mnt
+sudo mkfs.vfat ${card}1
+sudo mount ${card}1 /mnt
 ```
 
 Below script add flexibility to booting process by allowing user to replace on
