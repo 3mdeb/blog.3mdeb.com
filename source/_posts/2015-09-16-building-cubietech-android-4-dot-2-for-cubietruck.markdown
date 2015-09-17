@@ -30,13 +30,14 @@ git clone https://bitbucket.org/cubietech/a20-android4.2_android.git
 Based on other [instruction](http://docs.cubieboard.org/tutorials/ct1/installation/cb3_a20-compiling_android_image_for_cubietruck) that I hit previously (but download link was broken) I run build process:
 
 ```
+cd lichee
 ./build.sh -p sun7i_android
 ```
 
 ##Lichee compilation error
 
-World would too beautiful if everything would work out of the box, so I hit this very informative build error:
-
+World would be too beautiful if everything would work right out of the box, so
+I hit this very informative build error:
 
 ```
 make: Entering directory '/home/pietrushnic/storage/wdc/projects/3mdeb/cubietruck/cubietruck_android/a20-android4.2_lichee/linux-3.4/modules/mali'
@@ -62,10 +63,11 @@ make: Leaving directory '/home/pietrushnic/storage/wdc/projects/3mdeb/cubietruck
 ERROR: build kernel Failed
 ```
 
-After some digging I managed to narrow down issue to very clever code that to
-make command injected stings, which generate above mess. Without thinking much
-about fix I just changed incorrectly generated define to driver version. This
-string will be presented in UMP modinfo. Patch wich fix above looks like that:
+After some digging I managed to narrow down issue to piece of smart code, that
+injected version string through define, which generated above mess. Without
+thinking much about fix I just changed incorrectly generated define to driver
+version string. This string will be presented in UMP modinfo. Patch which fix
+above looks like that:
 
 ```
 diff --git a/linux-3.4/modules/mali/DX910-SW-99002-r3p2-01rel2/driver/src/devicedrv/ump/Kbuild b/linux-3.4/modules/mali/DX910-SW-99002-r3p2-01rel2/driver/src/devicedrv/ump/Kbuild
@@ -90,6 +92,10 @@ index 042745d0c757..608a7ba97f95 100755
 
 After above change repeated build command finish without errors.
 
+```
+./build.sh -p sun7i_android
+```
+
 ##Android
 
 I assume you directory layout looks like this:
@@ -100,8 +106,8 @@ I assume you directory layout looks like this:
 └── lichee
 ```
 
-Go to Android directory and source environment setup. Android do not like if
-you use shell different then bash, so change you shell if you using something
+Go to Android directory and source environment setup script. Android do not
+like shells other then bash, so change you shell if you using something
 different:
 
 ```
