@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Building Cubietech Android 4.2 for Cubietruck"
+title: "Building Android 4.2 LiveSuit image for Cubietruck (Allwinner A20)"
 date: 2015-09-16 23:02:57 +0200
 comments: true
 categories: android,cubietruck,linux,embedded
@@ -248,7 +248,7 @@ In file included from frameworks/native/include/utils/RefBase.h:24:0,
 This mean that you have missing dependencies. On Debian you can fix this with:
 
 ```
-sudo apt-get install bison g++-multilib git gperf libxml2-utils make python-networkx zip
+sudo apt-get install bison g++-multilib git gperf libxml2-utils make python-networkx zip xsltproc
 ```
 
 After all above fixes running make again should build the image:
@@ -256,3 +256,54 @@ After all above fixes running make again should build the image:
 ```
 make -j$(nproc)
 ```
+
+It took some time, so you can go for coffee. Final messaged for passed build should look like this:
+
+```
+Running:  simg2img out/target/product/sugar-cubietruck/obj/PACKAGING/systemimage_intermediates/system.img out/target/product/sugar-cubietruck/obj/PACKAGING/systemimage_intermediates/unsparse_system.img
+Running:  e2fsck -f -n out/target/product/sugar-cubietruck/obj/PACKAGING/systemimage_intermediates/unsparse_system.img
+e2fsck 1.41.14 (22-Dec-2010)
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+out/target/product/sugar-cubietruck/obj/PACKAGING/systemimage_intermediates/unsparse_system.img: 1506/32768 files (0.0% non-contiguous), 100004/131072 blocks
+Install system fs image: out/target/product/sugar-cubietruck/system.img
+out/target/product/sugar-cubietruck/system.img+out/target/product/sugar-cubietruck/obj/PACKAGING/recovery_patch_intermediates/recovery_from_boot.p maxsize=548110464 blocksize=4224 total=403588136 reserve=5537664
+```
+
+###Pack image
+
+```
+pack
+```
+
+In output it will tell you where your image is:
+
+```
+----------image is at----------
+
+/home/pietrushnic/storage/wdc/projects/3mdeb/cubietruck/cubietruck_android/lichee/tools/pack/sun7i_android_sugar-cubietruck.img
+
+pack finish
+/home/pietrushnic/projects/3mdeb/cubietruck/cubietruck_android/a20-android4.2_android
+```
+
+##Image installation
+
+Image can be installed using LiveSuit. Flashing instructions can be found on [sunxi wiki](http://linux-sunxi.org/LiveSuit).
+
+##Summary
+
+<a class="fancybox" rel="group" href="/assets/images/ct-android-1.jpg"><img src="/assets/images/ct-android-1.jpg" alt="" height="400" width="300" align="middle"/></a>
+
+As you can see Android boots to initial screen and it looks like we have
+working prcedure for building Cubietech Android SDK. This gives good ground for
+future experimentation.
+
+Hopefully above instructions works for you and will not outdate soon. If you
+found any problems/errors please let me know in comment. I you think content
+can be useful to others please share.
+
+Thanks for reading.
