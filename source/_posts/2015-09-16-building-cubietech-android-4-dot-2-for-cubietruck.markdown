@@ -3,7 +3,7 @@ layout: post
 title: "Building Android 4.2 LiveSuit image for Cubietruck (Allwinner A20)"
 date: 2015-09-16 23:02:57 +0200
 comments: true
-categories: android,cubietruck,linux,embedded
+categories: android cubietruck linux embedded
 ---
 
 Treating A20 boards like outdated piece of HW by vendors makes building Android
