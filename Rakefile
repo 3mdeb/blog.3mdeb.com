@@ -400,13 +400,13 @@ task :list do
 end
 
 ## -- LFTP Deploy config -- ##
-ftp_user = "piotr.krol@blog.3mdeb.com"
-ftp_server = "serwer1539010.home.pl"
-ftp_target = "/blog"
-deploy_default = "lftp"
-
-desc "Deploy website via LFTP"
-task :lftp do
-  puts "## Deploying website via LFTP"
-  ok_failed system("lftp -e 'mirror -R --ignore-time --delete -v #{public_dir} #{ftp_target}; bye' -u #{ftp_user} #{ftp_server}")
-end
+# ftp_user = "piotr.krol@blog.3mdeb.com"
+# ftp_server = "serwer1539010.home.pl"
+# ftp_target = "/blog"
+# deploy_default = "lftp"
+# 
+# desc "Deploy website via LFTP"
+# task :lftp do
+#   puts "## Deploying website via LFTP"
+#   ok_failed system("lftp -e 'mirror -R --ignore-time --delete -v #{public_dir} #{ftp_target}; bye' -u #{ftp_user} #{ftp_server}")
+# end
