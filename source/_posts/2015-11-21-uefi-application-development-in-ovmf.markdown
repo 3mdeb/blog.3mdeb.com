@@ -76,7 +76,7 @@ because of that we can built it as follows:
 
 ```
 source edksetup.sh
-build -a X64 -p MdeModulePkg/MdeModulePkg.dsc -n$(nproc)
+build -a X64 -p MdeModulePkg/MdeModulePkg.dsc -t GCC49 -n$(nproc)
 ```
 
 Let's put it into `app.disk`:
