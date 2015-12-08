@@ -18,6 +18,10 @@ It take some time to try PlatformIO using real hardware. Luckily on my desk
 there are 2 supported boards gathering dust, which I would like to try in this
 post.
 
+<a class="fancybox" rel="group" href="/assets/images/msp430.jpg"><img src="/assets/images/msp430.jpg" alt="" /></a>
+
+`MSP-EXP430F5529LP` on the left and `MSP-EXP430FR5969` on the right.
+
 ## Installation on Debian
 
 I highly recommend using
