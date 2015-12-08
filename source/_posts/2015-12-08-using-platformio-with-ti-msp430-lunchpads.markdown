@@ -7,12 +7,16 @@ categories: msp430 embedded ti platformio
 ---
 
 [PlatformIO](http://platformio.org/) is very interesting project that aim to
-solve very important problem of configuring development environment for
-embedded systems. Recent years we have explosion of bootstraping applications
-(ie.vagrant, puppet). Most of them seems to follow git-like command line
-interface and getting a lot of attention from programmers community. PlatformIO
-is promising project for all Embedded Software developers who in the era of IoT
-came from Linux systems.
+solve very important problem of configuring deployment environment for embedded
+systems. IMHO good approach is to focus on modularity (various IDE can be used,
+even Vim) and simplicity (in best case 2 command should be enough to deploy
+first code).
+
+Recent years we have explosion of bootstraping applications (ie.vagrant,
+puppet). Most of them seems to follow git-like command line interface and
+getting a lot of attention from programmers community. PlatformIO is promising
+project for all Embedded Software developers who in the era of IoT came from
+Linux systems.
 
 It take some time to try PlatformIO using real hardware. Luckily on my desk
 there are 2 supported boards gathering dust, which I would like to try in this
@@ -35,8 +39,7 @@ pip install -U pip setuptools
 pip install -U platformio
 ```
 
-My 2 boards that I would like to try are: `MSP-EXP430FR5969` and `MSP-EXP430F5529LP`
-First question is what configuration I should use ?
+What configuration I should use for my boards ?
 
 ```
 [13:38:34] pietrushnic:msp430 $ platformio boards|grep 5969
@@ -46,9 +49,8 @@ lpmsp430f5529         msp430f5529    16Mhz     128Kb   1Kb    TI LaunchPad w/ ms
 lpmsp430f5529_25      msp430f5529    25Mhz     128Kb   1Kb    TI LaunchPad w/ msp430f5529 (25MHz)
 ```
 
-So it looks like `5529` have 2 flavours. It looks like they just differ in CPU
-frequency configuration. 16MHz option is for backward compatibility. Let's use
-more powerful 25MHz config.
+So it looks like `5529` have 2 flavours. According to `Energia` 16MHz option is
+for backward compatibility. Let's use recent 25MHz config.
 
 ```
 mkdir msp430
@@ -56,15 +58,15 @@ cd msp430
 platformio init --board=lpmsp430fr5969 --board=lpmsp430f5529_25
 ```
 
-First question is about auto-uploading successfully built project, so I
-answered y. Then PlatformIO inform about creating some directories and
-`platformio.ini` file. After confirming toolchain downloading starts.
+PlatformIO first ask if we want auto-uploading successfully built project, so I
+answered y. Then inform about creating some directories and
+`platformio.ini` file. After confirming toolchain, downloading starts.
 
 ## Problems with MSP430F5529LP
 
 ### Lack of main.cpp
 
-If you run platformio without any source code in `src` directory you will get error message like this:
+If you run PlatformIO without any source code in `src` directory you will get error message like this:
 
 ```
 .pioenvs/lpmsp430f5529_25/libFrameworkEnergia.a(main.o): In function `main':
@@ -79,7 +81,7 @@ Of course adding main.cpp to src directory fix this issue. As sample code you ma
 ### libmsp430.so: cannot open shared object file
 
 Next problem is with `libmsp430.so` which is not visible by `mspdebug`, but was
-installed by platformio in
+installed by PlatformIO in
 `$HOME/.platformio/packages/toolchain-timsp430/bin/libmsp430.so`.
 
 Running:
@@ -88,14 +90,19 @@ Running:
 export LD_LIBRARY_PATH=$HOME/.platformio/packages/toolchain-timsp430/bin/
 ```
 
-before `platformio` fix problem.
+before calling `platformio` fix problem. For some users even better would be to
+make `libmsp430.so` accessible system wide:
+
+```
+sudo cp $HOME/.platformio/packages/toolchain-timsp430/bin/libmsp430.so /usr/lib
+```
 
 ### tilib: device initialization failed
 
 If you didn't use your MSP430 for a while there can be problem like this:
 
 ```
-/home/pietrushnic/.platformio/packages/tool-mspdebug/mspdebug tilib --force-reset "prog .pioenvs/lpmsp430f5529_25/firmware.hex"
+$HOME/.platformio/packages/tool-mspdebug/mspdebug tilib --force-reset "prog .pioenvs/lpmsp430f5529_25/firmware.hex"
 MSPDebug version 0.20 - debugging tool for MSP430 MCUs
 Copyright (C) 2009-2012 Daniel Beer <dlbeer@gmail.com>
 This is free software; see the source for copying conditions.  There is NO
@@ -114,7 +121,7 @@ scons: *** [upload] Error 255
 Fix for that according to error log should be like this:
 
 ```
-/home/pietrushnic/.platformio/packages/tool-mspdebug/mspdebug tilib --allow-fw-update
+$HOME/.platformio/packages/tool-mspdebug/mspdebug tilib --allow-fw-update
 ```
 
 But this can cause additional problems that I reported
@@ -151,8 +158,10 @@ tilib: MSP430_OpenDevice: Unknown device (error = 5)
 tilib: device initialization failed
 ```
 
-This probably means that default `libmsp430.so` downloaded probably from
-`Energia` project doesn't support `FR5969`. So I tried build `libmsp430.so` by
+### Building libmsp430.so
+
+This probably means that default `libmsp430.so`, downloaded probably from
+`Energia` project, doesn't support `FR5969`. So I tried build `libmsp430.so` by
 myself:
 
 ```
@@ -243,7 +252,6 @@ If you see blinking green `LED2` then everything works as expected.
 
 ## Summary
 
-Congratulation you survive to the end of this pretty long tutorial. I hope that
-this post was useful for you and you learn some things. If you feel that this
-knowledge was valuable please share, if you experienced some other problems
-please let me know, so I can improve content of this post.
+I hope that this post was useful for you and you learn some things. If you feel
+that this knowledge was valuable please share, if you experienced some other
+problems please let me know, so I can improve content of this post.
