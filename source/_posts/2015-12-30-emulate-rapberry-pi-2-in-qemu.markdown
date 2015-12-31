@@ -50,3 +50,15 @@ mkdir 2015-11-21-raspbian-boot
 cp tmp/kernel7.img 2015-11-21-raspbian-boot
 cp tmp/bcm2709-rpi-2-b.dtb 2015-11-21-raspbian-boot
 ```
+
+TBD
+
+## Debugging Raspbian in QEMU
+
+```
+qemu-system-arm -M raspi2 -kernel 2015-11-21-raspbian-boot/kernel7.img -sd \
+2015-11-21-raspbian-jessie.img -append "rw earlyprintk loglevel=8 \
+console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2" -dtb \
+2015-11-21-raspbian-boot/bcm2709-rpi-2-b.dtb -usbdevice mouse -usbdevice \
+keyboard -serial stdio -s -S
+```
