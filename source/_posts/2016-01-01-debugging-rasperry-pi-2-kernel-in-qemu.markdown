@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Debugging Rasperry Pi 2 kernel in QEMU"
+date: 2016-01-01 23:44:48 +0100
+comments: true
+categories: embedded linux qemu
+---
+
 ## Debugging Raspbian in QEMU
 
 Very useful notes about Linux kernel debugging using GDB and QEMU can be found
@@ -6,10 +14,13 @@ Very useful notes about Linux kernel debugging using GDB and QEMU can be found
 ### Obtain toolchain
 
 Raspberry Pi community provide recommended toolchain in GitHub repository.
+Unfortunately Linaro toolchains `gcc-linaro-arm-linux-gnueabihf-raspbian*` were
+not compiled with Python support, so if you plan to use Python during debugging
+you should use `arm-bcm2708hardfp-linux-gnueabi-`.
 
 ```
 git clone https://github.com/raspberrypi/tools.git
-export PATH=${PWD}/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin:${PATH}
+export PATH=${PWD}/tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/bin:${PATH}
 ```
 
 ### Obtain Linux kernel config
@@ -90,6 +101,10 @@ ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make -j$(nproc) zImage dtbs
 ```
 
 ### Execute QEMU
+
+Note that some changes to root filesystem have to be made to boot Raspbian. You
+can read about it in my previous
+[post](http://blog.3mdeb.com/2015/12/30/emulate-rapberry-pi-2-in-qemu/).
 
 ```
 qemu-system-arm -M raspi2 -kernel arch/arm/boot/zImage \
