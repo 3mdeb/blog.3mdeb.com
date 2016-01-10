@@ -3,7 +3,7 @@ layout: post
 title: "Power on of ESP-12 (ESP8266)"
 date: 2015-01-24 00:25:05 +0100
 comments: true
-categories: ESP8266,embedded
+categories: esp8266 embedded
 ---
 
 ESP8266 is a SoC made by [Espressif](https://espressif.com). For last couple of
