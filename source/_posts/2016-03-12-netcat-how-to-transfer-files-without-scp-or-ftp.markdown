@@ -11,12 +11,13 @@ Distribution used on this hardware was very limited there was no developers
 tools, file transfer applications (like scp, ftp or even tftp) or communication
 clients like ssh. I had to deploy some firmware files to the system without
 modifying it. This was i386 machine. Of course I could compile something and
-add this software usb stick, but what if I would not have direct access to
-hardware ?
+add this software using usb stick or other stoarge, but what if I would not
+have direct access to hardware ? Also for development and testing purposes it
+would be much easier to use network transfer, then running with usb stick.
 
 When looking for answer I found
 [this](http://stackoverflow.com/questions/17797758/using-nc-to-transfer-large-file).
-I heard before about netcat, but now first time saw how it can be used as file
+I heard before about netcat, but more in context of debugging then using it as file
 transfer application. Luckily `nc` as very small tool is in almost all
 distributions and it was also available in my small custom distro.
 
