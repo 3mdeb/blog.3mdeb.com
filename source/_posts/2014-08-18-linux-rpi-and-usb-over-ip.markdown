@@ -3,7 +3,7 @@ layout: post
 title: "Linux, RPi and USB over IP"
 date: 2014-08-18 21:26:37 +0200
 comments: true
-categories: raspberry-pi, linux, usb
+categories: raspberrypi linux usb
 ---
 
 Trying to google 'USB over IP' doesn't give much except some business web pages that give

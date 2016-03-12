@@ -3,7 +3,7 @@ layout: post
 title: "Raspberry Pi kernel repository aggregating patches for Linux mainline"
 date: 2014-10-15 23:23:11 +0200
 comments: true
-categories: rpi, linux
+categories: raspberrypi linux
 ---
 
 Since several months I'm trying to find my way to embedded Linux programming.
