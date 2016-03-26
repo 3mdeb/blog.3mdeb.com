@@ -3,14 +3,14 @@ layout: post
 title: "PC Engines APU2 netboot Debian installation"
 date: 2016-03-26 14:27:38 +0100
 comments: true
-categories: debian embedded coreboot apu2
+categories: debian embedded coreboot apu2 raspberrypi
 ---
 
 In [previous post](2016/03/12/pxe-server-with-raspberry-pi-1/) I described how
 to setup PXE server and boot Debian installer using it. I mentioned that
-provided setup is limited and some extensive configuration is needed to make is
+provided setup is limited and some extensive configuration is needed to make it
 useful for real world example. Since that time I learned that there is
-chainloading feature in iPXE, which give ability to use arbitrary TFTP server
+[chain command](http://ipxe.org/cmd/chain) in iPXE, which give ability to use arbitrary TFTP server
 as boot file source.
 
 ## Using RPi PXE server
@@ -20,9 +20,9 @@ to something like that:
 
 <a class="fancybox" rel="group" href="/assets/images/pxe_srv_apu2.png"><img src="/assets/images/pxe_srv_apu2.png" alt=""/></a>
 
-In short Raspberry Pi contain out PXE server configured in previous post.
-TL-MR3420 is out DHCP server and PC Engines APU2A4 is out target box where we
-want to install Debian and confiure Xen.
+In short Raspberry Pi contain our PXE server configured in previous post.
+TL-MR3420 is our DHCP server and PC Engines APU2A4 is our target box where we
+want to install Debian.
 
 We need to change `eth0` configuration, so our PXE server will get IP
 automatically from DHCP: 
@@ -38,12 +38,12 @@ Also disable `udhcpd`:
 sudo update-rc.d udhcpd disable
 ```
 
-Then reboot.
+Then reboot PXE server.
 
 ## PXE booting
 
-First enter iPXE by pressing `<Ctrl-B>` during boot. You should see something
-like this:
+First enter iPXE on APU2 board by pressing `<Ctrl-B>` during boot. You should
+see something like that:
 
 ```
 iPXE (http://ipxe.org) 00:00.0 C100 PCI2.10 PnP PMMpmm call arg1=1
