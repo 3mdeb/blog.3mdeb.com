@@ -125,8 +125,8 @@ running installer.
 ## Debian installation
 
 This is typical installation except it happen over serial. As a storage I used
-16GB USB stick with guided partitioning. At the end I also installed GRUB in
-stick MBR.
+16GB USB stick with guided partitioning. At the end I also installed GRUB on
+USB stick MBR.
 
 Be patient if serial console will be blank for some time it happen when
 installing over network.
@@ -152,7 +152,7 @@ pietrushnic@Maedhros:~$
 
 ## Summary
 
-Now when you have Debian installed on your system you can thing about various
+Now when you have Debian installed on your system you can think about various
 improvements. For example:
 
 * Xen installation
