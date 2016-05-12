@@ -51,7 +51,7 @@ Device                          Boot  Start     End Sectors  Size Id Type
 ```
 
 Check start of `W95 FAT32 (LBA)` partition. It is `8192`. Sector size is `512`.
-So calculate offset in bytes `8192 * 63 = 4194304`.
+So calculate offset in bytes `8192 * 512 = 4194304`.
 
 ```
 mkdir tmp
