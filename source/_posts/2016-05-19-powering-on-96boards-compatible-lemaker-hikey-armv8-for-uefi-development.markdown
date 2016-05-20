@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Powering on 96boards compatible LeMaker HiKey (ARMv8) for UEFI development"
+title: "Powering on LeMaker HiKey (ARMv8)"
 date: 2016-05-19 00:04:06 +0200
 comments: true
 categories: embedded arm uefi
@@ -36,14 +36,27 @@ UEFI was LeMaker HiKey.
 
 ### Why 96boards ?
 
-* this is open specification
+* this is open specification, so always good to support
 * its driven by Linaro, which is in my opinion do a lot of great work for whole
   community
 * its standardized way with big players behind, so knowing it and having in
   portfolio cannot demage Embedded Systems Consultant career
+* I assume this approach in long term will have better return on investment,
+  then custom quick shots made by not-so-community-friendly vendors
 
+## Power supply
 
-## 1.8V UART problem
+Expected power input is 8-18V. I understand the need for higher and wider
+voltage range, but this is for sure not standard in makers/hackers community. I
+have ton of 5V/2A power supplies in stock, also for 5V I can use my active USB
+hub or even PC port for not power hungry devices.
+
+Reasoning behind this choice can be found [here](https://www.96boards.org/products/accessories/power/).
+
+Finally to not additional USD to my ARMv8 development environment I used my
+Zhaoxin DC power supply and unused plug from universal power supply.
+
+## 1.8V UART
 
 I finally get my board, but to my surprise realized that it use 1.8V level for
 UART. Cables for that level are built with FT230XS or similar chips, which cost
@@ -59,3 +72,45 @@ which is out of stock for 5 months!
 While searching for alternatives I found [this TI converter on SparkFun page](https://www.sparkfun.com/products/11771).
 Luckily availability of various SparkFun distributors made delivery possible in
 less then 48h.
+
+After wiring up with TXB0104 everything seems to work ok.
+
+<a class="fancybox" rel="group" href="/assets/images/hikey_setup.png"><img src="/assets/images/hikey_setup.png" alt="" /></a>
+
+Note that board use 2 UARTs. `UART0` for bootloader development. This is
+connector with not typical pitch (2.0mm) and `UART3` as debug port for Linux
+kernel output.
+
+The only problem with wiring is that using one TI chip you can only have one
+reference Vcc for USB to serial UART, so you have to select one of them as
+reference and assume that second will have very similar level without much
+noise. I understand this is electronically probably not perfect, but I moved
+forward with that budget solution.
+
+## Booting OS
+
+Board is pre-installed with Debian, so +1 for choice. It boots smooth and you
+can also see bootloader logs.
+
+<a class="fancybox" rel="group" href="/assets/images/hikey_screen.png"><img src="/assets/images/hikey_screen.png" alt="" /></a>
+
+On top there is bootloader on bottom booted Debian. Bootloader logs came from
+[OP-TEE Trusted OS](https://github.com/OP-TEE/optee_os),
+
+
+## Summary
+
+Setting up hardware to boot and having some debug output is initial step to
+start development. Once this point is passed I can start to deal with UEFI
+and(or) ARM Trusted Firmware (ATF). It is important to note that documentation on
+[GitHub](https://github.com/96boards/documentation) and in [Hardware User Manual](https://www.96boards.org/wp-content/uploads/2015/02/HiKey_User_Guide_Rev0.2.pdf)
+is very good and huge kudos should go to Linaro people for putting so much
+effort into that.
+
+Things that I would like to write about in future posts:
+
+* UEFI setup for HiKey
+* UEFI capabilities and limitation
+* ATF development
+
+As always please share if you think content maybe valuable to other.
