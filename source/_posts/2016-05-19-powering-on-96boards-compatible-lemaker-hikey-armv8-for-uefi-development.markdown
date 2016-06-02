@@ -21,7 +21,7 @@ be studied by every aspiring Embedded Systems adept.
 ## Choosing ARMv8 dev board
 
 First problem was to choose development board. Probably simpler solution is to
-use platforms like [Raspberru Pi 3](https://www.raspberrypi.org/magpi/raspberry-pi-3-specs-benchmarks/) which
+use platforms like [Raspberry Pi 3](https://www.raspberrypi.org/magpi/raspberry-pi-3-specs-benchmarks/) which
 features Broadcom Cortex-A53 or very interesting alternative like
 [PINE64](https://www.pine64.com/product#intro) with Allwinner flavour.
 
