@@ -91,3 +91,14 @@ sudo apt-get install nfs-kernel-server
 ```
 /home/pietrushnic/storage/rootfs/sid-rootfs-20160615  *(rw,sync,no_subtree_check)
 ```
+
+## Dockerized development environment
+
+Thanks to containers we are able to pack everything in script and build image
+with server that we want. I thought that this kind of setup should be already
+available and tried various solutions. First was [Jérôme Petazzoni pxe](https://github.com/jpetazzo/pxe).
+
+### jpetazzo/pxe
+
+I followed `Quick start` from README and after building and installing required
+software (ie. `bridge-utils`).
