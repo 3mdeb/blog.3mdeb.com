@@ -40,16 +40,24 @@ provided in that form.
 In general customer should receive document based on which business decision
 can be made.
 
-* Brief consultant experience
-* Risk analysis
+* Brief project description
+* Feasibility and risk analysis
 * Plan of action
 * Time estimates
 * Additional cost
 
 Usually those sections overlap in some way.
 
-### Brief consultant experience
+### Brief project description
 
-IMO this should be first section of every proposal. In this section consultant
-provide information about his/her expertise in project area. This section
-should be short and contain biggest achievement
+Section should in general describe consultant's understanding of project and
+goals that have to be achieved. It is good to provide requirements or features
+as list of bullet points in this point to build correct ground for whole
+document.
+
+This section should present minimal information that describe project.
+
+### Feasibility and risk analysis
+
+This section is core of whole document. It contain information about features
+and how those can be implemented.
