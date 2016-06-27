@@ -95,10 +95,16 @@ sudo apt-get install nfs-kernel-server
 ## Dockerized development environment
 
 Thanks to containers we are able to pack everything in script and build image
-with server that we want. I thought that this kind of setup should be already
-available and tried various solutions. First was [Jérôme Petazzoni pxe](https://github.com/jpetazzo/pxe).
+with server that we want. What are the requirements for this kind of setup ?
 
-### jpetazzo/pxe
+* container should expose TFTP server
+* pxelinux configuration should expose various operating systems (Debian sid,
+  stretch, jessie, Xen, pfSense etc.)
+* there should be booting as well as installation option
+* there should be support for Linux kernel development at least in Debian
 
-I followed `Quick start` from README and after building and installing required
-software (ie. `bridge-utils`).
+### Preapre Voyage Linux for PXE boot
+
+
+
+
