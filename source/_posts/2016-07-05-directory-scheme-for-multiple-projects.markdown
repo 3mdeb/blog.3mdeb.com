@@ -9,9 +9,9 @@ categories: productivity
 How to keep clean organization while working on multiple projects ?
 -------------------------------------------------------------------
 
-Answer to this question is dependant on workflow and nature of projects itself.
+Answer to this question depends on workflow and nature of projects itself.
 
-Below I would like to present my approach to managing sanity while having
+Below I would like to present my approach to manage sanity while having
 multiple projects going simultaneously. This would be Embedded Systems
 Consultant view and will mostly show directory organization, but I think it can
 be adopted to other programmers workflow.
@@ -21,9 +21,11 @@ Directory organization
 
 Usually I have up to 10 projects from external customer running and ~3
 internal. Obviously better organization minimize overhead related to searching
-and wondering where to put recently obtained file.
+and wondering where to put recently obtained file. During last 3 years I
+collected over 60 projects for 45 customers.
 
-My directory structure looks like that:
+Based on that experience I created directory structure that work pretty good
+for above numbers. Scheme looks like this:
 
 ```
 ${HOME}/projects/<year>/<customer>/<project-name>/{logs,images,releases,src}
@@ -37,8 +39,8 @@ think making it `<customer>/<year>` improve things, because then I would have
 tens of even hundred of directories in `projects`. Splitting it by year makes
 searching focused. For now, when I deal with project longer then year I just
 copy relevant part from previous year. By relevant part I mean something that I
-really have to use, not one time reference. This can be for example SD card
-image with one of releases.
+really have to use, not one time reference. This can be for example particular
+SD card image that is still used as development base.
 
 ## Customer
 
@@ -56,7 +58,7 @@ unknown.
 ## Project name
 
 Usually prototype projects doesn't have marketing name, but project can be
-called by SoC/CPU/dev board + main feature ie. a20_camera, bbb_canbus_reader
+called by SoC/CPU/dev board + main feature ie. `a20_camera`, `bbb_canbus_reader`
 etc.
 
 What most embedded projects needs ?
@@ -72,7 +74,7 @@ After couple years I found that couple thing are typically needed:
   images and ISO images of distros used in project, sometimes you may end up
   keeping multiple instance of the same OS in various projects, but with 1TB
   disc this should not be big concern, you can always search for duplicates,
-  knowing where you OS is and avoiding downloading it again can save some time
+  knowing where your OS is and avoiding downloading it again can save some time
 
 * `releases` - this directory contain all releases, developers usually use work
   in progress code, but customer receive release version of deliverables and
