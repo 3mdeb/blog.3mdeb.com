@@ -13,19 +13,20 @@ Answer to this question is dependant on workflow and nature of projects itself.
 
 Below I would like to present my approach to managing sanity while having
 multiple projects going simultaneously. This would be Embedded Systems
-Consultant view, but I think it can be adapted to other programmers workflow.
+Consultant view and will mostly show directory organization, but I think it can
+be adopted to other programmers workflow.
 
 Directory organization
 ----------------------
 
 Usually I have up to 10 projects from external customer running and ~3
-internal. Obviously better organization minimize overhead related with
-searching and wondering where to put recently obtained file.
+internal. Obviously better organization minimize overhead related to searching
+and wondering where to put recently obtained file.
 
 My directory structure looks like that:
 
 ```
-${HOME}/projects/<year>/<customer>/<project-name>
+${HOME}/projects/<year>/<customer>/<project-name>/{logs,images,releases,src}
 ```
 
 
@@ -73,6 +74,48 @@ After couple years I found that couple thing are typically needed:
   disc this should not be big concern, you can always search for duplicates,
   knowing where you OS is and avoiding downloading it again can save some time
 
-* `releases` - 
+* `releases` - this directory contain all releases, developers usually use work
+  in progress code, but customer receive release version of deliverables and
+  usually will report bugs against particular release version
 
+* `src` - this directory keep all source code related to project, those are
+  mostly git repositories cloned inside directory
 
+Sample directory structure may look like that:
+
+```
+.
+└── projects
+    ├── 2015
+    │   └── acme1
+    │       ├── foo1
+    │       │   ├── images
+    │       │   ├── logs
+    │       │   ├── releases
+    │       │   └── src
+    │       └── foo2
+    │           ├── images
+    │           ├── logs
+    │           ├── releases
+    │           └── src
+    └── 2016
+        └── acme2
+            ├── foo1
+            │   ├── images
+            │   ├── logs
+            │   ├── releases
+            │   └── src
+            └── foo2
+                ├── images
+                ├── logs
+                ├── releases
+                └── src
+```
+
+Summary
+-------
+
+I hope this concept is somehow useful for you. I want to keep above information
+for self reference, because I was asked couple times how to organize multiple
+projects. Explaining this each time leads to this article. Of course whole
+organization is very subjective and may not work good for everyone.
