@@ -9,10 +9,10 @@ categories: uefi edk2 embedded armv8
 This is second post from series about LeMaker version of HiKey board from
 96boards Customer Edition family. [Previous](2016/05/19/powering-on-96boards-compatible-lemaker-hikey-armv8-for-uefi-development/)
 post focused on describing hardware part. In this post I would like to show how
-to start UEFI/EDK2 development on ARMv8 platform.
+to setup firmware development and testing environment.
 
 This post highly rely on [96boards documentation](https://github.com/96boards/documentation/wiki/HiKeyUEFI),
-so kudos to 96boards for providing lot of information for developers.
+so kudos to 96boards and LeMaker for providing lot of information for developers.
 
 ## Obtain pre-compiled binaries
 
@@ -22,6 +22,7 @@ wget https://builds.96boards.org/releases/hikey/linaro/binaries/latest/fip.bin
 wget https://builds.96boards.org/releases/hikey/linaro/binaries/latest/ptable-linux-4g.img
 wget https://builds.96boards.org/releases/hikey/linaro/debian/latest/boot-fat.uefi.img.gz
 wget http://builds.96boards.org/releases/hikey/linaro/debian/latest/hikey-jessie_developer_20151130-387-4g.emmc.img.gz
+wget https://builds.96boards.org/releases/hikey/linaro/binaries/latest/nvme.img
 gunzip *.img.gz
 ```
 
@@ -32,11 +33,10 @@ git clone https://github.com/96boards/burn-boot.git
 ```
 
 Follow [flashing instructions](https://github.com/96boards/documentation/wiki/HiKeyUEFI#flash-binaries-to-emmc-).
-
 For Debian-based systems you may need:
 
 ```
-sudo apt-get install python-serial 
+sudo apt-get install python-serial android-tools-fastboot
 ```
 
 On my Debian I see in `dmesg`:
@@ -91,4 +91,50 @@ uFileAddress=ss=f9800800
 
 Switch to aarch64 mode. CPU0 executes at 0xf9801000!
 ```
+
+As result I saw that green LED on board is on, then I proceed with fastboot
+commands.
+
+If above steps finish without the problems, then you know working procedure for
+flashing all required components.
+
+### Install necessary software
+
+Wireless network can be easily configured using [this instructions](https://github.com/96boards/documentation/wiki/HiKeyGettingStarted#wireless-network).
+
+
+
+### Bug hunting
+
+There was time when I asked myself what I can do ? Where to start ? Good way to
+analyze system compatibility (and find bugs) from firmware perspective is
+[FirmwareTestSuit](https://wiki.ubuntu.com/FirmwareTestSuite/). It can be
+cloned using:
+
+```
+git clone git://kernel.ubuntu.com/hwe/fwts.git
+```
+
+To compile:
+
+```
+apt-get install autoconf automake libglib2.0-dev libtool libpcre3-dev libjson0-dev flex bison dkms
+autoreconf -ivf
+./configure
+make
+```
+
+To run:
+
+```
+./src/fwts
+```
+
+At point of writing this post only 13 tests passed. Most of testes (243) were
+aborted since no support for given feature was detected. This results show that
+there is plenty to do before getting well-supported firmware on HiKey.
+
+## Summary
+
+
 
