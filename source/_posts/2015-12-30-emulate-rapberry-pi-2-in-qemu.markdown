@@ -7,7 +7,7 @@ categories: qemu embedded linux
 ---
 
 In the process of planning system testing for one of my clients I found that
-someone from Microsoft published patches with [BCM2846 support](https://lists.gnu.org/archive/html/qemu-arm/2015-12/msg00078.html) to
+someone from Microsoft published patches with [BCM2836 support](https://lists.gnu.org/archive/html/qemu-arm/2015-12/msg00078.html) to
 QEMU mailing list. I thought it is very interesting, because if it is possible
 to setup emulated Raspberry Pi many use cases can be tested faster and in more
 automatic way. For example checking how application behave when running on more
