@@ -3,7 +3,7 @@ layout: post
 title: "Yet another quick build of arm-unknown-linux-gnueabi"
 date: 2013-04-03 19:00
 comments: true
-categories: [embedded, linux]
+categories: embedded linux
 published: true
 keywords: arm-unknown-linux-gnueabi,linux,arm,toolchain,crosstool-ng
 description: How to build sample corsstool-ng toolchain

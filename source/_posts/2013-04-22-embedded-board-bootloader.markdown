@@ -3,7 +3,7 @@ layout: post
 title: "0x3: Embedded board bootloader"
 date: 2013-06-07 10:32
 comments: true
-categories: [embedded, linux, vdb, u-boot]
+categories: embedded linux vdb u-boot qemu
 published: true
 keywords: u-boot, embedded, linux, virtual development board
 description: How to compile and configure U-Boot

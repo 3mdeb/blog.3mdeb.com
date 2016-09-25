@@ -3,7 +3,7 @@ layout: post
 title: "UEFI Application development in OVMF"
 date: 2015-11-21 11:18:52 +0100
 comments: true
-categories: uefi ovmf
+categories: uefi ovmf qemu
 ---
 
 OVMF (_Open Virtual Machine Firmware_) is a project that aim is to enable UEFI

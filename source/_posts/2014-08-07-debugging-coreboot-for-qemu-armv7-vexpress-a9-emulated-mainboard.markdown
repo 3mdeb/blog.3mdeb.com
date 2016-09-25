@@ -3,7 +3,7 @@ layout: post
 title: "Coreboot for QEMU armv7 (vexpress-a9) emulated mainboard"
 date: 2014-08-07 23:08:39 +0200
 comments: true
-categories: coreboot
+categories: coreboot qemu
 ---
 
 Recently I came back to look into coreboot. Mainly because low level is fun and

@@ -4,7 +4,7 @@ title: "Debugging coreboot in qemu environment - part 2"
 date: 2012-04-18T22:41:00+02:00
 published: true
 comments: true
-categories: coreboot
+categories: coreboot qemu
 keywords: coreboot,qemu
 description: How to debug coreboot under qemu
 ---

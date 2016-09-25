@@ -3,7 +3,7 @@ layout: post
 title: "0x0: Intro to Virtual Development Board building"
 date: 2013-06-07 01:27
 comments: true
-categories: [embedded, linux, vdb]
+categories: embedded linux vdb qemu
 published: true
 keywords: virtual development board, qemu, linux, embedded
 description: Intrudction to virtual embedded development board building

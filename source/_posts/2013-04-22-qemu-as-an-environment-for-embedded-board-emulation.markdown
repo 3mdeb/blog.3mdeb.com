@@ -3,7 +3,7 @@ layout: post
 title: "0x1: Qemu as an environment for embedded board emulation"
 date: 2013-06-07 08:27
 comments: true
-categories: [embedded, linux, vdb, qemu]
+categories: embedded linux vdb qemu
 published: true
 keywords: virtual development board, Qemu, Linux, Emulation
 description: How to compile Qemu and brief embedded Linux history
