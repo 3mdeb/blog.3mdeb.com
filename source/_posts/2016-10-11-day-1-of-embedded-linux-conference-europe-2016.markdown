@@ -23,11 +23,11 @@ to adapt gerrit, but patchwork seems to be more liked by Greg, if he had to
 choose anything else then email. More information in [this presentation](https://github.com/gregkh/presentation-stone-tools/blob/master/stone-tools.pdf).
 
 In talk they mention that Greg gave first technical talk from long time.
-[Video](https://www.youtube.com/watch?v=AdPxeGHIZ74) and [presentation
+[video](https://www.youtube.com/watch?v=AdPxeGHIZ74) and [presentation
 slides](https://github.com/gregkh/presentation-driver-model/blob/master/driver-model.pdf)
 
-
-
 BTW when looking for videos I remembered that [eLinux Events site](http://elinux.org/Events#Past_events)
-have amazed number of recent informations from conferences. I also found that
-there is some number of webinars that maybe interesting 
+have amazed number of recent information from conferences. I also found that
+there is some number of webinars that maybe interesting.
+
+### bus1 and rejected kdbus
