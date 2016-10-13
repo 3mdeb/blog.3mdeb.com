@@ -29,5 +29,3 @@ slides](https://github.com/gregkh/presentation-driver-model/blob/master/driver-m
 BTW when looking for videos I remembered that [eLinux Events site](http://elinux.org/Events#Past_events)
 have amazed number of recent information from conferences. I also found that
 there is some number of webinars that maybe interesting.
-
-### bus1 and rejected kdbus
