@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Building Android 4.2 LiveSuit image for Cubietruck (Allwinner A20)"
 date: 2015-09-16 23:02:57 +0200

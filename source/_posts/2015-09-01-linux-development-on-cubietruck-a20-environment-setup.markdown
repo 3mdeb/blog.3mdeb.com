@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Setup for Linux kernel development on Cubietruck"
 date: 2015-09-01 21:48:55 +0200

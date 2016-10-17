@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Blogger favicon in Chrome and FF"
 date: 2012-01-05T00:22:00+01:00

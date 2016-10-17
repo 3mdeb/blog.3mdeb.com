@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "\"Democracy: The God That Failed\" Hans-Hermann Hoppe"
 date: 2012-03-20T21:16:00+01:00

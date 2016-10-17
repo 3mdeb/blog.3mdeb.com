@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Blog look and feel idea"
 date: 2012-01-04T19:30:00+01:00

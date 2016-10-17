@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Ideas for development"
 date: 2012-01-09T22:24:00+01:00

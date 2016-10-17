@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "0x4: Linux kernel for embedded system"
 date: 2013-06-07 10:33

@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "How to fix backlight issue on IdeaPad y510p"
 date: 2014-08-23 23:49:03 +0200

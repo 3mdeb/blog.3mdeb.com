@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Music for programming"
 date: 2013-03-30T03:27:00+01:00

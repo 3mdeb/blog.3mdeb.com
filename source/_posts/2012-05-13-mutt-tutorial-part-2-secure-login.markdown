@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Mutt tutorial part 2 - secure login"
 date: 2012-05-13T14:13:00+02:00

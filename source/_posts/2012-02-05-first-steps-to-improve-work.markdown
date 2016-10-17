@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "First steps to improve work productivity in Linux environment"
 date: 2012-02-05T03:08:00+01:00

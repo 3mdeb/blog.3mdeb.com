@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Thunderbird to Mutt migration - tips & tricks"
 date: 2013-05-15 18:40

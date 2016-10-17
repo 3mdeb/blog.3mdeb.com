@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: Linux (Debian Wheezy) on Lenovo y510p
 date: 2014-05-16 22:36:27 +0200

@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Kernel developers tools - based on '30 Linux Kernel Developers in 30 Weeks'"
 date: 2013-05-12 02:41

@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "My view for silver perspective"
 date: 2012-01-09T22:31:00+01:00

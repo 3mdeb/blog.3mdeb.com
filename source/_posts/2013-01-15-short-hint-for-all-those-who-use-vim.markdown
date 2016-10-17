@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Short hint for all those who use vim and pathogen"
 date: 2013-01-15T11:51:00+01:00

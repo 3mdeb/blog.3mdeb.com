@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Powering on LeMaker HiKey (ARMv8)"
 date: 2016-05-19 00:04:06 +0200

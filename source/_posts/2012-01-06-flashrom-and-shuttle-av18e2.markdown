@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "flashrom and Shuttle AV18E2"
 date: 2012-01-06T14:31:00+01:00

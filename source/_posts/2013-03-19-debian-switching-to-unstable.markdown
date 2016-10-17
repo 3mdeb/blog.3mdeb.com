@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "tmux multiplexer and vi-like keys in copy-mode"
 date: 2013-03-19 16:30

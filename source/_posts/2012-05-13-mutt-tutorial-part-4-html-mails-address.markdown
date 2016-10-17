@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Mutt tutorial part 4 - html mails, address book and other useful features"
 date: 2012-05-13T17:21:00+02:00

@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Set irssi under debian to use freenode server"
 date: 2012-02-15T20:25:00+01:00

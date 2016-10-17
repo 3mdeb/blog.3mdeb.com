@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "PXE server with Raspberry Pi 1"
 date: 2016-03-12 17:42:42 +0100

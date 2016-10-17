@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Directory scheme for multiple projects"
 date: 2016-07-05 23:31:33 +0200

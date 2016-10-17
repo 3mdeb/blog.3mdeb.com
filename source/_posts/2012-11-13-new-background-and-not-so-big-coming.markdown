@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "New background and not so big \"coming back\""
 date: 2012-11-13T00:04:00+01:00

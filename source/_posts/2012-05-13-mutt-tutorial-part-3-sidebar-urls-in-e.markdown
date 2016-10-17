@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Mutt tutorial part 3 - sidebar, URLs in e-mails"
 date: 2012-05-13T15:43:00+02:00

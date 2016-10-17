@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Improve productivity by tracking work environment with git - vim"
 date: 2012-02-20T21:43:00+01:00

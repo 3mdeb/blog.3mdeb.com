@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "0x3: Embedded board bootloader"
 date: 2013-06-07 10:32

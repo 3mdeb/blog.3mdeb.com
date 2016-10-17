@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Improve productivity by tracking work environment with git - preparation"
 date: 2012-02-19T21:12:00+01:00

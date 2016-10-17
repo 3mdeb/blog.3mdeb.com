@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "How to begin with coreboot"
 date: 2012-01-06T14:23:00+01:00

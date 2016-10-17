@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Octopress depoying problem after migrating to *.github.io"
 date: 2013-05-16 22:20

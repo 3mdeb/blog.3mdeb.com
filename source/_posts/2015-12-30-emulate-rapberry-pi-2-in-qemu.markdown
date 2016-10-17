@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Emulate Rapberry Pi 2 in QEMU"
 date: 2015-12-30 23:02:30 +0100

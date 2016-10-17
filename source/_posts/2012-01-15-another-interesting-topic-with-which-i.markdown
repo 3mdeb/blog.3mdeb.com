@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "UEFI from Linux enthusiast perspective"
 date: 2012-01-15T23:04:00+01:00

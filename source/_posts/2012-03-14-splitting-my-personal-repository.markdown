@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Splitting my personal repository"
 date: 2012-03-14T 23:26:00+01:00

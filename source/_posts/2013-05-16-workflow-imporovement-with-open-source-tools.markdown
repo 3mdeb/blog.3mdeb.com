@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Workflow imporovement with Open Source tools - part 1"
 date: 2013-05-16 22:16

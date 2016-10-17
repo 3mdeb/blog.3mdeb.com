@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "UEFI Application development in OVMF"
 date: 2015-11-21 11:18:52 +0100

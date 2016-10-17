@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Building ARM toolchain - part 2: gcc and eglibc"
 date: 2012-04-12T23:54:00+02:00

@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Netcat - how to transfer files without scp or ftp"
 date: 2016-03-12 15:19:44 +0100

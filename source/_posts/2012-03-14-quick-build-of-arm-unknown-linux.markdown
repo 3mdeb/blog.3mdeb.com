@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Quick build of arm-unknown-linux-gnueabi with crosstool-ng"
 date: 2012-03-14T23:42:00+01:00

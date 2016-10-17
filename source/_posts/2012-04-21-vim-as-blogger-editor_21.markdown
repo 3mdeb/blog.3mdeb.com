@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Vim as a Blogger editor"
 date: 2012-04-21T12:55:00+02:00

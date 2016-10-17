@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Building ARM toolchain - part 1: libs and binutils"
 date: 2012-03-20T23:25:00+01:00

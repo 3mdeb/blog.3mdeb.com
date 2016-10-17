@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Build and run OVMF under Qemu"
 date: 2013-06-14 23:22

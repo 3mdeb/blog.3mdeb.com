@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Improve productivity with Goolge history using bookmarks and Chrome extensions"
 date: 2013-07-30 02:40

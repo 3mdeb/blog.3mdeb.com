@@ -1,4 +1,5 @@
 --- layout: post title: "arbtt as productivity improver for Linux enviroment" date: 2012-02-06T00:37:00+01:00 categories: - productivity ---
+author: Piotr Król
 
 As I mentioned in previous [post](http://pietrushnic.blogspot.com/2012/02/first-steps-to-improve-work.html) I work a lot on improving my productivity. After FreeMind it is time for [arbtt](http://darcs.nomeata.de/arbtt/doc/users_guide/). This is small tool which tracks active windows during your work. It is delivered with distro that I'm currently using (Debian wheezy). So all I had to do was:  
 

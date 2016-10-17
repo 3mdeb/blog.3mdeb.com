@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "PC Engines APU2 netboot Debian installation"
 date: 2016-03-26 14:27:38 +0100

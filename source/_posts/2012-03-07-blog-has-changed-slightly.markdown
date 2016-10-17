@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Nice small additions for my blog"
 date: 2012-03-07T23:15:00+01:00

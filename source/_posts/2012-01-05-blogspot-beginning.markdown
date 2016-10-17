@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Blogspot beginning"
 date: 2012-01-05T00:02:00+01:00

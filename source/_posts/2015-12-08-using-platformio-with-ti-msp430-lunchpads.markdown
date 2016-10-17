@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Using PlatformIO with TI MSP430 LunchPads"
 date: 2015-12-08 13:16:36 +0100

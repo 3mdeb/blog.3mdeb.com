@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Linux, RPi and USB over IP"
 date: 2014-08-18 21:26:37 +0200

@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Power on of ESP-12 (ESP8266)"
 date: 2015-01-24 00:25:05 +0100

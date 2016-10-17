@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "0x5: Qemu network configuration and tftp for Virtual Development Board"
 date: 2013-06-07 10:36

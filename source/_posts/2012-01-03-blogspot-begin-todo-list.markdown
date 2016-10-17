@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Blogspot begin: todo list"
 date: 2012-01-03T00:38:00+01:00

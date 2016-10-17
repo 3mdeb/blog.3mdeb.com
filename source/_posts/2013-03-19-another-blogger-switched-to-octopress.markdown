@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Yet another blogger switched to Octopress"
 date: 2013-03-19 03:01

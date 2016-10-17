@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Sqlite3 gem not supported on Heroku"
 date: 2012-11-18T21:16:00+01:00

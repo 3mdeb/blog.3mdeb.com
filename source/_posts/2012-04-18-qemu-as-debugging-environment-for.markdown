@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Debugging coreboot in qemu environment - part 2"
 date: 2012-04-18T22:41:00+02:00

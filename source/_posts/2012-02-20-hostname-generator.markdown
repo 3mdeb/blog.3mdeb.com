@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Hostname generator"
 date: 2012-02-20T20:58:00+01:00

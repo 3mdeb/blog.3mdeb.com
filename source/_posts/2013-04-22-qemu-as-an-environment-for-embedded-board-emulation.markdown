@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "0x1: Qemu as an environment for embedded board emulation"
 date: 2013-06-07 08:27

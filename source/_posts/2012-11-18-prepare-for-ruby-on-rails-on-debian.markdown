@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Prepare for Ruby on Rails on Debian wheezy"
 date: 2012-11-18T18:18:00+01:00

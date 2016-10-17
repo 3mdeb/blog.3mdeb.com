@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "0x0: Intro to Virtual Development Board building"
 date: 2013-06-07 01:27

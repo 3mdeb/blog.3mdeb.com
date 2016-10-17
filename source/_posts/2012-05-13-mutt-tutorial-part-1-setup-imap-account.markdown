@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Mutt tutorial part 1 - setup IMAP account"
 date: 2012-05-13T11:43:00+02:00

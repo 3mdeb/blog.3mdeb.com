@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Raspberry Pi kernel repository aggregating patches for Linux mainline"
 date: 2014-10-15 23:23:11 +0200

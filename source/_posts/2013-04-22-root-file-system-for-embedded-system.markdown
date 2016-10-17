@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "0x6: Root file system for embedded system"
 date: 2013-06-07 10:40

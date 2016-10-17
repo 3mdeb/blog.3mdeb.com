@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "virtualbox-dkms: fix alloc_netdev problems when compiling with 3.17.0-rcX headers"
 date: 2014-09-20 22:55:00 +0200

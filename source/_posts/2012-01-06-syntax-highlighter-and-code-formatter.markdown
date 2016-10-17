@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Syntax highlighter and code formatter for Blogger"
 date: 2012-01-06T18:14:00+01:00

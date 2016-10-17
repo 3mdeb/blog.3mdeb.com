@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Useful hints for blogging using Octopress with Vim"
 date: 2013-03-30 05:49

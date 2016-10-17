@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "0x2: Toolchain for Virtual Development Board"
 date: 2013-06-07 08:42

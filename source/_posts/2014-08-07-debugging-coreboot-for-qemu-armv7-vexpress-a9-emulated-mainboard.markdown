@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "Coreboot for QEMU armv7 (vexpress-a9) emulated mainboard"
 date: 2014-08-07 23:08:39 +0200
