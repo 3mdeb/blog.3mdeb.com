@@ -221,7 +221,7 @@ task :deploy do
   end
 
   Rake::Task[:copydot].invoke(source_dir, public_dir)
-  Rake::Task["#{deploy_default}"].execute
+  #Rake::Task["#{deploy_default}"].execute
 end
 
 desc "Generate website and deploy"
