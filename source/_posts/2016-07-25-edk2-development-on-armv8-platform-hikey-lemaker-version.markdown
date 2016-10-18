@@ -1,7 +1,7 @@
 ---
 author: Piotr Król
 layout: post
-title: "EDK2 development on ARMv8 platform (HiKey LeMaker version)"
+title: "FWTS on ARMv8 platform (HiKey LeMaker version) from scratch"
 date: 2016-07-25 14:13:02 +0200
 comments: true
 categories: uefi edk2 embedded armv8
@@ -209,6 +209,78 @@ To run:
 At point of writing this post only 13 tests passed. Most of testes (243) were
 aborted since no support for given feature was detected. This results show that
 there is plenty to do before getting well-supported firmware on HiKey.
+
+```
+Test           |Pass |Fail |Abort|Warn |Skip |Info |
+---------------+-----+-----+-----+-----+-----+-----+
+acpiinfo       |     |     |     |     |     |    2|
+acpitables     |     |     |    1|     |     |     |
+asf            |     |     |    1|     |     |     |
+aspm           |     |     |     |     |    1|     |
+aspt           |     |     |    1|     |     |     |
+bert           |     |     |    1|     |     |     |
+bgrt           |     |     |    1|     |     |     |
+bmc_info       |     |     |     |     |    1|     |
+boot           |     |     |    1|     |     |     |
+checksum       |     |     |     |     |     |     |
+cpep           |     |     |    1|     |     |     |
+cpufreq        |    5|     |     |     |    2|     |
+csrt           |     |     |    1|     |     |     |
+dbg2           |     |     |    1|     |     |     |
+dbgp           |     |     |    1|     |     |     |
+dmicheck       |     |    1|     |     |    2|     |
+drtm           |     |     |    1|     |     |     |
+ecdt           |     |     |    1|     |     |     |
+einj           |     |     |    1|     |     |     |
+erst           |     |     |    1|     |     |     |
+facs           |     |     |    1|     |     |     |
+fadt           |     |     |    6|     |     |     |
+fpdt           |     |     |    1|     |     |     |
+gtdt           |     |     |    1|     |     |     |
+hest           |     |     |    1|     |     |     |
+iort           |     |     |    1|     |     |     |
+klog           |     |     |     |     |     |     |
+lpit           |     |     |    1|     |     |     |
+madt           |     |     |    5|     |     |     |
+maxreadreq     |    1|     |     |     |     |     |
+mchi           |     |     |    1|     |     |     |
+method         |     |     |  192|     |     |     |
+mpst           |     |     |    1|     |     |     |
+msct           |     |     |    1|     |     |     |
+msdm           |     |     |    1|     |     |     |
+mtd_info       |     |     |     |     |    1|     |
+nfit           |     |     |    1|     |     |     |
+olog           |     |     |     |     |    1|     |
+oops           |    2|     |     |     |     |     |
+pcct           |     |     |    1|     |     |     |
+pmtt           |     |     |    1|     |     |     |
+prd_info       |     |     |     |     |    1|     |
+rsdp           |     |     |    1|     |     |     |
+rsdt           |     |     |    1|     |     |     |
+sbst           |     |     |    1|     |     |     |
+securebootcert |     |     |    1|     |     |     |
+slic           |     |     |    1|     |     |     |
+slit           |     |     |    1|     |     |     |
+spcr           |     |     |    1|     |     |     |
+spmi           |     |     |    1|     |     |     |
+srat           |     |     |    1|     |     |     |
+stao           |     |     |    1|     |     |     |
+syntaxcheck    |     |     |     |     |     |     |
+tcpa           |     |     |    1|     |     |     |
+tpm2           |     |     |    1|     |     |     |
+uefi           |     |     |    1|     |     |     |
+uefibootpath   |     |     |     |     |    1|     |
+version        |     |     |     |     |    1|    3|
+waet           |     |     |    1|     |     |     |
+wakealarm      |    5|    1|     |     |     |     |
+wdat           |     |     |    1|     |     |     |
+wpbt           |     |     |    1|     |     |     |
+xenv           |     |     |    1|     |     |     |
+xsdt           |     |     |    1|     |     |     |
+---------------+-----+-----+-----+-----+-----+-----+
+Total:         |   13|    2|  248|    0|   11|    5|
+---------------+-----+-----+-----+-----+-----+-----+
+```
 
 ## Summary
 
