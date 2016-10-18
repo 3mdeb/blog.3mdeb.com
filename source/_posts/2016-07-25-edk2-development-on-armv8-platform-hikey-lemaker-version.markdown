@@ -1,4 +1,5 @@
 ---
+author: Piotr Król
 layout: post
 title: "EDK2 development on ARMv8 platform (HiKey LeMaker version)"
 date: 2016-07-25 14:13:02 +0200
@@ -17,12 +18,12 @@ so kudos to 96boards and LeMaker for providing lot of information for developers
 ## Obtain pre-compiled binaries
 
 ```
-wget https://builds.96boards.org/releases/hikey/linaro/binaries/latest/l-loader.bin
-wget https://builds.96boards.org/releases/hikey/linaro/binaries/latest/fip.bin
-wget https://builds.96boards.org/releases/hikey/linaro/binaries/latest/ptable-linux-4g.img
+wget https://builds.96boards.org/snapshots/hikey/linaro/uefi/latest/l-loader.bin
+wget https://builds.96boards.org/snapshots/hikey/linaro/uefi/latest/fip.bin
+wget https://builds.96boards.org/snapshots/hikey/linaro/uefi/latest/ptable-linux-8g.img
+wget https://builds.96boards.org/snapshots/hikey/linaro/uefi/latest/nvme.img
 wget https://builds.96boards.org/releases/hikey/linaro/debian/latest/boot-fat.uefi.img.gz
-wget http://builds.96boards.org/releases/hikey/linaro/debian/latest/hikey-jessie_developer_20151130-387-4g.emmc.img.gz
-wget https://builds.96boards.org/releases/hikey/linaro/binaries/latest/nvme.img
+wget http://builds.96boards.org/snapshots/hikey/linaro/debian/latest/hikey-jessie_developer_20160225-410.emmc.img.gz
 gunzip *.img.gz
 ```
 
@@ -96,13 +97,87 @@ As result I saw that green LED on board is on, then I proceed with fastboot
 commands.
 
 If above steps finish without the problems, then you know working procedure for
-flashing all required components.
+flashing all required components. Now let's proceed with fast boot and flashing
+remaining components:
 
-### Install necessary software
+```
+sudo fastboot flash ptable ptable-linux-8g.img
+sudo fastboot flash fastboot fip.bin
+sudo fastboot flash nvme nvme.img
+sudo fastboot flash boot boot-fat.uefi.img
+sudo fastboot flash system hikey-jessie_developer_20160225-410.emmc.img
+```
+
+Output should look like this:
+
+```
+$ sudo fastboot flash ptable ptable-linux-8g.img 
+target reported max download size of 268435456 bytes
+sending 'ptable' (17 KB)...
+OKAY [  0.001s]
+writing 'ptable'...
+OKAY [  0.004s]
+finished. total time: 0.006s
+$ sudo fastboot flash fastboot fip.bin
+target reported max download size of 268435456 bytes
+sending 'fastboot' (1383 KB)...
+OKAY [  0.060s]
+writing 'fastboot'...
+OKAY [  0.135s]
+finished. total time: 0.196s
+$ sudo fastboot flash nvme nvme.img
+target reported max download size of 268435456 bytes
+sending 'nvme' (128 KB)...
+OKAY [  0.006s]
+writing 'nvme'...
+OKAY [  0.007s]
+finished. total time: 0.014s
+$ sudo fastboot flash boot boot-fat.uefi.img
+target reported max download size of 268435456 bytes
+sending 'boot' (65536 KB)...
+OKAY [  2.645s]
+writing 'boot'...
+OKAY [  3.258s]
+finished. total time: 5.903s
+$ sudo fastboot flash system hikey-jessie_developer_20160225-410.emmc.img
+target reported max download size of 268435456 bytes
+sending sparse 'system' (262140 KB)...
+OKAY [ 10.692s]
+writing 'system'...
+OKAY [ 11.868s]
+sending sparse 'system' (262140 KB)...
+OKAY [ 10.786s]
+writing 'system'...
+OKAY [ 11.838s]
+sending sparse 'system' (262140 KB)...
+OKAY [ 10.791s]
+writing 'system'...
+OKAY [ 11.812s]
+sending sparse 'system' (262140 KB)...
+OKAY [ 10.720s]
+writing 'system'...
+OKAY [ 11.803s]
+sending sparse 'system' (262140 KB)...
+OKAY [ 10.833s]
+writing 'system'...
+OKAY [ 11.830s]
+sending sparse 'system' (116064 KB)...
+OKAY [  4.854s]
+writing 'system'...
+OKAY [  5.219s]
+finished. total time: 123.047s
+```
+
+Remove Boot Select jumper (link 3-4) and power on platform.
+
+### System configuration
 
 Wireless network can be easily configured using [this instructions](https://github.com/96boards/documentation/wiki/HiKeyGettingStarted#wireless-network).
+It is also required to setup DNS in `/etc/resolv.conf` ie.:
 
-
+```
+nameserver 8.8.8.8
+```
 
 ### Bug hunting
 
@@ -118,6 +193,7 @@ git clone git://kernel.ubuntu.com/hwe/fwts.git
 To compile:
 
 ```
+apt-get update
 apt-get install autoconf automake libglib2.0-dev libtool libpcre3-dev libjson0-dev flex bison dkms
 autoreconf -ivf
 ./configure
@@ -135,6 +211,4 @@ aborted since no support for given feature was detected. This results show that
 there is plenty to do before getting well-supported firmware on HiKey.
 
 ## Summary
-
-
 
