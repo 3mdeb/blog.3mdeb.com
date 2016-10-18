@@ -197,7 +197,7 @@ apt-get update
 apt-get install autoconf automake libglib2.0-dev libtool libpcre3-dev libjson0-dev flex bison dkms
 autoreconf -ivf
 ./configure
-make
+make -j$(nproc)
 ```
 
 To run:
@@ -212,3 +212,18 @@ there is plenty to do before getting well-supported firmware on HiKey.
 
 ## Summary
 
+As presented above HiKey developement process is not so simple. Using
+precompiled binaries is very useful for presentation purposes, but adding
+features to EDK2 will requires recompilation some of mentioned components.
+Documentation is not easy to search as well as forum, key probablem is that it
+needs more order, because various information (sometimes unrelated) are spread
+actoss directories and repositories.
+
+Nevertheless hacking ARMv8 firmware may be fun and there huge undiscovered area
+to explore. Key question is what valid use cases may lead to extensive firmware
+development in this area ? First I would look into features that have to be
+exposed to operating system ie. verify boot for Linux OS use of TEE module in
+Linux.
+
+As always please share if you feel this is valuable and comment if you have any
+questions or something is unclear.
