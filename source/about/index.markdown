@@ -9,15 +9,17 @@ footer: true
 
 {% img left /assets/images/photo.jpg  220 100 Me %}
 
-Hello,
-I'm Piotr Król owner of 3mdeb, which is Poland-based brand dedicated to
-help small companies change their idea into products by recommending
-technology, building prototypes and developing required software. I'm a
-Embedded Systems Consultant with over 7 years of professional experience. I was
-involved in firmware development and low level programming for microcomputer
-(x86, ARM) and embedded (ARM, AVR, MSP430) CPU architectures. I'm looking for
-challenging projects in area of embedded systems, general purpose low level
-programming and reverse engineering.
+Hi, my name is Piotr Król. I'm owner of [3mdeb Embedded Systems Consulting](http://3mdeb.com/). **3mdeb** is a Poland-based brand dedicated to
+helping small companies change their idea into products by recommending
+technology, building prototypes and developing required software. Our expertise
+covers wide range of service related to firmware and embedded software
+development.
+
+I'm a Embedded Systems Consultant with over 8 years of professional experience.
+I was involved in firmware development and low level programming for
+microcomputer (x86, ARM) and embedded (ARM, AVR, MSP430) CPU architectures. I'm
+looking for challenging projects in area of embedded systems, general purpose
+low level programming and reverse engineering.
 
 More about me you can find on social media sites.
 
@@ -28,6 +30,7 @@ More about me you can find on social media sites.
 [{% img social-icon /assets/icons/twitter-logo-square.png 64 64 twitter %}](https://twitter.com/pietrushnic)
 [{% img social-icon /assets/icons/you-tube2-s.png 64 64 youtube %}](https://www.youtube.com/user/pietrushnic)
 
-If you need professional support I'm available [directly](http://3mdeb.com/#contact) or
-over [Upwork](https://www.upwork.com/o/profiles/users/_~01f19997d41c4867dc/)
-and other freelance portals.
+If you need professional support feel free to reach me
+[directly](http://3mdeb.com/#contact) or over
+[Upwork](https://www.upwork.com/o/profiles/users/_~01f19997d41c4867dc/) and
+other freelance portals.
