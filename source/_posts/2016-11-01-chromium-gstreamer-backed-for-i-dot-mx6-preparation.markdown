@@ -1,7 +1,7 @@
 ---
 author: Piotr Król
 layout: post
-title: "Chromium GStreamer backed for i.MX6 failure"
+title: "Chromium GStreamer backed for i.MX6 research"
 date: 2016-11-01 00:13:32 +0100
 comments: true
 categories: embedded imx6 linux chromium gstreamer qt
