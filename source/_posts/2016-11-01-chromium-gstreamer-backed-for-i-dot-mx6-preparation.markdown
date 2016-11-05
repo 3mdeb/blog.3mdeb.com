@@ -1,13 +1,13 @@
 ---
 author: Piotr Król
 layout: post
-title: "Chromium GStreamer backed for i.MX6 - preparation"
+title: "Chromium GStreamer backed for i.MX6 failure"
 date: 2016-11-01 00:13:32 +0100
 comments: true
 categories: embedded imx6 linux chromium gstreamer qt
 ---
 
-For couple of months I work on i.MX6 based project that requires hardware
+Recently I work on i.MX6 based project that requires video hardware
 decoding in web browser (best case in [QtWebEngine](https://wiki.qt.io/QtWebEngine), which is entire Chromium
 platform in Qt).
 
@@ -52,9 +52,26 @@ first glance). Company published [Chromium GStreamer Backend](https://github.com
 doesn't seem to have big community, but recent commits are from September, so
 1.5 month old. There 2 main contributors both from Samsung.
 
-## Building Chromium
+## How I gave up and pivot to other solution
 
-As some sources note:
+I tried to approach Chromium building from scratch as described in Samsung
+documentation. Unfortunately it consumed a lot of effort. Hardware requirements
+are ridiculous (>16GB RAM and 100GB storage). Then it happened that procedures
+are for Ubuntu and do not align great with Debian (especially Sid). On the
+other hand I broke my system so many time that I'm very resistant to any
+additional system modification - at this point I'm really in favour of
+separating environment using Docker.
 
-> "It's nearly impossible to build a browser that never crashes or
-> hangs.” (chromium.org)
+So after realizing how complex Chromium is I reconsidered approach and decided
+that I have to focus on making GStreamer video hardware acceleration work
+smoothly in Qt. Final result will be less flexible but will add less headache.
+
+## Summary
+
+I wanted to drop this note for community and 3mdeb further reference. Hope
+anyone trying similar will read that and can decide if it is worth digging
+deeper. I had this passivity to pivot, but I assume there were situation when
+you will have to go deeper, if so please drop me note in comments. Also if you
+feel that things moved forward in above area it would be great to know.
+
+
