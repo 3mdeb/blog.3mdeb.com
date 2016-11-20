@@ -74,23 +74,23 @@ Please note that if you want to install Debian you should change kernel booting
 parameters to make installer available on serial console. To do that when you screen:
 
 ```
-                 +---------------------------------------+                                                                                                                                                                                    
-                 | Debian GNU/Linux installer boot menu |                                                                                                                                                                                     
-                 |---------------------------------------|                                                                                                                                                                                    
-                 | Install                               |                      
-                 | Advanced options                    > |                      
-                 | Help                                  |                                
-                 |                                       |                               
-                 |                                       |                      
-                 |                                       |                      
-                 |                                       |                                             
-                 |                                       |                           
-                 |                                       |                                  
-                 |                                       |                                
-                 +---------------------------------------+                                                                   
-                                                                                
+                 +---------------------------------------+
+                 | Debian GNU/Linux installer boot menu |
+                 |---------------------------------------|
+                 | Install                               |
+                 | Advanced options                    > |
+                 | Help                                  |
+                 |                                       |
+                 |                                       |
+                 |                                       |
+                 |                                       |
+                 |                                       |
+                 |                                       |
+                 |                                       |
+                 +---------------------------------------+
+
 > debian-installer/i386/linux vga=788 initrd=debian-installer/i386/initrd.gz console=ttyS0,115200n8
-                                                                                                
+
               Press ENTER to boot or TAB to edit a menu entry 
 ```
 
@@ -104,3 +104,39 @@ iPXE> kernel tftp://<ip_address>/debian-installer/i386/linux console=ttyS0,11520
 iPXE> initrd tftp://<ip_address>/debian-installer/i386/initrd.gz
 iPXE> boot
 ```
+
+## Kernel compilation for APU2
+
+### Getting minimal config from Debian
+
+```
+sudo apt-get install linux-source
+cd /usr/src/
+tar xf linux-source-4.8.tar.xz
+cd linux-source-4.8
+cp /boot/config-`uname -r` .config
+```
+
+## coreboot GDB debugging for APU2
+
+Enable below option in `make menuconfig`:
+
+```
+Debugging -> GDB debugging support 
+Debugging -> Wait for a GDB connection
+```
+
+Build and flash new image. Note that it is good to have cross debugger for
+APU2. You can build it with coreboot using:
+
+```
+make crosstools-i386
+```
+
+Disable minicom and run:
+
+```
+
+```
+
+
