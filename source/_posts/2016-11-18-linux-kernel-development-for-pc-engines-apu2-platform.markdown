@@ -133,10 +133,12 @@ APU2. You can build it with coreboot using:
 make crosstools-i386
 ```
 
-Disable minicom and run:
+Disable minicom and boot platform:
 
 ```
-
+cgdb -d ./util/crossgcc/xgcc/bin/i386-elf-gdb -nh
+(gdb) target remote /dev/ttyUSB1
+(gdb) file build/cbfs/fallback/ramstage.elf
 ```
 
 
