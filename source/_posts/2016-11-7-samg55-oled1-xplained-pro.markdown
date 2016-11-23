@@ -146,6 +146,9 @@ OLED1 Xplained Pro Documentation
 Summary
 -------
 
+<a class="fancybox" rel="group" href="/assets/images/workerison.jpg"><img
+src="/assets/images/workerison.jpg" alt="" /></a>
+
 As you can see, starting with `Atmel SAMG55 Xplained Pro` can be easy. I hope
 that providied information are easy to read, and useful. If they are not,
 please leave a comment. Thanks for reading.
