@@ -150,5 +150,5 @@ Summary
 src="/assets/images/workerison.jpg" alt="" /></a>
 
 As you can see, starting with `Atmel SAMG55 Xplained Pro` can be easy. I hope
-that providied information are easy to read, and useful. If they are not,
+that provided information are easy to read, and useful. If they are not,
 please leave a comment. Thanks for reading.
