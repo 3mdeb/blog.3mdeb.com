@@ -129,26 +129,19 @@ Sources
 -------
 
 SAMG55 Xplained Pro documentation
- 
-[Data Gateway Interface](http://www.atmel.com/Images/Atmel-32223-Data-Gateway-Interface_UserGuide.pdf)
 
-[DGILIB for DGI](http://www.atmel.com/Images/Atmel-42771-DGILib_UserGuide.pdf)
-
-[EDBG](http://www.atmel.com/Images/Atmel-42096-Microcontrollers-Embedded-Debugger_User-Guide.pdf)
-
-[SAMG55 Xplained Pro](http://www.atmel.com/Images/Atmel-42389-SAM-G55-Xplained-Pro_User-Guide.pdf)
-
-[SAMG55 Xplained Pro Datasheet](http://www.atmel.com/Images/Atmel-11289-32-bit-Cortex-M4-Microcontroller-SAM-G55_Datasheet.pdf)
-
-[SAMG55 Xplained Pro Datasheet summary](http://www.atmel.com/Images/Atmel-11289-32-bit-Cortex-M4-Microcontroller-SAM-G55_Summary-Datasheet.pdf)
-
-[All SAMG55 Documents](http://www.atmel.com/devices/ATSAMG55.aspx?tab=documents)
+* [Data Gateway Interface](http://www.atmel.com/Images/Atmel-32223-Data-Gateway-Interface_UserGuide.pdf)
+* [DGILIB for DGI](http://www.atmel.com/Images/Atmel-42771-DGILib_UserGuide.pdf)
+* [EDBG](http://www.atmel.com/Images/Atmel-42096-Microcontrollers-Embedded-Debugger_User-Guide.pdf)
+* [SAMG55 Xplained Pro](http://www.atmel.com/Images/Atmel-42389-SAM-G55-Xplained-Pro_User-Guide.pdf)
+* [SAMG55 Xplained Pro Datasheet](http://www.atmel.com/Images/Atmel-11289-32-bit-Cortex-M4-Microcontroller-SAM-G55_Datasheet.pdf)
+* [SAMG55 Xplained Pro Datasheet summary](http://www.atmel.com/Images/Atmel-11289-32-bit-Cortex-M4-Microcontroller-SAM-G55_Summary-Datasheet.pdf)
+* [All SAMG55 Documents](http://www.atmel.com/devices/ATSAMG55.aspx?tab=documents)
 
 OLED1 Xplained Pro Documentation
 
-[OLED1 Xplained Pro](http://www.atmel.com/Images/Atmel-42077-OLED1-Xplained-Pro_User-Guide.pdf)
-
-[SSD1306 controller API](http://asf.atmel.com/docs/latest/samg/html/group__ssd1306__oled__controller__group.html)
+* [OLED1 Xplained Pro](http://www.atmel.com/Images/Atmel-42077-OLED1-Xplained-Pro_User-Guide.pdf)
+* [SSD1306 controller API](http://asf.atmel.com/docs/latest/samg/html/group__ssd1306__oled__controller__group.html)
 
 Summary
 -------
