@@ -1,7 +1,7 @@
 ---
 author: Piotr Król
 layout: post
-title: "Starting with Nucleo-F411RE and mbed OS for command line enthusiast"
+title: "Starting with Nucleo-F411RE and mbed OS for command line enthusiasts"
 date: 2016-11-23 16:01:48 +0100
 comments: true
 categories: mbed embedded linux nucleo cortex-m4
