@@ -280,7 +280,7 @@ Object file test_env.o is not unique! It could be made from: ./mbed-os/features/
 Image: ./BUILD/NUCLEO_F411RE/GCC_ARM/mbed-os-example-blinky.bin
 ```
 
-Ok so we have binary now we would like to deploy it to target.
+So we have binary now we would like to deploy it to target.
 
 ## Test real hardware
 
@@ -343,7 +343,7 @@ Summary
 
 I hope this tutorial add something or help resolving some issue that you may
 struggle with. As you can see mbed is not perfect, but it looks like it may
-serve as great replacement for previous environments ie. custome IDE from
+serve as great replacement for previous environments ie. custom IDE from
 various vendors. What would be useful to verify is for sure OpenOCD with STLink
 to see if whole development stack is ready to use under Linux. In next post I
 will try to start work with Atmel SAM G55 and mbed OS.
