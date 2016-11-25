@@ -80,7 +80,7 @@ After starting Atmel Studio choose `Open Project...`, navigate to
 CryptoAuthentication example and choose `node-auth-basic` you should get funny
 pop-up that tells you to watch out for malicious Atmel Studio projects:
 
-TODO: screenoshot
+TODO: screenshot
 
 Then you have window with info `Please select your project`, so choose
 `node-auth-basic`, then try `Build -> Rebuild Solution`, of course this doesn't
@@ -98,10 +98,14 @@ The problem with `node-auth-basic` is that it is not prepared for SAM G55.
 Whole code in `AT88CKECC-AWS-XSTK` documents target SAM D21. So you have to
 change target device and this is possible only after update. To change device
 enter `node-auth-basic` project properties and got to `Device` tab, then use
-`Change Device` find `SAMG` family and use `SAMG55J19`. Result should look like
-this:
+`Change Device` find `SAMG` family and use `SAMG55J19`. Please note that SAM
+G55 devices are not visible if not change `Show devices` to `All Parts`. Result
+should look like this:
 
 TODO: screenshot
+
+I can only imagine how outdated this post will be with next version of Atmel
+Studio.
 
 Now we get more compilation errors:
 
