@@ -114,6 +114,63 @@ Error       sam/sleepmgr.h: No such file or directory   node-auth-basic \
 C:\(...)\cryptoauth-node-auth-basic\node-auth-basic\src\ASF\common\services\sleepmgr\sleepmgr.h 53
 ```
 
+With above problem I started to think I'm gettting really useless expertise.
+The issue was pretty clear - we compile for SAMG not for SAMD and we need
+different header.
+
+### ASF installation madness
+
+Moreover when I tried to reinstall ASF I had to register on Atmel page which
+complained on LastPass and indentify my location as Russian Federation (despite
+I'm in Poland). Of course Atmel Studio open Edge to login me into their wesite.
+This whole IDE sucks and do a lot of demage to Atmel - how I can recommend them
+after all that hassle ? Then after going thour password/login Windows 10 detect
+that something is wrong with Atmel Studio and decided that it have to be
+restarted. What I finally started intallation I get this:
+
+```
+2016-11-26 23:46:10 - Microsoft VSIX Installer
+2016-11-26 23:46:10 - -------------------------------------------
+2016-11-26 23:46:10 - Initializing Install...
+2016-11-26 23:46:10 - Extension Details...
+2016-11-26 23:46:10 -   Identifier      : 4CE20911-D794-4550-8B94-6C66A93228B8
+2016-11-26 23:46:10 -   Name            : Atmel Software Framework
+2016-11-26 23:46:10 -   Author          : Atmel
+2016-11-26 23:46:10 -   Version         : 3.33.0.640
+2016-11-26 23:46:10 -   Description     : Provides software drivers and libraries to build applications for Atmel devices. The minimum supported ASF version is 3.24.2.
+2016-11-26 23:46:10 -   Locale          : en-US
+2016-11-26 23:46:10 -   MoreInfoURL     : http://asf.atmel.com/docs/latest/
+2016-11-26 23:46:10 -   InstalledByMSI  : False
+2016-11-26 23:46:10 -   SupportedFrameworkVersionRange : [4.0,4.5]
+2016-11-26 23:46:10 - 
+2016-11-26 23:46:10 -   Supported Products : 
+2016-11-26 23:46:10 -           AtmelStudio
+2016-11-26 23:46:10 -                   Version : [7.0]
+2016-11-26 23:46:10 - 
+2016-11-26 23:46:10 -   References      : 
+2016-11-26 23:46:10 - 
+2016-11-26 23:46:14 - The extension with ID '4CE20911-D794-4550-8B94-6C66A93228B8' is not installed to AtmelStudio.
+2016-11-26 23:46:28 - The following target products have been selected...
+2016-11-26 23:46:28 -   AtmelStudio
+2016-11-26 23:46:28 - 
+2016-11-26 23:46:28 - Beginning to install extension to AtmelStudio...
+2016-11-26 23:46:29 - Install Error : System.IO.IOException: There is not enough space on the disk.
+
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.WriteCore(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.FileStream.Write(Byte[] array, Int32 offset, Int32 count)
+   at Microsoft.VisualStudio.ExtensionManager.ExtensionManagerService.WriteFilesToInstallDirectory(InstallableExtensionImpl extension, String installPath, ZipPackage vsixPackage, IDictionary`2 extensionsInstalledSoFar, AsyncOperation asyncOp, UInt64 totalBytesToWrite, UInt64& totalBytesWritten)
+   at Microsoft.VisualStudio.ExtensionManager.ExtensionManagerService.InstallInternal(InstallableExtensionImpl extension, Boolean perMachine, Boolean isNestedExtension, IDictionary`2 extensionsInstalledSoFar, List`1 extensionsUninstalledSoFar, IInstalledExtensionList modifiedInstalledExtensionsList, AsyncOperation asyncOp, UInt64 totalBytesToWrite, UInt64& totalBytesWritten)
+   at Microsoft.VisualStudio.ExtensionManager.ExtensionManagerService.BeginInstall(IInstallableExtension installableExtension, Boolean perMachine, AsyncOperation asyncOp)
+   at Microsoft.VisualStudio.ExtensionManager.ExtensionManagerService.InstallWorker(IInstallableExtension extension, Boolean perMachine, AsyncOperation asyncOp)
+```
+
+This should be enough to throw it away. Of course I have ~500MB on disk, but
+this is not enough. I assume that MS way of providing information to user is
+throwing exeptions.
+
+
+
 ### CryptoAuthLib: Driver Support for Atmel CryptoAuthentication Devices
 
 So I tried to download `CryptoAuthLib SAMD21 Test Host Project.zip` from the
