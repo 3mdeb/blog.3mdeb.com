@@ -1,7 +1,7 @@
 ---
 author: Piotr Król
 layout: post
-title: "Initial triage of Atmel SAM G55 and Microchip ECC508A"
+title: "Failure of ECC508A crypto coprocessor initial triage with SAM G55 Xplained Pro Evaluation Kit"
 date: 2016-11-24 15:37:26 +0100
 comments: true
 categories: atmel samg55 ecc508a embedded firmware security aws iot
@@ -166,12 +166,39 @@ restarted. What I finally started intallation I get this:
 ```
 
 This should be enough to throw it away. Of course I have ~500MB on disk, but
-this is not enough. I assume that MS way of providing information to user is
-throwing exeptions.
+this is not enough. I assume that MS way in Windows 10 of providing information
+to user is throwing exceptions or this was method of handling lack of free
+space in Atmel Studio.
 
+## I gave up
 
+Couple more things that I found:
 
-### CryptoAuthLib: Driver Support for Atmel CryptoAuthentication Devices
+* There is no easy way to convert examples for ECC508A to make them work with
+  SAMG55 as those examples are mostly created for SAMD21. Clearly Atmel do a
+  lot noise about 250USD kit for which you don't have examples.
+* CryptoAuthentication library doesn't have HAL for SAMG55
+* Atmel engagement in process of supporting community is poor, what can be
+  found here
+  [1](https://community.atmel.com/forum/provisioning-and-accessing-atecc508a),[2](https://community.atmel.com/forum/atecc508a-i2c-input-capacitance-ci)
+* Full datasheet is available only under NDA
 
-So I tried to download `CryptoAuthLib SAMD21 Test Host Project.zip` from the
-same page - another project with > 1.5k files in it. 
+## Summary
+
+I waste lot of time to figure out that evaluation of well advertised product is
+terribly difficult. I'm sure that lack of knowledge of Atmel ecosystem probably
+added to my problems. I also didn't bother to contact community, which is
+not fair to judge from my side.
+
+Key idea behind this triage was to check ECC508A in environment suggested by
+manufacturer. It happens that manufacturer didn't prepare infrastructure and
+documentation to be able to evaluate product in advertised way. Initial triage
+was needed for implementation in more complex system with Embedded Linux on
+board. Luckily during whole this process I found
+[cryptoauth-openssl-enginea](https://github.com/AtmelCSO/cryptoauth-openssl-engine)
+Github repository. Which I will evaluate in next posts.
+
+If you will struggle with similar problems and pass through some mentioned
+above or you successfully triaged `ECC508A` on `AT88CKECC-AWS-XSTK` please let
+me know. Other comments as always welcome.
+
