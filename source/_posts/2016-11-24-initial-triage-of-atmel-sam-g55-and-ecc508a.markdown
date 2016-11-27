@@ -25,31 +25,31 @@ I'm personally very interested in all categories related to those news:
   make sure 3mdeb customers use best in class product in IoT cloud segment. To
   provide that service we try to be on track with all news related to AWS IoT.
 
-* Security - there will be not so much work for Embedded System Constultants if
+* Security - there will be not so much work for Embedded System Consultants if
   IoT will be rejected because of security issues. I'm sure I don't have to
   convince anyone about important of security. Key is to see typical flow that
   we face in technology (especially in security area): 
 
-  ```
-  mathematics -> 
-  proof of concept software -> 
-  mature software -> 
-  hardware acceleration -> 
-  hardware implementation
-  ```
+```
+mathematics -> 
+proof of concept software -> 
+mature software -> 
+hardware acceleration -> 
+hardware implementation
+```
 
   AWS IoT cryptography is not trivial and doing it right is even more complex.
-  Using crypt chips like ECC580A simplify whole workflow.
+  Using crypt chips like ECC508A should simplify whole workflow.
 
 Initial idea for this blog post was to triage ECC508A with some Linux or mbed
 OS enabled platform. Atmel SAM G55 seem to have support in mbed OS
 [here](https://github.com/ARMmbed/target-atmel-samg55j19-gcc), but diving into
-[CryptAuthentication](http://www.atmel.com/products/security-ics/cryptoauthentication/default.aspx)
+[CryptoAuthentication](http://www.atmel.com/products/security-ics/cryptoauthentication/default.aspx)
 with development stack that I'm not sure work fine is not best choice. That's
-why I have to try stuff on Windows 10 VM and then after understanding things
-better I will move to something more convenient.
+why I had to try stuff on Windows 10 and then after understanding things
+better I move to something more convenient.
 
-I will mostly rely on [ATECC508A Node Authentication Example Using Asymmetric PKI](http://www.atmel.com/applications/iot/aws-zero-touch-secure-provisioning-platform/default.aspx?tab=documents)
+I mostly relied on [ATECC508A Node Authentication Example Using Asymmetric PKI](http://www.atmel.com/applications/iot/aws-zero-touch-secure-provisioning-platform/default.aspx?tab=documents)
 Application Note.
 
 What we need to start is:
@@ -114,19 +114,19 @@ Error       sam/sleepmgr.h: No such file or directory   node-auth-basic \
 C:\(...)\cryptoauth-node-auth-basic\node-auth-basic\src\ASF\common\services\sleepmgr\sleepmgr.h 53
 ```
 
-With above problem I started to think I'm gettting really useless expertise.
+With above problem I started to think I'm getting really useless expertise.
 The issue was pretty clear - we compile for SAMG not for SAMD and we need
 different header.
 
 ### ASF installation madness
 
 Moreover when I tried to reinstall ASF I had to register on Atmel page which
-complained on LastPass and indentify my location as Russian Federation (despite
-I'm in Poland). Of course Atmel Studio open Edge to login me into their wesite.
-This whole IDE sucks and do a lot of demage to Atmel - how I can recommend them
-after all that hassle ? Then after going thour password/login Windows 10 detect
+complained on LastPass and identify my location as Russian Federation (despite
+I'm in Poland). Of course Atmel Studio open Edge to login me into their website.
+This whole IDE sucks and do a lot of damage to Atmel - how I can recommend them
+after all that hassle ? Then after going through password/login Windows 10 detect
 that something is wrong with Atmel Studio and decided that it have to be
-restarted. What I finally started intallation I get this:
+restarted. What I finally started installation I get this:
 
 ```
 2016-11-26 23:46:10 - Microsoft VSIX Installer
@@ -195,7 +195,7 @@ manufacturer. It happens that manufacturer didn't prepare infrastructure and
 documentation to be able to evaluate product in advertised way. Initial triage
 was needed for implementation in more complex system with Embedded Linux on
 board. Luckily during whole this process I found
-[cryptoauth-openssl-enginea](https://github.com/AtmelCSO/cryptoauth-openssl-engine)
+[cryptoauth-openssl-engine](https://github.com/AtmelCSO/cryptoauth-openssl-engine)
 Github repository. Which I will evaluate in next posts.
 
 If you will struggle with similar problems and pass through some mentioned
