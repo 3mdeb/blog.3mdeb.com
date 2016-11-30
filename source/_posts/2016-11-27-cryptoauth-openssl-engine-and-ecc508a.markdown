@@ -119,11 +119,35 @@ cd cryptoauth-openssl-engine
 time make |& tee build.log
 ```
 
-This takes ~6min on i.MX6DL (2x ARM® Cortex™-A9 up to 1 GHz).
+This takes ~14min on i.MX6DL (2x ARM® Cortex™-A9 up to 1 GHz).
 
 Unfortunately compilation failed on my platform with errors like this:
 
 ```console
+/hashes' make[3]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/lib/crypto'
+/bin/sh: 1: make[3]:: not found
+/bin/sh: 1: make[4]:: not found
+Makefile:18: recipe for target 'all' failed
+make[3]: [all] Error 127 (ignored)
+(...)
+make[4]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/test/atcacert'
+make[4]: Entering directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/test/tls'
+gcc -I. -I.. -I../.. -I../../.. -I../../../.. -I../../lib -I../lib -fPIC -g -O0 -DATCA_HAL_KIT_CDC -DATCAPRINTF -o atcatls_tests.o -c atcatls_tests.c
+make[4]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/test/tls'
+make[4]: Entering directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/test/sha-byte-test-vectors'
+make[4]: *** No targets specified and no makefile found.  Stop.
+make[4]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/test/sha-byte-test-vectors'
+../Makefile.generic:14: recipe for target 'all' failed
+make[3]: *** [all] Error 2
+make[3]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/test'
+Makefile:22: recipe for target 'tgt_test' failed
+make[2]: *** [tgt_test] Error 2
+make[2]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib'
+Makefile:39: recipe for target 'tgt_cryptoauthlib' failed
+make[1]: *** [tgt_cryptoauthlib] Error 2
+make[1]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc'
+Makefile:104: recipe for target 'build_engine_atecc' failed
+make: *** [build_engine_atecc] Error 2
 ```
 
 This error is not consistent and objects that had problem vary. On x86
