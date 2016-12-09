@@ -38,31 +38,29 @@ Most development board have i2c connection exposed. Wiring is very simple all
 you need is connect Vcc, GND, SCL and SDA.
 
 After connecting Cryptoauth Xplained Pro your distro should show difference on
-one of i2c buses. In my case it was `/dev/i2c-2`:
+one of i2c buses. In my case it was `/dev/i2c-1`:
 
 ```
-debian@linux:~$ sudo i2cdetect  2
-[sudo] password for debian:
+pi@raspberrypi:~/cryptoauth-openssl-engine $ i2cdetect 1
 WARNING! This program can confuse your I2C bus, cause data loss and worse!
-I will probe file /dev/i2c-2.
+I will probe file /dev/i2c-1.
 I will probe address range 0x03-0x77.
-Continue? [Y/n]
+Continue? [Y/n] 
      0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
-00:          -- -- -- -- -- -- -- -- -- -- -- -- --
-10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-40: -- -- -- -- -- -- -- -- 48 -- -- -- -- -- -- --
-50: 50 -- -- -- -- -- -- -- 58 -- -- -- -- -- -- --
-60: -- -- -- -- 64 -- -- -- -- -- -- -- -- -- -- --
+00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: 50 -- -- -- -- -- -- -- 58 -- -- -- -- -- -- -- 
+60: -- -- -- -- 64 -- -- -- -- -- -- -- -- -- -- -- 
 70: -- -- -- -- -- -- -- --
 ```
 
 When tried to read not provisioned device I saw something like this:
 
 ```
-debian@linux:~/cryptoauth-openssl-engine$ sudo i2cdump 2 0x50
-No size specified (using byte-data access)
+pi@raspberrypi:~/cryptoauth-openssl-engine $ sudo i2cdump 2 0x50
 WARNING! This program can confuse your I2C bus, cause data loss and worse!
 I will probe file /dev/i2c-2, address 0x50, mode byte
 Continue? [Y/n] 
@@ -70,8 +68,7 @@ Continue? [Y/n]
 00: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff    ................
 (...)
 f0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff    ................
-@linux:~/cryptoauth-openssl-engine$ sudo i2cdump 2 0x58
-No size specified (using byte-data access)
+pi@raspberrypi:~/cryptoauth-openssl-engine $ sudo i2cdump 2 0x58
 WARNING! This program can confuse your I2C bus, cause data loss and worse!
 I will probe file /dev/i2c-2, address 0x58, mode byte
 Continue? [Y/n] 
@@ -80,8 +77,7 @@ Continue? [Y/n]
 10: 11 33 43 04 11 33 43 04 11 33 43 04 11 33 43 04    ?3C??3C??3C??3C?
 (...)
 f0: 11 33 43 04 11 33 43 04 11 33 43 04 11 33 43 04    ?3C??3C??3C??3C?
-debian@linux:~/cryptoauth-openssl-engine$ sudo i2cdump 2 0x64
-No size specified (using byte-data access)
+pi@raspberrypi:~/cryptoauth-openssl-engine $ sudo i2cdump 2 0x64
 WARNING! This program can confuse your I2C bus, cause data loss and worse!
 I will probe file /dev/i2c-2, address 0x64, mode byte
 Continue? [Y/n] 
@@ -99,11 +95,14 @@ Lines that repeat were replaced with `(...)`.
 This library was created by Atmel to provide support for TLS v1.2 connection by
 utilizing ECC508A crypto coprocessor. To skip cross-compilation hassle I decide
 to compile natively on my Embedded Linux. If you use development board with
-recent SoC this should not be problem. My platform was i.MX6DL based, so I had
-decent power behind. As Embedded Linux I used Debian image provided by vendor,
-but my target it implementation of below work in Yocto image.
+recent SoC this should not be problem. My platform was RaspberryPi 2 with
+`2016-11-25-raspbian-jessie`. To prepare my distro I needed additional steps:
 
-To prepare my distro I needed additional steps:
+```
+sudo raspi-config
+```
+
+Choose `Advanced Options -> I2C` and enable i2c interface.
 
 ```console
 sudo apt-get update
@@ -119,39 +118,48 @@ cd cryptoauth-openssl-engine
 time make |& tee build.log
 ```
 
-This takes ~14min on i.MX6DL (2x ARM® Cortex™-A9 up to 1 GHz).
+This takes ~17min.
 
-Unfortunately compilation failed on my platform with errors like this:
+## Provisioning
 
-```console
-/hashes' make[3]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/lib/crypto'
-/bin/sh: 1: make[3]:: not found
-/bin/sh: 1: make[4]:: not found
-Makefile:18: recipe for target 'all' failed
-make[3]: [all] Error 127 (ignored)
-(...)
-make[4]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/test/atcacert'
-make[4]: Entering directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/test/tls'
-gcc -I. -I.. -I../.. -I../../.. -I../../../.. -I../../lib -I../lib -fPIC -g -O0 -DATCA_HAL_KIT_CDC -DATCAPRINTF -o atcatls_tests.o -c atcatls_tests.c
-make[4]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/test/tls'
-make[4]: Entering directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/test/sha-byte-test-vectors'
-make[4]: *** No targets specified and no makefile found.  Stop.
-make[4]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/test/sha-byte-test-vectors'
-../Makefile.generic:14: recipe for target 'all' failed
-make[3]: *** [all] Error 2
-make[3]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib/test'
-Makefile:22: recipe for target 'tgt_test' failed
-make[2]: *** [tgt_test] Error 2
-make[2]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc/cryptoauthlib'
-Makefile:39: recipe for target 'tgt_cryptoauthlib' failed
-make[1]: *** [tgt_cryptoauthlib] Error 2
-make[1]: Leaving directory '/home/debian/cryptoauth-openssl-engine/engine_atecc'
-Makefile:104: recipe for target 'build_engine_atecc' failed
-make: *** [build_engine_atecc] Error 2
+Let's switch context to crypt device provisioning. As it can be found in logs,
+by dumping registers of i2c devices, chips are not in operational state. 
+
+Unfortunately Root and Signer module can be used only with Windows application.
+I had to run it in virtual machine. Of course first thing that came to mind is
+to sniff traffic that go through USB bus. To do that Wireshark and `usbmon`
+module can be used.
+
+### USB monitor setup
+
+```
+sudo modprobe usbmon
 ```
 
-This error is not consistent and objects that had problem vary. On x86
-everything compiles without errors so it have to be toolchain issue.
+This should cause additional devices appear in `/dev` like `/dev/usbmon0`,
+`/dev/usbmon1` etc. Numbers means bus that you can sniff. So lets identify bus:
+
+```
+$ lsusb|grep microchip -i
+Bus 003 Device 010: ID 04d8:0f30 Microchip Technology, Inc.
+```
+
+Then running Wireshark on `/dev/usbmon3` should show you flying URBs
+
+### AT88CKECCROOT
+
+Under Linux it identify itself as:
+
+```
+[14344.115498] usb 3-1.3.2: new full-speed USB device number 10 using ehci-pci
+[14344.239913] usb 3-1.3.2: New USB device found, idVendor=04d8, idProduct=0f30
+[14344.239915] usb 3-1.3.2: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[14344.239916] usb 3-1.3.2: Product: AWS Root dongle
+[14344.239917] usb 3-1.3.2: Manufacturer: Microchip
+```
+
+Unfortun
+
 
 ### Lack of support for Linux i2c device
 
