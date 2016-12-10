@@ -144,7 +144,18 @@ $ lsusb|grep microchip -i
 Bus 003 Device 010: ID 04d8:0f30 Microchip Technology, Inc.
 ```
 
-Then running Wireshark on `/dev/usbmon3` should show you flying URBs
+Then running Wireshark on `/dev/usbmon3` should show you flying URBs. Analyzing
+this traffic should help in developing `Atmel Secure Provisioning Utilies` and
+`Atmel Secure Provisioning Server` for Linux and other platforms. Legal
+aftermath should be taken into consideration, but AFAIK 2 main points for
+reversing USB and TCP/IP communication between provisioning client, server and
+USB Root/Signer module are:
+
+* there is not Linux/Mac implementation of this application, so user is forced
+  to use Windows
+* exact communication is not described and it may be implemented in insecure
+  manner (ie. it may contain communication with outside server), so reasonable
+  researcher should check if solution sold is good for his/her use
 
 ### AT88CKECCROOT
 
@@ -158,7 +169,16 @@ Under Linux it identify itself as:
 [14344.239917] usb 3-1.3.2: Manufacturer: Microchip
 ```
 
-Unfortun
+### Atmel sales magic
+
+TODO: picture
+
+When taking this apart it happen to be just
+[AT88CK590](http://www.atmel.com/tools/AT88CK590.aspx), what is interesting is
+that this `AT88CK590` cost 20 USD but `AT88CKECCROOT` that seems to provide
+3x`AT88CK590` cost [149.95USD](http://www.atmel.com/tools/AT88CKECCROOT-SIGNER.aspx?tab=overview)
+what's even more interesting is that I see no difference between
+`AT88CKECCROOT` and `AT88CKECCSIGNER`, but further one cost 99.95USD. This looks like sales magick.
 
 
 ### Lack of support for Linux i2c device
