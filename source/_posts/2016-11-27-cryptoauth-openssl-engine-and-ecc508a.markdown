@@ -120,6 +120,44 @@ time make |& tee build.log
 
 This takes ~17min.
 
+I also run tests to check if everything is working fine:
+
+```
+$ make test
+```
+
+Not all tests pass:
+
+```
+tls1_setup_key_block()
+client random
+AA 63 C1 66 13 6B 5F 4B DF F3 33 E2 33 EB 33 AD
+ED 99 A5 B1 26 E8 8B 33 9D 91 F6 5E AA 08 A4 F1
+server random
+EE DB BC 1B 79 89 E4 A1 3A 0B DC EF F1 91 2E B6
+61 FA 5C D7 B6 EA A0 E7 7A 6E B4 74 5D ED 0B 21
+pre-master
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+tls1_generate_key_block() ==> 48 byte master_key =
+        000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+ERROR in CLIENT
+1995519184:error:1411C146:SSL routines:tls1_prf:unsupported digest type:t1_enc.c:276:
+1995519184:error:1411C146:SSL routines:tls1_prf:unsupported digest type:t1_enc.c:276:
+tls1_enc(1)
+TLSv1.2, cipher TLSv1/SSLv3 ECDHE-RSA-AES256-GCM-SHA384, 2048 bit RSA
+1 handshakes of 256 bytes done
+Makefile:297: recipe for target 'test_ssl' failed
+make[2]: *** [test_ssl] Error 1
+make[2]: Leaving directory '/home/pi/cryptoauth-openssl-engine/openssl_1_0_2/test'
+Makefile:460: recipe for target 'tests' failed
+make[1]: *** [tests] Error 2
+make[1]: Leaving directory '/home/pi/cryptoauth-openssl-engine/openssl_1_0_2'
+Makefile:88: recipe for target 'test_openssl' failed
+make: *** [test_openssl] Error 2
+```
+
 ## Provisioning
 
 Let's switch context to crypt device provisioning. As it can be found in logs,
@@ -179,6 +217,29 @@ that this `AT88CK590` cost 20 USD but `AT88CKECCROOT` that seems to provide
 3x`AT88CK590` cost [149.95USD](http://www.atmel.com/tools/AT88CKECCROOT-SIGNER.aspx?tab=overview)
 what's even more interesting is that I see no difference between
 `AT88CKECCROOT` and `AT88CKECCSIGNER`, but further one cost 99.95USD. This looks like sales magick.
+
+This discovery brings me to conclusion that sniffing USB is not needed since
+`AT90USB1287`, which is heart of `AT88CK590` can be supported under Linux.
+There are even some signs of it in Google. Documentation also reveal protocol
+for communication with server, so the only missing part is OpenSSL handling and
+HAL in CryptoAuth Lib for `AT88CK590`. At least this was my understanding at
+that point.
+
+Of course I didn't had time to hack solution for Linux, which would be
+educational, that's why I tried with Windows VM and Atmel Provisioning Utilies
+and Server. Unfortunately Windows VM was not able to detect USB keys, so the
+only option was using Windows machine or reverse what is going within
+`AT90USB1287` which is heart of `AT88CK590`.
+
+Luckily `AT88CK590` modules have JTAG exposed - more information can be found
+on [schematics](http://www.atmel.com/Images/Atmel-CryptoAuth-AT88CK590_Schematics.pdf).
+
+### Using Atmel software
+
+I started with [Quic Start
+Guide](http://www.atmel.com/Images/Atmel-8966-CryptoAuth-Security-Provisioning-Kits-Quick-Start-Guide.pdf).
+But googling lead me also to very interesting documents like [this rs-online traning](http://www.rs-online.com/designspark/assets/ds-assets/uploads/knowledge-items/why-iot-and-everything-else-requires-strong-authentication/Atmel%20Crypto%20Products%20REAL.EASY%20Training%20Manual%202Q2015%20r6.pdf).
+And there are even more recent materials that provide a lot of information about Atmel Security chips [here](http://www.slideshare.net/BillBoldt/crypto-products-backgrounder-r0).
 
 
 ### Lack of support for Linux i2c device
