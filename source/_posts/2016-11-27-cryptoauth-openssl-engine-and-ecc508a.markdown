@@ -236,8 +236,7 @@ on [schematics](http://www.atmel.com/Images/Atmel-CryptoAuth-AT88CK590_Schematic
 
 ### Using Atmel software
 
-I started with [Quic Start
-Guide](http://www.atmel.com/Images/Atmel-8966-CryptoAuth-Security-Provisioning-Kits-Quick-Start-Guide.pdf).
+I started with [Quic Start Guide](http://www.atmel.com/Images/Atmel-8966-CryptoAuth-Security-Provisioning-Kits-Quick-Start-Guide.pdf).
 But googling lead me also to very interesting documents like [this rs-online traning](http://www.rs-online.com/designspark/assets/ds-assets/uploads/knowledge-items/why-iot-and-everything-else-requires-strong-authentication/Atmel%20Crypto%20Products%20REAL.EASY%20Training%20Manual%202Q2015%20r6.pdf).
 And there are even more recent materials that provide a lot of information about Atmel Security chips [here](http://www.slideshare.net/BillBoldt/crypto-products-backgrounder-r0).
 
@@ -267,3 +266,27 @@ and what was included in engine. I see very little difference like:
 I did fork and update CryptoAuth Library in my repository. You can find update
 version
 [here](https://github.com/3mdeb/cryptoauth-openssl-engine/tree/cryptoauthlib_20160108)>
+
+### libcrypti2c
+
+Further search lead me to [libcrypti2c](https://github.com/cryptotronix/libcrypti2c) from
+[Cryptotronix](https://cryptotronix.com/), which itself is very interesting
+business which focus on IoT security. I found very interesting pages and
+presentation following Cryptotronix:
+
+* [CrypTech Open Hardware Security Module (Alpha Board)](https://www.crowdsupply.com/cryptech/open-hardware-security-module)
+* [EClet](https://github.com/cryptotronix/EClet)
+
+I tried to compile library on my Raspbian:
+
+```
+sudo apt-get update && sudo apt-get upgrade
+# this library installs really long
+sudo apt-get install gnulib libgcrypt20-dev libxml2-dev
+git clone https://github.com/cryptotronix/libcrypti2c.git
+cd libcrypti2c
+./autogen.sh
+./configure
+make -j$(nproc)
+```
+
