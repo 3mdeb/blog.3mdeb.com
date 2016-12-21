@@ -160,7 +160,7 @@ make: *** [test_openssl] Error 2
 
 ## Provisioning
 
-Let's switch context to crypt device provisioning. As it can be found in logs,
+Let's switch context to crypto device provisioning. As it can be found in logs,
 by dumping registers of i2c devices, chips are not in operational state. 
 
 Unfortunately Root and Signer module can be used only with Windows application.
@@ -240,6 +240,14 @@ I started with [Quic Start Guide](http://www.atmel.com/Images/Atmel-8966-CryptoA
 But googling lead me also to very interesting documents like [this rs-online traning](http://www.rs-online.com/designspark/assets/ds-assets/uploads/knowledge-items/why-iot-and-everything-else-requires-strong-authentication/Atmel%20Crypto%20Products%20REAL.EASY%20Training%20Manual%202Q2015%20r6.pdf).
 And there are even more recent materials that provide a lot of information about Atmel Security chips [here](http://www.slideshare.net/BillBoldt/crypto-products-backgrounder-r0).
 
+### WolfSSL and related work
+
+Digging more in various repositories and documentation lead me to WoldSSL
+support for ECC508A. Interesting thing I found in [David Garske
+repository](https://github.com/dgarske/atmel) which contain provisioning code
+for ECC508A in [provision.c](https://github.com/dgarske/atmel/blob/master/cryptoauthlib/certs/provision.c).
+It would be interesting to walk through this and see how this implement
+provisioning workflow described in Atmel documentation.
 
 ### Lack of support for Linux i2c device
 
@@ -251,7 +259,8 @@ HALs. There are dozen of them so it is not big problem, but still additional
 work to just evaluate module.
 
 I did comparison of [CryptoAuthLib Firmware Library 20160108](http://www.atmel.com/images/Atmel-CryptoAuthLib-Firmware_20160108.zip)
-and what was included in engine. I see very little difference like:
+and what was included in OpenSSL engine implementation. I see quite a lot of
+difference:
 
 * Makefiles were added to alldirectories
 * Bunch of HALs for non Linux targets (ie. i2c bitbang, samd21, sam4s, samv71,
@@ -266,6 +275,11 @@ and what was included in engine. I see very little difference like:
 I did fork and update CryptoAuth Library in my repository. You can find update
 version
 [here](https://github.com/3mdeb/cryptoauth-openssl-engine/tree/cryptoauthlib_20160108)>
+
+I did fork and updated CryptoAuth Library in my repository. You can find update
+version [here](https://github.com/3mdeb/cryptoauth-openssl-engine/tree/cryptoauthlib_20160108)>
+
+## Starting with CryptAuthLib under Linux
 
 ### libcrypti2c
 
@@ -289,4 +303,3 @@ cd libcrypti2c
 ./configure
 make -j$(nproc)
 ```
-
