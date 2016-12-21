@@ -236,7 +236,7 @@ on [schematics](http://www.atmel.com/Images/Atmel-CryptoAuth-AT88CK590_Schematic
 
 ### Using Atmel software
 
-I started with [Quic Start Guide](http://www.atmel.com/Images/Atmel-8966-CryptoAuth-Security-Provisioning-Kits-Quick-Start-Guide.pdf).
+I started with [Quick Start Guide](http://www.atmel.com/Images/Atmel-8966-CryptoAuth-Security-Provisioning-Kits-Quick-Start-Guide.pdf).
 But googling lead me also to very interesting documents like [this rs-online traning](http://www.rs-online.com/designspark/assets/ds-assets/uploads/knowledge-items/why-iot-and-everything-else-requires-strong-authentication/Atmel%20Crypto%20Products%20REAL.EASY%20Training%20Manual%202Q2015%20r6.pdf).
 And there are even more recent materials that provide a lot of information about Atmel Security chips [here](http://www.slideshare.net/BillBoldt/crypto-products-backgrounder-r0).
 
@@ -307,10 +307,10 @@ sudo make install
 cd ..
 git clone https://github.com/cryptotronix/libcrypti2c.git
 cd libcrypti2c
-git checkout develop
 ./autogen.sh
 ./configure
 make -j$(nproc)
+sudo make install
 ```
 
 ### EClet
@@ -319,7 +319,6 @@ make -j$(nproc)
 sudo apt-get install check markdown html2text
 git clone https://github.com/cryptotronix/EClet.git
 cd EClet
-git checkout develop
 ./autogen.sh
 ./configure
 make
@@ -337,5 +336,23 @@ pi@raspberrypi:~/EClet $ ./eclet -a 0x64 state
 Personalized
 ```
 
-It's hard to say if this is correct result. I had to dig deeper to understand
+It's hard to say if this was correct result. I had to dig deeper to understand
 how it works.
+
+I tried to read serial numbers:
+
+```
+pi@raspberrypi:~/EClet $ ./eclet -a 0x50 serial-num
+eclet: src/i2c.c:100: lca_wakeup: Assertion `lca_is_crc_16_valid(buf, 2, buf+2)' failed.
+Aborted
+pi@raspberrypi:~/EClet $ ./eclet -a 0x58 serial-num
+01237B3D43B2AB9DEE
+pi@raspberrypi:~/EClet $ ./eclet -a 0x64 serial-num
+0123236C89536F7CEE
+```
+
+I also tried `develop` branch which at that point failed even to read serial
+number, but didn't assert on ECC508A checking.
+
+Unfortunately those brand new CryptoAuth Xplained Pro boards got `personalized`
+status, which seems to no be correct IIUC. I posted [issue to EClet repo](https://github.com/cryptotronix/EClet/issues/17).
