@@ -296,10 +296,46 @@ I tried to compile library on my Raspbian:
 ```
 sudo apt-get update && sudo apt-get upgrade
 # this library installs really long
-sudo apt-get install gnulib libgcrypt20-dev libxml2-dev
+sudo apt-get install gnulib libgcrypt20-dev libxml2-dev libglib2.0-dev \
+build-essential libsodium-dev guile-2.0-dev
+git clone https://github.com/cryptotronix/yacl.git
+cd yacl
+./autogen.sh
+./configure --with-libglib -with-guile --with-libsodium --enable-tests
+make
+sudo make install
+cd ..
 git clone https://github.com/cryptotronix/libcrypti2c.git
 cd libcrypti2c
+git checkout develop
 ./autogen.sh
 ./configure
 make -j$(nproc)
 ```
+
+### EClet
+
+```
+sudo apt-get install check markdown html2text
+git clone https://github.com/cryptotronix/EClet.git
+cd EClet
+git checkout develop
+./autogen.sh
+./configure
+make
+```
+
+Quick check what are the replies from my device CryptoAuth Xplained Pro
+
+```
+pi@raspberrypi:~/EClet $ ./eclet -a 0x50 state
+eclet: src/i2c.c:100: lca_wakeup: Assertion `lca_is_crc_16_valid(buf, 2, buf+2)' failed.
+Aborted
+pi@raspberrypi:~/EClet $ ./eclet -a 0x58 state
+Personalized
+pi@raspberrypi:~/EClet $ ./eclet -a 0x64 state
+Personalized
+```
+
+It's hard to say if this is correct result. I had to dig deeper to understand
+how it works.
