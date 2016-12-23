@@ -249,6 +249,56 @@ for ECC508A in [provision.c](https://github.com/dgarske/atmel/blob/master/crypto
 It would be interesting to walk through this and see how this implement
 provisioning workflow described in Atmel documentation.
 
+## Atmel Software Framework
+
+Atmel did great work with AVR and community around that. We get all Linux tools
+necessary for building application on those small MCUs. But it looks like with
+ARMs Atmel lost feeling about things developers need and quality they should
+provide. First ASF is provided only after logging in, second it happens that
+website is not able to log you in:
+
+```
+maintenance.aspx?ErrorCode=ErrorUnknownException&status=AuthenticationFailed
+```
+
+Causing blocking issue on embedded engineer side. If someone hit that during
+evaluation this can seriously damage brand view of this person.
+
+Luckily I found `xdk-asf-3.32.0` on one of my machines.
+
+### EDBG programmer
+
+Luckily googling for ASF development under Linux I found [EDBG](https://github.com/ataradov/edbg) project:
+
+```
+git clone https://github.com/ataradov/edbg.git
+cd edbg
+make all
+sudo cp 90-atmel-edbg.rules /etc/udev/rules.d
+```
+
+Then connect board and you should see something like that in `dmesg`:
+
+```
+[47626.485486] usb 3-10.1.1: new high-speed USB device number 9 using xhci_hcd
+[47626.585730] usb 3-10.1.1: config 1 interface 2 altsetting 0 bulk endpoint 0x84 has invalid maxpacket 64
+[47626.585733] usb 3-10.1.1: config 1 interface 2 altsetting 0 bulk endpoint 0x5 has invalid maxpacket 64
+[47626.586072] usb 3-10.1.1: New USB device found, idVendor=03eb, idProduct=2111
+[47626.586074] usb 3-10.1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[47626.586075] usb 3-10.1.1: Product: EDBG CMSIS-DAP
+[47626.586076] usb 3-10.1.1: Manufacturer: Atmel Corp.
+[47626.586076] usb 3-10.1.1: SerialNumber: ATML2130021800025687
+[47626.587836] hid-generic 0003:03EB:2111.0004: hiddev0,hidraw3: USB HID v1.11 Device [Atmel Corp. EDBG CMSIS-DAP] on usb-0000:00:14.0-10.1.1/input0
+[47626.661842] cdc_acm 3-10.1.1:1.1: ttyACM0: USB ACM device
+[47626.662618] usbcore: registered new interface driver cdc_acm
+[47626.662621] cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
+```
+
+### Blinky LED on Linux
+
+```
+```
+
 ### Lack of support for Linux i2c device
 
 CryptoAuth OpenSSL Engines published by Atmel covers only one case when
