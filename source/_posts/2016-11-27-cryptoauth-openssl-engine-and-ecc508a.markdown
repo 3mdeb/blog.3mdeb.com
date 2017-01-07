@@ -406,3 +406,95 @@ number, but didn't assert on ECC508A checking.
 
 Unfortunately those brand new CryptoAuth Xplained Pro boards got `personalized`
 status, which seems to no be correct IIUC. I posted [issue to EClet repo](https://github.com/cryptotronix/EClet/issues/17).
+
+### Linux kernel module
+
+Following advise from Josh (owner of Cryptotronix) I tried his Linux kernel
+driver on my RPi.
+
+First you need kernel, toolchain and module:
+
+```
+git clone https://github.com/raspberrypi/linux.git
+git clone https://github.com/raspberrypi/tools.git
+git clone https://github.com/cryptotronix/atsha204-i2c.git
+export PATH=$PATH:$PWD/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+```
+
+Get config from your RPi:
+
+```
+sudo modprobe configs
+zcat /proc/config.gz > rpi_config
+scp rpi_config user@myhost:/home/user
+```
+
+Copy your config to Raspberry kernel directory:
+
+```
+cd linux
+cp /home/user/rpi_config .config
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j$(nproc) deb-pkg
+scp ../*.deb pi@192.168.0.100:/home/pi
+```
+
+On RPi:
+
+```
+sudo dpkg -i *.deb
+```
+
+This take some time
+
+`atsha204-i2c` cross-compilation requires patch for Makefile:
+
+```
+diff --git a/Makefile b/Makefile
+index 8f8a6f52516d..ff489ae09fdf 100644
+--- a/Makefile
++++ b/Makefile
+@@ -3,13 +3,13 @@ KDIR ?= /lib/modules/`uname -r`/build
+ MDIR ?= /lib/modules/`uname -r`/kernel/drivers/char/
+ SRC = atsha204-i2c.c atsha204-i2c.h
+ # Enable CFLAG to run DEBUG MODE
+-#CFLAGS_atsha204-i2c.o := -DDEBUG
++CFLAGS_atsha204-i2c.o := -DDEBUG
+
+ all:
+-       make -C $(KDIR) M=$$PWD modules
++       make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -C $(KDIR) M=$$PWD modules
+ #      make testing code
+-       gcc -c $$PWD/test/test.c
+-       gcc $$PWD/test/test.c -o $$PWD/test/test
++       arm-linux-gnueabihf-gcc -c $$PWD/test/test.c
++       arm-linux-gnueabihf-gcc $$PWD/test/test.c -o $$PWD/test/test
+
+ clean:
+        make -C $(KDIR) M=$$PWD clean
+```
+
+Then module should correctly compile:
+
+```
+[14:20:06] pietrushnic:atsha204-i2c git:(master*) $ KDIR=../linux make                    
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -C ../linux M=$PWD modules
+make[1]: Entering directory '/home/pietrushnic/path/to/rpi_crypto/linux'
+  Building modules, stage 2.
+  MODPOST 1 modules
+make[1]: Leaving directory '/home/pietrushnic/path/to/rpi_crypto/linux'
+arm-linux-gnueabihf-gcc -c $PWD/test/test.c
+arm-linux-gnueabihf-gcc $PWD/test/test.c -o $PWD/test/test
+```
+
+Copy module to Raspberry:
+
+```
+scp atsha204-i2c.ko pi@192.168.0.100:/home/pi
+```
+
+On RPi move module to character drivers directory:
+
+```
+
+```
+
