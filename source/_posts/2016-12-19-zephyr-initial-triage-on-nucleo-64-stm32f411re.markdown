@@ -2,7 +2,7 @@
 author: Piotr Król
 layout: post
 title: "Zephyr initial triage on Nucleo-64 STM32F411RE"
-date: 2016-12-19 22:14:10 +0100
+date: 2017-01-14 22:14:10 +0100
 comments: true
 categories: zephyr stm32 linux embedded
 ---
