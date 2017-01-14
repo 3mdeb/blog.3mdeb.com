@@ -9,14 +9,15 @@ categories: zephyr stm32 linux embedded
 
 As I mention in [previous post](2016/11/23/starting-with-mdeb-os-for-linux-and-command-line-enthusiast)
 [Zephyr RTOS](https://www.zephyrproject.org/) is an interesting initiative
-started by Intel, NXP and couple other strong organizations. With so strong
-background there I see no different way for this RTOS then to be significant
-player on IoT arena.
+started by Intel, NXP and couple other strong organizations. With so well
+founded background future for this RTOS should look bright and I think it will
+quickly became important player on IoT arena.
 
 Because of that it is worth to dig little bit deeper in this RTOS and see what
-problems we faced when trying to develop for STM32 F411RE. As always I will
-present perspective of Linux enthusiast trying to use Debian Linux and command
-line for development as I did for [mbed OS](2016/11/23/starting-with-mdeb-os-for-linux-and-command-line-enthusiast).
+problems we faced when trying to develop for some well known development board.
+I choose STM32 F411RE mainly because it start to gather dust and some customers
+ask about it recently. As always I will present perspective of Linux enthusiast
+trying to use Debian Linux and command line for development as I did for [mbed OS](2016/11/23/starting-with-mdeb-os-for-linux-and-command-line-enthusiast).
 
 ## Let's start
 
@@ -28,7 +29,7 @@ recent `arm` branch:
 
 ```
 git fetch origin arm
-git co arm
+git checkout arm
 ```
 
 Then `make help` should show `f411re`:
@@ -165,8 +166,8 @@ make[1]: Leaving directory '/home/pietrushnic/storage/wdc/projects/2016/acme/zep
 
 ## Hello world verification
 
-Unfortunately I was not able to verify if `hello_world` example works. I posted
-my experience on [mailing list](https://lists.zephyrproject.org/archives/list/devel@lists.zephyrproject.org/thread/3U5SX62HCTJFTQEAJX6DR6P5T45PZXUH/)
+Unfortunately I was not able to verify if `hello_world` example works at first
+time. I posted my experience on [mailing list](https://lists.zephyrproject.org/archives/list/devel@lists.zephyrproject.org/thread/3U5SX62HCTJFTQEAJX6DR6P5T45PZXUH/)
 and after couple days I received information that there was bug in clock
 initialisation and fix was pushed to gerrit.
 
@@ -181,6 +182,9 @@ source zephyr-env.sh
 cd samples/hello_world
 make BOARD=nucleo_f411re
 ```
+
+Unfortunately `arm` branch seems to rebase or change in not linear manner, so
+just pulling it cause lot of conflicts.
 
 After correctly building I flashed binary to board:
 
@@ -246,6 +250,8 @@ Result was:
 ***** BOOTING ZEPHYR OS v1.6.99 - BUILD: Jan 14 2017 22:03:14 *****
 Hello World! arm
 ```
+
+The same method worked with `basic/blinky` example.
 
 ## Summary
 
