@@ -264,13 +264,88 @@ maintenance.aspx?ErrorCode=ErrorUnknownException&status=AuthenticationFailed
 Causing blocking issue on embedded engineer side. If someone hit that during
 evaluation this can seriously damage brand view of this person.
 
-Luckily I found `xdk-asf-3.32.0` on one of my machines.
+Finally Atmel finished maintenance and I was able to download
+[ASF](http://www.atmel.com/tools/avrsoftwareframework.aspx) and
+[Toolchain](http://www.atmel.com/tools/atmel-arm-toolchain.aspx?tab=overview).
+
+Archive for `3.33.0.50` was broken so to unpack recent ASF I needed:
+
+```
+sudo apt-get install fastjar
+jar xvf asf-standalone-archive-3.33.0.50.zip
+```
+
+To extract toolchain:
+
+```
+tar xvf arm-gnu-toolchain-5.3.1.487-linux.any.x86_64.tar.gz
+export PATH=$PATH:$PWD/arm-none-eabi/bin
+```
+
+### Blinky LED on Linux
+
+```
+$ cd xdk-asf-3.33.0/sam0/applications/led_toggle/samd21_xplained_pro/gcc
+$ make
+MKDIR   common/utils/interrupt/
+CC      common/utils/interrupt/interrupt_sam_nvic.o
+MKDIR   sam0/applications/led_toggle/
+CC      sam0/applications/led_toggle/led_toggle.o
+MKDIR   sam0/boards/samd21_xplained_pro/
+CC      sam0/boards/samd21_xplained_pro/board_init.o
+MKDIR   sam0/drivers/port/
+CC      sam0/drivers/port/port.o
+MKDIR   sam0/drivers/system/clock/clock_samd21_r21_da_ha1/
+CC      sam0/drivers/system/clock/clock_samd21_r21_da_ha1/clock.o
+CC      sam0/drivers/system/clock/clock_samd21_r21_da_ha1/gclk.o
+MKDIR   sam0/drivers/system/interrupt/
+CC      sam0/drivers/system/interrupt/system_interrupt.o
+MKDIR   sam0/drivers/system/pinmux/
+CC      sam0/drivers/system/pinmux/pinmux.o
+CC      sam0/drivers/system/system.o
+MKDIR   sam0/utils/cmsis/samd21/source/gcc/
+CC      sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o
+CC      sam0/utils/cmsis/samd21/source/system_samd21.o
+MKDIR   sam0/utils/syscalls/gcc/
+CC      sam0/utils/syscalls/gcc/syscalls.o
+LN      led_toggle_flash.elf
+SIZE    led_toggle_flash.elf
+led_toggle_flash.elf  :
+section              size         addr
+.text               0xa58          0x0
+.relocate             0x4   0x20000000
+.bss                 0x3c   0x20000004
+.stack             0x2000   0x20000040
+.ARM.attributes      0x28          0x0
+.comment             0x2b          0x0
+.debug_info        0xa640          0x0
+.debug_abbrev      0x1593          0x0
+.debug_aranges      0x280          0x0
+.debug_ranges       0x190          0x0
+.debug_macro      0x17a4b          0x0
+.debug_line        0x52fb          0x0
+.debug_str        0x89a7b          0x0
+.debug_frame        0x4d4          0x0
+.debug_loc         0x1644          0x0
+Total             0xb6da7
+
+
+   text    data     bss     dec     hex filename
+  0xa58     0x4  0x203c   10904    2a98 led_toggle_flash.elf
+OBJDUMP led_toggle_flash.lss
+NM      led_toggle_flash.sym
+OBJCOPY led_toggle_flash.hex
+OBJCOPY led_toggle_flash.bin
+```
+
+Now we have binaries and can flash it to samd21 board.
 
 ### EDBG programmer
 
 Luckily googling for ASF development under Linux I found [EDBG](https://github.com/ataradov/edbg) project:
 
 ```
+sudo apt-get install libudev-dev
 git clone https://github.com/ataradov/edbg.git
 cd edbg
 make all
@@ -294,10 +369,37 @@ Then connect board and you should see something like that in `dmesg`:
 [47626.662621] cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
 ```
 
-### Blinky LED on Linux
+You can request list of available debuggers:
 
 ```
+$ ./edbg -l                                                                                                                                                                  master 
+Attached debuggers:
+  ATML2130021800025687 - Atmel Corp. EDBG CMSIS-DAP
 ```
+
+Backup our flash content:
+
+```
+$ ./edbg -b -r -f flash.dump -t atmel_cm0p                                                                                                                                   master 
+Debugger: ATMEL EDBG CMSIS-DAP ATML2130021800025687 01.1A.00FB (S)
+Target: SAM D21J18A Rev D
+Reading................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................... done.
+```
+
+To flash our blinky example:
+
+```
+$ ./edbg -b -p -v -f /path/to/led_toggle_flash.bin  -t atmel_cm0p 
+Debugger: ATMEL EDBG CMSIS-DAP ATML2130021800025687 01.1A.00FB (S)
+Target: SAM D21J18A Rev D
+Programming.............. done.
+Verification.............. done.
+```
+
+Then you should see blinking LED0 on your SAMD21 board.
+
+### Crypto examples using ASF on Linux
+
 
 ### Lack of support for Linux i2c device
 
