@@ -27,7 +27,7 @@ Thanks to this ST-LINK could be used in stand-alone mode.
 Connection should be made this way:
 
 ```
-Nucleo CN4 connector             BLE400 SWD connector
+Nucleo CN2 connector             BLE400 SWD connector
 -----------------+               +------------------
 VCC     (pin 1)  |-x             | .
 SWD CLK (pin 2)  |---------------| (pin 9) SWD CLK
@@ -132,7 +132,7 @@ in procedure 'ocd_bouncer'
 This means you may have `STLink v2.1`, so your command should look like this:
 
 ```
-$ openocd -f interface/stlink-v2.cfg  -f target/nrf51.cfg
+$ openocd -f interface/stlink-v2-1.cfg  -f target/nrf51.cfg
 Open On-Chip Debugger 0.10.0-dev-00395-g674141e8a7a6 (2016-10-20-15:01)
 Licensed under GNU GPL v2
 For bug reports, read
@@ -205,7 +205,7 @@ Connection closed by foreign host.
 ### Testing the example program
 
 First we need proper SDK for out device. ICs that we tested were revision 2 and
-3 (`QFAAG` and `QFAC` code, see the print on the NRF chip). You can check the
+3 (`QFAA` and `QFAC` code, see the print on the NRF chip). You can check the
 [revision table] and [compatibility matrix] to determine SDK version. We used
 [SDK v.12.1.0] for the rev3 chip.
 
