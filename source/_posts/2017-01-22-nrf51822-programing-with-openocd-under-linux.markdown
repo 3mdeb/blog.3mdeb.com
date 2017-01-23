@@ -7,17 +7,17 @@ comments: true
 categories: nrf51822 linux openocd
 ---
 
-Some time ago we bought [BLE400 from Waveshare](http://www.waveshare.com/nrf51822-eval-kit.htm)
-as probably one of the cheapest option to enter nRF51822 market. As our readers
-know we prefer to use Linux environment for embedded systems development.
-Because of that we following guide for using Waveshare nRF51822 Eval Kit. We're
-won kudos to [icarus-sensors](http://icarus-sensors.github.io/general/starting-with-nRF51822.html)
-for great post that helped us enter nRF51822 and mbed OS land under Linux.
+Some time ago we bought [BLE400 from Waveshare] as probably one of the cheapest 
+option to enter nRF51822 market. As our readers know, we prefer to use the Linux 
+environment for embedded systems development. Because of that, we're following the
+guide for using Waveshare nRF51822 Eval Kit: [icarus-sensors].
+Kudos due to great post that helped us enter nRF51822 and mbed OS land under Linux.
 
-Key is to realize  that you can use Waveshare's BLE400 eval kit and STM32
-development board ie. Discovery or any Nucleo (only for its stlink v2
-integrated debugger/programmer). Of course other boards or standalone ST-Link
-could be used.
+BLE400 is pretty cheap, because it hasn't got integrated debugger/programmer.
+Key is to realize, that you can use BLE400 eval kit and STM32 development 
+board ie. Discovery or any Nucleo (only for its stlink integrated 
+debugger/programmer), which are also cheap. Of course other boards or 
+standalone ST-Link could be used.
 
 ## Hardware connections
 
@@ -48,7 +48,7 @@ detected and `ttyUSBx` exposed).
 
 No `stlink` tools are needed. Only OpenOCD.
 
-OpenOCD version I'm using:
+OpenOCD version we're using:
 ```
 $ openocd -v
 Open On-Chip Debugger 0.9.0 (2016-04-27-23:18)
@@ -59,7 +59,7 @@ For bug reports, read
 
 ### Enable user access to Debugger
 
-First we need to check our debugger is detected. There should be line like
+First we need to check, that our debugger is detected. There should be line like
 this:
 
 ```
@@ -73,7 +73,7 @@ Note the `ID's: 0483:3748`. Create rule in
 `/etc/udev/rules.d` (as `root`):
 
 ```
-$ cat > /etc/udev/rules.d/45-usb-stlink-v2.rules << EOF
+$ cat > /etc/udev/rules.d/95-usb-stlink-v2.rules << EOF
 SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="3748", GROUP="users", MODE="0666"
 EOF
 ```
@@ -207,7 +207,7 @@ Connection closed by foreign host.
 First we need proper SDK for out device. ICs that we tested were revision 2 and
 3 (`QFAAG` and `QFAC` code, see the print on the NRF chip). You can check the
 [revision table] and [compatibility matrix] to determine SDK version. We used
-[SDK v.12.1.0].
+[SDK v.12.1.0] for the rev3 chip.
 
 After downloading and uncompressing the SDK. We can find the `blinky` example in
 `examples/peripheral/blinky/hex/blinky_pca10028.hex`. Now we can try to program
@@ -294,11 +294,13 @@ Note: `openocd` does not accept filenames containing space in path.
 
 ## Summary
 
-As you can see it is possible to work with nRF51822 under Linux using only
+As you can see, it's possible to work with nRF51822 under Linux using only
 OpenOCD. Whole workflow can be scripted to match your needs. With this
-knowledge we can start to deploy mbed OS and Zephy which both have great
+knowledge, we can start to deploy mbed OS and Zephyr, which both have great
 support for Linux through command line interface.
 
+[BLE400 from Waveshare]: http://www.waveshare.com/nrf51822-eval-kit.htm
+[icarus-sensors]: http://icarus-sensors.github.io/general/starting-with-nRF51822.html
 [revision table]: http://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.nrf51%2Fdita%2Fnrf51%2Fcompatibility_matrix%2FnRF51822_ic_revision_overview.html&cp=3_0_1
 [compatibility matrix]: http://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.nrf51%2Fdita%2Fnrf51%2Fcompatibility_matrix%2FnRF51422_nRF51822_ic_rev_sdk_sd_comp_matrix.html&cp=3_0_4
 [SDK v.12.1.0]: https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v12.x.x/nRF5_SDK_12.1.0_0d23e2a.zip
