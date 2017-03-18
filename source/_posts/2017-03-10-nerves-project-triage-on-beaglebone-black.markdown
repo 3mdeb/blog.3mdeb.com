@@ -4,7 +4,7 @@ layout: post
 title: "Nerves project triage on BeagleBone Black"
 date: 2017-03-10 22:53:55 +0100
 comments: true
-categories:  embedded beagleboneblack linux nerves
+categories: embedded beagleboneblack linux nerves elixir erlang
 ---
 
 Recently one of my customers brought to my attention [Nerves](http://nerves-project.org).
@@ -78,8 +78,11 @@ sudo dpkg -i fwup_0.13.0_amd64.deb
 ```
 
 I don't understand why Nerves Projects used `fwup`, when software like
-`swupdate` from Denx is available. I'm not sure about feature overlap or
-difference.
+`swupdate` from Denx is available. I don't see difference in feature set and
+would say that `swupdate` is more flexible and covers more use cases. It looks
+like Nerves Project is main user of `fwup`.
+
+Maybe it would be worth to consider comparison of `fwup` and `swupdate` ?
 
 ### nerves_bootstrap
 
@@ -88,7 +91,6 @@ mix local.hex
 mix local.rebar
 mix archive.install https://github.com/nerves-project/archives/raw/master/nerves_bootstrap.ez
 ```
-
 
 ## hello_nerves for BeagleBone Black
 
@@ -184,6 +186,10 @@ specific use case that can be fully handled by Elixir application. Of course
 still some hardware setup is needed. In that case only Linux kernel or Elixir
 application can be attacked.
 
+As one of my associate mention this is very similar approach to `Busybox`
+although here we replace shell with Elixir interpreter, but idea is similar to
+have one application that is entry point to the system.
+
 From performance perspective this is also good solution since there a no
 daemons working in background that consuming resources. Lack of additional
 processes means that all server type of work have to be written in Elixir.
@@ -191,8 +197,22 @@ processes means that all server type of work have to be written in Elixir.
 It would be very interesting to see how this approach can work for other VMs
 and if there are real world use cases for that.
 
+## erlinit & erlexec
 
-## Building natively
+`erlinit` is MIT licensed `/sbin/init` replacement. In general it:
+
+* setup pseudo-filesystems like `/dev`, `/proc` and `/sys`
+* setup serial console
+* register signal hendlers (`SIGPWR`, `SIGUSR1`, `SIGTERM`, `SIGUSR2`)
+* forks into cleanup process and new that start `erlexec`
+
+`elrexec` is mix of C++ and Erlang that aim to control OS processes from Erlang
+application.
+
+Source code can be found on Github: [erlinit](https://github.com/nerves-project/erlinit) and [erlexec](https://github.com/saleyn/erlexec).
+
+
+## Note about building natively
 
 Recently I'm huge fan of containers and way this technology can be utilized by
 embedded software developers. Installing all dependencies in your environment
@@ -200,7 +220,17 @@ is painful and can cause problems if you do not pay attention. Containers give
 you ability to separate tools for each project. In that way you create one
 `Dockerfile` for whole development environment and then share it with your
 peers. I believe Nerves Project shall share containers to build system images
-instead of maintaining huge documentation explaining how to setup development
-environment.
+instead of maintaining documentation explaining how to setup development
+for lot of various environments.
+
+For example steps for Debian required more of jumping between pages and
+googling then it was worth since correct set of packages solve issue.
+
+## Summary
+
+Do you plan to use Nerves in your next embedded systems project ? Maybe you
+struggle with adapting similar approach for different VM ? Feel free to share
+your ideas and issues in comments. If you think content valuable please share
+this help us in providing more content to our blog.
 
 
