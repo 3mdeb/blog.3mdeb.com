@@ -153,7 +153,7 @@ zperf>
 Testing scenarios are described [here](https://www.zephyrproject.org/doc/samples/net/zperf/README.html?highlight=zperf).
 Unfortunately basic test hangs.
 
-## Debugging
+## Debugging problems
 
 To debug Zephyr I used tui mode of gdb:
 
@@ -164,8 +164,15 @@ OPENOCD=/usr/local/bin/openocd TUI="--tui" make BOARD=frdm_k64f debug
 Please note that before debugging you have to flash application to your target.
 At least I saw that need when switching applications.
 
+Unfortunately debugging didn't worked for me out of the box. I struggle with
+various problems trying different configuration. My main goal was to have pure
+OpenOCD+GDB environment. It happen very problematic with breakpoints triggering
+exception handlers and GDB initially stopping in weird location.
 
+I [asked](https://lists.zephyrproject.org/pipermail/zephyr-devel/2017-March/007352.html)
+on mailing list question about narrowing down this issue. Moving forward with
+limited debugging functionality would be harder, but not impossible - `print is your friend`.
 
-
+## CoAP example
 
 
