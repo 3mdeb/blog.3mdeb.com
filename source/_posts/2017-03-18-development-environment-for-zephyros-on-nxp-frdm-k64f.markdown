@@ -173,6 +173,78 @@ I [asked](https://lists.zephyrproject.org/pipermail/zephyr-devel/2017-March/0073
 on mailing list question about narrowing down this issue. Moving forward with
 limited debugging functionality would be harder, but not impossible - `print is your friend`.
 
-## CoAP example
+NXP support replies on mailing list of course are far from being satisfying.
 
+## Digging in OpenOCD
+
+In general there were two issues I faced:
+
+```
+Error: 123323 44739 target.c:2898 target_wait_state(): timed out (>40000) while waiting for target halted
+(...)
+Error: 123917 44934 armv7m.c:723 armv7m_checksum_memory(): error executing cortex_m crc algorithm (retval=-302)
+```
+
+`timeout` value and `retval` value were added for debugging purposes. First
+conclusion was that increasing timeout doesn't help and that crc failure could
+be caused by problems with issuing halt, so it sound like both problems were
+connected.
+
+### DAPLink
+
+It looks like [DAPLink](https://github.com/mbedmicro/DAPLink) replace mbed
+CMSIS-DAP, but there is no clear information about support in OpenOCD except
+that `pyOCD` should debug target with this firmware. Unfortunately DAPLink
+firmware provided by NXP for FRDM-K64F didn't worked for me out of the box,
+what I tried to resolve [here](https://community.nxp.com/thread/447692).
+
+## Kinetis Design Studio
+
+I don't like idea of bloated Eclipse-based IDEs forced on us by corpo-minds. It
+looks like all of big semiconductors in embedded go that way TI, STM, NXP -
+this terrible for industry and lot of Linux enthusiast working on IoT
+solutions. Not mention Atmel, which is even worst going Visual Studio path and
+making whole ecosystem terrible to work with.
+
+I know they want to attract junior developers with good looking interface, but
+number of option hidden and quality of documentation lead experts to rebel
+against this choice.
+
+Luckily KDS is available in DEB package, but it couldn't be smaller then 691MB.
+No I have to allow this big bugged environment to dig into my system :(.
+
+```
+[1:31:54] pietrushnic:Downloads $ sudo dpkg -i  kinetis-design-studio_3.2.0-1_amd64.deb 
+[sudo] password for pietrushnic:
+Selecting previously unselected package kinetis-design-studio.
+(Reading database ... 405039 files and directories currently installed.)
+Preparing to unpack kinetis-design-studio_3.2.0-1_amd64.deb ...
+Unpacking kinetis-design-studio (3.2.0) ...
+Setting up kinetis-design-studio (3.2.0) ...
+
+**********************************************************************
+* Warning: This package includes the GCC ARM Embedded toolchain,     *
+*          which is built for 32-bit hosts. If you are using a       *
+*          64-bit system, you may need to install additional         *
+*          packages before building software with these tools.       *
+*                                                                    *
+*          For more details see:                                     *
+*          - KDS_Users_Guide.pdf:"Installing Kinetis Design Studio". *
+*          - The Kinetis Design Studio release notes.                *
+**********************************************************************
+Processing triggers for gnome-menus (3.13.3-9) ...
+Processing triggers for desktop-file-utils (0.23-1) ...
+Processing triggers for mime-support (3.60) ...
+```
+
+Then this:
+
+<picture>
+
+
+### KDS OpenOCD
+
+Interestingly OpenOCD in KDS behave composedly different. There are still
+problem with errors mentioned above. Unfortunately flashing is terribly slow
+(0.900 KiB/s). NXP seems to use old OpenOCD `Open On-Chip Debugger 0.8.0-dev (2015-01-09-16:23)`
 
