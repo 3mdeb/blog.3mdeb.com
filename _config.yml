@@ -6,8 +6,8 @@ url: http://blog.3mdeb.com
 title: '[3mdeb blog]'
 subtitle: Thoughts dereferenced from scratchpad noise
 author: Piort Król
-simple_search: http://google.com/search
-description:
+simple_search: https://google.com/search
+description: On 3mdeb blog we present content related to our consulting work. We focus on embedded systems and firmware for bigger platforms like coreboot and UEFI.
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
