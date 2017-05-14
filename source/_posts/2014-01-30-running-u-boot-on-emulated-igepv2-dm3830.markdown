@@ -92,7 +92,6 @@ My mistake was not looking first through ISEE website. There is [wiki about QEMU
 Using suggested command:
 
 ```
-
 qemu-system-arm -M igep -m 512 -clock unix -serial stdio \
 -drive file=igep-nano.img,if=sd,cache=writeback -usb \
 -monitor telnet:localhost:7100,server,nowait,nodelay \
@@ -166,7 +165,10 @@ sudo mount -o offset=$[106496*512] igep-nano.img tmp
 
 ### X-loader compilation
 
-Get toolchain from [here](https://www.isee.biz/support/downloads/item/igep-sdk-yocto-toolchain-1-2-2-3)
+Get toolchain from
+[here](https://www.isee.biz/support/downloads/item/igep-sdk-yocto-toolchain-1-2-2-3)
+and follow installation steps from
+[here](http://labs.isee.biz/index.php/The_IGEP_X-loader#Build_with_ISEE_SDK_Yocto_Toolchain_1.2).
 
 ```
 git clone git://git.isee.biz/pub/scm/igep-x-loader.git
@@ -174,4 +176,50 @@ git clone git://git.isee.biz/pub/scm/igep-x-loader.git
 
 QEMU Emulator from ISEE has X-loader 2.3.0-1 and most recent version is
 2.6.0-2.
+
+```
+source /opt/poky/1.2/environment-setup-armv7a-vfp-neon-poky-linux-gnueabi
+cd igep-x-loader
+make igep00x0_config
+make
+```
+
+### X-loader update
+
+Bootloader is update simply by copying to boot partition:
+
+```
+sudo mount -o offset=$[63*512] igep-nano.img tmp
+cp MLO tmp/MLO
+sudo umount tmp
+```
+
+After that you will see:
+
+```
+IGEP-X-Loader 2.6.0-2 (May 14 2017 - 18:40:10)
+XLoader: Memory Manufacturer: Numonyx
+XLoader: Configuration file igep.ini Loaded from MMC
+XLoader: kernel zImage loaded from MMC at 0x80008000 size = 3043416
+Uncompressing Linux... done, booting the kernel.
+```
+
+### Debugging
+
+Very convenient way is to use terminal user interface for GDB as `cgdb`. First
+you have to start QEMU in debugging mode with `-s -S` prams which add GDB
+server and stop CPU at QEMU start.
+
+```
+qemu-system-arm -M igep -m 512 -clock unix -serial stdio \
+-drive file=igep-nano.img,if=sd,cache=writeback -usb \
+-monitor telnet:localhost:7100,server,nowait,nodelay \
+-device usb-kbd -device usb-mouse -s -S
+```
+
+Then run `cgdb`:
+
+```
+cgdb -d arm-poky-linux-gnueabi-gdb x-load
+```
 
