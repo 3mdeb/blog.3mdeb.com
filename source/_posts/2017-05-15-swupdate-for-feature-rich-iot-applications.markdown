@@ -27,7 +27,7 @@ In most of our project where software is concerned, we are heading towards
 partitions, which always leaves us with at least one copy of correct software.
 Core of developed update systems is usually similar to the one presented on the
 graph below.
-![Update flow](update_flow.png)
+![Update flow](../images/update_flow.png)
 
 ## What is SWUpdate?
 
