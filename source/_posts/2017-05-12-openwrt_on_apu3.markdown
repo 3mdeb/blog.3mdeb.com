@@ -4,7 +4,7 @@ layout: post
 title: "Installing OpenWRT on APU3 platform"
 date: 2017-05-12 12:00:00 +0100
 comments: true
-categories: pcengines openwrt
+categories: pcengines openwrt apu3 rt5370
 ---
 
 This guide should be considered as a simple walk-through for using APU3
