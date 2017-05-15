@@ -90,6 +90,9 @@ sudo dd if=openwrt-x86-64-combined-ext4.img of=/dev/sde bs=4M
 
 ## First boot
 
+> Default username after first boot is `root` and no password.
+> Password should be set using `passwd`.
+
 To make the first boot we need some kind of serial adapter (USB to RS232) and
 null-modem cable. There is a RS232 port on the back of the APU board. We need to
 connect it there.
