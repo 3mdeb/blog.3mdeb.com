@@ -501,3 +501,11 @@ Accepted connection from 192.168.1.121, port 60032
 ## Completed setup
 
 <a class="fancybox" rel="group" href="/assets/images/apu3_complete.jpg"><img src="/assets/images/apu3_complete.jpg" width=800 alt="" /></a>
+
+## Summary
+
+We hope you enjoyed reading. If you faced problems in installing your system of
+choice on any PC Engines platform please let us know using comments below or
+social media channels. We would be glad to help you solve your issues. If you
+are in need of professional support we are alway open for new challenges, so do
+not bother to drop us email at `contact@3mdeb.com`
