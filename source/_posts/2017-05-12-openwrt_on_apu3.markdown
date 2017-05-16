@@ -181,7 +181,7 @@ devices:
 
 We need to find drivers for those. It seems, that Intel is using `CONFIG_IGB`
 kernel option for its driver. Module for Atheros card is in OpenWRT.
-Let's deal firs with ethernet controllers:
+Let's deal first with ethernet controllers:
 
 ```sh
 make kernel_menuconfig
