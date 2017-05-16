@@ -504,8 +504,9 @@ Accepted connection from 192.168.1.121, port 60032
 
 ## Summary
 
-We hope you enjoyed reading. If you faced problems in installing your system of
-choice on any PC Engines platform please let us know using comments below or
-social media channels. We would be glad to help you solve your issues. If you
-are in need of professional support we are alway open for new challenges, so do
-not bother to drop us email at `contact@3mdeb.com`
+We hope you have enjoyed reading this article. If you have faced problems
+installing your system of choice on any PC Engines platform, please let us know
+by using comments below or by social media channels. We would be glad, to help
+you solve your issues. If you are in need of a professional support, we are
+always open for new challenges, so do not hesitate to drop us an email at
+`contact@3mdeb.com`
