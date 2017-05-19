@@ -42,7 +42,7 @@ graph below.
 It is strongly focused on reliability of each update. Every update should be
 consistent and atomic. Major goal is to make it completely power-cut safe.
 Power-off in any phase of an update should not brick the device and we always
-should be left with working system.
+should end up having fully-functional system.
 
 ## Purpose of this post
 
