@@ -232,6 +232,8 @@ projects) for actual update system.
 Below example fits for any embedded device running Linux with U-Boot as
 bootloader. In my case [Hummingboard] from Solidrun was used.
 
+![Hummingboard 2 Gate](../images/hb2_gate.jpg)
+
 ### Rootfs image
 
 Of course you need a rootfs image to perform update with it. It can be prepared
