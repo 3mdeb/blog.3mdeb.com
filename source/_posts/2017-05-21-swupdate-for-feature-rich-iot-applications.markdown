@@ -4,7 +4,7 @@ layout: post
 title: "SWUpdate for feature-rich IoT applications"
 date: 2017-05-21 12:00:00 +0100
 comments: true
-categories: nrf51822 linux openocd
+categories: update swupdate linux IoT
 ---
 
 When you work with embedded systems long enough, sooner or later you realize
