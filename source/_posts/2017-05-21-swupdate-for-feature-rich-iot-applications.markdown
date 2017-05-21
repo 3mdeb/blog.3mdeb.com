@@ -34,7 +34,8 @@ In most of our project where software is concerned, we are heading towards
 partitions, which always leaves us with at least one copy of correct software.
 Core of developed update systems is usually similar to the one presented on the
 graph below.
-![Update flow](../images/update_flow.png)
+
+<a class="fancybox" rel="group" href="/assets/images/update_flow.png"><img src="/assets/images/update_flow.png" alt="" /></a>
 
 ## What is SWUpdate?
 
@@ -69,33 +70,33 @@ flags in each section.
 `SWUpdate` supports dual image approach by providing [software collections] in
 `sw-description` file. Such simple collection inside can be written as:
 
-  ```
-  software =
-  {
-          version = "1.0.0";
-          stable:
-          {
-                  mmcblk0p2:
-                  {
-                          images: (
-                          {
-                                  filename = "example-rootfs-image.ext4";
-                                  device = "/dev/mmcblk0p2";
-                          }
-                          );
-                  };
-                  mmcblk0p3:
-                  {
-                          images: (
-                          {
-                                  filename = "example-rootfs-image.ext4";
-                                  device = "/dev/mmcblk0p3";
-                          }
-                          );
-                  };
-          };
-  }
-  ```
+```
+software =
+{
+        version = "1.0.0";
+        stable:
+        {
+                mmcblk0p2:
+                {
+                        images: (
+                        {
+                                filename = "example-rootfs-image.ext4";
+                                device = "/dev/mmcblk0p2";
+                        }
+                        );
+                };
+                mmcblk0p3:
+                {
+                        images: (
+                        {
+                                filename = "example-rootfs-image.ext4";
+                                device = "/dev/mmcblk0p3";
+                        }
+                        );
+                };
+        };
+}
+```
 
 As you can see below, there are two software modes to choose from:
 * `stable,mmcblk0p2` will install rootfs image into `/dev/mmcblk0p2` partition
@@ -103,9 +104,9 @@ As you can see below, there are two software modes to choose from:
 
 Selection of given mode is made by using `-e` command line switch, e.g.:
 
-  ```
-  swupdate -e "stable,mmcblk0p2" -i example.swu-image.swu
-  ```
+```
+swupdate -e "stable,mmcblk0p2" -i example.swu-image.swu
+```
 
 In double copy approach we are using software collections mainly to point to
 target partition on which update will be performed. File (image) name is
@@ -116,16 +117,16 @@ usually the same in both.
 It can be used to exclude the risk of installing software on the wrong
 platform. `sw-descrption` should contain list of compatible hardware revisions:
 
-  ```
-  hardware-compatibility = [ "1.0.1", "1.0.0", "1.0.2" ];
-  ```
+```
+hardware-compatibility = [ "1.0.1", "1.0.0", "1.0.2" ];
+```
 
 Hardware revision is saved in file (by default `/etc/hwrevision`)
 using following format:
 
-  ```
-  board_name board_revision
-  ```
+```
+board_name board_revision
+```
 
 When I last checked this, only `board_revision` string was taken into account
 when it came to checking for image compatibility. So in these terms, boards:
@@ -157,9 +158,9 @@ contribution into the project.
 To download image from given URL, following command line parameters should be
 passed:
 
-  ```
-  swupdate -d "-u http://example.com/mysoftware.swu"
-  ```
+```
+swupdate -d "-u http://example.com/mysoftware.swu"
+```
 
 > Note that there's been syntax change a while ago. In previous releases (for
 > example in the one present in Yocto krogoth release, which is still in use)
@@ -175,15 +176,15 @@ today's network speed is not that much as long as there is no serious
 connection restrictions. When delivering compressed image, `copressed` flag
 must be set in corresponding `sw-description` section. It may look like below:
 
-  ```
-  images: (
-  {
-          filename = "rootfs-image-name.img.gz";
-          device = "/dev/sda3";
-          compressed = TRUE;
-  }
-  );
-  ```
+```
+images: (
+{
+        filename = "rootfs-image-name.img.gz";
+        device = "/dev/sda3";
+        compressed = TRUE;
+}
+);
+```
 
 I always use this feature, as it drastically decreases update image size. Thing
 to remember is that you need to compress rootfs image itself (not whole SWU
@@ -197,16 +198,16 @@ especially desired when RAM amount is not enough to store whole rootfs image.
 This can be enabled by setting `installed-directly` flag in given `image`
 section. In this case it would look like this:
 
-  ```
-  images: (
-  {
-          filename = "rootfs-image-name.img.gz";
-          device = "/dev/sda3";
-          compressed = TRUE;
-          installed-directly = TRUE;
-  }
-  );
-  ```
+```
+images: (
+{
+        filename = "rootfs-image-name.img.gz";
+        device = "/dev/sda3";
+        compressed = TRUE;
+        installed-directly = TRUE;
+}
+);
+```
 
 By default, temporary copy is done by `SWUpdate` to check for image
 correctness. I feel that with dual copy approach it is not really necessary as
@@ -232,7 +233,7 @@ projects) for actual update system.
 Below example fits for any embedded device running Linux with U-Boot as
 bootloader. In my case [Hummingboard] from Solidrun was used.
 
-![Hummingboard 2 Gate](../images/hb2_gate.jpg)
+<a class="fancybox" rel="group" href="/assets/images/hb2_gate.jpg"><img src="/assets/images/hb2_gate.jpg" alt="" /></a>
 
 ### Rootfs image
 
@@ -240,9 +241,9 @@ Of course you need a rootfs image to perform update with it. It can be prepared
 in may ways. For test purpose, you can even perform `dd` command to obtain raw
 image from SD card. An example command would be:
 
-  ```
-  sudo dd if=/dev/mmcblk0 of=rootfs-image.img bs=16M
-  ```
+```
+sudo dd if=/dev/mmcblk0 of=rootfs-image.img bs=16M
+```
 
 However, preferred method would be to use [Yocto] build system. Along with
 [meta-swupdate] it allows for automated building of rootfs image, as well as
@@ -256,27 +257,27 @@ has finished successfully. In case of `U-Boot` we can tell which partition to
 use as rootfs when booting. With below script we will boot into newly updated
 software once.
 
-  ```
-  # if fback is not defined yet, boot from 2 partition as default
-  if test x${fback} != x; then
-      boot_part=${fback}
-  else
-      boot_part=2
-  fi
+```
+# if fback is not defined yet, boot from 2 partition as default
+if test x${fback} != x; then
+    boot_part=${fback}
+else
+    boot_part=2
+fi
 
-  # Boot once into new system after update
-  if test x${next_entry} != x; then
-      boot_part=${next_entry}
-      setenv next_entry
-  fi
+# Boot once into new system after update
+if test x${next_entry} != x; then
+    boot_part=${next_entry}
+    setenv next_entry
+fi
 
-  saveenv
+saveenv
 
-  setenv bootargs "console=ttymxc0,115200n8 rootfstype=ext4 rootwait panic=10 root=/dev/mmcblk0p${boot_part}"
-  ext4load mmc 0:${boot_part} 0x13000000 boot/${fdtfile}
-  ext4load mmc 0:${boot_part} 0x10800000 boot/zImage
-  bootz 0x10800000 - 0x13000000
-  ```
+setenv bootargs "console=ttymxc0,115200n8 rootfstype=ext4 rootwait panic=10 root=/dev/mmcblk0p${boot_part}"
+ext4load mmc 0:${boot_part} 0x13000000 boot/${fdtfile}
+ext4load mmc 0:${boot_part} 0x10800000 boot/zImage
+bootz 0x10800000 - 0x13000000
+```
 
 When booted into newly updated partition, some sort of sanity checks can be
 made. If passed, new software is marked as default by setting `fback`
@@ -284,92 +285,92 @@ environment variable to point to this partition. We can modify bootloader
 environment using SWU image with just `sw-description` file. Below is an
 example of such:
 
-  ```
-  software =
-  {
-          version = "1.0.0";
+```
+software =
+{
+        version = "1.0.0";
 
-          hardware-compatibility = [ "Hummingboard", "som-v1.5" ];
-          confirm =
-          {
-                  mmcblk0p3:
-                  {
-                          uboot: (
-                          {
-                                  name = "fback";
-                                  value = "3";
-                          }
-                          );
-                  };
-                  mmcblk0p2:
-                  {
-                          uboot: (
-                          {
-                                  name = "fback";
-                                  value = "2";
-                          }
-                          );
-                  };
-          }
-  }
-  ```
+        hardware-compatibility = [ "Hummingboard", "som-v1.5" ];
+        confirm =
+        {
+                mmcblk0p3:
+                {
+                        uboot: (
+                        {
+                                name = "fback";
+                                value = "3";
+                        }
+                        );
+                };
+                mmcblk0p2:
+                {
+                        uboot: (
+                        {
+                                name = "fback";
+                                value = "2";
+                        }
+                        );
+                };
+        }
+}
+```
 
 ### Prepare sw-description file
 
 Below is an example `sw-description` file including features mentioned above:
 
-  ```
-  software =
-  {
-          version = "1.0.0";
-          hardware-compatibility = [ "Hummingboard", "som-v1.5" ];
-          stable:
-          {
-                  mmcblk0p2:
-                  {
-                          images: (
-                          {
-                                  filename = "example-rootfs-image.ext4.gz";
-                                  device = "/dev/mmcblk0p2";
-                                  installed-directly = TRUE;
-                                  compressed = TRUE;
-                          }
-                          );
-                          uboot: (
-                          {
-                                  name = "next_entry";
-                                  value = "2";
-                          },
-                          {
-                                  name = "fback";
-                                  value = "3";
-                          }
-                          );
-                  };
-                  mmcblk0p3:
-                  {
-                          images: (
-                          {
-                                  filename = "example-rootfs-image.ext4.gz";
-                                  device = "/dev/mmcblk0p3";
-                                  installed-directly = TRUE;
-                                  compressed = TRUE;
-                          }
-                          );
-                          uboot: (
-                          {
-                                  name = "next_entry";
-                                  value = "3";
-                          },
-                          {
-                                  name = "fback";
-                                  value = "2";
-                          }
-                          );
-                  };
-          };
-  }
-  ```
+```
+software =
+{
+        version = "1.0.0";
+        hardware-compatibility = [ "Hummingboard", "som-v1.5" ];
+        stable:
+        {
+                mmcblk0p2:
+                {
+                        images: (
+                        {
+                                filename = "example-rootfs-image.ext4.gz";
+                                device = "/dev/mmcblk0p2";
+                                installed-directly = TRUE;
+                                compressed = TRUE;
+                        }
+                        );
+                        uboot: (
+                        {
+                                name = "next_entry";
+                                value = "2";
+                        },
+                        {
+                                name = "fback";
+                                value = "3";
+                        }
+                        );
+                };
+                mmcblk0p3:
+                {
+                        images: (
+                        {
+                                filename = "example-rootfs-image.ext4.gz";
+                                device = "/dev/mmcblk0p3";
+                                installed-directly = TRUE;
+                                compressed = TRUE;
+                        }
+                        );
+                        uboot: (
+                        {
+                                name = "next_entry";
+                                value = "3";
+                        },
+                        {
+                                name = "fback";
+                                value = "2";
+                        }
+                        );
+                };
+        };
+}
+```
 
 ### Creation of SWU image
 
@@ -384,44 +385,44 @@ Below is an example `sw-description` file including features mentioned above:
   Assuming that `hummingboard` is our machine name in Yocto, such recipe could
   look like below:
 
-  ```
-  # Copyright (C) 2015 Unknown User <unknow@user.org>
-  # Released under the MIT license (see COPYING.MIT for the terms)
+```
+# Copyright (C) 2015 Unknown User <unknow@user.org>
+# Released under the MIT license (see COPYING.MIT for the terms)
 
-  DESCRIPTION = "Example Compound image for Hummingboard"
-  SECTION = ""
+DESCRIPTION = "Example Compound image for Hummingboard"
+SECTION = ""
 
-  # Note: sw-description is mandatory
-  SRC_URI_hummingboard= "file://sw-description \
-             "
-  inherit swupdate
+# Note: sw-description is mandatory
+SRC_URI_hummingboard= "file://sw-description \
+           "
+inherit swupdate
 
-  LICENSE = "MIT"
-  LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
-                      file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
+                    file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-  # IMAGE_DEPENDS: list of Yocto images that contains a root filesystem
-  # it will be ensured they are built before creating swupdate image
-  IMAGE_DEPENDS = ""
+# IMAGE_DEPENDS: list of Yocto images that contains a root filesystem
+# it will be ensured they are built before creating swupdate image
+IMAGE_DEPENDS = ""
 
-  # SWUPDATE_IMAGES: list of images that will be part of the compound image
-  # the list can have any binaries - images must be in the DEPLOY directory
-  SWUPDATE_IMAGES = " \
-                  core-image-full-cmdline \
-                  "
+# SWUPDATE_IMAGES: list of images that will be part of the compound image
+# the list can have any binaries - images must be in the DEPLOY directory
+SWUPDATE_IMAGES = " \
+                core-image-full-cmdline \
+                "
 
-  # Images can have multiple formats - define which image must be
-  # taken to be put in the compound image
-  SWUPDATE_IMAGES_FSTYPES[core-image-full-cmdline] = ".ext4"
+# Images can have multiple formats - define which image must be
+# taken to be put in the compound image
+SWUPDATE_IMAGES_FSTYPES[core-image-full-cmdline] = ".ext4"
 
-  COMPATIBLE = "hummingboard"
-  ```
+COMPATIBLE = "hummingboard"
+```
 
 * SWU image can be build with following command:
 
-  ```
-  bitbake test-swu-image
-  ```
+```
+bitbake test-swu-image
+```
 
 It can be found in standard directory for built images:
 
@@ -436,9 +437,9 @@ Refer to [building a single image] section from SWUpdate documentation.
 Assuming SWU image is already uploaded and current partition is
 `/dev/mmcblk0p2`:
 
-  ```
-  swupdate -d http://example.com/mysoftware.swu -e "stable,mmcblk0p3"
-  ```
+```
+swupdate -d http://example.com/mysoftware.swu -e "stable,mmcblk0p3"
+```
 
 ## Conclusion
 
