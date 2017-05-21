@@ -463,11 +463,11 @@ assure that it is safe and reliable.
 
 ## Summary
 
-We hope content of this blog post was entertaining and useful for you. If you
-have any comments or questions do not bother to drop us a note below. If you
-feel this blog post contain something useful please share with other. As 3mdeb
-we are always ready to give you professional support jut let us know by sending
-email to `contact@3mdeb.com`.
+We hope that content of this blog post was entertaining and useful for you. If
+you have any comments or questions do not bother to drop us a note below. If
+you feel this blog post contains something useful please share with the others.
+As 3mdeb we are always ready to give you professional support. Just let us know
+by sending an email to `contact@3mdeb.com`.
 
 [Linux is being picked increasingly]: https://www.arrow.com/en/research-and-events/articles/iot-operating-systems
 [SWUpdate]: https://github.com/sbabic/swupdate
