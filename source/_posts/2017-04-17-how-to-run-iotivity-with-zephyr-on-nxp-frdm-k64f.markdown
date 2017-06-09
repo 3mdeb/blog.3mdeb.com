@@ -7,9 +7,10 @@ comments: true
 categories: iotivity zephyr rtos nxp frdm-k64f
 ---
 
-As consulting company we know that each project evaluation should start with
-checking and verifying what features are already provided in existing projects,
-especially those with permissive licenses.
+As consulting company we know that each project should start with evaluation.
+Checking and verifying what features are already existing in other projects,
+especially those with permissive licenses is one of first step during
+evaluation.
 
 Recently we were asked to port IoTvity to yet unsupported operating system
 dedicated to some specific platform. Precisely query was about
@@ -20,15 +21,14 @@ names making it really hard to understand what is what.
 
 This is our first touch of IoTvity, but at first glance I see couple things:
 
-- most examples contain CoAP as communication protocol, which IMO associate
-  with IPv6,
+- CoAP is communication protocol protocol of choice
 - total specification has almost 500 pages - reasonable economic output would
   be required to justify reading through those documents,
 - there are multiple APIs available: C, C++ and Java
 - Apache 2.0 license
 - feature set is blasting and far from KISS philosophy
 
-But let's try what we can do IoTvity-constrained basic use case from
+But let's try what we can do with IoTvity-constrained basic use case from
 documentation.
 
 ## Trying IoTvity with Zephyr on QEMU
@@ -75,31 +75,34 @@ source /path/to/zephyr-project/zephyr-env.sh
 make pristine && make run
 ```
 
-Last command will run Zephyr with IoTivity in QEMU. Leave it as it is and
-follow further steps.
+Last command will run Zephyr with IoTivity in QEMU. Precisely it will run
+sample application from `apps/server_zephyr.c`. Leave it as it is and follow
+further steps.
 
 We can check RAM and ROM consumption, by using `make ram_report` and `make
 rom_report`. Depending on perspective IoTivity-constrained take quite a lot of
 memory RAM: 26.3KB and ROM: 63.6KB. It means it requires at least Cortex-M3
 device.
 
+Then IoTvity Linux examples should be compiled:
+
 ```
 cd port/linux
 make
-./simpleserver
 ```
 
-And in other window:
+As result you should have couple applications. We are interested in
+`simpleclient`. By running it Zephyr should see traffic on network level:
 
 ```
 ./simpleclient
 ```
 
-On QEMU console you should see log similar to:
+What result with this log from IoTvity server running in Zephyr:
 
 ```
 oc_network_receive: received 52 bytes
-oc_network_receive: incoming message: [fe80:0000:0000:0000:500f:89ff:fe44:6836]:35095
+oc_network_receive: incoming message: [fe80:0000:0000:0000:fce1:3bff:fe11:2094]:41018
 ```
 
 
