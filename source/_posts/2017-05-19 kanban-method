@@ -1,13 +1,11 @@
-```
 ---
 author: Michał Olszewski
 layout: post
 title: "Kanban method in a consulting company"
 date: 2017-05-12 12:00:00 +0100
 comments: true
-categories: 
+categories: Managament 
 ---
-```
 
 # Kanban method in a consulting company
 
@@ -30,10 +28,11 @@ service whose work outcome is intangible rather than physical.
 
 ## Tools
 
-In our company we're using [Trello](https://trello.com/) that have electrical 
-boards to visualize our workflow in all project. Our arrays are divided into 
-appropriate categories: Backlog, To Do, In Progress, Verification, Done and 
-Project Status, where we can discuss about project features or problems.
+The basic work tools are boards and stickers, but in our company we use visual 
+boards in [Trello] (https://trello.com/), which streamlines our work in kanban. 
+Our arrays are divided into appropriate categories: Backlog, To Do, In Progress,
+Verification, Done and Project Status, where we can discuss project features 
+or problems.
 
 ![1](http://imageshack.com/a/img922/6156/YfxSE1.png)
 
@@ -43,7 +42,7 @@ According to the Kanban method we give out a kanban cards to assigned
 employees. The card is very important in the whole project process. According
 to her, we measure our work and set time for each stage in the design, develop
 and testing solutions in embedded systems projects. Additionally inside the 
-card we can discuss about features and see, what happened since last time.
+card we can discuss the features and see, what happened since last time.
 
 ![img](http://imageshack.com/a/img924/2586/spqDrv.png)
 
@@ -66,9 +65,9 @@ To make kanban work, each employee must follow these rules:
 - [ ] Don't race for who will do more - focus on teamwork,
 - [ ] When somebody have problem our task is to help each other.
 
-These rules are only a sample but improve the whole process. There aren't create
-the artificial stack of tasks for verification, such tasks are mostly inaccurate
-and return to the left. Good comunication helps, what if some feature is expired
+These rules are only a sample but improve the whole process. We know situations 
+where tasks is going fast to verification, after which it turns out that the task 
+is incomplete and we need turn it back to the left. Good comunication helps, what if some feature is expired
 and we dont know about it? One sentence in communication can save much of time. 
 
 ## Pros and cons
