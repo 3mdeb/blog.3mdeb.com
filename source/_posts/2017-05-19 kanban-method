@@ -66,9 +66,10 @@ To make kanban work, each employee must follow these rules:
 - [ ] When somebody have problem our task is to help each other.
 
 These rules are only a sample but improve the whole process. We know situations 
-where tasks is going fast to verification, after which it turns out that the task 
-is incomplete and we need turn it back to the left. Good comunication helps, what if some feature is expired
-and we dont know about it? One sentence in communication can save much of time. 
+where tasks is going fast to verification, after which it turns out that the 
+task is incomplete and we need turn it back to the left. Good comunication 
+helps, what if some feature is expired and we dont know about it? One sentence 
+in communication can save much of time. 
 
 ## Pros and cons
 
@@ -94,6 +95,6 @@ has done more and create a nasty mess on the work cards.
 Kanban is designed for companies where software is deployed and delivered in 
 cycles. This choice was very useful in our company. By using it, we increase the 
 order in the organization of our tasks and make it easy to find the needed
-information by reducing the volume of communication and grouping it into individual 
-pages. Now we don't have to look for another tool but maybe in future we will try
-to mix some metodologies for better work.
+information by reducing the volume of communication and grouping it into 
+individual pages. Now we don't have to look for another tool but maybe in future
+we will try to mix some metodologies for better work.
