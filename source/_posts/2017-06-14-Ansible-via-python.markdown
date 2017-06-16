@@ -1,3 +1,12 @@
+---
+author: Maciej Ruciński
+layout: post
+title: "Ansible via Python"
+date: 2017-06-14 12:00:00 +0100
+comments: true
+categories: Development
+---
+
 # Ansible via Python ![alt text](https://cub.nobleprog.com/sites/hitramx/files/styles/height50_scale/public/category_image/cursos-de-ansible-en-mexico.png?itok=xPUrGNrA)
 
 **_Ansible is designed around the way people work and the way people work together_**
@@ -11,7 +20,7 @@ orchestration, and many other IT operations. It is easy to deploy due to using
 no agents and no additional custom security infrastructure. We can define own
 configuration management in simple YAML language, which is named
 ansible-playbook. YAML is easier to read and write by humans than other common
-data formats line XML or JSON. Futhermore, most programming languages contain
+data formats like XML or JSON. Futhermore, most programming languages contain
 libraries which operate and work YAML.
 
 ## Inventory
@@ -64,13 +73,14 @@ contain `hosts` we would like to manage, and `tasks` we want to perform.
 
 ### Ansible for Embedded Linux
 
-There is possibility to need build image with custom Linux-based system for
-embedded with Ansible. In addition, we would like to run ansible-playbook via
-python. It seems to be hard to implement. Nothing more simple! It is needed to
-add recipe to image with ansible from
-[Python Ansible package](https://github.com/OverC/meta-overc/blob/master/meta-cube/recipes-devtools/python/python-ansible_2.1.1.0.bb)
+> Note: This paragraph is relevant to Yocto build system
 
-You also need to have installed python, of course.
+There is possibility to need build image with custom Linux-based system for
+embedded with Ansible, using complete development environment, with tools,
+metadata and documentation, named Yocto. In addition, we would like to run
+ansible-playbook via python. It seems to be hard to implement. Nothing more
+simple! It is needed to add recipe to image with ansible from
+[Python Ansible package](https://github.com/OverC/meta-overc/blob/master/meta-cube/recipes-devtools/python/python-ansible_2.1.1.0.bb)
 
 #### Additional information
 
@@ -78,25 +88,25 @@ For more information go to [Ansible Documentation](http://docs.ansible.com/ansib
 
 ## Python API
 
-Python API is very powerful, so we can manage and run ansible-playbook drom
+Python API is very powerful, so we can manage and run ansible-playbook from
 python level, there is possibility to controll nodes, write various plugins,
 extend Ansible to respond to various python events and plug in inventory data
 from external data sources.
 
-> Note: There is a permament structure to build python program which operates ansible
-commands:
+> Note: There is a permament structure to build python program which operates
+ansible commands:
 
 First of all we have to import some modules needed to run ansible in python.
 
 - Let's describe some of them:
 
-	- `json` module to convert output to json format
-	- `ansible` modules to manage e.g. inventory or plays
-	- `TaskQueueManager` is responsible for loading the play strategy plugin,
-	which dispatches the Play's tasks to hosts
-	- `CallbackBase` module - base ansible callback class, that does nothing
-	here, but new callbacks, which inherits from CallbackBase class and
-	override methods, can execute custom actions
+  - `json` module to convert output to json format
+  - `ansible` module to manage e.g. inventory or plays
+  - `TaskQueueManager` is responsible for loading the play strategy plugin,
+  which dispatches the Play's tasks to hosts
+  - `CallbackBase` module - base ansible callback class, that does nothing
+  here, but new callbacks, which inherits from CallbackBase class and
+  override methods, can execute custom actions
 
 ```python
 import json
@@ -115,12 +125,12 @@ ansible
 ```python
 class ResultCallback(CallbackBase):
 
-	def v2_runner_on_ok(self, result, **kwargs):
-		host = result._host
-		print json.dumps({host.name: result._result}, indent=4)
+  def v2_runner_on_ok(self, result, **kwargs):
+    host = result._host
+    print json.dumps({host.name: result._result}, indent=4)
 ```
 
-We can overrides more method. All specification can find in
+We can override more method. All specification can be found in
 [CallbackBase](https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/callback/__init__.py)
 
 - Next step is to initialize needed objects
@@ -184,5 +194,5 @@ finally:
 
 Ansible delivers IT automation that ends repetitive tasks and frees up DevOps
 teams for more strategic work. Manage the Ansbile via Python API is easy, it
-can by apply to operate a configuration on many systems at the time, using
+can be applied to operate a configuration on many systems at the time, using
 only simple python program. 
