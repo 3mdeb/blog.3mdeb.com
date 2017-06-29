@@ -4,7 +4,7 @@ layout: post
 title: "Ansible via Python"
 date: 2017-06-14 12:00:00 +0100
 comments: true
-categories: Development
+categories: Python Ansible
 ---
 
 # Ansible via Python ![alt text](https://cub.nobleprog.com/sites/hitramx/files/styles/height50_scale/public/category_image/cursos-de-ansible-en-mexico.png?itok=xPUrGNrA)
