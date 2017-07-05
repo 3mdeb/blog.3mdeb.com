@@ -18,6 +18,8 @@ on PC Engines APU2 platform.
 
 For interested in that topi I recommend to take look at [video from coreboot conference 2016](https://youtu.be/I08NHJLu6Us?list=PLiWdJ1SEk1_AfMNC6nD_BvUVCIsHq6f0u).
 
+All my modification from below article can be found in [3mdeb edk2 fork](https://github.com/3mdeb/edk2/tree/apu2-uefi)
+
 ## Firmware
 
 Let's start with building APU2 mainline. First follow [this instruction](https://github.com/pcengines/release_manifests)
@@ -51,6 +53,27 @@ I added build result as `An ELF executable payload`.
 
 It is important to deselect secondary payloads like `memtest86+` and
 `sortbootorder` to avoid compilation issues.
+
+### EDK2 development
+
+For all interested in EDK2 code development I strongly advise to follow [Laszlo's  guide](https://github.com/tianocore/tianocore.github.io/wiki/Laszlo's-unkempt-git-guide-for-edk2-contributors-and-maintainers).
+
+Useful script in case of APU2 may be:
+
+```sh
+#!/bin/bash
+build -a IA32 -p CorebootPayloadPkg/CorebootPayloadPkgIa32.dsc -b DEBUG -t GCC5
+cp Build/CorebootPayloadPkgIA32/DEBUG_GCC5/FV/UEFIPAYLOAD.fd ../apu2_fw_rel/apu2/coreboot/
+cd ../apu2_fw_rel
+./apu2/apu2-documentation/scripts/apu2_fw_rel.sh build-ml
+read -n 1 -s -p "Press any key to continue with flashing recent build ..."
+./apu2/apu2-documentation/scripts/apu2_fw_rel.sh flash-ml root@192.168.0.105
+cd ../edk2
+```
+
+I added prompt for flashing since it happen to forget remove recovery flash,
+what may lead to blocking further development since both SPIs will contain not
+bootable firmware.
 
 
 ## Booting
@@ -95,3 +118,6 @@ ProtectUefiImageCommon - 0xCFC2AB28
 
 Unfortunately Real Time Clock is required architecture protocol and cannot be
 omitted.
+
+First problem with this code was incorrect state of `Valid RAM and Time` bit in
+RTC Date Alarm register (aka Register D).
