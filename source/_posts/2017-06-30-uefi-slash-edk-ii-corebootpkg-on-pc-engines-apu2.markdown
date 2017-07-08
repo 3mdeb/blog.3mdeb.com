@@ -121,3 +121,10 @@ omitted.
 
 First problem with this code was incorrect state of `Valid RAM and Time` bit in
 RTC Date Alarm register (aka Register D).
+
+Checking BKDG I was not able to find issue with RTC reading all registers was
+done correctly and register layout seemed to be standardized for RTC devices.
+
+I faced one very strange situation when after leaving APU2 for a night first
+boot passed above assert. This was very suspicious like timing or hw
+initialization issue.
