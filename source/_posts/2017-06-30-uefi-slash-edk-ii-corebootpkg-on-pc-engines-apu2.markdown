@@ -119,12 +119,83 @@ ProtectUefiImageCommon - 0xCFC2AB28
 Unfortunately Real Time Clock is required architecture protocol and cannot be
 omitted.
 
-First problem with this code was incorrect state of `Valid RAM and Time` bit in
+First problem with this code was incorrect state of `Valid RAM and Time` (`VRT`) bit in
 RTC Date Alarm register (aka Register D).
 
 Checking BKDG I was not able to find issue with RTC reading all registers was
 done correctly and register layout seemed to be standardized for RTC devices.
 
-I faced one very strange situation when after leaving APU2 for a night first
-boot passed above assert. This was very suspicious like timing or hw
-initialization issue.
+I faced one very strange situation after leaving APU2 for a night. First boot
+passed through above assert and finished booting much farther (in BDS).
+This was very suspicious like timing or HW initialization issue. Final log
+looked like that:
+
+```
+[Bds]=============Begin Load Options Dumping ...=============
+  Driver Options:
+  SysPrep Options:
+  Boot Options:
+    Boot0000: UiApp              0x0109
+    Boot0001: UEFI Shell                 0x0001
+  PlatformRecovery Options:
+    PlatformRecovery0000: Default PlatformRecovery               0x0001
+[Bds]=============End Load Options Dumping=============
+[Bds]BdsWait ...Zzzzzzzzzzzz...
+[Bds]BdsWait(3)..Zzzz...
+[Bds]BdsWait(2)..Zzzz...
+[Bds]BdsWait(1)..Zzzz...
+[Bds]Exit the waiting!
+PROGRESS CODE: V03051007 I0
+[Bds]Stop Hotkey Service!
+[Bds]UnregisterKeyNotify: 000C/0000 Success
+[Bds]UnregisterKeyNotify: 0002/0000 Success
+[Bds]UnregisterKeyNotify: 0000/000D Success
+Enable SCI bit at 0x804 before boot
+PROGRESS CODE: V03051001 I0
+Memory  Previous  Current    Next
+ Type    Pages     Pages     Pages
+======  ========  ========  ========
+  09    00000008  00000000  00000008
+  0A    00000004  00000000  00000004
+  00    00000004  00000001  00000004
+  06    000000C0  0000002E  000000C0
+  05    00000080  0000001A  00000080
+[Bds]Booting UEFI Shell
+[Bds] Expand MemoryMapped(0xB,0x830000,0xC0FFFF)/FvFile(C57AD6B7-0515-40A8-9D21-551652854E37) -> MemoryMapped(0xB,0x830000,0xC0FFFF)/FvFile(C57AD6B7-0515-40A8-9D21-551652854E37)
+PROGRESS CODE: V03058000 I0
+InstallProtocolInterface: 5B1B31A1-9562-11D2-8E3F-00A0C969723B CF954D28
+Loading driver at 0x000CF6B8000 EntryPoint=0x000CF718BC1
+InstallProtocolInterface: BC62157E-3E33-4FEC-9920-2D3B36D750DF CF96E590
+ProtectUefiImageCommon - 0xCF954D28
+  - 0x00000000CF6B8000 - 0x00000000000A6FA0
+PROGRESS CODE: V03058001 I0
+InstallProtocolInterface: 47C7B221-C42A-11D2-8E57-00A0C969723B CF6BCA38
+InstallProtocolInterface: 47C7B223-C42A-11D2-8E57-00A0C969723B CF945410
+```
+
+In debug logs there was nothing suspicious. Apparently register D of RTC
+returned correct value in `VRT` register.
+
+Finally it happen that `VRT` was incorrectly described in datasheet as
+read-only. Register D initialization function caused setting `VRT` bit to 0
+what further led to `Device Error` assert. I fixed that problem by removing
+initialization from `PcRtcInit`.
+
+### Unexpected behavior
+
+Other behaviors worth to note were unexpected coreboot reset after applying
+power:
+
+```
+PCEngines apu2
+coreboot build 06/30/2017
+BIOS version v4.5.8
+PCEngines apu2
+coreboot build 06/30/2017
+BIOS version v4.5.8
+4080 MB ECC DRAM
+
+PROGRESS CODE: V03020003 I0
+Loading PEIM at 0x000008143C0 EntryPoint=0x00000814600 CbSupportPeim.efi
+PROGRESS CODE: V03020002 I0
+```
