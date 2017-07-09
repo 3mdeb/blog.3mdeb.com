@@ -199,3 +199,34 @@ PROGRESS CODE: V03020003 I0
 Loading PEIM at 0x000008143C0 EntryPoint=0x00000814600 CbSupportPeim.efi
 PROGRESS CODE: V03020002 I0
 ```
+
+## Booting to UEFI Shell
+
+I had freeze after:
+
+```
+InstallProtocolInterface: 47C7B221-C42A-11D2-8E57-00A0C969723B CF6BCA38
+InstallProtocolInterface: 47C7B223-C42A-11D2-8E57-00A0C969723B CF945410
+```
+
+First is `gEfiShellEnvironment2Guid` and second `gEfiShellInterfaceGuid`, so I
+decided to take a look where those GUIDs are used and hook there to see what
+may be wrong. After poking around I realized that those came from binary
+included in repository. What is included can be modified by changing
+`SHELL_TYPE` variable.
+
+When using `BUILD_SHELL` I see little bit different output:
+
+```
+InstallProtocolInterface: 387477C2-69C7-11D2-8E39-00A0C969723B CF8DEBA0
+InstallProtocolInterface: 752F3136-4E16-4FDC-A22A-E5F46812F4CA CF8DDF98
+InstallProtocolInterface: 6302D008-7F9B-4F30-87AC-60C9FEF5DA4E CF5D9800
+```
+
+Control is passed in BDS code by calling `StartImage`.
+
+For some reason I couldn't print my logs to `debug by printk`. I verified that
+I'm in correct code by placing assert, code was interrupted in correct place
+but not serial log.
+
+Trying to change `DebugLib` and provide correct `SerialIoLib` leads to reboot.
