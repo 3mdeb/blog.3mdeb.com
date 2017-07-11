@@ -89,7 +89,7 @@ For more information go to [Ansible Documentation](http://docs.ansible.com/ansib
 ## Python API
 
 Python API is very powerful, so we can manage and run ansible-playbook from
-python level, there is possibility to controll nodes, write various plugins,
+python level, there is possibility to control nodes, write various plugins,
 extend Ansible to respond to various python events and plug in inventory data
 from external data sources.
 
@@ -120,7 +120,8 @@ from ansible.plugins.callback import CallbackBase
 ```
 
 - ResultCallback which inherits from `CallbackBase` and manage the output of
-ansible
+ansible. We can create and modify own methods to regulate the
+behaviour of the ansbile in python controller.
 
 ```python
 class ResultCallback(CallbackBase):
@@ -130,7 +131,7 @@ class ResultCallback(CallbackBase):
     print json.dumps({host.name: result._result}, indent=4)
 ```
 
-We can override more method. All specification can be found in
+We can override more methods. All specification can be found in
 [CallbackBase](https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/callback/__init__.py)
 
 - Next step is to initialize needed objects
@@ -143,20 +144,20 @@ options = Options(connection='local', module_path='/path/to/mymodules', forks=10
 passwords = dict(vault_pass='secret')
 ```
 
-- Instantiate our ResultCallback for handling results as they come in
+- Instantiate our `ResultCallback` for handling results as they come in
 
 ```python
 results_callback = ResultCallback()
 ```
 
-- Create inventory and pass to var manager
+- Create inventory and pass to variable manager
 
 ```python
 inventory = Inventory(loader=loader, variable_manager=variable_manager, host_list='localhost')
 variable_manager.set_inventory(inventory)
 ```
 
-- Create play with tasks
+- Create play with tasks - basic jobs we want to handle by ansible
 
 ```python
 play_source =  dict(
