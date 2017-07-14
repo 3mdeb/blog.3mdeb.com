@@ -50,7 +50,7 @@ one person, but we recommend to assing one person / per task,
 
 The card is very important in the whole project process. That way, we measure 
 our work and set time for each stage in the design, develop and testing 
-solutions in embedded systems projects. Additionally inside the
+solution phases in embedded systems projects. Additionally inside the
 card we can discuss the features and see, what happened since last time.
 
 ![img](http://imageshack.com/a/img924/2586/spqDrv.png)
@@ -73,11 +73,9 @@ frequent changes in priorities.
 To make kanban work, each employee must follow these rules:
 
 * In Progress have biggest priority, next is ToDo and Backlog,
-* Never take more than two tasks at a time - it is interesting to note that when
-switching between two tasks we need about 13 minutes to return to the previous
-concentration,
+* Never take more than two tasks at a time,
 * Do not throw unfinished tasks for verification, because due date is comming,
-* Listen and read communication, ask questions
+* Listen and read communication, ask questions,
 * Discuss inside cards - about problems and progress,
 * Suggest changes in places where you see such a need.
 
