@@ -1,7 +1,7 @@
 ---
 author: Piotr Król
 layout: post
-title: "UEFI/EDK II CorebootPkg on PC Engines APU2"
+title: "UEFI/EDK II CorebootPayloadPkg on PC Engines APU2"
 date: 2017-06-30 22:14:55 +0200
 comments: true
 categories: coreboot uefi edk2 apu2
@@ -9,18 +9,26 @@ categories: coreboot uefi edk2 apu2
 
 Recently we were reached by person interested in running CoreOS on APU2. CoreOS
 is very interesting system from security point of view it was created to
-support containers out of the box.
+support containers out of the box. Unfortunately it requires firmware
+supporting GPT. At that point I was not sure if I can utilize GRUB GPT support
+on APU2, but this lead to other questions:
 
-But what is more interesting to firmware developer is idea of booting
-UEFI-aware operating system no matter if it is CoreOS or Debian. Because of
+- Is it possible to boot UEFI-aware OS on PC Engines APUx boards ?
+- What level of security I can get with UEFI-awere OS in comparison to coreboot ?
+
+Those question were much more interesting to firmware developer, because of
 that we decided to triage [coreboot UEFI payload](https://github.com/tianocore/tianocore.github.io/wiki/Coreboot_UEFI_payload)
 on PC Engines APU2 platform.
 
-For interested in that topi I recommend to take look at [video from coreboot conference 2016](https://youtu.be/I08NHJLu6Us?list=PLiWdJ1SEk1_AfMNC6nD_BvUVCIsHq6f0u).
+For interested in that topic I recommend to take look at [video from coreboot conference 2016](https://youtu.be/I08NHJLu6Us?list=PLiWdJ1SEk1_AfMNC6nD_BvUVCIsHq6f0u).
 
 All my modification from below article can be found in [3mdeb edk2 fork](https://github.com/3mdeb/edk2/tree/apu2-uefi)
 
-## Firmware
+For those interested in UEFI-aware OS booting this blog post can be useful, but
+I also plan to write something straight forward that can be used and read by
+APUx platform users.
+
+## APU2 firmware with UEFI/EDK2 payload
 
 Let's start with building APU2 mainline. First follow [this instruction](https://github.com/pcengines/release_manifests)
 and build mainline version of coreboot. Meanwhile you can take care of EDK2 CorebootPkg build:
@@ -54,7 +62,7 @@ I added build result as `An ELF executable payload`.
 It is important to deselect secondary payloads like `memtest86+` and
 `sortbootorder` to avoid compilation issues.
 
-### EDK2 development
+### EDK2 developer's script
 
 For all interested in EDK2 code development I strongly advise to follow [Laszlo's  guide](https://github.com/tianocore/tianocore.github.io/wiki/Laszlo's-unkempt-git-guide-for-edk2-contributors-and-maintainers).
 
@@ -76,7 +84,7 @@ what may lead to blocking further development since both SPIs will contain not
 bootable firmware.
 
 
-## Booting
+## Hacking UEFI payload to boot on APU2
 
 ### CbSupportDxe assert
 
@@ -181,7 +189,7 @@ read-only. Register D initialization function caused setting `VRT` bit to 0
 what further led to `Device Error` assert. I fixed that problem by removing
 initialization from `PcRtcInit`.
 
-### Unexpected behavior
+### Random unexpected behaviors
 
 Other behaviors worth to note were unexpected coreboot reset after applying
 power:
@@ -200,9 +208,9 @@ Loading PEIM at 0x000008143C0 EntryPoint=0x00000814600 CbSupportPeim.efi
 PROGRESS CODE: V03020002 I0
 ```
 
-## Booting to UEFI Shell
+## Booting to UEFI Shell on APU2
 
-I had freeze after:
+I had "freeze" after:
 
 ```
 InstallProtocolInterface: 47C7B221-C42A-11D2-8E57-00A0C969723B CF6BCA38
@@ -230,3 +238,98 @@ I'm in correct code by placing assert, code was interrupted in correct place
 but not serial log.
 
 Trying to change `DebugLib` and provide correct `SerialIoLib` leads to reboot.
+
+I fixed that by removing `DebugLib` from libraries section in Ia32X64 DSC:
+
+```
+diff --git a/CorebootPayloadPkg/CorebootPayloadPkgIa32X64.dsc b/CorebootPayloadPkg/CorebootPayloadPkgIa32X64.dsc
+index 27aba9f59cc9..262ba2b345af 100644
+--- a/CorebootPayloadPkg/CorebootPayloadPkgIa32X64.dsc
++++ b/CorebootPayloadPkg/CorebootPayloadPkgIa32X64.dsc
+@@ -565,7 +565,6 @@ [Components.X64]
+     #------------------------------
+ 
+     <LibraryClasses>
+-      DebugLib|MdePkg/Library/UefiDebugLibConOut/UefiDebugLibConOut.inf
+       DevicePathLib|MdePkg/Library/UefiDevicePathLib/UefiDevicePathLib.inf
+       FileHandleLib|MdePkg/Library/UefiFileHandleLib/UefiFileHandleLib.inf
+       HandleParsingLib|ShellPkg/Library/UefiHandleParsingLib/UefiHandleParsingLib.inf
+```
+
+However this showed me hang in `DoShellPrompt` on function code:
+
+```
+ShellInfoObject.NewEfiShellProtocol->ReadFile(...)
+```
+
+So apparently Shell wait for some input, but I could not see Shell and type any
+input commands.
+
+### Explaining ConIn, ConOut and ErrOut
+
+Big kudos to Laszlo Ersek who is well known from creating and maintaining OVMF.
+He pointed me to code in `ArmVirtPkg` where workaround for my problem was
+implemented.
+
+I read through code from `ArmVirtPkg/Library/PlatformBootManagerLib/PlatformBm.c` 
+and meant that I have to modify `ConIn`, `ConOut` and `ErrOut` variables. It
+was because those variable miss device path to UART device.
+
+`ConIn`, `ConOut` and `ErrOut` are global variables defined in UEFI spec. Those
+variables are available in boot time, runtime and are non volatile. This means
+that those variables are available during boot phase before firmware calls
+ExitBootServices and after that during system runtime. Those variables can be
+changed, but change takes effect after boot. So in short those variables define
+where we can find input, output and std error device.
+
+As described in [mailing thread](https://lists.01.org/pipermail/edk2-devel/2017-July/012352.html) serial
+port can be reached through `SerialPortLib` API and it worked for me during
+boot phase. Precisely what worked for me was `BaseSerialPortLib16550`. I assume
+methods in this library are not available in runtime and that's why switching
+to Shell caused no output. Second method is through `EfiSimpleTextOutProtocol`.
+Full explanation can be found in mentioned thread, but in short it is required
+to add device path of UART to mentioned global variables so those can be used.
+
+My understanding of stack is:
+
+```
+|- ShellPkg/Application/Shell/Shell.inf
+|- MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
+|- MdeModulePkg/Universal/SerialDxe/SerialDxe.inf
+|->SerialPortLib|CorebootModulePkg/Library/BaseSerialPortLib16550/BaseSerialPortLib16550.inf
+```
+
+`BaseSerialPortLib16550` works on I/O and MMIO level to initialize and provide
+read/write capability for  16550 compatible UART device. This lib is utilized
+by `SerialDxe` DXE driver. `SerialDxe` produce `gEfiSerialIoProtocolGuid` and
+`gEfiDevicePathProtocolGuid`. First abstracts any type of I/O device and
+provide communication capability for it. Second gives ability of providing
+information about generic path/location information of physical or logical
+device (more information in UEFI spec). `gEfiSerialIoProtocolGuid` is consumed
+by `TerminalDxe` UEFI driver, which is responsible for producing Simple Text
+Input and Output protocols on top of Serial IO protocol. Those protocols give
+API like `ReadKeyStroke`, `WaitForKey`, `OutputString`, `ClearScreen`,
+`SetCursorPosition` and other that help in handling input and output data.
+Those protocols then can be used by Shell application to provide interactive
+experience.
+
+## Source code
+
+As I mentioned at beginning code is available on [3mdeb git repo](https://github.com/3mdeb/edk2/tree/apu2-uefi). With it you can build
+coreboot.rom that boots to UEFI Shell. There are plenty things to do ie. `map`
+and probably other commands do not work properly. Feel free to contribute.
+
+## Summary
+
+Above steps gave me ability to enable UEFI payload on top of coreboot firmware.
+This configuration seems to heavily use AGESA, which is very similar to Intel
+FSP being responsible for big part of hardware initialization as well as
+exposing artifacts for UEFI-aware payload, bootloader and operating system.
+
+This blog post can open possibilities to boot UEFI-aware OSes on PC Engines
+APU2 platform as well as give ability to research more extensively AGESA
+firmware.
+
+If you are interested in enabling UEFI-aware operating system on your platform
+that already support coreboot do not hesitate to contact us. If you have any
+other questions or comments post those below.
