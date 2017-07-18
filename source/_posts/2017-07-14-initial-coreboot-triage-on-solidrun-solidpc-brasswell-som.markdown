@@ -27,7 +27,7 @@ First I followed Andreas instruction.
 ```
 git clone https://github.com/3mdeb/Solidrun-Braswell-SOM-Coreboot.git
 cd Solidrun-Braswell-SOM-Coreboot
-git clone --recursive https://github.com/coreboot/coreboot.git
+git clone --recursive https://github.com/3mdeb/coreboot.git -b solidpc-origin
 cd coreboot
 patch -p1 < ../solidrun.patch
 mkdir -p 3rdparty/blobs/mainboard/solidrun/braswell_som
