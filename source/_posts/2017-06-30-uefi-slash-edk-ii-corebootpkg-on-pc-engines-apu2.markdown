@@ -8,13 +8,13 @@ categories: coreboot uefi edk2 apu2
 ---
 
 Recently we were reached by person interested in running CoreOS on APU2. CoreOS
-is very interesting system from security point of view it was created to
-support containers out of the box. Unfortunately it requires firmware
+is very interesting system from security point of view. It was created to
+support containers and scalability out of the box. Unfortunately it requires firmware
 supporting GPT. At that point I was not sure if I can utilize GRUB GPT support
-on APU2, but this lead to other questions:
+on APU2, but this led to other questions:
 
 - Is it possible to boot UEFI-aware OS on PC Engines APUx boards ?
-- What level of security I can get with UEFI-awere OS in comparison to coreboot ?
+- What level of security I can get with UEFI-aware OS in comparison to coreboot ?
 
 Those question were much more interesting to firmware developer, because of
 that we decided to triage [coreboot UEFI payload](https://github.com/tianocore/tianocore.github.io/wiki/Coreboot_UEFI_payload)
@@ -25,7 +25,7 @@ For interested in that topic I recommend to take look at [video from coreboot co
 All my modification from below article can be found in [3mdeb edk2 fork](https://github.com/3mdeb/edk2/tree/apu2-uefi)
 
 For those interested in UEFI-aware OS booting this blog post can be useful, but
-I also plan to write something straight forward that can be used and read by
+I also plan to write something straightforward that can be used and read by
 APUx platform users.
 
 ## APU2 firmware with UEFI/EDK2 payload
@@ -79,7 +79,7 @@ read -n 1 -s -p "Press any key to continue with flashing recent build ..."
 cd ../edk2
 ```
 
-I added prompt for flashing since it happen to forget remove recovery flash,
+I added prompt for flashing since it happens to forget remove recovery flash,
 what may lead to blocking further development since both SPIs will contain not
 bootable firmware.
 
@@ -134,7 +134,7 @@ Checking BKDG I was not able to find issue with RTC reading all registers was
 done correctly and register layout seemed to be standardized for RTC devices.
 
 I faced one very strange situation after leaving APU2 for a night. First boot
-passed through above assert and finished booting much farther (in BDS).
+passed through above assert and finished booting much further (in BDS).
 This was very suspicious like timing or HW initialization issue. Final log
 looked like that:
 
@@ -237,7 +237,7 @@ For some reason I couldn't print my logs to `debug by printk`. I verified that
 I'm in correct code by placing assert, code was interrupted in correct place
 but not serial log.
 
-Trying to change `DebugLib` and provide correct `SerialIoLib` leads to reboot.
+Trying to change `DebugLib` and provide correct `SerialIoLib` led to reboot.
 
 I fixed that by removing `DebugLib` from libraries section in Ia32X64 DSC:
 
