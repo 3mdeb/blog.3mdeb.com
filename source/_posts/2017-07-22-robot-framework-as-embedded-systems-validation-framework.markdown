@@ -13,7 +13,7 @@ validation automation.
 
 As maintainers of PC Engines platforms in coreboot we debug and fix quite a lot
 of bugs, but to take full responsibility for out code everything should be
-validate each time we do release. Limited resources leads us to automation and
+validated each time we do release. Limited resources leads us to automation and
 as Python enthusiasts we decided to evaluate Robot Framework as first candidate.
 
 When preparing to mentioned conference I found that we lack PXE server from
@@ -25,7 +25,7 @@ shell or integrate custom script. In long term those were not good solutions.
 
 ## Robot Framework first try
 
-Project by itself seems to be very popular and at first glance have well
+Project by itself seems to be very popular and at first glance has well
 designed. It gives ability to leverage enormous amount of Python libraries and
 have integrated most important ones. I decided to start with installation in
 virtualenv:
@@ -112,7 +112,7 @@ After `N for PXE boot` show script should sent `N` or `n` what should sent me
 to `iPXE>` prompt.
 
 Initially I thought about using [robotframework-seriallibrary](https://github.com/whosaysni/robotframework-seriallibrary),
-but limitation lead me to search for different solution.
+but limitation led me to search for different solution.
 `ser2net` and `telnet` solution was suggested on [mailing list](https://groups.google.com/d/msg/robotframework-users/r0xvLtGNgno/TI0suLOlNL4J)
 and eventually was good choice.
 
@@ -146,7 +146,7 @@ Connection closed.
 ### Telnet module for Robot Framework
 
 After playing some time I get to point when I can enter iPXE command prompt. My
-test look pretty simple:
+test looks pretty simple:
 
 ```robot
 *** settings ***
@@ -180,7 +180,7 @@ in `\x1b[A` what triggers escape sequence matching arrow up key on keyboard. Oth
 ## Debugging pxelinux booting
 
 Serial console handling in Robot Framework is not trivial task. Especially, if
-you doing it first time. What I learned is that below parameters are critical
+you are doing it first time. What I learned is that below parameters are critical
 to correct understand what is going on behind the scene:
 
 * enable debug log by using `-b <file>` parameter
@@ -195,7 +195,7 @@ robot -b debug.log -L TRACE <script_name>
 ### iPXE on apu2
 
 I tried to create Robot Framework script, but faced weird issue when trying to
-send more then one character. I describe my findings in [this email](https://groups.google.com/d/msg/robotframework-users/5Mf2rKns13s/XQbalZ_DAQAJ).
+send more then one character. I described my findings in [this email](https://groups.google.com/d/msg/robotframework-users/5Mf2rKns13s/XQbalZ_DAQAJ).
 As I wrote it happen that `Telnet.write()` functions is too fast and iPXE
 cannot handle incoming characters. It took couple hours to figure out and
 without debugging output it would not be possible.
@@ -339,7 +339,7 @@ about automation as soon as possible.
 
 I tried to build PXE server for apu2 platform many times and always failed
 running out of time. Typical booting cycle took me ~90s, automated environment
-does it in 37s. This is not blasting result, but automation give me solid
+does it in 37s. This is not blasting result, but automation gives me solid
 ground for growing further test case and keep me away from typing mistakes.
 
 If you have any comments or problems related to above blog post please let us
