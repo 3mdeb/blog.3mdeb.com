@@ -1,7 +1,7 @@
 ---
 author: Piotr Król
 layout: post
-title: "Robot Framework as embedded systems validation framework"
+title: "Robot Framework for embedded systems validation - iPXE automation use case"
 date: 2017-07-22 22:42:44 +0200
 comments: true
 categories: apu2 python robotframework validation automation
@@ -11,26 +11,26 @@ Recently we started to prepare to [ECC2017](https://ecc2017.coreboot.org/)
 conference one of topics that we considered was system for development and
 validation automation.
 
-As maintainers of PC Engines platforms in coreboot we fix quite a lot of bugs,
-but to take full responsibility for out code everything should be validate each
-time we do release. Limited resources leads us to automation and as Python
-enthusiast we decided to evaluate Robot Framework as first candidate that came
-to mind.
+As maintainers of PC Engines platforms in coreboot we debug and fix quite a lot
+of bugs, but to take full responsibility for out code everything should be
+validate each time we do release. Limited resources leads us to automation and
+as Python enthusiasts we decided to evaluate Robot Framework as first candidate.
 
 When preparing to mentioned conference I found that we lack PXE server from
-which I could run or install needed OS. Also there was no configuration when I
-could use diskless boot to try recent Linux. I started to fight with PXE server
-configuration, but then I realized that without DHCP I have to provide booting
-information every time. This was very annoying and I know I can do better from
-my early days as validation engineer in Intel. That's why I decided fight it in
-a more structured way.
+which I could run or install needed OSes. Also there was no ready to use
+configuration that gave ability to utilize diskless boot and try recent Linux.
+I started to fight with PXE server configuration, but then I realized that
+without DHCP I have to provide booting information every time typing in iPXE
+shell or integrate custom script. In long term those were not good solutions.
 
 ## Robot Framework first try
 
-Project by itself seems to be very popular and at first glance have good
-design. I decided to start with virtualenv:
+Project by itself seems to be very popular and at first glance have well
+designed. It gives ability to leverage enormous amount of Python libraries and
+have integrated most important ones. I decided to start with installation in
+virtualenv:
 
-```
+```shell
 [23:00:11] pietrushnic:storage $ virtualenv robot-venv
 Running virtualenv with interpreter /usr/bin/python2
 New python executable in /home/pietrushnic/storage/robot-venv/bin/python2
@@ -51,7 +51,7 @@ Successfully installed robotframework-3.0.2
 
 Verification:
 
-```
+```shell
 (robot-venv) [23:00:46] pietrushnic:storage $ robot --version
 Robot Framework 3.0.2 (Python 2.7.13 on linux2)
 ```
@@ -90,9 +90,9 @@ Log:     /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/QuickStar
 Report:  /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/QuickStartGuide/report.html
 ```
 
-What is great about that. It is clean and can be easily understood. In addition
-it generate log and report. Report and log files are clean and eye-catching. So
-far so good.
+What is great about that? Output is clean and can be easily understood. In
+addition it generates log and report. Both generated files are clean and
+eye-catching.
 
 ## Let's try something real on PC Engines APU2
 
@@ -108,12 +108,13 @@ SeaBIOS (version rel-1.10.2.1)
 Press F10 key now for boot menu, N for PXE boot
 ```
 
-After `N for PXE boot` show script should sent `N` or `n` and I should go to
-`iPXE>` prompt.
+After `N for PXE boot` show script should sent `N` or `n` what should sent me
+to `iPXE>` prompt.
 
 Initially I thought about using [robotframework-seriallibrary](https://github.com/whosaysni/robotframework-seriallibrary),
-but its limitation lead me to search for different solution and look like using
-`ser2net` and `telnet` library seems to be great idea. This solution was suggested on [mailing list](https://groups.google.com/d/msg/robotframework-users/r0xvLtGNgno/TI0suLOlNL4J).
+but limitation lead me to search for different solution.
+`ser2net` and `telnet` solution was suggested on [mailing list](https://groups.google.com/d/msg/robotframework-users/r0xvLtGNgno/TI0suLOlNL4J)
+and eventually was good choice.
 
 ```
 sudo apt-get install ser2net
@@ -124,6 +125,8 @@ Quick test with config file `ser2net_apu.cfg`
 ```
 13542:telnet:600:/dev/ttyUSB0:115200 8DATABITS NONE 1STOPBIT
 ```
+
+To prove that `ser2net` works correctly:
 
 ```
 [0:19:39] pietrushnic:pcengines $ telnet localhost 13542
@@ -142,6 +145,206 @@ Connection closed.
 
 ### Telnet module for Robot Framework
 
-After playing some time I get 
+After playing some time I get to point when I can enter iPXE command prompt. My
+test look pretty simple:
+
+```robot
+*** settings ***
+Library    Telnet
+
+*** Test Cases ***
+Enter PXE with 'n'
+    Open Connection    localhost    port=13542
+    Set Encoding    errors=strict
+    Set Timeout    30
+    Read Until    N for PXE boot
+    Write Bare    n
+    Read Until    Booting from ROM
+    Read Until    autoboot
+    # move arrow up
+    Write Bare    \x1b[A
+    Read Until    autoboot
+    Write Bare    \n
+    Read Until    iPXE>
+```
+
+Most complex part was related to pushing arrow keys through terminal. Magic is
+in `\x1b[A` what triggers escape sequence matching arrow up key on keyboard. Other keys are:
+
+```
+\x1b[B - down key
+\x1b[C - right key
+\x1b[D - left key
+```
+
+## Debugging pxelinux booting
+
+Serial console handling in Robot Framework is not trivial task. Especially, if
+you doing it first time. What I learned is that below parameters are critical
+to correct understand what is going on behind the scene:
+
+* enable debug log by using `-b <file>` parameter
+* set debug level `-L <level>`
+
+Command for running framework should look like that:
+
+```
+robot -b debug.log -L TRACE <script_name>
+```
+
+### iPXE on apu2
+
+I tried to create Robot Framework script, but faced weird issue when trying to
+send more then one character. I describe my findings in [this email](https://groups.google.com/d/msg/robotframework-users/5Mf2rKns13s/XQbalZ_DAQAJ).
+As I wrote it happen that `Telnet.write()` functions is too fast and iPXE
+cannot handle incoming characters. It took couple hours to figure out and
+without debugging output it would not be possible.
+
+## Booting pxelinux on apu2 using Robot Framework
+
+Finally I managed to boot to iPXE shell and reliably send commands. Next step
+was to provide address of PXE server for downloading and booting purpose.
+
+### Setup PXE server for apu2
+
+Communication with apu2 goes only through serial console or ssh when service
+ready, because of that typical Debian netboot had to be modified. In addition
+to that based on netboot package I decided to create bigger booting menu for
+various systems so you can see little bit different structure in future.
+
+To setup PXE server easy way please follow:
+
+```
+git clone https://github.com/3mdeb/pxe-server.git
+cd pxe-server
+git clone https://github.com/3mdeb/netboot.git
+NETBOOT_DIR=./netboot ./init.sh
+```
+
+At point of writing this blog post support was very limited and menu had just
+Debian i386 installer.
+
+### Full Robot Framework script
+
+Below is my full script. Please note that I'm using custom method `Write Bare
+Slow` this is because of flaw related to slow iPXE input. To use this code you
+can utilize our fork of [robotframework](https://github.com/3mdeb/robotframework).
+
+```
+*** settings ***
+Library    Telnet
+
+*** Test Cases ***
+Enter iPXE shell
+    # provide ser2net port where serial was redirected
+    Open Connection    localhost    port=%{S2N_PORT}
+    Set Encoding    errors=strict
+    Set Timeout    30
+    # find string indicating network booting is enabled
+    Read Until    N for PXE boot
+    # use n/N to enter network boot menu
+    Write Bare    n
+    Read Until    Booting from ROM
+    Read Until    autoboot
+    # move arrow up to choose iPXE shell position
+    # https://github.com/pcengines/apu2-documentation/blob/master/ipxe/menu.ipxe
+    Write Bare    \x1b[A
+    Read Until    autoboot
+    # press enter
+    Write Bare    \n
+    # make sure we are inside iPXE shell
+    Read Until    iPXE> \x1b[?25h
+
+Download and boot pxelinux
+    # request IP address
+    Write Bare Slow  dhcp net0\n
+    Read Until    ok
+    Read Until    iPXE>
+    # provide pxelinux filename on PXE server
+    Write Bare Slow  set filename pxelinux.0\n
+    Read Until    iPXE>
+    # provide PXE server IP address
+    Write Bare Slow  set next-server %{PXE_SRV_IP}\n
+    Read Until    iPXE>
+    # download and boot pxelinux
+    Write Bare Slow  chain tftp://\${next-server}/\${filename}\n
+    Read Until    PXE server boot menu
+    Close Connection
+```
+
+Configuration for `ser2net` port and PXE server IP address are passed through
+environment variables.
+
+## Automated PXE booting
+
+Assuming your PXE server works fine you can run:
+
+```
+git clone https://github.com/pcengines/apu-test-suite.git
+cd apu-test-suite
+sudo ser2net -c ser2net_apu.cfg
+```
+
+Then please change port and IP address accordingly:
+
+```
+S2N_PORT=13542 PXE_SRV_IP=<IP_ADDR> robot -b debug.log -L TRACE pxe_boot.robot
+```
+
+Please note that port is hardcoded in ser2net_apu.cfg.
+
+Output in terminal should look like this:
+
+```
+==============================================================================
+Pxe Boot                                                                      
+==============================================================================
+Enter iPXE shell                                                      | PASS |
+------------------------------------------------------------------------------
+Download and boot pxelinux                                            | PASS |
+------------------------------------------------------------------------------
+Pxe Boot                                                              | PASS |
+2 critical tests, 2 passed, 0 failed
+2 tests total, 2 passed, 0 failed
+==============================================================================
+Debug:   /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-suite/debug.log
+Output:  /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-suite/output.xml
+Log:     /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-suite/log.html
+Report:  /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-suite/report.html
+```
+
+This means PXE boot menu is already in your telnet, to connect to it simply
+type:
+
+```
+telnet localhost 13542
+```
+
+After refreshing you screen with `<CTRL>-L` you should see boot menu:
+
+<a class="fancybox" rel="group" href="/assets/images/pxe_server_menu.png"><img src="/assets/images/pxe_server_menu.png" alt="" /></a>
+
+More to that you can investigate in details what happen using automatically
+generated HTML page:
+
+<a class="fancybox" rel="group" href="/assets/images/ipxe_test_log.png"><img src="/assets/images/ipxe_test_log.png" alt="" /></a>
+
+## Summary
+
+Why bother ? Firmware debugging effort consist of tons of repeatable tasks.
+Lots of them can be automated. Even if debugging is finished, problem was root
+caused and fixed, we should make sure it will never return. That's why if we
+face hacking session with big number of debug-code-test cycle we should think
+about automation as soon as possible.
+
+I tried to build PXE server for apu2 platform many times and always failed
+running out of time. Typical booting cycle took me ~90s, automated environment
+does it in 37s. This is not blasting result, but automation give me solid
+ground for growing further test case and keep me away from typing mistakes.
+
+If you have any comments or problems related to above blog post please let us
+know we would be glad to help you. If you trying to automate your embedded
+device validation we would be glad to hear more about that.
+
 
 
