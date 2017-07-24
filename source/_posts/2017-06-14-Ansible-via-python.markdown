@@ -131,10 +131,12 @@ class ResultCallback(CallbackBase):
     print json.dumps({host.name: result._result}, indent=4)
 ```
 
-We can override more methods. All specification can be found in
+> Note: we can override more methods. All specification can be found in
 [CallbackBase](https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/callback/__init__.py)
 
-- Next step is to initialize needed objects
+- Next step is to initialize needed objects. Options class to replace Ansible
+OptParser. Since we're not calling it via CLI, we need something to provide
+options.
 
 ```python
 Options = namedtuple('Options', ['connection', 'module_path', 'forks', 'become', 'become_method', 'become_user', 'check'])
@@ -150,14 +152,15 @@ passwords = dict(vault_pass='secret')
 results_callback = ResultCallback()
 ```
 
-- Create inventory and pass to variable manager
+- Then the script creates a VariableManager object, which is responsible for
+adding in all variables from the various sources, and keeping variable
+precedence consistent. Then create play with tasks - basic jobs we want to
+handle by ansible.
 
 ```python
 inventory = Inventory(loader=loader, variable_manager=variable_manager, host_list='localhost')
 variable_manager.set_inventory(inventory)
 ```
-
-- Create play with tasks - basic jobs we want to handle by ansible
 
 ```python
 play_source =  dict(
@@ -172,7 +175,11 @@ play_source =  dict(
 play = Play().load(play_source, variable_manager=variable_manager, loader=loader)
 ```
 
-- Actually run it
+- Actually run it, using the `Runner` object for collecting needed data and
+running the Ansible Playbook executor. The actual execution of the playbook is
+in a run method, so we can call it when we need to. The `__init__` method just
+sets everything up for us. This should run your roles against your hosts! It
+will still output the usual data to Stderr/Stdout.
 
 ```python
 tqm = None
