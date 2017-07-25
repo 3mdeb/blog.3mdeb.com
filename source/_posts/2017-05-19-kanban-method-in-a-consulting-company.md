@@ -24,7 +24,7 @@ rather than work being "pushed" into the process when requested.
 which aids decision-making about what, when and how much to produce. Although
 the method (inspired by the Toyota Production System and lean manufacturing) 
 originated in software development and IT, it may be applied to any professional
-service whose work outcome is intangible rather than physical.)
+service whose work outcome is intangible rather than physical.
 
 
 ## Tools
