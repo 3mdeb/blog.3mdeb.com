@@ -22,9 +22,9 @@ rather than work being "pushed" into the process when requested.
 
 > In software development, Kanban provides a visual process-management system
 which aids decision-making about what, when and how much to produce. Although
-the method (inspired by the Toyota Production System and lean manufacturing
+the method (inspired by the Toyota Production System and lean manufacturing) 
 originated in software development and IT, it may be applied to any professional
-service whose work outcome is intangible rather than physical.
+service whose work outcome is intangible rather than physical.)
 
 
 ## Tools
@@ -57,12 +57,12 @@ card we can discuss the features and see, what happened since last time.
 
 ## Workflow
  
-The card life begins in Backlog, tasks here have lowest priority and they
+The card life begins in Backlog, tasks here have lowest priority and they are
 waiting for select to development - but it's not a rule, sometimes we add cards
 with high priority directly to ToDo column. ToDo is the queue for the most
 important column - In Progress. From there our goal is to safely move this task
 to done. By analyzing the boards we are able to find the blocker very quickly.
-In embedded systems company, we are dealing mostly with blockers in the form
+In embedded systems company, we are dealing mostly with blockers in the form of
 not working or missing hardware, incompatibility of the kernel with hardware and 
 frequent changes in priorities.
 
@@ -72,7 +72,7 @@ frequent changes in priorities.
 
 To make kanban work, each employee must follow these rules:
 
-* In Progress have biggest priority, next is ToDo and Backlog,
+* In Progress has the biggest priority, next is ToDo and Backlog,
 * Never take more than two tasks at a time,
 * Do not throw unfinished tasks for verification, because due date is comming,
 * Listen and read communication, ask questions,
@@ -80,8 +80,8 @@ To make kanban work, each employee must follow these rules:
 * Suggest changes in places where you see such a need.
 
 These rules are only a sample but improve the whole process. We know situations
-where tasks is going fast to verification, after which it turns out that the
-task is incomplete and we need turn it back to the left. When the checks show
+where tasks are going fast to verification, after which it turns out that the
+task is incomplete and we need to turn it back to the left. When the checks show
 such errors, we try to first determine the degree of completion of the card, and
 then decide whether the card must return or sometimes we split cards and move 
 part of result to Verification and other part to ToDo. In our field there are 
@@ -120,4 +120,4 @@ in the organization of our tasks and make it easy to find the needed information
 by reducing the volume of communication and grouping it into individual pages.
 At this moment we are able to follow tasks of every employee in our company
 individually so now we don't have to look for another tool but maybe in future
-we will try to mix some metodologies for better work.
+we will try to mix some methodologies for better work.
