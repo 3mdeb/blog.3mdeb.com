@@ -1,10 +1,10 @@
 ---
 author: Maciej Ruciński
 layout: post
-title: "Ansible via Python"
+title: "How to use Ansible via Python"
 date: 2017-06-14 12:00:00 +0100
 comments: true
-categories: Python Ansible
+categories: python ansible
 ---
 
 # Ansible via Python ![alt text](https://cub.nobleprog.com/sites/hitramx/files/styles/height50_scale/public/category_image/cursos-de-ansible-en-mexico.png?itok=xPUrGNrA)
@@ -204,3 +204,13 @@ Ansible delivers IT automation that ends repetitive tasks and frees up DevOps
 teams for more strategic work. Manage the Ansbile via Python API is easy, it
 can be applied to operate a configuration on many systems at the time, using
 only simple python program. 
+
+## Summary
+
+We hope you enjoyed this post. If you have any comments please leave it below,
+if you think this post provide valuable information please share with
+interested parties.
+
+We are always open for leveraging Ansible and Python in IoT and embedded
+environment. If you have project that can benefit from those IT automation do
+not hesitate to drop us email `contact<at>3mdeb.com`.
