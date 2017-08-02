@@ -30,7 +30,7 @@ important to specify a roster to keep `hosts`. This list is named `inventory`,
 which can be in one of many formats. For this example, the format is an
 `INI-like` and is saved in `/etc/ansible/hosts`.
 
-```INI
+```ini
 mail.example.com
 
 [webservers]
