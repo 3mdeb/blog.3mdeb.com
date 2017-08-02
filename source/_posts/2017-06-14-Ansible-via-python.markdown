@@ -7,7 +7,7 @@ comments: true
 categories: python ansible
 ---
 
-# Ansible via Python ![alt text](https://cub.nobleprog.com/sites/hitramx/files/styles/height50_scale/public/category_image/cursos-de-ansible-en-mexico.png?itok=xPUrGNrA)
+![alt text](https://cub.nobleprog.com/sites/hitramx/files/styles/height50_scale/public/category_image/cursos-de-ansible-en-mexico.png?itok=xPUrGNrA)
 
 **_Ansible is designed around the way people work and the way people work together_**
 
