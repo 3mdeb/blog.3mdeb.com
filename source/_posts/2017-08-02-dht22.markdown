@@ -35,7 +35,7 @@ both directions, due to communication protocol defined in DHT22 datasheet. Also
 a timer is enabled to measure voltage level duration.
 
 The DHT22 sensor is connected as proposed in section 5 of DHT22 
-[documentation](https://cdn-shop.adafruit.com/datasheets/Digital+humidity+and+temperature+sensor +AM2302.pdf)
+[documentation](https://cdn-shop.adafruit.com/datasheets/Digital+humidity+and+temperature+sensor+AM2302.pdf)
 ,but I used a 4.7kOhm pull-up resistor between data line and VDD, because 10kOhm
 resistor was producing to much noise. I also added a 100nF capacitor between GND
 and VDD for wave filtering.
@@ -141,7 +141,7 @@ monitor the sensor's data line. The result occured to be litttle surprising. The
 data line waveform I captured is showed below. The sampling frequency was set to
 12MHz.
 
-<a class="fancybox" rel="group" href="/assets/images/dht22-response.png"><img src="/assets/images/dht22-response. png" alt="" /></a>
+<a class="fancybox" rel="group" href="/assets/images/dht22-response.png"><img src="/assets/images/dht22-response.png" alt="" /></a>
 
 The sensor pulled the line down after c.a. 22 microseconds, which is apropiate.
 But then the voltage level durations differ slighlty, they are 1.5 microseconds
