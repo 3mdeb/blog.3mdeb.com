@@ -10,8 +10,12 @@ categories: sensors measurements dht22 1-wire mbed stm32
 Recently I have encountered with temperature and humidity measurements using
 DHT22 sensor. I was developing a driver source code in ARM mbed OS SDK on
 particular STM32 NUCLEO L432KC platform. Thorough analysis of DHT22 
+<<<<<<< HEAD
 [documentation](https://cdn-shop.adafruit.com/datasheets/Digital+humidity+and+temperature+sensor+AM2302.pdf)
 led me to the following questions:
+=======
+[documentation](https://cdn-shop.adafruit.com/datasheets/Digital+humidity+and+temperature+sensor+AM2302.pdf)\led me to the following questions:
+>>>>>>> 65dc3e35217906cf3c15b693f05878239a37bde6
 
 - Is it possible to accurately measure voltage-level durations during read 
 process?
