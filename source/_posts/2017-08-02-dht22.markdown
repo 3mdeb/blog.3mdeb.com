@@ -27,7 +27,7 @@ For ARM mbed OS documentation please refer to
 
 Let's start with a little bit of configuration and statistics.
 
-The STM32 NUCLEO L432KC is cocked with up to 80MHz frequency which gives a
+The STM32 NUCLEO L432KC is clocked with up to 80MHz frequency which gives a
 period of 125 nanoseconds, so basically 8 periods sums to 1 microsecond.
 
 The 1-Wire pin is configured as an `DigitalInOut`, it is necessary to operate
