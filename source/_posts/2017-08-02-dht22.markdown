@@ -284,9 +284,9 @@ still remains unknown to me. Despite very high frequency clock (80 MHz), the
 counted microseconds were different each time I was debugging the code.
 
 Taking into consideration the relatively low price and pretty high popularity,
-dht22 is undoubtly a good choice, but I have found many version of documentation
-which made me a little confused. A standarized one should be provided to
-eliminate different approaches to handling this sensor.
+dht22 is undoubtly a good choice, but I have found many versions of
+documentation which made me a little confused. A standarized one should be
+provided to eliminate different approaches to handling this sensor.
 
 Better datasheet with acceptable timing deviations ought to be published to
 avoid problems mentioned by me. It took me a significant amount of time to
