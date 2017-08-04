@@ -52,7 +52,7 @@ Each read operation can be divided into main 2 steps:
 Initially the data line should be in high state (high voltage), in this
 particular case it is 3.3V. High state on the data line is considered as idle.
 To begin transmission the host must pull the data line down for at least 1
-milisecond, it is called a start signal. Then host should pull it up and wait
+millisecond, it is called a start signal. Then host should pull it up and wait
 for sensor response. The response should be acquired after 20-40 microseconds.
 
 Procedure described above can be basically carried out like that:
@@ -127,7 +127,7 @@ if(n != 80) {
 ```
 At this point we can deliberate about the `TIMEOUT` value and the time
 restrictions provided in the `if` expressions. 100 microseconds seems to be
-reasonable value for `TIMEOUT`, beacause there is no voltage level duration 
+reasonable value for `TIMEOUT`, because there is no voltage level duration 
 longer than 80 microsecond defined by the protocol. 
 
 Running this code will certainly lead to returning `DHT_RESPONSE_ERROR`. Why?
@@ -137,16 +137,16 @@ microseconds passed each time I ran this code. The values fluctuated between 70
 and even 90 microseconds. This dispersion is unacceptable considering 125
 nanoseconds clock period in STM32 NUCLEO L432KC. It inspired me to investigate
 the hardware layer for possible faults. I have used the logic analyzer to
-monitor the sensor's data line. The result occured to be litttle surprising. The
+monitor the sensor's data line. The result occurred to be little surprising. The
 data line waveform I captured is showed below. The sampling frequency was set to
 12MHz.
 
 <a class="fancybox" rel="group" href="/assets/images/dht22-response.png"><img src="/assets/images/dht22-response.png" alt="" /></a>
 
-The sensor pulled the line down after c.a. 22 microseconds, which is apropiate.
-But then the voltage level durations differ slighlty, they are 1.5 microseconds
+The sensor pulled the line down after c.a. 22 microseconds, which is appropriate.
+But then the voltage level durations differ slightly, they are 1.5 microseconds
 far from 80. In few cases I observed also a 90 microseconds long low voltage
-level. To confirm the realiability of this measurement I have additionally
+level. To confirm the reliability of this measurement I have additionally
 connected the data line to oscilloscope. The results were the same
 as on logic analyzer.
 
@@ -221,7 +221,7 @@ Checking the waveform of data line leads to following results:
 Picture above shows a fragment of data bits transfer. The voltage level
 durations are clearly going beyond the acceptable scope. For example, the 64.42
 and 73.58 microseconds long voltage level duration are corresponding to logic
-'1' sent by the sensor, where it should be 50 and 70 microseconds. On the oher
+'1' sent by the sensor, where it should be 50 and 70 microseconds. On the other
 hand, next bit sequence is 53.92 and 73.58 microseconds, which is little bit
 more accurate, but still far away from sensor's specification. Only logic '0'
 high voltage duration lasts properly long - 26 microseconds. To ensure reading
@@ -269,7 +269,7 @@ Above steps gave me ability to take temperature and humidity measurements by
 DHT22. This particular sensor has its pros as well as cons.
 
 Its advantage certainly is simplicity in hardware design. Only a pull up
-resistor, filtering condensator and 3 wire connections are needed.
+resistor, filtering capacitor and 3 wire connections are needed.
 
 Its disadvantage is specially designed 1-Wire bus communication. It prevents
 the usage of common Maxim/Dallas 1-Wire bus standard and forces the developer to
