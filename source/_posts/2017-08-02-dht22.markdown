@@ -35,10 +35,10 @@ both directions, due to communication protocol defined in DHT22 datasheet. Also
 a timer is enabled to measure voltage level duration.
 
 The DHT22 sensor is connected as proposed in section 5 of DHT22 
-[documentation](https://cdn-shop.adafruit.com/datasheets/Digital+humidity+and+temperature+sensor+AM2302.pdf)
-,but I used a 4.7kOhm pull-up resistor between data line and VDD, because 10kOhm
-resistor was producing to much noise. I also added a 100nF capacitor between GND
-and VDD for wave filtering.
+[documentation](https://cdn-shop.adafruit.com/datasheets/Digital+humidity+and+temperature+sensor+AM2302.pdf),
+but I used a 4.7kOhm pull-up resistor between data line and VDD, because
+10kOhm resistor was producing too much noise. I also added a 100nF capacitor
+between GND and VDD for wave filtering.
 
 
 ### Read process
@@ -52,7 +52,7 @@ Each read operation can be divided into main 2 steps:
 Initially the data line should be in high state (high voltage), in this
 particular case it is 3.3V. High state on the data line is considered as idle.
 To begin transmission the host must pull the data line down for at least 1
-millisecond, it is called a start signal. Then host should pull it up and wait
+milisecond, it is called a start signal. Then host should pull it up and wait
 for sensor response. The response should be acquired after 20-40 microseconds.
 
 Procedure described above can be basically carried out like that:
@@ -65,9 +65,9 @@ Timer timer;
 dht_data.output();	//sets the pin in output mode
 dht_data.write(0);
 wait_ms(2);
-tmr.reset();
+timer.reset();
 dht_data.write(1);
-tmr.start();
+timer.start();
 ```
 **Important** Notice that timer's state is set to 0 before the line is pulled up
 and then started.
@@ -93,42 +93,42 @@ do {
 timer.reset();
 // check
 if((n < 20) || (n > 40)) {
-    tmr.stop();
+    timer.stop();
     return DHT_RESPONSE_ERROR;
 }
 
 do {
-    n = tmr.read_us();
+    n = timer.read_us();
     if(n > TIMEOUT) {
-        tmr.stop();
+        timer.stop();
         return DHT_RESPONSE_TIMEOUT;
     }
 } while(dht_data.read() == 0);
 
-tmr.reset();
+timer.reset();
 if(n != 80) {
-    tmr.stop();
+    timer.stop();
     return DHT_RESPONSE_ERROR;
 }
 
 do {
-    n = tmr.read_us();
+    n = timer.read_us();
     if(n > TIMEOUT) {
-        tmr.stop();
+        timer.stop();
         return DHT_RESPONSE_TIMEOUT;
     }
 } while(dht_data.read() == 1);
 
-tmr.reset();
+timer.reset();
 if(n != 80) {
-    tmr.stop();
+    timer.stop();
     return DHT_RESPONSE_ERROR;
 }
 ```
 At this point we can deliberate about the `TIMEOUT` value and the time
 restrictions provided in the `if` expressions. 100 microseconds seems to be
 reasonable value for `TIMEOUT`, because there is no voltage level duration 
-longer than 80 microsecond defined by the protocol. 
+longer than 80 microseconds defined by the protocol. 
 
 Running this code will certainly lead to returning `DHT_RESPONSE_ERROR`. Why?
 The timer restriction provided in `if` expressions are too strict. Tests
@@ -143,12 +143,12 @@ data line waveform I captured is showed below. The sampling frequency was set to
 
 <a class="fancybox" rel="group" href="/assets/images/dht22-response.png"><img src="/assets/images/dht22-response.png" alt="" /></a>
 
-The sensor pulled the line down after c.a. 22 microseconds, which is appropriate.
+The sensor pulled the line down after ca. 22 microseconds, which is appropriate.
 But then the voltage level durations differ slightly, they are 1.5 microseconds
 far from 80. In few cases I observed also a 90 microseconds long low voltage
 level. To confirm the reliability of this measurement I have additionally
-connected the data line to oscilloscope. The results were the same
-as on logic analyzer.
+connected the data line to oscilloscope. The results were the same as on logic
+analyzer.
 
 These measurements have been taken with two different wiring lengths. With the
 shorter wiring, voltage level durations were much more repeatable and closer to
@@ -157,7 +157,7 @@ follows:
 
 ```c
 if((n < 70) || (n > 100)) {
-    tmr.stop();
+    timer.stop();
     return DHT_RESPONSE_ERROR;
 }
 ```
@@ -254,7 +254,7 @@ without failure. To end the transmission, the data line should be pulled up by
 the host to leave it in an idle state.
 
 ```c
-tmr.stop();
+timer.stop();
 dht_data.output(); // switch back to output mode
 dht_data.write(1);
 ```
