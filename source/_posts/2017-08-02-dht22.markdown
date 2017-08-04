@@ -133,10 +133,10 @@ longer than 80 microsecond defined by the protocol.
 Running this code will certainly lead to returning `DHT_RESPONSE_ERROR`. Why?
 The timer restriction provided in `if` expressions are too strict. Tests
 conducted by me showed, that `timer` does not always read the same amount of
-microseconds passed each time i ran this code. The values fluctuated between 70
+microseconds passed each time I ran this code. The values fluctuated between 70
 and even 90 microseconds. This dispersion is unacceptable considering 125
 nanoseconds clock period in STM32 NUCLEO L432KC. It inspired me to investigate
-the hardware layer for possible faults. I have used the Saleae Logic Analyzer to
+the hardware layer for possible faults. I have used the logic analyzer to
 monitor the sensor's data line. The result occured to be litttle surprising. The
 data line waveform I captured is showed below. The sampling frequency was set to
 12MHz.
@@ -146,8 +146,8 @@ data line waveform I captured is showed below. The sampling frequency was set to
 The sensor pulled the line down after c.a. 22 microseconds, which is apropiate.
 But then the voltage level durations differ slighlty, they are 1.5 microseconds
 far from 80. In few cases I observed also a 90 microseconds long low voltage
-level.To confirm the realiability of this measurement I have additionally
-connected the data line to RIGOL DS1104 oscilloscope. The results were the same
+level. To confirm the realiability of this measurement I have additionally
+connected the data line to oscilloscope. The results were the same
 as on logic analyzer.
 
 These measurements have been taken with two different wiring lengths. With the
@@ -282,6 +282,11 @@ showed, that longer wires have significant influence on the data line waveform
 and voltage transition timings. The reason of STM32 L432KC timer inaccuracy
 still remains unknown to me. Despite very high frequency clock (80 MHz), the
 counted microseconds were different each time I was debugging the code.
+
+Taking into consideration the relatively low price and pretty high popularity,
+dht22 is undoubtly a good choice, but I have found many version of documentation
+which made me a little confused. A standarized one should be provided to
+eliminate different approaches to handling this sensor.
 
 Better datasheet with acceptable timing deviations ought to be published to
 avoid problems mentioned by me. It took me a significant amount of time to
