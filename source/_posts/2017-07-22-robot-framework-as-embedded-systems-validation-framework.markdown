@@ -227,7 +227,7 @@ Debian i386 installer.
 ### Full Robot Framework script
 
 Below is my full script. Please note that I'm using custom method `Write Bare
-Slow` this is because of flaw related to slow iPXE input. To use this code you
+Slow`. This is because of flaw related to slow iPXE input. To use this code you
 can utilize our fork of [robotframework](https://github.com/3mdeb/robotframework).
 
 ```
