@@ -8,12 +8,12 @@ categories: apu2 python robotframework validation automation
 ---
 
 Recently we started to prepare to [ECC2017](https://ecc2017.coreboot.org/)
-conference one of topics that we considered was system for development and
+conference. One of topics that we considered was a system for development and
 validation automation.
 
 As maintainers of PC Engines platforms in coreboot we debug and fix quite a lot
-of bugs, but to take full responsibility for out code everything should be
-validated each time we do release. Limited resources leads us to automation and
+of bugs, but to take full responsibility for our code everything should be
+validated each time we do release. Limited resources lead us to automation and
 as Python enthusiasts we decided to evaluate Robot Framework as first candidate.
 
 When preparing to mentioned conference I found that we lack PXE server from
@@ -25,9 +25,9 @@ shell or integrate custom script. In long term those were not good solutions.
 
 ## Robot Framework first try
 
-Project by itself seems to be very popular and at first glance has well
+Project by itself seems to be very popular and at first glance is well
 designed. It gives ability to leverage enormous amount of Python libraries and
-have integrated most important ones. I decided to start with installation in
+has integrated most important ones. I decided to start with installation in
 virtualenv:
 
 ```shell
@@ -108,7 +108,7 @@ SeaBIOS (version rel-1.10.2.1)
 Press F10 key now for boot menu, N for PXE boot
 ```
 
-After `N for PXE boot` show script should sent `N` or `n` what should sent me
+After `N for PXE boot` show script should send `N` or `n` what should send me
 to `iPXE>` prompt.
 
 Initially I thought about using [robotframework-seriallibrary](https://github.com/whosaysni/robotframework-seriallibrary),
@@ -145,7 +145,7 @@ Connection closed.
 
 ### Telnet module for Robot Framework
 
-After playing some time I get to point when I can enter iPXE command prompt. My
+After playing some time I got to point when I can enter iPXE command prompt. My
 test looks pretty simple:
 
 ```robot
@@ -196,20 +196,20 @@ robot -b debug.log -L TRACE <script_name>
 
 I tried to create Robot Framework script, but faced weird issue when trying to
 send more then one character. I described my findings in [this email](https://groups.google.com/d/msg/robotframework-users/5Mf2rKns13s/XQbalZ_DAQAJ).
-As I wrote it happen that `Telnet.write()` functions is too fast and iPXE
-cannot handle incoming characters. It took couple hours to figure out and
+As I wrote it happens that `Telnet.write()` function is too fast and iPXE
+cannot handle incoming characters. It took couple hours to figure it out and
 without debugging output it would not be possible.
 
 ## Booting pxelinux on apu2 using Robot Framework
 
 Finally I managed to boot to iPXE shell and reliably send commands. Next step
-was to provide address of PXE server for downloading and booting purpose.
+was to provide an address of PXE server for downloading and booting purpose.
 
 ### Setup PXE server for apu2
 
-Communication with apu2 goes only through serial console or ssh when service
+Communication with apu2 goes only through serial console or ssh when service is
 ready, because of that typical Debian netboot had to be modified. In addition
-to that based on netboot package I decided to create bigger booting menu for
+to that I decided to create bigger booting menu, based on netboot package, for
 various systems so you can see little bit different structure in future.
 
 To setup PXE server easy way please follow:
@@ -320,18 +320,18 @@ type:
 telnet localhost 13542
 ```
 
-After refreshing you screen with `<CTRL>-L` you should see boot menu:
+After refreshing your screen with `<CTRL>-L` you should see boot menu:
 
 <a class="fancybox" rel="group" href="/assets/images/pxe_server_menu.png"><img src="/assets/images/pxe_server_menu.png" alt="" /></a>
 
-More to that you can investigate in details what happen using automatically
+Moreover you can investigate in details what happened using automatically
 generated HTML page:
 
 <a class="fancybox" rel="group" href="/assets/images/ipxe_test_log.png"><img src="/assets/images/ipxe_test_log.png" alt="" /></a>
 
 ## Summary
 
-Why bother ? Firmware debugging effort consist of tons of repeatable tasks.
+Why bother ? Firmware debugging effort consists of tons of repeatable tasks.
 Lots of them can be automated. Even if debugging is finished, problem was root
 caused and fixed, we should make sure it will never return. That's why if we
 face hacking session with big number of debug-code-test cycle we should think
@@ -343,7 +343,7 @@ does it in 37s. This is not blasting result, but automation gives me solid
 ground for growing further test case and keep me away from typing mistakes.
 
 If you have any comments or problems related to above blog post please let us
-know we would be glad to help you. If you trying to automate your embedded
+know we would be glad to help you. If You are trying to automate your embedded
 device validation we would be glad to hear more about that.
 
 
