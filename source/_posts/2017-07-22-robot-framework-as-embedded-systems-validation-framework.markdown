@@ -331,7 +331,7 @@ generated HTML page:
 
 ## Summary
 
-Why bother ? Firmware debugging effort consists of tons of repeatable tasks.
+Why bother? Firmware debugging effort consists of tons of repeatable tasks.
 Lots of them can be automated. Even if debugging is finished, problem was root
 caused and fixed, we should make sure it will never return. That's why if we
 face hacking session with big number of debug-code-test cycle we should think
