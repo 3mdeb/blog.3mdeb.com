@@ -180,7 +180,7 @@ in `\x1b[A` what triggers escape sequence matching arrow up key on keyboard. Oth
 ## Debugging pxelinux booting
 
 Serial console handling in Robot Framework is not trivial task. Especially, if
-you are doing it first time. What I learned is that below parameters are critical
+You are doing it first time. What I learned is that below parameters are critical
 to correct understand what is going on behind the scene:
 
 * enable debug log by using `-b <file>` parameter
@@ -210,7 +210,7 @@ was to provide an address of PXE server for downloading and booting purpose.
 Communication with apu2 goes only through serial console or ssh when service is
 ready, because of that typical Debian netboot had to be modified. In addition
 to that I decided to create bigger booting menu, based on netboot package, for
-various systems so you can see little bit different structure in future.
+various systems so You can see little bit different structure in future.
 
 To setup PXE server easy way please follow:
 
@@ -227,7 +227,7 @@ Debian i386 installer.
 ### Full Robot Framework script
 
 Below is my full script. Please note that I'm using custom method `Write Bare
-Slow`. This is because of flaw related to slow iPXE input. To use this code you
+Slow`. This is because of flaw related to slow iPXE input. To use this code You
 can utilize our fork of [robotframework](https://github.com/3mdeb/robotframework).
 
 ```
@@ -277,7 +277,7 @@ environment variables.
 
 ## Automated PXE booting
 
-Assuming your PXE server works fine you can run:
+Assuming Your PXE server works fine You can run:
 
 ```
 git clone https://github.com/pcengines/apu-test-suite.git
@@ -313,18 +313,18 @@ Log:     /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-
 Report:  /home/pietrushnic/storage/wdc/projects/2017/pcengines/apu/src/apu-test-suite/report.html
 ```
 
-This means PXE boot menu is already in your telnet, to connect to it simply
+This means PXE boot menu is already in Your telnet, to connect to it simply
 type:
 
 ```
 telnet localhost 13542
 ```
 
-After refreshing your screen with `<CTRL>-L` you should see boot menu:
+After refreshing Your screen with `<CTRL>-L` You should see boot menu:
 
 <a class="fancybox" rel="group" href="/assets/images/pxe_server_menu.png"><img src="/assets/images/pxe_server_menu.png" alt="" /></a>
 
-Moreover you can investigate in details what happened using automatically
+Moreover You can investigate in details what happened using automatically
 generated HTML page:
 
 <a class="fancybox" rel="group" href="/assets/images/ipxe_test_log.png"><img src="/assets/images/ipxe_test_log.png" alt="" /></a>
@@ -342,8 +342,8 @@ running out of time. Typical booting cycle took me ~90s, automated environment
 does it in 37s. This is not blasting result, but automation gives me solid
 ground for growing further test case and keep me away from typing mistakes.
 
-If you have any comments or problems related to above blog post please let us
-know we would be glad to help you. If You are trying to automate your embedded
+If You have any comments or problems related to above blog post please let us
+know we would be glad to help You. If You are trying to automate Your embedded
 device validation we would be glad to hear more about that.
 
 
