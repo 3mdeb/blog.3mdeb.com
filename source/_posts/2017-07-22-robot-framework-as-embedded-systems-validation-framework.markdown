@@ -62,7 +62,7 @@ Robot Framework 3.0.2 (Python 2.7.13 on linux2)
 sudo apt-get install docutils
 git clone https://github.com/robotframework/QuickStartGuide.git
 cd QuickStartGuide
-robot QuickStartGuide.rst
+robot QuickStart.rst
 ```
 
 Output should look like this:
