@@ -14,15 +14,15 @@ supporting GPT. At that point I was not sure if I can utilize GRUB GPT support
 on APU2, but this led to other questions:
 
 - Is it possible to boot UEFI-aware OS on PC Engines APUx boards ?
-- What level of security I can get with UEFI-aware OS in comparison to coreboot ?
+- What level of security can I get with UEFI-awere OS in comparison to coreboot ?
 
-Those question were much more interesting to firmware developer, because of
+Those questions were much more interesting to firmware developer, because of
 that we decided to triage [coreboot UEFI payload](https://github.com/tianocore/tianocore.github.io/wiki/Coreboot_UEFI_payload)
 on PC Engines APU2 platform.
 
-For interested in that topic I recommend to take look at [video from coreboot conference 2016](https://youtu.be/I08NHJLu6Us?list=PLiWdJ1SEk1_AfMNC6nD_BvUVCIsHq6f0u).
+For interested ones in that topic I recommend to take look at [video from coreboot conference 2016](https://youtu.be/I08NHJLu6Us?list=PLiWdJ1SEk1_AfMNC6nD_BvUVCIsHq6f0u).
 
-All my modification from below article can be found in [3mdeb edk2 fork](https://github.com/3mdeb/edk2/tree/apu2-uefi)
+All my modifications of the article below can be found in [3mdeb edk2 fork](https://github.com/3mdeb/edk2/tree/apu2-uefi)
 
 For those interested in UEFI-aware OS booting this blog post can be useful, but
 I also plan to write something straightforward that can be used and read by
@@ -57,7 +57,7 @@ Build result is located in
 `Build/CorebootPayloadPkgIA32/DEBUG_GCC5/FV/UEFIPAYLOAD.fd`. Following [build and integration instructions](https://raw.githubusercontent.com/tianocore/edk2/master/CorebootPayloadPkg/BuildAndIntegrationInstructions.txt)
 I added build result as `An ELF executable payload`.
 
-{image tbd}
+<a class="fancybox" rel="group" href="/assets/images/uefi_payload.png"><img src="/assets/images/uefi_paylod.png" width=800 alt="" /></a>
 
 It is important to deselect secondary payloads like `memtest86+` and
 `sortbootorder` to avoid compilation issues.
@@ -66,7 +66,7 @@ It is important to deselect secondary payloads like `memtest86+` and
 
 For all interested in EDK2 code development I strongly advise to follow [Laszlo's  guide](https://github.com/tianocore/tianocore.github.io/wiki/Laszlo's-unkempt-git-guide-for-edk2-contributors-and-maintainers).
 
-Useful script in case of APU2 may be:
+In case of APU2 useful script may be:
 
 ```sh
 #!/bin/bash
@@ -89,7 +89,7 @@ bootable firmware.
 ### CbSupportDxe assert
 
 First problem I faced was assert in `CbSupportDxe.c` related to adding 1MB
-memory for LAPIC. Reservation happen in CbSupportDxe entry point.
+memory for LAPIC. Reservation happens in CbSupportDxe entry point.
 
 ```
 Loading driver at 0x000CFC25000 EntryPoint=0x000CFC2595B CbSupportDxe.efi
@@ -105,13 +105,13 @@ DXE_ASSERT!: [CbSupportDxe] /home/pietrushnic/storage/wdc/projects/2017/pcengine
 ```
 
 Interestingly CbSupportDxe seems to not have problem with finding GUID HOB,
-which is right after asserting reservation. It also pass installation of ACPI
+which is right after asserting reservation. It also passes installation of ACPI
 and SMBIOS table. I just commented that reservation and moved forward to see
 what will happen.
 
 ### PcRtcEntry assert
 
-Next problem happen during initialization of RTC:
+Next problem happens during initialization of RTC:
 
 ```
 Loading driver at 0x000CFE50000 EntryPoint=0x000CFE507DB PcRtc.efi
@@ -127,10 +127,10 @@ ProtectUefiImageCommon - 0xCFC2AB28
 Unfortunately Real Time Clock is required architecture protocol and cannot be
 omitted.
 
-First problem with this code was incorrect state of `Valid RAM and Time` (`VRT`) bit in
+First problem with this code was an incorrect state of `Valid RAM and Time` (`VRT`) bit in
 RTC Date Alarm register (aka Register D).
 
-Checking BKDG I was not able to find issue with RTC reading all registers was
+By checking BKDG I was not able to find issue with RTC. Reading all registers was
 done correctly and register layout seemed to be standardized for RTC devices.
 
 I faced one very strange situation after leaving APU2 for a night. First boot
@@ -184,14 +184,14 @@ InstallProtocolInterface: 47C7B223-C42A-11D2-8E57-00A0C969723B CF945410
 In debug logs there was nothing suspicious. Apparently register D of RTC
 returned correct value in `VRT` register.
 
-Finally it happen that `VRT` was incorrectly described in datasheet as
+Finally it turned out that `VRT` was incorrectly described in datasheet as
 read-only. Register D initialization function caused setting `VRT` bit to 0
 what further led to `Device Error` assert. I fixed that problem by removing
 initialization from `PcRtcInit`.
 
 ### Random unexpected behaviors
 
-Other behaviors worth to note were unexpected coreboot reset after applying
+One of other behaviors worth to note was unexpected coreboot reset after applying
 power:
 
 ```
@@ -273,7 +273,7 @@ implemented.
 
 I read through code from `ArmVirtPkg/Library/PlatformBootManagerLib/PlatformBm.c` 
 and meant that I have to modify `ConIn`, `ConOut` and `ErrOut` variables. It
-was because those variable miss device path to UART device.
+was because those variables miss device path to UART device.
 
 `ConIn`, `ConOut` and `ErrOut` are global variables defined in UEFI spec. Those
 variables are available in boot time, runtime and are non volatile. This means
@@ -303,7 +303,7 @@ My understanding of stack is:
 read/write capability for  16550 compatible UART device. This lib is utilized
 by `SerialDxe` DXE driver. `SerialDxe` produce `gEfiSerialIoProtocolGuid` and
 `gEfiDevicePathProtocolGuid`. First abstracts any type of I/O device and
-provide communication capability for it. Second gives ability of providing
+provide communication capability for it. Second gives ability of provides
 information about generic path/location information of physical or logical
 device (more information in UEFI spec). `gEfiSerialIoProtocolGuid` is consumed
 by `TerminalDxe` UEFI driver, which is responsible for producing Simple Text
@@ -316,19 +316,19 @@ experience.
 ## Source code
 
 As I mentioned at beginning code is available on [3mdeb git repo](https://github.com/3mdeb/edk2/tree/apu2-uefi). With it you can build
-coreboot.rom that boots to UEFI Shell. There are plenty things to do ie. `map`
+coreboot.rom that boots to UEFI Shell. There are plenty things to do i.e. `map`
 and probably other commands do not work properly. Feel free to contribute.
 
 ## Summary
 
 Above steps gave me ability to enable UEFI payload on top of coreboot firmware.
-This configuration seems to heavily use AGESA, which is very similar to Intel
+This configuration seems to heavily use AGESA, which is a very similar to Intel
 FSP being responsible for big part of hardware initialization as well as
 exposing artifacts for UEFI-aware payload, bootloader and operating system.
 
 This blog post can open possibilities to boot UEFI-aware OSes on PC Engines
-APU2 platform as well as give ability to research more extensively AGESA
-firmware.
+APU2 platform as well as give ability to research more AGESA firmware more
+extensively.
 
 If you are interested in enabling UEFI-aware operating system on your platform
 that already support coreboot do not hesitate to contact us. If you have any
