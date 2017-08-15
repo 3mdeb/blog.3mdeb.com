@@ -7,7 +7,7 @@ comments: true
 categories: apu2 python robotframework validation automation
 ---
 
-Recently we started to prepare to [ECC2017](https://ecc2017.coreboot.org/)
+Recently we started to prepare for [ECC2017](https://ecc2017.coreboot.org/)
 conference. One of topics that we considered was a system for development and
 validation automation.
 
@@ -111,10 +111,16 @@ Press F10 key now for boot menu, N for PXE boot
 After `N for PXE boot` show script should send `N` or `n` what should send me
 to `iPXE>` prompt.
 
-Initially I thought about using [robotframework-seriallibrary](https://github.com/whosaysni/robotframework-seriallibrary),
+Initially I thought about using
+[robotframework-seriallibrary](https://github.com/whosaysni/robotframework-seriallibrary),
 but limitation led me to search for different solution.
+`robotframework-seriallibrary` was designed to handle single byte communication
+not serial output streams from operating system. For example `read_until`
+function check for termination character, instead of marching string pattern,
+what was expected during iPXE testing.
+
 `ser2net` and `telnet` solution was suggested on [mailing list](https://groups.google.com/d/msg/robotframework-users/r0xvLtGNgno/TI0suLOlNL4J)
-and eventually was good choice.
+and eventually was much better choice for my use case.
 
 ```
 sudo apt-get install ser2net
@@ -332,7 +338,7 @@ generated HTML page:
 ## Summary
 
 Why bother? Firmware debugging effort consists of tons of repeatable tasks.
-Lots of them can be automated. Even if debugging is finished, problem was root
+Lots of them can be automated. Even if debugging is finished and problem was root
 caused and fixed, we should make sure it will never return. That's why if we
 face hacking session with big number of debug-code-test cycle we should think
 about automation as soon as possible.
