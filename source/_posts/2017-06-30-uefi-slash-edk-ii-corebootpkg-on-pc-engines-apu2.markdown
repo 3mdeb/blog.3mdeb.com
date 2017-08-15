@@ -79,11 +79,6 @@ read -n 1 -s -p "Press any key to continue with flashing recent build ..."
 cd ../edk2
 ```
 
-I added prompt for flashing since it happens to forget remove recovery flash,
-what may lead to blocking further development since both SPIs will contain not
-bootable firmware.
-
-
 ## Hacking UEFI payload to boot on APU2
 
 ### CbSupportDxe assert
@@ -130,7 +125,7 @@ omitted.
 First problem with this code was an incorrect state of `Valid RAM and Time` (`VRT`) bit in
 RTC Date Alarm register (aka Register D).
 
-By checking BKDG I was not able to find issue with RTC. Reading all registers was
+By checking AMD Bios and Kernel Developer's Guide (BKDG) I was not able to find issue with RTC. Reading all registers was
 done correctly and register layout seemed to be standardized for RTC devices.
 
 I faced one very strange situation after leaving APU2 for a night. First boot
@@ -262,8 +257,7 @@ However this showed me hang in `DoShellPrompt` on function code:
 ShellInfoObject.NewEfiShellProtocol->ReadFile(...)
 ```
 
-So apparently Shell wait for some input, but I could not see Shell and type any
-input commands.
+I could not see the prompt and type any input commands.
 
 ### Explaining ConIn, ConOut and ErrOut
 
@@ -327,7 +321,7 @@ FSP being responsible for big part of hardware initialization as well as
 exposing artifacts for UEFI-aware payload, bootloader and operating system.
 
 This blog post can open possibilities to boot UEFI-aware OSes on PC Engines
-APU2 platform as well as give ability to research more AGESA firmware more
+APU2 platform as well as give ability to research AGESA firmware more
 extensively.
 
 If you are interested in enabling UEFI-aware operating system on your platform
