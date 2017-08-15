@@ -14,7 +14,7 @@ supporting GPT. At that point I was not sure if I can utilize GRUB GPT support
 on APU2, but this led to other questions:
 
 - Is it possible to boot UEFI-aware OS on PC Engines APUx boards ?
-- What level of security can I get with UEFI-awere OS in comparison to coreboot ?
+- What level of security can I get with UEFI-aware OS in comparison to coreboot ?
 
 Those questions were much more interesting to firmware developer, because of
 that we decided to triage [coreboot UEFI payload](https://github.com/tianocore/tianocore.github.io/wiki/Coreboot_UEFI_payload)
