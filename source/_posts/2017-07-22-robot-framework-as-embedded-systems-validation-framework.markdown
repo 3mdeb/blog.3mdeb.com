@@ -116,7 +116,7 @@ Initially I thought about using
 but limitation led me to search for different solution.
 `robotframework-seriallibrary` was designed to handle single byte communication
 not serial output streams from operating system. For example `read_until`
-function check for termination character, instead of marching string pattern,
+function check for termination character, instead of matching string pattern,
 what was expected during iPXE testing.
 
 `ser2net` and `telnet` solution was suggested on [mailing list](https://groups.google.com/d/msg/robotframework-users/r0xvLtGNgno/TI0suLOlNL4J)
