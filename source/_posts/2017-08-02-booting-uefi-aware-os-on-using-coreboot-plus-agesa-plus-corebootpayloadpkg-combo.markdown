@@ -16,8 +16,12 @@ correctly, but no device except serial was detected. Obviously it would be
 great to have some storage or at least diskless installation that we can boot
 on apu2. Speaking about diskless network interfaces were also not visible.
 
-On my workbench I had available mSATA disks and USB stick. Knowing that USB
-stick contain Voyage Linux, that already worked with apu2 and coreboot, I
-decided go USB path.
+Because all important devices are connected on PCIe bus I decided to figure out
+why I can't see anything. Quick check revealed that root bright is not
+detected.
 
-## Enabling USB on apu2
+## Enabling PCI on apu2
+
+I started with investigation of memory ranges disabled during work on UEFI
+Shell booting. Call to reserve LAPIC memory range hardcoded to `0xfee00000`
+caused assert what was the reason for disabling this code initially.
