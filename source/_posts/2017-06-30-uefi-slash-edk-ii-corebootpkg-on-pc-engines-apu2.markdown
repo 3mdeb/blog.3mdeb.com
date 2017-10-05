@@ -8,7 +8,7 @@ categories: coreboot uefi edk2 apu2
 ---
 
 Recently we were reached by person interested in running CoreOS on APU2. CoreOS
-is very interesting system from security point of view. It was created to
+is a very interesting system from security point of view. It was created to
 support containers and scalability out of the box. Unfortunately it requires firmware
 supporting GPT. At that point I was not sure if I can utilize GRUB GPT support
 on APU2, but this led to other questions:
@@ -22,11 +22,22 @@ on PC Engines APU2 platform.
 
 For interested ones in that topic I recommend to take look at [video from coreboot conference 2016](https://youtu.be/I08NHJLu6Us?list=PLiWdJ1SEk1_AfMNC6nD_BvUVCIsHq6f0u).
 
-All my modifications of the article below can be found in [3mdeb edk2 fork](https://github.com/3mdeb/edk2/tree/apu2-uefi)
+All my modifications of edk2 for the article below can be found in [3mdeb edk2 fork](https://github.com/3mdeb/edk2/tree/apu2-uefi)
 
 For those interested in UEFI-aware OS booting this blog post can be useful, but
 I also plan to write something straightforward that can be used and read by
 APUx platform users.
+
+**NOTE**: this blog post wait so long for publishing that coreboot community
+provided and improved support for tianocore payload. It can be choose from
+`menuconfig` and adds some coreboot specific patches that improve overall
+support. Please use option:
+
+```
+Payload -> Add a payload -> Tianocore coreboot payload package
+```
+
+Manual method still can be useful to try vanilla edk2 and hack with it.
 
 ## APU2 firmware with UEFI/EDK2 payload
 
