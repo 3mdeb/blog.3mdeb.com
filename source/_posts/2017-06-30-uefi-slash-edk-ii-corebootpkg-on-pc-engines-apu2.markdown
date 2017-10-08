@@ -305,7 +305,7 @@ My understanding of stack is:
 ```
 
 `BaseSerialPortLib16550` works on I/O and MMIO level to initialize and provide
-read/write capability for  16550 compatible UART device. This lib is utilized
+read/write capability for 16550 compatible UART device. This lib is utilized
 by `SerialDxe` DXE driver. `SerialDxe` produce `gEfiSerialIoProtocolGuid` and
 `gEfiDevicePathProtocolGuid`. First abstracts any type of I/O device and
 provide communication capability for it. Second gives ability of provides
