@@ -68,7 +68,7 @@ Build result is located in
 `Build/CorebootPayloadPkgIA32/DEBUG_GCC5/FV/UEFIPAYLOAD.fd`. Following [build and integration instructions](https://raw.githubusercontent.com/tianocore/edk2/master/CorebootPayloadPkg/BuildAndIntegrationInstructions.txt)
 I added build result as `An ELF executable payload`.
 
-<a class="fancybox" rel="group" href="/assets/images/uefi_payload.jpeg"><img src="/assets/images/uefi_payload.jpeg" alt="" /></a>
+![uefi_payload](http://3mdeb.com/wp-content/uploads/2017/07/uefi_payload.jpeg)
 
 It is important to deselect secondary payloads like `memtest86+` and
 `sortbootorder` to avoid compilation issues.
