@@ -92,5 +92,20 @@ and was applied in coreboot master branch. After applying that patch I was able
 to bisect my issue. Recent apu2 code missed innovation introduced by Kyösti
 Mälkki, which was related with Cache-as-RAM and AGESA cleanup. Unfortunately I
 was not able to understand what is really missing and how I should introduce
-support of this new code. Then I get reply that problem can be fixed easily with [this patch](https://review.coreboot.org/#/c/21840/2/src/cpu/amd/pi/Makefile.inc).
+support of this new code. Problem was fixed easily with [this patch](https://review.coreboot.org/#/c/21840/2/src/cpu/amd/pi/Makefile.inc) right after being reported.
 
+
+## DuetPkg PCI no enumeration code
+
+After above I learned lesson that I should use recent `coreboot-sdk` whenever I
+have to. It also happen that applying one of coreboot's tianocore patches lead
+to correct PCI enumeration, what I announced [here](https://twitter.com/3mdeb_com/status/915105643933175808):
+
+On screenshot you can see USB detected and part of SMBIOS table proving this is
+PC Engines platform.
+
+Key question was: what is the difference between PCI enumeration from
+`MdeModulePkg` and `DuetPkg` ?
+
+Exact name of `DuetPkg` drivers used were `PciRootBridgeNoEnumeration` and
+`PciBusNoEnumeration`.
