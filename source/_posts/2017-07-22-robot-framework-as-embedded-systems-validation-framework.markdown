@@ -328,12 +328,12 @@ telnet localhost 13542
 
 After refreshing Your screen with `<CTRL>-L` You should see boot menu:
 
-<a class="fancybox" rel="group" href="/assets/images/pxe_server_menu.png"><img src="/assets/images/pxe_server_menu.png" alt="" /></a>
+![pxe_server_menu](https://3mdeb.com/wp-content/uploads/2017/11/pxe_server_menu.png"><img src="/assets/images/pxe_server_menu.png)
 
 Moreover You can investigate in details what happened using automatically
 generated HTML page:
 
-<a class="fancybox" rel="group" href="/assets/images/ipxe_test_log.png"><img src="/assets/images/ipxe_test_log.png" alt="" /></a>
+![pxe_test_log](http://3mdeb.com/wp-content/uploads/2017/11/ipxe_test_log.png)
 
 ## Summary
 
